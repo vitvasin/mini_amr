@@ -65,9 +65,11 @@ def generate_launch_description():
     # scan = IncludeLaunchDescription(os.path.join(
     #     get_package_share_directory("sllidar_ros2"),
     #     "launch",
-    #     "sllidar_s2e_launch.py")
+    #     "sllidar_s2e_launch.py"),
+    #     launch_arguments={
+    #             'serial_port': '/dev/lidar_s3',
+    #     }.items()
     # ) 
-
     scan = Node(
             package='sllidar_ros2',
             executable='sllidar_node',
@@ -77,10 +79,35 @@ def generate_launch_description():
                          'udp_port': 8089,
                          'frame_id': 'laser',
                          'inverted': False, 
-                         'angle_compensate': True, 
+                         'angle_compensate': True,
+                         'scan_frequency': 10.0,
                          'scan_mode': 'Sensitivity'}],
             remappings=[("scan", "raw_scan")],
             output='screen')
+
+    # oak_d = IncludeLaunchDescription(os.path.join(
+    #     get_package_share_directory("depthai_ros_driver"),
+    #     "launch",
+    #     "camera.launch.py"),
+    #     launch_arguments={
+    #             'cam_pos_x': '0.24',
+    #             'cam_pos_y': '0.0',
+    #             'cam_pos_z': '0.12',
+    #             'cam_roll' : '0.0',
+    #             'cam_pitch': '0.0',
+    #             'cam_yaw'  : '0.0',
+    #             'imu_from_descr': 'false',
+    #             'parent_frame': 'base_link',                
+    #     }.items()
+    # ) 
+
+    # camera = Node(
+    #         package='usb_cam', 
+    #         executable='usb_cam_node_exe',
+    #         output='screen',
+    #         name="usb_camera",
+    #         parameters=[params_file]
+    #     )
 
     laser_filter = Node(
             package='laser_filters',
@@ -91,13 +118,7 @@ def generate_launch_description():
         )
 
 
-    # camera = Node(
-    #         package='usb_cam', 
-    #         executable='usb_cam_node_exe',
-    #         output='screen',
-    #         name="usb_camera",
-    #         parameters=[params_file]
-    #     )
+    
 
     robot_localization = Node(
             package='robot_localization',
@@ -120,9 +141,11 @@ def generate_launch_description():
      actions=[
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
+        # camera, 
         robot_state_publisher_node,
         joint_state_publisher_node,   
         scan,
+        #oak_d,
         laser_filter,
         rviz_node, 
         robot_localization,

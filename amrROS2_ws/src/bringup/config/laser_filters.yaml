@@ -1,38 +1,47 @@
 scan_to_scan_filter_chain:
   ros__parameters:
     filter1:
-      name: front_right_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      name: box_filter
+      type: laser_filters/LaserScanRangeFilter
       params:
-        lower_angle: 2.30
-        upper_angle: 2.46
+        use_message_range_limits: false   # if not specified defaults to false
+        lower_threshold: 0.15              # if not specified defaults to 0.0
+        upper_threshold: 1.0              # if not specified defaults to 100000.0
+        lower_replacement_value: -.inf    # if not specified defaults to NaN
+        upper_replacement_value: .inf     # if not specified defaults to NaN
+    # filter1:
+    #   name: front_right_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: 2.30
+    #     upper_angle: 2.46
     
-    filter2:
-      name: front_left_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: -2.41
-        upper_angle: -2.25
+    # filter2:
+    #   name: front_left_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: -2.41
+    #     upper_angle: -2.25
     
-    filter3:
-      name: back_right_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: 0.59
-        upper_angle: 0.84   
+    # filter3:
+    #   name: back_right_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: 0.6
+    #     upper_angle: 0.83   
     
-    filter4:
-      name: back_left_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: -0.80
-        upper_angle: -0.56   
+    # filter4:
+    #   name: back_left_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: -0.80
+    #     upper_angle: -0.56   
 
-    filter5:
-      name: speckle_filter
-      type: laser_filters/LaserScanSpeckleFilter
-      params:
-        filter_type: 0
-        max_range: 2.0
-        max_range_difference: 0.1
-        filter_window: 7
+    # filter5:
+    #   name: speckle_filter
+    #   type: laser_filters/LaserScanSpeckleFilter
+    #   params:
+    #     filter_type: 0
+    #     max_range: 2.0
+    #     max_range_difference: 0.1
+    #     filter_window: 7

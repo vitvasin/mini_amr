@@ -8,6 +8,90 @@
 #include <thread>
 #include <iomanip>
 #include <unistd.h>
+//----------- Pkg data -----------------
+#define _PKG_LEN 36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+
+#define _HEADER         0
+#define _HOST_ID        1
+#define _PKG_SIZE       2
+
+#define _IMU_ROLL_L     0               // IMU data(12)
+#define _IMU_ROLL_H     1
+#define _IMU_PITCH_L    2
+#define _IMU_PITCH_H    3
+#define _IMU_YAW_L      4
+#define _IMU_YAW_H      5
+#define _IMU_ACCX_L     6
+#define _IMU_ACCX_H     7
+#define _IMU_ACCY_L     8
+#define _IMU_ACCY_H     9
+#define _IMU_ACCZ_L     10
+#define _IMU_ACCZ_H     11
+
+#define _ODOM_VX_L      12 // ODOM data(6)
+#define _ODOM_VX_H      13
+#define _ODOM_VY_L      14
+#define _ODOM_VY_H      15
+#define _ODOM_WZ_L      16
+#define _ODOM_WZ_H      17
+
+#define _RANGER_RIGHT_L     18 // Ranger data(6)
+#define _RANGER_RIGHT_H     19
+#define _RANGER_CENTER_L    20
+#define _RANGER_CENTER_H    21
+#define _RANGER_LEFT_L      22
+#define _RANGER_LEFT_H      23
+
+#define _SAFETY_            24 // Safty data(1)  xxxx xyzw     y: emer state, z: bumper_state, w: clift_state
+
+#define _BMS_VOLTAGE_L      25 // BMS data(4)(28-31)  for mini emr   , BMS data(7)(28-34)  for thai_easy & WIS amr
+#define _BMS_VOLTAGE_H      26
+#define _BMS_CURRENT_L      27
+#define _BMS_CURRENT_H      28
+#define _BMS_PERCENT_L      29
+#define _BMS_PERCENT_H      30
+#define _BMS_STATUS_        31
+
+#define _CHK_SUM_           32
+
+// #define _IMU_ROLL_L     3               // IMU data(12)
+// #define _IMU_ROLL_H     4
+// #define _IMU_PITCH_L    5
+// #define _IMU_PITCH_H    6
+// #define _IMU_YAW_L      7
+// #define _IMU_YAW_H      8
+// #define _IMU_ACCX_L     9
+// #define _IMU_ACCX_H     10
+// #define _IMU_ACCY_L     11
+// #define _IMU_ACCY_H     12
+// #define _IMU_ACCZ_L     13
+// #define _IMU_ACCZ_H     14
+
+// #define _ODOM_VX_L      15 // ODOM data(6)
+// #define _ODOM_VX_H      16
+// #define _ODOM_VY_L      17
+// #define _ODOM_VY_H      18
+// #define _ODOM_WZ_L      19
+// #define _ODOM_WZ_H      20
+
+// #define _RANGER_RIGHT_L     21 // Ranger data(6)
+// #define _RANGER_RIGHT_H     22
+// #define _RANGER_CENTER_L    23
+// #define _RANGER_CENTER_H    24
+// #define _RANGER_LEFT_L      25
+// #define _RANGER_LEFT_H      26
+
+// #define _SAFETY_            27 // Safty data(1)  xxxx xyzw     y: emer state, z: bumper_state, w: clift_state
+
+// #define _BMS_VOLTAGE_L      28 // BMS data(4)(28-31)  for mini emr   , BMS data(7)(28-34)  for thai_easy & WIS amr
+// #define _BMS_VOLTAGE_H      29
+// #define _BMS_CURRENT_L      30
+// #define _BMS_CURRENT_H      31
+// #define _BMS_PERCENT_L      32
+// #define _BMS_PERCENT_H      33
+// #define _BMS_STATUS_        34
+
+// #define _CHK_SUM_           35
 
 class HardwareInterface 
 {
@@ -73,6 +157,7 @@ private:
     bool run_receive_thread;
 
     void ParseData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& data); 
+    void ParseData(const std::vector<uint8_t>& data); 
     void SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& param);
     void ReceiveData();
 

@@ -48,7 +48,7 @@ bt_navigator:
   ros__parameters:
     global_frame: map
     robot_base_frame: center_footprint
-    odom_topic: <robot_namespace>/odom
+    odom_topic: /odom
     bt_loop_duration: 10
     default_server_timeout: 20
     wait_for_service_timeout: 1000
@@ -89,6 +89,7 @@ controller_server:
       plugin: "nav2_controller::SimpleProgressChecker"
       required_movement_radius: 0.5
       movement_time_allowance: 10.0
+    
     # Goal checker parameters
     #precise_goal_checker:
     #  plugin: "nav2_controller::SimpleGoalChecker"
@@ -100,9 +101,10 @@ controller_server:
       plugin: "nav2_controller::SimpleGoalChecker"
       xy_goal_tolerance: 0.25
       yaw_goal_tolerance: 0.25
+
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 56
+      time_steps: 56 #56
       model_dt: 0.1
       batch_size: 2000
 
@@ -110,14 +112,14 @@ controller_server:
       ax_max: 3.0
       ax_min: -3.0
       ay_max: 3.0
-      az_max: 3.5
-      vx_std: 0.2    
-      vy_std: 0.2
-      wz_std: 0.4
-      vx_max: 0.5
-      vx_min: -0.35
-      vy_max: 0.5
-      wz_max: 1.9
+      az_max: 3.8
+      vx_std: 0.3    
+      vy_std: 0.1
+      wz_std: 0.2
+      vx_max: 1.0
+      vx_min: -1.0
+      vy_max: 1.0
+      wz_max: 1.9 #1.9
 
       iteration_count: 1
       prune_distance: 1.7
@@ -200,16 +202,17 @@ local_costmap:
       global_frame: odom
       robot_base_frame: center_footprint
       rolling_window: true
-      width: 3
-      height: 3
+      width: 4
+      height: 4
       resolution: 0.1
       # robot_radius: 0.22
       footprint: '[ [0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22] ]'
-      plugins: ["voxel_layer", "inflation_layer"]
+      # plugins: ["voxel_layer", "inflation_layer"]
+      plugins: [ "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.70
+        inflation_radius: 0.50
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -221,12 +224,12 @@ local_costmap:
         mark_threshold: 0
         observation_sources: scan
         scan:
-          topic: <robot_namespace>/scan
+          topic: /scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 3.0
+          raytrace_max_range: 4.0
           raytrace_min_range: 0.0
           obstacle_max_range: 2.5
           obstacle_min_range: 0.0
@@ -252,7 +255,7 @@ global_costmap:
         enabled: True
         observation_sources: scan
         scan:
-          topic: <robot_namespace>/scan
+          topic: /scan
           max_obstacle_height: 2.0
           clearing: True
           marking: True
@@ -267,7 +270,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.7
+        inflation_radius: 0.5
       always_send_full_costmap: True
 
 # The yaml_filename does not need to be specified since it going to be set by defaults in launch.
@@ -292,7 +295,7 @@ planner_server:
     GridBased:
       plugin: "nav2_navfn_planner::NavfnPlanner"
       tolerance: 0.5
-      use_astar: false
+      use_astar: true
       allow_unknown: true
 
 smoother_server:
@@ -342,20 +345,35 @@ waypoint_follower:
       enabled: True
       waypoint_pause_duration: 200
 
+# velocity_smoother:
+#   ros__parameters:
+#     smoothing_frequency: 35.0
+#     use_realtime_priority: false
+#     scale_velocities: true
+#     feedback: "OPEN_LOOP"
+#     max_velocity: [0.5, 0.0, 1.3]
+#     min_velocity: [-0.08, 0.0, -1.3]
+#     max_accel: [2.0, 0.0, 1.6]
+#     max_decel: [-2.0, 0.0, -1.6]
+#     odom_topic: "odom"
+#     odom_duration: 0.1
+#     deadband_velocity: [0.0, 0.0, 0.0]
+#     velocity_timeout: 0.5
 velocity_smoother:
   ros__parameters:
     smoothing_frequency: 20.0
-    scale_velocities: False
-    feedback: "OPEN_LOOP"
-    max_velocity: [0.5, 0.0, 2.0]
-    min_velocity: [-0.5, 0.0, -2.0]
-    max_accel: [2.5, 0.0, 3.2]
-    max_decel: [-2.5, 0.0, -3.2]
-    odom_topic: "odom"
-    odom_duration: 0.1
+    scale_velocities: false
+    feedback: "CLOSED_LOOP"
+    max_velocity: [1.0, 0.0, 1.9]
+    min_velocity: [-1.0, 0.0, -1.9]
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0
-
+    max_accel: [3.0, 0.0, 3.8]
+    max_decel: [-3.0, 0.0, -3.8]
+    odom_topic: "odom"
+    odom_duration: 0.1
+    use_realtime_priority: false
+    enable_stamped_cmd_vel: false
 # collision_monitor:
 #   ros__parameters:
 #     base_frame_id: "base_footprint"
@@ -392,11 +410,11 @@ collision_monitor:
     use_sim_time: false
     base_frame_id: "center_footprint"
     odom_frame_id: "odom"
-    cmd_vel_in_topic: "<robot_namespace>/cmd_vel_smoothed" 
-    cmd_vel_out_topic: "<robot_namespace>/cmd_vel"
+    cmd_vel_in_topic: "/cmd_vel_smoothed" 
+    cmd_vel_out_topic: "/cmd_vel"
     state_topic: "collision_monitor_state"
-    transform_tolerance: 1.0
-    source_timeout: 5.0
+    transform_tolerance: 0.5 #1.0
+    source_timeout: 5.0 #5.0
     base_shift_correction: True
     stop_pub_timeout: 2.0
     # Polygons represent zone around the robot for "stop" and "slowdown" action types,
@@ -404,44 +422,48 @@ collision_monitor:
     # Footprint could be "polygon" type with dynamically set footprint from footprint_topic
     # or "circle" type with static footprint set by radius. "footprint_topic" parameter
     # to be ignored in circular case.
-    # polygons: ["PolygonStop", "PolygonSlow"]
-    polygons: ["PolygonStop"]
+    polygons: ["PolygonStop", "PolygonSlow"]
+    #polygons: ["PolygonStop"]
     PolygonStop:
       type: "polygon"
       points: "[[0.3, 0.25], [0.3, -0.25], [0.0, -0.25], [0.0, 0.25]]"
       action_type: "stop"
-      max_points: 3
+      max_points: 4
       visualize: True
-      polygon_pub_topic: "<robot_namespace>/polygon_stop"
-      enabled: True
+      polygon_pub_topic: "/polygon_stop"
+      enabled: true
     PolygonSlow:
       type: "polygon"
       points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
       action_type: "slowdown"
-      max_points: 3
+      max_points: 4
       slowdown_ratio: 0.5
       visualize: True
-      polygon_pub_topic: "<robot_namespace>/polygon_slowdown"
+      polygon_pub_topic: "/polygon_slowdown"
       enabled: True
     # observation_sources: ["range_center", "range_left", "range_right", "scan"]
     observation_sources: ["scan"]
     scan:
       type: "scan"
-      topic: "<robot_namespace>/scan"
-    pointcloud:
-      type: "pointcloud"
-      topic: "<robot_namespace>/intel_realsense_r200_depth/points"
-      min_height: 0.1
-      max_height: 0.5
+      topic: "/scan"
+      enabled: True
+    # pointcloud:
+    #   type: "pointcloud"
+    #   topic: "/intel_realsense_r200_depth/points"
+    #   min_height: 0.1
+    #   max_height: 0.5
     range_left:
       type: "range"
-      topic: "<robot_namespace>/range/left"
+      topic: "/range/left"
+      enabled: false
     range_center:
       type: "range"
-      topic: "<robot_namespace>/range/center"
+      topic: "/range/center"
+      enabled: false
     range_right:
       type: "range"
-      topic: "<robot_namespace>/range/right"
+      topic: "/range/right"
+      enabled: false
 
 docking_server:
   ros__parameters:

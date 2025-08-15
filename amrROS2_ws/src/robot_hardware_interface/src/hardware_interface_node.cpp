@@ -130,18 +130,21 @@ private:
 
   void twistCallback(const geometry_msgs::msg::Twist & msg)
   {
-    // std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
+    //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetMotion(msg.linear.x, 0.0, msg.angular.z);
   }
 
   void timerUpdateCallback()
   {
+    static int tCount=0;
     auto current_time = get_clock()->now();
-    if (hardware_interface->update_odom_)
-    {
+    // if (hardware_interface->update_odom_)
+    // {
       msg_odom_.header.stamp = current_time;
 
       uint64_t dt = current_time.nanoseconds() - prev_update_;
+      //std::cout << "odom publish time : "<< dt << std::endl;
+
       double dt_seconds = static_cast<double>(dt) / 1000000000.0f;
 
       double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z) * dt_seconds; // radians
@@ -170,17 +173,19 @@ private:
       msg_odom_.twist.twist.linear.y = hardware_interface->odom_velocity.y;
       msg_odom_.twist.twist.angular.z = hardware_interface->odom_velocity.z;
 
-      hardware_interface->update_odom_ = false;
+      //hardware_interface->update_odom_ = false;
       odom_pub_->publish(msg_odom_);
-
+    
       prev_update_ = current_time.nanoseconds();
-    }
-    else if (hardware_interface->update_imu_)
-    {
+      
+
+    // }
+    // else if (hardware_interface->update_imu_)
+    //{
       msg_imu_.header.stamp = current_time;
 
-      uint64_t dt = current_time.nanoseconds() - imu_prev_update_;
-      double dt_seconds = static_cast<double>(dt) / 1000000000.0;
+      dt = current_time.nanoseconds() - imu_prev_update_;
+      dt_seconds = static_cast<double>(dt) / 1000000000.0;
 
       double imu_delta_z = static_cast<double>(hardware_interface->angular_velocity.z) * dt_seconds;
       yaw_ += imu_delta_z;
@@ -201,38 +206,52 @@ private:
       msg_imu_.linear_acceleration.y = hardware_interface->linear_acceleration.x * (-1);
       msg_imu_.linear_acceleration.z = hardware_interface->linear_acceleration.z;
 
-      hardware_interface->update_imu_ = false;
+      //hardware_interface->update_imu_ = false;
       imu_pub_->publish(msg_imu_);
 
       imu_prev_update_ = current_time.nanoseconds();
-    }
-    else if (hardware_interface->update_range_)
-    {
+    // }
+    // else if (hardware_interface->update_range_)
+    // //if (hardware_interface->update_range_)
+    // {
       msg_range_left_.header.stamp   = current_time;
       msg_range_center_.header.stamp = current_time;
       msg_range_right_.header.stamp  = current_time;
 
-      msg_range_left_.range = hardware_interface->range_left;
-      msg_range_center_.range = hardware_interface->range_center;
-      msg_range_right_.range = hardware_interface->range_right;
+      msg_range_left_.range = 0.3;//hardware_interface->range_left;
+      msg_range_center_.range = 0.3;//hardware_interface->range_center;
+      msg_range_right_.range = 0.3;//hardware_interface->range_right;
 
-      hardware_interface->update_range_ = false;
+      // std::cout << "range_left:"<< msg_range_left_.range 
+      //           << "    range_center:"<< msg_range_center_.range 
+      //           << "    range_right:"<< msg_range_right_.range << std::endl;
+
+      //hardware_interface->update_range_ = false;
 
       range_left_pub_  ->publish(msg_range_left_);
       range_center_pub_->publish(msg_range_center_);
       range_right_pub_ ->publish(msg_range_right_);
-    }
-    else if (hardware_interface->update_batt_)
-    {
+    // }
+    // else if (hardware_interface->update_batt_)
+    // //if (hardware_interface->update_batt_)
+    // {
       msg_batt_.voltage = hardware_interface->voltage_;
       msg_batt_.current = hardware_interface->current_;
       msg_batt_.percentage = hardware_interface->percentage_;
       msg_batt_.power_supply_status = hardware_interface->status_;
 
-      hardware_interface->update_batt_ = false;
+      //hardware_interface->update_batt_ = false;
 
       batt_pub_->publish(msg_batt_);
-    }
+
+      if(tCount > 10){
+        hardware_interface->UpdateStatus(1);
+        tCount=0;
+      }
+      else
+        tCount++;
+      
+    //}
   }
 };
 

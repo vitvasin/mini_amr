@@ -1,6 +1,8 @@
 ekf_filter_node:
     ros__parameters:
-            frequency: 20.0
+            # frequency: 20.0
+            #frequency: 50.0
+            frequency: 25.0
             two_d_mode: true
             publish_tf: true
     
@@ -69,43 +71,37 @@ usb_camera:
       autofocus: false
       focus: -1
 
+#60degree laser scan filter chain
 scan_to_scan_filter_chain:
   ros__parameters:
     filter1:
       name: front_right_angle 
       type: laser_filters/LaserScanAngularBoundsFilterInPlace
       params:
-        # lower_angle: 2.30
-        # upper_angle: 2.46
-        lower_angle: 2.3812
-        upper_angle: 2.5015
+        lower_angle: 1.8314 #2.25
+        upper_angle: 2.46
+        #lsmgop:
     
     filter2:
       name: front_left_angle 
       type: laser_filters/LaserScanAngularBoundsFilterInPlace
       params:
-        # lower_angle: -2.41
-        # upper_angle: -2.25
-        lower_angle: -2.5015
-        upper_angle: -2.3812
+        lower_angle: -2.8536 #-2.41
+        upper_angle: -1.8064 #-2.25
     
     filter3:
       name: back_right_angle 
       type: laser_filters/LaserScanAngularBoundsFilterInPlace
       params:
-        # lower_angle: 0.59
-        # upper_angle: 0.84  
-        lower_angle: 0.6385
-        upper_angle: 0.7588
+        lower_angle: 0.59 #0.1914 #0.59
+        upper_angle: 0.84 #1.2386 #0.84   
     
     filter4:
       name: back_left_angle 
       type: laser_filters/LaserScanAngularBoundsFilterInPlace
       params:
-        # lower_angle: -0.80
-        # upper_angle: -0.56  
-        lower_angle: -0.7588 
-        upper_angle: -0.6385
+        lower_angle: -0.8 #-1.2036 #-0.80
+        upper_angle: -0.56 #-0.1564 #-0.56   
 
     filter5:
       name: speckle_filter
@@ -115,5 +111,14 @@ scan_to_scan_filter_chain:
         max_range: 2.0
         max_range_difference: 0.1
         filter_window: 7
-
+    
+    # filter1:
+    #   name: box_filter
+    #   type: laser_filters/LaserScanRangeFilter
+    #   params:
+    #     use_message_range_limits: false   # if not specified defaults to false
+    #     lower_threshold: 0.15              # if not specified defaults to 0.0
+    #     upper_threshold: 1.0              # if not specified defaults to 100000.0
+    #     lower_replacement_value: -.inf    # if not specified defaults to NaN
+    #     upper_replacement_value: .inf     # if not specified defaults to NaN
 

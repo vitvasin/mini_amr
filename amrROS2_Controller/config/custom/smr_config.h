@@ -15,8 +15,9 @@
 #ifndef SMR_BASE_CONFIG_H
 #define SMR_BASE_CONFIG_H
 
-#define LED_PIN_RUN 32
+#define LED_PIN 32
 #define LED_PIN_STATUS 26
+
 //uncomment the base you're building
 #define SMR_BASE DIFFERENTIAL_DRIVE       // 2WD and Tracked robot w/ 2 motors
 // #define SMR_BASE SKID_STEER            // 4WD robot
@@ -34,10 +35,7 @@
 #define K_D 0.0                             // D constant
 
 /*
-echo "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
-echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrcecho "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
-echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrcecho "source /usr/share/colcon_cd/function/colcon_cd.sh" >> ~/.bashrc
-echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrcROBOT ORIENTATION
+ROBOT ORIENTATION
          FRONT
     MTR_LEFT  MTR_RIGHT  (2WD/ACKERMANN)
     MOTOR3  MOTOR4  (4WD/MECANUM)  
@@ -45,13 +43,13 @@ echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrcROBOT ORIENTATION
 */
 
 //define your robot' specs here
-#define MOTOR_MAX_RPM 160                   // motor's max RPM          
-#define MAX_RPM_RATIO 0.7                  // max RPM allowed for each MAX_RPM_ALLOWED = MOTOR_MAX_RPM * MAX_RPM_RATIO          
+#define MOTOR_MAX_RPM 100                   // motor's max RPM          
+#define MAX_RPM_RATIO 1.0  //0.85                  // max RPM allowed for each MAX_RPM_ALLOWED = MOTOR_MAX_RPM * MAX_RPM_RATIO          
 
-#define COUNTS_PER_REV_RIGHT 200000              // wheel1 encoder's no of ticks per rev
-#define COUNTS_PER_REV_LEFT 200000              // wheel2 encoder's no of ticks per rev
-#define WHEEL_DIAMETER 0.1651                // wheel's diameter in meters
-#define LR_WHEELS_DISTANCE 0.333            // distance between left and right wheels
+#define COUNTS_PER_REV_RIGHT 300000              // wheel1 encoder's no of ticks per rev
+#define COUNTS_PER_REV_LEFT 300000              // wheel2 encoder's no of ticks per rev
+#define WHEEL_DIAMETER 0.15                // wheel's diameter in meters
+#define LR_WHEELS_DISTANCE 0.34            // distance between left and right wheels
 #define PWM_BITS 12                          // PWM Resolution of the microcontroller
 #define PWM_FREQUENCY 10000                 // PWM Frequency
 #define PWM_MAX (pow(2, PWM_BITS) - 1)
@@ -66,8 +64,8 @@ echo "export _colcon_cd_root=/opt/ros/humble/" >> ~/.bashrcROBOT ORIENTATION
 #define PWM_POS_RIGHT 269
 
 // INVERT ENCODER COUNTS
-#define MTR_ENCODER_INV_LEFT true 
-#define MTR_ENCODER_INV_RIGHT false 
+#define MTR_ENCODER_INV_LEFT false 
+#define MTR_ENCODER_INV_RIGHT true 
 
 // INVERT MOTOR DIRECTIONS
 #define MTR_INV_LEFT true 

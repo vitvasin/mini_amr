@@ -101,13 +101,13 @@ def generate_launch_description():
     #     }.items()
     # ) 
 
-    # camera = Node(
-    #         package='usb_cam', 
-    #         executable='usb_cam_node_exe',
-    #         output='screen',
-    #         name="usb_camera",
-    #         parameters=[params_file]
-    #     )
+    camera = Node(
+            package='usb_cam', 
+            executable='usb_cam_node_exe',
+            output='screen',
+            name="usb_camera",
+            parameters=[params_file]
+        )
 
     laser_filter = Node(
             package='laser_filters',
@@ -141,7 +141,7 @@ def generate_launch_description():
      actions=[
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
-        # camera, 
+        camera, 
         robot_state_publisher_node,
         joint_state_publisher_node,   
         scan,

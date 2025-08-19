@@ -74,36 +74,17 @@ usb_camera:
 #60degree laser scan filter chain
 scan_to_scan_filter_chain:
   ros__parameters:
-    filter1:
-      name: front_right_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: 1.8314 #2.25
-        upper_angle: 2.46
-        #lsmgop:
-    
-    filter2:
-      name: front_left_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: -2.8536 #-2.41
-        upper_angle: -1.8064 #-2.25
-    
-    filter3:
-      name: back_right_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: 0.59 #0.1914 #0.59
-        upper_angle: 0.84 #1.2386 #0.84   
-    
-    filter4:
-      name: back_left_angle 
-      type: laser_filters/LaserScanAngularBoundsFilterInPlace
-      params:
-        lower_angle: -0.8 #-1.2036 #-0.80
-        upper_angle: -0.56 #-0.1564 #-0.56   
+  filter1:
+    name: box
+    type: laser_filters/LaserScanBoxFilter
+    params: #[0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22]
+      box_frame: scan_link
+      min_x: -0.24
+      max_x: 0.24
+      min_y: -0.22
+      max_y: 0.22
 
-    filter5:
+  filter2:
       name: speckle_filter
       type: laser_filters/LaserScanSpeckleFilter
       params:
@@ -111,6 +92,45 @@ scan_to_scan_filter_chain:
         max_range: 2.0
         max_range_difference: 0.1
         filter_window: 7
+    
+      
+    # filter1:
+    #   name: front_right_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: 1.8314 #2.25
+    #     upper_angle: 2.46
+    #     #lsmgop:
+    
+    # filter2:
+    #   name: front_left_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: -2.8536 #-2.41
+    #     upper_angle: -1.8064 #-2.25
+    
+    # filter3:
+    #   name: back_right_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: 0.59 #0.1914 #0.59
+    #     upper_angle: 0.84 #1.2386 #0.84   
+    
+    # filter4:
+    #   name: back_left_angle 
+    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
+    #   params:
+    #     lower_angle: -0.8 #-1.2036 #-0.80
+    #     upper_angle: -0.56 #-0.1564 #-0.56   
+
+    # filter5:
+    #   name: speckle_filter
+    #   type: laser_filters/LaserScanSpeckleFilter
+    #   params:
+    #     filter_type: 0
+    #     max_range: 2.0
+    #     max_range_difference: 0.1
+    #     filter_window: 7
     
     # filter1:
     #   name: box_filter

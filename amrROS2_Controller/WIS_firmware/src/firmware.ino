@@ -716,20 +716,21 @@ void loop()
 
     if ((millis() - safety_time) > safety_interval)
     {
+        //uint32_t current_time = millis();
         safety_task();
         safety_time = millis();
         
-        // uint32_t current_time = millis();
-        // Serial5.printf("Time usege for safety_task(): %d\n", current_time - prev_time);
-        // prev_time = current_time;
+        
+        //Serial5.printf("safety: %d\n", millis() - current_time);
+        //prev_time = current_time;
     }
 
     if ((millis() - sensor_update_time) > sensor_interval)
     {
-        //sensor_module_task();
+       // uint32_t current_time = millis();
+        sensor_module_task();
         sensor_update_time = millis();
-        // uint32_t current_time = millis();
-        // Serial5.printf("Time usege for sensor_module_task(): %d\n", current_time - prev_time);
+        //Serial5.printf("Time usege for sensor_module_task(): %d\n", millis()- current_time);
         // prev_time = current_time;
     }
 
@@ -758,12 +759,13 @@ void loop()
 
     if ((millis() - bms_update_time) > bms_interval)
     {
+       // uint32_t current_time = millis();
         bms_task();
         bms_update_time = millis();
-
-        // uint32_t current_time = millis();
-        // Serial5.printf("Time usege for bms_task(): %d\n", current_time - prev_time);
-        // prev_time = current_time;
+       // prev_time = current_time;
+        
+       // Serial5.printf("Time usege for bms_task(): %d\n", millis()- current_time);
+        
     }
 
     if ((millis() - send_data_time) > send_data_interval)

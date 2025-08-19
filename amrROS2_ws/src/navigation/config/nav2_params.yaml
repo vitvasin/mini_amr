@@ -498,8 +498,8 @@ collision_monitor:
       visualize: True
       polygon_pub_topic: "/polygon_slowdown"
       enabled: True
-    # observation_sources: ["range_center", "range_left", "range_right", "scan"]
-    observation_sources: ["scan"]
+    observation_sources: ["range_center", "range_left", "range_right", "scan"]
+    #observation_sources: ["scan"]
     scan:
       type: "scan"
       topic: "/scan"
@@ -512,15 +512,15 @@ collision_monitor:
     range_left:
       type: "range"
       topic: "/range/left"
-      enabled: false
+      enabled: true
     range_center:
       type: "range"
       topic: "/range/center"
-      enabled: false
+      enabled: true
     range_right:
       type: "range"
       topic: "/range/right"
-      enabled: false
+      enabled: true
 
 docking_server:
   ros__parameters:

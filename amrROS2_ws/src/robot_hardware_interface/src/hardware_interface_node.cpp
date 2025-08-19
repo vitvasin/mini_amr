@@ -218,9 +218,13 @@ private:
       msg_range_center_.header.stamp = current_time;
       msg_range_right_.header.stamp  = current_time;
 
-      msg_range_left_.range = 0.3;//hardware_interface->range_left;
-      msg_range_center_.range = 0.3;//hardware_interface->range_center;
-      msg_range_right_.range = 0.3;//hardware_interface->range_right;
+      // msg_range_left_.range = 0.3;//hardware_interface->range_left;
+      // msg_range_center_.range = 0.3;//hardware_interface->range_center;
+      // msg_range_right_.range = 0.3;//hardware_interface->range_right;
+
+      msg_range_left_.range = hardware_interface->range_left*10.0; // *10 Convert to cm
+      msg_range_center_.range = hardware_interface->range_center*10.0;// *10 Convert to cm
+      msg_range_right_.range = hardware_interface->range_right*10.0;// *10 Convert to cm
 
       // std::cout << "range_left:"<< msg_range_left_.range 
       //           << "    range_center:"<< msg_range_center_.range 

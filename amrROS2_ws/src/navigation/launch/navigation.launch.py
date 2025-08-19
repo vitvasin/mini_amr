@@ -203,7 +203,7 @@ def generate_launch_description():
     bringup = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [robot_bringup_dir, 'launch', 'bringup.launch.py'])),
-            condition=IfCondition(bringup)
+            condition=IfCondition(bringup) #default is false
         )
 
     launch_elements = GroupAction(

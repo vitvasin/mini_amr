@@ -55,9 +55,9 @@ public:
     msg_imu_.linear_acceleration_covariance[4] = 0.0550;
     msg_imu_.linear_acceleration_covariance[8] = 0.0267;
 
-    ut_fov_       = 20.0;
+    ut_fov_       = 15.0;
     ut_min_range_ = 0.03;
-    ut_max_range_ = 0.50;
+    ut_max_range_ = 0.20;//0.30;//3.50;
 
     msg_range_left_.header.frame_id   = "left_ranger_link";
     msg_range_center_.header.frame_id = "center_ranger_link";
@@ -222,17 +222,21 @@ private:
       // msg_range_center_.range = 0.3;//hardware_interface->range_center;
       // msg_range_right_.range = 0.3;//hardware_interface->range_right;
 
-      msg_range_left_.range = hardware_interface->range_left*10.0; // *10 Convert to cm
-      msg_range_center_.range = hardware_interface->range_center*10.0;// *10 Convert to cm
-      msg_range_right_.range = hardware_interface->range_right*10.0;// *10 Convert to cm
+      msg_range_left_.range = hardware_interface->range_left; //Convert to cm
+      msg_range_center_.range = hardware_interface->range_center; //Convert to cm
+      msg_range_right_.range = hardware_interface->range_right; //Convert to cm
 
-      // std::cout << "range_left:"<< msg_range_left_.range 
-      //           << "    range_center:"<< msg_range_center_.range 
-      //           << "    range_right:"<< msg_range_right_.range << std::endl;
+      // Limit ultrasonic readings to not exceed 3.5 m
+      //const float ULTRASONIC_MAX_CM = 3.5f;
+      //msg_range_left_.range   = std::min(msg_range_left_.range,   ULTRASONIC_MAX_CM);
+      //msg_range_center_.range = std::min(msg_range_center_.range, ULTRASONIC_MAX_CM);
+      //msg_range_right_.range  = std::min(msg_range_right_.range,  ULTRASONIC_MAX_CM); 
+      
+      //std::cout << "range_left:"<< msg_range_left_.range << "    range_center:"<< msg_range_center_.range << "    range_right:"<< msg_range_right_.range << std::endl;
 
       //hardware_interface->update_range_ = false;
 
-      range_left_pub_  ->publish(msg_range_left_);
+      range_left_pub_->publish(msg_range_left_);
       range_center_pub_->publish(msg_range_center_);
       range_right_pub_ ->publish(msg_range_right_);
     // }

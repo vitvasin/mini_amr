@@ -64,7 +64,7 @@
 #define CliffDistanceLimit 200 // 20cm
 
 //----------- Pkg data -----------------
-#define _PKG_LEN 36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN    36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER 0
 #define _HOST_ID 1
@@ -107,7 +107,13 @@
 #define _BMS_PERCENT_H 33
 #define _BMS_STATUS_ 34
 
-#define _CHK_SUM_ 35
+// #define _IMU_READY_     35          // add new
+// #define _ODOM_READY_    36          // add new
+// #define _RANGER_READY_  37          // add new
+// #define _SAFETY_READY_  38          // add new
+// #define _BMS_READY_     39          // add new
+
+#define _CHK_SUM_       35
 
 //--------------------------------------
 
@@ -162,7 +168,7 @@ static const int RX_BUF_SIZE = 100; // 1024;
 unsigned long prev_cmd_time = 0;
 unsigned long master_time = 0, imu_update_time = 0, control_update_time = 0, bms_update_time = 0, sensor_update_time;
 unsigned long safety_time = 0, send_data_time = 0, receive_data_time = 0;
-const unsigned int imu_interval = 45, control_interval = 20, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 10, receive_data_interval;
+const unsigned int imu_interval = 45, control_interval = 20, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 20, receive_data_interval;
 
 unsigned char pkg_data[_PKG_LEN];
 
@@ -223,8 +229,8 @@ void receive_data_task()
     uint8_t rx_check_num;
     uint8_t check_sum;
 
-    uint8_t *data = (uint8_t *)malloc(RX_BUF_SIZE);
-    uint8_t *buffer = (uint8_t *)malloc(RX_BUF_SIZE + 1);
+    // Use stack-allocated buffers to avoid dynamic allocation in the hot receive loop
+    uint8_t data[RX_BUF_SIZE];
 
     while (Serial.available() > 0)
     {
@@ -304,8 +310,8 @@ void receive_data_task()
     }
     // threads.delay(25);
     //}
-    free(data);
-    free(buffer);
+    // no dynamic memory to free
+    
 }
 
 void send_data_task()
@@ -314,7 +320,7 @@ void send_data_task()
 
     pkg_data[_HEADER] = HEAD;
     pkg_data[_HOST_ID] = HOST_ID;
-    pkg_data[_PKG_SIZE] = sizeof(pkg_data) - 1; // 36 - 1 // not include chk_sum  err.
+    pkg_data[_PKG_SIZE] = sizeof(pkg_data) - 1; //41-1// 36 - 1 // not include chk_sum  err.
 
     uint8_t checksum = 0;
     for (size_t i = 0; i < pkg_data[2]; i++)
@@ -381,6 +387,7 @@ void imu_update_task()
     pkg_data[_IMU_ACCY_H] = static_cast<uint8_t>((acc_y >> 8) & 0xFF);
     pkg_data[_IMU_ACCZ_L] = static_cast<uint8_t>(acc_z & 0xFF);
     pkg_data[_IMU_ACCZ_H] = static_cast<uint8_t>((acc_z >> 8) & 0xFF);
+    //pkg_data[_IMU_READY_] = 1;
 
     // uint64_t end_time = millis();
     // uint32_t dt = end_time - start_time;
@@ -413,11 +420,13 @@ void bms_task()
         pkg_data[_BMS_PERCENT_L] = static_cast<uint8_t>(percentage & 0xFF);
         pkg_data[_BMS_PERCENT_H] = static_cast<uint8_t>((percentage >> 8) & 0xFF);
         pkg_data[_BMS_STATUS_] = static_cast<uint8_t>(batt_status & 0xFF);
+        //pkg_data[_BMS_READY_] = 1;
 
         // Serial5.printf("voltage    : %d\n", voltage);
         // Serial5.printf("current    : %d\n", current);
         // Serial5.printf("percentage : %d\n", percentage);
     }
+    //threads.delay(5);
 }
 
 void control_task()
@@ -471,8 +480,17 @@ void control_task()
     
     if (emer_state)
     {
+        if(!emer_flag)
+        {
+            //eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
+            // for (int i = 0; i < sizeof(pkg_data); i++)
+            // {
+            //     pkg_data[i] = 0;
+            // }
+        }
         emer_flag = true;
         // Serial.println("Emer ON");
+        
     }
     else
     {
@@ -481,6 +499,7 @@ void control_task()
         {
             // Serial.println("Emer OFF");
             eMR_CANOpen_Init();
+            eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
             // Serial.println("eMR CANopen Init. eMR motor ");
             delay(3000);
             emer_flag = false;
@@ -504,12 +523,10 @@ void control_task()
         }
     }
 
-   // Serial5.printf("Time usege2 : %d\n", millis() - start_time);
 
     //------------  Get Current RPM --------------------
     eMR_ReadActualVelocity2();
 
-   // Serial5.printf("Time usege3 : %d\n", millis() - start_time);
     current_rpm_right = v.velocity1/30;
     current_rpm_left = -1*v.velocity2 /30;
 
@@ -542,81 +559,92 @@ void control_task()
     pkg_data[_ODOM_VY_H] = static_cast<uint8_t>((Vy >> 8) & 0xFF);
     pkg_data[_ODOM_WZ_L] = static_cast<uint8_t>(Wz & 0xFF);
     pkg_data[_ODOM_WZ_H] = static_cast<uint8_t>((Wz >> 8) & 0xFF);
+    //pkg_data[_ODOM_READY_] = 1;
     
 }
 
 void sensor_module_task()
 {
-    float buff;
+    int32_t buff;
     uint8_t alarm_mode;
     uint8_t led_mode;
+
+    const uint8_t ultarsonic_max_range = 20;  // cm unit
 
     // uint64_t start_time = millis();
 
     if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess)
     {
-        buff = Ultrasonics_L.getResponseBuffer(0);//* 0.01; // coe = 0.01, addr = 0
-        range_left = buff;
+        buff = Ultrasonics_L.getResponseBuffer(0);// * 0.01; // coe = 0.01  => cm ==> m, addr = 0
+        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+        range_left = buff*10;// *0.01* 1000;
 
         pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
         pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
-
-        //Serial5.printf("Range Letf : %f\n", buff);
+        
+        // Serial5.printf("Range Letf : %d\n", buff);
     }
     else
     {
         if (DEBUG)
             Serial5.println("Read range left error");
     }
-    delay(10);
+    // cooperative sleep to allow other Threads to run
+    threads.delay(5);
 
     if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
     {
-        buff = Ultrasonics_R.getResponseBuffer(0);//* 0.01; // coe = 0.01, addr = 0
-        range_right = buff;
+        buff = Ultrasonics_R.getResponseBuffer(0);// * 0.01; // coe = 0.01 => cm ==> m, addr = 0
+        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+        range_right = buff*10;// *0.01* 1000;
 
         pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
         pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
 
-        // Serial5.printf("Range Right : %f\n", buff);
+        // Serial5.printf("Range Right : %d\n", buff);
     }
     else
     {
         if (DEBUG)
             Serial5.println("Read range right error");
     }
-    delay(10);
+    // cooperative sleep to allow other Threads to run
+    threads.delay(5);
 
     if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
     {
-        buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01, addr = 0
-        range_center = buff;
+        buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01  => cm ==> m, addr = 0
+        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+        range_center = buff*10;// *0.01* 1000;
         pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
         pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
 
-        // Serial5.printf("Range Center : %f\n", buff);
+        // Serial5.printf("Range Center : %d\n", buff);
     }
     else
     {
         if (DEBUG)
             Serial5.println("Read range center error");
     }
-    delay(10);
+    // cooperative sleep to allow other Threads to run
+    threads.delay(5);
 
     if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess)
     {
         buff = Cliff_Sensor.getResponseBuffer(1);//* 0.001; // coe = 0.001, addr = 1
-        cliff = buff;
+        cliff = buff;// * 1000;
 
-        //Serial5.printf("Cliff distance : %f\n", buff);
+        // Serial5.printf("Cliff distance : %d\n", buff);
     }
     else
     {
         if (DEBUG)
             Serial5.println("Read range center error");
     }
-    delay(10);
-
+    // cooperative sleep to allow other Threads to run
+    threads.delay(5);
+    //Serial5.printf("Range Letf: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
+    //pkg_data[_RANGER_READY_] = 1;
    
 }
 
@@ -637,6 +665,8 @@ void safety_task()
     else
         stop = false;
 
+
+    //pkg_data[_SAFETY_READY_] = 1;
  //Serial5.printf("bumper_state: %d  --- emer_state: %d --- cliff: %d\n", bumper_state, emer_state, cliff);
 
 }
@@ -676,7 +706,7 @@ void setup()
 
     eMR_CANOpen_Begin();
     eMR_CANOpen_Init();
-
+    eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
     //------------ BMS Init ---------------------
     BMS_SERIAL.begin(9600);
     BMS_SERIAL.setTimeout(30);
@@ -685,8 +715,8 @@ void setup()
     SENSORS_SERIAL.begin(115200);
     SENSORS_SERIAL.setTimeout(10);
     Cliff_Sensor.begin(1, SENSORS_SERIAL);
-    Ultrasonics_L.begin(3, SENSORS_SERIAL);
-    Ultrasonics_R.begin(2, SENSORS_SERIAL);
+    Ultrasonics_L.begin(2, SENSORS_SERIAL);
+    Ultrasonics_R.begin(3, SENSORS_SERIAL);
     Led_Modele.begin(5, SENSORS_SERIAL);
     Ultrasonics_C.begin(7, SENSORS_SERIAL);
     //------------ IMU Init --------------------------------
@@ -714,68 +744,62 @@ void loop()
 
     receive_data_task();
 
+    // pkg_data[_ODOM_VX_L] = 0;
+    // pkg_data[_ODOM_VX_H] = 0;
+    // pkg_data[_ODOM_VY_L] = 0;
+    // pkg_data[_ODOM_VY_H] = 0;
+    // pkg_data[_ODOM_WZ_L] = 0;
+    // pkg_data[_ODOM_WZ_H] = 0;
+
+    if ((millis() - control_update_time) > control_interval)
+    {
+        //uint32_t current_time = millis();
+        control_task();
+        //Serial5.printf("control: %d\n", millis()- control_update_time);
+        control_update_time = millis();
+        //Serial5.printf("control: %d\n", millis()- current_time);
+        
+    }
+
     if ((millis() - safety_time) > safety_interval)
     {
         //uint32_t current_time = millis();
         safety_task();
         safety_time = millis();
-        
-        
         //Serial5.printf("safety: %d\n", millis() - current_time);
-        //prev_time = current_time;
     }
 
     if ((millis() - sensor_update_time) > sensor_interval)
     {
-       // uint32_t current_time = millis();
+        //uint32_t current_time = millis();
         sensor_module_task();
         sensor_update_time = millis();
-        //Serial5.printf("Time usege for sensor_module_task(): %d\n", millis()- current_time);
-        // prev_time = current_time;
-    }
-
-    if ((millis() - control_update_time) > control_interval)
-    {
-        //uint32_t prev_time = millis();
-
-        control_task();
-        control_update_time = millis();
-
-        //Serial5.printf("Time usege for control_task();: %d\n", millis()- prev_time);
-        // uint32_t current_time = millis();
-        //Serial5.printf("Time usege for control_task();: %d\n", current_time - prev_time);
-        // prev_time = current_time;
-    }
+        //Serial5.printf("sensor: %d\n", millis()- current_time);
+    }  
 
     if ((millis() - imu_update_time) > imu_interval)
     {
+        //uint32_t current_time = millis();
         imu_update_task();
-        imu_update_time = millis();
-        
-        // uint32_t current_time = millis();
-        // Serial5.printf("Time usege for imu_update_task(): %d\n", current_time - prev_time);
-        // prev_time = current_time;
+        imu_update_time = millis();        
+        //Serial5.printf("imu: %d\n", millis()- current_time);
     }
 
     if ((millis() - bms_update_time) > bms_interval)
     {
-       // uint32_t current_time = millis();
-        bms_task();
+        //uint32_t current_time = millis();
+        //bms_task();
         bms_update_time = millis();
-       // prev_time = current_time;
+        //Serial5.printf("bms: %d\n", millis()- current_time);
         
-       // Serial5.printf("Time usege for bms_task(): %d\n", millis()- current_time);
-        
-    }
+    }    
 
     if ((millis() - send_data_time) > send_data_interval)
     {
+        //uint32_t current_time = millis();
         send_data_task();
         send_data_time = millis();
-
-        // uint32_t current_time = millis();
-        // Serial5.printf("Time usege for send_data_task(): %d\n", current_time - prev_time);
-        // prev_time = current_time;
+        //Serial5.printf("send_data: %d\n", millis()- current_time);
     }
 
     if (millis() - LedActivity > 200)

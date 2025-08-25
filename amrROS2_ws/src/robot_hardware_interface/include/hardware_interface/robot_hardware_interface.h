@@ -9,7 +9,7 @@
 #include <iomanip>
 #include <unistd.h>
 //----------- Pkg data -----------------
-#define _PKG_LEN 36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN       36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER         0
 #define _HOST_ID        1
@@ -51,8 +51,16 @@
 #define _BMS_PERCENT_L      29
 #define _BMS_PERCENT_H      30
 #define _BMS_STATUS_        31
-
 #define _CHK_SUM_           32
+
+// #define _IMU_READY_     32          // add new
+// #define _ODOM_READY_    33          // add new
+// #define _RANGER_READY_  34          // add new
+// #define _SAFETY_READY_  35          // add new
+// #define _BMS_READY_     36          // add new
+
+// #define _CHK_SUM_       37          //32
+
 
 // #define _IMU_ROLL_L     3               // IMU data(12)
 // #define _IMU_ROLL_H     4

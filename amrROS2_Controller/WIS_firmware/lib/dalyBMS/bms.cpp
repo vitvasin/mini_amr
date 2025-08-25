@@ -66,7 +66,7 @@ unsigned int RequestDataFromBMD(char cmd)
 {
   unsigned int req_sta;
   unsigned char len=0,chksum;
-  uint32_t tmr_out;
+  uint32_t tmr_out=0;
 
   char Buf[50];
 

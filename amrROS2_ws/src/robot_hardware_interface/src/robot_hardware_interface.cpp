@@ -84,7 +84,7 @@ void HardwareInterface::UpdateStatus(int status) {
 }
 
 void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
-    //if (FUNC_TYPE == FUNC_IMU) {
+   // if (data[_IMU_READY_] == 1) {
         int16_t roll  = static_cast<int16_t>(data[_IMU_ROLL_L] | (data[_IMU_ROLL_H] << 8));
         int16_t pitch = static_cast<int16_t>(data[_IMU_PITCH_L] | (data[_IMU_PITCH_H] << 8));
         int16_t yaw   = static_cast<int16_t>(data[_IMU_YAW_L] | (data[_IMU_YAW_H] << 8));
@@ -113,7 +113,7 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
         }
     //}
     //else if (FUNC_TYPE == FUNC_ODOM) {
-    //if (FUNC_TYPE == FUNC_ODOM) {
+    //if (data[_ODOM_READY_] == 1) {
         int16_t Vx = static_cast<int16_t>(data[_ODOM_VX_L] | (data[_ODOM_VX_H] << 8));
         int16_t Vy = static_cast<int16_t>(data[_ODOM_VY_L] | (data[_ODOM_VY_H] << 8));
         int16_t Wz = static_cast<int16_t>(data[_ODOM_WZ_L] | (data[_ODOM_WZ_H] << 8));
@@ -130,28 +130,28 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
             std::cout << " " << odom_velocity.y / 1000.0;
             std::cout << " " << odom_velocity.z / 1000.0 << std::endl;
         }
-    //}
+   // }
     //else if (FUNC_TYPE == FUNC_RANGE) {
-    //if (FUNC_TYPE == FUNC_RANGE) {
+   // if (data[_RANGER_READY_] == 1) {
         int16_t range_1 = static_cast<int16_t>(data[_RANGER_RIGHT_L] | (data[_RANGER_RIGHT_H] << 8));
         int16_t range_2 = static_cast<int16_t>(data[_RANGER_CENTER_L] | (data[_RANGER_CENTER_H] << 8));
         int16_t range_3 = static_cast<int16_t>(data[_RANGER_LEFT_L] | (data[_RANGER_LEFT_H] << 8));
 
-        range_left   = range_1 / 1000.0;
+        range_left   = range_3 / 1000.0;
         range_center = range_2 / 1000.0;
-        range_right  = range_3 / 1000.0;
+        range_right  = range_1 / 1000.0;
 
         update_range_ = true;
 
-        if(DEBUG_RANGE){
-            std::cout << "Range -";
-            std::cout << " " << range_left;
-            std::cout << " " << range_center;
-            std::cout << " " << range_right << std::endl;
-        }
-    //}
+        //if(DEBUG_RANGE){
+        //    std::cout << "Range -";
+        //    std::cout << " " << range_left;
+        //    std::cout << " " << range_center;
+        //    std::cout << " " << range_right << std::endl;
+        //}
+   // }
     //else if (FUNC_TYPE == FUNC_BATT) {
-    //if (FUNC_TYPE == FUNC_BATT) {
+   // if (data[_BMS_READY_] == 1) {
         int16_t voltage     = static_cast<int16_t>(data[_BMS_VOLTAGE_L] | (data[_BMS_VOLTAGE_H] << 8));
         int16_t current     = static_cast<int16_t>(data[_BMS_CURRENT_L] | (data[_BMS_CURRENT_H] << 8));
         int16_t percentage  = static_cast<int16_t>(data[_BMS_PERCENT_L] | (data[_BMS_PERCENT_H] << 8));
@@ -164,14 +164,14 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
 
         update_batt_ = true;
 
-        if(DEBUG_BATT){
-            std::cout << "Battery -";
-            std::cout << " " << voltage;
-            std::cout << " " << current;
-            std::cout << " " << percentage;
-            std::cout << " " << static_cast<int>(status) << std::endl;   
-        }
-    //}
+        //if(DEBUG_BATT){
+        //    std::cout << "Battery -";
+        //    std::cout << " " << voltage;
+        //    std::cout << " " << current;
+        //    std::cout << " " << percentage;
+        //    std::cout << " " << static_cast<int>(status) << std::endl;   
+       // }
+   // }
 }
 
 void HardwareInterface::ParseData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& data) {

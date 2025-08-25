@@ -1,0 +1,63 @@
+[0.512s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup -- -j8 -l8
+[0.987s] -- Found ament_cmake: 2.5.4 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.195s] -- Found rclcpp: 28.1.9 (/opt/ros/jazzy/share/rclcpp/cmake)
+[1.281s] -- Found rosidl_generator_c: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_c/cmake)
+[1.301s] -- Found rosidl_generator_cpp: 4.6.5 (/opt/ros/jazzy/share/rosidl_generator_cpp/cmake)
+[1.324s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.349s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.646s] -- Found rmw_implementation_cmake: 7.3.2 (/opt/ros/jazzy/share/rmw_implementation_cmake/cmake)
+[1.659s] -- Found rmw_cyclonedds_cpp: 2.2.3 (/opt/ros/jazzy/share/rmw_cyclonedds_cpp/cmake)
+[1.818s] -- Using RMW implementation 'rmw_cyclonedds_cpp' as default
+[2.070s] -- Found std_msgs: 5.3.6 (/opt/ros/jazzy/share/std_msgs/cmake)
+[2.123s] -- Found sensor_msgs: 5.3.6 (/opt/ros/jazzy/share/sensor_msgs/cmake)
+[2.205s] -- Found ament_lint_auto: 0.17.2 (/opt/ros/jazzy/share/ament_lint_auto/cmake)
+[2.421s] -- Added test 'flake8' to check Python code syntax and style conventions
+[2.421s] -- Configured 'flake8' exclude dirs and/or files: 
+[2.422s] -- Added test 'lint_cmake' to check CMake code style
+[2.424s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[2.427s] -- Added test 'xmllint' to check XML markup files
+[2.432s] -- Configuring done (1.8s)
+[2.459s] -- Generating done (0.0s)
+[2.479s] -- Build files have been written to: /home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup
+[2.569s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup -- -j8 -l8
+[2.571s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup
+[2.621s] -- Install configuration: ""
+[2.621s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch
+[2.621s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/bringup_namspace.launch.py
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/bringup.launch.py
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/gazebo.launch.py
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/camera.launch.py
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/__pycache__
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/__pycache__/bringup.launch.cpython-312.pyc
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/__pycache__/gazebo.launch.cpython-312.pyc
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/launch/__pycache__/camera.launch.cpython-312.pyc
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config
+[2.622s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config/usbcam.yaml
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config/laser_filters.yaml
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config/ekf.yaml
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config/bringup.yaml
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/world
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/world/empty.sdf
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena/model.config
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena/model.sdf
+[2.623s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena/meshes
+[2.624s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena/meshes/wall.dae
+[2.624s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/models/TurtlebotArena/meshes/hexagon.dae
+[2.624s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/ament_index/resource_index/package_run_dependencies/bringup
+[2.624s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/ament_index/resource_index/parent_prefix_path/bringup
+[2.626s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/environment/ament_prefix_path.sh
+[2.627s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/environment/ament_prefix_path.dsv
+[2.628s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/environment/path.sh
+[2.630s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/environment/path.dsv
+[2.631s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/local_setup.bash
+[2.631s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/local_setup.sh
+[2.633s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/local_setup.zsh
+[2.634s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/local_setup.dsv
+[2.636s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/package.dsv
+[2.641s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/ament_index/resource_index/packages/bringup
+[2.645s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/cmake/bringupConfig.cmake
+[2.646s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/cmake/bringupConfig-version.cmake
+[2.647s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/package.xml
+[2.648s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup

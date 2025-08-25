@@ -1,0 +1,90 @@
+[0.000000] (-) TimerEvent: {}
+[0.001073] (-) JobUnselected: {'identifier': 'action_autodock'}
+[0.001205] (-) JobUnselected: {'identifier': 'bringup'}
+[0.001305] (-) JobUnselected: {'identifier': 'custom_interface'}
+[0.001405] (-) JobUnselected: {'identifier': 'description'}
+[0.001501] (-) JobUnselected: {'identifier': 'dock_lidar'}
+[0.001598] (-) JobUnselected: {'identifier': 'navigation'}
+[0.001690] (-) JobUnselected: {'identifier': 'python_pkg'}
+[0.001781] (-) JobUnselected: {'identifier': 'robot_hardware_interface'}
+[0.001863] (-) JobUnselected: {'identifier': 'sllidar_ros2'}
+[0.001951] (robot_data_tool) JobQueued: {'identifier': 'robot_data_tool', 'dependencies': OrderedDict()}
+[0.002089] (robot_data_tool) JobStarted: {'identifier': 'robot_data_tool'}
+[0.099299] (-) TimerEvent: {}
+[0.200025] (-) TimerEvent: {}
+[0.300697] (-) TimerEvent: {}
+[0.401461] (-) TimerEvent: {}
+[0.502755] (-) TimerEvent: {}
+[0.603452] (-) TimerEvent: {}
+[0.704268] (-) TimerEvent: {}
+[0.804968] (-) TimerEvent: {}
+[0.905625] (-) TimerEvent: {}
+[1.006311] (-) TimerEvent: {}
+[1.106958] (-) TimerEvent: {}
+[1.207598] (-) TimerEvent: {}
+[1.308266] (-) TimerEvent: {}
+[1.409424] (-) TimerEvent: {}
+[1.510499] (-) TimerEvent: {}
+[1.611215] (-) TimerEvent: {}
+[1.712338] (-) TimerEvent: {}
+[1.776061] (robot_data_tool) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/robot_data_tool', 'build', '--build-base', '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build', 'install', '--record', '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_data_tool', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'smr', 'SSH_CLIENT': '10.225.61.177 60247 22', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'SSH_TTY': '/dev/pts/0', 'ROS_PYTHON_VERSION': '3', 'LC_CTYPE': 'C.UTF-8', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'COLCON_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '10', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_cyclonedds_cpp', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'ROS_DOMAIN_ID': '19', 'AMENT_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/sllidar_ros2:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/navigation:/home/smr/workspaces/mini_amr/amrROS2_ws/install/dock_lidar:/home/smr/workspaces/mini_amr/amrROS2_ws/install/description:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'ROS_WS': '/home/smr/workspaces/mini_amr/amrROS2_ws', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool', 'SSH_CONNECTION': '10.225.61.177 60247 10.221.10.148 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/sllidar_ros2:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/navigation:/home/smr/workspaces/mini_amr/amrROS2_ws/install/dock_lidar:/home/smr/workspaces/mini_amr/amrROS2_ws/install/description:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}, 'shell': False}
+[1.812556] (-) TimerEvent: {}
+[1.912884] (-) TimerEvent: {}
+[2.013180] (-) TimerEvent: {}
+[2.113475] (-) TimerEvent: {}
+[2.187175] (robot_data_tool) StdoutLine: {'line': b'running egg_info\n'}
+[2.187658] (robot_data_tool) StdoutLine: {'line': b'creating ../../build/robot_data_tool/robot_data_tool.egg-info\n'}
+[2.213589] (-) TimerEvent: {}
+[2.218543] (robot_data_tool) StdoutLine: {'line': b'writing ../../build/robot_data_tool/robot_data_tool.egg-info/PKG-INFO\n'}
+[2.218922] (robot_data_tool) StdoutLine: {'line': b'writing dependency_links to ../../build/robot_data_tool/robot_data_tool.egg-info/dependency_links.txt\n'}
+[2.219187] (robot_data_tool) StdoutLine: {'line': b'writing entry points to ../../build/robot_data_tool/robot_data_tool.egg-info/entry_points.txt\n'}
+[2.219467] (robot_data_tool) StdoutLine: {'line': b'writing requirements to ../../build/robot_data_tool/robot_data_tool.egg-info/requires.txt\n'}
+[2.219949] (robot_data_tool) StdoutLine: {'line': b'writing top-level names to ../../build/robot_data_tool/robot_data_tool.egg-info/top_level.txt\n'}
+[2.220479] (robot_data_tool) StdoutLine: {'line': b"writing manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'\n"}
+[2.280590] (robot_data_tool) StdoutLine: {'line': b"reading manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'\n"}
+[2.281674] (robot_data_tool) StdoutLine: {'line': b"writing manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'\n"}
+[2.282039] (robot_data_tool) StdoutLine: {'line': b'running build\n'}
+[2.282257] (robot_data_tool) StdoutLine: {'line': b'running build_py\n'}
+[2.282446] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build\n'}
+[2.282659] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib\n'}
+[2.282817] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.282991] (robot_data_tool) StdoutLine: {'line': b'copying robot_data_tool/robot_detail.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.283169] (robot_data_tool) StdoutLine: {'line': b'copying robot_data_tool/map_pose_provider.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.283348] (robot_data_tool) StdoutLine: {'line': b'copying robot_data_tool/absolute_origin_laser.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.283517] (robot_data_tool) StdoutLine: {'line': b'copying robot_data_tool/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.283693] (robot_data_tool) StdoutLine: {'line': b'copying robot_data_tool/publish_robot_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool\n'}
+[2.284075] (robot_data_tool) StdoutLine: {'line': b'running install\n'}
+[2.294508] (robot_data_tool) StdoutLine: {'line': b'running install_lib\n'}
+[2.313842] (-) TimerEvent: {}
+[2.325059] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.325424] (robot_data_tool) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/robot_detail.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.325642] (robot_data_tool) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/map_pose_provider.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.325831] (robot_data_tool) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/absolute_origin_laser.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.326036] (robot_data_tool) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.326236] (robot_data_tool) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/publish_robot_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool\n'}
+[2.326933] (robot_data_tool) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/robot_detail.py to robot_detail.cpython-312.pyc\n'}
+[2.327939] (robot_data_tool) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/map_pose_provider.py to map_pose_provider.cpython-312.pyc\n'}
+[2.330364] (robot_data_tool) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/absolute_origin_laser.py to absolute_origin_laser.cpython-312.pyc\n'}
+[2.331647] (robot_data_tool) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/__init__.py to __init__.cpython-312.pyc\n'}
+[2.331958] (robot_data_tool) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/publish_robot_pose.py to publish_robot_pose.cpython-312.pyc\n'}
+[2.332720] (robot_data_tool) StdoutLine: {'line': b'running install_data\n'}
+[2.333041] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index\n'}
+[2.333155] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index\n'}
+[2.333378] (robot_data_tool) StdoutLine: {'line': b'creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index/packages\n'}
+[2.333484] (robot_data_tool) StdoutLine: {'line': b'copying resource/robot_data_tool -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index/packages\n'}
+[2.333637] (robot_data_tool) StdoutLine: {'line': b'copying package.xml -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/robot_data_tool\n'}
+[2.333809] (robot_data_tool) StdoutLine: {'line': b'running install_egg_info\n'}
+[2.367412] (robot_data_tool) StdoutLine: {'line': b'Copying ../../build/robot_data_tool/robot_data_tool.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool-0.0.0-py3.12.egg-info\n'}
+[2.368821] (robot_data_tool) StdoutLine: {'line': b'running install_scripts\n'}
+[2.414122] (-) TimerEvent: {}
+[2.515429] (-) TimerEvent: {}
+[2.584202] (robot_data_tool) StdoutLine: {'line': b'Installing absolute_origin_laser script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool\n'}
+[2.585171] (robot_data_tool) StdoutLine: {'line': b'Installing map_pose_provider script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool\n'}
+[2.585788] (robot_data_tool) StdoutLine: {'line': b'Installing publish_robot_pose script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool\n'}
+[2.586397] (robot_data_tool) StdoutLine: {'line': b'Installing robot_detail script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool\n'}
+[2.586883] (robot_data_tool) StdoutLine: {'line': b"writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/install.log'\n"}
+[2.615662] (-) TimerEvent: {}
+[2.680093] (robot_data_tool) CommandEnded: {'returncode': 0}
+[2.715773] (-) TimerEvent: {}
+[2.725471] (robot_data_tool) JobEnded: {'identifier': 'robot_data_tool', 'rc': 0}
+[2.727253] (-) EventReactorShutdown: {}

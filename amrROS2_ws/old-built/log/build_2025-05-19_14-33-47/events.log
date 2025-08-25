@@ -1,0 +1,68 @@
+[0.000000] (-) TimerEvent: {}
+[0.000435] (-) JobUnselected: {'identifier': 'action_autodock'}
+[0.001090] (-) JobUnselected: {'identifier': 'bringup'}
+[0.001142] (-) JobUnselected: {'identifier': 'custom_interface'}
+[0.001164] (-) JobUnselected: {'identifier': 'description'}
+[0.001183] (-) JobUnselected: {'identifier': 'dock_lidar'}
+[0.001204] (-) JobUnselected: {'identifier': 'navigation'}
+[0.001222] (-) JobUnselected: {'identifier': 'python_pkg'}
+[0.001239] (-) JobUnselected: {'identifier': 'robot_data_tool'}
+[0.001256] (-) JobUnselected: {'identifier': 'robot_hardware_interface'}
+[0.001274] (-) JobUnselected: {'identifier': 'sllidar_ros2'}
+[0.001298] (wis_pkg) JobQueued: {'identifier': 'wis_pkg', 'dependencies': OrderedDict()}
+[0.001328] (wis_pkg) JobStarted: {'identifier': 'wis_pkg'}
+[0.099629] (-) TimerEvent: {}
+[0.200214] (-) TimerEvent: {}
+[0.300757] (-) TimerEvent: {}
+[0.401277] (-) TimerEvent: {}
+[0.501979] (-) TimerEvent: {}
+[0.602541] (-) TimerEvent: {}
+[0.703016] (-) TimerEvent: {}
+[0.803486] (-) TimerEvent: {}
+[0.904025] (-) TimerEvent: {}
+[1.004492] (-) TimerEvent: {}
+[1.105041] (-) TimerEvent: {}
+[1.205585] (-) TimerEvent: {}
+[1.306162] (-) TimerEvent: {}
+[1.406786] (-) TimerEvent: {}
+[1.468942] (wis_pkg) Command: {'cmd': ['/usr/bin/python3', '-W', 'ignore:setup.py install is deprecated', '-W', 'ignore:easy_install command is deprecated', 'setup.py', 'egg_info', '--egg-base', '../../build/wis_pkg', 'build', '--build-base', '/home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/build', 'install', '--record', '/home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/install.log', '--single-version-externally-managed', 'install_data'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg', 'env': {'LESSOPEN': '| /usr/bin/lesspipe %s', 'USER': 'smr', 'SSH_CLIENT': '10.225.60.196 60228 22', 'GZ_CONFIG_PATH': '/opt/ros/jazzy/opt/gz_sim_vendor/share/gz:/opt/ros/jazzy/opt/sdformat_vendor/share/gz:/opt/ros/jazzy/opt/gz_gui_vendor/share/gz:/opt/ros/jazzy/opt/gz_transport_vendor/share/gz:/opt/ros/jazzy/opt/gz_rendering_vendor/share/gz:/opt/ros/jazzy/opt/gz_plugin_vendor/share/gz:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/share/gz:/opt/ros/jazzy/opt/gz_msgs_vendor/share/gz:/opt/ros/jazzy/opt/gz_common_vendor/share/gz', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface/lib:/opt/ros/jazzy/opt/gz_sim_vendor/lib:/opt/ros/jazzy/opt/gz_sensors_vendor/lib:/opt/ros/jazzy/opt/gz_physics_vendor/lib:/opt/ros/jazzy/opt/sdformat_vendor/lib:/opt/ros/jazzy/opt/rviz_ogre_vendor/lib:/opt/ros/jazzy/lib/aarch64-linux-gnu:/opt/ros/jazzy/opt/gz_gui_vendor/lib:/opt/ros/jazzy/opt/gz_transport_vendor/lib:/opt/ros/jazzy/opt/gz_rendering_vendor/lib:/opt/ros/jazzy/opt/gz_plugin_vendor/lib:/opt/ros/jazzy/opt/gz_fuel_tools_vendor/lib:/opt/ros/jazzy/opt/gz_msgs_vendor/lib:/opt/ros/jazzy/opt/gz_common_vendor/lib:/opt/ros/jazzy/opt/gz_math_vendor/lib:/opt/ros/jazzy/opt/gz_utils_vendor/lib:/opt/ros/jazzy/opt/gz_tools_vendor/lib:/opt/ros/jazzy/opt/gz_ogre_next_vendor/lib:/opt/ros/jazzy/opt/gz_dartsim_vendor/lib:/opt/ros/jazzy/opt/gz_cmake_vendor/lib:/opt/ros/jazzy/lib', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/wis_pkg', 'SSH_TTY': '/dev/pts/2', 'ROS_PYTHON_VERSION': '3', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'COLCON_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install', 'ROS_DISTRO': 'jazzy', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'XDG_SESSION_CLASS': 'user', 'TERM': 'xterm-256color', 'XDG_SESSION_ID': '25', 'PATH': '/opt/ros/jazzy/opt/gz_msgs_vendor/bin:/opt/ros/jazzy/opt/gz_tools_vendor/bin:/opt/ros/jazzy/opt/gz_ogre_next_vendor/bin:/opt/ros/jazzy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'RMW_IMPLEMENTATION': 'rmw_cyclonedds_cpp', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'ROS_DOMAIN_ID': '19', 'AMENT_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/sllidar_ros2:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/navigation:/home/smr/workspaces/mini_amr/amrROS2_ws/install/dock_lidar:/home/smr/workspaces/mini_amr/amrROS2_ws/install/description:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy', 'SHELL': '/bin/bash', 'ROS_WS': '/home/smr/workspaces/mini_amr/amrROS2_ws', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'ROS_AUTOMATIC_DISCOVERY_RANGE': 'SUBNET', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg', 'SSH_CONNECTION': '10.225.60.196 60228 10.221.10.148 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'PYTHONPATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface/lib/python3.12/site-packages:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages:/opt/ros/jazzy/lib/python3.12/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/sllidar_ros2:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/navigation:/home/smr/workspaces/mini_amr/amrROS2_ws/install/dock_lidar:/home/smr/workspaces/mini_amr/amrROS2_ws/install/description:/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface:/home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup:/opt/ros/jazzy/opt/gz_sim_vendor:/opt/ros/jazzy/opt/gz_sensors_vendor:/opt/ros/jazzy/opt/gz_physics_vendor:/opt/ros/jazzy/opt/sdformat_vendor:/opt/ros/jazzy/opt/gz_gui_vendor:/opt/ros/jazzy/opt/gz_transport_vendor:/opt/ros/jazzy/opt/gz_rendering_vendor:/opt/ros/jazzy/opt/gz_plugin_vendor:/opt/ros/jazzy/opt/gz_fuel_tools_vendor:/opt/ros/jazzy/opt/gz_msgs_vendor:/opt/ros/jazzy/opt/gz_common_vendor:/opt/ros/jazzy/opt/gz_math_vendor:/opt/ros/jazzy/opt/gz_utils_vendor:/opt/ros/jazzy/opt/gz_tools_vendor:/opt/ros/jazzy/opt/gz_ogre_next_vendor:/opt/ros/jazzy/opt/gz_dartsim_vendor:/opt/ros/jazzy/opt/gz_cmake_vendor'}, 'shell': False}
+[1.507007] (-) TimerEvent: {}
+[1.607503] (-) TimerEvent: {}
+[1.708066] (-) TimerEvent: {}
+[1.808525] (-) TimerEvent: {}
+[1.909069] (-) TimerEvent: {}
+[1.923172] (wis_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[1.953365] (wis_pkg) StdoutLine: {'line': b'writing ../../build/wis_pkg/wis_pkg.egg-info/PKG-INFO\n'}
+[1.953866] (wis_pkg) StdoutLine: {'line': b'writing dependency_links to ../../build/wis_pkg/wis_pkg.egg-info/dependency_links.txt\n'}
+[1.954319] (wis_pkg) StdoutLine: {'line': b'writing entry points to ../../build/wis_pkg/wis_pkg.egg-info/entry_points.txt\n'}
+[1.954642] (wis_pkg) StdoutLine: {'line': b'writing requirements to ../../build/wis_pkg/wis_pkg.egg-info/requires.txt\n'}
+[1.954905] (wis_pkg) StdoutLine: {'line': b'writing top-level names to ../../build/wis_pkg/wis_pkg.egg-info/top_level.txt\n'}
+[2.009268] (-) TimerEvent: {}
+[2.017314] (wis_pkg) StdoutLine: {'line': b"reading manifest file '../../build/wis_pkg/wis_pkg.egg-info/SOURCES.txt'\n"}
+[2.018663] (wis_pkg) StdoutLine: {'line': b"writing manifest file '../../build/wis_pkg/wis_pkg.egg-info/SOURCES.txt'\n"}
+[2.019132] (wis_pkg) StdoutLine: {'line': b'running build\n'}
+[2.019345] (wis_pkg) StdoutLine: {'line': b'running build_py\n'}
+[2.019595] (wis_pkg) StdoutLine: {'line': b'copying wis_pkg/map_load_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/build/lib/wis_pkg\n'}
+[2.020199] (wis_pkg) StdoutLine: {'line': b'running install\n'}
+[2.030635] (wis_pkg) StdoutLine: {'line': b'running install_lib\n'}
+[2.062266] (wis_pkg) StdoutLine: {'line': b'copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/build/lib/wis_pkg/map_load_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages/wis_pkg\n'}
+[2.063528] (wis_pkg) StdoutLine: {'line': b'byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_load_subscriber_node.py to map_load_subscriber_node.cpython-312.pyc\n'}
+[2.065516] (wis_pkg) StdoutLine: {'line': b'running install_data\n'}
+[2.065834] (wis_pkg) StdoutLine: {'line': b'running install_egg_info\n'}
+[2.099753] (wis_pkg) StdoutLine: {'line': b"removing '/home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages/wis_pkg-0.0.0-py3.12.egg-info' (and everything under it)\n"}
+[2.100227] (wis_pkg) StdoutLine: {'line': b'Copying ../../build/wis_pkg/wis_pkg.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/python3.12/site-packages/wis_pkg-0.0.0-py3.12.egg-info\n'}
+[2.101605] (wis_pkg) StdoutLine: {'line': b'running install_scripts\n'}
+[2.109424] (-) TimerEvent: {}
+[2.209858] (-) TimerEvent: {}
+[2.310398] (-) TimerEvent: {}
+[2.323546] (wis_pkg) StdoutLine: {'line': b'Installing map_info script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.324143] (wis_pkg) StdoutLine: {'line': b'Installing map_load script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.324511] (wis_pkg) StdoutLine: {'line': b'Installing map_name script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.324816] (wis_pkg) StdoutLine: {'line': b'Installing map_nav script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.324996] (wis_pkg) StdoutLine: {'line': b'Installing map_save script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.325299] (wis_pkg) StdoutLine: {'line': b'Installing map_scan script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg/lib/wis_pkg\n'}
+[2.325839] (wis_pkg) StdoutLine: {'line': b"writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/build/wis_pkg/install.log'\n"}
+[2.410780] (-) TimerEvent: {}
+[2.446079] (wis_pkg) CommandEnded: {'returncode': 0}
+[2.463963] (wis_pkg) JobEnded: {'identifier': 'wis_pkg', 'rc': 0}
+[2.465523] (-) EventReactorShutdown: {}

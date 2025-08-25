@@ -1,0 +1,56 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "custom_interface/action/Autodock_GetResult_Response",
+      "fields": [
+        {
+          "name": "status",
+          "type": {
+            "type_id": 2,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        },
+        {
+          "name": "result",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_Result"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "custom_interface/action/Autodock_Result",
+        "fields": [
+          {
+            "name": "structure_needs_at_least_one_member",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "custom_interface/action/Autodock_GetResult_Response",
+      "hash_string": "RIHS01_e46bb79de347d52101c9969b0d9292f196ff95354eb1a1288eeae399abb2e2fc"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_Result",
+      "hash_string": "RIHS01_f0aebff0343e0ddd0767fd69125b8a020ecbfc82c134ff3df77ad674224a658e"
+    }
+  ]
+}

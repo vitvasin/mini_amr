@@ -1,0 +1,202 @@
+[0.000000] (-) TimerEvent: {}
+[0.000585] (action_autodock) JobQueued: {'identifier': 'action_autodock', 'dependencies': OrderedDict()}
+[0.000868] (bringup) JobQueued: {'identifier': 'bringup', 'dependencies': OrderedDict()}
+[0.000974] (custom_interface) JobQueued: {'identifier': 'custom_interface', 'dependencies': OrderedDict()}
+[0.001109] (description) JobQueued: {'identifier': 'description', 'dependencies': OrderedDict()}
+[0.001266] (navigation) JobQueued: {'identifier': 'navigation', 'dependencies': OrderedDict()}
+[0.001431] (python_pkg) JobQueued: {'identifier': 'python_pkg', 'dependencies': OrderedDict()}
+[0.001532] (robot_hardware_interface) JobQueued: {'identifier': 'robot_hardware_interface', 'dependencies': OrderedDict()}
+[0.001625] (dock_lidar) JobQueued: {'identifier': 'dock_lidar', 'dependencies': OrderedDict({'custom_interface': '/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface'})}
+[0.001882] (custom_interface) JobStarted: {'identifier': 'custom_interface'}
+[0.008147] (action_autodock) JobStarted: {'identifier': 'action_autodock'}
+[0.012886] (bringup) JobStarted: {'identifier': 'bringup'}
+[0.015224] (description) JobStarted: {'identifier': 'description'}
+[0.017722] (navigation) JobStarted: {'identifier': 'navigation'}
+[0.020151] (python_pkg) JobStarted: {'identifier': 'python_pkg'}
+[0.024331] (robot_hardware_interface) JobStarted: {'identifier': 'robot_hardware_interface'}
+[0.029803] (custom_interface) JobProgress: {'identifier': 'custom_interface', 'progress': 'cmake'}
+[0.030500] (custom_interface) Command: {'cmd': ['/usr/bin/cmake', '/home/smr/workspaces/mini_amr/amrROS2_ws/src/autodock/custom_interface', '-DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/custom_interface', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'TMUX': '/tmp/tmux-1000/default,2173,0', 'USER': 'smr', 'SSH_CLIENT': '10.222.42.222 50962 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'TERM_PROGRAM_VERSION': '3.4', 'SSH_TTY': '/dev/pts/0', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'TERM': 'tmux-256color', 'XDG_SESSION_ID': '3', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'TERM_PROGRAM': 'tmux', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/custom_interface', 'SSH_CONNECTION': '10.222.42.222 50962 10.222.42.56 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'TMUX_PANE': '%2'}), 'shell': False}
+[0.098291] (-) TimerEvent: {}
+[0.198968] (-) TimerEvent: {}
+[0.299696] (-) TimerEvent: {}
+[0.355065] (bringup) JobProgress: {'identifier': 'bringup', 'progress': 'cmake'}
+[0.356454] (bringup) Command: {'cmd': ['/usr/bin/cmake', '/home/smr/workspaces/mini_amr/amrROS2_ws/src/bringup', '-DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'TMUX': '/tmp/tmux-1000/default,2173,0', 'USER': 'smr', 'SSH_CLIENT': '10.222.42.222 50962 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'TERM_PROGRAM_VERSION': '3.4', 'SSH_TTY': '/dev/pts/0', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'TERM': 'tmux-256color', 'XDG_SESSION_ID': '3', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'TERM_PROGRAM': 'tmux', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/bringup', 'SSH_CONNECTION': '10.222.42.222 50962 10.222.42.56 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'TMUX_PANE': '%2'}), 'shell': False}
+[0.357981] (description) JobProgress: {'identifier': 'description', 'progress': 'cmake'}
+[0.359085] (description) Command: {'cmd': ['/usr/bin/cmake', '/home/smr/workspaces/mini_amr/amrROS2_ws/src/description', '-DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/description'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/description', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'TMUX': '/tmp/tmux-1000/default,2173,0', 'USER': 'smr', 'SSH_CLIENT': '10.222.42.222 50962 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'TERM_PROGRAM_VERSION': '3.4', 'SSH_TTY': '/dev/pts/0', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'TERM': 'tmux-256color', 'XDG_SESSION_ID': '3', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'TERM_PROGRAM': 'tmux', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/description', 'SSH_CONNECTION': '10.222.42.222 50962 10.222.42.56 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'TMUX_PANE': '%2'}), 'shell': False}
+[0.360821] (navigation) JobProgress: {'identifier': 'navigation', 'progress': 'cmake'}
+[0.361244] (navigation) Command: {'cmd': ['/usr/bin/cmake', '/home/smr/workspaces/mini_amr/amrROS2_ws/src/navigation', '-DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/navigation'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/navigation', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'TMUX': '/tmp/tmux-1000/default,2173,0', 'USER': 'smr', 'SSH_CLIENT': '10.222.42.222 50962 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'TERM_PROGRAM_VERSION': '3.4', 'SSH_TTY': '/dev/pts/0', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'TERM': 'tmux-256color', 'XDG_SESSION_ID': '3', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'TERM_PROGRAM': 'tmux', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/navigation', 'SSH_CONNECTION': '10.222.42.222 50962 10.222.42.56 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'TMUX_PANE': '%2'}), 'shell': False}
+[0.399894] (-) TimerEvent: {}
+[0.428694] (custom_interface) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.479539] (description) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.487039] (navigation) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.500056] (-) TimerEvent: {}
+[0.521514] (bringup) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.600209] (-) TimerEvent: {}
+[0.675529] (robot_hardware_interface) JobProgress: {'identifier': 'robot_hardware_interface', 'progress': 'cmake'}
+[0.676966] (description) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.679938] (robot_hardware_interface) Command: {'cmd': ['/usr/bin/cmake', '/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface', '-DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface'], 'cwd': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface', 'env': OrderedDict({'LESSOPEN': '| /usr/bin/lesspipe %s', 'TMUX': '/tmp/tmux-1000/default,2173,0', 'USER': 'smr', 'SSH_CLIENT': '10.222.42.222 50962 22', 'XDG_SESSION_TYPE': 'tty', 'SHLVL': '2', 'HOME': '/home/smr', 'OLDPWD': '/home/smr/workspaces/mini_amr', 'TERM_PROGRAM_VERSION': '3.4', 'SSH_TTY': '/dev/pts/0', 'DBUS_SESSION_BUS_ADDRESS': 'unix:path=/run/user/1000/bus', 'DEBUGINFOD_URLS': 'https://debuginfod.ubuntu.com', 'LOGNAME': 'smr', '_': '/usr/bin/colcon', 'XDG_SESSION_CLASS': 'user', 'TERM': 'tmux-256color', 'XDG_SESSION_ID': '3', 'PATH': '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin', 'XDG_RUNTIME_DIR': '/run/user/1000', 'LANG': 'C.UTF-8', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=00:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.avif=01;35:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:*~=00;90:*#=00;90:*.bak=00;90:*.crdownload=00;90:*.dpkg-dist=00;90:*.dpkg-new=00;90:*.dpkg-old=00;90:*.dpkg-tmp=00;90:*.old=00;90:*.orig=00;90:*.part=00;90:*.rej=00;90:*.rpmnew=00;90:*.rpmorig=00;90:*.rpmsave=00;90:*.swp=00;90:*.tmp=00;90:*.ucf-dist=00;90:*.ucf-new=00;90:*.ucf-old=00;90:', 'TERM_PROGRAM': 'tmux', 'SHELL': '/bin/bash', 'LESSCLOSE': '/usr/bin/lesspipe %s %s', 'PWD': '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface', 'SSH_CONNECTION': '10.222.42.222 50962 10.222.42.56 22', 'XDG_DATA_DIRS': '/usr/share/gnome:/usr/local/share:/usr/share:/var/lib/snapd/desktop', 'COLCON': '1', 'TMUX_PANE': '%2'}), 'shell': False}
+[0.691443] (custom_interface) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.695389] (bringup) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.700331] (-) TimerEvent: {}
+[0.711041] (navigation) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.740122] (description) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.741609] (custom_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.743142] (bringup) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.755957] (navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.795530] (robot_hardware_interface) StdoutLine: {'line': b'-- The C compiler identification is GNU 13.3.0\n'}
+[0.800499] (-) TimerEvent: {}
+[0.901413] (-) TimerEvent: {}
+[0.929411] (robot_hardware_interface) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 13.3.0\n'}
+[0.957662] (bringup) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.959986] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.984682] (description) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.999968] (description) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.000661] (description) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.000889] (bringup) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.001296] (bringup) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.001426] (-) TimerEvent: {}
+[1.001626] (description) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.001949] (bringup) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.009260] (navigation) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.013194] (custom_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.015056] (description) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.015418] (bringup) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.054029] (navigation) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.054365] (navigation) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.055144] (navigation) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.059232] (custom_interface) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.060130] (custom_interface) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.060806] (custom_interface) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.072080] (navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.078774] (custom_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.101626] (-) TimerEvent: {}
+[1.202422] (-) TimerEvent: {}
+[1.215908] (description) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.225171] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[1.231971] (description) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.232855] (description) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.233568] (description) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.246434] (robot_hardware_interface) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[1.247421] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[1.248095] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[1.248865] (description) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.249590] (description) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.250125] (description) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.250627] (description) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.251115] (description) StderrLine: {'line': b'\n'}
+[1.251662] (description) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.252170] (description) StderrLine: {'line': b'  any of the following names:\n'}
+[1.252627] (description) StderrLine: {'line': b'\n'}
+[1.253068] (description) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.253503] (description) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.253935] (description) StderrLine: {'line': b'\n'}
+[1.254367] (description) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.254977] (description) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.255443] (description) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.255895] (description) StderrLine: {'line': b'  has been installed.\n'}
+[1.256344] (description) StderrLine: {'line': b'\n'}
+[1.256790] (description) StderrLine: {'line': b'\x1b[0m\n'}
+[1.257232] (description) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.260051] (description) CommandEnded: {'returncode': 1}
+[1.260726] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[1.270316] (bringup) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.284399] (navigation) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.300460] (navigation) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.301452] (navigation) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.302073] (navigation) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.302591] (-) TimerEvent: {}
+[1.320331] (navigation) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.321046] (navigation) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.321671] (navigation) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.322173] (navigation) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.322640] (navigation) StderrLine: {'line': b'\n'}
+[1.323092] (navigation) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.323537] (navigation) StderrLine: {'line': b'  any of the following names:\n'}
+[1.323973] (navigation) StderrLine: {'line': b'\n'}
+[1.324402] (navigation) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.324869] (navigation) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.325330] (navigation) StderrLine: {'line': b'\n'}
+[1.325756] (navigation) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.326187] (navigation) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.326616] (navigation) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.327039] (navigation) StderrLine: {'line': b'  has been installed.\n'}
+[1.327465] (navigation) StderrLine: {'line': b'\n'}
+[1.328034] (navigation) StderrLine: {'line': b'\x1b[0m\n'}
+[1.332837] (navigation) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.336680] (custom_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.338822] (bringup) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.339834] (bringup) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.341097] (bringup) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.343323] (bringup) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.343569] (bringup) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.343746] (bringup) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.343854] (bringup) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.343954] (bringup) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.344049] (bringup) StderrLine: {'line': b'\n'}
+[1.344141] (bringup) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.344234] (bringup) StderrLine: {'line': b'  any of the following names:\n'}
+[1.344325] (bringup) StderrLine: {'line': b'\n'}
+[1.344416] (bringup) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.344507] (bringup) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.344597] (bringup) StderrLine: {'line': b'\n'}
+[1.344843] (bringup) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.344952] (bringup) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.345046] (bringup) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.345138] (bringup) StderrLine: {'line': b'  has been installed.\n'}
+[1.345228] (bringup) StderrLine: {'line': b'\n'}
+[1.345318] (bringup) StderrLine: {'line': b'\x1b[0m\n'}
+[1.353173] (description) JobEnded: {'identifier': 'description', 'rc': 1}
+[1.356977] (navigation) JobEnded: {'identifier': 'navigation', 'rc': 'SIGINT'}
+[1.358841] (bringup) JobEnded: {'identifier': 'bringup', 'rc': 'SIGINT'}
+[1.373673] (custom_interface) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.374383] (custom_interface) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.377309] (custom_interface) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.389651] (custom_interface) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.390388] (custom_interface) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.390881] (custom_interface) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.391382] (custom_interface) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.391870] (custom_interface) StderrLine: {'line': b'\n'}
+[1.392325] (custom_interface) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.392770] (custom_interface) StderrLine: {'line': b'  any of the following names:\n'}
+[1.393204] (custom_interface) StderrLine: {'line': b'\n'}
+[1.393629] (custom_interface) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.394052] (custom_interface) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.394477] (custom_interface) StderrLine: {'line': b'\n'}
+[1.395114] (custom_interface) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.395917] (custom_interface) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.397221] (custom_interface) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.397646] (custom_interface) StderrLine: {'line': b'  has been installed.\n'}
+[1.398093] (custom_interface) StderrLine: {'line': b'\n'}
+[1.398523] (custom_interface) StderrLine: {'line': b'\x1b[0m\n'}
+[1.398939] (custom_interface) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.399379] (custom_interface) JobEnded: {'identifier': 'custom_interface', 'rc': 'SIGINT'}
+[1.402699] (-) TimerEvent: {}
+[1.503237] (-) TimerEvent: {}
+[1.504208] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[1.550175] (robot_hardware_interface) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[1.551081] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[1.551909] (robot_hardware_interface) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[1.566804] (robot_hardware_interface) StderrLine: {'line': b'\x1b[31mCMake Error at CMakeLists.txt:9 (find_package):\n'}
+[1.567662] (robot_hardware_interface) StderrLine: {'line': b'  By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project\n'}
+[1.568297] (robot_hardware_interface) StderrLine: {'line': b'  has asked CMake to find a package configuration file provided by\n'}
+[1.568833] (robot_hardware_interface) StderrLine: {'line': b'  "ament_cmake", but CMake did not find one.\n'}
+[1.569326] (robot_hardware_interface) StderrLine: {'line': b'\n'}
+[1.569795] (robot_hardware_interface) StderrLine: {'line': b'  Could not find a package configuration file provided by "ament_cmake" with\n'}
+[1.570248] (robot_hardware_interface) StderrLine: {'line': b'  any of the following names:\n'}
+[1.570687] (robot_hardware_interface) StderrLine: {'line': b'\n'}
+[1.571112] (robot_hardware_interface) StderrLine: {'line': b'    ament_cmakeConfig.cmake\n'}
+[1.571586] (robot_hardware_interface) StderrLine: {'line': b'    ament_cmake-config.cmake\n'}
+[1.572013] (robot_hardware_interface) StderrLine: {'line': b'\n'}
+[1.572429] (robot_hardware_interface) StderrLine: {'line': b'  Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set\n'}
+[1.572845] (robot_hardware_interface) StderrLine: {'line': b'  "ament_cmake_DIR" to a directory containing one of the above files.  If\n'}
+[1.573261] (robot_hardware_interface) StderrLine: {'line': b'  "ament_cmake" provides a separate development package or SDK, be sure it\n'}
+[1.573674] (robot_hardware_interface) StderrLine: {'line': b'  has been installed.\n'}
+[1.574084] (robot_hardware_interface) StderrLine: {'line': b'\n'}
+[1.574497] (robot_hardware_interface) StderrLine: {'line': b'\x1b[0m\n'}
+[1.575026] (robot_hardware_interface) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[1.577094] (robot_hardware_interface) JobEnded: {'identifier': 'robot_hardware_interface', 'rc': 'SIGINT'}
+[1.603608] (-) TimerEvent: {}
+[1.631000] (python_pkg) JobEnded: {'identifier': 'python_pkg', 'rc': 'SIGINT'}
+[1.639481] (action_autodock) JobEnded: {'identifier': 'action_autodock', 'rc': 'SIGINT'}
+[1.650763] (dock_lidar) JobSkipped: {'identifier': 'dock_lidar'}
+[1.651004] (-) EventReactorShutdown: {}

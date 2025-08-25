@@ -1,0 +1,32 @@
+[0.344s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/description': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/smr/workspaces/mini_amr/amrROS2_ws/src/description -DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/description
+[0.464s] -- The C compiler identification is GNU 13.3.0
+[0.662s] -- The CXX compiler identification is GNU 13.3.0
+[0.725s] -- Detecting C compiler ABI info
+[0.969s] -- Detecting C compiler ABI info - done
+[0.984s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.985s] -- Detecting C compile features
+[0.986s] -- Detecting C compile features - done
+[0.999s] -- Detecting CXX compiler ABI info
+[1.200s] -- Detecting CXX compiler ABI info - done
+[1.217s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.217s] -- Detecting CXX compile features
+[1.218s] -- Detecting CXX compile features - done
+[1.234s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[1.234s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[1.235s]   has asked CMake to find a package configuration file provided by
+[1.235s]   "ament_cmake", but CMake did not find one.
+[1.236s] 
+[1.236s]   Could not find a package configuration file provided by "ament_cmake" with
+[1.237s]   any of the following names:
+[1.237s] 
+[1.238s]     ament_cmakeConfig.cmake
+[1.238s]     ament_cmake-config.cmake
+[1.238s] 
+[1.239s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[1.239s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[1.240s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[1.240s]   has been installed.
+[1.241s] 
+[1.241s] [0m
+[1.242s] -- Configuring incomplete, errors occurred!
+[1.245s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/description' returned '1': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/smr/workspaces/mini_amr/amrROS2_ws/src/description -DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/description

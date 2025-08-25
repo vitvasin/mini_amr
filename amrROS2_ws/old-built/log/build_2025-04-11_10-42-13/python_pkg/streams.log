@@ -1,0 +1,42 @@
+[1.787s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/python_pkg': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/python_pkg build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/install.log --single-version-externally-managed install_data
+[2.161s] running egg_info
+[2.163s] creating ../../build/python_pkg/python_pkg.egg-info
+[2.186s] writing ../../build/python_pkg/python_pkg.egg-info/PKG-INFO
+[2.187s] writing dependency_links to ../../build/python_pkg/python_pkg.egg-info/dependency_links.txt
+[2.188s] writing entry points to ../../build/python_pkg/python_pkg.egg-info/entry_points.txt
+[2.188s] writing requirements to ../../build/python_pkg/python_pkg.egg-info/requires.txt
+[2.189s] writing top-level names to ../../build/python_pkg/python_pkg.egg-info/top_level.txt
+[2.190s] writing manifest file '../../build/python_pkg/python_pkg.egg-info/SOURCES.txt'
+[2.241s] reading manifest file '../../build/python_pkg/python_pkg.egg-info/SOURCES.txt'
+[2.242s] adding license file 'LICENSE'
+[2.244s] writing manifest file '../../build/python_pkg/python_pkg.egg-info/SOURCES.txt'
+[2.246s] running build
+[2.247s] running build_py
+[2.248s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build
+[2.248s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib
+[2.251s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg
+[2.258s] copying python_pkg/cmd_vel_pub.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg
+[2.260s] copying python_pkg/ip_address_publisher.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg
+[2.261s] copying python_pkg/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg
+[2.262s] running install
+[2.273s] running install_lib
+[2.278s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg
+[2.278s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg/cmd_vel_pub.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg
+[2.279s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg/ip_address_publisher.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg
+[2.279s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build/lib/python_pkg/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg
+[2.280s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg/cmd_vel_pub.py to cmd_vel_pub.cpython-312.pyc
+[2.280s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg/ip_address_publisher.py to ip_address_publisher.cpython-312.pyc
+[2.281s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg/__init__.py to __init__.cpython-312.pyc
+[2.281s] running install_data
+[2.282s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/share/ament_index
+[2.283s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/share/ament_index/resource_index
+[2.283s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/share/ament_index/resource_index/packages
+[2.284s] copying resource/python_pkg -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/share/ament_index/resource_index/packages
+[2.285s] copying package.xml -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/share/python_pkg
+[2.286s] running install_egg_info
+[2.309s] Copying ../../build/python_pkg/python_pkg.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages/python_pkg-0.0.0-py3.12.egg-info
+[2.311s] running install_scripts
+[2.491s] Installing cmd_vel_pub script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python_pkg
+[2.492s] Installing ip_publisher script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python_pkg
+[2.492s] writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/install.log'
+[2.574s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/python_pkg' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/python_pkg build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/python_pkg/install.log --single-version-externally-managed install_data

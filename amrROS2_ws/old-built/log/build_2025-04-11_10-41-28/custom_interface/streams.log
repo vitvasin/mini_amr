@@ -1,0 +1,31 @@
+[0.031s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/custom_interface': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/smr/workspaces/mini_amr/amrROS2_ws/src/autodock/custom_interface -DCMAKE_INSTALL_PREFIX=/home/smr/workspaces/mini_amr/amrROS2_ws/install/custom_interface
+[0.427s] -- The C compiler identification is GNU 13.3.0
+[0.690s] -- The CXX compiler identification is GNU 13.3.0
+[0.740s] -- Detecting C compiler ABI info
+[1.011s] -- Detecting C compiler ABI info - done
+[1.058s] -- Check for working C compiler: /usr/bin/cc - skipped
+[1.059s] -- Detecting C compile features
+[1.059s] -- Detecting C compile features - done
+[1.078s] -- Detecting CXX compiler ABI info
+[1.336s] -- Detecting CXX compiler ABI info - done
+[1.372s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.375s] -- Detecting CXX compile features
+[1.376s] -- Detecting CXX compile features - done
+[1.388s] [31mCMake Error at CMakeLists.txt:9 (find_package):
+[1.389s]   By not providing "Findament_cmake.cmake" in CMAKE_MODULE_PATH this project
+[1.389s]   has asked CMake to find a package configuration file provided by
+[1.390s]   "ament_cmake", but CMake did not find one.
+[1.390s] 
+[1.391s]   Could not find a package configuration file provided by "ament_cmake" with
+[1.391s]   any of the following names:
+[1.392s] 
+[1.392s]     ament_cmakeConfig.cmake
+[1.392s]     ament_cmake-config.cmake
+[1.393s] 
+[1.394s]   Add the installation prefix of "ament_cmake" to CMAKE_PREFIX_PATH or set
+[1.395s]   "ament_cmake_DIR" to a directory containing one of the above files.  If
+[1.396s]   "ament_cmake" provides a separate development package or SDK, be sure it
+[1.396s]   has been installed.
+[1.397s] 
+[1.397s] [0m
+[1.397s] -- Configuring incomplete, errors occurred!

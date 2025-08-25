@@ -1,0 +1,49 @@
+[1.781s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_data_tool': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robot_data_tool build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/install.log --single-version-externally-managed install_data
+[2.185s] running egg_info
+[2.186s] creating ../../build/robot_data_tool/robot_data_tool.egg-info
+[2.217s] writing ../../build/robot_data_tool/robot_data_tool.egg-info/PKG-INFO
+[2.217s] writing dependency_links to ../../build/robot_data_tool/robot_data_tool.egg-info/dependency_links.txt
+[2.217s] writing entry points to ../../build/robot_data_tool/robot_data_tool.egg-info/entry_points.txt
+[2.217s] writing requirements to ../../build/robot_data_tool/robot_data_tool.egg-info/requires.txt
+[2.218s] writing top-level names to ../../build/robot_data_tool/robot_data_tool.egg-info/top_level.txt
+[2.219s] writing manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'
+[2.279s] reading manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'
+[2.280s] writing manifest file '../../build/robot_data_tool/robot_data_tool.egg-info/SOURCES.txt'
+[2.280s] running build
+[2.280s] running build_py
+[2.280s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build
+[2.281s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib
+[2.281s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.281s] copying robot_data_tool/robot_detail.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.281s] copying robot_data_tool/map_pose_provider.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.281s] copying robot_data_tool/absolute_origin_laser.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.281s] copying robot_data_tool/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.282s] copying robot_data_tool/publish_robot_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool
+[2.282s] running install
+[2.293s] running install_lib
+[2.323s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.323s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/robot_detail.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.324s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/map_pose_provider.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.324s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/absolute_origin_laser.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.324s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.324s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build/lib/robot_data_tool/publish_robot_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool
+[2.325s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/robot_detail.py to robot_detail.cpython-312.pyc
+[2.326s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/map_pose_provider.py to map_pose_provider.cpython-312.pyc
+[2.328s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/absolute_origin_laser.py to absolute_origin_laser.cpython-312.pyc
+[2.330s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/__init__.py to __init__.cpython-312.pyc
+[2.330s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool/publish_robot_pose.py to publish_robot_pose.cpython-312.pyc
+[2.331s] running install_data
+[2.331s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index
+[2.331s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index
+[2.331s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index/packages
+[2.331s] copying resource/robot_data_tool -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/ament_index/resource_index/packages
+[2.332s] copying package.xml -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/share/robot_data_tool
+[2.332s] running install_egg_info
+[2.366s] Copying ../../build/robot_data_tool/robot_data_tool.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages/robot_data_tool-0.0.0-py3.12.egg-info
+[2.367s] running install_scripts
+[2.583s] Installing absolute_origin_laser script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool
+[2.584s] Installing map_pose_provider script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool
+[2.584s] Installing publish_robot_pose script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool
+[2.585s] Installing robot_detail script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/robot_data_tool
+[2.585s] writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/install.log'
+[2.679s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_data_tool' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../build/robot_data_tool build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_data_tool/install.log --single-version-externally-managed install_data

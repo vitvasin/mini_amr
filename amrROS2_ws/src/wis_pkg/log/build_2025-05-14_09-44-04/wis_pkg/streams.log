@@ -1,0 +1,58 @@
+[1.635s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/wis_pkg build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/install.log --single-version-externally-managed install_data
+[2.071s] running egg_info
+[2.071s] creating build/wis_pkg/wis_pkg.egg-info
+[2.099s] writing build/wis_pkg/wis_pkg.egg-info/PKG-INFO
+[2.099s] writing dependency_links to build/wis_pkg/wis_pkg.egg-info/dependency_links.txt
+[2.100s] writing entry points to build/wis_pkg/wis_pkg.egg-info/entry_points.txt
+[2.100s] writing requirements to build/wis_pkg/wis_pkg.egg-info/requires.txt
+[2.100s] writing top-level names to build/wis_pkg/wis_pkg.egg-info/top_level.txt
+[2.100s] writing manifest file 'build/wis_pkg/wis_pkg.egg-info/SOURCES.txt'
+[2.162s] reading manifest file 'build/wis_pkg/wis_pkg.egg-info/SOURCES.txt'
+[2.162s] writing manifest file 'build/wis_pkg/wis_pkg.egg-info/SOURCES.txt'
+[2.162s] running build
+[2.162s] running build_py
+[2.163s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build
+[2.163s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib
+[2.163s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.163s] copying wis_pkg/map_nav_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.164s] copying wis_pkg/map_scan_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.165s] copying wis_pkg/map_info_publisher_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.165s] copying wis_pkg/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.166s] copying wis_pkg/map_load_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.166s] copying wis_pkg/map_save_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.167s] copying wis_pkg/map_name_publisher_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg
+[2.167s] running install
+[2.177s] running install_lib
+[2.206s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.207s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_nav_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.207s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_scan_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.208s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_info_publisher_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.208s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.209s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_load_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.209s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_save_subscriber_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.210s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build/lib/wis_pkg/map_name_publisher_node.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg
+[2.210s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_nav_subscriber_node.py to map_nav_subscriber_node.cpython-312.pyc
+[2.211s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_scan_subscriber_node.py to map_scan_subscriber_node.cpython-312.pyc
+[2.211s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_info_publisher_node.py to map_info_publisher_node.cpython-312.pyc
+[2.213s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/__init__.py to __init__.cpython-312.pyc
+[2.213s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_load_subscriber_node.py to map_load_subscriber_node.cpython-312.pyc
+[2.215s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_save_subscriber_node.py to map_save_subscriber_node.cpython-312.pyc
+[2.217s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg/map_name_publisher_node.py to map_name_publisher_node.cpython-312.pyc
+[2.218s] running install_data
+[2.219s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/ament_index
+[2.220s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/ament_index/resource_index
+[2.220s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/ament_index/resource_index/packages
+[2.220s] copying resource/wis_pkg -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/ament_index/resource_index/packages
+[2.220s] copying package.xml -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/wis_pkg
+[2.221s] copying launch/wis.launch.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/share/wis_pkg
+[2.221s] running install_egg_info
+[2.252s] Copying build/wis_pkg/wis_pkg.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages/wis_pkg-0.0.0-py3.12.egg-info
+[2.253s] running install_scripts
+[2.464s] Installing map_info script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.464s] Installing map_load script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.464s] Installing map_name script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.465s] Installing map_nav script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.465s] Installing map_save script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.465s] Installing map_scan script to /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/wis_pkg
+[2.465s] writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/install.log'
+[2.544s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/install/wis_pkg/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/wis_pkg build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/src/wis_pkg/build/wis_pkg/install.log --single-version-externally-managed install_data

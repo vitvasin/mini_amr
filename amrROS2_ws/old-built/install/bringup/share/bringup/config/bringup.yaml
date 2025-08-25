@@ -1,0 +1,119 @@
+ekf_filter_node:
+    ros__parameters:
+            frequency: 25.0
+            two_d_mode: true
+            publish_tf: true
+    
+            map_frame: map             
+            odom_frame: odom            
+            base_link_frame: base_footprint
+            world_frame: odom 
+
+            #x     , y     , z,
+            #roll  , pitch , yaw,
+            #vx    , vy    , vz,
+            #vroll , vpitch, vyaw,
+            #ax    , ay    , az
+            odom0: odom_raw
+            odom0_config: [false, false, false,
+                        false, false, false,
+                        true, true, false,
+                        false, false, true,
+                        false, false, false]
+
+            imu0: imu/data_raw
+            imu0_config: [false, false, false,
+                        false, false, true,
+                        false, false, false,
+                        false, false, true,
+                        false, false, false]     
+
+imu_filter:
+    ros__parameters:
+        stateless: false
+        use_mag: false
+        publish_tf: false
+        reverse_tf: false
+        fixed_frame: "odom"
+        constant_dt: 0.0
+        publish_debug_topics: false
+        world_frame: "enu"
+        gain: 0.1
+        zeta: 0.0
+        mag_bias_x: 0.0
+        mag_bias_y: 0.0
+        mag_bias_z: 0.0
+        orientation_stddev: 0.0
+
+usb_camera:
+    ros__parameters:
+      video_device: "/dev/video0"
+      framerate: 30.0
+      io_method: "mmap"
+      frame_id: "camera"
+        #pixel_format: "yuyv"  # see usb_cam/supported_formats for list of supported formats
+        #av_device_format: "YUYV"
+      image_width: 640
+      image_height: 360 
+      camera_name: "test_camera"
+      camera_info_url: "package://usb_cam/config/camera_info.yaml"
+      brightness: -1
+      contrast: -1
+      saturation: -1
+      sharpness: -1
+      gain: -1
+      auto_white_balance: true
+      white_balance: 2000
+      autoexposure: true
+      exposure: 100
+      autofocus: false
+      focus: -1
+
+scan_to_scan_filter_chain:
+  ros__parameters:
+    filter1:
+      name: front_right_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        # lower_angle: 2.30
+        # upper_angle: 2.46
+        lower_angle: 2.3812
+        upper_angle: 2.5015
+    
+    filter2:
+      name: front_left_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        # lower_angle: -2.41
+        # upper_angle: -2.25
+        lower_angle: -2.4915
+        upper_angle: -2.3712
+    
+    filter3:
+      name: back_right_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        # lower_angle: 0.59
+        # upper_angle: 0.84  
+        lower_angle: 0.6385
+        upper_angle: 0.7588
+    
+    filter4:
+      name: back_left_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        # lower_angle: -0.80
+        # upper_angle: -0.56  
+        lower_angle: -0.7588 
+        upper_angle: -0.6385
+
+    filter5:
+      name: speckle_filter
+      type: laser_filters/LaserScanSpeckleFilter
+      params:
+        filter_type: 0
+        max_range: 2.0
+        max_range_difference: 0.1
+        filter_window: 7
+
+

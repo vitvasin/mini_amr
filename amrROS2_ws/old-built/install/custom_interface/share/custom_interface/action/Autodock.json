@@ -1,0 +1,551 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "custom_interface/action/Autodock",
+      "fields": [
+        {
+          "name": "goal",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_Goal"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "result",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_Result"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "feedback",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_Feedback"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "send_goal_service",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_SendGoal"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "get_result_service",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_GetResult"
+          },
+          "default_value": ""
+        },
+        {
+          "name": "feedback_message",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "custom_interface/action/Autodock_FeedbackMessage"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "builtin_interfaces/msg/Time",
+        "fields": [
+          {
+            "name": "sec",
+            "type": {
+              "type_id": 6,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "nanosec",
+            "type": {
+              "type_id": 7,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_Feedback",
+        "fields": [
+          {
+            "name": "step",
+            "type": {
+              "type_id": 6,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "text",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "std_msgs/msg/String"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_FeedbackMessage",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "feedback",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_Feedback"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_GetResult",
+        "fields": [
+          {
+            "name": "request_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_GetResult_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_GetResult_Response"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "event_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_GetResult_Event"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_GetResult_Event",
+        "fields": [
+          {
+            "name": "info",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "service_msgs/msg/ServiceEventInfo"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "request",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_GetResult_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_GetResult_Response"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_GetResult_Request",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_GetResult_Response",
+        "fields": [
+          {
+            "name": "status",
+            "type": {
+              "type_id": 2,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "result",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_Result"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_Goal",
+        "fields": [
+          {
+            "name": "is_dock",
+            "type": {
+              "type_id": 15,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_Result",
+        "fields": [
+          {
+            "name": "structure_needs_at_least_one_member",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_SendGoal",
+        "fields": [
+          {
+            "name": "request_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_SendGoal_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_SendGoal_Response"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "event_message",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_SendGoal_Event"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_SendGoal_Event",
+        "fields": [
+          {
+            "name": "info",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "service_msgs/msg/ServiceEventInfo"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "request",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_SendGoal_Request"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "response",
+            "type": {
+              "type_id": 97,
+              "capacity": 1,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_SendGoal_Response"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_SendGoal_Request",
+        "fields": [
+          {
+            "name": "goal_id",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "unique_identifier_msgs/msg/UUID"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "goal",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "custom_interface/action/Autodock_Goal"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "custom_interface/action/Autodock_SendGoal_Response",
+        "fields": [
+          {
+            "name": "accepted",
+            "type": {
+              "type_id": 15,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "stamp",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "builtin_interfaces/msg/Time"
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "service_msgs/msg/ServiceEventInfo",
+        "fields": [
+          {
+            "name": "event_type",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "stamp",
+            "type": {
+              "type_id": 1,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": "builtin_interfaces/msg/Time"
+            },
+            "default_value": ""
+          },
+          {
+            "name": "client_gid",
+            "type": {
+              "type_id": 51,
+              "capacity": 16,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "sequence_number",
+            "type": {
+              "type_id": 8,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "std_msgs/msg/String",
+        "fields": [
+          {
+            "name": "data",
+            "type": {
+              "type_id": 17,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      },
+      {
+        "type_name": "unique_identifier_msgs/msg/UUID",
+        "fields": [
+          {
+            "name": "uuid",
+            "type": {
+              "type_id": 51,
+              "capacity": 16,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "custom_interface/action/Autodock",
+      "hash_string": "RIHS01_36961f95ab5f234068d6a3b46e2294a92b0bdcc49e719dbe93bf8f636ceb432d"
+    },
+    {
+      "type_name": "builtin_interfaces/msg/Time",
+      "hash_string": "RIHS01_b106235e25a4c5ed35098aa0a61a3ee9c9b18d197f398b0e4206cea9acf9c197"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_Feedback",
+      "hash_string": "RIHS01_302b33e2134f3c247dfeff247a69c1ac49dbc70fbeee10ad8fc0fcdb516404ad"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_FeedbackMessage",
+      "hash_string": "RIHS01_92b155da61b75c5abca4a54d4ee64f55a022d8c53bcf6adfba2f94dd1cf8eedc"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_GetResult",
+      "hash_string": "RIHS01_94b24d0a145eea0ed52a100f0a385fac8698458371f4a781a527aa3d268df7d1"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_GetResult_Event",
+      "hash_string": "RIHS01_91f241b392aa8a15f46217726a8ddcf1522e44cf71c3d3a0ba0f2c99bf3634f5"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_GetResult_Request",
+      "hash_string": "RIHS01_5f7869fd366819805b0bc13fc6393583e6605ff4e2474649145d52e78a3e6803"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_GetResult_Response",
+      "hash_string": "RIHS01_e46bb79de347d52101c9969b0d9292f196ff95354eb1a1288eeae399abb2e2fc"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_Goal",
+      "hash_string": "RIHS01_3be3f539dfa7984fa873b8472096aafc3293e217b2df24734f90919569cfaf86"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_Result",
+      "hash_string": "RIHS01_f0aebff0343e0ddd0767fd69125b8a020ecbfc82c134ff3df77ad674224a658e"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_SendGoal",
+      "hash_string": "RIHS01_e1382f3b40684d01738859260d2a5c330760481ed281d7ebada2ec5cc8ff44bb"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_SendGoal_Event",
+      "hash_string": "RIHS01_3a9459b87d5fcac0e43faff3c209a4cf42e6e47bfa2960f6a17cb6917d5ebadf"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_SendGoal_Request",
+      "hash_string": "RIHS01_710ca3862ee4b2297063ed8812c8ae85d2c44d8f71db1b80b6cd0926a90999cf"
+    },
+    {
+      "type_name": "custom_interface/action/Autodock_SendGoal_Response",
+      "hash_string": "RIHS01_2a2792111a2a41a96a7357c563e269107576680cbfb05542cd78d5e196484665"
+    },
+    {
+      "type_name": "service_msgs/msg/ServiceEventInfo",
+      "hash_string": "RIHS01_41bcbbe07a75c9b52bc96bfd5c24d7f0fc0a08c0cb7921b3373c5732345a6f45"
+    },
+    {
+      "type_name": "std_msgs/msg/String",
+      "hash_string": "RIHS01_df668c740482bbd48fb39d76a70dfd4bd59db1288021743503259e948f6b1a18"
+    },
+    {
+      "type_name": "unique_identifier_msgs/msg/UUID",
+      "hash_string": "RIHS01_1b8e8aca958cbea28fe6ef60bf6c19b683c97a9ef60bb34752067d0f2f7ab437"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[1.713s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/wis_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_data_tool:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface -- -j8 -l8
+[2.305s] [ 33%] [32mBuilding CXX object CMakeFiles/robot_hardware.dir/src/hardware_interface_node.cpp.o[0m
+[2.322s] [ 66%] [32mBuilding CXX object CMakeFiles/robot_hardware.dir/src/robot_hardware_interface.cpp.o[0m
+[6.912s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:[m[K In member function ‘[01m[Kvoid HardwareInterface::[01;32m[KReceiveData[m[K()[m[K’:
+[6.913s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:211:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kdata_len[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[6.914s]   211 |         uint8_t [01;35m[Kdata_len[m[K;
+[6.934s]       |                 [01;35m[K^~~~~~~~[m[K
+[6.935s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:214:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kcheck_sum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[6.936s]   214 |         uint8_t [01;35m[Kcheck_sum[m[K;
+[6.936s]       |                 [01;35m[K^~~~~~~~~[m[K

@@ -1,0 +1,54 @@
+[1.804s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/autodock/action_autodock': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/action_autodock build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/install.log --single-version-externally-managed install_data
+[2.187s] running egg_info
+[2.188s] creating ../../../build/action_autodock/action_autodock.egg-info
+[2.214s] writing ../../../build/action_autodock/action_autodock.egg-info/PKG-INFO
+[2.215s] writing dependency_links to ../../../build/action_autodock/action_autodock.egg-info/dependency_links.txt
+[2.215s] writing entry points to ../../../build/action_autodock/action_autodock.egg-info/entry_points.txt
+[2.216s] writing requirements to ../../../build/action_autodock/action_autodock.egg-info/requires.txt
+[2.217s] writing top-level names to ../../../build/action_autodock/action_autodock.egg-info/top_level.txt
+[2.218s] writing manifest file '../../../build/action_autodock/action_autodock.egg-info/SOURCES.txt'
+[2.278s] reading manifest file '../../../build/action_autodock/action_autodock.egg-info/SOURCES.txt'
+[2.281s] adding license file 'LICENSE'
+[2.287s] writing manifest file '../../../build/action_autodock/action_autodock.egg-info/SOURCES.txt'
+[2.288s] running build
+[2.288s] running build_py
+[2.289s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build
+[2.290s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib
+[2.291s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.293s] copying action_autodock/autodock_action_server.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.293s] copying action_autodock/robot_navigator.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.294s] copying action_autodock/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.294s] copying action_autodock/move_to_pose_backward.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.295s] copying action_autodock/MPC_path_generator.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.295s] copying action_autodock/example_nav_to_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock
+[2.296s] running install
+[2.297s] running install_lib
+[2.305s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.308s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/autodock_action_server.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.308s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/robot_navigator.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.310s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/__init__.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.310s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/move_to_pose_backward.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.311s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/MPC_path_generator.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.311s] copying /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build/lib/action_autodock/example_nav_to_pose.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock
+[2.312s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py to autodock_action_server.cpython-312.pyc
+[2.316s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/robot_navigator.py to robot_navigator.cpython-312.pyc
+[2.321s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/__init__.py to __init__.cpython-312.pyc
+[2.321s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/move_to_pose_backward.py to move_to_pose_backward.cpython-312.pyc
+[2.323s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/MPC_path_generator.py to MPC_path_generator.cpython-312.pyc
+[2.326s] byte-compiling /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/example_nav_to_pose.py to example_nav_to_pose.cpython-312.pyc
+[2.327s] running install_data
+[2.327s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/ament_index
+[2.328s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/ament_index/resource_index
+[2.328s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/ament_index/resource_index/packages
+[2.329s] copying resource/action_autodock -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/ament_index/resource_index/packages
+[2.329s] copying package.xml -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock
+[2.330s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/launch
+[2.331s] copying launch/auto_dock_launch.py -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/launch
+[2.331s] creating /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config
+[2.332s] copying config/auto_dock_config.yaml -> /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config
+[2.332s] running install_egg_info
+[2.356s] Copying ../../../build/action_autodock/action_autodock.egg-info to /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock-0.0.0-py3.12.egg-info
+[2.357s] running install_scripts
+[2.537s] Installing autodock_action_server script to /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock
+[2.539s] writing list of installed files to '/home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/install.log'
+[2.625s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/src/autodock/action_autodock' returned '0': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com PYTHONPATH=/home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base ../../../build/action_autodock build --build-base /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/build install --record /home/smr/workspaces/mini_amr/amrROS2_ws/build/action_autodock/install.log --single-version-externally-managed install_data

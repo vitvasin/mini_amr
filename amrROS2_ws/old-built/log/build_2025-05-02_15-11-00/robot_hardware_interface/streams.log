@@ -1,0 +1,33 @@
+[0.745s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface -- -j8 -l8
+[0.974s] [ 33%] [32mBuilding CXX object CMakeFiles/robot_hardware.dir/src/hardware_interface_node.cpp.o[0m
+[0.990s] [ 66%] [32mBuilding CXX object CMakeFiles/robot_hardware.dir/src/robot_hardware_interface.cpp.o[0m
+[1.879s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:[m[K In member function ‘[01m[Kvoid HardwareInterface::[01;32m[KReceiveData[m[K()[m[K’:
+[1.879s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:211:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kdata_len[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.880s]   211 |         uint8_t [01;35m[Kdata_len[m[K;
+[1.880s]       |                 [01;35m[K^~~~~~~~[m[K
+[1.881s] [01m[K/home/smr/workspaces/mini_amr/amrROS2_ws/src/robot_hardware_interface/src/robot_hardware_interface.cpp:214:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[Kcheck_sum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[1.881s]   214 |         uint8_t [01;35m[Kcheck_sum[m[K;
+[1.882s]       |                 [01;35m[K^~~~~~~~~[m[K
+[19.175s] [100%] [32m[1mLinking CXX executable robot_hardware[0m
+[20.414s] [100%] Built target robot_hardware
+[20.441s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface -- -j8 -l8
+[20.459s] Invoking command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface
+[20.484s] -- Install configuration: ""
+[20.488s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/lib/robot_hardware_interface/robot_hardware
+[20.505s] -- Set non-toolchain portion of runtime path of "/home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/lib/robot_hardware_interface/robot_hardware" to ""
+[20.507s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/ament_index/resource_index/package_run_dependencies/robot_hardware_interface
+[20.508s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/ament_index/resource_index/parent_prefix_path/robot_hardware_interface
+[20.508s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/environment/ament_prefix_path.sh
+[20.508s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/environment/ament_prefix_path.dsv
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/environment/path.sh
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/environment/path.dsv
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/local_setup.bash
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/local_setup.sh
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/local_setup.zsh
+[20.509s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/local_setup.dsv
+[20.510s] -- Installing: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/package.dsv
+[20.510s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/ament_index/resource_index/packages/robot_hardware_interface
+[20.511s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/cmake/robot_hardware_interfaceConfig.cmake
+[20.511s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/cmake/robot_hardware_interfaceConfig-version.cmake
+[20.511s] -- Up-to-date: /home/smr/workspaces/mini_amr/amrROS2_ws/install/robot_hardware_interface/share/robot_hardware_interface/package.xml
+[20.517s] Invoked command in '/home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/smr/workspaces/mini_amr/amrROS2_ws/install/python_pkg:/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/smr/workspaces/mini_amr/amrROS2_ws/build/robot_hardware_interface

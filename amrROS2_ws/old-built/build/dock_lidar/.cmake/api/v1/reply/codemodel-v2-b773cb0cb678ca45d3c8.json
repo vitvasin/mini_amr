@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-c0dc93988ee3479a21e8.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "dock_lidar",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "dock_coordinates::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dock_coordinates-1e8c1db2e91c9c463614.json",
+					"name" : "dock_coordinates",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "dock_lidar_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-dock_lidar_uninstall-082e01101c8288a76cc3.json",
+					"name" : "dock_lidar_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-e5165a8ed25a1e43f1e5.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/smr/workspaces/mini_amr/amrROS2_ws/build/dock_lidar",
+		"source" : "/home/smr/workspaces/mini_amr/amrROS2_ws/src/autodock/dock_lidar"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}

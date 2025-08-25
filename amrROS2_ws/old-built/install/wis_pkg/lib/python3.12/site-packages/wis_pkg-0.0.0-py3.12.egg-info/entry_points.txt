@@ -1,0 +1,9 @@
+[console_scripts]
+map_info = wis_pkg.map_info_publisher_node:main
+map_load = wis_pkg.map_load_subscriber_node:main
+map_name = wis_pkg.map_name_publisher_node:main
+map_nav = wis_pkg.map_nav_subscriber_node:main
+map_save = wis_pkg.map_save_subscriber_node:main
+map_scan = wis_pkg.map_scan_subscriber_node:main
+map_shutdown = wis_pkg.map_shutdown_subscriber_node:main
+point_save = wis_pkg.point_save_subscriber_node:main

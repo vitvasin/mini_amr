@@ -141,7 +141,7 @@ def generate_launch_description():
      actions=[
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
-        camera, 
+       # camera, 
         robot_state_publisher_node,
         joint_state_publisher_node,   
         scan,

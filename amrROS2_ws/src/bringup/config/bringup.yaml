@@ -2,7 +2,7 @@ ekf_filter_node:
     ros__parameters:
             # frequency: 20.0
             #frequency: 50.0
-            frequency: 25.0
+            frequency: 22.0
             two_d_mode: true
             publish_tf: true
     
@@ -75,7 +75,7 @@ usb_camera:
 scan_to_scan_filter_chain:
   ros__parameters:
     filter1:
-      name: box
+      name: box_filter
       type: laser_filters/LaserScanBoxFilter
       params: #[0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22]
         box_frame: laser

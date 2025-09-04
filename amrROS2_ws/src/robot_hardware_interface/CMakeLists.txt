@@ -12,6 +12,7 @@ find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
 
 include_directories(include)
 
@@ -26,7 +27,7 @@ else()
     message(FATAL_ERROR "LibSerial library not found!")
 endif()
 
-ament_target_dependencies(robot_hardware rclcpp geometry_msgs sensor_msgs nav_msgs action_msgs)
+ament_target_dependencies(robot_hardware rclcpp geometry_msgs sensor_msgs nav_msgs action_msgs tf2_ros)
 
 install(TARGETS
   robot_hardware

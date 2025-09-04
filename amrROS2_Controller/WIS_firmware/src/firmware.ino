@@ -1,9 +1,7 @@
 #define USE_SMR_CONFIG
 
 #include <Arduino.h>
-#include <TeensyThreads.h>
 #include <ModbusMaster.h>
-// #include <jbdbms.h>               // bms for mini amr
 #include <Adafruit_MCP23X17.h>
 
 #include <stdio.h>
@@ -14,15 +12,14 @@
 #include "kinematics.h"
 #include "JY61P.h"
 #include "motor_driver.cpp"
-
 #include "bms.h"
 
+// ---------------- Debug Flags ----------------
 #define DEBUG false
 #define DEBUG_IMU false
 #define DEBUG_MOTOR false
 #define DEBUG_MOTION false
 #define DEBUG_RANGE false
-
 #define DEBUG_ODOM false
 #define DEBUG_SEND false
 #define DEBUG_RECEIVE false
@@ -30,6 +27,7 @@
 #define DEBUG_SAFTY false
 #define DEBUG_BATT false
 
+// ---------------- Protocol -------------------
 #define HEAD 0xFF
 #define HOST_ID 0x00
 #define DEVICE_ID 0x01
@@ -42,49 +40,86 @@
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
 
-/////////////////////////////////////////////////////////////////////////////////////
-#define motor_axis0 0
-#define motor_axis1 1
+// ---------------- Pkg data frame -----------------
+#define _PKG_LEN    36  // Total bytes: header + host + size + payload + checksum
+
+#define _HEADER   0
+#define _HOST_ID  1
+#define _PKG_SIZE 2
+
+// --- IMU (12 bytes) ---
+#define _IMU_ROLL_L    3
+#define _IMU_ROLL_H    4
+#define _IMU_PITCH_L   5
+#define _IMU_PITCH_H   6
+#define _IMU_YAW_L     7
+#define _IMU_YAW_H     8
+#define _IMU_ACCX_L    9
+#define _IMU_ACCX_H    10
+#define _IMU_ACCY_L    11
+#define _IMU_ACCY_H    12
+#define _IMU_ACCZ_L    13
+#define _IMU_ACCZ_H    14
+
+// --- ODOM (6 bytes) ---
+#define _ODOM_VX_L     15
+#define _ODOM_VX_H     16
+#define _ODOM_VY_L     17
+#define _ODOM_VY_H     18
+#define _ODOM_WZ_L     19
+#define _ODOM_WZ_H     20
+
+// --- RANGE (6 bytes) ---
+#define _RANGER_RIGHT_L   21
+#define _RANGER_RIGHT_H   22
+#define _RANGER_CENTER_L  23
+#define _RANGER_CENTER_H  24
+#define _RANGER_LEFT_L    25
+#define _RANGER_LEFT_H    26
+
+// --- SAFETY (1 byte) ---
+#define _SAFETY_       27   // bits: xxxx xyzw (emergency, bumper, cliff etc)
+
+// --- BMS (7 bytes for your platform) ---
+#define _BMS_VOLTAGE_L   28
+#define _BMS_VOLTAGE_H   29
+#define _BMS_CURRENT_L   30
+#define _BMS_CURRENT_H   31
+#define _BMS_PERCENT_L   32
+#define _BMS_PERCENT_H   33
+#define _BMS_STATUS_     34
+
+#define _CHK_SUM_        35   // Final byte
+//--------------------------------------------------
+
+uint8_t pkg_data[_PKG_LEN];   // Global buffer
+
+// ---------------- Hardware -------------------
 #define MAX485_DE 4
 #define MAX485_RE 5
-
 #define TEENSY_RS485_DIR_PIN 22
-// #define MOTOR_DRIVER_SERIAL Serial1
+
 #define SENSORS_SERIAL Serial2
-#define BMS_SERIAL Serial1 // Serial2
+#define BMS_SERIAL Serial1
 #define ULTARSONICS_SERIAL Serial2
 
-#define REG_DUALAXIS_CMD_SPEED 0x0B1A
-#define REG_AXIS1_COMMAND_SPEED 0x0A02
-#define REG_AXIS1_FEEDBACK_SPEED 0x0A03
-#define REG_AXIS2_COMMAND_SPEED 0x0C02
-#define REG_AXIS2_FEEDBACK_SPEED 0x0C03
-
-#define CliffDistanceLimit 200 // 20cm
-
-// ModbusMaster Motor_dualdrive;
+// ---------------- Devices --------------------
 ModbusMaster Sensor_module;
-ModbusMaster Ultrasonics_1; // Left
-ModbusMaster Ultrasonics_2; // Center
-ModbusMaster Ultrasonics_3; // Right
-// JbdBms jbdbms(BMS_SERIAL);
+ModbusMaster Ultrasonics_1; 
+ModbusMaster Ultrasonics_2; 
+ModbusMaster Ultrasonics_3; 
 
-int LED = 13;        // LED status TeensyMicromod
-int LED_RUN = 32;    // G9 - Teensy pin 32, MicroMod pad 65
-int LED_STATUS = 26; // G8 - Teensy pin 26, MicroMod pad 67
+int LED = 13;        
+int LED_RUN = 32;    
+int LED_STATUS = 26; 
 int RS485_DE = 4;
 int RS485_RE = 5;
-String data;
-/////////////////////////////////////////////////////////////////////////////////////
 
+// ---------------- Sensors State --------------
 int16_t range_left;
 int16_t range_center;
 int16_t range_right;
 uint16_t cliff;
-
-uint8_t range_limit = 100;  // 200 = 20cm
-uint8_t led_mode_prev;
-uint8_t alarm_mode_prev;
 
 uint8_t imu2send[12];
 uint8_t odom2send[6];
@@ -95,6 +130,7 @@ bool odom_ready;
 bool batt_ready;
 bool range_ready;
 
+// ---------------- Control --------------------
 Kinematics kinematics(
     Kinematics::SMR_BASE,
     MOTOR_MAX_RPM,
@@ -105,273 +141,412 @@ Kinematics kinematics(
     0.333);
 
 Kinematics::velocities cmd_vel;
-Threads::Mutex cmd_vel_Mutex;
-Threads::Mutex xSendDataMutex;
-
-static const int RX_BUF_SIZE = 1024;
 
 unsigned long prev_cmd_time = 0;
 
 Adafruit_MCP23X17 mcp;
-bool mcp_input[8];
-bool mcp_out_put[8];
 
-bool cliff_state, bumper_state, emer_state, stop, ack;
+bool cliff_state, bumper_state, emer_state, stop;
 bool connection_failed;
 
-volatile unsigned long msStart;
-volatile unsigned int state_prev = 0, state_batt = 0;
+static const int RX_BUF_SIZE = 128;  // safe static buffer size
 
+// ---------------- Task Timing ----------------
+const unsigned int recv_interval    = 1;   // check UART almost every cycle
+const unsigned int control_interval = 10;  // 100 Hz motor update
+const unsigned int send_interval    = 20;  // 50 Hz odometry feedback
+const unsigned int imu_interval     = 40;  // 25 Hz IMU
+const unsigned int bms_interval     = 1000;// 1 Hz BMS
+const unsigned int sensor_interval  = 50;  // 20 Hz rangers
+const unsigned int safety_interval  = 20;  // 50 Hz for safety
+
+unsigned long imu_time = 0;
+unsigned long control_time = 0;
+unsigned long bms_time = 0;
+unsigned long sensor_time = 0;
+unsigned long safety_time = 0;
+unsigned long send_time = 0;
+unsigned long recv_time = 0;
+
+// --- Non-blocking parser state ---
+#define RX_BUFFER_MAX 128
+
+static uint8_t rx_buffer[RX_BUFFER_MAX];
+static uint8_t rx_index = 0;
+static uint8_t rx_expected_length = 0;
+
+// --- BMS state machine ---
+static uint8_t bms_buf[50];
+static uint8_t bms_index = 0;
+static unsigned long last_bms_request = 0;
+const unsigned int bms_request_interval = 1000; // every 1s
+
+// Latest BMS floats filled when valid packet received
+// extern float fBattVolt = 0;
+// extern float fBattCurrent = 0;
+// extern float fBattSOC = 0;
+uint8_t batt_status = 0;
+bool update_batt_ = false;
+
+// ---------------- Parse Data ----------------
 void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 {
-
     if (func == FUNC_MOTION)
     {
         int16_t packed_v_x = (data[1] << 8) | data[0];
         int16_t packed_v_y = (data[3] << 8) | data[2];
         int16_t packed_w_z = (data[5] << 8) | data[4];
-	
-        cmd_vel_Mutex.lock(); 
-	cmd_vel.linear_x = packed_v_x / 1000.0;
+
+        cmd_vel.linear_x = packed_v_x / 1000.0;
         cmd_vel.linear_y = packed_v_y / 1000.0;
         cmd_vel.angular_z = packed_w_z / 1000.0;
-        cmd_vel_Mutex.unlock(); 
 
         prev_cmd_time = millis();
 
         if (DEBUG_MOTION)
         {
-            Serial.printf("Vx: %f\n", cmd_vel.linear_x);
-            Serial.printf("Vy: %f\n", cmd_vel.linear_y);
-            Serial.printf("Wz: %f\n", cmd_vel.angular_z);
-        }
-    }
-    else
-    {
-        if (DEBUG_RECEIVE)
-        {
-            Serial5.println("Out of provided function");
+            Serial.printf("Vx: %f, Vy: %f, Wz: %f\n", cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
         }
     }
 }
 
-void recive_data_task(void *parameter)
+// ---------------- Receive Data Task ----------
+void recive_data_task(void *parameter = nullptr)
 {
-
-    uint8_t header;
-    uint8_t device_id;
-    uint8_t len;
-    uint8_t func;
-    uint8_t data_len;
-    uint8_t data_to_mem = 0;
-    uint8_t value;
-    uint8_t rx_check_num;
-    uint8_t check_sum;
-
-    uint8_t *data = (uint8_t *)malloc(RX_BUF_SIZE);
-    uint8_t *buffer = (uint8_t *)malloc(RX_BUF_SIZE + 1);
-
-    while (true)
+    // Read all available bytes from UART
+    while (Serial.available() > 0)
     {
+        uint8_t byte_in = Serial.read();
 
-        while (Serial.available() > 0)
+        // Step 1: header check
+        if (rx_index == 0)
         {
-            header = Serial.read();
-
-            if (header == HEAD)
+            if (byte_in == HEAD)
             {
-                if (DEBUG_RECEIVE)
+                rx_buffer[rx_index++] = byte_in;
+            }
+            // else ignore garbage
+        }
+        else
+        {
+            rx_buffer[rx_index++] = byte_in;
+
+            // Step 2: determine expected length
+            if (rx_index == 3) // got HEAD + device_id + len
+            {
+                rx_expected_length = rx_buffer[2]; // len from packet
+                if (rx_expected_length > RX_BUFFER_MAX)
                 {
-                    Serial5.println("--------------New Data--------------");
-                    Serial5.println("Correct header");
+                    // reset if bogus length
+                    rx_index = 0;
                 }
-                device_id = Serial.read();
+            }
 
-                if (device_id == DEVICE_ID)
+            // Step 3: check if full frame received
+            if (rx_expected_length > 0 && rx_index == (rx_expected_length + 1)) // +1 for HEAD
+            {
+                // Got a full frame!
+                uint8_t checksum = 0;
+                for (uint8_t i = 0; i < rx_index - 1; i++) checksum += rx_buffer[i];
+                checksum &= 0xFF;
+                uint8_t rx_checksum = rx_buffer[rx_index - 1];
+
+                if (checksum == rx_checksum)
                 {
-
-                    len = Serial.read();
-                    func = Serial.read();
-
-                    check_sum = header + device_id + len + func;
-                    data_len = len - 4;
-                    data_to_mem = data_len;
-                    memset(data, 0, RX_BUF_SIZE);
-
-                    while (data_to_mem > 0)
+                    uint8_t device_id = rx_buffer[1];
+                    if (device_id == DEVICE_ID)
                     {
-                        uint8_t index = data_len - data_to_mem;
-                        data[index] = Serial.read();
-                        check_sum += data[index];
+                        uint8_t func = rx_buffer[3];
+                        uint8_t data_len = rx_expected_length - 4; // exclude header, dev, len, func
+                        uint8_t *data = &rx_buffer[4];
 
-                        data_to_mem--;
-                    }
-
-                    rx_check_num = Serial.read();
-
-                    if ((check_sum & 0xFF) == rx_check_num)
-                    {
-                        if (DEBUG_RECEIVE)
-                        {
-                            Serial5.println("Data Recived");
-                        }
-                        threads.delay(1);
+                        if (DEBUG_RECEIVE) Serial5.println("Frame OK");
                         parse_data(func, data, data_len);
                     }
-                    else
-                    {
-                        if (DEBUG_RECEIVE)
-                        {
-                            Serial5.println("Check sum error");
-                        }
-                    }
-                    if (DEBUG_RECEIVE)
-                    {
-                        Serial5.print("Device_id:  ");
-                        Serial5.println(device_id);
-                        Serial5.print("Data_range:  ");
-                        Serial5.println(len);
-                        Serial5.print("Function:  ");
-                        Serial5.println(func);
-                        for (uint8_t i = 0; i < data_len; i++)
-                        {
-                            Serial5.print("Data ");
-                            Serial5.print(i);
-                            Serial5.print(": ");
-                            Serial5.println(data[i]);
-                        }
-                        Serial5.print("Rx_check:  ");
-                        Serial5.println(rx_check_num);
-                        Serial5.print("Check sum:  ");
-                        Serial5.println(check_sum & 0xFF);
-                    }
                 }
+                else
+                {
+                    if (DEBUG_RECEIVE) Serial5.println("Checksum fail");
+                }
+
+                // Reset for next frame
+                rx_index = 0;
+                rx_expected_length = 0;
             }
         }
-        threads.delay(5);
-    }
-    free(data);
-    free(buffer);
-}
-
-void send_data_task(void *parameter)
-{
-    static uint64_t prev_time =0;
-    while (true)
-    {
-	/*RUT
-        uint64_t start_time = millis();
-
-        if (odom_ready && imu_ready)
-        {
-            send_data(FUNC_IMU, imu2send, sizeof(imu2send));
-            send_data(FUNC_ODOM, odom2send, sizeof(odom2send));
-            
-            if (batt_ready)
-            {
-                send_data(FUNC_BATT, batt2send, sizeof(batt2send));
-                batt_ready = false;
-            }
-            if(range_ready)
-            {
-                send_data(FUNC_RANGE, range2send, sizeof(range2send));
-                range_ready = false;
-            }
-            odom_ready = false;
-            imu_ready = false;
-
-            // uint64_t dt = start_time - prev_time;
-            // Serial5.printf("dt = %d\n", dt);
-            // prev_time = start_time;
-        }
-    	*/
- 	if (odom_ready )
-        {
-            send_data(FUNC_ODOM, odom2send, sizeof(odom2send));
-            odom_ready = false;
-	}
-	if ( imu_ready )
-	{	
-	    send_data(FUNC_IMU, imu2send, sizeof(imu2send));
-            imu_ready = false;
-        }   
-        if (batt_ready)
-        {
-            send_data(FUNC_BATT, batt2send, sizeof(batt2send));
-            batt_ready = false;
-        }
-        if(range_ready)
-        {
-            send_data(FUNC_RANGE, range2send, sizeof(range2send));
-            range_ready = false;
-        }
-        threads.delay(10);
     }
 }
 
+// ---------------- Send Data ------------------
 void send_data(uint8_t FUNC_TYPE, uint8_t *param, size_t param_len)
 {
+    const size_t MAX_PACKET_SIZE = 64;
+    uint8_t cmd[MAX_PACKET_SIZE];
 
-    if (xSendDataMutex.getState() == 0)
+    size_t cmd_len = param_len + 5; 
+    if (cmd_len > MAX_PACKET_SIZE) return; // prevent overflow
+
+    cmd[0] = HEAD;
+    cmd[1] = HOST_ID;
+    cmd[2] = cmd_len - 1;
+    cmd[3] = FUNC_TYPE;
+    memcpy(&cmd[4], param, param_len);
+
+    uint8_t checksum = 0;
+    for (size_t i = 0; i < cmd_len - 1; i++) checksum += cmd[i];
+    cmd[cmd_len - 1] = checksum & 0xFF;
+
+    Serial.write(cmd, cmd_len);
+
+    if (DEBUG_SEND)
     {
-
-        xSendDataMutex.lock();
-
-        size_t cmd_len = param_len + 4 + 1;
-        uint8_t *cmd = (uint8_t *)malloc(cmd_len);
-
-        cmd[0] = HEAD;
-        cmd[1] = HOST_ID;
-        cmd[2] = cmd_len - 1;
-        cmd[3] = FUNC_TYPE;
-        memcpy(&cmd[4], param, param_len);
-
-        uint8_t checksum = 0;
-        for (size_t i = 0; i < cmd_len - 1; i++)
-        {
-            checksum += cmd[i];
-        }
-        checksum &= 0xFF;
-        cmd[cmd_len - 1] = checksum;
-
-        for (size_t i = 0; i < cmd_len; i++)
-        {
-            Serial.write(cmd[i]);
-        }
-
-        if (DEBUG_SEND)
-        {
-            Serial5.println("Sent command:");
-            for (size_t i = 0; i < cmd_len; i++)
-            {
-                Serial5.print(cmd[i]);
-                Serial5.print(" ");
-            }
-            Serial5.println();
-        }
-        free(cmd);
-        xSendDataMutex.unlock();
+        Serial5.print("Sent [FUNC "); Serial5.print(FUNC_TYPE, HEX); Serial5.print("]: ");
+        for (size_t i=0;i<cmd_len;i++) { Serial5.print(cmd[i]); Serial5.print(" "); }
+        Serial5.println();
     }
 }
 
-void preTransmission()
+// ---------------- IMU Task -------------------
+void imu_update_task(void *arg = nullptr)
 {
-    delay(10);
-    digitalWrite(MAX485_RE, 1);
-    digitalWrite(MAX485_DE, 1);
-    delay(10);
+    float imu_gyro_dps[3] = {
+        (JY61P.getGyroX() / 180) * 3.14,
+        (JY61P.getGyroY() / 180) * 3.14,
+        (JY61P.getGyroZ() / 180) * 3.14
+    };
+    float imu_accel_g[3] = { JY61P.getAccX(), JY61P.getAccY(), JY61P.getAccZ() };
+
+    int16_t roll  = (int16_t)(imu_gyro_dps[0] * 1000);
+    int16_t pitch = (int16_t)(imu_gyro_dps[1] * 1000);
+    int16_t yaw   = (int16_t)(imu_gyro_dps[2] * 1000);
+    int16_t acc_x = (int16_t)(imu_accel_g[0] * 1000);
+    int16_t acc_y = (int16_t)(imu_accel_g[1] * 1000);
+    int16_t acc_z = (int16_t)(imu_accel_g[2] * 1000);
+
+    pkg_data[_IMU_ROLL_L]  = roll & 0xFF;
+    pkg_data[_IMU_ROLL_H]  = (roll >> 8) & 0xFF;
+    pkg_data[_IMU_PITCH_L] = pitch & 0xFF;
+    pkg_data[_IMU_PITCH_H] = (pitch >> 8) & 0xFF;
+    pkg_data[_IMU_YAW_L]   = yaw & 0xFF;
+    pkg_data[_IMU_YAW_H]   = (yaw >> 8) & 0xFF;
+    pkg_data[_IMU_ACCX_L]  = acc_x & 0xFF;
+    pkg_data[_IMU_ACCX_H]  = (acc_x >> 8) & 0xFF;
+    pkg_data[_IMU_ACCY_L]  = acc_y & 0xFF;
+    pkg_data[_IMU_ACCY_H]  = (acc_y >> 8) & 0xFF;
+    pkg_data[_IMU_ACCZ_L]  = acc_z & 0xFF;
+    pkg_data[_IMU_ACCZ_H]  = (acc_z >> 8) & 0xFF;
 }
 
-void postTransmission()
+// ---------------- BMS Task -------------------
+void poll_bms()
 {
-    delay(10);
-    digitalWrite(MAX485_DE, 0);
-    digitalWrite(MAX485_RE, 0);
-    delay(10);
+    // Step A: send request periodically
+    if (millis() - last_bms_request >= bms_request_interval)
+    {
+        SendDataToBMS(VOLT_AMP_CMD);     // already in your firmware
+        last_bms_request = millis();
+    }
+
+    // Step B: accumulate incoming bytes
+    while (BMS_SERIAL.available())
+    {
+        uint8_t c = BMS_SERIAL.read();
+        if (bms_index < sizeof(bms_buf))
+        {
+            bms_buf[bms_index++] = c;
+        }
+
+        // Simple heuristic: check minimum length for packet
+        if (bms_index >= 13) // enough for 0x90 packet
+        {
+            // calculate checksum
+            uint8_t chk = calChecksum((char*)bms_buf, bms_index-1);
+            if (chk == bms_buf[bms_index-1])
+            {
+                // ✅ Parse packet now
+                parse_bms_packet(bms_buf, bms_index);
+                bms_index = 0; // reset buffer
+            }
+            else if (bms_index >= 50) {
+                // overflow / invalid packet -> reset
+                bms_index = 0;
+            }
+        }
+    }
 }
 
-void sensor_module_task();
+void parse_bms_packet(uint8_t *Buf, uint8_t len)
+{
+    if (Buf[2] == 0x90) // voltage/current/SOC frame
+    {
+        unsigned int BattVolt = ((unsigned)Buf[4]<<8) | Buf[5];
+        fBattVolt = BattVolt * 0.1f;
 
+        int BattCurrent = ((int)Buf[8]<<8) | Buf[9];
+        fBattCurrent = (BattCurrent - 30000) * 0.1f;
+
+        unsigned int BattSOC = ((unsigned)Buf[10]<<8) | Buf[11];
+        fBattSOC = BattSOC * 0.1f;
+
+        // Determine status
+        if (fBattSOC >= 100.0) batt_status = 4;  // full
+        else if (fBattCurrent > 0) batt_status = 1; // charging
+        else if (fBattCurrent < 0) batt_status = 2; // discharging
+        else batt_status = 0; // unknown
+
+        update_batt_ = true;
+    }
+    else if (Buf[2] == 0x93) // info frame
+    {
+        uint8_t ChargeStatus = Buf[4];
+        uint8_t BmsLife = Buf[7];
+        uint32_t BattCap = (Buf[8]<<24) | (Buf[9]<<16) | (Buf[10]<<8) | Buf[11];
+        // store / log if you want
+        update_batt_ = true;
+    }
+}
+
+// ---------------- BMS Task -------------------
+void bms_task()
+{
+    // Step A: poll non-blocking reader
+    poll_bms();
+
+    // Step B: if new packet parsed, update pkg_data
+    if (update_batt_)
+    {
+        int16_t voltage    = (int16_t)(fBattVolt * 100);     // scale to centivolts
+        int16_t current    = (int16_t)(fBattCurrent * 100);  // scale to centiamps
+        int16_t percentage = (int16_t)(fBattSOC * 100);      // scale to centi%
+
+        pkg_data[_BMS_VOLTAGE_L] = voltage & 0xFF;
+        pkg_data[_BMS_VOLTAGE_H] = (voltage >> 8) & 0xFF;
+
+        pkg_data[_BMS_CURRENT_L] = current & 0xFF;
+        pkg_data[_BMS_CURRENT_H] = (current >> 8) & 0xFF;
+
+        pkg_data[_BMS_PERCENT_L] = percentage & 0xFF;
+        pkg_data[_BMS_PERCENT_H] = (percentage >> 8) & 0xFF;
+
+        pkg_data[_BMS_STATUS_]   = batt_status & 0xFF;
+
+        update_batt_ = false; // clear flag until next packet
+    }
+}
+
+// ---------------- ODOM/Control ---------------
+void control_task(void *arg = nullptr)
+{
+    static bool emer_flag = false;
+
+    if ((millis() - prev_cmd_time > 100) || stop || emer_state)
+    {
+        cmd_vel.linear_x = 0.0;
+        cmd_vel.linear_y = 0.0;
+        cmd_vel.angular_z = 0.0;
+    }
+
+    Kinematics::rpm req_rpm = kinematics.getRPM(cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
+
+    if (emer_state) { emer_flag = true; return; }
+    else if (emer_flag) {
+        // delay(1000); CANOpen_eMR_Init(); delay(3000);
+        emer_flag = false;
+    }
+
+    eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+    eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+
+    // Right motor
+    eMR.cobid = TSDO_COBID + axis1;
+    CANOpen_ReadActualVelocityObj(&eMR);
+    float current_rpm_right = eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
+
+    // Left motor
+    eMR.cobid = TSDO_COBID + axis2;
+    CANOpen_ReadActualVelocityObj(&eMR);
+    float current_rpm_left = eMR.ActualVelocity * (3.75 / 16384) * 1.578;
+
+    Kinematics::velocities current_vel = kinematics.getVelocities(current_rpm_left, current_rpm_right, 0, 0);
+
+    int16_t Vx = (int16_t)(current_vel.linear_x * 1000);
+    int16_t Vy = (int16_t)(current_vel.linear_y * 1000);
+    int16_t Wz = (int16_t)(current_vel.angular_z * 1000);
+
+    pkg_data[_ODOM_VX_L] = Vx & 0xFF;
+    pkg_data[_ODOM_VX_H] = (Vx >> 8) & 0xFF;
+    pkg_data[_ODOM_VY_L] = Vy & 0xFF;
+    pkg_data[_ODOM_VY_H] = (Vy >> 8) & 0xFF;
+    pkg_data[_ODOM_WZ_L] = Wz & 0xFF;
+    pkg_data[_ODOM_WZ_H] = (Wz >> 8) & 0xFF;
+    odom_ready = true;
+}
+
+// ---------------- Sensors --------------------
+void sensor_module_task()
+{
+    if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
+        range_left = Ultrasonics_1.getResponseBuffer(0);
+    if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
+        range_center = Ultrasonics_2.getResponseBuffer(0);
+    if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
+        range_right = Ultrasonics_3.getResponseBuffer(0);
+    if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
+        cliff = Sensor_module.getResponseBuffer(0);
+
+
+    pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
+    pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
+    pkg_data[_RANGER_CENTER_L] = range_center & 0xFF;
+    pkg_data[_RANGER_CENTER_H] = (range_center >> 8) & 0xFF;
+    pkg_data[_RANGER_RIGHT_L]  = range_right & 0xFF;
+    pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
+    
+    range_ready = true;
+}
+
+// ---------------- Safety ---------------------
+void safty_task()
+{
+    emer_state = !mcp.digitalRead(8);
+    bumper_state = !mcp.digitalRead(9) || !mcp.digitalRead(10);
+    cliff_state = (cliff > 200 && cliff < 5000);
+    stop = (bumper_state || cliff_state);
+    uint8_t safety = 0;
+    safety |= (emer_state   ? 0x04 : 0);
+    safety |= (bumper_state ? 0x02 : 0);
+    safety |= (cliff_state  ? 0x01 : 0);
+    pkg_data[_SAFETY_] = safety;
+}
+
+// ---------------- Send Task ------------------
+void send_data_task()
+{
+    pkg_data[_HEADER]   = HEAD;
+    pkg_data[_HOST_ID]  = HOST_ID;
+    pkg_data[_PKG_SIZE] = _PKG_LEN - 1; // exclude checksum
+
+    // Compute checksum
+    uint8_t checksum = 0;
+    for (uint8_t i = 0; i < _PKG_LEN - 1; i++) {
+        checksum += pkg_data[i];
+    }
+    pkg_data[_CHK_SUM_] = checksum & 0xFF;
+
+    // Send entire frame
+    Serial.write(pkg_data, _PKG_LEN);
+
+    if (DEBUG_SEND) {
+        Serial5.println("Sent pkg_data:");
+        for (int i=0; i<_PKG_LEN; i++) {
+            Serial5.print(pkg_data[i]);
+            Serial5.print(" ");
+        }
+        Serial5.println();
+    }
+}
+
+// ---------------- Setup ----------------------
 void setup()
 {
     pinMode(LED, OUTPUT);
@@ -381,545 +556,43 @@ void setup()
     pinMode(MAX485_DE, OUTPUT);
 
     mcp.begin_I2C(0x21);
-
     for (uint8_t i = 0; i < 16; i++)
-    {
-        if (i > 7)
-            mcp.pinMode(i, INPUT_PULLUP);
-        else
-        {
-            mcp.pinMode(i, OUTPUT);
-        }
-    }
-
+        mcp.pinMode(i, (i > 7) ? INPUT_PULLUP : OUTPUT);
     mcp.digitalWrite(7, HIGH);
-    delay(5000);
 
-    Serial.begin(115200);
-
+    Serial.begin(460800);
     Serial5.begin(115200);
 
     can1.begin();
-    can1.setBaudRate(500000); // Set CAN1 bitrate 500 Kbps
+    can1.setBaudRate(500000);
     can1.setMBFilter(ACCEPT_ALL);
     can1.distribute();
-    can1.mailboxStatus();
-
     CANOpen_eMR_Init();
 
-    // SENSORS_SERIAL.begin(9600, SERIAL_8N1);
-    SENSORS_SERIAL.begin(115200, SERIAL_8N1);
-    init_ultrasonics();
-
+    SENSORS_SERIAL.begin(115200);
+    Ultrasonics_1.begin(1, ULTARSONICS_SERIAL);
+    Ultrasonics_2.begin(2, ULTARSONICS_SERIAL);
+    Ultrasonics_3.begin(3, ULTARSONICS_SERIAL);
     Sensor_module.begin(5, SENSORS_SERIAL);
 
     BMS_SERIAL.begin(9600);
 
     JY61P.startIIC();
     JY61P.caliIMU();
-
-    threads.addThread(control_task);
-    threads.addThread(recive_data_task);
-    threads.addThread(imu_update_task);
-    threads.addThread(send_data_task);
-    threads.addThread(safty_task);
-    threads.addThread(bms_task);
-    threads.addThread(sensor_module_task);
 }
 
-void loop() {}
-
-void imu_update_task(void *arg)
+// ---------------- Superloop ------------------
+void loop()
 {
-    float imu_gyro_dps[3] = {0};
-    float imu_accel_g[3] = {0};
-
-    while (1)
-    {
-        uint64_t start_time = millis();
-
-        imu_gyro_dps[0] = (JY61P.getGyroX() / 180) * 3.14;
-        imu_gyro_dps[1] = (JY61P.getGyroY() / 180) * 3.14;
-        imu_gyro_dps[2] = (JY61P.getGyroZ() / 180) * 3.14;
-
-        imu_accel_g[0] = JY61P.getAccX();
-        imu_accel_g[1] = JY61P.getAccY();
-        imu_accel_g[2] = JY61P.getAccZ();
-
-        if (DEBUG_IMU)
-        {
-            Serial.println(imu_gyro_dps[0]);
-            Serial.println(imu_gyro_dps[1]);
-            Serial.println(imu_gyro_dps[2]);
-            Serial.println(imu_accel_g[0]);
-            Serial.println(imu_accel_g[1]);
-            Serial.println(imu_accel_g[2]);
-            Serial.println("-------------------------------------------");
-        }
-
-        int16_t roll = static_cast<int16_t>(imu_gyro_dps[0] * 1000);
-        int16_t pitch = static_cast<int16_t>(imu_gyro_dps[1] * 1000);
-        int16_t yaw = static_cast<int16_t>(imu_gyro_dps[2] * 1000);
-
-        int16_t acc_x = static_cast<int16_t>(imu_accel_g[0] * 1000);
-        int16_t acc_y = static_cast<int16_t>(imu_accel_g[1] * 1000);
-        int16_t acc_z = static_cast<int16_t>(imu_accel_g[2] * 1000);
-
-        uint8_t cmd[12] = {
-            static_cast<uint8_t>(roll & 0xFF), static_cast<uint8_t>((roll >> 8) & 0xFF),
-            static_cast<uint8_t>(pitch & 0xFF), static_cast<uint8_t>((pitch >> 8) & 0xFF),
-            static_cast<uint8_t>(yaw & 0xFF), static_cast<uint8_t>((yaw >> 8) & 0xFF),
-            static_cast<uint8_t>(acc_x & 0xFF), static_cast<uint8_t>((acc_x >> 8) & 0xFF),
-            static_cast<uint8_t>(acc_y & 0xFF), static_cast<uint8_t>((acc_y >> 8) & 0xFF),
-            static_cast<uint8_t>(acc_z & 0xFF), static_cast<uint8_t>((acc_z >> 8) & 0xFF)};
-
-        memcpy(imu2send, cmd, sizeof(cmd));
-        imu_ready = true;
-
-        uint64_t end_time = millis();
-        uint32_t dt = end_time - start_time;
-        // Serial.println(dt);
-	if( dt > 40 )
-	    dt = 40;
-        // send_data(FUNC_IMU, cmd, sizeof(cmd));
-        threads.delay(40 - dt);
-    }
-}
-
-void bms_task()
-{
-    // JbdBms::Status_t status;
-    static uint64_t prev_batt = 0;
-    int16_t voltage = 0, current = 0, percentage = 0;
-    uint8_t batt_status = 0;
-
-    while (true)
-    {
-        uint64_t start_time = millis();
-
-        // Serial5.print("bms_task - start time = ");
-        // Serial5.println(start_time - prev_batt);
-
-        if (start_time - prev_batt > 1000)
-        {
-            if (RequestDataFromBMD(VOLT_AMP_CMD) == 1)
-            {
-                voltage = static_cast<int16_t>(fBattVolt * 100);
-                current = static_cast<int16_t>(fBattCurrent * 100);
-                percentage = static_cast<int16_t>(fBattSOC * 100);
-
-                if (fBattSOC >= 100)
-                    batt_status = 4; // FULL
-                else if (fBattCurrent > 0)
-                    batt_status = 1; // CHARGIGN
-                else if (fBattCurrent < 0)
-                    batt_status = 2; // DISCHARGIGN
-                else
-                    batt_status = 0; // UNKNOWN
-
-                uint8_t cmd_batt[7] = {
-                    static_cast<uint8_t>(voltage & 0xFF), static_cast<uint8_t>((voltage >> 8) & 0xFF),
-                    static_cast<uint8_t>(current & 0xFF), static_cast<uint8_t>((current >> 8) & 0xFF),
-                    static_cast<uint8_t>(percentage & 0xFF), static_cast<uint8_t>((percentage >> 8) & 0xFF),
-                    static_cast<uint8_t>(batt_status & 0xFF)};
-
-                memcpy(batt2send, cmd_batt, sizeof(cmd_batt));
-                batt_ready = true;
-
-                // Serial5.print("percentage : ");
-                // Serial5.println(percentage);
-
-                prev_batt = start_time;
-            }
-        }
-        threads.delay(200);
-    }
-}
-
-void control_task(void *arg)
-{
-    bool emer_flag;
-
-    while (1)
-    {
-        uint64_t start_time = millis();
-        uint8_t result;
-        int16_t buff;
-        float current_rpm_left;
-        float current_rpm_right;
-
-        cmd_vel_Mutex.lock(); 
-        if ((millis() - prev_cmd_time > 100) || stop || emer_state)
-        {
-            cmd_vel.linear_x = 0.0;
-            cmd_vel.linear_y = 0.0;
-            cmd_vel.angular_z = 0.0;
-        }
-
-        // cmd_vel.linear_x  = 0.1037;
-        // cmd_vel.linear_x  = 0.2074;
-        // cmd_vel.linear_x  = 0.0;
-
-        Kinematics::rpm req_rpm = kinematics.getRPM(
-            cmd_vel.linear_x,
-            cmd_vel.linear_y,
-            cmd_vel.angular_z);
-        cmd_vel_Mutex.unlock(); 
-        
-	// Serial.print("Command RPM1 : ");
-        // Serial.println(req_rpm.motor1);
-        // Serial.print("Command RPM2 : ");
-        // Serial.println(req_rpm.motor2);
-
-        if (emer_state)
-        {
-            emer_flag = true;
-            // Serial.println("Emer ON");
-        }
-        else
-        {
-            if (emer_flag)
-            {
-                delay(1000);
-                // Serial.println("Emer OFF");
-                CANOpen_eMR_Init();
-                // Serial.println("eMR CANopen Init. eMR motor ");
-                delay(3000);
-                emer_flag = false;
-            }
-	}
-        //    else
-            {
-
-                eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
-                eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
-
-                eMR.cobid = TSDO_COBID + axis1;
-                /////////////////////////////////////////////////////
-                CANOpen_ReadActualVelocityObj(&eMR);
-                /////////////////////////////////////////////////////
-
-                CANOpen_ReadActualVelocityObj(&eMR);
-                // current_rpm_right = eMR.ActualVelocity * (3.75/16000) * (-1);
-                current_rpm_right = eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
-
-                eMR.cobid = TSDO_COBID + axis2;
-
-                /////////////////////////////////////////////////////
-                CANOpen_ReadActualVelocityObj(&eMR);
-                /////////////////////////////////////////////////////
-
-                CANOpen_ReadActualVelocityObj(&eMR);
-                // current_rpm_left = eMR.ActualVelocity * (3.75/16000);
-                current_rpm_left = eMR.ActualVelocity * (3.75 / 16384) * 1.578;
-            }
-        //}
-
-        // if(!emer_state){
-        //     if (emer_flag) {
-        //         if (connection_failed) {
-        //             connection_failed = false;
-        //             mcp.digitalWrite(7, HIGH); // Enable motor driver after reset with emer switch
-        //         }
-        //         delay(8000);
-        //         emer_flag = false;
-        //     }
-        //     if (!connection_failed) {
-        //         if( Motor_dualdrive.readHoldingRegisters(REG_AXIS2_FEEDBACK_SPEED,1) == Motor_dualdrive.ku8MBSuccess ){
-        //             buff = Motor_dualdrive.getResponseBuffer(0);
-        //             current_rpm_left = (buff / 30.0) * (-1);
-        //             delay(1);
-        //         } else {
-        //             mcp.digitalWrite(7, LOW); // Disable motor driver when connection is failed.
-        //             connection_failed = true;
-        //             Serial.println("Connection is failed");
-        //             break;
-        //         }
-        //         if( Motor_dualdrive.readHoldingRegisters(REG_AXIS1_FEEDBACK_SPEED,1) == Motor_dualdrive.ku8MBSuccess ){
-        //             buff = Motor_dualdrive.getResponseBuffer(0);
-        //             current_rpm_right = (buff / 30.0) ;
-        //             delay(1);
-        //         } else {
-        //             mcp.digitalWrite(7, LOW); // Disable motor driver when connection is failed.
-        //             connection_failed = true;
-        //             Serial.println("Connection is failed");
-        //             break;
-        //         }
-        //         Motor_dualdrive.setTransmitBuffer(0, 0x0003);
-        //         Motor_dualdrive.setTransmitBuffer(1, int16_t(req_rpm.motor2 * 30));
-        //         Motor_dualdrive.setTransmitBuffer(2, int16_t(req_rpm.motor1 * 30));
-        //         Motor_dualdrive.writeMultipleRegisters(REG_DUALAXIS_CMD_SPEED, 3);
-        //         delay(1);
-        //     }
-        // } else emer_flag = true;
-
-        Kinematics::velocities current_vel = kinematics.getVelocities(
-            current_rpm_left,
-            current_rpm_right,
-            0,
-            0);
-
-        // Serial.print("Actual RPM1 : ");
-        // Serial.print(current_rpm_right);
-        // Serial.print("   ");
-        // Serial.print("Actual RPM2 : "); // Serial.print(current_rpm_left);
-
-        // Serial.print("   ");
-
-        // Serial.print(current_vel.linear_x);
-        // Serial.print("   ");
-        // Serial.println(current_vel.angular_z);
-
-        int16_t Vx = static_cast<int16_t>(current_vel.linear_x * 1000);
-        int16_t Vy = static_cast<int16_t>(current_vel.linear_y * 1000);
-        int16_t Wz = static_cast<int16_t>(current_vel.angular_z * 1000);
-
-        uint8_t cmd[6] = {
-            static_cast<uint8_t>(Vx & 0xFF), static_cast<uint8_t>((Vx >> 8) & 0xFF),
-            static_cast<uint8_t>(Vy & 0xFF), static_cast<uint8_t>((Vy >> 8) & 0xFF),
-            static_cast<uint8_t>(Wz & 0xFF), static_cast<uint8_t>((Wz >> 8) & 0xFF)};
-
-        // send_data(FUNC_ODOM, cmd, sizeof(cmd));
-
-        memcpy(odom2send, cmd, sizeof(cmd));
-        odom_ready = true;
-
-        uint64_t end_time = millis();
-        uint32_t dt = end_time - start_time;
-
-        if (DEBUG_ODOM)
-        {
-            Serial5.printf(">Command Vx :%f\n", cmd_vel.linear_x);
-            Serial5.printf(">Command Wz :%f\n", cmd_vel.angular_z);
-            Serial5.printf(">Odom Vx :%f\n", current_vel.linear_x);
-            Serial5.printf(">Odom Wz :%f\n", current_vel.angular_z);
-        }
-
-        if (DEBUG_MOTOR)
-        {
-            Serial5.printf(">Command Motor 1:%f\n", req_rpm.motor1);
-            Serial5.printf(">Command Motor 2:%f\n", req_rpm.motor2);
-            Serial5.printf(">Current Motor 1:%f\n", current_rpm_left);
-            Serial5.printf(">Current Motor 2:%f\n", current_rpm_right);
-            Serial5.printf(">dt:%d\n", dt);
-        }
-
-        // Serial.println(dt);
-        if (dt >= 40)
-        {
-            dt = 0;
-        }
-        threads.delay(40 - dt);
-    }
-}
-
-void init_ultrasonics()
-{
-    // ULTARSONICS_SERIAL.begin(9600, SERIAL_8N1, U0_RXD, U0_TXD);
-
-    Ultrasonics_1.begin(1, ULTARSONICS_SERIAL);
-    Ultrasonics_2.begin(2, ULTARSONICS_SERIAL);
-    Ultrasonics_3.begin(3, ULTARSONICS_SERIAL);
-}
-
-void sensor_module_task()
-{
-    int16_t buff = 0;
-    uint8_t alarm_mode = 0;
-    uint8_t led_mode = 0;
+    unsigned long now = millis();
     
+    recive_data_task(); 
 
-    while (true)
-    {
-
-        uint64_t start_time = millis();
-        
-        if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
-        {
-            buff = Ultrasonics_1.getResponseBuffer(0);
-            range_left = buff;
-            if (DEBUG)
-            {
-                Serial.print(buff);
-                Serial.print("  ");
-            }
-        }
-        else
-        {
-            if (DEBUG)
-                Serial.println("Read range_1 error");
-        }        
-        delay(10);
-        
-        if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
-        {
-            buff = Ultrasonics_2.getResponseBuffer(0);
-            range_center = buff;
-            if (DEBUG)
-            {
-                Serial.print(buff);
-                Serial.print("  ");
-            }
-        }
-        else
-        {
-            if (DEBUG)
-                Serial.println("Read range_2 error");
-        }
-        delay(10);
-
-        if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
-        {
-            buff = Ultrasonics_3.getResponseBuffer(0);
-            range_right = buff;
-            if (DEBUG)
-            {
-                Serial.print(buff);
-                Serial.print("  ");
-            }
-        }
-        else
-        {
-            if (DEBUG)
-                Serial.println("Read range_3 error");
-        }
-        delay(10);
-
-        if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
-        {
-            buff = Sensor_module.getResponseBuffer(0);
-            cliff = buff;
-            if (DEBUG)
-            {
-                Serial.print(buff);
-                Serial.println("  ");
-            }
-        }
-        else
-        {
-            if (DEBUG)
-                Serial.println("Read cliff error");
-        }
-        delay(10);
-        
-
-        bool A = (range_left < range_limit);
-        bool B = (range_center < range_limit);
-        bool C = (range_right < range_limit);
-
-        if (stop || emer_state || connection_failed)
-            A = B = C = true;
-
-        alarm_mode = (static_cast<uint8_t>(A) << 2) |
-                     (static_cast<uint8_t>(B) << 1) |
-                     (static_cast<uint8_t>(C));
-
-        Sensor_module.writeSingleRegister(1, alarm_mode);
-        delay(10);
-
-        if (cmd_vel.linear_x == 0 && cmd_vel.angular_z == 0)
-        {
-            led_mode = 0;
-        }
-        else if (cmd_vel.linear_x != 0 && cmd_vel.angular_z == 0)
-        {
-            led_mode = 1;
-        }
-        else if (((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x < 0)))
-        {
-            led_mode = 2;
-        }
-        else if (((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x < 0)))
-        {
-            led_mode = 3;
-        }
-
-        if (led_mode != led_mode_prev)
-        {
-            if (DEBUG)
-                Serial.println(led_mode);
-            // Serial.println(led_mode);
-            Sensor_module.writeSingleRegister(2, led_mode);
-            delay(10);
-        }
-
-        // Serial.print("led_mode : ");
-        // Serial.println(led_mode);
-        // Sensor_module.writeSingleRegister(2, 333);
-        // delay(10);
-
-        led_mode_prev = led_mode;
-        alarm_mode_prev = alarm_mode;
-        A = B = C = false;        
-
-        uint8_t cmd[6] = {
-            static_cast<uint8_t>(range_left & 0xFF), static_cast<uint8_t>((range_left >> 8) & 0xFF),
-            static_cast<uint8_t>(range_center & 0xFF), static_cast<uint8_t>((range_center >> 8) & 0xFF),
-            static_cast<uint8_t>(range_right & 0xFF), static_cast<uint8_t>((range_right >> 8) & 0xFF)};
-
-        // uint64_t dt = millis() - start_time;
-        // Serial5.print("dt : ");
-        // Serial5.println(dt);
-
-        // if (DEBUG)
-        // {
-        //     Serial5.print("dt : ");
-        //     Serial5.println(dt);
-        // }
-        memcpy(range2send, cmd, sizeof(cmd));
-        range_ready = true;
-
-        threads.delay(50);
-    }
-}
-
-void safty_task()
-{
-    while (1)
-    {
-        //uint64_t start_time = millis();
-
-        emer_state = !mcp.digitalRead(8);
-        bumper_state = !mcp.digitalRead(9) || !mcp.digitalRead(10);
-
-        if (cliff < 200)
-        {
-            cliff_state = false;
-        } // 50 mm. for flat surface
-        else
-        {
-            if (cliff < 5000)
-            {
-                cliff_state = true;
-            }
-            else
-            {
-                cliff_state = false;
-            }
-        }
-
-        if (bumper_state || cliff_state)
-        {
-            stop = true;
-        }
-        else
-            stop = false;
-
-        if (DEBUG_SAFTY)
-        {
-            Serial.print(bumper_state);
-            Serial.print(" ");
-            Serial.print(cliff);
-            Serial.print(" ");
-            Serial.println(emer_state);
-        }
-
-
-        threads.delay(50);
-
-        // uint64_t dt = millis() - start_time;
-        // Serial5.print("dt-safty task : ");
-        // Serial5.println(dt);
-
-    }
+    if (now - control_time > control_interval) { control_task(); control_time = now; }
+    if (now - imu_time > imu_interval) { imu_update_task(); imu_time = now; }
+    if (now - bms_time > bms_interval) { bms_task(); bms_time = now; }
+    if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
+    if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
+    if (now - send_time > send_interval) { send_data_task(); send_time = now; }
+    
 }

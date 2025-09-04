@@ -5,7 +5,7 @@ HardwareInterface::HardwareInterface(const std::string& port) : port_name(port),
     try {
         // Open the serial port
         serial_port.Open(port_name);
-        serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+        serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_460800);
         std::cout << "Serial port opened at port "<< port_name << " with baudrate 115200" << std::endl;
     }
     catch (const std::exception& e) {
@@ -82,93 +82,155 @@ void HardwareInterface::UpdateStatus(int status) {
     }
 }
 
-void HardwareInterface::ParseData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& data) {
-    if (FUNC_TYPE == FUNC_IMU) {
-        int16_t roll  = static_cast<int16_t>(data[0] | (data[1] << 8));
-        int16_t pitch = static_cast<int16_t>(data[2] | (data[3] << 8));
-        int16_t yaw   = static_cast<int16_t>(data[4] | (data[5] << 8));
-        int16_t acc_x = static_cast<int16_t>(data[6] | (data[7] << 8));
-        int16_t acc_y = static_cast<int16_t>(data[8] | (data[9] << 8));
-        int16_t acc_z = static_cast<int16_t>(data[10] | (data[11] << 8));
+// void HardwareInterface::ParseData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& data) {
+//     // if (FUNC_TYPE == FUNC_IMU) {
+//         int16_t roll  = static_cast<int16_t>(data[0] | (data[1] << 8));
+//         int16_t pitch = static_cast<int16_t>(data[2] | (data[3] << 8));
+//         int16_t yaw   = static_cast<int16_t>(data[4] | (data[5] << 8));
+//         int16_t acc_x = static_cast<int16_t>(data[6] | (data[7] << 8));
+//         int16_t acc_y = static_cast<int16_t>(data[8] | (data[9] << 8));
+//         int16_t acc_z = static_cast<int16_t>(data[10] | (data[11] << 8));
 
-        angular_velocity.x = roll  / 1000.0;
-        angular_velocity.y = pitch / 1000.0;
-        angular_velocity.z = yaw   / 1000.0;
+//         angular_velocity.x = roll  / 1000.0;
+//         angular_velocity.y = pitch / 1000.0;
+//         angular_velocity.z = yaw   / 1000.0;
 
-        linear_acceleration.x = acc_x / 1000.0;
-        linear_acceleration.y = acc_y / 1000.0;
-        linear_acceleration.z = acc_z / 1000.0;
+//         linear_acceleration.x = acc_x / 1000.0;
+//         linear_acceleration.y = acc_y / 1000.0;
+//         linear_acceleration.z = acc_z / 1000.0;
 
-        update_imu_ = true;
+//         update_imu_ = true;
 
-        if(DEBUG_IMU){
-            std::cout << "IMU -";
-            std::cout << " " << angular_velocity.x;
-            std::cout << " " << angular_velocity.y;
-            std::cout << " " << angular_velocity.z;
-            std::cout << " " << linear_acceleration.x;
-            std::cout << " " << linear_acceleration.y;
-            std::cout << " " << linear_acceleration.z << std::endl;
-        }
-    }
-    else if (FUNC_TYPE == FUNC_ODOM) {
-        int16_t Vx = static_cast<int16_t>(data[0] | (data[1] << 8));
-        int16_t Vy = static_cast<int16_t>(data[2] | (data[3] << 8));
-        int16_t Wz = static_cast<int16_t>(data[4] | (data[5] << 8));
+//         if(DEBUG_IMU){
+//             std::cout << "IMU -";
+//             std::cout << " " << angular_velocity.x;
+//             std::cout << " " << angular_velocity.y;
+//             std::cout << " " << angular_velocity.z;
+//             std::cout << " " << linear_acceleration.x;
+//             std::cout << " " << linear_acceleration.y;
+//             std::cout << " " << linear_acceleration.z << std::endl;
+//         }
+//     // }
+//     // else if (FUNC_TYPE == FUNC_ODOM) {
+//         int16_t Vx = static_cast<int16_t>(data[0] | (data[1] << 8));
+//         int16_t Vy = static_cast<int16_t>(data[2] | (data[3] << 8));
+//         int16_t Wz = static_cast<int16_t>(data[4] | (data[5] << 8));
 
-        odom_velocity.x = Vx / 1000.0;
-        odom_velocity.y = Vy / 1000.0;
-        odom_velocity.z = Wz / 1000.0;
+//         odom_velocity.x = Vx / 1000.0;
+//         odom_velocity.y = Vy / 1000.0;
+//         odom_velocity.z = Wz / 1000.0;
 
-        update_odom_ = true;
+//         update_odom_ = true;
 
-        if(DEBUG_ODOM){
-            std::cout << "Odom -";
-            std::cout << " " << odom_velocity.x / 1000.0;
-            std::cout << " " << odom_velocity.y / 1000.0;
-            std::cout << " " << odom_velocity.z / 1000.0 << std::endl;
-        }
-    }
-    else if (FUNC_TYPE == FUNC_RANGE) {
-        int16_t range_1 = static_cast<int16_t>(data[0] | (data[1] << 8));
-        int16_t range_2 = static_cast<int16_t>(data[2] | (data[3] << 8));
-        int16_t range_3 = static_cast<int16_t>(data[4] | (data[5] << 8));
+//         if(DEBUG_ODOM){
+//             std::cout << "Odom -";
+//             std::cout << " " << odom_velocity.x / 1000.0;
+//             std::cout << " " << odom_velocity.y / 1000.0;
+//             std::cout << " " << odom_velocity.z / 1000.0 << std::endl;
+//         }
+//     // }
+//     // else if (FUNC_TYPE == FUNC_RANGE) {
+//         int16_t range_1 = static_cast<int16_t>(data[0] | (data[1] << 8));
+//         int16_t range_2 = static_cast<int16_t>(data[2] | (data[3] << 8));
+//         int16_t range_3 = static_cast<int16_t>(data[4] | (data[5] << 8));
 
-        range_left   = range_1 / 1000.0;
-        range_center = range_2 / 1000.0;
-        range_right  = range_3 / 1000.0;
+//         range_left   = range_1 / 1000.0;
+//         range_center = range_2 / 1000.0;
+//         range_right  = range_3 / 1000.0;
 
-        update_range_ = true;
+//         update_range_ = true;
 
-        if(DEBUG_RANGE){
-            std::cout << "Range -";
-            std::cout << " " << range_left;
-            std::cout << " " << range_center;
-            std::cout << " " << range_right << std::endl;
-        }
-    }
-    else if (FUNC_TYPE == FUNC_BATT) {
-        int16_t voltage     = static_cast<int16_t>(data[0] | (data[1] << 8));
-        int16_t current     = static_cast<int16_t>(data[2] | (data[3] << 8));
-        int16_t percentage  = static_cast<int16_t>(data[4] | (data[5] << 8));
-        uint8_t  status     = static_cast<uint8_t>(data[6]);
+//         if(DEBUG_RANGE){
+//             std::cout << "Range -";
+//             std::cout << " " << range_left;
+//             std::cout << " " << range_center;
+//             std::cout << " " << range_right << std::endl;
+//         }
+//     // }
+//     // else if (FUNC_TYPE == FUNC_BATT) {
+//         int16_t voltage     = static_cast<int16_t>(data[0] | (data[1] << 8));
+//         int16_t current     = static_cast<int16_t>(data[2] | (data[3] << 8));
+//         int16_t percentage  = static_cast<int16_t>(data[4] | (data[5] << 8));
+//         uint8_t  status     = static_cast<uint8_t>(data[6]);
 
-        voltage_ = voltage / 100.0;
-        current_ = current / 100.0;
-        percentage_ = percentage / 100.0;
-        status_ = status;
+//         voltage_ = voltage / 100.0;
+//         current_ = current / 100.0;
+//         percentage_ = percentage / 100.0;
+//         status_ = status;
 
-        update_batt_ = true;
+//         update_batt_ = true;
 
-        if(DEBUG_BATT){
-            std::cout << "Battery -";
-            std::cout << " " << voltage;
-            std::cout << " " << current;
-            std::cout << " " << percentage;
-            std::cout << " " << static_cast<int>(status) << std::endl;   
-        }
-    }
+//         if(DEBUG_BATT){
+//             std::cout << "Battery -";
+//             std::cout << " " << voltage;
+//             std::cout << " " << current;
+//             std::cout << " " << percentage;
+//             std::cout << " " << static_cast<int>(status) << std::endl;   
+//         }
+//     // }
+// }
+
+void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
+{
+    if (len != 36) return;   // wrong frame size
+    if (buf[0] != 0xFF) return; // header check
+
+    // ----- IMU -----
+    int16_t roll  = (int16_t)(buf[3] | (buf[4]<<8));
+    int16_t pitch = (int16_t)(buf[5] | (buf[6]<<8));
+    int16_t yaw   = (int16_t)(buf[7] | (buf[8]<<8));
+    int16_t accx  = (int16_t)(buf[9] | (buf[10]<<8));
+    int16_t accy  = (int16_t)(buf[11] | (buf[12]<<8));
+    int16_t accz  = (int16_t)(buf[13] | (buf[14]<<8));
+
+    angular_velocity.x = roll  / 1000.0;
+    angular_velocity.y = pitch / 1000.0;
+    angular_velocity.z = yaw   / 1000.0;
+
+    linear_acceleration.x = accx / 1000.0;
+    linear_acceleration.y = accy / 1000.0;
+    linear_acceleration.z = accz / 1000.0;
+    update_imu_ = true;
+
+    // ----- ODOM -----
+    int16_t vx = (int16_t)(buf[15] | (buf[16]<<8));
+    int16_t vy = (int16_t)(buf[17] | (buf[18]<<8));
+    int16_t wz = (int16_t)(buf[19] | (buf[20]<<8));
+
+    odom_velocity.x = vx / 1000.0 ;
+    odom_velocity.y = vy / 1000.0;
+    odom_velocity.z = wz / 1000.0;
+    update_odom_ = true;
+
+    // ----- Ranger -----
+    int16_t r_right  = (int16_t)(buf[21] | (buf[22]<<8));
+    int16_t r_center = (int16_t)(buf[23] | (buf[24]<<8));
+    int16_t r_left   = (int16_t)(buf[25] | (buf[26]<<8));
+
+    range_right  = r_right  / 1000.0f;   // meters
+    range_center = r_center / 1000.0f;
+    range_left   = r_left   / 1000.0f;
+    update_range_ = true;
+
+    // ----- Safety -----
+    uint8_t safety_bits = buf[27];
+    emer_state_   = (safety_bits & 0x04);
+    bumper_state_ = (safety_bits & 0x02);
+    cliff_state_  = (safety_bits & 0x01);
+
+    // ----- Battery -----
+    int16_t batt_v = (int16_t)(buf[28] | (buf[29]<<8));
+    int16_t batt_i = (int16_t)(buf[30] | (buf[31]<<8));
+    int16_t batt_p = (int16_t)(buf[32] | (buf[33]<<8));
+    uint8_t batt_s = buf[34];
+
+    voltage_    = batt_v / 100.0f;   // volts
+    current_    = batt_i / 100.0f;   // amps
+    percentage_ = batt_p / 100.0f;   // %
+    status_     = batt_s;
+    update_batt_ = true;
 }
+
 
 void HardwareInterface::SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& param) {
     try {
@@ -201,73 +263,125 @@ void HardwareInterface::SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& 
     }
 }
 
-void HardwareInterface::ReceiveData() {
-    try {
+// void HardwareInterface::ReceiveData() {
+//     try {
 
-        uint8_t header;
-        uint8_t device_id;
-        uint8_t len;
-        uint8_t func_type;
-        uint8_t data_len;
-        uint8_t value;
-        uint8_t rx_check_num;
-        uint8_t check_sum;
-        std::vector<uint8_t> data;
+//         uint8_t header;
+//         uint8_t device_id;
+//         uint8_t len;
+//         uint8_t func_type;
+//         uint8_t data_len;
+//         uint8_t value;
+//         uint8_t rx_check_num;
+//         uint8_t check_sum;
+//         std::vector<uint8_t> data;
 
-        while (run_receive_thread) {
-            if (serial_port.IsDataAvailable()) {
+//         while (run_receive_thread) {
+//             if (serial_port.IsDataAvailable()) {
 
-                serial_port.ReadByte(header, SERIALPORT_TIMEOUT_MS);
+//                 serial_port.ReadByte(header, SERIALPORT_TIMEOUT_MS);
                 
-                if (header == HEAD) {
-                    serial_port.ReadByte(device_id, SERIALPORT_TIMEOUT_MS);
+//                 if (header == HEAD) {
+//                     serial_port.ReadByte(device_id, SERIALPORT_TIMEOUT_MS);
 
-                    if (device_id == HOST_ID) {
+//                     if (device_id == HOST_ID) {
 
-                        serial_port.ReadByte(len, SERIALPORT_TIMEOUT_MS);
-                        serial_port.ReadByte(func_type, SERIALPORT_TIMEOUT_MS);
+//                         serial_port.ReadByte(len, SERIALPORT_TIMEOUT_MS);
+//                         serial_port.ReadByte(func_type, SERIALPORT_TIMEOUT_MS);
 
-                        uint8_t check_sum = header + device_id + len + func_type;
-                        uint8_t data_len = len - 4;
-                        data = {};
+//                         uint8_t check_sum = header + device_id + len + func_type;
+//                         uint8_t data_len = len - 4;
+//                         data = {};
 
-                        while (data.size() < data_len) {                            
-                            serial_port.ReadByte(value, SERIALPORT_TIMEOUT_MS);
-                            data.push_back(value);
-                            check_sum += value;
-                        }
+//                         while (data.size() < data_len) {                            
+//                             serial_port.ReadByte(value, SERIALPORT_TIMEOUT_MS);
+//                             data.push_back(value);
+//                             check_sum += value;
+//                         }
 
-                        serial_port.ReadByte(rx_check_num, SERIALPORT_TIMEOUT_MS);  
+//                         serial_port.ReadByte(rx_check_num, SERIALPORT_TIMEOUT_MS);  
                         
-                        if ((check_sum & 0xFF) == rx_check_num) {
-                            if (DEBUG_RECEIVE) {
-                                std::cout << "Data received" << std::endl;
-                            }
-                            ParseData(func_type, data);
-                        } else {
-                            if (DEBUG_RECEIVE) {
-                                std::cout << "Checksum error" << std::endl;
-                            }
-                        }
+//                         if ((check_sum & 0xFF) == rx_check_num) {
+//                             if (DEBUG_RECEIVE) {
+//                                 std::cout << "Data received" << std::endl;
+//                             }
+//                             ParseData(func_type, data);
+//                         } else {
+//                             if (DEBUG_RECEIVE) {
+//                                 std::cout << "Checksum error" << std::endl;
+//                             }
+//                         }
 
-                        if (DEBUG_RECEIVE) {
-                            std::cout << "Device_id: " << (int)device_id << std::endl;
-                            std::cout << "Data range: " << (int)len << std::endl;
-                            std::cout << "Function type: " << (int)func_type << std::endl;
-                            for (size_t i = 0; i < data.size(); ++i) {
-                                std::cout << "Data" << i << ": " << (int)data[i] << std::endl;
-                            }
-                            std::cout << "Ground truth: " << (int)rx_check_num << std::endl;
-                            std::cout << "Checksum: " << (check_sum & 0xFF) << std::endl;
-                        }
+//                         if (DEBUG_RECEIVE) {
+//                             std::cout << "Device_id: " << (int)device_id << std::endl;
+//                             std::cout << "Data range: " << (int)len << std::endl;
+//                             std::cout << "Function type: " << (int)func_type << std::endl;
+//                             for (size_t i = 0; i < data.size(); ++i) {
+//                                 std::cout << "Data" << i << ": " << (int)data[i] << std::endl;
+//                             }
+//                             std::cout << "Ground truth: " << (int)rx_check_num << std::endl;
+//                             std::cout << "Checksum: " << (check_sum & 0xFF) << std::endl;
+//                         }
+//                     }
+//                 }
+//             }
+//             else{
+//                 usleep(10000);
+//             }
+//         }
+//     } catch (const std::exception& e) {
+//         std::cerr << "Received Data Error: " << e.what() << std::endl;
+//     }
+// }
+void HardwareInterface::ReceiveData()
+{
+    std::vector<uint8_t> buffer;
+    buffer.reserve(64);
+    
+    while (run_receive_thread)
+    {
+        if (serial_port.IsDataAvailable())
+        {
+            char c;
+            serial_port.ReadByte(c, 10);  // 10ms timeout
+            buffer.push_back((uint8_t)c);
+
+            // Look for header
+            if (buffer.size() >= _PKG_LEN)
+            {
+                // find first header 0xFF
+                size_t header_index = 0;
+                while (header_index < buffer.size() && buffer[header_index] != 0xFF)
+                    header_index++;
+
+                if (buffer.size() - header_index >= _PKG_LEN)
+                {
+                    // candidate packet
+                    const uint8_t* pkt = &buffer[header_index];
+                    
+                    // checksum verify
+                    uint8_t checksum = 0;
+                    for (uint8_t i=0; i<_PKG_LEN-1; i++)
+                        checksum += pkt[i];
+                    checksum &= 0xFF;
+
+                    if (checksum == pkt[_PKG_LEN-1])
+                    {
+                        ParsePacket(pkt, _PKG_LEN);
                     }
+                    
+                    // discard old bytes
+                    buffer.erase(buffer.begin(), buffer.begin()+header_index+_PKG_LEN);
+                }
+                else
+                {
+                    // not enough yet
                 }
             }
-            else{
-                usleep(10000);
-            }
+        } 
+        else 
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
-    } catch (const std::exception& e) {
-        std::cerr << "Received Data Error: " << e.what() << std::endl;
     }
 }

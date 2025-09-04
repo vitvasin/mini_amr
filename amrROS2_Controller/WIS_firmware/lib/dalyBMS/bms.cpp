@@ -73,7 +73,8 @@ unsigned int RequestDataFromBMD(char cmd)
     //Serial2.read();
     Serial1.read();
     SendDataToBMS(cmd);
-    delay(15);
+    // delay(15);
+    delay(5);
      
     req_sta=0;
     Init_Var();

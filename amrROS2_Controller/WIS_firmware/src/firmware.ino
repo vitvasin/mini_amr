@@ -109,9 +109,6 @@ ModbusMaster Ultrasonics_1;
 ModbusMaster Ultrasonics_2; 
 ModbusMaster Ultrasonics_3; 
 
-int LED = 13;        
-int LED_RUN = 32;    
-int LED_STATUS = 26; 
 int RS485_DE = 4;
 int RS485_RE = 5;
 
@@ -181,10 +178,19 @@ static uint8_t bms_index = 0;
 static unsigned long last_bms_request = 0;
 const unsigned int bms_request_interval = 1000; // every 1s
 
+// ---------------- LED status --------------------
+int LED = 13;        // LED status TeensyMicromod
+int LED_RUN = 32;    // G9 - Teensy pin 32, MicroMod pad 65
+int LED_STATUS = 26; // G8 - Teensy pin 26, MicroMod pad 67
+uint8_t led_mode_prev;
+uint8_t alarm_mode_prev;
+uint8_t alarm_mode = 0;
+uint8_t led_mode = 0;
+uint8_t range_limit = 100;  // 200 = 20cm
+
+
+
 // Latest BMS floats filled when valid packet received
-// extern float fBattVolt = 0;
-// extern float fBattCurrent = 0;
-// extern float fBattSOC = 0;
 uint8_t batt_status = 0;
 bool update_batt_ = false;
 
@@ -343,7 +349,7 @@ void poll_bms()
     // Step A: send request periodically
     if (millis() - last_bms_request >= bms_request_interval)
     {
-        SendDataToBMS(VOLT_AMP_CMD);     // already in your firmware
+        SendDataToBMS(VOLT_AMP_CMD);     
         last_bms_request = millis();
     }
 
@@ -483,8 +489,10 @@ void control_task(void *arg = nullptr)
 }
 
 // ---------------- Sensors --------------------
+
 void sensor_module_task()
 {
+    
     if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
         range_left = Ultrasonics_1.getResponseBuffer(0);
     if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
@@ -503,6 +511,50 @@ void sensor_module_task()
     pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
     
     range_ready = true;
+
+    bool A = (range_left < range_limit);
+    bool B = (range_center < range_limit);
+    bool C = (range_right < range_limit);
+
+    if (stop || emer_state || connection_failed)
+        A = B = C = true;
+
+    alarm_mode = (static_cast<uint8_t>(A) << 2) |
+                (static_cast<uint8_t>(B) << 1) |
+                (static_cast<uint8_t>(C));
+    
+    Sensor_module.writeSingleRegister(1, alarm_mode);
+
+    if (cmd_vel.linear_x == 0 && cmd_vel.angular_z == 0)
+        {
+            led_mode = 0;
+        }
+    else if (cmd_vel.linear_x != 0 && cmd_vel.angular_z == 0)
+        {
+            led_mode = 1;
+        }
+    else if (((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x < 0)))
+        {
+            led_mode = 2;
+        }
+    else if (((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x < 0)))
+        {
+            led_mode = 3;
+        }
+
+    if (led_mode != led_mode_prev)
+    {
+        if (DEBUG)
+            Serial.println(led_mode);
+        // Serial.println(led_mode);
+        Sensor_module.writeSingleRegister(2, led_mode);
+        delay(10);
+    }
+
+    led_mode_prev = led_mode;
+    alarm_mode_prev = alarm_mode;
+    A = B = C = false;   
+
 }
 
 // ---------------- Safety ---------------------
@@ -579,6 +631,7 @@ void setup()
 
     JY61P.startIIC();
     JY61P.caliIMU();
+    // sendTimer.begin(sendTimerISR, 20000);  // 20ms interval
 }
 
 // ---------------- Superloop ------------------

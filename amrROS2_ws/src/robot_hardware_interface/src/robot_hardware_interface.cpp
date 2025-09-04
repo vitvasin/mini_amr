@@ -210,6 +210,10 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     range_right  = r_right  / 1000.0f;   // meters
     range_center = r_center / 1000.0f;
     range_left   = r_left   / 1000.0f;
+    // Limit to 0.3 meters
+    if (range_right  > 0.2f) range_right  = 0.2f;
+    if (range_center > 0.2f) range_center = 0.2f;
+    if (range_left   > 0.2f) range_left   = 0.2f;
     update_range_ = true;
 
     // ----- Safety -----

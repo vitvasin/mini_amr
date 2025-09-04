@@ -59,7 +59,7 @@ public:
 
     ut_fov_       = 20.0;
     ut_min_range_ = 0.03;
-    ut_max_range_ = 0.10; // 10cm
+    ut_max_range_ = 0.20; // 10cm
 
     msg_range_left_.header.frame_id   = "left_ranger_link";
     msg_range_center_.header.frame_id = "center_ranger_link";

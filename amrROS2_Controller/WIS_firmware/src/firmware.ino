@@ -441,6 +441,68 @@ void bms_task()
 }
 
 // ---------------- ODOM/Control ---------------
+// void control_task(void *arg = nullptr)
+// {
+//     static bool emer_flag = false;
+
+//     // If command is stale, stop, or emergency condition → force zero cmd_vel
+//     if ((millis() - prev_cmd_time > 100) || stop || emer_state) {
+//         cmd_vel.linear_x = 0.0;
+//         cmd_vel.linear_y = 0.0;
+//         cmd_vel.angular_z = 0.0;
+//     }
+
+//     // Compute requested motor speeds (based on cmd_vel)
+//     Kinematics::rpm req_rpm = kinematics.getRPM(cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
+
+//     // 🔴 Emergency stop logic
+//     if (emer_state) {
+//         emer_flag = true;
+//         // Don’t send speed commands to motors while emergency active
+//         eMRCanSpeedCntrl(0, DIR_NEG, axis2);
+//         eMRCanSpeedCntrl(0, DIR_POS, axis1);
+//     } 
+//     else {
+//         // If we just came back from emergency, re-init motor driver
+//         if (emer_flag) {
+//             delay(100); 
+//             CANOpen_eMR_Init(); 
+//             delay(1000);
+//             emer_flag = false;
+//         }
+//         // Normal motor control
+//         eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+//         eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+//     }
+
+//     // 🔵 Always read odometry from motors, even in emergency
+//     // Right motor
+//     eMR.cobid = TSDO_COBID + axis1;
+//     CANOpen_ReadActualVelocityObj(&eMR);
+//     float current_rpm_right = eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
+
+//     // Left motor
+//     eMR.cobid = TSDO_COBID + axis2;
+//     CANOpen_ReadActualVelocityObj(&eMR);
+//     float current_rpm_left = eMR.ActualVelocity * (3.75 / 16384) * 1.578;
+
+//     // Convert to linear/angular velocities
+//     Kinematics::velocities current_vel = kinematics.getVelocities(current_rpm_left, current_rpm_right, 0, 0);
+
+//     // Pack into outgoing frame
+//     int16_t Vx = (int16_t)(current_vel.linear_x * 1000);
+//     int16_t Vy = (int16_t)(current_vel.linear_y * 1000);
+//     int16_t Wz = (int16_t)(current_vel.angular_z * 1000);
+
+//     pkg_data[_ODOM_VX_L] = Vx & 0xFF;
+//     pkg_data[_ODOM_VX_H] = (Vx >> 8) & 0xFF;
+//     pkg_data[_ODOM_VY_L] = Vy & 0xFF;
+//     pkg_data[_ODOM_VY_H] = (Vy >> 8) & 0xFF;
+//     pkg_data[_ODOM_WZ_L] = Wz & 0xFF;
+//     pkg_data[_ODOM_WZ_H] = (Wz >> 8) & 0xFF;
+
+//     odom_ready = true;
+// }
 void control_task(void *arg = nullptr)
 {
     static bool emer_flag = false;
@@ -454,14 +516,42 @@ void control_task(void *arg = nullptr)
 
     Kinematics::rpm req_rpm = kinematics.getRPM(cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
 
-    if (emer_state) { emer_flag = true; return; }
-    else if (emer_flag) {
-        // delay(1000); CANOpen_eMR_Init(); delay(3000);
-        emer_flag = false;
-    }
+    // if (emer_state) { emer_flag = true; return; }
+    // else if (emer_flag) {
+    //     delay(100); CANOpen_eMR_Init(); delay(1000);
+    //     emer_flag = false;
+    // }
 
-    eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
-    eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+    // eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+    // eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+
+    if (emer_state)
+    {
+        if (!emer_flag)
+        {
+            // Disable both motors (freewheel)
+            eMR.cobid = TSDO_COBID + axis1;
+            CANOpen_Shutdown(&eMR);
+            eMR.cobid = TSDO_COBID + axis2;
+            CANOpen_Shutdown(&eMR);
+
+            // Optional: stop sending velocity commands
+        }
+        emer_flag = true;
+    }
+    else
+    {
+        if (emer_flag)
+        {
+            // Re-init communication and re-enable torque on both drives
+            CANOpen_eMR_Init();
+            emer_flag = false;
+        }
+
+        // Normal: send target velocity
+        eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+        eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+    }
 
     // Right motor
     eMR.cobid = TSDO_COBID + axis1;
@@ -489,7 +579,79 @@ void control_task(void *arg = nullptr)
 }
 
 // ---------------- Sensors --------------------
+// void sensor_module_task()
+// {
+//     // round robin index: 0=Ultrasonic1, 1=Ultrasonic2, 2=Ultrasonic3, 3=Cliff
+//     static uint8_t sensor_index = 0;
 
+//     switch (sensor_index) {
+//         case 0:
+//             if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess) {
+//                 range_left = Ultrasonics_1.getResponseBuffer(0);
+//             }
+//             break;
+//         case 1:
+//             if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess) {
+//                 range_center = Ultrasonics_2.getResponseBuffer(0);
+//             }
+//             break;
+//         case 2:
+//             if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess) {
+//                 range_right = Ultrasonics_3.getResponseBuffer(0);
+//             }
+//             break;
+//         case 3:
+//             if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess) {
+//                 cliff = Sensor_module.getResponseBuffer(0);
+//             }
+//             break;
+//     }
+
+//     // Move to next sensor for next call
+//     sensor_index = (sensor_index + 1) % 4;
+
+//     // → Pack all known readings into pkg_data every time (even if only one updated)
+//     pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
+//     pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
+//     pkg_data[_RANGER_CENTER_L] = range_center & 0xFF;
+//     pkg_data[_RANGER_CENTER_H] = (range_center >> 8) & 0xFF;
+//     pkg_data[_RANGER_RIGHT_L]  = range_right & 0xFF;
+//     pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
+
+//     range_ready = true;
+
+//     // Obstacle detection logic
+//     bool A = (range_left   < range_limit);
+//     bool B = (range_center < range_limit);
+//     bool C = (range_right  < range_limit);
+
+//     if (stop || emer_state || connection_failed)
+//         A = B = C = true;
+
+//     alarm_mode = (static_cast<uint8_t>(A) << 2) |
+//                  (static_cast<uint8_t>(B) << 1) |
+//                  (static_cast<uint8_t>(C));
+
+//     // Update alarm to sensor module
+//     Sensor_module.writeSingleRegister(1, alarm_mode);
+
+//     // LED control logic (unchanged)
+//     if (cmd_vel.linear_x == 0 && cmd_vel.angular_z == 0)
+//         led_mode = 0;
+//     else if (cmd_vel.linear_x != 0 && cmd_vel.angular_z == 0)
+//         led_mode = 1;
+//     else if (((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x >= 0)) || 
+//              ((cmd_vel.angular_z >  0.05) && (cmd_vel.linear_x <  0)))
+//         led_mode = 2;
+//     else
+//         led_mode = 3;
+
+//     if (led_mode != led_mode_prev)
+//         Sensor_module.writeSingleRegister(2, led_mode);
+
+//     led_mode_prev = led_mode;
+//     alarm_mode_prev = alarm_mode;
+// }
 void sensor_module_task()
 {
     
@@ -501,7 +663,7 @@ void sensor_module_task()
         range_right = Ultrasonics_3.getResponseBuffer(0);
     if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
         cliff = Sensor_module.getResponseBuffer(0);
-
+    // range_center =1000;
 
     pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
     pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
@@ -548,7 +710,7 @@ void sensor_module_task()
             Serial.println(led_mode);
         // Serial.println(led_mode);
         Sensor_module.writeSingleRegister(2, led_mode);
-        delay(10);
+        // delay(10);
     }
 
     led_mode_prev = led_mode;

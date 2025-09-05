@@ -214,6 +214,12 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     if (range_right  > 0.2f) range_right  = 0.2f;
     if (range_center > 0.2f) range_center = 0.2f;
     if (range_left   > 0.2f) range_left   = 0.2f;
+    // std::cout << "range_center: " << range_center << std::endl;
+    // if (range_right  < 0.0f) range_right  = 0.0f;
+    // if (range_center < 0.0f) range_center = 0.0f;
+    // if (range_left   < 0.0f) range_left   = 0.0f;
+    
+    
     update_range_ = true;
 
     // ----- Safety -----

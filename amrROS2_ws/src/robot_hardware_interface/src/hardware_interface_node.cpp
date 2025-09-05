@@ -223,6 +223,8 @@ private:
       range_left_pub_  ->publish(msg_range_left_);
       range_center_pub_->publish(msg_range_center_);
       range_right_pub_ ->publish(msg_range_right_);
+      
+      // std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     }
     else if (hardware_interface->update_batt_)
     {

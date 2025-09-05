@@ -294,7 +294,8 @@ local_costmap:
       # plugins: ["voxel_layer", "inflation_layer"]
       #plugins: [ "inflation_layer"]
       #plugins: ["obstacle_layer", "inflation_layer"]
-      plugins: ["obstacle_layer", "inflation_layer","denoise_layer"]
+      #plugins: ["obstacle_layer", "inflation_layer","denoise_layer"]
+      plugins: ["obstacle_layer", "inflation_layer","denoise_layer","range_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -307,17 +308,29 @@ local_costmap:
           data_type: "LaserScan"
           raytrace_max_range: 3.0
           raytrace_min_range: 0.0
-          obstacle_max_range: 2.5
+          obstacle_max_range: 3.0
           obstacle_min_range: 0.0
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.3
+        inflation_radius: 0.4
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"
         enabled: true
         minimal_group_size: 2
         group_connectivity_type: 8
+      range_layer:
+        plugin: "nav2_costmap_2d::RangeSensorLayer"
+        enabled: true
+        topics: ["/range/left", "/range/center", "/range/right"]
+        phi: 1.2
+        inflate_cone: 1.0
+        no_readings_timeout: 0.5
+        clear_threshold: 0.2
+        mark_threshold: 0.8
+        clear_on_max_reading: True
+        input_sensor_type: "FIXED "
+
       # voxel_layer:
       #   plugin: "nav2_costmap_2d::VoxelLayer"
       #   enabled: True
@@ -354,7 +367,8 @@ global_costmap:
       footprint: '[ [0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22] ]'
       resolution: 0.05
       track_unknown_space: true
-      plugins: ["static_layer", "obstacle_layer", "inflation_layer","denoise_layer"]
+      # plugins: ["static_layer", "obstacle_layer", "inflation_layer","denoise_layer"]
+      plugins: ["static_layer", "obstacle_layer","denoise_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -372,10 +386,10 @@ global_costmap:
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
-      inflation_layer:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0
-        inflation_radius: 0.3
+      # inflation_layer:
+      #   plugin: "nav2_costmap_2d::InflationLayer"
+      #   cost_scaling_factor: 3.0
+      #   inflation_radius: 0.3
       always_send_full_costmap: True
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"
@@ -481,12 +495,13 @@ waypoint_follower:
   ros__parameters:
     loop_rate: 20
     stop_on_failure: false
+    retry_forever: true        # NEW, keep retrying same waypoint edit on waypoint_follower node
     action_server_result_timeout: 900.0
     waypoint_task_executor_plugin: "wait_at_waypoint"
     wait_at_waypoint:
       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
       enabled: True
-      waypoint_pause_duration: 100
+      waypoint_pause_duration: 200
 
 # velocity_smoother:
 #   ros__parameters:

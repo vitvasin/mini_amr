@@ -4,14 +4,76 @@
   recovery actions specific to planning / control as well as general system issues.
   This will be continuous if a kinematically valid planner is selected.
 -->
+
 <root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+  
+    <!-- Outer recovery node, never give up this waypoint -->
+    <RecoveryNode number_of_retries="-1" name="NavigateRecovery">
+      
+      <!-- Normal pipeline -->
+      <PipelineSequence name="NavigateOnce">
+      
+        <ControllerSelector selected_controller="{selected_controller}"
+                            default_controller="FollowPath"
+                            topic_name="controller_selector"/>
+        <PlannerSelector selected_planner="{selected_planner}"
+                         default_planner="GridBased"
+                         topic_name="planner_selector"/>
+                         
+        <!-- Planner Execution + Local Recovery -->
+        <RecoveryNode number_of_retries="-1" name="ComputePathToPose">
+          <ComputePathToPose goal="{goal}" path="{path}" 
+                             planner_id="{selected_planner}"
+                             error_code_id="{compute_path_error_code}"/>
+          <Sequence>
+            <WouldAPlannerRecoveryHelp error_code="{compute_path_error_code}"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Context"
+                                service_name="global_costmap/clear_entirely_global_costmap"/>
+          </Sequence>
+        </RecoveryNode>
+        
+        <!-- Controller Execution + Local Recovery -->
+        <RecoveryNode number_of_retries="-1" name="FollowPath">
+          <FollowPath path="{path}" controller_id="{selected_controller}"
+                      error_code_id="{follow_path_error_code}"/>
+          <Sequence>
+            <WouldAControllerRecoveryHelp error_code="{follow_path_error_code}"/>
+            <ClearEntireCostmap name="ClearLocalCostmap-Context"
+                                service_name="local_costmap/clear_entirely_local_costmap"/>
+          </Sequence>
+        </RecoveryNode>
+        
+      </PipelineSequence>
+      
+      <!-- Global Recovery Loop, repeats forever if still stuck -->
+      <ReactiveFallback name="RecoveryFallback">
+        <GoalUpdated/>
+        <RoundRobin name="RecoveryActions">
+          <Sequence name="ClearingActions">
+            <ClearEntireCostmap name="ClearLocalCostmap-Subtree"
+                                service_name="local_costmap/clear_entirely_local_costmap"/>
+            <ClearEntireCostmap name="ClearGlobalCostmap-Subtree"
+                                service_name="global_costmap/clear_entirely_global_costmap"/>
+          </Sequence>
+          <Wait wait_duration="3.0"/>
+          <!-- You can re‑enable backup/spin if you want additional chances -->
+          <!-- <BackUp backup_dist="0.30" backup_speed="0.15" server_timeout="10"/> -->
+          <!-- <Spin spin_dist="1.57" server_name="spin" server_timeout="10"/> -->
+        </RoundRobin>
+      </ReactiveFallback>
+      
+    </RecoveryNode>
+  </BehaviorTree>
+</root>
+<!-- <root BTCPP_format="4" main_tree_to_execute="MainTree">
   <BehaviorTree ID="MainTree">
     <RecoveryNode number_of_retries="-1" name="NavigateRecovery">
       <PipelineSequence name="NavigateWithReplanning">
         <ControllerSelector selected_controller="{selected_controller}" default_controller="FollowPath" topic_name="controller_selector"/>
         <PlannerSelector selected_planner="{selected_planner}" default_planner="GridBased" topic_name="planner_selector"/>
         <RateController hz="1.0">
-          <RecoveryNode number_of_retries="1" name="ComputePathToPose">
+          <RecoveryNode number_of_retries="-1" name="ComputePathToPose">
             <ComputePathToPose goal="{goal}" path="{path}" planner_id="{selected_planner}" error_code_id="{compute_path_error_code}"/>
             <Sequence>
               <WouldAPlannerRecoveryHelp error_code="{compute_path_error_code}"/>
@@ -19,7 +81,7 @@
             </Sequence>
           </RecoveryNode>
         </RateController>
-        <RecoveryNode number_of_retries="1" name="FollowPath">
+        <RecoveryNode number_of_retries="-1" name="FollowPath">
           <FollowPath path="{path}" controller_id="{selected_controller}" error_code_id="{follow_path_error_code}"/>
           <Sequence>
             <WouldAControllerRecoveryHelp error_code="{follow_path_error_code}"/>
@@ -47,4 +109,4 @@
       </Sequence>
     </RecoveryNode>
   </BehaviorTree>
-</root>
+</root> -->

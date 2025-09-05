@@ -149,6 +149,23 @@ bool odom_ready;
 bool batt_ready;
 bool range_ready;
 
+// Latest BMS floats filled when valid packet received
+
+uint8_t batt_status = 0;
+bool update_batt_ = false;
+// --- BMS state machine ---
+static uint8_t bms_buf[50];
+static uint8_t bms_index = 0;
+static unsigned long last_bms_request = 0;
+const unsigned int bms_request_interval = 1000; // every 1s
+
+// --- Non-blocking parser state ---
+#define RX_BUFFER_MAX 128
+
+static uint8_t rx_buffer[RX_BUFFER_MAX];
+static uint8_t rx_index = 0;
+static uint8_t rx_expected_length = 0;
+
 Kinematics kinematics(
     Kinematics::SMR_BASE,
     MOTOR_MAX_RPM,
@@ -169,7 +186,7 @@ unsigned long prev_cmd_time = 0;
 unsigned long master_time = 0, imu_update_time = 0, control_update_time = 0, bms_update_time = 0, sensor_update_time;
 unsigned long safety_time = 0, send_data_time = 0, receive_data_time = 0;
 //const unsigned int imu_interval = 45, control_interval = 30, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 30, receive_data_interval;
-const unsigned int imu_interval = 45, control_interval = 20, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 50, receive_data_interval;
+const unsigned int imu_interval = 40, control_interval = 10, bms_interval = 1000, sensor_interval = 50, safety_interval = 50, send_data_interval = 50, receive_data_interval;
 
 unsigned char pkg_data[_PKG_LEN];
 
@@ -217,104 +234,169 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 }
 
 // void recive_data_task(void *parameter)
-void receive_data_task()
+// void receive_data_task()
+// {
+
+//     uint8_t header;
+//     uint8_t device_id;
+//     uint8_t len;
+//     uint8_t func;
+//     uint8_t data_len;
+//     uint8_t data_to_mem = 0;
+//     uint8_t value;
+//     uint8_t rx_check_num;
+//     uint8_t check_sum;
+
+//     // Use stack-allocated buffers to avoid dynamic allocation in the hot receive loop
+//     uint8_t data[RX_BUF_SIZE];
+
+//     while (Serial.available() > 0)
+//     {
+
+//         header = Serial.read();
+
+//         if (header == HEAD)
+//         {
+//             if (DEBUG_RECEIVE)
+//             {
+//                 Serial5.println("--------------New Data--------------");
+//                 Serial5.println("Correct header");
+//             }
+//             device_id = Serial.read();
+
+//             if (device_id == DEVICE_ID)
+//             {
+
+//                 len = Serial.read();
+//                 func = Serial.read();
+
+//                 check_sum = header + device_id + len + func;
+//                 data_len = len - 4;
+//                 data_to_mem = data_len;
+//                 memset(data, 0, RX_BUF_SIZE);
+
+//                 while (data_to_mem > 0)
+//                 {
+//                     uint8_t index = data_len - data_to_mem;
+//                     data[index] = Serial.read();
+//                     check_sum += data[index];
+
+//                     data_to_mem--;
+//                 }
+
+//                 rx_check_num = Serial.read();
+
+//                 if ((check_sum & 0xFF) == rx_check_num)
+//                 {
+//                     if (DEBUG_RECEIVE)
+//                     {
+//                         Serial5.println("Data Recived");
+//                     }
+//                     threads.delay(1);
+//                     parse_data(func, data, data_len);
+//                 }
+//                 else
+//                 {
+//                     if (DEBUG_RECEIVE)
+//                     {
+//                         Serial5.println("Check sum error");
+//                     }
+//                 }
+
+//                 if (DEBUG_RECEIVE)
+//                 {
+//                     Serial5.print("Device_id:  ");
+//                     Serial5.println(device_id);
+//                     Serial5.print("Data_range:  ");
+//                     Serial5.println(len);
+//                     Serial5.print("Function:  ");
+//                     Serial5.println(func);
+//                     for (uint8_t i = 0; i < data_len; i++)
+//                     {
+//                         Serial5.print("Data ");
+//                         Serial5.print(i);
+//                         Serial5.print(": ");
+//                         Serial5.println(data[i]);
+//                     }
+//                     Serial5.print("Rx_check:  ");
+//                     Serial5.println(rx_check_num);
+//                     Serial5.print("Check sum:  ");
+//                     Serial5.println(check_sum & 0xFF);
+//                 }
+//             }
+//         }
+//     }
+//     // threads.delay(25);
+//     //}
+//     // no dynamic memory to free
+    
+// }
+
+void receive_data_task(void *parameter = nullptr)
 {
-
-    uint8_t header;
-    uint8_t device_id;
-    uint8_t len;
-    uint8_t func;
-    uint8_t data_len;
-    uint8_t data_to_mem = 0;
-    uint8_t value;
-    uint8_t rx_check_num;
-    uint8_t check_sum;
-
-    // Use stack-allocated buffers to avoid dynamic allocation in the hot receive loop
-    uint8_t data[RX_BUF_SIZE];
-
+    // Read all available bytes from UART
     while (Serial.available() > 0)
     {
+        uint8_t byte_in = Serial.read();
 
-        header = Serial.read();
-
-        if (header == HEAD)
+        // Step 1: header check
+        if (rx_index == 0)
         {
-            if (DEBUG_RECEIVE)
+            if (byte_in == HEAD)
             {
-                Serial5.println("--------------New Data--------------");
-                Serial5.println("Correct header");
+                rx_buffer[rx_index++] = byte_in;
             }
-            device_id = Serial.read();
+            // else ignore garbage
+        }
+        else
+        {
+            rx_buffer[rx_index++] = byte_in;
 
-            if (device_id == DEVICE_ID)
+            // Step 2: determine expected length
+            if (rx_index == 3) // got HEAD + device_id + len
             {
-
-                len = Serial.read();
-                func = Serial.read();
-
-                check_sum = header + device_id + len + func;
-                data_len = len - 4;
-                data_to_mem = data_len;
-                memset(data, 0, RX_BUF_SIZE);
-
-                while (data_to_mem > 0)
+                rx_expected_length = rx_buffer[2]; // len from packet
+                if (rx_expected_length > RX_BUFFER_MAX)
                 {
-                    uint8_t index = data_len - data_to_mem;
-                    data[index] = Serial.read();
-                    check_sum += data[index];
-
-                    data_to_mem--;
+                    // reset if bogus length
+                    rx_index = 0;
                 }
+            }
 
-                rx_check_num = Serial.read();
+            // Step 3: check if full frame received
+            if (rx_expected_length > 0 && rx_index == (rx_expected_length + 1)) // +1 for HEAD
+            {
+                // Got a full frame!
+                uint8_t checksum = 0;
+                for (uint8_t i = 0; i < rx_index - 1; i++) checksum += rx_buffer[i];
+                checksum &= 0xFF;
+                uint8_t rx_checksum = rx_buffer[rx_index - 1];
 
-                if ((check_sum & 0xFF) == rx_check_num)
+                if (checksum == rx_checksum)
                 {
-                    if (DEBUG_RECEIVE)
+                    uint8_t device_id = rx_buffer[1];
+                    if (device_id == DEVICE_ID)
                     {
-                        Serial5.println("Data Recived");
+                        uint8_t func = rx_buffer[3];
+                        uint8_t data_len = rx_expected_length - 4; // exclude header, dev, len, func
+                        uint8_t *data = &rx_buffer[4];
+
+                        if (DEBUG_RECEIVE) Serial5.println("Frame OK");
+                        parse_data(func, data, data_len);
                     }
-                    threads.delay(1);
-                    parse_data(func, data, data_len);
                 }
                 else
                 {
-                    if (DEBUG_RECEIVE)
-                    {
-                        Serial5.println("Check sum error");
-                    }
+                    if (DEBUG_RECEIVE) Serial5.println("Checksum fail");
                 }
 
-                if (DEBUG_RECEIVE)
-                {
-                    Serial5.print("Device_id:  ");
-                    Serial5.println(device_id);
-                    Serial5.print("Data_range:  ");
-                    Serial5.println(len);
-                    Serial5.print("Function:  ");
-                    Serial5.println(func);
-                    for (uint8_t i = 0; i < data_len; i++)
-                    {
-                        Serial5.print("Data ");
-                        Serial5.print(i);
-                        Serial5.print(": ");
-                        Serial5.println(data[i]);
-                    }
-                    Serial5.print("Rx_check:  ");
-                    Serial5.println(rx_check_num);
-                    Serial5.print("Check sum:  ");
-                    Serial5.println(check_sum & 0xFF);
-                }
+                // Reset for next frame
+                rx_index = 0;
+                rx_expected_length = 0;
             }
         }
     }
-    // threads.delay(25);
-    //}
-    // no dynamic memory to free
-    
 }
-
 void send_data_task()
 {
     //memset(pkg_data, 0, sizeof(pkg_data));
@@ -394,25 +476,123 @@ void imu_update_task()
     // uint32_t dt = end_time - start_time;
 }
 
+// ---------------- BMS Task -------------------
+void poll_bms()
+{
+    // Step A: send request periodically
+    if (millis() - last_bms_request >= bms_request_interval)
+    {
+        SendDataToBMS(VOLT_AMP_CMD);     
+        last_bms_request = millis();
+    }
+
+    // Step B: accumulate incoming bytes
+    while (BMS_SERIAL.available())
+    {
+        uint8_t c = BMS_SERIAL.read();
+        if (bms_index < sizeof(bms_buf))
+        {
+            bms_buf[bms_index++] = c;
+        }
+
+        // Simple heuristic: check minimum length for packet
+        if (bms_index >= 13) // enough for 0x90 packet
+        {
+            // calculate checksum
+            uint8_t chk = calChecksum((char*)bms_buf, bms_index-1);
+            if (chk == bms_buf[bms_index-1])
+            {
+                // ✅ Parse packet now
+                parse_bms_packet(bms_buf, bms_index);
+                bms_index = 0; // reset buffer
+            }
+            else if (bms_index >= 50) {
+                // overflow / invalid packet -> reset
+                bms_index = 0;
+            }
+        }
+    }
+}
+
+void parse_bms_packet(uint8_t *Buf, uint8_t len)
+{
+    if (Buf[2] == 0x90) // voltage/current/SOC frame
+    {
+        unsigned int BattVolt = ((unsigned)Buf[4]<<8) | Buf[5];
+        fBattVolt = BattVolt * 0.1f;
+
+        int BattCurrent = ((int)Buf[8]<<8) | Buf[9];
+        fBattCurrent = (BattCurrent - 30000) * 0.1f;
+
+        unsigned int BattSOC = ((unsigned)Buf[10]<<8) | Buf[11];
+        fBattSOC = BattSOC * 0.1f;
+
+        // Determine status
+        if (fBattSOC >= 100.0) batt_status = 4;  // full
+        else if (fBattCurrent > 0) batt_status = 1; // charging
+        else if (fBattCurrent < 0) batt_status = 2; // discharging
+        else batt_status = 0; // unknown
+
+        update_batt_ = true;
+    }
+    else if (Buf[2] == 0x93) // info frame
+    {
+        uint8_t ChargeStatus = Buf[4];
+        uint8_t BmsLife = Buf[7];
+        uint32_t BattCap = (Buf[8]<<24) | (Buf[9]<<16) | (Buf[10]<<8) | Buf[11];
+        // store / log if you want
+        update_batt_ = true;
+    }
+}
+
+// void bms_task()
+// {
+//     int16_t voltage = 0, current = 0, percentage = 0;
+//     uint8_t batt_status = 0;
+
+//     if (RequestDataFromBMD(VOLT_AMP_CMD) == 1)
+//     {
+//         voltage = static_cast<int16_t>(fBattVolt * 100);
+//         current = static_cast<int16_t>(fBattCurrent * 100);
+//         percentage = static_cast<int16_t>(fBattSOC * 100);
+
+//         if (fBattSOC >= 100)
+//             batt_status = 4; // FULL
+//         else if (fBattCurrent > 0)
+//             batt_status = 1; // CHARGIGN
+//         else if (fBattCurrent < 0)
+//             batt_status = 2; // DISCHARGIGN
+//         else
+//             batt_status = 0; // UNKNOWN
+
+//         pkg_data[_BMS_VOLTAGE_L] = static_cast<uint8_t>(voltage & 0xFF);
+//         pkg_data[_BMS_VOLTAGE_H] = static_cast<uint8_t>((voltage >> 8) & 0xFF);
+//         pkg_data[_BMS_CURRENT_L] = static_cast<uint8_t>(current & 0xFF);
+//         pkg_data[_BMS_CURRENT_H] = static_cast<uint8_t>((current >> 8) & 0xFF);
+//         pkg_data[_BMS_PERCENT_L] = static_cast<uint8_t>(percentage & 0xFF);
+//         pkg_data[_BMS_PERCENT_H] = static_cast<uint8_t>((percentage >> 8) & 0xFF);
+//         pkg_data[_BMS_STATUS_] = static_cast<uint8_t>(batt_status & 0xFF);
+//         //pkg_data[_BMS_READY_] = 1;
+
+//         // Serial5.printf("voltage    : %d\n", voltage);
+//         // Serial5.printf("current    : %d\n", current);
+//         // Serial5.printf("percentage : %d\n", percentage);
+//     }
+//     //threads.delay(5);
+// }
+
+// ---------------- BMS Task -------------------
 void bms_task()
 {
-    int16_t voltage = 0, current = 0, percentage = 0;
-    uint8_t batt_status = 0;
+    // Step A: poll non-blocking reader
+    poll_bms();
 
-    if (RequestDataFromBMD(VOLT_AMP_CMD) == 1)
+    // Step B: if new packet parsed, update pkg_data
+    if (update_batt_)
     {
-        voltage = static_cast<int16_t>(fBattVolt * 100);
-        current = static_cast<int16_t>(fBattCurrent * 100);
-        percentage = static_cast<int16_t>(fBattSOC * 100);
-
-        if (fBattSOC >= 100)
-            batt_status = 4; // FULL
-        else if (fBattCurrent > 0)
-            batt_status = 1; // CHARGIGN
-        else if (fBattCurrent < 0)
-            batt_status = 2; // DISCHARGIGN
-        else
-            batt_status = 0; // UNKNOWN
+        int16_t voltage    = (int16_t)(fBattVolt * 100);     // scale to centivolts
+        int16_t current    = (int16_t)(fBattCurrent * 100);  // scale to centiamps
+        int16_t percentage = (int16_t)(fBattSOC * 100);      // scale to centi%
 
         pkg_data[_BMS_VOLTAGE_L] = static_cast<uint8_t>(voltage & 0xFF);
         pkg_data[_BMS_VOLTAGE_H] = static_cast<uint8_t>((voltage >> 8) & 0xFF);
@@ -421,13 +601,9 @@ void bms_task()
         pkg_data[_BMS_PERCENT_L] = static_cast<uint8_t>(percentage & 0xFF);
         pkg_data[_BMS_PERCENT_H] = static_cast<uint8_t>((percentage >> 8) & 0xFF);
         pkg_data[_BMS_STATUS_] = static_cast<uint8_t>(batt_status & 0xFF);
-        //pkg_data[_BMS_READY_] = 1;
 
-        // Serial5.printf("voltage    : %d\n", voltage);
-        // Serial5.printf("current    : %d\n", current);
-        // Serial5.printf("percentage : %d\n", percentage);
+        update_batt_ = false; // clear flag until next packet
     }
-    //threads.delay(5);
 }
 
 void control_task()
@@ -697,7 +873,7 @@ void setup()
     mcp.digitalWrite(7, HIGH);
     delay(3000);
     //-------------
-    Serial.begin(115200);
+    Serial.begin(460800);
 
     Serial5.begin(115200);
 

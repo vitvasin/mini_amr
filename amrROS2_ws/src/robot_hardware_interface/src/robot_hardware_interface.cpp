@@ -5,7 +5,7 @@ HardwareInterface::HardwareInterface(const std::string& port) : port_name(port),
     try {
         // Open the serial port
         serial_port.Open(port_name);
-        serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_115200);
+        serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_460800);
         std::cout << "Serial port opened at port "<< port_name << " with baudrate 115200" << std::endl;
     }
     catch (const std::exception& e) {

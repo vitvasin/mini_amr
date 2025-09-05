@@ -39,7 +39,7 @@ public:
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
 
     //timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
-    timer_update_data_ = create_wall_timer(20ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";

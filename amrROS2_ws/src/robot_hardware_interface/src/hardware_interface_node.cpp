@@ -144,7 +144,7 @@ private:
       msg_odom_.header.stamp = current_time;
 
       uint64_t dt = current_time.nanoseconds() - prev_update_;
-      double dt_seconds = static_cast<double>(dt) / 1000000000.0f;
+      double dt_seconds = static_cast<double>(dt) / 1.0e9;
 
       double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z) * dt_seconds; // radians
       double cos_h = cos(heading_);
@@ -177,12 +177,12 @@ private:
 
       prev_update_ = current_time.nanoseconds();
     }
-    else if (hardware_interface->update_imu_)
+    if (hardware_interface->update_imu_)
     {
       msg_imu_.header.stamp = current_time;
 
       uint64_t dt = current_time.nanoseconds() - imu_prev_update_;
-      double dt_seconds = static_cast<double>(dt) / 1000000000.0;
+      double dt_seconds = static_cast<double>(dt) /  1.0e9;
 
       double imu_delta_z = static_cast<double>(hardware_interface->angular_velocity.z) * dt_seconds;
       yaw_ += imu_delta_z;
@@ -208,7 +208,7 @@ private:
 
       imu_prev_update_ = current_time.nanoseconds();
     }
-    else if (hardware_interface->update_range_)
+    if (hardware_interface->update_range_)
     {
       msg_range_left_.header.stamp   = current_time;
       msg_range_center_.header.stamp = current_time;
@@ -226,7 +226,7 @@ private:
       
       // std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     }
-    else if (hardware_interface->update_batt_)
+    if (hardware_interface->update_batt_)
     {
       msg_batt_.voltage = hardware_interface->voltage_;
       msg_batt_.current = hardware_interface->current_;

@@ -13,6 +13,7 @@
 #include "JY61P.h"
 #include "motor_driver.cpp"
 #include "bms.h"
+// #include "can_driver.h"
 
 // ---------------- Debug Flags ----------------
 #define DEBUG false
@@ -503,9 +504,12 @@ void bms_task()
 
 //     odom_ready = true;
 // }
+
 void control_task(void *arg = nullptr)
 {
     static bool emer_flag = false;
+    // float current_rpm_left = 0.0;
+    // float current_rpm_right = 0.0;
 
     if ((millis() - prev_cmd_time > 100) || stop || emer_state)
     {
@@ -530,10 +534,10 @@ void control_task(void *arg = nullptr)
         if (!emer_flag)
         {
             // Disable both motors (freewheel)
-            eMR.cobid = TSDO_COBID + axis1;
-            CANOpen_Shutdown(&eMR);
-            eMR.cobid = TSDO_COBID + axis2;
-            CANOpen_Shutdown(&eMR);
+            // eMR.cobid = TSDO_COBID + axis1;
+            // CANOpen_Shutdown(&eMR);
+            // eMR.cobid = TSDO_COBID + axis2;
+            // CANOpen_Shutdown(&eMR);
 
             // Optional: stop sending velocity commands
         }
@@ -544,13 +548,21 @@ void control_task(void *arg = nullptr)
         if (emer_flag)
         {
             // Re-init communication and re-enable torque on both drives
+            
             CANOpen_eMR_Init();
+            eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
+            eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
+            // delay(3000);
             emer_flag = false;
-        }
-
+        }else
+        {
         // Normal: send target velocity
         eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
         eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+
+        }
+
+
     }
 
     // Right motor
@@ -563,11 +575,44 @@ void control_task(void *arg = nullptr)
     CANOpen_ReadActualVelocityObj(&eMR);
     float current_rpm_left = eMR.ActualVelocity * (3.75 / 16384) * 1.578;
 
+    current_rpm_left = round(current_rpm_left * 100.0) / 100.0;
+    current_rpm_right = round(current_rpm_right * 100.0) / 100.0;
+
+    // eMR_ReadActualVelocity2();  
+
+    // current_rpm_right = v.velocity1;
+    // current_rpm_left = -1*v.velocity2;
+
     Kinematics::velocities current_vel = kinematics.getVelocities(current_rpm_left, current_rpm_right, 0, 0);
 
-    int16_t Vx = (int16_t)(current_vel.linear_x * 1000);
-    int16_t Vy = (int16_t)(current_vel.linear_y * 1000);
-    int16_t Wz = (int16_t)(current_vel.angular_z * 1000);
+    // int16_t Vx = (int16_t)(current_vel.linear_x * 1000);
+    // int16_t Vy = (int16_t)(current_vel.linear_y * 1000);
+    // int16_t Wz = (int16_t)(current_vel.angular_z * 1000);
+
+    //for debug
+    // int16_t Vx = (int16_t)(current_rpm_right);
+    // int16_t Vy = (int16_t)(current_rpm_left);
+    // int16_t Wz = (int16_t)(current_vel.angular_z);
+
+    float rounded_vx = round(current_vel.linear_x * 100.0) / 100.0;
+    float rounded_vy = round(current_vel.linear_y * 100.0) / 100.0;
+    float rounded_wz = round(current_vel.angular_z * 100.0) / 100.0;
+
+    // int16_t Vx = (int16_t)(rounded_vx * 1000);
+    // int16_t Vy = (int16_t)(rounded_vy * 1000);
+    // int16_t Wz = (int16_t)(rounded_wz * 1000);
+
+    auto clamp16 = [](float x) -> int16_t {
+    if (x > 32.767f) return 32767;
+    if (x < -32.768f) return -32768;
+    return (int16_t)(x * 1000);
+};
+
+    int16_t Vx = clamp16(rounded_vx);
+    int16_t Vy = clamp16(rounded_vy);
+    int16_t Wz = clamp16(rounded_wz);
+
+        
 
     pkg_data[_ODOM_VX_L] = Vx & 0xFF;
     pkg_data[_ODOM_VX_H] = (Vx >> 8) & 0xFF;
@@ -577,7 +622,140 @@ void control_task(void *arg = nullptr)
     pkg_data[_ODOM_WZ_H] = (Wz >> 8) & 0xFF;
     odom_ready = true;
 }
+// void control_task()
+// {
+//     static bool emer_flag = true;
 
+//     const float K = 0.5;
+
+//     uint64_t start_time = millis();
+//     uint8_t result;
+//     int16_t buff;
+//     float current_rpm_left = 0.0;
+//     float current_rpm_right = 0.0;
+//     static uint32_t LedControl = millis();
+
+//     if ((millis() - prev_cmd_time > 200) || stop || emer_state)
+//     {
+//         cmd_vel.linear_x = 0.0;
+//         cmd_vel.linear_y = 0.0;
+//         cmd_vel.angular_z = 0.0;
+//         //digitalWrite(LED_STATUS, 0);
+//     }
+//     else
+//     {
+//         if ((millis() - LedControl) > 500)
+//         {
+//             digitalWrite(LED_STATUS, !digitalRead(LED_STATUS)); // For control task
+//             // Serial5.printf("ROS comm start.\n");
+//             LedControl = millis();
+//         }
+//     }
+
+//     //Serial5.printf("Time usege1 : %d\n", millis() - start_time);
+
+//     //-------- Calculate smooth velocity -------------
+
+//     // vel.linear_x = K * vel_old.linear_x + (1 - K) * cmd_vel.linear_x;
+//     // vel.linear_y = K * vel_old.linear_y + (1 - K) * cmd_vel.linear_y;
+
+//     // vel_old.linear_x = vel.linear_x;
+//     // vel_old.linear_y = vel.linear_y;
+//     //-----------------------------------------------
+
+//     Kinematics::rpm req_rpm = kinematics.getRPM(
+//         cmd_vel.linear_x,
+//         cmd_vel.linear_y,
+//         // vel.linear_x, 
+//         // vel.linear_y,
+//         cmd_vel.angular_z);
+
+    
+//     if (emer_state)
+//     {
+//         if(!emer_flag)
+//         {
+//             //eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
+//             // for (int i = 0; i < sizeof(pkg_data); i++)
+//             // {
+//             //     pkg_data[i] = 0;
+//             // }
+//         }
+//         emer_flag = true;
+//         // Serial.println("Emer ON");
+        
+//     }
+//     else
+//     {
+
+//         if (emer_flag)
+//         {
+//             // Serial.println("Emer OFF");
+//             eMR_CANOpen_Init();
+//             eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
+//             // Serial.println("eMR CANopen Init. eMR motor ");
+//             delay(3000);
+//             emer_flag = false;
+//         }
+//         else
+//         {
+//             float percentPWM1 = 0.0, percentPWM2 = 0.0;
+
+            
+
+//             //------------- Calculate & Set Target RPM ----------
+//             //percentPWM1 = req_rpm.motor1 * 100 / MaxVelocity;
+//             //percentPWM2 = req_rpm.motor2 * 100 / MaxVelocity;
+//             percentPWM1 = req_rpm.motor1 * 100 / MOTOR_MAX_RPM;
+//             percentPWM2 = req_rpm.motor2 * 100 / MOTOR_MAX_RPM;
+
+//             //Serial5.printf("req_rpm.motor1: %f -- req_rpm.motor1: %f -- percentPWM1: %f -- percentPWM2: %f\n", req_rpm.motor1 , req_rpm.motor2, percentPWM1, percentPWM2);
+
+//             // eMR_SetTargetVelocity(percentPWM1, DIR_POS, percentPWM2, DIR_NEG);
+//             eMR_SetTargetVelocity(percentPWM2, DIR_NEG, percentPWM1, DIR_POS);
+//         }
+//     }
+
+
+//     //------------  Get Current RPM --------------------
+//     eMR_ReadActualVelocity2();
+
+//     current_rpm_right = v.velocity1/30;
+//     current_rpm_left = -1*v.velocity2 /30;
+
+//     Kinematics::velocities current_vel = kinematics.getVelocities(
+//         current_rpm_left,
+//         current_rpm_right,
+//         0,
+//         0);
+
+//     // Serial5.print("Actual RPM1 : ");
+//     // Serial5.print(current_rpm_right);
+//     // Serial5.print("   ");
+//     // Serial5.print("Actual RPM2 : ");
+//     // Serial5.print(current_rpm_left);
+
+//     // Serial5.print("   ");
+//     // Serial5.print("Vel_x: ");
+//     // Serial5.print(current_vel.linear_x);
+//     // Serial5.print("   ");
+//     // Serial5.print("ang_z: ");
+//     // Serial5.println(current_vel.angular_z);
+
+//     int16_t Vx = static_cast<int16_t>(current_vel.linear_x * 1000);
+//     int16_t Vy = static_cast<int16_t>(current_vel.linear_y * 1000);
+//     int16_t Wz = static_cast<int16_t>(current_vel.angular_z * 1000);
+
+//     pkg_data[_ODOM_VX_L] = Vx & 0xFF;
+//     pkg_data[_ODOM_VX_H] = (Vx >> 8) & 0xFF;
+//     pkg_data[_ODOM_VY_L] = Vy & 0xFF;
+//     pkg_data[_ODOM_VY_H] = (Vy >> 8) & 0xFF;
+//     pkg_data[_ODOM_WZ_L] = Wz & 0xFF;
+//     pkg_data[_ODOM_WZ_H] = (Wz >> 8) & 0xFF;
+//     odom_ready = true;
+//     //pkg_data[_ODOM_READY_] = 1;
+    
+// }
 // ---------------- Sensors --------------------
 // void sensor_module_task()
 // {
@@ -655,22 +833,28 @@ void control_task(void *arg = nullptr)
 void sensor_module_task()
 {
     
-    if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
-        range_left = Ultrasonics_1.getResponseBuffer(0);
-    if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
-        range_center = Ultrasonics_2.getResponseBuffer(0);
-    if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
-        range_right = Ultrasonics_3.getResponseBuffer(0);
+    // if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
+    //     range_left = Ultrasonics_1.getResponseBuffer(0);
+    // if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
+    //     range_center = Ultrasonics_2.getResponseBuffer(0);
+    // if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
+    //     range_right = Ultrasonics_3.getResponseBuffer(0);
     if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
         cliff = Sensor_module.getResponseBuffer(0);
     // range_center =1000;
 
-    pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
-    pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
-    pkg_data[_RANGER_CENTER_L] = range_center & 0xFF;
-    pkg_data[_RANGER_CENTER_H] = (range_center >> 8) & 0xFF;
-    pkg_data[_RANGER_RIGHT_L]  = range_right & 0xFF;
-    pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
+    // pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
+    // pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
+    // pkg_data[_RANGER_CENTER_L] = range_center & 0xFF;
+    // pkg_data[_RANGER_CENTER_H] = (range_center >> 8) & 0xFF;
+    // pkg_data[_RANGER_RIGHT_L]  = range_right & 0xFF;
+    // pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
+    pkg_data[_RANGER_LEFT_L]   = 300 & 0xFF;
+    pkg_data[_RANGER_LEFT_H]   = (300 >> 8) & 0xFF;
+    pkg_data[_RANGER_CENTER_L] = 300 & 0xFF;
+    pkg_data[_RANGER_CENTER_H] = (300 >> 8) & 0xFF;
+    pkg_data[_RANGER_RIGHT_L]  = 300 & 0xFF;
+    pkg_data[_RANGER_RIGHT_H]  = (300 >> 8) & 0xFF;
     
     range_ready = true;
 
@@ -782,6 +966,15 @@ void setup()
     can1.setMBFilter(ACCEPT_ALL);
     can1.distribute();
     CANOpen_eMR_Init();
+    
+
+    // //-----------  CAN Init ----------------------
+    // v.velocity1 = 0;
+    // v.velocity2 = 0;
+
+    // eMR_CANOpen_Begin();
+    // eMR_CANOpen_Init();
+    // eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
 
     SENSORS_SERIAL.begin(115200);
     Ultrasonics_1.begin(1, ULTARSONICS_SERIAL);

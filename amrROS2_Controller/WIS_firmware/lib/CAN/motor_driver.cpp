@@ -31,6 +31,7 @@
 #define RPDO2_COBID               0x280     
 #define RPDO3_COBID               0x380     
 #define RPDO4_COBID               0x480     
+#define SYNC_COBID                0x080
 
 #define SDO_Expedited_1           0x2F
 #define SDO_Expedited_2           0x2B
@@ -140,9 +141,10 @@ typedef struct eMR_s {
   int32_t ActualVelocity;
   int32_t ActualPosition;
   int32_t ActualTorque;
-  int32_t StatusWord;
-  int32_t ControlWord;
-
+  // int32_t StatusWord;
+  // int32_t ControlWord;
+  uint16_t StatusWord;      // <-- FIXED (was int32_t)
+  uint16_t ControlWord;     // <-- also 16-bit in CiA402
 
 } eMR_t;
 
@@ -155,6 +157,12 @@ CAN_message_t revPACKET;
 eMR_t eMR; 
 uint16_t count = 0;
 
+typedef struct velocity_s{
+    int32_t velocity1;
+    int32_t velocity2;
+}velocity_t;
+
+velocity_t v;
 // int LED = 13;                 // LED status TeensyMicromod
 // int LED_RUN = 32;             // G9 - Teensy pin 32, MicroMod pad 65
 // int LED_STATUS = 26;          // G8 - Teensy pin 26, MicroMod pad 67
@@ -332,55 +340,137 @@ uint8_t CANOpen_SetOperationMode(eMR_t *eMR)
 
   return CAN1_SendFrame(node_id,DLC, data);                               // Test DLC = 6?
 }
+
 uint8_t CANOpen_ReadStatusObj(eMR_t *eMR)
 {
-  uint8_t data[8];
-  uint32_t node_id;
-  int32_t Statusword = 0;
+    uint8_t data[8];
+    uint32_t node_id;
+    node_id = eMR->cobid;
 
-  node_id = eMR->cobid;
-  data[0] = RSDO_Expedited_4;                                 // SDO <CMD>            Byte0
-  data[1] = (uint8_t)(Statusword_Obj & 0xFF);                 // SDO <Lowbyte_Index>  Byte1
-  data[2] = (uint8_t)((Statusword_Obj>>8) & 0xFF);            // SDO <Highbyte_Index> Byte2
-  data[3] = 0x00;                                             // SDO <SubIndex>       Byte3
-  data[4] = 0x00;                                             // SDO <DATA_Byte0>     Byte4
-  data[5] = 0x00;                                             // SDO <DATA_Byte1>     Byte5
-  data[6] = 0x00;                                             // SDO <DATA_Byte2>     Byte6
-  data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
+    // Request Statusword (0x6041:00)
+    data[0] = RSDO_Expedited_4;                       // SDO <CMD>
+    data[1] = (uint8_t)(Statusword_Obj & 0xFF);       // Index low
+    data[2] = (uint8_t)((Statusword_Obj >> 8) & 0xFF);// Index high
+    data[3] = 0x00;                                   // Subindex
+    data[4] = 0x00;
+    data[5] = 0x00;
+    data[6] = 0x00;
+    data[7] = 0x00;
 
-  CAN1_SendFrame(node_id,DLC, data);      
+    CAN1_SendFrame(node_id, DLC, data);
 
-  eMR->StatusWord = ((Statusword | revPACKET.buf[7])<<24) + ((Statusword | revPACKET.buf[6])<<16)
-             + ((Statusword | revPACKET.buf[5])<<8) + (Statusword | revPACKET.buf[4]);                         
+    // Response: Statusword is 16-bit (little-endian), located in buf[4]..buf[5]
+    eMR->StatusWord = (uint16_t)(revPACKET.buf[4]) |
+                      ((uint16_t)revPACKET.buf[5] << 8);
 
-  return 0;
+    return 0;
 }
+// uint8_t CANOpen_ReadStatusObj(eMR_t *eMR)
+// {
+//   uint8_t data[8];
+//   uint32_t node_id;
+//   int32_t Statusword = 0;
 
+//   node_id = eMR->cobid;
+//   data[0] = RSDO_Expedited_4;                                 // SDO <CMD>            Byte0
+//   data[1] = (uint8_t)(Statusword_Obj & 0xFF);                 // SDO <Lowbyte_Index>  Byte1
+//   data[2] = (uint8_t)((Statusword_Obj>>8) & 0xFF);            // SDO <Highbyte_Index> Byte2
+//   data[3] = 0x00;                                             // SDO <SubIndex>       Byte3
+//   data[4] = 0x00;                                             // SDO <DATA_Byte0>     Byte4
+//   data[5] = 0x00;                                             // SDO <DATA_Byte1>     Byte5
+//   data[6] = 0x00;                                             // SDO <DATA_Byte2>     Byte6
+//   data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
+
+//   CAN1_SendFrame(node_id,DLC, data);      
+
+//   eMR->StatusWord = ((Statusword | revPACKET.buf[7])<<24) + ((Statusword | revPACKET.buf[6])<<16)
+//              + ((Statusword | revPACKET.buf[5])<<8) + (Statusword | revPACKET.buf[4]);                         
+
+//   return 0;
+// }
+
+// uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
+// {
+  
+//   uint8_t data[8];
+//   uint32_t node_id;
+//   int32_t velocity = 0;
+
+//   node_id = eMR->cobid;
+//   data[0] = RSDO_Expedited_4;                                 // SDO <CMD>            Byte0
+//   data[1] = (uint8_t)(ActualVelocity_Obj & 0xFF);             // SDO <Lowbyte_Index>  Byte1
+//   data[2] = (uint8_t)((ActualVelocity_Obj>>8) & 0xFF);        // SDO <Highbyte_Index> Byte2
+//   data[3] = 0x00;                                             // SDO <SubIndex>       Byte3
+//   data[4] = 0x00;                                             // SDO <DATA_Byte0>     Byte4
+//   data[5] = 0x00;                                             // SDO <DATA_Byte1>     Byte5
+//   data[6] = 0x00;                                             // SDO <DATA_Byte2>     Byte6
+//   data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
+
+  
+//   CAN1_SendFrame(node_id,DLC, data);                          
+
+//   eMR->ActualVelocity = ((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
+//              + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]);
+
+//   return 0;
+// }
 uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
 {
-  
-  uint8_t data[8];
-  uint32_t node_id;
-  int32_t velocity = 0;
+    uint8_t data[8];
+    uint32_t node_id;
+    node_id = eMR->cobid;
 
-  node_id = eMR->cobid;
-  data[0] = RSDO_Expedited_4;                                 // SDO <CMD>            Byte0
-  data[1] = (uint8_t)(ActualVelocity_Obj & 0xFF);             // SDO <Lowbyte_Index>  Byte1
-  data[2] = (uint8_t)((ActualVelocity_Obj>>8) & 0xFF);        // SDO <Highbyte_Index> Byte2
-  data[3] = 0x00;                                             // SDO <SubIndex>       Byte3
-  data[4] = 0x00;                                             // SDO <DATA_Byte0>     Byte4
-  data[5] = 0x00;                                             // SDO <DATA_Byte1>     Byte5
-  data[6] = 0x00;                                             // SDO <DATA_Byte2>     Byte6
-  data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
+    data[0] = RSDO_Expedited_4;
+    data[1] = (uint8_t)(ActualVelocity_Obj & 0xFF);
+    data[2] = (uint8_t)((ActualVelocity_Obj >> 8) & 0xFF);
+    data[3] = 0x00;
+    data[4] = 0x00;
+    data[5] = 0x00;
+    data[6] = 0x00;
+    data[7] = 0x00;
 
-  
-  CAN1_SendFrame(node_id,DLC, data);                          
+    CAN1_SendFrame(node_id, DLC, data);
 
-  eMR->ActualVelocity = ((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
-             + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]);
+    // Assemble 32-bit signed velocity (little endian per CANopen spec)
+    eMR->ActualVelocity =
+        (int32_t)((uint32_t)revPACKET.buf[4] |
+                 ((uint32_t)revPACKET.buf[5] << 8) |
+                 ((uint32_t)revPACKET.buf[6] << 16) |
+                 ((uint32_t)revPACKET.buf[7] << 24));
 
-  return 0;
+    return 0;
 }
+
+
+
+int32_t velocity1 = 0;
+int32_t velocity2 = 0;
+int32_t velocity = 0;
+
+uint8_t eMR_Sync_message()
+{
+  uint8_t data[1];          
+  uint32_t node_id;
+  
+  node_id = SYNC_COBID;
+  data[0] = 0x00;                                                                
+
+  return CAN1_SendFrame(node_id, 0x01, data);
+}
+
+void eMR_ReadActualVelocity2()
+{
+  int32_t  velocity=0;
+  eMR_Sync_message();
+
+  v.velocity1 = 0.1*(((velocity | revPACKET.buf[3])<<24) + ((velocity | revPACKET.buf[2])<<16)
+              + ((velocity | revPACKET.buf[1])<<8) + (velocity | revPACKET.buf[0]));
+
+  v.velocity2 = 0.1*(((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
+             + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]));
+
+}
+
 
 
 uint8_t CANOpen_SwitchON(eMR_t *eMR)
@@ -504,6 +594,24 @@ uint8_t CANOpen_SetTargetPosition(eMR_t *eMR)
 
   return CAN1_SendFrame(node_id,DLC, data); 
 }
+
+uint8_t CANOpen_SetPolarity(eMR_t *eMR, uint8_t value)
+{
+    uint8_t data[8];
+    uint32_t node_id = eMR->cobid;
+
+    data[0] = SDO_Expedited_1;                 // 1‑byte expedited write
+    data[1] = (uint8_t)(0x607E & 0xFF);
+    data[2] = (uint8_t)((0x607E >> 8) & 0xFF);
+    data[3] = 0x00;                            // Sub‑index 0
+    data[4] = value;                           // 0x00 = normal, 0x40 = flip velocity, etc.
+    data[5] = 0x00;
+    data[6] = 0x00;
+    data[7] = 0x00;
+
+    return CAN1_SendFrame(node_id, DLC, data);
+}
+
 void CANOpen_eMR_Init(void)
 {
 
@@ -518,6 +626,10 @@ void CANOpen_eMR_Init(void)
   //CANOpen_SetProfileAcceleration(&eMR);  
   //CANOpen_SetProfileDeceleration(&eMR); 
   //CANOpen_Shutdown(&eMR);
+
+  // ✅ Ensure consistent polarity (say, invert for right wheel)
+  // CANOpen_SetPolarity(&eMR, 0x40);
+
   delay(100);
   CANOpen_SwitchON(&eMR);    
   delay(100);
@@ -530,6 +642,9 @@ void CANOpen_eMR_Init(void)
   //CANOpen_SetProfileAcceleration(&eMR);  
   //CANOpen_SetProfileDeceleration(&eMR); 
   //CANOpen_Shutdown(&eMR);
+
+  // ✅ Ensure consistent polarity (say, invert for right wheel)
+  // CANOpen_SetPolarity(&eMR, 0x00);
   delay(100);
   CANOpen_SwitchON(&eMR);
   delay(100);
@@ -599,6 +714,5 @@ void Update_eMRMotorSpeed(void)
   eMR.cobid = TSDO_COBID + axis2;
   CANOpen_SwitchON(&eMR); 
 }
-
 
 

@@ -1,6 +1,6 @@
 ekf_filter_node:
     ros__parameters:
-            frequency: 50.0 #20.0
+            frequency: 30.0 #20.0
             two_d_mode: true
             publish_tf: true
     
@@ -15,6 +15,12 @@ ekf_filter_node:
             #vroll , vpitch, vyaw,
             #ax    , ay    , az
             odom0: odom_raw
+            # odom0_config: [false, false, false,
+            #             false, false, false,
+            #             true, true, false,
+            #             false, false, false,
+            #             false, false, false]
+            # odom0_differential: true
             odom0_config: [false, false, false,
                         false, false, false,
                         true, true, false,
@@ -22,11 +28,17 @@ ekf_filter_node:
                         false, false, false]
 
             imu0: imu/data_raw
+            # imu0_config: [false, false, false,
+            #             false, false, false,
+            #             false, false, false,
+            #             false, false, true,
+            #             true, false, false]   
             imu0_config: [false, false, false,
                         false, false, true,
                         false, false, false,
                         false, false, true,
                         false, false, false]     
+            # imu0_differential: true
 
 imu_filter:
     ros__parameters:
@@ -43,7 +55,7 @@ imu_filter:
         mag_bias_x: 0.0
         mag_bias_y: 0.0
         mag_bias_z: 0.0
-        orientation_stddev: 0.0
+        orientation_stddev: 0.05 #0.05
 
 usb_camera:
     ros__parameters:

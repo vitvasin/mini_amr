@@ -197,9 +197,12 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     int16_t vy = (int16_t)(buf[17] | (buf[18]<<8));
     int16_t wz = (int16_t)(buf[19] | (buf[20]<<8));
 
-    odom_velocity.x = vx / 1000.0 ;
+    odom_velocity.x = vx / 1000.0;
     odom_velocity.y = vy / 1000.0;
     odom_velocity.z = wz / 1000.0;
+    // odom_velocity.x = vx;
+    // odom_velocity.y = vy;
+    // odom_velocity.z = wz;
     update_odom_ = true;
 
     // ----- Ranger -----

@@ -3,6 +3,7 @@
 #include "geometry_msgs/msg/twist.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 #include "sensor_msgs/msg/range.hpp"
+#include "std_msgs/msg/int16.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "action_msgs/msg/goal_status_array.hpp"
 #include <sensor_msgs/msg/battery_state.hpp>
@@ -30,16 +31,23 @@ public:
     cmd_vel_sub_ = create_subscription<geometry_msgs::msg::Twist>(
         "cmd_vel", 1, std::bind(&HardwareInterfaceNode::twistCallback, this, _1));
 
+    charge_state_sub_ = create_subscription<std_msgs::msg::Int16>(
+        "set_charge_state", 1, std::bind(&HardwareInterfaceNode::ChargeStateCallback, this, _1));
+
+
     imu_pub_    = create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 10);
     odom_pub_   = create_publisher<nav_msgs::msg::Odometry>("odom_raw", 10);
     batt_pub_   = create_publisher<sensor_msgs::msg::BatteryState>("battery", 10);
-
+    charge_state_pub_ = create_publisher<std_msgs::msg::Int16>("ir_charge_state", 10);
+      
     range_left_pub_   = create_publisher<sensor_msgs::msg::Range>("range/left", 10);
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
+    
+
 
     //timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
-    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(20ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";
@@ -94,12 +102,15 @@ private:
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_left_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_center_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_right_pub_;
+  rclcpp::Publisher<std_msgs::msg::Int16>::SharedPtr charge_state_pub_;
+  rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr charge_state_sub_;
 
   rclcpp::TimerBase::SharedPtr timer_update_data_;
   nav_msgs::msg::Odometry msg_odom_;
   sensor_msgs::msg::Imu msg_imu_;
   sensor_msgs::msg::BatteryState msg_batt_;
   sensor_msgs::msg::Range msg_range_left_, msg_range_center_, msg_range_right_;
+  std_msgs::msg::Int16 msg_charge_state_;
 
   float ut_fov_;
   float ut_min_range_;
@@ -133,6 +144,12 @@ private:
   {
     //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetMotion(msg.linear.x, 0.0, msg.angular.z);
+  }
+
+  void ChargeStateCallback(const std_msgs::msg::Int16 & msg)
+  {
+    //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
+    hardware_interface->SetChargeState(static_cast<uint16_t>(msg.data));
   }
 
   void timerUpdateCallback()
@@ -252,6 +269,9 @@ private:
       //hardware_interface->update_batt_ = false;
 
       batt_pub_->publish(msg_batt_);
+
+      msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
+      charge_state_pub_->publish(msg_charge_state_);
 
       if(tCount > 10){
         hardware_interface->UpdateStatus(1);

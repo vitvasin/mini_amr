@@ -8,8 +8,9 @@
 #include <thread>
 #include <iomanip>
 #include <unistd.h>
+
 //----------- Pkg data -----------------
-#define _PKG_LEN       36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN       37 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER         0
 #define _HOST_ID        1
@@ -51,7 +52,8 @@
 #define _BMS_PERCENT_L      29
 #define _BMS_PERCENT_H      30
 #define _BMS_STATUS_        31
-#define _CHK_SUM_           32
+#define _IR_CHARGE_STATE_  32
+#define _CHK_SUM_           33
 
 // #define _IMU_READY_     32          // add new
 // #define _ODOM_READY_    33          // add new
@@ -133,6 +135,7 @@ public:
     float current_;
     float percentage_;
     uint8_t status_;
+    uint16_t ir_charge_state_;
 
     bool update_imu_;
     bool update_odom_;
@@ -144,6 +147,7 @@ public:
     ~HardwareInterface();
 
     void SetMotion(float v_x, float v_y, float v_z);
+    void SetChargeState(uint16_t charge_state); 
     void UpdateIP(char* addressBuffer);
     void UpdateStatus(int status);
 
@@ -159,6 +163,7 @@ private:
     const uint8_t FUNC_IP       = 0x05;
     const uint8_t FUNC_STATUS   = 0x06;
     const uint8_t FUNC_BATT     = 0x07;
+    const uint8_t FUNC_CHARGE     = 0x08;
 
     std::string port_name;
     LibSerial::SerialPort serial_port;

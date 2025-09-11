@@ -41,6 +41,7 @@
 #define FUNC_IP 0x05
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
+#define FUNC_CHARGE 0x08
 
 /////////////////////////////////////////////////////////////////////////////////////
 #define motor_axis0 0
@@ -64,7 +65,7 @@
 #define CliffDistanceLimit 200 // 20cm
 
 //----------- Pkg data -----------------
-#define _PKG_LEN    36 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN    37 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER 0
 #define _HOST_ID 1
@@ -106,14 +107,15 @@
 #define _BMS_PERCENT_L 32
 #define _BMS_PERCENT_H 33
 #define _BMS_STATUS_ 34
-
+#define _IR_CHARGE_STATE_  35   // <-- NEW BYTE for RobotStage
 // #define _IMU_READY_     35          // add new
 // #define _ODOM_READY_    36          // add new
 // #define _RANGER_READY_  37          // add new
 // #define _SAFETY_READY_  38          // add new
 // #define _BMS_READY_     39          // add new
 
-#define _CHK_SUM_       35
+#define _CHK_SUM_       36
+
 
 //--------------------------------------
 
@@ -122,6 +124,7 @@ ModbusMaster Cliff_Sensor;
 ModbusMaster Ultrasonics_L; // Left
 ModbusMaster Ultrasonics_C; // Center
 ModbusMaster Ultrasonics_R; // Right
+ModbusMaster IR_Charge_State;
 
 int LED = 13;        // LED status TeensyMicromod
 int LED_RUN = 32;    // G9 - Teensy pin 32, MicroMod pad 65
@@ -197,6 +200,10 @@ bool mcp_out_put[8];
 bool cliff_state, bumper_state, emer_state, stop, ack;
 bool connection_failed;
 
+
+//charge state
+uint8_t charge_state = 0; // 0: not charging, 1: charging, 2: charge done
+
 void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 {
 
@@ -214,7 +221,7 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 
         //Serial5.printf("Vx: %f ---  Vy: %f  ---  Wz: %f\n", cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
     }
-    else if (func == FUNC_STATUS)
+    if (func == FUNC_STATUS)
     {
         static uint32_t LedRosComm = millis();
         if ((millis() - LedRosComm) > 1000)
@@ -222,6 +229,48 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             digitalWrite(LED_RUN, !digitalRead(LED_RUN)); // For ROS Communication
             // Serial5.printf("ROS comm start.\n");
             LedRosComm = millis();
+        }
+    }
+    if (func == FUNC_CHARGE)
+    {
+        if (data_len >= 1)
+        {
+            uint8_t result;
+            charge_state = data[0];
+            // Serial5.print("Charge state: ");
+            // Serial5.println(charge_state);
+            
+            if (charge_state == 20)
+            {
+                result = IR_Charge_State.writeSingleRegister(1, 20); // Robot is ready to charge
+                if (result == IR_Charge_State.ku8MBSuccess)
+                {
+                   // Serial5.println("Sent: RobotReadyToCharge (20)");
+                }else {
+                //Serial5.println("Error sending state to robot");
+                }
+
+
+            }else if (charge_state == 22)
+            {
+                result = IR_Charge_State.writeSingleRegister(1, 22); // Robot is charging
+            
+                if (result == IR_Charge_State.ku8MBSuccess)
+                {
+                  //  Serial5.println("Sent: StopCharging (22)");
+                }else {
+                //Serial5.println("Error sending state to robot");
+                }
+
+
+            }
+
+
+            /// for debug /////////////////////////////////////////////////////////////// DB
+            // result = IR_Charge_State.writeSingleRegister(1, 22);
+
+            ////////////////////////////////////////////////////////////////////////////// DB
+        
         }
     }
     else
@@ -822,6 +871,49 @@ void sensor_module_task()
     threads.delay(5);
    // Serial5.printf("Range Letf: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
     //pkg_data[_RANGER_READY_] = 1;
+    uint8_t result;
+    if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess)
+    {
+        buff = IR_Charge_State.getResponseBuffer(0); // addr = 0
+        // Serial5.print("Status Register = ");
+        // Serial5.println(buff);
+
+        //for debuf
+        // switch (buff)
+        // {
+        // case 0:
+        //     // Serial5.println("Idle");
+        //     break;
+        // case 10:
+        //     // Serial5.println("RobotStopBackward");
+
+        //     ///// for debug /////////////////////////////////////////////////////////////// DB
+        //     // result = IR_Charge_State.writeSingleRegister(1, 22);
+        //     // if (result == IR_Charge_State.ku8MBSuccess)
+        //     // {
+        //     //     Serial5.println("Sent: RobotReadyToCharge (20)");
+        //     // }else {
+        //     // Serial5.println("Error sending RobotReadyToCharge");
+        //     // }
+        //     //////////////////////////////////////////////////////////////////////////////// DB
+        //     break;
+        // case 11:
+        //     // Serial5.println("RobotBattCharging");
+        //     break;
+        // default:
+        //     // Serial5.println("Unknown state");
+        // }
+        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+        // Serial5.printf("IR Charge State : %d\n", buff);
+    }
+    else
+    {
+        buff = 99;
+        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+        //Serial5.println("READ IR ERROR");
+        if (DEBUG)
+        Serial5.println("Read IR Charge State error");
+    }
    
 }
 
@@ -896,6 +988,7 @@ void setup()
     Ultrasonics_R.begin(3, SENSORS_SERIAL);
     Led_Modele.begin(5, SENSORS_SERIAL);
     Ultrasonics_C.begin(7, SENSORS_SERIAL);
+    IR_Charge_State.begin(9, SENSORS_SERIAL);
     //------------ IMU Init --------------------------------
     JY61P.startIIC();
     JY61P.caliIMU();
@@ -984,6 +1077,7 @@ void loop()
         digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
         LedActivity = millis();
     }
+    //Serial5.println("DEBUG MODE");
 
 
 }

@@ -53,6 +53,27 @@ void HardwareInterface::SetMotion(float v_x, float v_y, float v_z) {
     }
 }
 
+void HardwareInterface::SetChargeState(uint16_t charge_state) {
+
+    try {
+        // int16_t v_x_int = static_cast<int16_t>(v_x * 1000);
+        // int16_t v_y_int = static_cast<int16_t>(v_y * 1000);
+        // int16_t v_z_int = static_cast<int16_t>(v_z * 1000);
+
+        std::vector<uint8_t> cmd = {
+            static_cast<uint8_t>(charge_state)
+        };
+
+        SendData(FUNC_CHARGE, cmd);
+        //std::cout << "Set Charge State to: " << charge_state << std::endl;
+       // std::cout << "Vx: " << v_x<< " --- Vy: " << v_y<< " --- Vz: " << v_z<< std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Set Charge state error: " << e.what() << std::endl;
+    }
+}
+
+
 void HardwareInterface::UpdateIP(char* addressBuffer) {
     uint8_t ipPart1, ipPart2, ipPart3, ipPart4;
     try {
@@ -163,6 +184,13 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
         status_ = status;
 
         update_batt_ = true;
+
+        // uint16_t ir_charge_state_;
+
+        uint16_t ir_charge_state = static_cast<int16_t>(data[_IR_CHARGE_STATE_]);
+
+        ir_charge_state_ = ir_charge_state;
+        //std::cout << "IR Charge State: " << ir_charge_state << std::endl;
 
         //if(DEBUG_BATT){
         //    std::cout << "Battery -";

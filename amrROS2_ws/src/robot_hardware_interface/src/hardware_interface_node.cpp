@@ -146,7 +146,7 @@ private:
       uint64_t dt = current_time.nanoseconds() - prev_update_;
       double dt_seconds = static_cast<double>(dt) / 1.0e9;
 
-      double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z) * dt_seconds; // radians
+      double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z *(-1)) * dt_seconds; // radians
       double cos_h = cos(heading_);
       double sin_h = sin(heading_);
       double delta_x = (static_cast<double>(hardware_interface->odom_velocity.x) * cos_h - static_cast<double>(hardware_interface->odom_velocity.y) * sin_h) * dt_seconds; // m

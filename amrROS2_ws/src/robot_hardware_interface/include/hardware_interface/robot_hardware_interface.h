@@ -8,6 +8,7 @@
 #include <thread>
 #include <iomanip>
 #include <unistd.h>
+#include <deque>      // <-- needed for std::deque
 
 // -------- Shared Protocol Definition --------
 #define _PKG_LEN    36  // Total size of data frame (bytes)

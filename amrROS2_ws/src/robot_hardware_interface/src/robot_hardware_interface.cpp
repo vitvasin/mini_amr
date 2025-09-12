@@ -346,55 +346,113 @@ void HardwareInterface::SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& 
 //         std::cerr << "Received Data Error: " << e.what() << std::endl;
 //     }
 // }
+
+
+// void HardwareInterface::ReceiveData()
+// {
+//     std::vector<uint8_t> buffer;
+//     buffer.reserve(64);
+    
+//     while (run_receive_thread)
+//     {
+//         if (serial_port.IsDataAvailable())
+//         {
+//             char c;
+//             serial_port.ReadByte(c, 10);  // 10ms timeout
+//             buffer.push_back((uint8_t)c);
+
+//             // Look for header
+//             if (buffer.size() >= _PKG_LEN)
+//             {
+//                 // find first header 0xFF
+//                 size_t header_index = 0;
+//                 while (header_index < buffer.size() && buffer[header_index] != 0xFF)
+//                     header_index++;
+
+//                 if (buffer.size() - header_index >= _PKG_LEN)
+//                 {
+//                     // candidate packet
+//                     const uint8_t* pkt = &buffer[header_index];
+                    
+//                     // checksum verify
+//                     uint8_t checksum = 0;
+//                     for (uint8_t i=0; i<_PKG_LEN-1; i++)
+//                         checksum += pkt[i];
+//                     checksum &= 0xFF;
+
+//                     if (checksum == pkt[_PKG_LEN-1])
+//                     {
+//                         ParsePacket(pkt, _PKG_LEN);
+//                     }
+                    
+//                     // discard old bytes
+//                     buffer.erase(buffer.begin(), buffer.begin()+header_index+_PKG_LEN);
+//                 }
+//                 else
+//                 {
+//                     // not enough yet
+//                 }
+//             }
+//         } 
+//         else 
+//         {
+//             std::this_thread::sleep_for(std::chrono::milliseconds(1));
+//         }
+//     }
+// }
+
 void HardwareInterface::ReceiveData()
 {
-    std::vector<uint8_t> buffer;
-    buffer.reserve(64);
-    
+    std::deque<uint8_t> buffer;
+    buffer.clear();
+
     while (run_receive_thread)
     {
-        if (serial_port.IsDataAvailable())
+        try
         {
+            // Try to read a single byte with 10ms timeout
             char c;
-            serial_port.ReadByte(c, 10);  // 10ms timeout
+            serial_port.ReadByte(c, 10);   // throws ReadTimeout if no data
             buffer.push_back((uint8_t)c);
 
-            // Look for header
-            if (buffer.size() >= _PKG_LEN)
+            // --- Step 1: Resync to header (0xFF assumed) ---
+            while (!buffer.empty() && buffer.front() != 0xFF)
+                buffer.pop_front();
+
+            // --- Step 2: Process complete packets ---
+            while (buffer.size() >= _PKG_LEN)
             {
-                // find first header 0xFF
-                size_t header_index = 0;
-                while (header_index < buffer.size() && buffer[header_index] != 0xFF)
-                    header_index++;
+                // Candidate packet starting at front
+                std::vector<uint8_t> pkt(buffer.begin(),
+                                         buffer.begin() + _PKG_LEN);
 
-                if (buffer.size() - header_index >= _PKG_LEN)
-                {
-                    // candidate packet
-                    const uint8_t* pkt = &buffer[header_index];
-                    
-                    // checksum verify
-                    uint8_t checksum = 0;
-                    for (uint8_t i=0; i<_PKG_LEN-1; i++)
-                        checksum += pkt[i];
-                    checksum &= 0xFF;
+                // --- Step 3: Verify checksum ---
+                uint8_t checksum = 0;
+                for (size_t i = 0; i < _PKG_LEN - 1; i++)
+                    checksum += pkt[i];
+                checksum &= 0xFF;
 
-                    if (checksum == pkt[_PKG_LEN-1])
-                    {
-                        ParsePacket(pkt, _PKG_LEN);
-                    }
-                    
-                    // discard old bytes
-                    buffer.erase(buffer.begin(), buffer.begin()+header_index+_PKG_LEN);
-                }
-                else
+                if (checksum == pkt[_PKG_LEN - 1])
                 {
-                    // not enough yet
+                    // ✅ Valid packet → process
+                    ParsePacket(pkt.data(), _PKG_LEN);
                 }
+                
+
+                // --- Step 4: Remove processed bytes ---
+                buffer.erase(buffer.begin(), buffer.begin() + _PKG_LEN);
             }
-        } 
-        else 
+        }
+        catch (const LibSerial::ReadTimeout&)
         {
+            // ⏱ Timeout → no new byte, just loop again
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        }
+        catch (const std::exception& e)
+        {
+            std::cerr << "[ERROR] Serial read failed: " << e.what() << std::endl;
+            // Depending on needs: break, retry, or continue
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
         }
     }
 }

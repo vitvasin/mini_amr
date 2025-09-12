@@ -410,7 +410,7 @@ uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
     data[4] = data[5] = data[6] = data[7] = 0x00;
 
     // Send request
-    // Serial5.println("Request ActualVelocity Obj..");
+    Serial5.println("Request ActualVelocity Obj..");
 
     CAN1_SendFrame(node_id, DLC, data);
     
@@ -422,23 +422,23 @@ uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
         // }
         // Serial.print("  TS: "); Serial.println(msg.timestamp);
     
-    if (msg.buf[1] == (uint8_t)(ActualVelocity_Obj & 0xFF) &&
-        msg.buf[2] == (uint8_t)((ActualVelocity_Obj >> 8) & 0xFF)) 
-            {
-                // Ignore strict revPACKET.buf[0], just parse
-                eMR->ActualVelocity =
-                    (int32_t)((uint32_t)msg.buf[4] |
-                            ((uint32_t)msg.buf[5] << 8) |
-                            ((uint32_t)msg.buf[6] << 16) |
-                            ((uint32_t)msg.buf[7] << 24));
-                return 1;
-            }
-            else if (msg.buf[0] == SDO_Error_Msg) // 0x80
-            {
-                eMR->Err_Flag = true;
-                eMR->ActualVelocity = 0;
-                return 0;  // error response
-            }
+    // if (msg.buf[1] == (uint8_t)(ActualVelocity_Obj & 0xFF) &&
+    //     msg.buf[2] == (uint8_t)((ActualVelocity_Obj >> 8) & 0xFF)) 
+    //         {
+    //             // Ignore strict revPACKET.buf[0], just parse
+    //             eMR->ActualVelocity =
+    //                 (int32_t)((uint32_t)msg.buf[4] |
+    //                         ((uint32_t)msg.buf[5] << 8) |
+    //                         ((uint32_t)msg.buf[6] << 16) |
+    //                         ((uint32_t)msg.buf[7] << 24));
+    //             return 1;
+    //         }
+    //         else if (msg.buf[0] == SDO_Error_Msg) // 0x80
+    //         {
+    //             eMR->Err_Flag = true;
+    //             eMR->ActualVelocity = 0;
+    //             return 0;  // error response
+    //         }
      
     return 0;  // not valid
 }

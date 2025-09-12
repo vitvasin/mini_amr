@@ -160,11 +160,26 @@ controller_server:
       beta: 0.4
       lambda: 2.0
       v_linear_min: 0.1
-      v_linear_max: 0.3
-      v_angular_max: 1.0
+      v_linear_max: 0.8
+      v_angular_max: 0.8
       v_angular_min_in_place: 1.0 #0.50
       slowdown_radius: 1.5
 
+velocity_smoother: #WIS PARAM
+  ros__parameters:
+    smoothing_frequency: 20.0
+    scale_velocities: False
+    feedback: "OPEN_LOOP"
+    # max_velocity: [0.5, 0.0, 2.0]
+    max_velocity: [1.0, 0.0, 0.5]
+    # min_velocity: [-0.5, 0.0, -2.0]
+    min_velocity: [-0.35, 0.0, -0.5]
+    max_accel: [0.3, 0.0, 1.6]
+    max_decel: [-1.0, 0.0, -1.6]
+    odom_topic: "odom"
+    odom_duration: 0.1
+    deadband_velocity: [0.0, 0.0, 0.0]
+    velocity_timeout: 1.0
 
 local_costmap:
   local_costmap:
@@ -319,29 +334,16 @@ waypoint_follower:
   ros__parameters:
     loop_rate: 20
     stop_on_failure: false
+    retry_forever: true        # NEW, keep retrying same waypoint edit on waypoint_follower node
     action_server_result_timeout: 900.0
     waypoint_task_executor_plugin: "wait_at_waypoint"
     wait_at_waypoint:
       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
       enabled: True
-      waypoint_pause_duration: 100
+      waypoint_pause_duration: 200
 
 
-velocity_smoother: #WIS PARAM
-  ros__parameters:
-    smoothing_frequency: 20.0
-    scale_velocities: False
-    feedback: "OPEN_LOOP"
-    # max_velocity: [0.5, 0.0, 2.0]
-    max_velocity: [0.3, 0.0, 0.5]
-    # min_velocity: [-0.5, 0.0, -2.0]
-    min_velocity: [-0.35, 0.0, -0.5]
-    max_accel: [1.0, 0.0, 1.6]
-    max_decel: [-1.5, 0.0, -1.6]
-    odom_topic: "odom"
-    odom_duration: 0.1
-    deadband_velocity: [0.0, 0.0, 0.0]
-    velocity_timeout: 1.0
+
 
 
 collision_monitor:
@@ -373,7 +375,7 @@ collision_monitor:
     #   enabled: true
     PolygonStop:
       type: "circle"
-      radius: 0.3
+      radius: 0.32
       action_type: "stop"
       min_points: 4  # max_points: 3 for Humble
       visualize: True
@@ -391,7 +393,7 @@ collision_monitor:
     PolygonSlow:
       type: "polygon"
       #points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
-      points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
+      points: "[[0.4, 0.2], [0.4, -0.2], [0.0, -0.2], [0.0, 0.2]]"
       action_type: "slowdown"
       #max_points: 4
       slowdown_ratio: 0.5
@@ -432,8 +434,8 @@ collision_detector:
     polygons: ["PolygonStop", "PolygonSlow"]
     #polygons: ["PolygonStop"]
     PolygonStop:
-      type: "polygon"
-      points: "[[0.32, 0.25], [0.32, -0.25], [0.0, -0.25], [0.0, 0.25]]"
+      type: "circle"
+      radius: 0.32
       action_type: "none"
       #max_points: 4
       visualize: True
@@ -442,7 +444,7 @@ collision_detector:
     PolygonSlow:
       type: "polygon"
       #points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
-      points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
+      points: "[[0.4, 0.2], [0.4, -0.2], [0.0, -0.2], [0.0, 0.2]]"
       action_type: "none"
       #max_points: 4
       slowdown_ratio: 0.5

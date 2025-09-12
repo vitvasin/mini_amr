@@ -540,17 +540,7 @@ void control_task(void *arg = nullptr)
             // CANOpen_Shutdown(&eMR);
             // eMR.cobid = TSDO_COBID + axis2;
             // CANOpen_Shutdown(&eMR);
-                    // Left motor
-            eMR.cobid = TSDO_COBID + axis2;
-            CANOpen_ReadActualVelocityObj(&eMR);
-            current_rpm_left = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578;
-            current_rpm_left = round(current_rpm_left * 100.0) / 100.0;
 
-            //right motor
-            eMR.cobid = TSDO_COBID + axis1;
-            CANOpen_ReadActualVelocityObj(&eMR);
-            current_rpm_right = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
-            current_rpm_right = round(current_rpm_right * 100.0) / 100.0;
             // Optional: stop sending velocity commands
         }
         emer_flag = true;
@@ -564,27 +554,27 @@ void control_task(void *arg = nullptr)
             CANOpen_eMR_Init();
            // eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
            // eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
-            delay(3000);
+            // delay(3000);
             emer_flag = false;
         }else
         {
         // Normal: send target velocity
-        // eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
-        // eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
         eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
-        eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
-        
-        // Left motor
+                    // Left motor
         eMR.cobid = TSDO_COBID + axis2;
         CANOpen_ReadActualVelocityObj(&eMR);
-        current_rpm_left = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578;
-        current_rpm_left = round(current_rpm_left * 100.0) / 100.0;
+        //CANOpen_ReadActualVelocityObjEx(&eMR);
+        //current_rpm_left = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578;
 
-        //right motor
+        //current_rpm_left = round(current_rpm_left * 100.0) / 100.0;
+
+        eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
         eMR.cobid = TSDO_COBID + axis1;
         CANOpen_ReadActualVelocityObj(&eMR);
-        current_rpm_right = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
-        current_rpm_right = round(current_rpm_right * 100.0) / 100.0;
+        // CANOpen_ReadActualVelocityObjEx(&eMR);
+       // current_rpm_right = (float)eMR.ActualVelocity * (3.75 / 16384) * 1.578 * (-1);
+
+       // current_rpm_right = round(current_rpm_right * 100.0) / 100.0;
 
 
 
@@ -608,8 +598,8 @@ void control_task(void *arg = nullptr)
    // Serial.print("READ RPM: ");
    // Serial.print(current_rpm_left); Serial.print(", "); Serial.println(current_rpm_right);
    //Serial5 
-    Serial5.print("READ RPM: ");
-    Serial5.print(current_rpm_left); Serial5.print(", "); Serial5.println(current_rpm_right);
+    // Serial5.print("READ RPM: ");
+    // Serial5.print(current_rpm_left); Serial5.print(", "); Serial5.println(current_rpm_right);
    
 
     // eMR_ReadActualVelocity2();  
@@ -643,8 +633,8 @@ void control_task(void *arg = nullptr)
 
    // Serial.print("rounded_vel: ");
     //Serial.print(rounded_vx); Serial.print(", "); Serial.print(rounded_vy); Serial.print(", "); Serial.println(rounded_wz);
-    Serial5.print("rounded_vel: ");
-    Serial5.print(rounded_vx); Serial5.print(", "); Serial5.print(rounded_vy); Serial5.print(", "); Serial5.println(rounded_wz);
+    // Serial5.print("rounded_vel: ");
+    // Serial5.print(rounded_vx); Serial5.print(", "); Serial5.print(rounded_vy); Serial5.print(", "); Serial5.println(rounded_wz);
 
     auto clamp16 = [](float x) -> int16_t {
     if (x > 32.767f) return 32767;
@@ -995,6 +985,41 @@ void send_data_task()
     }
 }
 
+void canSniff(const CAN_message_t &msg)   //////////////// (Program type 2)
+{
+
+  volatile int32_t status_word1 = 0;
+  volatile int32_t position = 0;
+  volatile int32_t status_word2 = 0;
+  volatile int32_t velocity = 0;
+
+    Serial5.print("CAN1 "); 
+    Serial5.print("MB: "); Serial5.print(msg.mb);
+    Serial5.print("  ID: 0x"); Serial5.print(msg.id, HEX );
+    Serial5.print("  EXT: "); Serial5.print(msg.flags.extended );
+    Serial5.print("  LEN: "); Serial5.print(msg.len);
+    Serial5.print(" DATA: ");
+
+    for ( uint8_t i = 0; i < 8; i++ ) {
+      Serial5.print(msg.buf[i]); Serial5.print(" ");
+    }
+    Serial5.print("  TS: "); Serial5.println(msg.timestamp);
+  
+    
+    // if (msg.id==0x381){
+    //   status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+    //   position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    //   Serial.println("status_word1 : " + String(status_word1 )+ " word ");
+    //   Serial.println("position: " + String(position)+ " count ");
+    // }
+
+    // if (msg.id==0x481){
+    //   status_word2  = msg.buf[0] | (msg.buf[1] << 8);
+    //   velocity = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    //   Serial.println("status_word2 : " + String(status_word2 )+ " word ");
+    //   Serial.println("velocity: " + String(velocity)+ " rpm ");
+    // }
+}
 
 // ---------------- Setup ----------------------
 void setup()
@@ -1013,23 +1038,23 @@ void setup()
     Serial.begin(460800);
     Serial5.begin(115200);
 
-    can1.begin();
-    can1.setBaudRate(500000);
-    can1.setMBFilter(ACCEPT_ALL);
-    can1.distribute();
-    CANOpen_eMR_Init();
+    // can1.begin();
+    // can1.setBaudRate(500000);
+    // can1.setMBFilter(ACCEPT_ALL);
+    // can1.distribute();
+    // CANOpen_eMR_Init();
 
     //CAN2.0_TeensyMM_FlexCAN_T4_FIFO_with_interrupts (Program type 2)
 
-//   can1.begin();
-//   can1.setBaudRate(500000);
-//   can1.setMBFilter(ACCEPT_ALL);
-//   can1.setMaxMB(16);
-//   can1.enableFIFO();
-//   can1.enableFIFOInterrupt();
-//   can1.onReceive(canSniff);
-//   can1.mailboxStatus();
-//   CANOpen_eMR_Init();
+  can1.begin();
+  can1.setBaudRate(500000);
+  can1.setMBFilter(ACCEPT_ALL);
+  can1.setMaxMB(16);
+  can1.enableFIFO();
+  can1.enableFIFOInterrupt();
+  can1.onReceive(canSniff);
+  can1.mailboxStatus();
+  CANOpen_eMR_Init();
 ///////////////////////////////////////////////////////////
     
 

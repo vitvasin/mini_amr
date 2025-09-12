@@ -1,5 +1,5 @@
 TO DO
-- Tune the collision monitor
+-<!--  Tune the collision monitor --> DONE
 - Port the new WP follower from ICE_LED
 - HIGHSPEED ODOM FLIP problem!!
 

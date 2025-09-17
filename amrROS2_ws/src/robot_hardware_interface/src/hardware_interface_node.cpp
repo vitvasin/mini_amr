@@ -138,7 +138,8 @@ private:
   sensor_msgs::msg::Imu msg_imu_;
   sensor_msgs::msg::BatteryState msg_batt_;
   sensor_msgs::msg::Range msg_range_left_, msg_range_center_, msg_range_right_;
-
+  std_msgs::msg::Int16 msg_charge_state_;
+  
   float ut_fov_;
   float ut_min_range_;
   float ut_max_range_;
@@ -285,6 +286,8 @@ private:
 
       batt_pub_->publish(msg_batt_);
     }
+      msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
+      charge_state_pub_->publish(msg_charge_state_);
   }
 };
 

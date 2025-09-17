@@ -299,6 +299,10 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     percentage_ = batt_p / 100.0f;   // %
     status_     = batt_s;
     update_batt_ = true;
+
+    uint16_t ir_charge_state = static_cast<int16_t>(buf[_IR_CHARGE_STATE_]);
+
+    ir_charge_state_ = ir_charge_state;
 }
 
 

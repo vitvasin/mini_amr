@@ -8,8 +8,12 @@ Panels:
         - /TF1/Frames1
         - /TF1/Tree1
         - /Controller1
+        - /Controller1/Local Costmap1
+        - /Controller1/VoxelGrid1
+        - /MarkerArray2
+        - /MarkerArray2/Topic1
       Splitter Ratio: 0.5833333134651184
-    Tree Height: 140
+    Tree Height: 364
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -84,6 +88,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         center_footprint:
           Alpha: 1
           Show Axes: false
@@ -118,11 +127,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         rear_caster_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rgbd_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -156,6 +160,16 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera_color_frame:
+          Value: true
+        camera_color_optical_frame:
+          Value: true
+        camera_depth_frame:
+          Value: true
+        camera_depth_optical_frame:
+          Value: true
+        camera_link:
+          Value: true
         center_footprint:
           Value: true
         center_ranger_link:
@@ -172,29 +186,9 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        oak:
-          Value: true
-        oak_imu_frame:
-          Value: true
-        oak_left_camera_frame:
-          Value: true
-        oak_left_camera_optical_frame:
-          Value: true
-        oak_model_origin:
-          Value: true
-        oak_rgb_camera_frame:
-          Value: true
-        oak_rgb_camera_optical_frame:
-          Value: true
-        oak_right_camera_frame:
-          Value: true
-        oak_right_camera_optical_frame:
-          Value: true
         odom:
           Value: true
         rear_caster_wheel_link:
-          Value: true
-        rgbd_frame:
           Value: true
         right_ranger_link:
           Value: true
@@ -210,6 +204,13 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
+                camera_link:
+                  camera_color_frame:
+                    camera_color_optical_frame:
+                      {}
+                  camera_depth_frame:
+                    camera_depth_optical_frame:
+                      {}
                 center_ranger_link:
                   {}
                 front_caster_wheel_link:
@@ -222,23 +223,7 @@ Visualization Manager:
                   {}
                 left_wheel_link:
                   {}
-                oak:
-                  oak_imu_frame:
-                    {}
-                  oak_left_camera_frame:
-                    oak_left_camera_optical_frame:
-                      {}
-                  oak_model_origin:
-                    {}
-                  oak_rgb_camera_frame:
-                    oak_rgb_camera_optical_frame:
-                      {}
-                  oak_right_camera_frame:
-                    oak_right_camera_optical_frame:
-                      {}
                 rear_caster_wheel_link:
-                  {}
-                rgbd_frame:
                   {}
                 right_ranger_link:
                   {}
@@ -556,36 +541,36 @@ Visualization Manager:
             Reliability Policy: Reliable
             Value: /local_costmap/published_footprint
           Value: true
-        - Alpha: 1
+        - Alpha: 0.10000000149011612
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 10
-            Min Value: -10
+            Max Value: 3.102280616760254
+            Min Value: 0.3402910530567169
             Value: true
           Axis: Z
-          Channel Name: intensity
+          Channel Name: z
           Class: rviz_default_plugins/PointCloud2
-          Color: 255; 255; 255
-          Color Transformer: RGB8
+          Color: 87; 227; 137
+          Color Transformer: FlatColor
           Decay Time: 0
           Enabled: true
           Invert Rainbow: false
           Max Color: 255; 255; 255
-          Max Intensity: 4096
+          Max Intensity: 10.59000015258789
           Min Color: 0; 0; 0
-          Min Intensity: 0
+          Min Intensity: 0.9900000691413879
           Name: VoxelGrid
           Position Transformer: XYZ
-          Selectable: true
-          Size (Pixels): 3
+          Selectable: false
+          Size (Pixels): 2
           Size (m): 0.009999999776482582
-          Style: Flat Squares
+          Style: Points
           Topic:
             Depth: 5
             Durability Policy: Volatile
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /local_costmap/voxel_marked_cloud
+            Value: /camera/camera/depth/color/points
           Use Fixed Frame: true
           Use rainbow: true
           Value: true
@@ -710,7 +695,7 @@ Visualization Manager:
         Value: /range/right
       Value: true
     - Class: rviz_default_plugins/Image
-      Enabled: true
+      Enabled: false
       Max Value: 1
       Median window: 5
       Min Value: 0
@@ -722,7 +707,7 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /image_raw
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz_default_plugins/Polygon
       Color: 129; 61; 156
@@ -748,6 +733,18 @@ Visualization Manager:
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /polygon_stop
+      Value: true
+    - Class: rviz_default_plugins/MarkerArray
+      Enabled: true
+      Name: MarkerArray
+      Namespaces:
+        {}
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /visualization_marker_array
       Value: true
   Enabled: true
   Global Options:
@@ -793,45 +790,50 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: -0.0008007623255252838
-      Class: rviz_default_plugins/TopDownOrtho
+      Class: rviz_default_plugins/XYOrbit
+      Distance: 4.518407821655273
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
+      Focal Point:
+        X: 1.2316230535507202
+        Y: 0.22664998471736908
+        Z: 0
+      Focal Shape Fixed Size: true
+      Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 84.61333465576172
+      Pitch: -0.04020331799983978
       Target Frame: <Fixed Frame>
-      Value: TopDownOrtho (rviz_default_plugins)
-      X: -0.4033854007720947
-      Y: -0.9892981052398682
+      Value: XYOrbit (rviz_default_plugins)
+      Yaw: 2.8623878955841064
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
   Docking:
-    collapsed: true
+    collapsed: false
   Height: 1011
   Hide Left Dock: false
-  Hide Right Dock: true
+  Hide Right Dock: false
   Image:
     collapsed: false
   Navigation 2:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd00000004000000000000015600000395fc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005d00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000100044006900730070006c006100790073010000003f000000cc000000cc00fffffffb00000018004e0061007600690067006100740069006f006e002000320100000111000001e3000001e300fffffffb0000001e005200650061006c00730065006e0073006500430061006d00650072006100000002c6000000c10000001700fffffffb000000100044006900730070006c006100790073000000030f000000cc000000cc00fffffffb0000000a0049006d00610067006501000002fa000000da0000001700ffffff000000010000014700000395fc0200000005fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073000000003f000000d0000000a900fffffffb0000000e0044006f0063006b0069006e00670000000115000001b50000016200fffffffb0000001000530065006c006500630074006f007200000002d000000104000000d300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000002430000039500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000004000000000000017600000395fc020000000cfb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005d00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261fb000000100044006900730070006c006100790073010000003f000001ac000000cc00fffffffb00000018004e0061007600690067006100740069006f006e0020003201000001f1000001e3000001e300fffffffb0000001e005200650061006c00730065006e0073006500430061006d00650072006100000003390000007e0000001700fffffffb000000100044006900730070006c006100790073000000030f000000cc000000cc00fffffffb0000000a0049006d00610067006500000003b90000001b0000001700ffffff000000010000012b00000395fc0200000005fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003f00000154000000a900fffffffb0000000e0044006f0063006b0069006e00670100000199000001620000016200fffffffb0000001000530065006c006500630074006f00720100000301000000d3000000d300fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000004420000003efc0100000002fb0000000800540069006d00650100000000000004420000000000000000fb0000000800540069006d00650100000000000004500000000000000000000004d30000039500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   RealsenseCamera:
     collapsed: false
   Selection:
     collapsed: false
   Selector:
-    collapsed: true
+    collapsed: false
   Tool Properties:
     collapsed: false
   Views:
-    collapsed: true
-  Width: 927
-  X: 82
+    collapsed: false
+  Width: 1920
+  X: 0
   Y: 32

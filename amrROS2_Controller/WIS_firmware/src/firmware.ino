@@ -218,7 +218,7 @@ const unsigned int control_interval = 30;  // 33 Hz motor update
 const unsigned int send_interval    = 20;  // 50 Hz odometry feedback
 const unsigned int imu_interval     = 40;  // 25 Hz IMU
 const unsigned int bms_interval     = 1000;// 1 Hz BMS
-const unsigned int sensor_interval  = 50;  // 20 Hz rangers
+const unsigned int sensor_interval  = 50; //50;  // 20 Hz rangers
 const unsigned int safety_interval  = 20;  // 50 Hz for safety
 
 unsigned long imu_time = 0;
@@ -986,62 +986,80 @@ void sensor_module_task()
 {
     int32_t buff;
     if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
-        range_left = Ultrasonics_1.getResponseBuffer(0);
-    else range_left = 999;
+        {range_left = Ultrasonics_1.getResponseBuffer(0);
+
+            if (range_left < 0 ) range_left = 0;
+            if (range_left > 3000 ) range_left = 3000;
+            
+        
+        }
+    else {range_left = 9999;}
+    delay(5);
     if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
+       { 
         range_center = Ultrasonics_2.getResponseBuffer(0);
-    else range_center = 999;
+            if (range_center < 0 ) range_center = 0;
+            if (range_center > 3000 ) range_center = 3000;
+    
+    }
+    else {range_center = 9999;}
+    delay(5);
     if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
+    {
         range_right = Ultrasonics_3.getResponseBuffer(0);
-    else range_right = 999;
+            if (range_right < 0 ) range_right = 0;
+            if (range_right > 3000 ) range_right = 3000;
+    }
+        else range_right = 9999;
+    delay(5);
     if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
         cliff = Sensor_module.getResponseBuffer(0);
-
+    delay(5);
     Serial5.printf("Range L: %d  C: %d  R: %d  Cliff: %d\n", range_left, range_center, range_right, cliff);
 
     uint8_t result;
-    // if(IR_Charge_state.readHoldingRegisters(0, 1) == IR_Charge_state.ku8MBSuccess)
-    // {
-    //     buff = IR_Charge_state.getResponseBuffer(0); // addr = 0
-    //     Serial5.print("Status Register = ");
-    //     Serial5.println(buff);
+    if(IR_Charge_state.readHoldingRegisters(0x00, 1) == IR_Charge_state.ku8MBSuccess)
+    {
+        buff = IR_Charge_state.getResponseBuffer(0); // addr = 0
+        // Serial5.print("Status Register = ");
+        // Serial5.println(buff);
 
-    //     //for debuf
-    //     switch (buff)
-    //     {
-    //     case 0:
-    //         // Serial5.println("Idle");
-    //         break;
-    //     case 10:
-    //         // Serial5.println("RobotStopBackward");
+        // //for debuf
+        // switch (buff)
+        // {
+        // case 0:
+        //     // Serial5.println("Idle");
+        //     break;
+        // case 10:
+        //     // Serial5.println("RobotStopBackward");
 
-    //         ///// for debug /////////////////////////////////////////////////////////////// DB
-    //         // result = IR_Charge_State.writeSingleRegister(1, 22);
-    //         // if (result == IR_Charge_State.ku8MBSuccess)
-    //         // {
-    //         //     Serial5.println("Sent: RobotReadyToCharge (20)");
-    //         // }else {
-    //         // Serial5.println("Error sending RobotReadyToCharge");
-    //         // }
-    //         //////////////////////////////////////////////////////////////////////////////// DB
-    //         break;
-    //     case 11:
-    //         // Serial5.println("RobotBattCharging");
-    //         break;
-    //     default:
-    //          Serial5.println("Unknown state");
-    //     }
-    //     Serial5.printf("IR Charge State : %d\n", buff);
-    //     pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+        //     ///// for debug /////////////////////////////////////////////////////////////// DB
+        //     // result = IR_Charge_State.writeSingleRegister(1, 22);
+        //     // if (result == IR_Charge_State.ku8MBSuccess)
+        //     // {
+        //     //     Serial5.println("Sent: RobotReadyToCharge (20)");
+        //     // }else {
+        //     // Serial5.println("Error sending RobotReadyToCharge");
+        //     // }
+        //     //////////////////////////////////////////////////////////////////////////////// DB
+        //     break;
+        // case 11:
+        //     // Serial5.println("RobotBattCharging");
+        //     break;
+        // default:
+        //      Serial5.println("Unknown state");
+        // }
+        Serial5.printf("IR Charge State : %d\n", buff);
+        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         
-    // }
-    // else
-    // {
-    //     buff = 99;
-    //     pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-    //     //Serial5.println("READ IR ERROR");
-    //     Serial5.println("Read IR Charge State error");
-    // }
+    }
+    else
+    {
+        buff = 99;
+        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+        //Serial5.println("READ IR ERROR");
+        Serial5.println("Read IR Charge State error");
+    }
     // range_center =1000;
 
     // pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
@@ -1196,7 +1214,7 @@ void setup()
     Ultrasonics_2.begin(2, ULTARSONICS_SERIAL);
     Ultrasonics_3.begin(3, ULTARSONICS_SERIAL);
     Sensor_module.begin(5, SENSORS_SERIAL);
-    //IR_Charge_state.begin(9, SENSORS_SERIAL);
+    IR_Charge_state.begin(9, SENSORS_SERIAL);
 
     BMS_SERIAL.begin(9600);
 
@@ -1219,5 +1237,7 @@ void loop()
     if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
     if (now - send_time > send_interval) { send_data_task(); send_time = now; }
+
+    delay(1); // yield to other tasks
     
 }

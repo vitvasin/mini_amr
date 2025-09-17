@@ -6,7 +6,7 @@ HardwareInterface::HardwareInterface(const std::string& port) : port_name(port),
         // Open the serial port
         serial_port.Open(port_name);
         serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_460800);
-        std::cout << "Serial port opened at port "<< port_name << " with baudrate 115200" << std::endl;
+        std::cout << "Serial port opened at port "<< port_name << " with baudrate 460800" << std::endl;
     }
     catch (const std::exception& e) {
         std::cerr << "Open the serial port error: " << e.what() << std::endl;
@@ -16,6 +16,8 @@ HardwareInterface::HardwareInterface(const std::string& port) : port_name(port),
         // Create the thread for receiving data
         std::thread receive_thread(&HardwareInterface::ReceiveData, this);
         receive_thread.detach();
+        // run_receive_thread = false;
+        // if (receive_thread.joinable()) receive_thread.join();
         std::cout << "Created receive data thread" << std::endl;
     }
     catch (const std::exception& e) {
@@ -170,9 +172,27 @@ void HardwareInterface::UpdateStatus(int status) {
 //     // }
 // }
 
+HardwareInterface::Velocities HardwareInterface::calculateLinearAndAngularVelocityFromRPM(float rpm_L, float rpm_R) {
+    const float wheel_diameter = 0.333f;                 // meters
+    const float wheel_circumference = 3.14159f * wheel_diameter; // meters
+    const float rpm_to_rps = 1.0f / 60.0f;               // convert RPM to revolutions per second
+    const float wheels_y_distance = 0.36f;               // distance between wheels in meters
+
+    float v_L = rpm_L * rpm_to_rps * wheel_circumference; // left wheel linear velocity (m/s)
+    float v_R = rpm_R * rpm_to_rps * wheel_circumference; // right wheel linear velocity (m/s)
+
+    float linear_velocity  = (v_L + v_R) / 2.0f;               // robot linear velocity (m/s)
+    float angular_velocity = (v_R - v_L) / wheels_y_distance;  // robot angular velocity (rad/s)
+
+    return {linear_velocity, angular_velocity};
+}
+
 void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
 {
-    if (len != 36) return;   // wrong frame size
+    // std::cout << "x_pos: " << x_pos << ", y_pos: " << y_pos << ", z_pos: " << z_pos << std::endl;
+    //std::cout << "Received len: " << len << std::endl;
+
+    if (len != 43) return;   // wrong frame size
     if (buf[0] != 0xFF) return; // header check
 
     // ----- IMU -----
@@ -192,18 +212,55 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     linear_acceleration.z = accz / 1000.0;
     update_imu_ = true;
 
-    // ----- ODOM -----
+    // // ----- ODOM -----
     int16_t vx = (int16_t)(buf[15] | (buf[16]<<8));
     int16_t vy = (int16_t)(buf[17] | (buf[18]<<8));
     int16_t wz = (int16_t)(buf[19] | (buf[20]<<8));
+    int16_t x_pos = (int16_t)(buf[36] | (buf[37]<<8));
+    int16_t y_pos = (int16_t)(buf[38] | (buf[39]<<8));
+    int16_t z_pos = (int16_t)(buf[40] | (buf[41]<<8));
+
+    // std::cout << "x_pos: " << x_pos << ", y_pos: " << y_pos << ", z_pos: " << z_pos << std::endl;
 
     odom_velocity.x = vx / 1000.0;
     odom_velocity.y = vy / 1000.0;
     odom_velocity.z = wz / 1000.0;
+    odom_pos.x = x_pos / 1000.0;
+    odom_pos.y = y_pos / 1000.0;
+    odom_pos.z = z_pos; //heading in rad 
     // odom_velocity.x = vx;
     // odom_velocity.y = vy;
     // odom_velocity.z = wz;
     update_odom_ = true;
+        // ----- ODOM -----
+    // int16_t vx = (int16_t)(buf[15] | (buf[16]<<8));
+    // int16_t vy = (int16_t)(buf[17] | (buf[18]<<8));
+    // int16_t wz = (int16_t)(buf[19] | (buf[20]<<8));
+
+    // int16_t RPM_1 = (int16_t)(buf[15] | (buf[16]<<8));
+    // int16_t RPM_2 = (int16_t)(buf[17] | (buf[18]<<8));
+    // int16_t wz = (int16_t)(buf[19] | (buf[20]<<8));
+    
+    
+    // // add decimal point
+    // float RPM_L = (RPM_1 / 10.0f); // left wheel RPM
+    // float RPM_R = (RPM_2 / 10.0f); // right wheel RPM
+    // Velocities linear_and_angular = HardwareInterface::calculateLinearAndAngularVelocityFromRPM(RPM_L, RPM_R);
+
+    // //printf("RPM_L: %.2f, RPM_R: %.2f, Linear: %.3f m/s, Angular: %.3f rad/s\n", RPM_L, RPM_R, linear_and_angular[0], linear_and_angular[1]);
+    // std::cout << "RPM_L: " << RPM_L << ", RPM_R: " << RPM_R << ", Linear: " << linear_and_angular.linear << " m/s, Angular: " << linear_and_angular.angular << " rad/s" << std::endl;
+
+    // odom_velocity.x = linear_and_angular.linear; // linear velocity in m/s
+    // odom_velocity.y = 0.0; // lateral velocity in m/s
+    // odom_velocity.z = linear_and_angular.angular; // angular velocity in rad/s  
+
+    // // odom_velocity.x = vx / 1000.0;
+    // // odom_velocity.y = vy / 1000.0;
+    // // odom_velocity.z = wz / 1000.0;
+    // // odom_velocity.x = vx;
+    // // odom_velocity.y = vy;
+    // // odom_velocity.z = wz;
+    // update_odom_ = true;
 
     // ----- Ranger -----
     int16_t r_right  = (int16_t)(buf[21] | (buf[22]<<8));
@@ -400,6 +457,25 @@ void HardwareInterface::SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& 
 //         }
 //     }
 // }
+void HardwareInterface::SetChargeState(uint16_t charge_state) {
+
+    try {
+        // int16_t v_x_int = static_cast<int16_t>(v_x * 1000);
+        // int16_t v_y_int = static_cast<int16_t>(v_y * 1000);
+        // int16_t v_z_int = static_cast<int16_t>(v_z * 1000);
+
+        std::vector<uint8_t> cmd = {
+            static_cast<uint8_t>(charge_state)
+        };
+
+        SendData(FUNC_CHARGE, cmd);
+        //std::cout << "Set Charge State to: " << charge_state << std::endl;
+       // std::cout << "Vx: " << v_x<< " --- Vy: " << v_y<< " --- Vz: " << v_z<< std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Set Charge state error: " << e.what() << std::endl;
+    }
+}
 
 void HardwareInterface::ReceiveData()
 {

@@ -11,7 +11,7 @@
 #include <deque>      // <-- needed for std::deque
 
 // -------- Shared Protocol Definition --------
-#define _PKG_LEN    36  // Total size of data frame (bytes)
+#define _PKG_LEN    43  // Total size of data frame (bytes)
 
 // Field indexes in the pkg_data
 #define _HEADER   0
@@ -40,6 +40,13 @@
 #define _ODOM_WZ_L     19
 #define _ODOM_WZ_H     20
 
+#define _ODOM_X_L     36
+#define _ODOM_X_H     37
+#define _ODOM_Y_L     38
+#define _ODOM_Y_H     39
+#define _ODOM_Z_L     40
+#define _ODOM_Z_H     41
+
 // --- Range (6 bytes) ---
 #define _RANGER_RIGHT_L   21
 #define _RANGER_RIGHT_H   22
@@ -59,9 +66,10 @@
 #define _BMS_PERCENT_L   32
 #define _BMS_PERCENT_H   33
 #define _BMS_STATUS_     34
+#define _IR_CHARGE_STATE_ 35
 
 // --- Checksum ---
-#define _CHK_SUM_   35
+#define _CHK_SUM_   42
 
 class HardwareInterface 
 {
@@ -82,10 +90,18 @@ public:
         float y = 0.0;
         float z = 0.0;
     };
+    
+    struct Velocities {
+        float linear;   // m/s
+        float angular;  // rad/s
+    };
+
+    static Velocities calculateLinearAndAngularVelocityFromRPM(float rpm_L, float rpm_R);
 
     three_dimension angular_velocity;
     three_dimension linear_acceleration;
     three_dimension odom_velocity;
+    three_dimension odom_pos;
 
     float range_left;
     float range_center;
@@ -95,6 +111,7 @@ public:
     float current_;
     float percentage_;
     uint8_t status_;
+    uint16_t ir_charge_state_;
 
     bool update_imu_;
     bool update_odom_;
@@ -110,6 +127,7 @@ public:
     ~HardwareInterface();
 
     void SetMotion(float v_x, float v_y, float v_z);
+    void SetChargeState(uint16_t charge_state); 
     void UpdateIP(char* addressBuffer);
     void UpdateStatus(int status);
 
@@ -125,6 +143,7 @@ private:
     const uint8_t FUNC_IP       = 0x05;
     const uint8_t FUNC_STATUS   = 0x06;
     const uint8_t FUNC_BATT     = 0x07;
+    const uint8_t FUNC_CHARGE     = 0x08;
 
     std::string port_name;
     std::thread receive_thread_;
@@ -136,6 +155,8 @@ private:
     void ParsePacket(const uint8_t* buf, size_t len);
     void SendData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& param);
     void ReceiveData();
+    
+
 
 };
 

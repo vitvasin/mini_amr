@@ -101,33 +101,169 @@ Kinematics::rpm Kinematics::getRPM(float linear_x, float linear_y, float angular
     return calculateRPM(linear_x, linear_y, angular_z);;
 }
 
+// Kinematics::velocities Kinematics::getVelocities(float rpm1, float rpm2, float rpm3, float rpm4)
+// {
+//     Kinematics::velocities vel;
+//     float average_rps_x;
+//     float average_rps_y;
+//     float average_rps_a;
+
+//     if(base_platform_ == DIFFERENTIAL_DRIVE)
+//     {
+//         rpm3 = 0.0;
+//         rpm4 = 0.0;
+//     }
+ 
+//     //convert average revolutions per minute to revolutions per second
+//     average_rps_x = ((float)(rpm1 + rpm2 + rpm3 + rpm4) / total_wheels_) / 60.0; // RPM
+//     vel.linear_x = average_rps_x * wheel_circumference_; // m/s
+
+//     //convert average revolutions per minute in y axis to revolutions per second
+//     average_rps_y = ((float)(-rpm1 + rpm2 + rpm3 - rpm4) / total_wheels_) / 60.0; // RPM
+//     if(base_platform_ == MECANUM)
+//         vel.linear_y = average_rps_y * wheel_circumference_; // m/s
+//     else
+//         vel.linear_y = 0;
+
+//     //convert average revolutions per minute to revolutions per second
+//     average_rps_a = ((float)(-rpm1 + rpm2 - rpm3 + rpm4) / total_wheels_) / 60.0;
+//     vel.angular_z =  (average_rps_a * wheel_circumference_) / (wheels_y_distance_ / 2.0); //  rad/s
+
+//     return vel;
+// }
+Kinematics::velocities Kinematics::getVelocities_filtered(float rpm1, float rpm2, float rpm3, float rpm4)
+{
+    Kinematics::velocities vel{0.0f, 0.0f, 0.0f};
+
+    // --- Validation (same as before, with Serial5.println) ---
+    if (total_wheels_ <= 0) {
+        Serial5.println("Error: total_wheels_ must be > 0");
+        return vel;
+    }
+    if (wheels_y_distance_ <= 0.0f) {
+        Serial5.println("Error: wheels_y_distance_ must be > 0");
+        return vel;
+    }
+
+    // Clamp inputs
+    auto clampRpm = [](float rpm) {
+        constexpr float MAX_RPM = 300.0f;
+        if (rpm > MAX_RPM)  return MAX_RPM;
+        if (rpm < -MAX_RPM) return -MAX_RPM;
+        return rpm;
+    };
+
+    rpm1 = clampRpm(rpm1);
+    rpm2 = clampRpm(rpm2);
+    rpm3 = clampRpm(rpm3);
+    rpm4 = clampRpm(rpm4);
+
+    // Adjust for drive type
+    int active_wheels = total_wheels_;
+    if (base_platform_ == DIFFERENTIAL_DRIVE) {
+        rpm3 = 0.0f;
+        rpm4 = 0.0f;
+        active_wheels = 2;
+    }
+
+    // --- Raw velocity computation (unfiltered) ---
+    float average_rps_x = ((rpm1 + rpm2 + rpm3 + rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    float raw_linear_x = average_rps_x * wheel_circumference_;
+    
+
+    float average_rps_y = ((-rpm1 + rpm2 + rpm3 - rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    float raw_linear_y = (base_platform_ == MECANUM) ? 
+                          average_rps_y * wheel_circumference_ : 0.0f;
+
+    float average_rps_a = ((-rpm1 + rpm2 - rpm3 + rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    float raw_angular_z = (average_rps_a * wheel_circumference_) / (wheels_y_distance_ / 2.0f);
+
+    // --- Apply low-pass filter ---
+    float k =0.5f;
+    filtered_linear_x_ = k * raw_linear_x + (1.0f - k) * filtered_linear_x_;
+    filtered_linear_y_ = k * raw_linear_y + (1.0f - k) * filtered_linear_y_;
+    filtered_angular_z_ = k * raw_angular_z + (1.0f - k) * filtered_angular_z_;
+
+    // Assign filtered outputs
+    vel.linear_x = filtered_linear_x_;
+    vel.linear_y = filtered_linear_y_;
+    vel.angular_z = filtered_angular_z_;
+
+    return vel;
+}
+
 Kinematics::velocities Kinematics::getVelocities(float rpm1, float rpm2, float rpm3, float rpm4)
 {
-    Kinematics::velocities vel;
-    float average_rps_x;
-    float average_rps_y;
-    float average_rps_a;
+    // Initialize with safe defaults
+    Kinematics::velocities vel{0.0f, 0.0f, 0.0f};
 
-    if(base_platform_ == DIFFERENTIAL_DRIVE)
-    {
-        rpm3 = 0.0;
-        rpm4 = 0.0;
+    // --- Input validation with Serial5 logs ---
+    if (total_wheels_ <= 0) {
+        Serial5.println("Error: total_wheels_ must be > 0");
+        return vel; // return safe zero velocities
     }
- 
-    //convert average revolutions per minute to revolutions per second
-    average_rps_x = ((float)(rpm1 + rpm2 + rpm3 + rpm4) / total_wheels_) / 60.0; // RPM
-    vel.linear_x = average_rps_x * wheel_circumference_; // m/s
+    if (wheels_y_distance_ <= 0.0f) {
+        Serial5.println("Error: wheels_y_distance_ must be > 0");
+        return vel;
+    }
 
-    //convert average revolutions per minute in y axis to revolutions per second
-    average_rps_y = ((float)(-rpm1 + rpm2 + rpm3 - rpm4) / total_wheels_) / 60.0; // RPM
-    if(base_platform_ == MECANUM)
-        vel.linear_y = average_rps_y * wheel_circumference_; // m/s
-    else
-        vel.linear_y = 0;
+    // Clamp inputs to reasonable range (adjust MAX_RPM per hardware)
+    auto clampRpm = [](float rpm) {
+        constexpr float MAX_RPM = 300.0f; // safe bound
+        if (rpm > MAX_RPM)  return MAX_RPM;
+        if (rpm < -MAX_RPM) return -MAX_RPM;
+        return rpm;
+    };
 
-    //convert average revolutions per minute to revolutions per second
-    average_rps_a = ((float)(-rpm1 + rpm2 - rpm3 + rpm4) / total_wheels_) / 60.0;
-    vel.angular_z =  (average_rps_a * wheel_circumference_) / (wheels_y_distance_ / 2.0); //  rad/s
+    rpm1 = clampRpm(rpm1);
+    rpm2 = clampRpm(rpm2);
+    rpm3 = clampRpm(rpm3);
+    rpm4 = clampRpm(rpm4);
+
+    // --- Adjust logic depending on platform type ---
+    int active_wheels = total_wheels_;
+    if (base_platform_ == DIFFERENTIAL_DRIVE) {
+        rpm3 = 0.0f;
+        rpm4 = 0.0f;
+        active_wheels = 2; // only two wheels contribute
+    }
+
+    Serial5.print("Input RPMs: ");
+    Serial5.print(rpm1); Serial5.print(", ");
+    Serial5.print(rpm2); Serial5.print(", ");
+    Serial5.print(rpm3); Serial5.print(", ");
+    Serial5.println(rpm4);
+
+    // --- Compute velocities ---
+    // Revolutions per second average (X)
+    float rpm_sum = rpm1 + rpm2 + rpm3 + rpm4;
+    Serial5.print("rpm_sum: "); Serial5.println(rpm_sum);
+    // float rpm_convert = rpm_sum * 0.0167f; // 1/60
+    // Serial5.print("rpm_convert: "); Serial5.println(rpm_convert);
+    float average_rps_x = rpm_sum * 0.0083f;
+    // float average_rps_x = ((rpm1 + rpm2 + rpm3 + rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    
+    vel.linear_x = average_rps_x * wheel_circumference_;
+    Serial5.print("average_rps_x "); Serial5.print(average_rps_x);
+    Serial5.print(", vel.linear_x: "); Serial5.println(vel.linear_x);
+
+    // Revolutions per second average (Y)
+    float average_rps_y = 0.0f; // ((-rpm1 + rpm2 + rpm3 - rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    if (base_platform_ == MECANUM) {
+        vel.linear_y = average_rps_y * wheel_circumference_;
+    } else {
+        vel.linear_y = 0.0f;
+    }
+
+    // Angular velocity (rotation around Z)
+    float average_rps_a = ((-rpm1 + rpm2 - rpm3 + rpm4) / static_cast<float>(active_wheels)) / 60.0f;
+    vel.angular_z = (average_rps_a * wheel_circumference_) / (wheels_y_distance_ / 2.0f);
+    // Serial5.print("average_rps_a "); Serial5.print(average_rps_a);
+    // Serial5.print(", vel.angular_z: "); Serial5.println(vel.angular_z);
+
+    // vel = k*vel_old + (1-k)*cmd_vel;           //  k = 0-1  k=0.5               
+    // vel_old = vel;
+    
 
     return vel;
 }

@@ -75,9 +75,9 @@
 #define MaxAcceleration_Obj       0x60C5
 #define ProfileAcceleration_Obj   0x6083
 #define ProfileDeceleration_Obj   0x6084
-#define ActualPosition_Obj        0x6062
+#define ActualPosition_Obj        0x6064
 //#define ActualVelocity_Obj        0x606B                      // Maxon
-#define ActualVelocity_Obj        0x6069                        // eMR Motor hub
+#define ActualVelocity_Obj        0x606C                        // eMR Motor hub 606C
 #define PositionWindow_Obj        0x6067
 #define SoftwarePositionLimit_Obj 0x607D
 #define HomingMethod_Obj          0x6098
@@ -443,6 +443,51 @@ uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
     return 0;  // not valid
 }
 
+uint8_t CANOpen_ReadActualPosObj(eMR_t *eMR)
+{
+    uint8_t data[8];
+    uint32_t node_id = eMR->cobid;
+
+    // Build SDO request for ActualVelocity (0x6069:00)
+    data[0] = RSDO_Expedited_4;  // 0x40 = upload request
+    data[1] = (uint8_t)(ActualPosition_Obj & 0xFF);
+    data[2] = (uint8_t)((ActualPosition_Obj >> 8) & 0xFF);
+    data[3] = 0x00;  // subIndex
+    data[4] = data[5] = data[6] = data[7] = 0x00;
+
+    // Send request
+    // Serial5.println("Request ActualVelocity Obj..");
+
+    CAN1_SendFrame(node_id, DLC, data);
+    
+
+        // Serial.print("  ID: 0x"); Serial.print(msg.id, HEX );
+        // Serial.print(" DATA: ");
+        // for ( uint8_t i = 0; i <msg.len ; i++ ) {
+        //     Serial.print(msg.buf[i],HEX); Serial.print(" ");
+        // }
+        // Serial.print("  TS: "); Serial.println(msg.timestamp);
+    
+    if (msg.buf[1] == (uint8_t)(ActualPosition_Obj & 0xFF) &&
+        msg.buf[2] == (uint8_t)((ActualPosition_Obj >> 8) & 0xFF)) 
+            {
+                // Ignore strict revPACKET.buf[0], just parse
+                eMR->ActualPosition =
+                    (int32_t)((uint32_t)msg.buf[4] |
+                            ((uint32_t)msg.buf[5] << 8) |
+                            ((uint32_t)msg.buf[6] << 16) |
+                            ((uint32_t)msg.buf[7] << 24));
+                return 1;
+            }
+            else if (msg.buf[0] == SDO_Error_Msg) // 0x80
+            {
+                eMR->Err_Flag = true;
+                eMR->ActualVelocity = 0;
+                return 0;  // error response
+            }
+     
+    return 0;  // not valid
+}
 
 // uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
 // {

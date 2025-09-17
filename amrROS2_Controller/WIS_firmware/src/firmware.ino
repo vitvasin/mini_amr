@@ -214,9 +214,9 @@ static const int RX_BUF_SIZE = 128;  // safe static buffer size
 
 // ---------------- Task Timing ----------------
 const unsigned int recv_interval    = 1;   // check UART almost every cycle
-const unsigned int control_interval = 30;  // 33 Hz motor update
-const unsigned int send_interval    = 20;  // 50 Hz odometry feedback
-const unsigned int imu_interval     = 40;  // 25 Hz IMU
+const unsigned int control_interval = 1;  // 33 Hz motor update
+const unsigned int send_interval    = 1;  // 50 Hz odometry feedback
+const unsigned int imu_interval     = 10;  // 25 Hz IMU
 const unsigned int bms_interval     = 1000;// 1 Hz BMS
 const unsigned int sensor_interval  = 50; //50;  // 20 Hz rangers
 const unsigned int safety_interval  = 20;  // 50 Hz for safety
@@ -677,10 +677,10 @@ void control_task(void *arg = nullptr)
         {
             // Re-init communication and re-enable torque on both drives
             
-            CANOpen_eMR_Init();
+           // CANOpen_eMR_Init();
            // eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
            // eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
-            delay(3000);
+           // delay(3000);
             emer_flag = false;
         }else
         {
@@ -985,33 +985,33 @@ void control_task(void *arg = nullptr)
 void sensor_module_task()
 {
     int32_t buff;
-    if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
-        {range_left = Ultrasonics_1.getResponseBuffer(0);
+    // if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
+    //     {range_left = Ultrasonics_1.getResponseBuffer(0);
 
-            if (range_left < 0 ) range_left = 0;
-            if (range_left > 3000 ) range_left = 3000;
+    //         if (range_left < 0 ) range_left = 0;
+    //         if (range_left > 3000 ) range_left = 3000;
             
         
-        }
-    else {range_left = 9999;}
-    delay(5);
-    if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
-       { 
-        range_center = Ultrasonics_2.getResponseBuffer(0);
-            if (range_center < 0 ) range_center = 0;
-            if (range_center > 3000 ) range_center = 3000;
+    //     }
+    // else {range_left = 9999;}
+    // delay(5);
+    // if (Ultrasonics_2.readHoldingRegisters(0x0101, 1) == Ultrasonics_2.ku8MBSuccess)
+    //    { 
+    //     range_center = Ultrasonics_2.getResponseBuffer(0);
+    //         if (range_center < 0 ) range_center = 0;
+    //         if (range_center > 3000 ) range_center = 3000;
     
-    }
-    else {range_center = 9999;}
-    delay(5);
-    if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
-    {
-        range_right = Ultrasonics_3.getResponseBuffer(0);
-            if (range_right < 0 ) range_right = 0;
-            if (range_right > 3000 ) range_right = 3000;
-    }
-        else range_right = 9999;
-    delay(5);
+    // }
+    // else {range_center = 9999;}
+    // delay(5);
+    // if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
+    // {
+    //     range_right = Ultrasonics_3.getResponseBuffer(0);
+    //         if (range_right < 0 ) range_right = 0;
+    //         if (range_right > 3000 ) range_right = 3000;
+    // }
+    //     else range_right = 9999;
+    // delay(5);
     if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
         cliff = Sensor_module.getResponseBuffer(0);
     delay(5);
@@ -1238,6 +1238,6 @@ void loop()
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
     if (now - send_time > send_interval) { send_data_task(); send_time = now; }
 
-    delay(1); // yield to other tasks
+    //delay(1); // yield to other tasks
     
 }

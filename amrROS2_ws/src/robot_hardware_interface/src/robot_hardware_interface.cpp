@@ -225,9 +225,9 @@ void HardwareInterface::ParsePacket(const uint8_t* buf, size_t len)
     odom_velocity.x = vx / 1000.0;
     odom_velocity.y = vy / 1000.0;
     odom_velocity.z = wz / 1000.0;
-    odom_pos.x = x_pos / 1000.0;
-    odom_pos.y = y_pos / 1000.0;
-    odom_pos.z = z_pos; //heading in rad 
+    // odom_pos.x = x_pos / 1000.0;
+    // odom_pos.y = y_pos / 1000.0;
+    // odom_pos.z = z_pos; //heading in rad 
     // odom_velocity.x = vx;
     // odom_velocity.y = vy;
     // odom_velocity.z = wz;

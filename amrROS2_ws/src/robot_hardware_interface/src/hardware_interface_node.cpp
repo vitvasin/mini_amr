@@ -46,50 +46,51 @@ public:
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
 
-    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(30ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";
     // Pose covariance for [x, y, z, roll, pitch, yaw]
-    msg_odom_.pose.covariance[0]  = 1e-3;   // x
-    msg_odom_.pose.covariance[7]  = 1e-3;   // y
-    msg_odom_.pose.covariance[14] = 1e6;    // z -> large, we don't trust z
-    msg_odom_.pose.covariance[21] = 1e6;    // roll -> unobservable
-    msg_odom_.pose.covariance[28] = 1e6;    // pitch -> unobservable
-    msg_odom_.pose.covariance[35] = 1e-2;   // yaw (heading) (more uncertain)
-    // msg_odom_.twist.covariance[0] = 0.0001;
-    // msg_odom_.twist.covariance[7] = 0.0001;
-    // msg_odom_.twist.covariance[35] = 0.0001;
-    msg_odom_.twist.covariance[0]  = 1e-3;   // vx: forward velocity, quite good
-    msg_odom_.twist.covariance[7]  = 1e6;    // vy: lateral velocity should be huge
-    msg_odom_.twist.covariance[14] = 1e6;    // vz: no info
-    msg_odom_.twist.covariance[21] = 1e6;    // vroll
-    msg_odom_.twist.covariance[28] = 1e6;    // vpitch
-    msg_odom_.twist.covariance[35] = 1e-2;   // vyaw: angular velocity from odom
+
+    msg_odom_.twist.covariance[0] = 0.0001;
+    msg_odom_.twist.covariance[7] = 0.0001;
+    msg_odom_.twist.covariance[35] = 0.0001;
+    // msg_odom_.pose.covariance[0]  = 1e-3;   // x
+    // msg_odom_.pose.covariance[7]  = 1e-3;   // y
+    // msg_odom_.pose.covariance[14] = 1e6;    // z -> large, we don't trust z
+    // msg_odom_.pose.covariance[21] = 1e6;    // roll -> unobservable
+    // msg_odom_.pose.covariance[28] = 1e6;    // pitch -> unobservable
+    // msg_odom_.pose.covariance[35] = 1e-2;   // yaw (heading) (more uncertain)
+    // msg_odom_.twist.covariance[0]  = 1e-3;   // vx: forward velocity, quite good
+    // msg_odom_.twist.covariance[7]  = 1e6;    // vy: lateral velocity should be huge
+    // msg_odom_.twist.covariance[14] = 1e6;    // vz: no info
+    // msg_odom_.twist.covariance[21] = 1e6;    // vroll
+    // msg_odom_.twist.covariance[28] = 1e6;    // vpitch
+    // msg_odom_.twist.covariance[35] = 1e-2;   // vyaw: angular velocity from odom
 
     msg_imu_.header.frame_id = "imu_frame";
-    // msg_imu_.angular_velocity_covariance[0] = 0.1199;
-    // msg_imu_.angular_velocity_covariance[4] = 0.5753;
-    // msg_imu_.angular_velocity_covariance[8] = 0.0267;
+    msg_imu_.angular_velocity_covariance[0] = 0.1199;
+    msg_imu_.angular_velocity_covariance[4] = 0.5753;
+    msg_imu_.angular_velocity_covariance[8] = 0.0267;
     
-    // msg_imu_.linear_acceleration_covariance[0] = 0.0088;
-    // msg_imu_.linear_acceleration_covariance[4] = 0.0550;
-    // msg_imu_.linear_acceleration_covariance[8] = 0.0267;
+    msg_imu_.linear_acceleration_covariance[0] = 0.0088;
+    msg_imu_.linear_acceleration_covariance[4] = 0.0550;
+    msg_imu_.linear_acceleration_covariance[8] = 0.0267;
 
-    // Orientation covariance (roll, pitch, yaw)
-    msg_imu_.orientation_covariance[0] = 1e6;   // roll (ignored in 2D)
-    msg_imu_.orientation_covariance[4] = 1e6;   // pitch (ignored in 2D)
-    msg_imu_.orientation_covariance[8] = 0.05;  // yaw (we care about this)
+    // // Orientation covariance (roll, pitch, yaw)
+    // msg_imu_.orientation_covariance[0] = 1e6;   // roll (ignored in 2D)
+    // msg_imu_.orientation_covariance[4] = 1e6;   // pitch (ignored in 2D)
+    // msg_imu_.orientation_covariance[8] = 0.05;  // yaw (we care about this)
 
-    // Angular velocity covariance (wx, wy, wz)
-    msg_imu_.angular_velocity_covariance[0] = 1e6;   // ωx
-    msg_imu_.angular_velocity_covariance[4] = 1e6;   // ωy
-    msg_imu_.angular_velocity_covariance[8] = 0.03;  // ωz (gyro around vertical)
+    // // Angular velocity covariance (wx, wy, wz)
+    // msg_imu_.angular_velocity_covariance[0] = 1e6;   // ωx
+    // msg_imu_.angular_velocity_covariance[4] = 1e6;   // ωy
+    // msg_imu_.angular_velocity_covariance[8] = 0.03;  // ωz (gyro around vertical)
 
-    // Linear acceleration covariance (ax, ay, az)
-    msg_imu_.linear_acceleration_covariance[0] = 1e6;   // ax (not used in 2D)
-    msg_imu_.linear_acceleration_covariance[4] = 1e6;   // ay (not used in 2D)
-    msg_imu_.linear_acceleration_covariance[8] = 1e6;   // az (not used in 2D)
+    // // Linear acceleration covariance (ax, ay, az)
+    // msg_imu_.linear_acceleration_covariance[0] = 1e6;   // ax (not used in 2D)
+    // msg_imu_.linear_acceleration_covariance[4] = 1e6;   // ay (not used in 2D)
+    // msg_imu_.linear_acceleration_covariance[8] = 1e6;   // az (not used in 2D)
 
     ut_fov_       = 20.0;
     ut_min_range_ = 0.03;
@@ -139,7 +140,7 @@ private:
   sensor_msgs::msg::BatteryState msg_batt_;
   sensor_msgs::msg::Range msg_range_left_, msg_range_center_, msg_range_right_;
   std_msgs::msg::Int16 msg_charge_state_;
-  
+
   float ut_fov_;
   float ut_min_range_;
   float ut_max_range_;
@@ -188,22 +189,22 @@ private:
     {
       msg_odom_.header.stamp = current_time;
 
-      // uint64_t dt = current_time.nanoseconds() - prev_update_;
-      // double dt_seconds = static_cast<double>(dt) / 1.0e9;
+      uint64_t dt = current_time.nanoseconds() - prev_update_;
+      double dt_seconds = static_cast<double>(dt) / 1.0e9;
 
-      // double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z *(-1)) * dt_seconds; // radians
-      // double cos_h = cos(heading_);
-      // double sin_h = sin(heading_);
-      // double delta_x = (static_cast<double>(hardware_interface->odom_velocity.x) * cos_h - static_cast<double>(hardware_interface->odom_velocity.y) * sin_h) * dt_seconds; // m
-      // double delta_y = (static_cast<double>(hardware_interface->odom_velocity.x) * sin_h + static_cast<double>(hardware_interface->odom_velocity.y) * cos_h) * dt_seconds; // m
+      double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z *(-1)) * dt_seconds; // radians
+      double cos_h = cos(heading_);
+      double sin_h = sin(heading_);
+      double delta_x = (static_cast<double>(hardware_interface->odom_velocity.x) * cos_h - static_cast<double>(hardware_interface->odom_velocity.y) * sin_h) * dt_seconds; // m
+      double delta_y = (static_cast<double>(hardware_interface->odom_velocity.x) * sin_h + static_cast<double>(hardware_interface->odom_velocity.y) * cos_h) * dt_seconds; // m
 
-      // pos_x_ += delta_x;
-      // pos_y_ += delta_y;
-      // heading_ += delta_heading;
+      pos_x_ += delta_x;
+      pos_y_ += delta_y;
+      heading_ += delta_heading;
 
-      pos_x_ = static_cast<double>(hardware_interface->odom_pos.x) / 1000.0;
-      pos_y_ = static_cast<double>(hardware_interface->odom_pos.y) / 1000.0;
-      heading_ = static_cast<double>(hardware_interface->odom_pos.z);
+      // pos_x_ = static_cast<double>(hardware_interface->odom_pos.x) / 1000.0;
+      // pos_y_ = static_cast<double>(hardware_interface->odom_pos.y) / 1000.0;
+      // heading_ = static_cast<double>(hardware_interface->odom_pos.z);
 
       float q[4];
       odom_euler_to_quat(0.0, 0.0, static_cast<float>(heading_), q);

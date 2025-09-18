@@ -1223,6 +1223,7 @@ void setup()
     // sendTimer.begin(sendTimerISR, 20000);  // 20ms interval
 }
 
+
 // ---------------- Superloop ------------------
 void loop()
 {
@@ -1237,7 +1238,5 @@ void loop()
     if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
     if (now - send_time > send_interval) { send_data_task(); send_time = now; }
-
-    //delay(1); // yield to other tasks
     
 }

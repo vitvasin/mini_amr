@@ -149,8 +149,8 @@ controller_server:
       beta: 0.4
       lambda: 2.0
       v_linear_min: 0.1
-      v_linear_max: 0.8
-      v_angular_max: 0.8
+      v_linear_max: 1.0
+      v_angular_max: 1.5
       v_angular_min_in_place: 1.0 #0.50
       slowdown_radius: 1.5
       use_collision_detection: true
@@ -206,7 +206,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.30
+        inflation_radius: 0.4
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"
         enabled: true

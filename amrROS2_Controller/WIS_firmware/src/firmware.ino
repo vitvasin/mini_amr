@@ -1,10 +1,13 @@
 #define USE_SMR_CONFIG
+
 #include <Arduino.h>
 #include <ModbusMaster.h>
 #include <Adafruit_MCP23X17.h>
+
 #include <stdio.h>
 #include <vector>
 #include "math.h"
+
 #include "config.h"
 #include "kinematics.h"
 #include "JY61P.h"
@@ -20,23 +23,29 @@ public:
           prev_count(0),
           position_m(0.0f),
           initialized(false) {}
+
     float update(uint32_t raw_count) {
         if (!initialized) {
             prev_count = raw_count;
             initialized = true;
             return position_m;
         }
+
         int64_t delta = (int64_t)raw_count - (int64_t)prev_count;
         // handle 32-bit rollover
         if (delta > (int64_t)(UINT32_MAX / 2)) delta -= (int64_t)UINT32_MAX;
         else if (delta < -(int64_t)(UINT32_MAX / 2)) delta += (int64_t)UINT32_MAX;
+
         prev_count = raw_count;
+
         float delta_revs = (float)delta / (float)CPR;
         float delta_m = delta_revs * wheel_circumference;
         position_m += delta_m;
         return position_m; // cumulative displacement [m]
     }
+
     float getPosition() const { return position_m; }
+
 private:
     const uint32_t CPR;
     const float wheel_circumference;
@@ -44,17 +53,21 @@ private:
     float position_m;
     bool initialized;
 };
+
 // Encoder readers for left/right drives
 EncoderReader left_encoder(16384, 0.165f);
 EncoderReader right_encoder(16384, 0.165f);
+
 static constexpr float WHEEL_CPR = 16384.0f;
 // static constexpr float WHEEL_DIAMETER = 0.165f;   // meters
 static constexpr float WHEELBASE = 0.333f;        // meters between wheels
+
 // Track last positions for delta calculation
 float last_left_pos_m  = 0.0f;
 float last_right_pos_m = 0.0f;
 // Robot pose (for debugging if you want)
 float x=0.0f, y=0.0f, theta=0.0f;
+
 // ---------------- Debug Flags ----------------
 #define DEBUG false
 #define DEBUG_IMU false
@@ -67,10 +80,12 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define DEBUG_OLED false
 #define DEBUG_SAFTY false
 #define DEBUG_BATT false
+
 // ---------------- Protocol -------------------
 #define HEAD 0xFF
 #define HOST_ID 0x00
 #define DEVICE_ID 0x01
+
 #define FUNC_MOTION 0x01
 #define FUNC_IMU 0x02
 #define FUNC_ODOM 0x03
@@ -79,11 +94,14 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
 #define FUNC_CHARGE 0x08
+
 // ---------------- Pkg data frame -----------------
 #define _PKG_LEN    43  // Total bytes: header + host + size + payload + checksum
+
 #define _HEADER   0
 #define _HOST_ID  1
 #define _PKG_SIZE 2
+
 // --- IMU (12 bytes) ---
 #define _IMU_ROLL_L    3
 #define _IMU_ROLL_H    4
@@ -97,6 +115,7 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define _IMU_ACCY_H    12
 #define _IMU_ACCZ_L    13
 #define _IMU_ACCZ_H    14
+
 // --- ODOM (6 bytes) ---
 #define _ODOM_VX_L     15
 #define _ODOM_VX_H     16
@@ -104,12 +123,14 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define _ODOM_VY_H     18
 #define _ODOM_WZ_L     19
 #define _ODOM_WZ_H     20
+
 #define _ODOM_X_L     36
 #define _ODOM_X_H     37
 #define _ODOM_Y_L     38
 #define _ODOM_Y_H     39
 #define _ODOM_Z_L     40
 #define _ODOM_Z_H     41
+
 // --- RANGE (6 bytes) ---
 #define _RANGER_RIGHT_L   21
 #define _RANGER_RIGHT_H   22
@@ -117,8 +138,10 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define _RANGER_CENTER_H  24
 #define _RANGER_LEFT_L    25
 #define _RANGER_LEFT_H    26
+
 // --- SAFETY (1 byte) ---
 #define _SAFETY_       27   // bits: xxxx xyzw (emergency, bumper, cliff etc)
+
 // --- BMS (7 bytes for your platform) ---
 #define _BMS_VOLTAGE_L   28
 #define _BMS_VOLTAGE_H   29
@@ -128,29 +151,37 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define _BMS_PERCENT_H   33
 #define _BMS_STATUS_     34
 #define _IR_CHARGE_STATE_ 35
+
 #define _CHK_SUM_        42   // Final byte
 //--------------------------------------------------
+
 uint8_t pkg_data[_PKG_LEN];   // Global buffer
+
 // ---------------- Hardware -------------------
 #define MAX485_DE 4
 #define MAX485_RE 5
 #define TEENSY_RS485_DIR_PIN 22
+
 #define SENSORS_SERIAL Serial2
 #define BMS_SERIAL Serial1
 #define ULTARSONICS_SERIAL Serial2
+
 // ---------------- Devices --------------------
 ModbusMaster Sensor_module;
 ModbusMaster Ultrasonics_1; 
 ModbusMaster Ultrasonics_2; 
 ModbusMaster Ultrasonics_3; 
 ModbusMaster IR_Charge_state;
+
 int RS485_DE = 4;
 int RS485_RE = 5;
+
 // ---------------- Sensors State --------------
 int16_t range_left;
 int16_t range_center;
 int16_t range_right;
 uint16_t cliff;
+
 uint8_t imu2send[12];
 uint8_t odom2send[6];
 uint8_t batt2send[7];
@@ -159,6 +190,7 @@ bool imu_ready;
 bool odom_ready;
 bool batt_ready;
 bool range_ready;
+
 // ---------------- Control --------------------
 Kinematics kinematics(
     Kinematics::SMR_BASE,
@@ -168,12 +200,18 @@ Kinematics kinematics(
     MOTOR_POWER_MAX_VOLTAGE,
     0.165f,
     0.333f);
+
 Kinematics::velocities cmd_vel;
+
 unsigned long prev_cmd_time = 0;
+
 Adafruit_MCP23X17 mcp;
+
 bool cliff_state, bumper_state, emer_state, stop;
 bool connection_failed;
+
 static const int RX_BUF_SIZE = 128;  // safe static buffer size
+
 // ---------------- Task Timing ----------------
 const unsigned int recv_interval    = 1;   // check UART almost every cycle
 const unsigned int control_interval = 1;  // 33 Hz motor update
@@ -182,6 +220,7 @@ const unsigned int imu_interval     = 10;  // 25 Hz IMU
 const unsigned int bms_interval     = 1000;// 1 Hz BMS
 const unsigned int sensor_interval  = 50; //50;  // 20 Hz rangers
 const unsigned int safety_interval  = 20;  // 50 Hz for safety
+
 unsigned long imu_time = 0;
 unsigned long control_time = 0;
 unsigned long bms_time = 0;
@@ -189,16 +228,20 @@ unsigned long sensor_time = 0;
 unsigned long safety_time = 0;
 unsigned long send_time = 0;
 unsigned long recv_time = 0;
+
 // --- Non-blocking parser state ---
 #define RX_BUFFER_MAX 128
+
 static uint8_t rx_buffer[RX_BUFFER_MAX];
 static uint8_t rx_index = 0;
 static uint8_t rx_expected_length = 0;
+
 // --- BMS state machine ---
 static uint8_t bms_buf[50];
 static uint8_t bms_index = 0;
 static unsigned long last_bms_request = 0;
 const unsigned int bms_request_interval = 1000; // every 1s
+
 // ---------------- LED status --------------------
 int LED = 13;        // LED status TeensyMicromod
 int LED_RUN = 32;    // G9 - Teensy pin 32, MicroMod pad 65
@@ -208,6 +251,8 @@ uint8_t alarm_mode_prev;
 uint8_t alarm_mode = 0;
 uint8_t led_mode = 0;
 uint8_t range_limit = 100;  // 200 = 20cm
+
+
 
 // Latest BMS floats filled when valid packet received
 uint8_t batt_status = 0;
@@ -222,10 +267,13 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
         int16_t packed_v_x = (data[1] << 8) | data[0];
         int16_t packed_v_y = (data[3] << 8) | data[2];
         int16_t packed_w_z = (data[5] << 8) | data[4];
+
         cmd_vel.linear_x = packed_v_x / 1000.0;
         cmd_vel.linear_y = packed_v_y / 1000.0;
         cmd_vel.angular_z = packed_w_z / 1000.0;
+
         prev_cmd_time = millis();
+
         if (DEBUG_MOTION)
         {
             Serial.printf("Vx: %f, Vy: %f, Wz: %f\n", cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
@@ -250,6 +298,7 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
                 //Serial5.println("Error sending state to robot");
                 }
 
+
             }else if (charge_state == 22)
             {
                 result = IR_Charge_state.writeSingleRegister(1, 22); // Robot is charging
@@ -261,10 +310,12 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
                 //Serial5.println("Error sending state to robot");
                 }
 
+
             }
         }
     }
 }
+
 // ---------------- Receive Data Task ----------
 void recive_data_task(void *parameter = nullptr)
 {
@@ -272,6 +323,7 @@ void recive_data_task(void *parameter = nullptr)
     while (Serial.available() > 0)
     {
         uint8_t byte_in = Serial.read();
+
         // Step 1: header check
         if (rx_index == 0)
         {
@@ -284,6 +336,7 @@ void recive_data_task(void *parameter = nullptr)
         else
         {
             rx_buffer[rx_index++] = byte_in;
+
             // Step 2: determine expected length
             if (rx_index == 3) // got HEAD + device_id + len
             {
@@ -294,6 +347,7 @@ void recive_data_task(void *parameter = nullptr)
                     rx_index = 0;
                 }
             }
+
             // Step 3: check if full frame received
             if (rx_expected_length > 0 && rx_index == (rx_expected_length + 1)) // +1 for HEAD
             {
@@ -302,6 +356,7 @@ void recive_data_task(void *parameter = nullptr)
                 for (uint8_t i = 0; i < rx_index - 1; i++) checksum += rx_buffer[i];
                 checksum &= 0xFF;
                 uint8_t rx_checksum = rx_buffer[rx_index - 1];
+
                 if (checksum == rx_checksum)
                 {
                     uint8_t device_id = rx_buffer[1];
@@ -310,6 +365,7 @@ void recive_data_task(void *parameter = nullptr)
                         uint8_t func = rx_buffer[3];
                         uint8_t data_len = rx_expected_length - 4; // exclude header, dev, len, func
                         uint8_t *data = &rx_buffer[4];
+
                         if (DEBUG_RECEIVE) Serial5.println("Frame OK");
                         parse_data(func, data, data_len);
                     }
@@ -318,6 +374,7 @@ void recive_data_task(void *parameter = nullptr)
                 {
                     if (DEBUG_RECEIVE) Serial5.println("Checksum fail");
                 }
+
                 // Reset for next frame
                 rx_index = 0;
                 rx_expected_length = 0;
@@ -325,22 +382,28 @@ void recive_data_task(void *parameter = nullptr)
         }
     }
 }
+
 // ---------------- Send Data ------------------
 void send_data(uint8_t FUNC_TYPE, uint8_t *param, size_t param_len)
 {
     const size_t MAX_PACKET_SIZE = 64;
     uint8_t cmd[MAX_PACKET_SIZE];
+
     size_t cmd_len = param_len + 5; 
     if (cmd_len > MAX_PACKET_SIZE) return; // prevent overflow
+
     cmd[0] = HEAD;
     cmd[1] = HOST_ID;
     cmd[2] = cmd_len - 1;
     cmd[3] = FUNC_TYPE;
     memcpy(&cmd[4], param, param_len);
+
     uint8_t checksum = 0;
     for (size_t i = 0; i < cmd_len - 1; i++) checksum += cmd[i];
     cmd[cmd_len - 1] = checksum & 0xFF;
+
     Serial.write(cmd, cmd_len);
+
     if (DEBUG_SEND)
     {
         Serial5.print("Sent [FUNC "); Serial5.print(FUNC_TYPE, HEX); Serial5.print("]: ");
@@ -348,6 +411,7 @@ void send_data(uint8_t FUNC_TYPE, uint8_t *param, size_t param_len)
         Serial5.println();
     }
 }
+
 // ---------------- IMU Task -------------------
 void imu_update_task(void *arg = nullptr)
 {
@@ -357,12 +421,14 @@ void imu_update_task(void *arg = nullptr)
         (JY61P.getGyroZ() / 180) * 3.14
     };
     float imu_accel_g[3] = { JY61P.getAccX(), JY61P.getAccY(), JY61P.getAccZ() };
+
     int16_t roll  = (int16_t)(imu_gyro_dps[0] * 1000);
     int16_t pitch = (int16_t)(imu_gyro_dps[1] * 1000);
     int16_t yaw   = (int16_t)(imu_gyro_dps[2] * 1000);
     int16_t acc_x = (int16_t)(imu_accel_g[0] * 1000);
     int16_t acc_y = (int16_t)(imu_accel_g[1] * 1000);
     int16_t acc_z = (int16_t)(imu_accel_g[2] * 1000);
+
     pkg_data[_IMU_ROLL_L]  = roll & 0xFF;
     pkg_data[_IMU_ROLL_H]  = (roll >> 8) & 0xFF;
     pkg_data[_IMU_PITCH_L] = pitch & 0xFF;
@@ -376,6 +442,7 @@ void imu_update_task(void *arg = nullptr)
     pkg_data[_IMU_ACCZ_L]  = acc_z & 0xFF;
     pkg_data[_IMU_ACCZ_H]  = (acc_z >> 8) & 0xFF;
 }
+
 // ---------------- BMS Task -------------------
 void poll_bms()
 {
@@ -385,6 +452,7 @@ void poll_bms()
         SendDataToBMS(VOLT_AMP_CMD);     
         last_bms_request = millis();
     }
+
     // Step B: accumulate incoming bytes
     while (BMS_SERIAL.available())
     {
@@ -393,6 +461,7 @@ void poll_bms()
         {
             bms_buf[bms_index++] = c;
         }
+
         // Simple heuristic: check minimum length for packet
         if (bms_index >= 13) // enough for 0x90 packet
         {
@@ -411,21 +480,26 @@ void poll_bms()
         }
     }
 }
+
 void parse_bms_packet(uint8_t *Buf, uint8_t len)
 {
     if (Buf[2] == 0x90) // voltage/current/SOC frame
     {
         unsigned int BattVolt = ((unsigned)Buf[4]<<8) | Buf[5];
         fBattVolt = BattVolt * 0.1f;
+
         int BattCurrent = ((int)Buf[8]<<8) | Buf[9];
         fBattCurrent = (BattCurrent - 30000) * 0.1f;
+
         unsigned int BattSOC = ((unsigned)Buf[10]<<8) | Buf[11];
         fBattSOC = BattSOC * 0.1f;
+
         // Determine status
         if (fBattSOC >= 100.0) batt_status = 4;  // full
         else if (fBattCurrent > 0) batt_status = 1; // charging
         else if (fBattCurrent < 0) batt_status = 2; // discharging
         else batt_status = 0; // unknown
+
         update_batt_ = true;
     }
     else if (Buf[2] == 0x93) // info frame
@@ -437,27 +511,35 @@ void parse_bms_packet(uint8_t *Buf, uint8_t len)
         update_batt_ = true;
     }
 }
+
 // ---------------- BMS Task -------------------
 void bms_task()
 {
     // Step A: poll non-blocking reader
     poll_bms();
+
     // Step B: if new packet parsed, update pkg_data
     if (update_batt_)
     {
         int16_t voltage    = (int16_t)(fBattVolt * 100);     // scale to centivolts
         int16_t current    = (int16_t)(fBattCurrent * 100);  // scale to centiamps
         int16_t percentage = (int16_t)(fBattSOC * 100);      // scale to centi%
+
         pkg_data[_BMS_VOLTAGE_L] = voltage & 0xFF;
         pkg_data[_BMS_VOLTAGE_H] = (voltage >> 8) & 0xFF;
+
         pkg_data[_BMS_CURRENT_L] = current & 0xFF;
         pkg_data[_BMS_CURRENT_H] = (current >> 8) & 0xFF;
+
         pkg_data[_BMS_PERCENT_L] = percentage & 0xFF;
         pkg_data[_BMS_PERCENT_H] = (percentage >> 8) & 0xFF;
+
         pkg_data[_BMS_STATUS_]   = batt_status & 0xFF;
+
         update_batt_ = false; // clear flag until next packet
     }
 }
+
 // ---------------- ODOM/Control ---------------
 void update_odometry() {
     static unsigned long last_time = millis();
@@ -520,6 +602,7 @@ void update_odometry() {
     
     odom_ready = true;
 }
+
 void control_task(void *arg = nullptr) {
     static bool emer_flag = false;
     
@@ -560,15 +643,18 @@ void control_task(void *arg = nullptr) {
     // Update odometry
     update_odometry();
 }
-// ---------------- Sensor Task -----------------
+
+// ---------------- Sensor Task -------------------
 void sensor_module_task()
 {
     int32_t buff;
     // if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
     //     {range_left = Ultrasonics_1.getResponseBuffer(0);
+
     //         if (range_left < 0 ) range_left = 0;
     //         if (range_left > 3000 ) range_left = 3000;
             
+        
     //     }
     // else {range_left = 9999;}
     // delay(5);
@@ -592,12 +678,14 @@ void sensor_module_task()
     if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
         cliff = Sensor_module.getResponseBuffer(0);
     delay(5);
-    Serial5.printf("Range L: %d  C: %d  R: %d  Cliff: %d\n", range_left, range_center, range_right, cliff);
+   // Serial5.printf("Range L: %d  C: %d  R: %d  Cliff: %d\n", range_left, range_center, range_right, cliff);
+
     uint8_t result;
     if(IR_Charge_state.readHoldingRegisters(0x00, 1) == IR_Charge_state.ku8MBSuccess)
     {
         buff = IR_Charge_state.getResponseBuffer(0); // addr = 0
-       // Serial5.printf("IR Charge State : %d\n", buff);
+        
+     //   Serial5.printf("IR Charge State : %d\n", buff);
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         
     }
@@ -606,9 +694,10 @@ void sensor_module_task()
         buff = 99;
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         //Serial5.println("READ IR ERROR");
-       // Serial5.println("Read IR Charge State error");
+        Serial5.println("Read IR Charge State error");
     }
     // range_center =1000;
+
     // pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
     // pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
     // pkg_data[_RANGER_CENTER_L] = range_center & 0xFF;
@@ -623,16 +712,20 @@ void sensor_module_task()
     pkg_data[_RANGER_RIGHT_H]  = (300 >> 8) & 0xFF;
     
     range_ready = true;
+
     bool A = (range_left < range_limit);
     bool B = (range_center < range_limit);
     bool C = (range_right < range_limit);
+
     if (stop || emer_state || connection_failed)
         A = B = C = true;
+
     alarm_mode = (static_cast<uint8_t>(A) << 2) |
                 (static_cast<uint8_t>(B) << 1) |
                 (static_cast<uint8_t>(C));
     
     Sensor_module.writeSingleRegister(1, alarm_mode);
+
     if (cmd_vel.linear_x == 0 && cmd_vel.angular_z == 0)
         {
             led_mode = 0;
@@ -649,6 +742,7 @@ void sensor_module_task()
         {
             led_mode = 3;
         }
+
     if (led_mode != led_mode_prev)
     {
         if (DEBUG)
@@ -657,10 +751,13 @@ void sensor_module_task()
         Sensor_module.writeSingleRegister(2, led_mode);
         // delay(10);
     }
+
     led_mode_prev = led_mode;
     alarm_mode_prev = alarm_mode;
     A = B = C = false;   
+
 }
+
 // ---------------- Safety ---------------------
 void safty_task()
 {
@@ -674,20 +771,24 @@ void safty_task()
     safety |= (cliff_state  ? 0x01 : 0);
     pkg_data[_SAFETY_] = safety;
 }
+
 // ---------------- Send Task ------------------
 void send_data_task()
 {
     pkg_data[_HEADER]   = HEAD;
     pkg_data[_HOST_ID]  = HOST_ID;
     pkg_data[_PKG_SIZE] = _PKG_LEN - 1; // exclude checksum
+
     // Compute checksum
     uint8_t checksum = 0;
     for (uint8_t i = 0; i < _PKG_LEN - 1; i++) {
         checksum += pkg_data[i];
     }
     pkg_data[_CHK_SUM_] = checksum & 0xFF;
+
     // Send entire frame
     Serial.write(pkg_data, _PKG_LEN);
+
     if (DEBUG_SEND) {
         Serial5.println("Sent pkg_data:");
         for (int i=0; i<_PKG_LEN; i++) {
@@ -698,6 +799,7 @@ void send_data_task()
     }
 }
 
+
 // ---------------- Setup ----------------------
 void setup()
 {
@@ -706,30 +808,36 @@ void setup()
     pinMode(LED_RUN, OUTPUT);
     pinMode(MAX485_RE, OUTPUT);
     pinMode(MAX485_DE, OUTPUT);
+
     mcp.begin_I2C(0x21);
     for (uint8_t i = 0; i < 16; i++)
         mcp.pinMode(i, (i > 7) ? INPUT_PULLUP : OUTPUT);
     mcp.digitalWrite(7, HIGH);
+
     Serial.begin(460800);
-    //Serial5.begin(115200);
+    Serial5.begin(115200);
+
     can1.begin();
     can1.setBaudRate(500000);
     can1.setMBFilter(ACCEPT_ALL);
     can1.distribute();
     CANOpen_eMR_Init();
-    
-    // //-----------  CAN Init ----------------------
+
+
     SENSORS_SERIAL.begin(115200);
     Ultrasonics_1.begin(1, ULTARSONICS_SERIAL);
     Ultrasonics_2.begin(2, ULTARSONICS_SERIAL);
     Ultrasonics_3.begin(3, ULTARSONICS_SERIAL);
     Sensor_module.begin(5, SENSORS_SERIAL);
     IR_Charge_state.begin(9, SENSORS_SERIAL);
+
     BMS_SERIAL.begin(9600);
+
     JY61P.startIIC();
     JY61P.caliIMU();
     // sendTimer.begin(sendTimerISR, 20000);  // 20ms interval
 }
+
 
 // ---------------- Superloop ------------------
 void loop()
@@ -738,6 +846,7 @@ void loop()
     
     //can1.events(); 
     recive_data_task(); 
+
     if (now - control_time > control_interval) { control_task(); control_time = now; }
     if (now - imu_time > imu_interval) { imu_update_task(); imu_time = now; }
     if (now - bms_time > bms_interval) { bms_task(); bms_time = now; }

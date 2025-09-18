@@ -551,14 +551,14 @@ void update_odometry() {
     // Read encoder positions
     // Left motor
     eMR.cobid = TSDO_COBID + axis2;
-    CANOpen_ReadActualPosObj(&eMR);
+    CANOpen_ReadActualPosObj_Safe(&eMR);
     float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
-    
+    delay(5);
     // Right motor
     eMR.cobid = TSDO_COBID + axis1;
-    CANOpen_ReadActualPosObj(&eMR);
+    CANOpen_ReadActualPosObj_Safe(&eMR);
     float right_pos_m = right_encoder.update((uint32_t)eMR.ActualPosition);
-    
+    delay(5);
     // Calculate position deltas
     float d_left = left_pos_m - last_left_pos_m;
     float d_right = (right_pos_m - last_right_pos_m) * (-1); // right wheel is mounted in opposite direction
@@ -636,7 +636,9 @@ void control_task(void *arg = nullptr) {
         else {
             // Normal operation: send target velocity
             eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+            delay(5);
             eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+            delay(5);
         }
     }
     
@@ -844,7 +846,7 @@ void loop()
 {
     unsigned long now = millis();
     
-    //can1.events(); 
+
     recive_data_task(); 
 
     if (now - control_time > control_interval) { control_task(); control_time = now; }

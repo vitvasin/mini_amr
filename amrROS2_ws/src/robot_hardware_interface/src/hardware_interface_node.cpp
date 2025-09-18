@@ -189,6 +189,12 @@ private:
     RCLCPP_INFO(this->get_logger(), "Battery percentage: %.2f%%", hardware_interface->percentage_);
     RCLCPP_INFO(this->get_logger(), "Battery voltage: %.2fV", hardware_interface->voltage_);
     RCLCPP_INFO(this->get_logger(), "Battery current: %.2fA", hardware_interface->current_);
+
+    if (hardware_interface->percentage_ < 85.0) {
+    RCLCPP_WARN(this->get_logger(), "Low Battery! Only %.2f%% left", hardware_interface->percentage_ );
+    std::string cmd = "notify-send '⚠️ Low Battery' 'Robot battery is below 50%'";
+    std::system(cmd.c_str());
+}
   }
 
 

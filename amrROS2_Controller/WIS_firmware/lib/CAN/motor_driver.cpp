@@ -488,6 +488,82 @@ uint8_t CANOpen_ReadActualPosObj(eMR_t *eMR)
      
     return 0;  // not valid
 }
+bool CAN1_ReceiveFrameEx(CAN_message_t &rxMsg)
+{
+    unsigned long timer_out = millis();
+    rxMsg.id = 0x000000;   // reset
+
+    while ((rxMsg.id == 0x000000) && (millis() - timer_out < ReceiveTimeOut))
+    {
+        if (can1.read(rxMsg))  // read fills rxMsg
+        {
+            if (rxMsg.id == 0x000701) eMR.bootup_ID1 = 0x000701;
+            if (rxMsg.id == 0x000702) eMR.bootup_ID2 = 0x000702;
+            return true; // got a frame
+        }
+    }
+
+    return false; // timeout
+}
+
+bool CAN1_SendFrameEx(uint32_t node_id, uint32_t data_size, uint8_t* data, CAN_message_t &rxMsg)
+{
+    CAN_message_t txMsg;
+    txMsg.id = node_id;
+    txMsg.len = data_size;
+    memcpy(&txMsg.buf[0], &data[0], data_size);
+    can1.write(txMsg);
+
+    return CAN1_ReceiveFrameEx(rxMsg);
+}
+
+uint8_t CANOpen_ReadActualPosObj_Safe(eMR_t *eMR)
+{
+    uint8_t data[8] = {0}; // Initialize to zero
+    CAN_message_t rxMsg;   // Use a LOCAL message struct, not the global 'msg'
+    uint32_t node_id = eMR->cobid;
+    uint32_t expected_response_id = RSDO_COBID + (node_id - TSDO_COBID); // e.g., 0x580 + node_id
+
+    // Build SDO request for ActualPosition (0x6064:00)
+    data[0] = RSDO_Expedited_4; // 0x40 = upload request
+    data[1] = (uint8_t)(ActualPosition_Obj & 0xFF);
+    data[2] = (uint8_t)((ActualPosition_Obj >> 8) & 0xFF);
+    data[3] = 0x00; // subIndex
+
+    // Send the request and wait for a response in our local rxMsg
+    if (CAN1_SendFrameEx(node_id, DLC, data, rxMsg))
+    {
+        // --- ADDED VALIDATION ---
+        // 1. Check if the response is from the correct CAN ID
+        // 2. Check if it's a successful SDO Upload Response (cmd=0x43 for 4 bytes)
+        // 3. Check if the object index matches our request
+        if (rxMsg.id == expected_response_id &&
+            rxMsg.buf[0] == 0x43 && 
+            rxMsg.buf[1] == (uint8_t)(ActualPosition_Obj & 0xFF) &&
+            rxMsg.buf[2] == (uint8_t)((ActualPosition_Obj >> 8) & 0xFF))
+        {
+            // The response is valid, parse the position data
+            eMR->ActualPosition =
+                (int32_t)(((uint32_t)rxMsg.buf[4])       |
+                          ((uint32_t)rxMsg.buf[5] << 8)  |
+                          ((uint32_t)rxMsg.buf[6] << 16) |
+                          ((uint32_t)rxMsg.buf[7] << 24));
+            return 1; // Success
+        }
+        // Check for an SDO Abort message from the correct node
+        else if (rxMsg.id == expected_response_id && rxMsg.buf[0] == SDO_Error_Msg) // 0x80
+        {
+            eMR->Err_Flag = true;
+            eMR->ActualPosition = 0; // CORRECTLY zero the position on error
+            // Optionally, you could parse the abort code from rxMsg.buf[4-7]
+            return 0; // Error response received
+        }
+    }
+    
+    // If CAN1_SendFrameEx returned false (timeout) or validation failed, return 0.
+    // The old eMR->ActualPosition value remains, but the calling function knows it's stale.
+    return 0; 
+}
 
 // uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
 // {
@@ -525,34 +601,8 @@ uint8_t CANOpen_ReadActualPosObj(eMR_t *eMR)
 //     return 0;  // not valid
 // }
 
-bool CAN1_ReceiveFrameEx(CAN_message_t &rxMsg)
-{
-    unsigned long timer_out = millis();
-    rxMsg.id = 0x000000;   // reset
 
-    while ((rxMsg.id == 0x000000) && (millis() - timer_out < ReceiveTimeOut))
-    {
-        if (can1.read(rxMsg))  // read fills rxMsg
-        {
-            if (rxMsg.id == 0x000701) eMR.bootup_ID1 = 0x000701;
-            if (rxMsg.id == 0x000702) eMR.bootup_ID2 = 0x000702;
-            return true; // got a frame
-        }
-    }
 
-    return false; // timeout
-}
-
-bool CAN1_SendFrameEx(uint32_t node_id, uint32_t data_size, uint8_t* data, CAN_message_t &rxMsg)
-{
-    CAN_message_t txMsg;
-    txMsg.id = node_id;
-    txMsg.len = data_size;
-    memcpy(&txMsg.buf[0], &data[0], data_size);
-    can1.write(txMsg);
-
-    return CAN1_ReceiveFrameEx(rxMsg);
-}
 
 uint8_t CANOpen_ReadActualVelocityObjEx(eMR_t *eMR)
 {

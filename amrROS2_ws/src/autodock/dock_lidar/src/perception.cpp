@@ -291,8 +291,11 @@ bool DockPerception::getPose(geometry_msgs::msg::PoseStamped& pose,
     try {
       //listener_.waitTransform(frame, pose.header.frame_id);
       //listener_.transformPose(frame, pose, pose);
-      auto transform = tf_buffer_->lookupTransform(frame, pose.header.frame_id, pose.header.stamp);
-      tf2::doTransform(pose, pose, transform);
+      if (tf_buffer_->canTransform(frame, pose.header.frame_id, pose.header.stamp, tf2::durationFromSec(0.1)))
+      {
+        auto transform = tf_buffer_->lookupTransform(frame, pose.header.frame_id, pose.header.stamp);
+        tf2::doTransform(pose, pose, transform);
+      }
     } catch (const tf2::TransformException& ex) {
       std::cout << "Couldn't transform dock pose\n";
       return false;
@@ -338,8 +341,11 @@ void DockPerception::callback(
       //listener_.waitTransform(tracking_frame_, dock_.header.frame_id);
 
       //listener_.transformPose(tracking_frame_, dock_, dock_);
-      auto transform = tf_buffer_->lookupTransform(tracking_frame_,  dock_.header.frame_id, dock_.header.stamp);
-      tf2::doTransform(dock_, dock_, transform);
+      if (tf_buffer_->canTransform(frame, pose.header.frame_id, pose.header.stamp, tf2::durationFromSec(0.1)))
+      {
+        auto transform = tf_buffer_->lookupTransform(frame,  pose.header.frame_id, pose.header.stamp);
+       tf2::doTransform(dock_, dock_, transform);
+      }
     } catch (const tf2::TransformException& ex) {
       std::cout << "Couldn't transform dock pose to tracking frame";
       return;
@@ -526,7 +532,10 @@ DockCandidatePtr DockPerception::extract(laser_processor::SampleSet* cluster) {
     //listener_.waitTransform(tracking_frame_, cluster->header.frame_id);
 
     //t_frame = listener_.getTransform(tracking_frame_, cluster->header.frame_id);
-    t_frame = tf_buffer_->lookupTransform(tracking_frame_,  cluster->header.frame_id, cluster->header.stamp);
+    if (tf_buffer_->canTransform(tracking_frame_, cluster->header.frame_id, cluster->header.stamp, tf2::durationFromSec(0.1)))
+    {
+      t_frame = tf_buffer_->lookupTransform(tracking_frame_,  cluster->header.frame_id, cluster->header.stamp);
+    }
     
   } catch (const tf2::TransformException& ex) {
     std::cout << "ERROR. COULD NOT TRANSFORM POINT\n";

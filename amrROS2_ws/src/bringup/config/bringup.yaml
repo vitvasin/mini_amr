@@ -79,18 +79,18 @@ scan_to_scan_filter_chain:
       type: laser_filters/LaserScanBoxFilter
       params: #[0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22]
         box_frame: laser
-        min_x: -0.25
-        max_x: 0.25
-        min_y: -0.25
-        max_y: 0.25
-        min_z: -1.0
-        max_z: 1.0
+        min_x: -0.27
+        max_x: 0.27
+        min_y: -0.27
+        max_y: 0.27
+        min_z: -0.1
+        max_z: 0.1
 
     filter2:
         name: speckle_filter
         type: laser_filters/LaserScanSpeckleFilter
         params:
-          filter_type: 0
+          filter_type: 1
           max_range: 2.0
           max_range_difference: 0.1
           filter_window: 7

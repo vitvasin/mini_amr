@@ -189,7 +189,7 @@ unsigned long prev_cmd_time = 0;
 unsigned long master_time = 0, imu_update_time = 0, control_update_time = 0, bms_update_time = 0, sensor_update_time;
 unsigned long safety_time = 0, send_data_time = 0, receive_data_time = 0;
 //const unsigned int imu_interval = 45, control_interval = 30, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 30, receive_data_interval;
-const unsigned int imu_interval = 10, control_interval = 10, bms_interval = 1000, sensor_interval = 50, safety_interval = 50, send_data_interval = 10, receive_data_interval;
+const unsigned int imu_interval = 30, control_interval = 10, bms_interval = 1000, sensor_interval = 50, safety_interval = 50, send_data_interval = 10, receive_data_interval;
 
 unsigned char pkg_data[_PKG_LEN];
 

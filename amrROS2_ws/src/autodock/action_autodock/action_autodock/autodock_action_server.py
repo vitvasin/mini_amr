@@ -26,7 +26,7 @@ import os
 import math
 
 
-
+from enum import Enum, auto, IntEnum
 #from rclpy.qos import qos_profile_default
 
 
@@ -56,7 +56,7 @@ import threading
 # Enables publishers, subscribers, and action servers to be in a single node
 from rclpy.callback_groups import ReentrantCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
-from std_msgs.msg import String, Bool
+from std_msgs.msg import String, Bool, Int16
 
 import numpy as np
 
@@ -72,8 +72,18 @@ dock_pose = Pose()
 found_dock = False
 event_obj = None
 
-is_charge = False
+class ChargerState(IntEnum):
+    IDLE = 0
+    READY = 10
+    CHARGING = 11
+    IR_ERROR = 99
 
+charger_state = ChargerState.IDLE
+
+class CmdCharger(IntEnum):
+    START_CHARGING = 20
+    BATTERY_FULL   = 21
+    STOP_CHARGING  = 22
 
 class Robot_Pose(Node):
          
@@ -180,17 +190,24 @@ class Charge_Status(Node):
         super().__init__('charge_status')
         self.callback_group = ReentrantCallbackGroup()
         self.create_subscription(
-            Bool,
-            'charge_state',  # Replace with your actual topic name
+            Int16,
+            'ir_charge_state',  # Replace with your actual topic name
             self.update_status,
             callback_group = ReentrantCallbackGroup(),
             qos_profile=1) 
     
-    def update_status(self, msg):
+    def update_status(self, msg: Int16):
         # Your custom logic here
         # Access laser scan data using msg.ranges, msg.intensities, etc.
-        global is_charge
-        is_charge = msg.data
+        global charger_state
+        try:
+            charge_s = ChargerState(msg.data)
+            if (charger_state != charge_s):
+                charger_state = charge_s
+                self.get_logger().info(f"IR Charge State: {charger_state.name} ({msg.data})")
+        except ValueError:
+            self.get_logger().warn(f"Unknown IR charge state received: {msg.data}")
+         
         
 
 class AutodockActionServer(Node):
@@ -269,6 +286,8 @@ class AutodockActionServer(Node):
         event_obj = threading.Event()
 
         self.publisher_ = self.create_publisher(String, 'command_dock', 10)
+
+        self.charge_state_pub = self.create_publisher(Int16, 'set_charge_state', 10)
 
         #tf_listener = TransformListener(tf_buffer,self)
         
@@ -765,7 +784,39 @@ class AutodockActionServer(Node):
         twist.linear.x = 0.0
         self.pub.publish(twist)
         
-    
+     # ฟังก์ชันส่งค่า charge state
+    def set_charge_state(self, state: CmdCharger):
+        msg = Int16()
+        msg.data = state.value
+        self.charge_state_pub.publish(msg)
+        self.get_logger().info(f'Published charge state: {state.name} ({state.value})')
+
+    def set_charge_state_with_confirm(self, state: CmdCharger, retries: int = 3, delay: float = 1.0):
+        """
+        ส่งคำสั่ง set_charge_state แล้วตรวจสอบว่า IR state = CHARGING
+        ถ้าไม่ใช่จะส่งใหม่สูงสุด retries ครั้ง
+        """
+        for attempt in range(1, retries + 1):
+            # ส่งค่า
+            self.set_charge_state(state)
+
+            # รอให้ callback update ค่า IR state
+            time.sleep(delay)
+
+            # ตรวจสอบ feedback
+            global charger_state
+            if charger_state == ChargerState.CHARGING:
+                self.get_logger().info(f'Confirm: Robot is CHARGING (after {attempt} attempt(s)) ✅')
+                return True
+            else:
+                self.get_logger().warn(
+                    f'Attempt {attempt}: IR state = {self.current_ir_state.name if self.current_ir_state else "Unknown"}'
+                )
+
+        self.get_logger().error('Failed to confirm CHARGING after retries ❌')
+        return False
+
+
     def move_open_loop_check_charge(self, speed, duration, accel_duration=0.2, decel_duration=0.2):
         """
         เคลื่อนที่ด้วยความเร็วแบบ smooth (accel/decel) เป็นเวลาที่กำหนด
@@ -790,8 +841,9 @@ class AutodockActionServer(Node):
         twist.angular.x = twist.angular.y = twist.angular.z = 0.0
 
         # --- Acceleration Phase ---
+        global charger_state
         for _ in range(accel_steps):
-            if is_charge:
+            if (charger_state == ChargerState.READY):
                 break
             current_speed += speed_step
             if (speed > 0 and current_speed > speed) or (speed < 0 and current_speed < speed):
@@ -802,7 +854,7 @@ class AutodockActionServer(Node):
 
         # --- Constant Speed Phase ---
         for _ in range(cruise_steps):
-            if is_charge:
+            if (charger_state == ChargerState.READY):
                 break
             twist.linear.x = float(speed)
             self.pub.publish(twist)
@@ -810,7 +862,7 @@ class AutodockActionServer(Node):
 
         # --- Deceleration Phase ---
         for _ in range(decel_steps):
-            if is_charge:
+            if (charger_state == ChargerState.READY):
                 break
             current_speed -= speed_step
             if (speed > 0 and current_speed < 0) or (speed < 0 and current_speed > 0):
@@ -822,7 +874,16 @@ class AutodockActionServer(Node):
         # --- Final Stop ---
         twist.linear.x = 0.0
         self.pub.publish(twist)
-    
+
+        #start charger
+        #ต้องตรวจสอบสถานะแบตเตอรี่ก่อน ----Todo------
+        #self.set_charge_state(CmdCharger.START_CHARGING)
+        success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,5,0.5)
+        if success:
+            self.get_logger().info("Charging started successfully")
+        else:
+            self.get_logger().error("Charging failed to start")
+
     '''
     def move_open_loop_check_charge(self,speed,duration):
         timeout = time.time()+duration #seconds
@@ -1178,7 +1239,9 @@ class AutodockActionServer(Node):
         #angular_speed = 0.1
         #linear_speed = 0.1 #forward
         self.cal_undock_point(self.undock_dist_step2)
-        
+        self.set_charge_state(CmdCharger.STOP_CHARGING)
+        time.sleep(2.0)
+
         self.send_feedback(goal_handle,1,'start undocking.......')
         self.move_open_loop(self.undock_speed_step1,self.undock_time_step1)
         

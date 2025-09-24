@@ -22,7 +22,7 @@
                          topic_name="planner_selector"/>
                          
         <!-- Planner Execution + Local Recovery -->
-        <RecoveryNode number_of_retries="-1" name="ComputePathToPose">
+        <RecoveryNode number_of_retries="1" name="ComputePathToPose">
           <ComputePathToPose goal="{goal}" path="{path}" 
                              planner_id="{selected_planner}"
                              error_code_id="{compute_path_error_code}"/>
@@ -34,7 +34,7 @@
         </RecoveryNode>
         
         <!-- Controller Execution + Local Recovery -->
-        <RecoveryNode number_of_retries="-1" name="FollowPath">
+        <RecoveryNode number_of_retries="1" name="FollowPath">
           <FollowPath path="{path}" controller_id="{selected_controller}"
                       error_code_id="{follow_path_error_code}"/>
           <Sequence>

@@ -285,15 +285,15 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
         {
             uint8_t result;
             charge_state = data[0];
-            // Serial5.print("Charge state: ");
-            // Serial5.println(charge_state);
+             Serial5.print("Charge state: ");
+             Serial5.println(charge_state);
             
             if (charge_state == 20)
             {
                 result = IR_Charge_state.writeSingleRegister(1, 20); // Robot is ready to charge
                 if (result == IR_Charge_state.ku8MBSuccess)
                 {
-                   // Serial5.println("Sent: RobotReadyToCharge (20)");
+                    Serial5.println("Sent: RobotReadyToCharge (20)");
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
@@ -305,13 +305,24 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             
                 if (result == IR_Charge_state.ku8MBSuccess)
                 {
-                  //  Serial5.println("Sent: StopCharging (22)");
+                    Serial5.println("Sent: StopCharging (22)");
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
 
 
             }
+        }
+    }
+
+     if (func == FUNC_STATUS)
+    {
+        static uint32_t LedRosComm = millis();
+        if ((millis() - LedRosComm) > 1000)
+        {
+            digitalWrite(LED_RUN, !digitalRead(LED_RUN)); // For ROS Communication
+            // Serial5.printf("ROS comm start.\n");
+            LedRosComm = millis();
         }
     }
 }
@@ -605,12 +616,15 @@ void update_odometry() {
 
 void control_task(void *arg = nullptr) {
     static bool emer_flag = false;
+    static uint32_t LedControl = millis();
     
     // Handle command timeout
     if ((millis() - prev_cmd_time > 100) || stop || emer_state) {
         cmd_vel.linear_x = 0.0;
         cmd_vel.linear_y = 0.0;
         cmd_vel.angular_z = 0.0;
+    }else {
+        if (millis() - LedControl > 200) { digitalWrite(LED_STATUS, !digitalRead(LED_STATUS)); LedControl = millis(); }
     }
     
     // Calculate required RPM
@@ -845,6 +859,7 @@ void setup()
 void loop()
 {
     unsigned long now = millis();
+    static uint32_t LedActivity = millis();
     
 
     recive_data_task(); 
@@ -855,5 +870,6 @@ void loop()
     if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
     if (now - send_time > send_interval) { send_data_task(); send_time = now; }
+    if (now - LedActivity > 200 ){digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); LedActivity = now; }
     
 }

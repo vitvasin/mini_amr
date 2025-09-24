@@ -46,7 +46,7 @@ public:
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
 
-    timer_update_data_ = create_wall_timer(1ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(20ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
     Battery_report = create_wall_timer(300s, std::bind(&HardwareInterfaceNode::batteryUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";

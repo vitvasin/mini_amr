@@ -214,8 +214,8 @@ static const int RX_BUF_SIZE = 128;  // safe static buffer size
 
 // ---------------- Task Timing ----------------
 const unsigned int recv_interval    = 1;   // check UART almost every cycle
-const unsigned int control_interval = 1;  // 33 Hz motor update
-const unsigned int send_interval    = 1;  // 50 Hz odometry feedback
+const unsigned int control_interval = 1000;  // 33 Hz motor update
+const unsigned int send_interval    = 10;  // 50 Hz odometry feedback
 const unsigned int imu_interval     = 10;  // 25 Hz IMU
 const unsigned int bms_interval     = 1000;// 1 Hz BMS
 const unsigned int sensor_interval  = 50; //50;  // 20 Hz rangers
@@ -285,15 +285,15 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
         {
             uint8_t result;
             charge_state = data[0];
-             Serial5.print("Charge state: ");
-             Serial5.println(charge_state);
+             //Serial5.print("Charge state: ");
+             //Serial5.println(charge_state);
             
             if (charge_state == 20)
             {
                 result = IR_Charge_state.writeSingleRegister(1, 20); // Robot is ready to charge
                 if (result == IR_Charge_state.ku8MBSuccess)
                 {
-                    Serial5.println("Sent: RobotReadyToCharge (20)");
+                    //Serial5.println("Sent: RobotReadyToCharge (20)");
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
@@ -305,7 +305,7 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             
                 if (result == IR_Charge_state.ku8MBSuccess)
                 {
-                    Serial5.println("Sent: StopCharging (22)");
+                    //Serial5.println("Sent: StopCharging (22)");
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
@@ -551,25 +551,70 @@ void bms_task()
     }
 }
 
+volatile int32_t g_left_motor_position = 0;
+volatile int32_t g_right_motor_position = 0;
+
+void process_can_messages() {
+  // Check if a new message is available from your CAN library
+
+    if (msg.id == 0x380 + Motor_ID1) { // Assuming Motor_ID1 is the RIGHT motor
+      g_right_motor_position =
+          (int32_t)(((uint32_t)msg.buf[2])       |
+                    ((uint32_t)msg.buf[3] << 8)  |
+                    ((uint32_t)msg.buf[4] << 16) |
+                    ((uint32_t)msg.buf[5] << 24));
+
+    } else if (msg.id == 0x380 + Motor_ID2) { // Assuming Motor_ID2 is the LEFT motor
+      g_left_motor_position =
+          (int32_t)(((uint32_t)msg.buf[2])       |
+                    ((uint32_t)msg.buf[3] << 8)  |
+                    ((uint32_t)msg.buf[4] << 16) |
+                    ((uint32_t)msg.buf[5] << 24));
+    }else {
+      // Unknown message ID, ignore or handle as needed
+        Serial.print("Unknown CAN ID: ");
+        Serial.println(msg.id, HEX);
+    }
+    // You can add more 'else if' blocks here to handle other messages
+  
+}
 // ---------------- ODOM/Control ---------------
 void update_odometry() {
     static unsigned long last_time = millis();
     unsigned long now = millis();
+    //float left_pos_m, right_pos_m;
+    uint8_t status;
     float dt = (now - last_time) / 1000.0f;
     if (dt <= 0) dt = 0.02f; // fallback
     last_time = now;
     
     // Read encoder positions
-    // Left motor
-    eMR.cobid = TSDO_COBID + axis2;
-    CANOpen_ReadActualPosObj_Safe(&eMR);
-    float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
-    delay(5);
+    // // Left motor
+    // // eMR.cobid = TSDO_COBID + axis2;
+    // eMR.cobid = DKE_TPDO3 + axis2; // use TPDO3 for less jitter
+    // // CANOpen_ReadActualPosObj_Safe(&eMR);
+    // CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
+    // //Serial.print("Left pos: ");
+    // //Serial.println((uint32_t)eMR.ActualPosition);
+    // float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
+    // delay(1);
     // Right motor
-    eMR.cobid = TSDO_COBID + axis1;
-    CANOpen_ReadActualPosObj_Safe(&eMR);
+    Sync_message(&eMR);  // send SYNC message
+    eMR.cobid = DKE_TPDO3 + axis1;
+    // CANOpen_ReadActualPosObj_Safe(&eMR);
+    CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
     float right_pos_m = right_encoder.update((uint32_t)eMR.ActualPosition);
-    delay(5);
+    //delay(1);
+    eMR.cobid = DKE_TPDO3 + axis2; // use TPDO3 for less jitter
+    CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
+    float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
+
+    
+    Serial.print("L: ");
+    Serial.print(left_pos_m, 4);
+    Serial.print(" R: ");
+    Serial.println(right_pos_m, 4);
+    
     // Calculate position deltas
     float d_left = left_pos_m - last_left_pos_m;
     float d_right = (right_pos_m - last_right_pos_m) * (-1); // right wheel is mounted in opposite direction
@@ -586,6 +631,9 @@ void update_odometry() {
     x += d_center * cos(theta + d_theta/2.0f);
     y += d_center * sin(theta + d_theta/2.0f);
     theta += d_theta;
+    // Serial.print("X: "); Serial.print(x, 4);
+    // Serial.print(" Y: "); Serial.print(y, 4);
+    // Serial.print(" Th: "); Serial.println(theta, 4);
     
     // Pack into pkg_data (mm/s, mrad/s with ×1000 scaling)
     auto clamp16 = [](float x) -> int16_t {
@@ -597,7 +645,9 @@ void update_odometry() {
     int16_t Vx = clamp16(v);
     int16_t Vy = 0;          // no lateral motion in diff drive
     int16_t Wz = clamp16(w);
+    // Serial.print("Vx: "); Serial.println(Vx);
     
+
     pkg_data[_ODOM_VX_L] = Vx & 0xFF;
     pkg_data[_ODOM_VX_H] = (Vx >> 8) & 0xFF;
     pkg_data[_ODOM_VY_L] = Vy & 0xFF;
@@ -620,11 +670,11 @@ void control_task(void *arg = nullptr) {
     
     // Handle command timeout
     if ((millis() - prev_cmd_time > 100) || stop || emer_state) {
-        cmd_vel.linear_x = 0.0;
+        cmd_vel.linear_x = 0.1;
         cmd_vel.linear_y = 0.0;
         cmd_vel.angular_z = 0.0;
     }else {
-        if (millis() - LedControl > 200) { digitalWrite(LED_STATUS, !digitalRead(LED_STATUS)); LedControl = millis(); }
+        //if (millis() - LedControl > 200) { digitalWrite(LED_STATUS, !digitalRead(LED_STATUS)); LedControl = millis(); }
     }
     
     // Calculate required RPM
@@ -650,13 +700,14 @@ void control_task(void *arg = nullptr) {
         else {
             // Normal operation: send target velocity
             eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
-            delay(5);
+           // delay(1);
             eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
-            delay(5);
+            //delay(1);
         }
     }
-    
+    //Sync_message(&eMR); // Send SYNC after setting velocity
     // Update odometry
+    //process_can_messages();
     update_odometry();
 }
 
@@ -710,7 +761,7 @@ void sensor_module_task()
         buff = 99;
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         //Serial5.println("READ IR ERROR");
-        Serial5.println("Read IR Charge State error");
+        //Serial5.println("Read IR Charge State error");
     }
     // range_center =1000;
 
@@ -864,12 +915,13 @@ void loop()
 
     recive_data_task(); 
 
+    
     if (now - control_time > control_interval) { control_task(); control_time = now; }
     if (now - imu_time > imu_interval) { imu_update_task(); imu_time = now; }
     if (now - bms_time > bms_interval) { bms_task(); bms_time = now; }
     if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
-    if (now - send_time > send_interval) { send_data_task(); send_time = now; }
+    //if (now - send_time > send_interval) { send_data_task(); send_time = now; }
     if (now - LedActivity > 200 ){digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); LedActivity = now; }
     
 }

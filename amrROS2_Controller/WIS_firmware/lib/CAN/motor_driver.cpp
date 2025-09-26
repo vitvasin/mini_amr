@@ -32,6 +32,11 @@
 #define RPDO3_COBID               0x380     
 #define RPDO4_COBID               0x480     
 #define SYNC_COBID                0x080
+#define Motor_ID1                0x01
+#define Motor_ID2                0x02
+#define DKE_TPDO3          0x380
+#define DKE_RPDO4          0x500
+
 
 #define SDO_Expedited_1           0x2F
 #define SDO_Expedited_2           0x2B
@@ -50,7 +55,7 @@
 
 
 
-#define ReceiveTimeOut            1000            // Maximum for waiting answer from eMR in milli second
+#define ReceiveTimeOut            1            // Maximum for waiting answer from eMR in milli second
 #define Acceleration              5000            // rpm/s^2 
 #define Deceleration              5000            // rpm/s^2 
 #define MaxVelocity               160             // rpm/s      // maxspeed eMR motor hub
@@ -155,6 +160,9 @@ FlexCAN_T4<CAN2, RX_SIZE_256, TX_SIZE_16> can2;
 CAN_message_t msg;
 CAN_message_t revPACKET;
 eMR_t eMR; 
+eMR_t eMR_left;
+eMR_t eMR_right;
+
 uint16_t count = 0;
 
 typedef struct velocity_s{
@@ -299,7 +307,7 @@ uint8_t Sync_message(eMR_t *eMR)
   uint8_t data[1];          
   uint32_t node_id;
   
-  node_id = eMR->cobid;
+  node_id = SYNC_COBID;
   data[0] = 0x00;                                                                
 
   return CAN1_SendFrame(node_id, 0x01, data);
@@ -307,16 +315,16 @@ uint8_t Sync_message(eMR_t *eMR)
 ////////////// Producer Heartbeat messsage /////////
 uint8_t Heartbeat_CheckMessage(eMR_t *eMR)
 {
-  CAN_message_t revPACKET;
+  CAN_message_t msg;
 
-  if(can1.read(revPACKET))
+  if(can1.read(msg))
   {   
-    // Serial.print("  ID: 0x"); Serial.print(revPACKET.id, HEX );
-    // Serial.print(" DATA: ");
-    // Serial.print(revPACKET.buf[0],HEX); Serial.print(" ");
-    // Serial.print("  TS: "); Serial.println(revPACKET.timestamp);
+    Serial.print("  ID: 0x"); Serial.print(msg.id, HEX );
+    Serial.print(" DATA: ");
+    Serial.print(msg.buf[0],HEX); Serial.print(" ");
+    Serial.print("  TS: "); Serial.println(msg.timestamp);
   }
-  return revPACKET.buf[0];
+  return msg.buf[0];
 }
 
 uint8_t CANOpen_ResetFaults(eMR_t *eMR)
@@ -564,6 +572,172 @@ uint8_t CANOpen_ReadActualPosObj_Safe(eMR_t *eMR)
     // The old eMR->ActualPosition value remains, but the calling function knows it's stale.
     return 0; 
 }
+
+// uint8_t CANOpen_ReadActualPosObj_Safe(eMR_t *eMR)
+// {
+//     uint8_t data[8] = {0}; // Initialize to zero
+//     CAN_message_t rxMsg;   // Use a LOCAL message struct, not the global 'msg'
+//     uint32_t node_id = eMR->cobid;
+//     uint32_t expected_response_id = RSDO_COBID + (node_id - TSDO_COBID); // e.g., 0x580 + node_id
+
+//     // Build SDO request for ActualPosition (0x6064:00)
+//     data[0] = RSDO_Expedited_4; // 0x40 = upload request
+//     data[1] = (uint8_t)(ActualPosition_Obj & 0xFF);
+//     data[2] = (uint8_t)((ActualPosition_Obj >> 8) & 0xFF);
+//     data[3] = 0x00; // subIndex
+
+//     // Send the request and wait for a response in our local rxMsg
+//     if (CAN1_SendFrameEx(node_id, DLC, data, rxMsg))
+//     {
+//         // --- ADDED VALIDATION ---
+//         // 1. Check if the response is from the correct CAN ID
+//         // 2. Check if it's a successful SDO Upload Response (cmd=0x43 for 4 bytes)
+//         // 3. Check if the object index matches our request
+//         if (rxMsg.id == expected_response_id &&
+//             rxMsg.buf[0] == 0x43 && 
+//             rxMsg.buf[1] == (uint8_t)(ActualPosition_Obj & 0xFF) &&
+//             rxMsg.buf[2] == (uint8_t)((ActualPosition_Obj >> 8) & 0xFF))
+//         {
+//             // The response is valid, parse the position data
+//             eMR->ActualPosition =
+//                 (int32_t)(((uint32_t)rxMsg.buf[4])       |
+//                           ((uint32_t)rxMsg.buf[5] << 8)  |
+//                           ((uint32_t)rxMsg.buf[6] << 16) |
+//                           ((uint32_t)rxMsg.buf[7] << 24));
+//             return 1; // Success
+//         }
+//         // Check for an SDO Abort message from the correct node
+//         else if (rxMsg.id == expected_response_id && rxMsg.buf[0] == SDO_Error_Msg) // 0x80
+//         {
+//             eMR->Err_Flag = true;
+//             eMR->ActualPosition = 0; // CORRECTLY zero the position on error
+//             // Optionally, you could parse the abort code from rxMsg.buf[4-7]
+//             return 0; // Error response received
+//         }
+//     }
+    
+//     // If CAN1_SendFrameEx returned false (timeout) or validation failed, return 0.
+//     // The old eMR->ActualPosition value remains, but the calling function knows it's stale.
+//     return 0; 
+// }
+void eMR_Read_data()   //////////////// (Program type 1)
+{
+  // volatile int32_t status_word1 = 0;
+  volatile int32_t position = 0;
+
+    
+    if (msg.id==0x380 + Motor_ID1){
+      // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+      position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+
+      
+      
+      // eMR->ActualPosition =
+      //   (int32_t)(((uint32_t)msg.buf[2])       |
+      //             ((uint32_t)msg.buf[3] << 8)  |
+      //             ((uint32_t)msg.buf[4] << 16) |
+      //             ((uint32_t)msg.buf[5] << 24));
+      // Serial.println("status_word1 : " + String(status_word1 )+ " word ");
+      //Serial.println("position_motor1: " + String(position)+ " count ");
+
+    }
+
+    if (msg.id==0x380 + Motor_ID2){
+      // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+      position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+
+      // eMR->ActualPosition =
+      //   (int32_t)(((uint32_t)msg.buf[2])       |
+      //             ((uint32_t)msg.buf[3] << 8)  |
+      //             ((uint32_t)msg.buf[4] << 16) |
+      //             ((uint32_t)msg.buf[5] << 24));
+      // Serial.println("status_word1 : " + String(status_word1 )+ " word ");
+      //Serial.println("position_motor2: " + String(position)+ " count ");
+    }
+
+    // if (msg.id==0x480 + Motor_ID1){
+    //   status_word2  = msg.buf[0] | (msg.buf[1] << 8);
+    //   velocity = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    //   Serial.println("status_word2 : " + String(status_word2 )+ " word ");
+    //   Serial.println("velocity_motor1: " + String(velocity)+ " rpm ");
+    // }
+    // if (msg.id==0x380 + Motor_ID2) {
+    //   status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+    //   position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    //   Serial.println("status_word1 : " + String(status_word1 )+ " word ");
+    //   Serial.println("position_motor2: " + String(position)+ " count ");
+    // }
+
+    // if (msg.id==0x480 + Motor_ID2){
+    //   status_word2  = msg.buf[0] | (msg.buf[1] << 8);
+    //   velocity = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    //   Serial.println("status_word2 : " + String(status_word2 )+ " word ");
+    //   Serial.println("velocity_motor2: " + String(velocity)+ " rpm ");
+    // }
+      
+
+  
+
+}
+
+// uint8_t CANOpen_ReadActualPosObj_PDO(eMR_t *eMR)
+// {
+//     CAN_message_t rxMsg;
+//     uint32_t expectedId = TPDO3_COBID + (eMR->cobid - TSDO_COBID);  
+//     // For Actual Position in PDO3 (0x380 + NodeID)
+
+//     unsigned long start = millis();
+//     while (millis() - start < ReceiveTimeOut) // wait until timeout
+//     {
+//         if (can1.read(rxMsg))  // got a frame
+//         {
+//             // Only process if this is the PDO3 from our motor
+//             if (rxMsg.id == expectedId)
+//             {
+//                 eMR->StatusWord = rxMsg.buf[0] | (rxMsg.buf[1] << 8);
+//                 eMR->ActualPosition =
+//                     (int32_t)( ((uint32_t)rxMsg.buf[2]) |
+//                                ((uint32_t)rxMsg.buf[3] << 8) |
+//                                ((uint32_t)rxMsg.buf[4] << 16) |
+//                                ((uint32_t)rxMsg.buf[5] << 24));
+//                 return 1;  // success
+//             }
+//         }
+//     }
+
+//     return 0; // timeout, no valid PDO received for this motor
+// }
+uint8_t CANOpen_ReadActualPosObj_PDO(eMR_t *eMR)
+{
+    uint32_t node_id = eMR->cobid;
+
+    //Sync_message(eMR); // Send SYNC before reading PDO
+    
+    //Serial.println("node_id: " + String(node_id));
+    //Serial.println("msg id: " + String(msg.id, HEX) + " msg len: " + String(msg.len));
+
+    // position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
+    if (node_id != msg.id) // Example for Motor_ID1=1 or Motor_ID2=2
+    {
+        //Serial.println("Unexpected PDO ID: " + String(msg.id, HEX));
+        return 0; // Not the expected PDO message
+    }
+    else
+    {
+    eMR->ActualPosition =
+        (int32_t)(((uint32_t)msg.buf[2])       |
+                  ((uint32_t)msg.buf[3] << 8)  |
+                  ((uint32_t)msg.buf[4] << 16) |
+                  ((uint32_t)msg.buf[5] << 24));
+
+
+    return 1; // Success
+
+    }
+
+
+}
+
 
 // uint8_t CANOpen_ReadActualVelocityObj(eMR_t *eMR)
 // {
@@ -860,6 +1034,34 @@ void CANOpen_eMR_QuickStop(void)
 }
 
 
+
+uint8_t CANOpen_SetTargetVelocityPDO(eMR_t *eMR)
+{
+  uint8_t data[8];
+  uint32_t node_id;
+  int32_t velocity;
+
+  node_id = eMR->cobid;                                       // 0x501, 0x502
+  velocity = eMR->TargetVelocity;
+  // 1F 20 64 AA 00 00
+  data[0] = 0x1F;                                             // PDO <Lowbyte_Index>  Byte0
+  data[1] = 0x20;                                             // PDO <Highbyte_Index> Byte1
+
+  data[2] = (uint8_t)(velocity & 0xFF);                       // PDO <DATA_Byte0>     Byte4
+  data[3] = (uint8_t)((velocity>>8) & 0xFF);                  // PDO <DATA_Byte1>     Byte5
+  data[4] = (uint8_t)((velocity>>16) & 0xFF);                 // PDO <DATA_Byte2>     Byte6
+  data[5] = (uint8_t)((velocity>>24) & 0xFF);                 // PDO <DATA_Byte3>     Byte7
+
+  // 5 rpm 
+
+  //data[2] = 0x64;                       
+  //data[3] = 0xAA;                  
+  // data[6] = 0x00;                 
+  // data[7] = 0x00;                 
+
+  return CAN1_SendFrame(node_id,6, data); 
+}
+
 uint8_t eMRCanSpeedCntrl(float percentPwm, bool direction, uint8_t motorNo)
 {
 
@@ -867,7 +1069,8 @@ uint8_t eMRCanSpeedCntrl(float percentPwm, bool direction, uint8_t motorNo)
 
     if (motorNo==1)
     {
-      eMR.cobid = TSDO_COBID + axis1;
+      //eMR.cobid = TSDO_COBID + axis1;
+      eMR.cobid = DKE_RPDO4 + axis1;  //0x501
       if (direction)                             // Positive direction
       {
           // eMR.TargetVelocity = (int32_t)(eMR.MaxProfileVelocity*percentPwm*16384/600);
@@ -880,10 +1083,12 @@ uint8_t eMRCanSpeedCntrl(float percentPwm, bool direction, uint8_t motorNo)
           eMR.TargetVelocity = (int32_t)(-eMR.MaxProfileVelocity*percentPwm*16384/947);
         //   Serial.print("Target Speed motor1: "); Serial.println(eMR.TargetVelocity, DEC );
       }      
-      CANOpen_SetTargetVelocity(&eMR);
+      CANOpen_SetTargetVelocityPDO(&eMR);
+      //Sync_message(&eMR); // Send SYNC after setting velocity
     }
     else if (motorNo==2){
-      eMR.cobid = TSDO_COBID + axis2;
+      //eMR.cobid = TSDO_COBID + axis2;
+      eMR.cobid = DKE_RPDO4 + axis2;  //0x501
       if (direction)
       {
           // eMR.TargetVelocity = (int32_t)(eMR.MaxProfileVelocity*percentPwm*16384/600);
@@ -896,7 +1101,10 @@ uint8_t eMRCanSpeedCntrl(float percentPwm, bool direction, uint8_t motorNo)
           eMR.TargetVelocity = (int32_t)(-eMR.MaxProfileVelocity*percentPwm*16384/947);
         //   Serial.print("Target Speed motor2: "); Serial.println(eMR.TargetVelocity, DEC );   
       }
-      CANOpen_SetTargetVelocity(&eMR);
+      //CANOpen_SetTargetVelocity(&eMR);
+      // CAN_Open_setTargetVelocityPDO(&eMR);
+      CANOpen_SetTargetVelocityPDO(&eMR);
+       
     }
     else
     {
@@ -912,5 +1120,6 @@ void Update_eMRMotorSpeed(void)
   eMR.cobid = TSDO_COBID + axis2;
   CANOpen_SwitchON(&eMR); 
 }
+
 
 

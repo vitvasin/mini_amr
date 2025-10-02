@@ -202,10 +202,11 @@ bool connection_failed;
 
 
 //charge state
-uint8_t charge_state = 0; // 0: not charging, 1: charging, 2: charge done
+// uint8_t charge_state = 0; // 0: not charging, 1: charging, 2: charge done
 
 void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 {
+    uint8_t charge_state = 0; // 0: not charging, 1: charging, 2: charge done
 
     if (func == FUNC_MOTION)
     {
@@ -242,10 +243,11 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             
             if (charge_state == 20)
             {
-                result = IR_Charge_State.writeSingleRegister(1, 20); // Robot is ready to charge
+                result = IR_Charge_State.writeSingleRegister(1, 20); // start charge
                 if (result == IR_Charge_State.ku8MBSuccess)
                 {
                    // Serial5.println("Sent: RobotReadyToCharge (20)");
+                   //charge_state =11;
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
@@ -253,18 +255,28 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
 
             }else if (charge_state == 22)
             {
-                result = IR_Charge_State.writeSingleRegister(1, 22); // Robot is charging
+                result = IR_Charge_State.writeSingleRegister(1, 22); // stop charge
             
                 if (result == IR_Charge_State.ku8MBSuccess)
                 {
                   //  Serial5.println("Sent: StopCharging (22)");
+                     //charge_state =12;
                 }else {
                 //Serial5.println("Error sending state to robot");
                 }
 
 
+            }else if (charge_state == 21)
+            {
+                result = IR_Charge_State.writeSingleRegister(1, 21); // Robot is fully charged
+                if (result == IR_Charge_State.ku8MBSuccess)
+                {
+                   // Serial5.println("Sent: ChargingComplete (21)");
+                   // charge_state =13;
+                }else {
+                //Serial5.println("Error sending state to robot");
+                }
             }
-
 
             /// for debug /////////////////////////////////////////////////////////////// DB
             // result = IR_Charge_State.writeSingleRegister(1, 22);
@@ -924,8 +936,9 @@ void safety_task()
     emer_state = !mcp.digitalRead(8);
     bumper_state = !mcp.digitalRead(9) || !mcp.digitalRead(10);
 
-    if (cliff > 50.0)  
-        cliff_state = true; // 50 mm. for flat surface
+    if (cliff > 100.0)  
+        //cliff_state = true; // 50 mm. for flat surface
+        cliff_state =false; //hardcode to test without cliff sensor
     else
         cliff_state = false;
 

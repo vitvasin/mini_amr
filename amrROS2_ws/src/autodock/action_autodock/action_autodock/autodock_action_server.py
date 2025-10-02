@@ -27,6 +27,7 @@ import math
 
 
 from enum import Enum, auto, IntEnum
+from typing import Iterable, Sequence, Union
 #from rclpy.qos import qos_profile_default
 
 
@@ -76,6 +77,7 @@ class ChargerState(IntEnum):
     IDLE = 0
     READY = 10
     CHARGING = 11
+    BATT_FULL = 12
     IR_ERROR = 99
 
 charger_state = ChargerState.IDLE
@@ -245,7 +247,12 @@ class AutodockActionServer(Node):
                 ('undock_speed_step1', 0.05), #m/sec
                 ('undock_dist_step2', 0.4), #meters from dock position
                 ('undock_speed_step2', 0.1), #m/sec
-                ('undock_angular_speed_step2', 0.1) #m/sec
+                ('undock_angular_speed_step2', 0.1), #m/sec
+                # --- New parameters for retry logic ---
+                ('dock_retry_attempts', 3),            # number of retry attempts when docking fails
+                ('dock_retry_backout_time', 2.0),      # seconds to move forward to back out
+                ('dock_retry_backout_speed', 0.1),     # m/s forward speed for backout
+                ('dock_retry_wait', 1.0)               # seconds to wait before re-approach
             ])
         
         self.pre_dock_dist = self.get_parameter('pre_dock_dist').get_parameter_value().double_value
@@ -272,6 +279,11 @@ class AutodockActionServer(Node):
         self.undock_speed_step2 = self.get_parameter('undock_speed_step2').get_parameter_value().double_value
         self.undock_angular_speed_step2 = self.get_parameter('undock_angular_speed_step2').get_parameter_value().double_value
 
+        self.dock_retry_attempts = self.get_parameter('dock_retry_attempts').get_parameter_value().integer_value
+        self.dock_retry_backout_time = self.get_parameter('dock_retry_backout_time').get_parameter_value().double_value
+        self.dock_retry_backout_speed = self.get_parameter('dock_retry_backout_speed').get_parameter_value().double_value
+        self.dock_retry_wait = self.get_parameter('dock_retry_wait').get_parameter_value().double_value
+
         current_pose = Pose()
         current_head_angle = 0.0 #radian
         
@@ -288,6 +300,8 @@ class AutodockActionServer(Node):
         self.publisher_ = self.create_publisher(String, 'command_dock', 10)
 
         self.charge_state_pub = self.create_publisher(Int16, 'set_charge_state', 10)
+
+        self.request_stop_charge = self.create_publisher(Bool, 'request_stop_charge', 10)
 
         #tf_listener = TransformListener(tf_buffer,self)
         
@@ -784,36 +798,78 @@ class AutodockActionServer(Node):
         twist.linear.x = 0.0
         self.pub.publish(twist)
         
-     # ฟังก์ชันส่งค่า charge state
-    def set_charge_state(self, state: CmdCharger):
-        msg = Int16()
-        msg.data = state.value
-        self.charge_state_pub.publish(msg)
-        self.get_logger().info(f'Published charge state: {state.name} ({state.value})')
-
-    def set_charge_state_with_confirm(self, state: CmdCharger, retries: int = 3, delay: float = 1.0):
-        """
-        ส่งคำสั่ง set_charge_state แล้วตรวจสอบว่า IR state = CHARGING
-        ถ้าไม่ใช่จะส่งใหม่สูงสุด retries ครั้ง
-        """
+    
+    def set_stop_charge(self, is_charge: bool):
+        msg = Bool()
+        msg.data = bool(is_charge)
+        self.request_stop_charge.publish(msg)
+        self.get_logger().info(f'Published request_stop_charge: ({msg.data})')
+     
+    def wait_charge_state_with_confirm(self, is_charge: bool, retries: int = 3, delay: float = 1.0):
+        
         for attempt in range(1, retries + 1):
-            # ส่งค่า
-            self.set_charge_state(state)
+            # ส่งคำสั่ง
+            self.set_stop_charge(is_charge)
 
             # รอให้ callback update ค่า IR state
             time.sleep(delay)
 
             # ตรวจสอบ feedback
             global charger_state
-            if charger_state == ChargerState.CHARGING:
-                self.get_logger().info(f'Confirm: Robot is CHARGING (after {attempt} attempt(s)) ✅')
+            if charger_state in [ChargerState.READY, ChargerState.BATT_FULL, ChargerState.IDLE]:
+                self.get_logger().info(
+                    f'Confirm: Robot stop charge (after {attempt} attempt(s)) ✅'
+                )
                 return True
             else:
                 self.get_logger().warn(
-                    f'Attempt {attempt}: IR state = {self.current_ir_state.name if self.current_ir_state else "Unknown"}'
+                    f'Attempt {attempt}: IR state = {charger_state.name}, want Stop Charge'
                 )
 
-        self.get_logger().error('Failed to confirm CHARGING after retries ❌')
+        self.get_logger().error(f'Failed to confirm any of Stop Charge after retries ❌')
+        return False
+
+
+     # ฟังก์ชันส่งค่า charge state แต่ไม่ใช้แล้ว ย้ายการชาร์จไปทำที่ battery_manager ที่เดียว
+    def set_charge_state(self, state: CmdCharger):
+        msg = Int16()
+        msg.data = state.value
+        self.charge_state_pub.publish(msg)
+        self.get_logger().info(f'Published charge state: {state.name} ({state.value})')
+
+    def set_charge_state_with_confirm(self, cmd: CmdCharger, target_states: Union[ChargerState, Sequence[ChargerState]], retries: int = 3, delay: float = 1.0):
+        """
+        ส่งคำสั่ง set_charge_state แล้วตรวจสอบว่า IR state ตรงกับค่าเป้าหมายอย่างน้อยหนึ่งค่า
+        (รองรับได้หลายค่า เช่น [CHARGING, BATT_FULL]) หากไม่ตรงจะส่งใหม่สูงสุด retries ครั้ง
+        """
+        # ทำให้รองรับได้ทั้งค่าเดียวและหลายค่า
+        if isinstance(target_states, (list, tuple, set)):
+            target_set = set(target_states)
+        else:
+            target_set = {target_states}
+
+        accept_names = "/".join([s.name for s in target_set])
+
+        for attempt in range(1, retries + 1):
+            # ส่งคำสั่ง
+            self.set_charge_state(cmd)
+
+            # รอให้ callback update ค่า IR state
+            time.sleep(delay)
+
+            # ตรวจสอบ feedback
+            global charger_state
+            if charger_state in target_set:
+                self.get_logger().info(
+                    f'Confirm: Robot is in [{accept_names}] (after {attempt} attempt(s)) ✅'
+                )
+                return True
+            else:
+                self.get_logger().warn(
+                    f'Attempt {attempt}: IR state = {charger_state.name}, want one of [{accept_names}]'
+                )
+
+        self.get_logger().error(f'Failed to confirm any of [{accept_names}] after retries ❌')
         return False
 
 
@@ -843,7 +899,7 @@ class AutodockActionServer(Node):
         # --- Acceleration Phase ---
         global charger_state
         for _ in range(accel_steps):
-            if (charger_state == ChargerState.READY):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
                 break
             current_speed += speed_step
             if (speed > 0 and current_speed > speed) or (speed < 0 and current_speed < speed):
@@ -854,7 +910,7 @@ class AutodockActionServer(Node):
 
         # --- Constant Speed Phase ---
         for _ in range(cruise_steps):
-            if (charger_state == ChargerState.READY):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
                 break
             twist.linear.x = float(speed)
             self.pub.publish(twist)
@@ -862,7 +918,7 @@ class AutodockActionServer(Node):
 
         # --- Deceleration Phase ---
         for _ in range(decel_steps):
-            if (charger_state == ChargerState.READY):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
                 break
             current_speed -= speed_step
             if (speed > 0 and current_speed < 0) or (speed < 0 and current_speed > 0):
@@ -878,11 +934,20 @@ class AutodockActionServer(Node):
         #start charger
         #ต้องตรวจสอบสถานะแบตเตอรี่ก่อน ----Todo------
         #self.set_charge_state(CmdCharger.START_CHARGING)
-        success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,5,0.5)
+        #if (charger_state == ChargerState.BATT_FULL):
+        #    success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
+        #    if not success:
+        #        self.get_logger().error("Charging failed to set READY before START_CHARGING")
+        #        return False
+        
+        #success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
+        success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL))
         if success:
-            self.get_logger().info("Charging started successfully")
+                self.get_logger().info("Charging started successfully")
+                return True
         else:
-            self.get_logger().error("Charging failed to start")
+                self.get_logger().error("Charging failed to start")
+                return False
 
     '''
     def move_open_loop_check_charge(self,speed,duration):
@@ -1199,19 +1264,50 @@ class AutodockActionServer(Node):
                 + 'dock x= ' + '{:.2f}'.format(dock.position.x) + ' y='+ '{:.2f}'.format(dock.position.y)
         self.send_feedback(goal_handle,3,'move to dock' + os.linesep + ss)  
 
-        #step3 - move to dock
-        if self.dock_check_charge_status:
-            self.move_open_loop_check_charge(self.dock_linear_speed_final,self.dock_time_final)
-        else:
-            self.move_open_loop(self.dock_linear_speed_final,self.dock_time_final)
+        #step3/4 - approach dock with retries (optional charge-check)
+        success = False
+        attempts = max(1, int(self.dock_retry_attempts))  # ensure at least 1 pass
+        for attempt in range(1, attempts + 1):
+            # Align to current dock pose before each attempt
+            dock = dock_pose  # refresh dock pose
+            angle = math.atan2(dock.position.y-current_pose.position.y,dock.position.x-current_pose.position.x)
+            target_angle = self.opposite_angle(angle)
+            self.command_rotate_robot(target_angle, self.dock_angular_speed_final)
+            self.send_feedback(goal_handle, 3, f'Approach attempt {attempt}/{attempts}')
+
+            if self.dock_check_charge_status:
+                self.set_stop_charge(False)
+                success = self.move_open_loop_check_charge(self.dock_linear_speed_final, self.dock_time_final)
+            else:
+                self.move_open_loop(self.dock_linear_speed_final, self.dock_time_final)
+                success = True  # if not checking charge, treat as success of motion-only
+
+            if success:
+                break
+
+            # Back out and wait before retrying
+            self.get_logger().warn(f'Approach failed (attempt {attempt}/{attempts}). Backing out and retrying...')
+            self.move_open_loop(abs(self.dock_retry_backout_speed), self.dock_retry_backout_time)  # move forward out
+            time.sleep(self.dock_retry_wait)
+            # Optionally re-run pre-charge move for stability
+            if self.dock_smooth_profile:
+                self.move_to_pre_charge_smooth(self.dock_smooth_max_vel, self.dock_smooth_max_omega)
+            else:
+                self.move_to_pre_charge(self.dock_linear_speed, self.dock_angular_speed)
+
+        if not success:
+            self.get_logger().error('Docking failed after retries')
+            msg.data = 'shutdown'
+            self.publisher_.publish(msg)
+            found_dock = False
+            event_obj.clear()
+            return
 
         #step4 - finish docking
         self.get_logger().info('finish docking')
         msg.data = 'shutdown'
         self.publisher_.publish(msg)
-        #time.sleep(3.0)
         found_dock = False
-        event_obj.clear()
         
         """ self.current_head_angle = self.calculate_heading(current_pose)
         angle = math.atan2(self.pre_charge_pose.position.y-current_pose.position.y,self.pre_charge_pose.position.x-current_pose.position.x)
@@ -1239,12 +1335,19 @@ class AutodockActionServer(Node):
         #angular_speed = 0.1
         #linear_speed = 0.1 #forward
         self.cal_undock_point(self.undock_dist_step2)
-        self.set_charge_state(CmdCharger.STOP_CHARGING)
-        time.sleep(2.0)
-
-        self.send_feedback(goal_handle,1,'start undocking.......')
-        self.move_open_loop(self.undock_speed_step1,self.undock_time_step1)
         
+        #success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
+        success = self.wait_charge_state_with_confirm(True,5,1.0)
+        if success:
+            self.get_logger().info("Stop charging successfully")
+            time.sleep(1.0)
+            self.send_feedback(goal_handle,1,'start undocking.......')
+            self.move_open_loop(self.undock_speed_step1,self.undock_time_step1)
+        else:
+            self.get_logger().error("Stop charging failed")
+            self.get_logger().info('undocking failed')
+        
+        self.set_stop_charge(False)
         #ss = 'undock point x= ' + '{:.2f}'.format(self.undock_pose.position.x) + ' y='+ '{:.2f}'.format(self.undock_pose.position.y)
         #self.get_logger().info(ss)
 
@@ -1253,6 +1356,7 @@ class AutodockActionServer(Node):
         #angle = math.atan2(self.dock_pose.position.y-current_pose.position.y,self.dock_pose.position.x-current_pose.position.x)
         #target_angle = self.opposite_angle(angle)
         #self.command_rotate_robot(target_angle,current_pose,angular_speed)
+        
         event_obj.clear()
         self.get_logger().info('finish undocking')
 

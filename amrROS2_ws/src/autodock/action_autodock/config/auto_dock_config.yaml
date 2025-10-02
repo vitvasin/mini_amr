@@ -13,6 +13,10 @@
     dock_linear_speed_final: -0.05 #ความเร็วในการเคลื่อนที่ใกล้ถึงจุดหมาย pre dock
     dock_time_final: 4.0 #ระยะเวลาในการวิ่งเข้าหา dock ซึ่งควบคุมแบบ open 
     dock_check_charge_status: True #ตรวจสอบสถานะของการชาร์จ เพื่อหยุดหุ่นยนต์หรือไม่
+    dock_retry_attempts: 3
+    dock_retry_backout_time: 3.0
+    dock_retry_backout_speed: 0.1
+    dock_retry_wait: 1.0
     dock_smooth_K_rho: 0.4 # gain ที่ใช่้สำหรับการควบคุมการเคลื่อนที่เส้นตรง ในการเข้าจอดแบบ smooth
     dock_smooth_K_alpha: 1.0 # gain ที่ใช่้สำหรับการควบคุมการหมุน ในการเข้าจอดแบบ smooth
     dock_smooth_K_beta: 0.2 # gain ที่ใช่้สำหรับการควบคุมทิศทรงของหุ่นยนต์ที่เป้าหมาย ในการเข้าจอดแบบ smooth

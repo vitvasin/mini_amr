@@ -1,4 +1,3 @@
-
 #include <dock_lidar/perception.h>
 #include <tf2_ros/transform_broadcaster.h>
 
@@ -27,16 +26,19 @@ public:
     this->declare_parameter("max_alignment_error", 0.010);
     this->declare_parameter("max_dock_width", 0.4);
     this->declare_parameter("min_dock_width", 0.3);
+    this->declare_parameter("range_limit", 1.2);
     point_cloud_split_dist = this->get_parameter("point_cloud_split_dist").as_double();
     minimum_point_cloud = this->get_parameter("minimum_point_cloud").as_int();
     max_alignment_error = this->get_parameter("max_alignment_error").as_double();
     max_dock_width = this->get_parameter("max_dock_width").as_double();
     min_dock_width = this->get_parameter("min_dock_width").as_double();
+    range_limit = this->get_parameter("range_limit").as_double();
     RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "max_alignment_error: %f", max_alignment_error);
     RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "minimum_point_cloud: %d", minimum_point_cloud);
     RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "point_cloud_split_dist: %f", point_cloud_split_dist);
     RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "max_dock_width: %f", max_dock_width);
     RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "min_dock_width: %f", min_dock_width);
+    RCLCPP_INFO(rclcpp::get_logger("dock coordinates"), "range_limit: %f", range_limit);
     
     tbr = std::make_shared<tf2_ros::TransformBroadcaster>(this);
     publisher_ = this->create_publisher<custom_interface::msg::Initdock>(
@@ -79,7 +81,7 @@ public:
     this->perception_ptr->max_alignment_error_ = max_alignment_error;
     this->perception_ptr->max_dock_width = max_dock_width;
     this->perception_ptr->min_dock_width = min_dock_width;
-    
+    this->perception_ptr->range_limit = range_limit;
   }
 
   // shared_ptr_from_this would return a shared pointer of the current class
@@ -181,6 +183,7 @@ private:
   double max_alignment_error;
   double max_dock_width;
   double min_dock_width;
+  double range_limit;
 
 };
 

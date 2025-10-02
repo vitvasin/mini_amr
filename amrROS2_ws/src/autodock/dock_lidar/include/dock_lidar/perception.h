@@ -67,6 +67,7 @@ class DockPerception {
   int minimum_point_cloud;
   double max_dock_width;
   double min_dock_width;
+  double range_limit;
 
  private:
   /** @brief Callback to process laser scans */

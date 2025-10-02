@@ -27,7 +27,7 @@ case "$1" in
     "amcl")
         # Launch navigation with AMCL
         ros2 launch navigation navigation_amcl.launch.py \
-            map:="$SCRIPT_DIR/../amrROS2_ws/maps/latest_map.yaml" \
+            map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor.yaml" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
         ;;

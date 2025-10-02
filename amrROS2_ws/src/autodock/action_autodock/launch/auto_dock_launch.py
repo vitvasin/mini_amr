@@ -23,10 +23,17 @@ def generate_launch_description():
     	
     auto_dock = Node(
       	package='action_autodock',
-     	executable='autodock_action_server',
+    	executable='autodock_action_server',
       	name='autodock',
-     	parameters=[os.path.join(get_package_share_directory('action_autodock'),'config','auto_dock_config.yaml')]
+    	parameters=[os.path.join(get_package_share_directory('action_autodock'),'config','auto_dock_config.yaml')]
         )
+
+    battery_manager = Node(
+        package='battery_management',
+        executable='battery_manager_node',
+        name='battery_manager',
+        parameters=[os.path.join(get_package_share_directory('battery_management'), 'config', 'battery_manager.yaml')]
+    )
     	
     launch_elements = GroupAction(
     	actions=[
@@ -35,6 +42,7 @@ def generate_launch_description():
         SetRemap('/tf_static','tf_static'),
         dock_lidar,
         auto_dock,
+        battery_manager,
         ]
     )
     

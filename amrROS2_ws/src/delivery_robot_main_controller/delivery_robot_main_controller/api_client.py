@@ -14,18 +14,40 @@ def get_pending_queue():
 
 def add_queue(data):
     url = f"{API_BASE_URL}/api/queue/add"
-    # Send multipart/form-data with both flat and nested keys
-    form = {}
+    # Prefer JSON with nested "queue" object to match backend expectation
+    # Fallback to form encoding with bracketed keys if JSON fails
+    payload = {}
     if isinstance(data, dict):
-        for k, v in data.items():
-            form[k] = str(v)
-        if "action" in data:
-            form["queue[action]"] = str(data["action"])
-        if "target" in data:
-            form["queue[target]"] = str(data["target"])
-    response = requests.post(url, data=form, timeout=5)
-    response.raise_for_status()
-    return response.json()
+        if "queue" in data and isinstance(data["queue"], dict):
+            payload["queue"] = data["queue"]
+        else:
+            queue_obj = {}
+            if "action" in data:
+                queue_obj["action"] = data["action"]
+            if "target" in data:
+                queue_obj["target"] = data["target"]
+            # pass through other keys as top-level if provided
+            payload.update({k: v for k, v in data.items() if k not in ("action", "target")})
+            if queue_obj:
+                payload["queue"] = queue_obj
+    # Try JSON first
+    try:
+        response = requests.post(url, json=payload or data, timeout=5)
+        response.raise_for_status()
+        return response.json()
+    except requests.HTTPError:
+        # Fallback: form-encoded with both flat and nested keys
+        form = {}
+        if isinstance(data, dict):
+            for k, v in data.items():
+                form[k] = str(v)
+            if "action" in data:
+                form["queue[action]"] = str(data["action"])
+            if "target" in data:
+                form["queue[target]"] = str(data["target"])
+        response = requests.post(url, data=form or data, timeout=5)
+        response.raise_for_status()
+        return response.json()
 
 def update_queue_status(queue_id, status):
     url = f"{API_BASE_URL}/api/queue/updateStatus"

@@ -2,7 +2,7 @@ ekf_filter_node:
     ros__parameters:
             # frequency: 20.0
             #frequency: 50.0
-            frequency: 50.0
+            frequency: 30.0
             two_d_mode: true
             publish_tf: true
     
@@ -85,8 +85,15 @@ scan_to_scan_filter_chain:
         max_y: 0.27
         min_z: -0.1
         max_z: 0.1
-
     filter2:
+      name: front_right_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        lower_angle: 1.8314 #2.25
+        upper_angle: 2.46
+        #lsmgop:
+
+    filter3:
         name: speckle_filter
         type: laser_filters/LaserScanSpeckleFilter
         params:
@@ -95,7 +102,7 @@ scan_to_scan_filter_chain:
           max_range_difference: 0.1
           filter_window: 7
           
-    # filter3:
+    # filter3: ## -> this make ghost ladar point
     #     name: interpolation
     #     type: laser_filters/InterpolationFilter 
     

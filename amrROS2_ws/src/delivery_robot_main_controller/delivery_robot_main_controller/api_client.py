@@ -3,7 +3,7 @@
 import requests
 import json
 
-API_BASE_URL = "http://localhost:8080"
+API_BASE_URL = "http://localhost:3000"
 
 # Queue APIs
 def get_pending_queue():
@@ -14,40 +14,11 @@ def get_pending_queue():
 
 def add_queue(data):
     url = f"{API_BASE_URL}/api/queue/add"
-    # Prefer JSON with nested "queue" object to match backend expectation
-    # Fallback to form encoding with bracketed keys if JSON fails
-    payload = {}
-    if isinstance(data, dict):
-        if "queue" in data and isinstance(data["queue"], dict):
-            payload["queue"] = data["queue"]
-        else:
-            queue_obj = {}
-            if "action" in data:
-                queue_obj["action"] = data["action"]
-            if "target" in data:
-                queue_obj["target"] = data["target"]
-            # pass through other keys as top-level if provided
-            payload.update({k: v for k, v in data.items() if k not in ("action", "target")})
-            if queue_obj:
-                payload["queue"] = queue_obj
-    # Try JSON first
-    try:
-        response = requests.post(url, json=payload or data, timeout=5)
-        response.raise_for_status()
-        return response.json()
-    except requests.HTTPError:
-        # Fallback: form-encoded with both flat and nested keys
-        form = {}
-        if isinstance(data, dict):
-            for k, v in data.items():
-                form[k] = str(v)
-            if "action" in data:
-                form["queue[action]"] = str(data["action"])
-            if "target" in data:
-                form["queue[target]"] = str(data["target"])
-        response = requests.post(url, data=form or data, timeout=5)
-        response.raise_for_status()
-        return response.json()
+    payload = data if data is not None else {}
+    headers = {"Content-Type": "application/json"}
+    response = requests.post(url, headers=headers, json=payload, timeout=5)
+    response.raise_for_status()
+    return response.json()
 
 def update_queue_status(queue_id, status):
     url = f"{API_BASE_URL}/api/queue/updateStatus"
@@ -100,9 +71,15 @@ def add_request_queue(target: str):
         # If listing queues fails, let add proceed (server will enforce uniqueness if any)
         pass
 
-    # Add queue as Request
-    data = {"action": "Request", "target": target}
-    return add_queue(data)
+    # Add queue as Request following Postman payload structure
+    form = {
+        "action": "Request",
+        "target": target,
+        "boxNumber": "1",
+        "sender": "api_client",
+        "status": "Pending",
+    }
+    return add_queue(form)
 
 def remove_request_queue_by_target(target: str) -> int:
     """Remove all Request queues with matching target name.

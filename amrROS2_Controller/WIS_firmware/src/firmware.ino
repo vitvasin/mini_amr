@@ -828,7 +828,7 @@ void sensor_module_task()
             Serial5.println("Read range left error");
     }
     // cooperative sleep to allow other Threads to run
-    threads.delay(5);
+    //threads.delay(5);
 
     if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
     {
@@ -847,7 +847,7 @@ void sensor_module_task()
             Serial5.println("Read range right error");
     }
     // cooperative sleep to allow other Threads to run
-    threads.delay(5);
+    //threads.delay(5);
 
     if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
     {
@@ -865,7 +865,7 @@ void sensor_module_task()
             Serial5.println("Read range center error");
     }
     // cooperative sleep to allow other Threads to run
-    threads.delay(5);
+   // threads.delay(5);
 
     if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess)
     {
@@ -890,7 +890,7 @@ void sensor_module_task()
         // Serial5.print("Status Register = ");
         // Serial5.println(buff);
 
-        //for debuf
+        //for debug
         // switch (buff)
         // {
         // case 0:

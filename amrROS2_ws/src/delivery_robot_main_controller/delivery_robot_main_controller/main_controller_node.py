@@ -69,6 +69,7 @@ class DeliveryRobotMainController(Node):
         self.dockstate = DockState.IDLE
         self.chargestate = ChargeState.NOT_CHARGE
         self.target_station = ""
+        self.retry_move_no = 0
         self.get_logger().info(f"Initial state: {self.state.name}")
         
         self.get_system_parameters_from_api()
@@ -85,7 +86,7 @@ class DeliveryRobotMainController(Node):
             self.battery_callback,
             10
         )
-
+        self.smooth_path = True
         self.navigator = BasicNavigator()
         time.sleep(1)
         if not self.navigator.initial_pose_received:
@@ -434,7 +435,7 @@ class DeliveryRobotMainController(Node):
 
     def send_goal_pose_agv(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
-        building_yaml = "/home/emr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
+        building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
         current_pose = self.current_pose
         start_pos = (current_pose.pose.position.x, current_pose.pose.position.y)
         goal_pos = (x, y)
@@ -459,22 +460,26 @@ class DeliveryRobotMainController(Node):
             path_poses[-1].pose.orientation.z = quat[2]
             path_poses[-1].pose.orientation.w = quat[3]
 
-        self.navigator.followWaypoints(path_poses)
-        #self.navigator.goThroughPoses(path_poses)
+        if self.smooth_path:
+            self.navigator.goThroughPoses(path_poses)
+        else:
+            self.navigator.followWaypoints(path_poses)
+        
         self.change_state(RobotState.MOVE)
 
     def on_standby(self):
         self.get_logger().info("Robot is in STANDBY mode.")
 
-    def return_home_position(self,after: RobotState = RobotState.STANDBY):
-        x, y, heading = self.get_station_position("Home")
-        if x is not None:
-            yaw = heading * 3.141592 / 180.0
-            #self.send_goal_pose(x, y, yaw, after)
-            self.send_goal_pose_agv(x, y, yaw, after)
-        else:
-            self.get_logger().error("Home station not found.")
-        return
+  #  def return_home_position(self,after: RobotState = RobotState.STANDBY):
+  #      x, y, heading = self.get_station_position("Home")
+  #      if x is not None:
+  #          yaw = heading * 3.141592 / 180.0
+  #          #self.send_goal_pose(x, y, yaw, after)
+  #          self.target_station = "Home"
+  #          self.send_goal_pose_agv(x, y, yaw, after)
+  #      else:
+  #          self.get_logger().error("Home station not found.")
+  #      return
     
     def go_to_station(self,target_station,after: RobotState = RobotState.STANDBY):
         if not target_station:
@@ -520,7 +525,10 @@ class DeliveryRobotMainController(Node):
         if self._should_dock:
             self._should_dock = False
             if (self.dockstate != DockState.DOCKED):
-                self.return_home_position(RobotState.DOCK)
+                self.retry_move_no = 0
+                #self.return_home_position(RobotState.DOCK)
+                result = self.go_to_station("Home",RobotState.DOCK)
+            return
 
         if self._should_undock:
             self._should_undock = False
@@ -532,7 +540,9 @@ class DeliveryRobotMainController(Node):
         if self.batt_percentage < self.setting_batteryLowToCharge:
             if (self.dockstate != DockState.DOCKED):
                 self.get_logger().warn(f"Battery low ({self.batt_percentage}%), heading to Home for docking.")
-                self.return_home_position(RobotState.DOCK)
+                self.retry_move_no = 0
+                #self.return_home_position(RobotState.DOCK)
+                result = self.go_to_station("Home",RobotState.DOCK)
             else:
                 if (self.chargestate == ChargeState.NOT_CHARGE):
                     self.change_charge_state(ChargeState.CHARGING)
@@ -549,7 +559,7 @@ class DeliveryRobotMainController(Node):
             if (self.dockstate == DockState.DOCKED):
                 self._should_undock = True
                 return
-          
+            self.retry_move_no = 0
             action = task.get("action", "Request")
             self.get_logger().info(f"Queue action: {action}")
             if action == "Delivery":
@@ -602,7 +612,14 @@ class DeliveryRobotMainController(Node):
         elif result == TaskResult.CANCELED:
             self.get_logger().info('Goal was canceled!')
         elif result == TaskResult.FAILED:
-            self.get_logger().info('Goal failed!')
+            if (self.retry_move_no < 2):
+                self.retry_move_no += 1
+                self.get_logger().info('Goal failed! retrying...{0}'.format(self.retry_move_no))
+                self.go_to_station(self.target_station,self.goal_after_state)
+                return
+            else:
+                self.get_logger().info('Goal failed! after retry {0} times'.format(self.retry_move_no))
+                self.change_state(RobotState.STANDBY)
         else:
             self.get_logger().info('Goal has an invalid return status!')
         

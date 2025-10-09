@@ -21,7 +21,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'delivery_robot_main_controller = delivery_robot_main_controller.main_controller_node:main'
+            'delivery_robot_main_controller = delivery_robot_main_controller.main_controller_node:main',
+            'robot_sound = delivery_robot_main_controller.robot_sound:main'
         ],
     },
 )

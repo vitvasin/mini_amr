@@ -24,12 +24,21 @@ def generate_launch_description():
             emulate_tty=True,
     )
     
+    robot_sound = Node(
+            package='delivery_robot_main_controller',
+            executable='robot_sound',
+            name='robot_sound_node',
+            output='screen',
+            emulate_tty=True,
+    )
+
     launch_elements = GroupAction(
     	actions=[
         PushRosNamespace(namespace),
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
         main_controller,
+        robot_sound,
         ]
     )
 

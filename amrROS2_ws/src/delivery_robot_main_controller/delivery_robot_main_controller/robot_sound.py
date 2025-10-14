@@ -21,7 +21,7 @@ class RobotSoundNode(Node):
 
         # 🔸 ระยะตรวจจับสิ่งกีดขวาง
         self.threshold = 0.6  # เมตร
-        self.alert_cooldown = 3.0  # วินาที (กันพูดซ้ำเร็วเกิน)
+        self.alert_cooldown = 10.0  # วินาที (กันพูดซ้ำเร็วเกิน)
         self.last_alert_time = 0.0
 
         # 🔸 path เก็บไฟล์เสียง
@@ -32,7 +32,7 @@ class RobotSoundNode(Node):
             "thank_you": "robot_thankyou.wav",
             "arrive_delivery": "robot_delivery.wav",
             "arrive_target": "robot_target.wav",
-            "obstrucle_alert": "robot_obstrucle1.wav",
+            "obstacle_alert": "robot_obstacle.wav",
             "start": "robot_start.wav"
         }
         self.get_logger().info("✅ robot_sound_node started using .wav files")

@@ -208,7 +208,7 @@ class BatteryManager(Node):
                     self.set_state(ManagerState.CHARGING)
                 elif self.ir_state == ChargerState.READY:
                     # ready to charge -> command start
-                    self.send_cmd(CMD_STOP_CHG)
+                    #self.send_cmd(CMD_STOP_CHG)
                     if self.wait_for_ir_state(ChargerState.READY, self.ready_wait_timeout_sec):
                         self.get_logger().info('Charger READY; starting charge')
                         self.send_cmd(CMD_START_CHG)
@@ -216,7 +216,7 @@ class BatteryManager(Node):
                 elif self.ir_state == ChargerState.BATT_FULL:
                     # Charger latched full; must STOP before it becomes READY, then START
                     self.get_logger().info('Charger in BATT_FULL; sending STOP to reset to READY')
-                    self.send_cmd(CMD_STOP_CHG)
+                    #self.send_cmd(CMD_STOP_CHG)
                     if self.wait_for_ir_state(ChargerState.READY, self.ready_wait_timeout_sec):
                         self.get_logger().info('Charger READY; starting charge')
                         self.send_cmd(CMD_START_CHG)

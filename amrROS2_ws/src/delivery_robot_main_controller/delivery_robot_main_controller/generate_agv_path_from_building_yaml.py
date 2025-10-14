@@ -3,6 +3,7 @@
 import os
 import struct
 import yaml
+import math
 import networkx as nx
 from geometry_msgs.msg import PoseStamped
 
@@ -149,30 +150,59 @@ def find_nearest_vertex(x, y, vertex_map):
     return nearest
 
 
-def create_pose(x, y, frame='map'):
+def create_pose(x, y, yaw=None, frame='map'):
     pose = PoseStamped()
     pose.header.frame_id = frame
     pose.header.stamp.sec = 0
     pose.pose.position.x = x
     pose.pose.position.y = y
-    pose.pose.orientation.w = 1.0
+    pose.pose.orientation.x = 0.0
+    pose.pose.orientation.y = 0.0
+    if yaw is None:
+        pose.pose.orientation.z = 0.0
+        pose.pose.orientation.w = 1.0
+    else:
+        half_yaw = yaw * 0.5
+        pose.pose.orientation.z = math.sin(half_yaw)
+        pose.pose.orientation.w = math.cos(half_yaw)
     return pose
 
 
 def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1'):
+    start_x, start_y = start_pos[:2]
+    goal_x, goal_y = goal_pos[:2]
+    goal_yaw = None
+    if isinstance(goal_pos, (list, tuple)) and len(goal_pos) >= 3:
+        goal_yaw = goal_pos[2]
+
     G, vertex_map = load_graph_from_building_yaml(building_yaml_path, level_name)
-    start_wp = find_nearest_vertex(*start_pos, vertex_map)
-    goal_wp = find_nearest_vertex(*goal_pos, vertex_map)
+    start_wp = find_nearest_vertex(start_x, start_y, vertex_map)
+    goal_wp = find_nearest_vertex(goal_x, goal_y, vertex_map)
 
     path_nodes = nx.shortest_path(G, source=start_wp, target=goal_wp, weight='weight')
 
-    path_poses = []
+    path_points = []
     for i, node in enumerate(path_nodes):
         if i == 0:
-            x, y = start_pos
+            path_points.append((start_x, start_y))
         elif i == len(path_nodes) - 1:
-            x, y = goal_pos
+            path_points.append((goal_x, goal_y))
         else:
-            x, y = vertex_map[node]
-        path_poses.append(create_pose(x, y))
+            path_points.append(vertex_map[node])
+
+    yaws = []
+    for i, (x, y) in enumerate(path_points):
+        if i < len(path_points) - 1:
+            next_x, next_y = path_points[i + 1]
+            yaw = math.atan2(next_y - y, next_x - x)
+        elif yaws:
+            yaw = yaws[-1]
+        else:
+            yaw = 0.0
+        yaws.append(yaw)
+
+    if goal_yaw is not None and yaws:
+        yaws[-1] = goal_yaw
+
+    path_poses = [create_pose(x, y, yaw) for (x, y), yaw in zip(path_points, yaws)]
     return path_poses

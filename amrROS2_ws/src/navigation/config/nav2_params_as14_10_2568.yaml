@@ -373,11 +373,6 @@ local_costmap:
       footprint: '[ [0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22] ]'
       # plugins: ["obstacle_layer","range_layer","denoise_layer","inflation_layer"]
       plugins: ["obstacle_layer","denoise_layer","inflation_layer"]
-      filters: ["keepout_filter"]
-      keepout_filter:
-        plugin: "nav2_costmap_2d::KeepoutFilter"
-        enabled: True
-        filter_info_topic: "keepout_costmap_filter_info"
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -451,11 +446,6 @@ global_costmap:
       track_unknown_space: true
       # plugins: ["static_layer", "obstacle_layer", "inflation_layer","denoise_layer"]
       plugins: ["static_layer", "obstacle_layer","inflation_layer"]
-      filters: ["keepout_filter"]
-      keepout_filter:
-        plugin: "nav2_costmap_2d::KeepoutFilter"
-        enabled: True
-        filter_info_topic: "keepout_costmap_filter_info"
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True

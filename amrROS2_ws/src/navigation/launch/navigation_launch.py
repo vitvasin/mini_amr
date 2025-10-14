@@ -23,7 +23,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import LoadComposableNodes, SetParameter
 from launch_ros.actions import Node
 from launch_ros.descriptions import ComposableNode, ParameterFile
-from nav2_common.launch import RewrittenYaml
+from nav2_common.launch import LaunchConfigAsBool,RewrittenYaml
 
 
 def generate_launch_description():
@@ -40,6 +40,10 @@ def generate_launch_description():
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
 
+    #added for keepout zones
+    keepout_mask_yaml_file = params_file # LaunchConfiguration('keepout_mask') # the param file use the same as nav2 param file
+    use_keepout_zones = LaunchConfigAsBool('use_keepout_zones')
+
     lifecycle_nodes = [
         'controller_server',
         'smoother_server',
@@ -50,6 +54,9 @@ def generate_launch_description():
         'collision_detector',
         'bt_navigator',
         'waypoint_follower',
+         ##added for keepout zones
+        'keepout_filter_mask_server', 
+        'keepout_costmap_filter_info_server',
         # 'docking_server',
     ]
 
@@ -80,6 +87,17 @@ def generate_launch_description():
 
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace', default_value='', description='Top-level namespace'
+    )
+     ##added for keepout zones
+    declare_keepout_mask_yaml_cmd = DeclareLaunchArgument(
+        'keepout_mask',
+        default_value='',
+        description='Full path to keepout mask yaml file to load',
+    )
+
+    declare_use_keepout_zones_cmd = DeclareLaunchArgument(
+        'use_keepout_zones', default_value='True',
+        description='Whether to enable keepout zones or not'
     )
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -126,6 +144,31 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
             SetParameter('use_sim_time', use_sim_time),
+            ##added for keepout zones
+            Node( 
+                condition=IfCondition(use_keepout_zones),
+                package='nav2_map_server',
+                executable='map_server',
+                name='keepout_filter_mask_server',
+                output='screen',
+                respawn=use_respawn,
+                respawn_delay=2.0,
+                parameters=[configured_params, {'yaml_filename': keepout_mask_yaml_file}],
+                arguments=['--ros-args', '--log-level', log_level],
+                remappings=remappings,
+            ),
+            Node(
+                condition=IfCondition(use_keepout_zones),
+                package='nav2_map_server',
+                executable='costmap_filter_info_server',
+                name='keepout_costmap_filter_info_server',
+                output='screen',
+                respawn=use_respawn,
+                respawn_delay=2.0,
+                parameters=[configured_params],
+                arguments=['--ros-args', '--log-level', log_level],
+                remappings=remappings,
+            ),
             Node(
                 package='nav2_controller',
                 executable='controller_server',
@@ -254,6 +297,17 @@ def generate_launch_description():
             LoadComposableNodes(
                 target_container=container_name_full,
                 composable_node_descriptions=[
+                    ##added for keepout zones
+                    ComposableNode(
+                        package='nav2_map_server',
+                        plugin='nav2_map_server::MapServer',
+                        name='keepout_filter_mask_server',
+                        parameters=[
+                            configured_params,
+                            {'yaml_filename': keepout_mask_yaml_file}
+                        ],
+                        remappings=remappings,
+                    ),
                     ComposableNode(
                         package='nav2_controller',
                         plugin='nav2_controller::ControllerServer',
@@ -353,6 +407,9 @@ def generate_launch_description():
     ld.add_action(declare_container_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
     ld.add_action(declare_log_level_cmd)
+    # added for keepout zones
+    ld.add_action(declare_keepout_mask_yaml_cmd)
+    ld.add_action(declare_use_keepout_zones_cmd)
     # Add the actions to launch all of the navigation nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)

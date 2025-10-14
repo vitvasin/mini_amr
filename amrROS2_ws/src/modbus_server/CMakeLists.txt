@@ -14,9 +14,9 @@ find_package(rclcpp_action REQUIRED)
 find_package(rcpputils REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(rmw_implementation REQUIRED)
-find_package(Qt6SerialBus REQUIRED)
+find_package(Qt5SerialBus REQUIRED)
 find_package(ros2qt REQUIRED)
-find_package(emr_interfaces REQUIRED)
+find_package(hgcr_interfaces REQUIRED)
 #find_package(stag_ros REQUIRED)
 
 if(rclcpp_VERSION_MAJOR GREATER_EQUAL 2)
@@ -34,9 +34,9 @@ include_directories(
     ${rclcpp_INCLUDE_DIRS}
     ${rclcpp_action_INCLUDE_DIRS}
     ${std_msgs_INCLUDE_DIRS}
-    ${Qt6SerialBus_INCLUDE_DIRS}
+    ${Qt5SerialBus_INCLUDE_DIRS}
     ${ros2qt_INCLUDE_DIRS}
-    ${emr_interfaces_INCLUDE_DIRS}
+    ${hgcr_interfaces_INCLUDE_DIRS}
     #${stag_ros_INCLUDE_DIRS}
     )
 
@@ -57,7 +57,7 @@ ament_target_dependencies(${PROJECT_NAME}
     rmw_implementation
     rcpputils
     ros2qt
-    emr_interfaces
+    hgcr_interfaces
     # stag_ros 
     )
 
@@ -66,7 +66,7 @@ target_include_directories(${PROJECT_NAME}
         include/modbus_server
     )
 target_link_libraries(${PROJECT_NAME}
-    Qt6::SerialBus 
+    Qt5::SerialBus 
     )
 
 if(BUILD_TESTING)

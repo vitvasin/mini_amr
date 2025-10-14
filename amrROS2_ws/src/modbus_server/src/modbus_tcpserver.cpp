@@ -58,7 +58,7 @@ using namespace rclcpp;
 using namespace std::placeholders;
 
 Modbus_TCP_Server::Modbus_TCP_Server(QObject* parent) :
-    QObject(parent), Node("EMR_ModBusServer")
+    QObject(parent), Node("HGCR_ModBusServer")
 {
 ////////////////////////////////////////////////  Modbus  /////////////////////////////////////////////////
 
@@ -68,9 +68,9 @@ Modbus_TCP_Server::Modbus_TCP_Server(QObject* parent) :
 
     // mpSetZAnglePublisher = this->create_publisher<std_msgs::msg::UInt16>("/ptz_camera/set_angle", 10);
 
-    mpHoldingRegisterPublisher = this->create_publisher<emr_interfaces::msg::ModbusHoldingRegs>("mserver/holding_regs", 10);
-    mpHoldingRegisterSubscriber = this->create_subscription<emr_interfaces::msg::ModbusHoldingRegs>("mmaster/holding_regs", 10, std::bind(&Modbus_TCP_Server::holding_regs_topic_callback, this, _1)); 
-    // mpEMRPoseSubscriber = this->create_subscription<stag_ros::msg::EMRPose>("stag_ros/pose", 10, std::bind(&Modbus_TCP_Server::emr_pose_topic_callback, this, _1)); 
+    mpHoldingRegisterPublisher = this->create_publisher<hgcr_interfaces::msg::ModbusHoldingRegs>("mserver/holding_regs", 10);
+    mpHoldingRegisterSubscriber = this->create_subscription<hgcr_interfaces::msg::ModbusHoldingRegs>("mmaster/holding_regs", 10, std::bind(&Modbus_TCP_Server::holding_regs_topic_callback, this, _1)); 
+    // mpHGCRPoseSubscriber = this->create_subscription<stag_ros::msg::HGCRPose>("stag_ros/pose", 10, std::bind(&Modbus_TCP_Server::hgcr_pose_topic_callback, this, _1)); 
     service_ = this->create_service<SetHoldingRegister>("mservice/holding_regs", std::bind(&Modbus_TCP_Server::set_holding_regs_callback, this, std::placeholders::_1, std::placeholders::_2));
 
     init_modbus_server();
@@ -203,7 +203,7 @@ void Modbus_TCP_Server::onStateChanged(int state)
         RCLCPP_INFO(this->get_logger(), "Modbus Server Disconnected!");
 }
 /////////////// From Modbus RTU Connected to the Robot
-void Modbus_TCP_Server::holding_regs_topic_callback(const emr_interfaces::msg::ModbusHoldingRegs::SharedPtr msg) const
+void Modbus_TCP_Server::holding_regs_topic_callback(const hgcr_interfaces::msg::ModbusHoldingRegs::SharedPtr msg) const
 {
     for( quint16 idx = 0; idx < msg->size; idx++ )
         //mpModbusDevice->setData(QModbusDataUnit::HoldingRegisters, msg->address+idx, msg->data[idx]);

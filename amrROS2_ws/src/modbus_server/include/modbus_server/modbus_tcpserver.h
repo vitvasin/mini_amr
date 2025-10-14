@@ -27,17 +27,17 @@
 #include <rclcpp/rclcpp.hpp>
 #include <rclcpp_action/rclcpp_action.hpp>
 
-#include "emr_interfaces/msg/modbus_holding_regs.hpp"
-// #include "emr_interfaces/action/goto_preset.hpp"
-// #include "emr_interfaces/action/ptz_relative_move.hpp"
-// #include "emr_interfaces/action/rotate_to_pose.hpp"
-// #include "emr_interfaces/srv/rotate.hpp"
-// #include "emr_interfaces/srv/set_preset.hpp"
-// #include "emr_interfaces/srv/set_rotate_speed.hpp"
-#include "emr_interfaces/srv/set_holding_regs.hpp"
+#include "hgcr_interfaces/msg/modbus_holding_regs.hpp"
+// #include "hgcr_interfaces/action/goto_preset.hpp"
+// #include "hgcr_interfaces/action/ptz_relative_move.hpp"
+// #include "hgcr_interfaces/action/rotate_to_pose.hpp"
+// #include "hgcr_interfaces/srv/rotate.hpp"
+// #include "hgcr_interfaces/srv/set_preset.hpp"
+// #include "hgcr_interfaces/srv/set_rotate_speed.hpp"
+#include "hgcr_interfaces/srv/set_holding_regs.hpp"
 
 
-//#include "stag_ros/msg/emr_pose.hpp"
+//#include "stag_ros/msg/hgcr_pose.hpp"
 
 #include "std_msgs/msg/u_int16.hpp"
 
@@ -50,23 +50,23 @@ public:
     explicit Modbus_TCP_Server(QObject * parrent = nullptr);
     ~Modbus_TCP_Server();
     void init_modbus_server();
-    void set_holding_regs_callback(const std::shared_ptr<emr_interfaces::srv::SetHoldingRegs::Request> request, std::shared_ptr<emr_interfaces::srv::SetHoldingRegs::Response> response); 
+    void set_holding_regs_callback(const std::shared_ptr<hgcr_interfaces::srv::SetHoldingRegs::Request> request, std::shared_ptr<hgcr_interfaces::srv::SetHoldingRegs::Response> response); 
     
-    // using PTZRelativeMove = emr_interfaces::action::PTZRelativeMove;
+    // using PTZRelativeMove = hgcr_interfaces::action::PTZRelativeMove;
     // using GoalHandlePTZRelativeMove = rclcpp_action::ClientGoalHandle<PTZRelativeMove>;
 
-    // using RotateToPose = emr_interfaces::action::RotateToPose;
+    // using RotateToPose = hgcr_interfaces::action::RotateToPose;
     // using GoalHandleRotateToPose = rclcpp_action::ClientGoalHandle<RotateToPose>;
 
-    // using GotoPreset = emr_interfaces::action::GotoPreset;
+    // using GotoPreset = hgcr_interfaces::action::GotoPreset;
     // using GoalHandleGotoPreset = rclcpp_action::ClientGoalHandle<GotoPreset>;
 
-    // using Rotate = emr_interfaces::srv::Rotate;
-    // using SetRotateSpeed = emr_interfaces::srv::SetRotateSpeed;
-    // using SetPreset = emr_interfaces::srv::SetPreset;
+    // using Rotate = hgcr_interfaces::srv::Rotate;
+    // using SetRotateSpeed = hgcr_interfaces::srv::SetRotateSpeed;
+    // using SetPreset = hgcr_interfaces::srv::SetPreset;
 
     // using SetStagParams = rcl_interfaces::srv::SetParameters;
-    using SetHoldingRegister = emr_interfaces::srv::SetHoldingRegs;
+    using SetHoldingRegister = hgcr_interfaces::srv::SetHoldingRegs;
 signals:
 
 public slots:
@@ -79,16 +79,16 @@ private:
 
     QModbusTcpServer *mpModbusDevice{nullptr};
     bool bModbusCommOK{true};
-    void holding_regs_topic_callback(const emr_interfaces::msg::ModbusHoldingRegs::SharedPtr msg) const;
-    // void emr_pose_topic_callback(const stag_ros::msg::emrPose::SharedPtr msg) const;
+    void holding_regs_topic_callback(const hgcr_interfaces::msg::ModbusHoldingRegs::SharedPtr msg) const;
+    // void hgcr_pose_topic_callback(const stag_ros::msg::HGCRPose::SharedPtr msg) const;
 
     // rclcpp::Publisher<std_msgs::msg::UInt16>::SharedPtr mpSetZAnglePublisher;
 
-    rclcpp::Publisher<emr_interfaces::msg::ModbusHoldingRegs>::SharedPtr mpHoldingRegisterPublisher;
-    rclcpp::Subscription<emr_interfaces::msg::ModbusHoldingRegs>::SharedPtr mpHoldingRegisterSubscriber;
+    rclcpp::Publisher<hgcr_interfaces::msg::ModbusHoldingRegs>::SharedPtr mpHoldingRegisterPublisher;
+    rclcpp::Subscription<hgcr_interfaces::msg::ModbusHoldingRegs>::SharedPtr mpHoldingRegisterSubscriber;
     
     rclcpp::Service<SetHoldingRegister>::SharedPtr service_;
-    emr_interfaces::msg::ModbusHoldingRegs mPublisherMessages;
+    hgcr_interfaces::msg::ModbusHoldingRegs mPublisherMessages;
 
     // rclcpp_action::Client<PTZRelativeMove>::SharedPtr mpPTZ_relative_client;
     // void send_ptz_goal(qint16 pan, qint16 tilt, qint16 zoom);
@@ -113,7 +113,7 @@ private:
     // rclcpp::Client<SetPreset>::SharedPtr mpSetPreset_client;
     // rclcpp::Client<SetStagParams>::SharedPtr mpSetStagParams_client;
 
-    // rclcpp::Subscription<stag_ros::msg::EMRPose>::SharedPtr mpEMRPoseSubscriber;
+    // rclcpp::Subscription<stag_ros::msg::HGCRPose>::SharedPtr mpHGCRPoseSubscriber;
 
     // bool mbAUTO{false};
     // int miCMD_ROBOT{0};

@@ -1,6 +1,6 @@
 import sys
 
-from emr_interfaces.srv import SetHoldingRegs
+from hgcr_interfaces.srv import SetHoldingRegs
 import rclpy
 from rclpy.node import Node
 

@@ -23,7 +23,7 @@ from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import LoadComposableNodes, SetParameter
 from launch_ros.actions import Node
 from launch_ros.descriptions import ComposableNode, ParameterFile
-from nav2_common.launch import LaunchConfigAsBool,RewrittenYaml
+from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
@@ -42,7 +42,7 @@ def generate_launch_description():
 
     #added for keepout zones
     keepout_mask_yaml_file = params_file # LaunchConfiguration('keepout_mask') # the param file use the same as nav2 param file
-    use_keepout_zones = LaunchConfigAsBool('use_keepout_zones')
+    use_keepout_zones = LaunchConfiguration('use_keepout_zones')
 
     lifecycle_nodes = [
         'controller_server',
@@ -91,7 +91,7 @@ def generate_launch_description():
      ##added for keepout zones
     declare_keepout_mask_yaml_cmd = DeclareLaunchArgument(
         'keepout_mask',
-        default_value='',
+        default_value='/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml',
         description='Full path to keepout mask yaml file to load',
     )
 
@@ -153,9 +153,11 @@ def generate_launch_description():
                 output='screen',
                 respawn=use_respawn,
                 respawn_delay=2.0,
-                parameters=[configured_params, {'yaml_filename': keepout_mask_yaml_file}],
+               # parameters=[configured_params, {'yaml_filename': keepout_mask_yaml_file}],
+            #    parameters=[configured_params],
+                parameters=[{'yaml_filename': LaunchConfiguration('keepout_mask')}],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings,
+                remappings=remappings + [('/map', 'keepout_filter_mask')],
             ),
             Node(
                 condition=IfCondition(use_keepout_zones),
@@ -302,10 +304,10 @@ def generate_launch_description():
                         package='nav2_map_server',
                         plugin='nav2_map_server::MapServer',
                         name='keepout_filter_mask_server',
-                        parameters=[
-                            configured_params,
-                            {'yaml_filename': keepout_mask_yaml_file}
-                        ],
+                        parameters=[configured_params],
+                        # parameters=[
+                        #     {'yaml_filename': keepout_mask_yaml_file}
+                        # ],
                         remappings=remappings,
                     ),
                     ComposableNode(
@@ -400,16 +402,17 @@ def generate_launch_description():
 
     # Declare the launch options
     ld.add_action(declare_namespace_cmd)
+    ld.add_action(declare_keepout_mask_yaml_cmd)
     ld.add_action(declare_use_sim_time_cmd)
     ld.add_action(declare_params_file_cmd)
     ld.add_action(declare_autostart_cmd)
     ld.add_action(declare_use_composition_cmd)
     ld.add_action(declare_container_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
-    ld.add_action(declare_log_level_cmd)
     # added for keepout zones
-    ld.add_action(declare_keepout_mask_yaml_cmd)
     ld.add_action(declare_use_keepout_zones_cmd)
+    ld.add_action(declare_log_level_cmd)
+
     # Add the actions to launch all of the navigation nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)

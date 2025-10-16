@@ -188,33 +188,48 @@ def get_robot_status():
     response.raise_for_status()
     return response.json()
 
-def update_robot_status(state):
+def update_robot_status(status_id, state):
     url = f"{API_BASE_URL}/api/robotstatus/updatestatus"
-    response = requests.post(url, json={"status": state}, timeout=3)
+    if not status_id:
+        raise ValueError("status_id is required to update robot status")
+    payload = {"id": status_id, "status": state}
+    response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 
-def update_robot_position(position):
+def update_robot_position(status_id, position):
     url = f"{API_BASE_URL}/api/robotStatus/updateposition"
-    response = requests.post(url, json={"position": position}, timeout=3)
+    if not status_id:
+        raise ValueError("status_id is required to update robot position")
+    payload = {"id": status_id, "position": position}
+    response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 
-def update_robot_charging(charging):
+def update_robot_charging(status_id, charging):
     url = f"{API_BASE_URL}/api/robotStatus/updatecharging"
-    response = requests.post(url, json={"charging": charging}, timeout=3)
+    if not status_id:
+        raise ValueError("status_id is required to update robot charging")
+    payload = {"id": status_id, "charging": charging}
+    response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 
-def update_robot_door(door_str):
+def update_robot_door(status_id, door_payload):
     url = f"{API_BASE_URL}/api/robotStatus/updatedoor"
-    response = requests.post(url, json={"door": door_str}, timeout=3)
+    if not status_id:
+        raise ValueError("status_id is required to update robot door")
+    payload = {"id": status_id, "door": door_payload}
+    response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 
-def update_robot_box(box_str):
+def update_robot_box(status_id, box_payload):
     url = f"{API_BASE_URL}/api/robotStatus/updatebox"
-    response = requests.post(url, json={"box": box_str}, timeout=3)
+    if not status_id:
+        raise ValueError("status_id is required to update robot box")
+    payload = {"id": status_id, "box": box_payload}
+    response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 

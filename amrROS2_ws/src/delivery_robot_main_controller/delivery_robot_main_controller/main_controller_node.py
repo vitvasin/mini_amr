@@ -70,6 +70,7 @@ class DeliveryRobotMainController(Node):
         self.chargestate = ChargeState.NOT_CHARGE
         self.target_station = ""
         self.retry_move_no = 0
+        self.status_id = None
         self.get_logger().info(f"Initial state: {self.state.name}")
         
         self.get_system_parameters_from_api()
@@ -162,6 +163,9 @@ class DeliveryRobotMainController(Node):
             # ใช้ข้อมูล เช่น:
             if data and isinstance(data, list):
                 current_status = data[0]
+                status_id = current_status.get("_id") or current_status.get("id")
+                if status_id:
+                    self.status_id = status_id
                 state_value = current_status.get("status", "")
             
                 # ถ้า state เป็น dict เช่น {"name": "STANDBY"} ให้ดึงชื่อออกมา
@@ -196,6 +200,11 @@ class DeliveryRobotMainController(Node):
                 state_str = current_status.get("status", "STANDBY")
                 state = getattr(RobotState, state_str, RobotState.STANDBY)
                 #self.change_state(state)
+                status_id = current_status.get('_id') or current_status.get('id')
+                if status_id:
+                    self.status_id = status_id
+                else:
+                    self.get_logger().warn('Robot status id missing from API response.')
                 self.location = current_status.get('position','N/A')
                 self.charging = current_status.get('charging','Not Charge')
                 self.door1 = current_status.get('door1','N/A')
@@ -226,7 +235,10 @@ class DeliveryRobotMainController(Node):
                 "box": box_name,
                 "value": status
             }
-            api_client.update_robot_box(payload)
+            status_id = self._get_status_id_for('box status update')
+            if not status_id:
+                return
+            api_client.update_robot_box(status_id, payload)
             self.get_logger().info(f"Updated box status: {box_name} = {status}")
         except Exception as e:
             self.get_logger().error(f"Failed to update box status: {e}")
@@ -237,7 +249,10 @@ class DeliveryRobotMainController(Node):
                 "door": door_name,
                 "value": status
             }
-            api_client.update_robot_door(payload)
+            status_id = self._get_status_id_for('door status update')
+            if not status_id:
+                return
+            api_client.update_robot_door(status_id, payload)
             self.get_logger().info(f"Updated door status: {door_name} = {status}")
         except Exception as e:
             self.get_logger().error(f"Failed to update door status: {e}")
@@ -327,6 +342,17 @@ class DeliveryRobotMainController(Node):
         #self.get_logger().info(f"Current battery SOC: {self.batt_percentage}%")
         api_client.update_soc(self.batt_percentage)
         
+    def _get_status_id_for(self, action: str):
+        status_id = getattr(self, 'status_id', None)
+        if status_id:
+            return status_id
+        self.get_logger().warn(f'Robot status id missing; refreshing before {action}.')
+        self.get_robot_status_from_api()
+        status_id = getattr(self, 'status_id', None)
+        if not status_id:
+            self.get_logger().error(f'Skipping {action}; id is unavailable.')
+        return status_id
+
     def change_state(self, new_state: RobotState):
         if not isinstance(new_state, RobotState):
             self.get_logger().error(f"Invalid state requested. {new_state}")
@@ -336,7 +362,13 @@ class DeliveryRobotMainController(Node):
 
         self.get_logger().info(f"State change: {self.state.name} -> {new_state.name}")
         self.state = new_state
-        api_client.update_robot_status(new_state.name)
+
+        status_id = self._get_status_id_for('robot status update')
+        if status_id:
+            try:
+                api_client.update_robot_status(status_id, new_state.name)
+            except Exception as e:
+                self.get_logger().error(f'Failed to update robot status: {e}')
 
         # Placeholder for state entry logic
         if self.state == RobotState.STANDBY:
@@ -605,8 +637,13 @@ class DeliveryRobotMainController(Node):
         # Do something depending on the return code
         result = self.navigator.getResult()
         if result == TaskResult.SUCCEEDED:
-            if (self.target_station != ""):
-                api_client.update_robot_position(self.target_station)
+            if self.target_station != "":
+                status_id = self._get_status_id_for('position update')
+                if status_id:
+                    try:
+                        api_client.update_robot_position(status_id, self.target_station)
+                    except Exception as e:
+                        self.get_logger().error(f'Failed to update robot position: {e}')
                 self.target_station = ""
             self.get_logger().info('Goal succeeded!')
         elif result == TaskResult.CANCELED:

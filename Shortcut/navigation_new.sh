@@ -28,7 +28,6 @@ case "$1" in
         # Launch navigation with AMCL #NECTEC_4th_Floor.yaml
         ros2 launch navigation navigation_amcl.launch.py \
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor.yaml" \
-           #map:="$SCRIPT_DIR/../amrROS2_ws/maps/map_001.yaml" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
         ;;
@@ -36,7 +35,6 @@ case "$1" in
         # Launch navigation with AMCL #NECTEC_4th_Floor.yaml
         ros2 launch navigation navigation_amcl.launch.py \
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/smr_room.yaml" \
-           #map:="$SCRIPT_DIR/../amrROS2_ws/maps/map_001.yaml" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
         ;;

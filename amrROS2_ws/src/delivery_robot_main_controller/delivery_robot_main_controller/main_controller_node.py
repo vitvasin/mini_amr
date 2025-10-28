@@ -40,6 +40,7 @@ class RobotState(Enum):
     LOAD_IN = auto()
     LOAD_OUT = auto()
     DOCK = auto()
+    MANUAL = auto()
 
 class DockState(Enum):
     IDLE = auto()
@@ -71,9 +72,11 @@ class DeliveryRobotMainController(Node):
         self.target_station = ""
         self.retry_move_no = 0
         self.status_id = None
+
         self.get_logger().info(f"Initial state: {self.state.name}")
         
         self.get_system_parameters_from_api()
+
         # Example publisher (placeholder for /cmd_vel or similar)
         # self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
@@ -236,8 +239,6 @@ class DeliveryRobotMainController(Node):
                 "value": status
             }
             status_id = self._get_status_id_for('box status update')
-            if not status_id:
-                return
             api_client.update_robot_box(status_id, payload)
             self.get_logger().info(f"Updated box status: {box_name} = {status}")
         except Exception as e:
@@ -250,8 +251,6 @@ class DeliveryRobotMainController(Node):
                 "value": status
             }
             status_id = self._get_status_id_for('door status update')
-            if not status_id:
-                return
             api_client.update_robot_door(status_id, payload)
             self.get_logger().info(f"Updated door status: {door_name} = {status}")
         except Exception as e:
@@ -270,20 +269,29 @@ class DeliveryRobotMainController(Node):
                 config = data[0]
                 self.setting_autoHomeWaitTime = config.get("autoHomeWaitTime", 0)
                 self.setting_batteryLowToCharge = config.get("batteryLowToCharge", 20)
-                self.setting_batteryChargingLimit = config.get("batteryChargingLimit", 100)
+                self.setting_batteryChargingLimitUpper = config.get("batteryChargingLimitUpper", 100)
+                self.setting_batteryChargingLimitLower = config.get("batteryChargingLimitLower", 95)
                 self.setting_batteryLevelCanWork = config.get("batteryLevelCanWork", 50)
-                self.setting_isSoundAlarmAtStation = config.get("isSoundAlarmAtStation", False)
-                self.setting_isLightAlarmAtStation = config.get("isLightAlarmAtStation", False)
-                self.setting_isEnableStationPassword = config.get("isEnableStationPassword", False)
+                self.setting_isSoundAlarmForRequest = config.get("isSoundAlarmForRequest", 0)
+                self.setting_isSoundAlarmForDelivery = config.get("isSoundAlarmForDelivery", 0)
+                self.setting_isLightAlarmForRequest = config.get("isLightAlarmForRequest", 0)
+                self.setting_isLightAlarmForDelivery = config.get("isLightAlarmForDelivery", 0)
+                self.setting_isSoundAlarmForObstacle = config.get("isSoundAlarmForObstacle", 0)
+                self.setting_isEnableStationPassword = config.get("isEnableStationPassword", 0)
                 self.setting_adminPassword = config.get("adminPassword", "")
-                self.setting_waitLoadinTimeout = config.get("waitLoadinTimeout", 30)
+                self.setting_waitLoadinTimeout = config.get("waitLoadinTimeout", 5)
                 self.setting_waitLoadoutTimeout = config.get("waitLoadoutTimeout", 30)
                 self.setting_doorOpenTimeout = config.get("doorOpenTimeout", 30)
+                self.setting_startPoseX = config.get("startPoseX", 0)
+                self.setting_startPoseY = config.get("startPoseY", 0)
+                self.setting_startPoseYaw = config.get("startPoseYaw", 0)
+
                 self.get_logger().info(f"setting_batteryLowToCharge: {self.setting_batteryLowToCharge}")
             else:
                 self.get_logger().warn("Invalid system parameter format: 'data' is empty or not a list")
         except Exception as e:
             self.get_logger().error(f"Failed to get system parameters: {e}")
+
 
     def get_pending_queue_from_api(self):
         try:
@@ -340,7 +348,11 @@ class DeliveryRobotMainController(Node):
 
     def battery_status_monitor(self):
         #self.get_logger().info(f"Current battery SOC: {self.batt_percentage}%")
-        api_client.update_soc(self.batt_percentage)
+        status_id = self._get_status_id_for('state of charge update')
+        try:
+            api_client.update_soc(status_id, self.batt_percentage)
+        except Exception as e:
+            self.get_logger().error(f'Failed to update robot SOC: {e}')
         
     def _get_status_id_for(self, action: str):
         status_id = getattr(self, 'status_id', None)
@@ -349,9 +361,10 @@ class DeliveryRobotMainController(Node):
         self.get_logger().warn(f'Robot status id missing; refreshing before {action}.')
         self.get_robot_status_from_api()
         status_id = getattr(self, 'status_id', None)
-        if not status_id:
-            self.get_logger().error(f'Skipping {action}; id is unavailable.')
-        return status_id
+        if status_id:
+            return status_id
+        self.get_logger().warn(f'Using default status id 1 for {action}.')
+        return 1
 
     def change_state(self, new_state: RobotState):
         if not isinstance(new_state, RobotState):
@@ -580,7 +593,7 @@ class DeliveryRobotMainController(Node):
                     self.change_charge_state(ChargeState.CHARGING)
 
         #ตรวจสอบแบตเตอรี่ให้หยุดชาร์จเมื่อถึง limit
-        if self.batt_percentage >= self.setting_batteryChargingLimit:
+        if self.batt_percentage >= self.setting_batteryChargingLimitUpper:
             if (self.chargestate == ChargeState.CHARGING):
                 self.change_charge_state(ChargeState.NOT_CHARGE)         
 
@@ -639,11 +652,10 @@ class DeliveryRobotMainController(Node):
         if result == TaskResult.SUCCEEDED:
             if self.target_station != "":
                 status_id = self._get_status_id_for('position update')
-                if status_id:
-                    try:
-                        api_client.update_robot_position(status_id, self.target_station)
-                    except Exception as e:
-                        self.get_logger().error(f'Failed to update robot position: {e}')
+                try:
+                    api_client.update_robot_position(status_id, self.target_station)
+                except Exception as e:
+                    self.get_logger().error(f'Failed to update robot position: {e}')
                 self.target_station = ""
             self.get_logger().info('Goal succeeded!')
         elif result == TaskResult.CANCELED:

@@ -17,7 +17,7 @@ from nav_msgs.msg import OccupancyGrid
 import tf2_ros
 from tf2_ros import TransformException
 from typing import Optional, Tuple
-from rcl_interfaces.msg import SetParametersResult
+from . import api_client
 
 
 class RobotSoundNode(Node):
@@ -25,23 +25,22 @@ class RobotSoundNode(Node):
         super().__init__('robot_sound_node')
 
         # LiDAR data for obstacle detection
-        self.create_subscription(LaserScan, '/scan', self.lidar_callback, 10)
+        self.create_subscription(LaserScan, 'scan', self.lidar_callback, 10)
 
         # External commands to trigger sound manually
         self.create_subscription(String, 'robot_sound_command', self.command_callback, 10)
 
         # Static map to distinguish known vs. new obstacles
-        self.create_subscription(OccupancyGrid, '/map', self.map_callback, 1)
-
-        self.obstacle_alarm_param_name = 'isSoundAlarmForObstacle'
-        self.declare_parameter(self.obstacle_alarm_param_name, True)
-        self.sound_alarm_for_obstacle_enabled = self._parameter_to_bool(
-            self.get_parameter(self.obstacle_alarm_param_name).value
-        )
-        self.add_on_set_parameters_callback(self._on_parameters_changed)
+        self.create_subscription(OccupancyGrid, 'map', self.map_callback, 1)
 
         self.threshold = 0.6  # metres
-        self.alert_cooldown = 3.0  # seconds
+        self.sound_alarm_for_obstacle_enabled = True
+        self.settings_refresh_interval = 5.0
+        self.settings_fetch_in_progress = False
+        self.settings_fetch_fail_log_interval = 15.0
+        self.last_settings_fetch_error_log = 0.0
+
+        self.alert_cooldown = 10.0  # seconds
         self.last_alert_time = 0.0
 
         self.sound_dir = '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds'
@@ -49,7 +48,7 @@ class RobotSoundNode(Node):
             'thank_you': 'robot_thankyou.wav',
             'arrive_delivery': 'robot_delivery.wav',
             'arrive_target': 'robot_target.wav',
-            'obstacle_alert': 'robot_obstrucle1.wav',
+            'obstacle_alert': 'robot_obstacle.wav',
         }
 
         self.tf_buffer = tf2_ros.Buffer(cache_time=Duration(seconds=10.0))
@@ -67,6 +66,9 @@ class RobotSoundNode(Node):
 
         self.obstacle_alarm_suppressed_log_interval = 5.0
         self.last_obstacle_alarm_suppressed_log = 0.0
+
+        self.create_timer(self.settings_refresh_interval, self._refresh_settings_timer)
+        self._refresh_settings_from_api(initial=True)
 
         state = 'enabled' if self.sound_alarm_for_obstacle_enabled else 'disabled'
         self.get_logger().info(f'Obstacle sound alarm is {state}.')
@@ -90,9 +92,6 @@ class RobotSoundNode(Node):
     # 🗺️ Map callback
     # ============================================================
     def map_callback(self, msg: OccupancyGrid) -> None:
-        if not self.sound_alarm_for_obstacle_enabled:
-            return
-
         with self.map_lock:
             self.map_msg = msg
         if not self.map_received_logged:
@@ -108,18 +107,18 @@ class RobotSoundNode(Node):
     # 🚨 LiDAR callback
     # ============================================================
     def lidar_callback(self, msg: LaserScan) -> None:
-        if not self.sound_alarm_for_obstacle_enabled:
-            return
+        obstacle_detected = False
 
-        if not self.map_available():
+        if self.map_available():
+            transform = self.lookup_transform(msg.header)
+            if transform is None:
+                return
+            obstacle_detected = self.is_new_obstacle(transform, msg)
+        else:
             self.log_missing_map_once()
-            return
+            obstacle_detected = self._has_close_obstacle(msg)
 
-        transform = self.lookup_transform(msg.header)
-        if transform is None:
-            return
-
-        if not self.is_new_obstacle(transform, msg):
+        if not obstacle_detected:
             return
 
         now = time.time()
@@ -267,22 +266,52 @@ class RobotSoundNode(Node):
             return value.strip().lower() in ('1', 'true', 'yes', 'on')
         return bool(value)
 
-    def _on_parameters_changed(self, params):
-        result = SetParametersResult(successful=True)
-        for param in params:
-            if param.name == self.obstacle_alarm_param_name:
-                new_value = self._parameter_to_bool(param.value)
-                if new_value != self.sound_alarm_for_obstacle_enabled:
+    def _refresh_settings_timer(self):
+        self._refresh_settings_from_api()
+
+    def _refresh_settings_from_api(self, initial: bool = False):
+        if self.settings_fetch_in_progress:
+            return
+        self.settings_fetch_in_progress = True
+        threading.Thread(
+            target=self._fetch_settings_from_api,
+            args=(initial,),
+            daemon=True,
+        ).start()
+
+    def _fetch_settings_from_api(self, initial: bool = False) -> None:
+        try:
+            params = api_client.get_system_parameters()
+            data = params.get('data', [])
+            if isinstance(data, list) and data:
+                config = data[0]
+                new_value = self._parameter_to_bool(config.get('isSoundAlarmForObstacle', 0))
+                if new_value != self.sound_alarm_for_obstacle_enabled or initial:
                     self.sound_alarm_for_obstacle_enabled = new_value
                     state = 'enabled' if new_value else 'disabled'
-                    self.get_logger().info(f'Obstacle sound alarm {state} via parameter update.')
-        return result
+                    self.get_logger().info(f'Obstacle sound alarm {state} (API).')
+        except Exception as exc:
+            now = time.time()
+            if now - self.last_settings_fetch_error_log >= self.settings_fetch_fail_log_interval:
+                self.last_settings_fetch_error_log = now
+                self.get_logger().warn(f'Failed to refresh obstacle sound setting: {exc}')
+        finally:
+            self.settings_fetch_in_progress = False
+
+
 
     def log_obstacle_alarm_suppressed(self) -> None:
         now = time.time()
         if now - self.last_obstacle_alarm_suppressed_log >= self.obstacle_alarm_suppressed_log_interval:
             self.last_obstacle_alarm_suppressed_log = now
             self.get_logger().info('Obstacle detected but sound alarm disabled.')
+
+
+    def _has_close_obstacle(self, scan: LaserScan) -> bool:
+        for distance in scan.ranges:
+            if math.isfinite(distance) and distance < self.threshold:
+                return True
+        return False
 
 
 def main(args=None) -> None:

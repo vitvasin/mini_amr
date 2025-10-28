@@ -11,6 +11,9 @@ from .generate_agv_path_from_building_yaml import compute_path_poses
 import tf2_ros
 import tf2_geometry_msgs 
 
+from std_msgs.msg import String, Int16
+from math import degrees, hypot
+
 
 from tf_transformations import euler_from_quaternion, quaternion_from_euler, quaternion_multiply
 import time
@@ -61,34 +64,56 @@ class DeliveryRobotMainController(Node):
         self._should_dock = False #สำหรับเรียกเข้า dock และ undock แบบ manual
         self._should_undock = False
         self.current_pose = PoseStamped()
+        self.current_speed = 0.0
+        self._path_tracking = None
+        self._waypoint_tolerance = 0.3
         
         #self.get_logger().info(f"Initial state: {RobotState.MOVE}")
         #api_client.update_robot_status((RobotState.MOVE).name)
         #return
         # Initialize robot state
         self.state = RobotState.STANDBY
+        try:
+            api_client.update_robot_status(self.state.name)
+        except Exception as e:
+            self.get_logger().error(f'Failed to update robot status: {e}')
+
         self.dockstate = DockState.IDLE
         self.chargestate = ChargeState.NOT_CHARGE
         self.target_station = ""
         self.retry_move_no = 0
         self.status_id = None
+        self.load_out_loop_counter = 0
 
         self.get_logger().info(f"Initial state: {self.state.name}")
-        
-        self.get_system_parameters_from_api()
+
+        self._cached_system_parameters = None
+        self._system_param_poll_interval = 5.0  # seconds
+        self.get_system_parameters_from_api(report_changes=False)
+        self._system_param_poll_timer = self.create_timer(
+            self._system_param_poll_interval, self.poll_system_parameters
+        )
 
         # Example publisher (placeholder for /cmd_vel or similar)
         # self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
 
         # Example timer to periodically print state (can remove later)
         self.batt_percentage = 80  # battery state of charge
+        self._last_activity_time = self.get_clock().now()
 
+        # Subscribe to /ir_charge_state topic
+        self.create_subscription(
+            Int16,
+            "ir_charge_state",
+            self.charge_state_callback,
+            2
+        )
         # Subscribe to /battery topic
         self.create_subscription(
             BatteryState,
-            "/battery",
+            "battery",
             self.battery_callback,
-            10
+            1
         )
         self.smooth_path = True
         self.navigator = BasicNavigator()
@@ -104,29 +129,41 @@ class DeliveryRobotMainController(Node):
 
         self.tf_buffer = tf2_ros.Buffer()
         self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
-        self.timer = self.create_timer(1.0, self.get_current_robot_pose)
-
-        
-
-
+        self.create_timer(1.0, self.get_current_robot_pose)
         
         self.autodock_client = ActionClient(self, Autodock, 'autodock')
 
         # Add dock_command service for external dock/undock requests
         self.dock_command_srv = self.create_service(SetBool, 'dock_command', self.handle_dock_command)
 
+        # Add sound publisher
+        self.sound_publisher = self.create_publisher(String, '/robot_sound_command', 10)
         #time.sleep(2.0)
         #self.send_goal_pose(1.0,0.0,0.0) #test
         self.on_standby()
 
         # TODO: Add action clients / services / subscribers as needed
+    
+    @staticmethod
+    def _parameter_to_bool(value) -> bool:
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)):
+            return value != 0
+        if isinstance(value, str):
+            return value.strip().lower() in ('1', 'true', 'yes', 'on')
+        return bool(value)
 
+    def touch_activity(self): 
+        self._last_activity_time = self.get_clock().now() 
+    
     def get_current_robot_pose(self):
         try:
             # Lookup the transform from 'map' to 'base_link'
             transform = self.tf_buffer.lookup_transform(
                 'map', 'base_link', rclpy.time.Time()
             )
+            now = self.get_clock().now()
             # Create a PoseStamped message from the transform
             current_pose = PoseStamped()
             current_pose.header.frame_id = 'map'
@@ -136,7 +173,28 @@ class DeliveryRobotMainController(Node):
             current_pose.pose.position.z = transform.transform.translation.z
             current_pose.pose.orientation = transform.transform.rotation
             self.current_pose =  current_pose
-            self.get_logger().info(f"Current Pose: x={current_pose.pose.position.x}, y={current_pose.pose.position.y}")
+            #status_id = self._get_status_id_for('update robot pose')
+            api_client.update_status('pose_x',current_pose.pose.position.x)
+            api_client.update_status('pose_y',current_pose.pose.position.y)
+            yaw = degrees(self.calculate_heading(current_pose.pose))
+            api_client.update_status('pose_yaw',yaw)
+
+             # คำนวณความเร็วเชิงเส้น (m/s)
+            prev_pose = getattr(self, "_prev_pose", None)
+            prev_time = getattr(self, "_prev_time", None)
+            if prev_pose and prev_time:
+                dt = (now - prev_time).nanoseconds / 1e9
+                if dt > 0:
+                    dx = current_pose.pose.position.x - prev_pose.pose.position.x
+                    dy = current_pose.pose.position.y - prev_pose.pose.position.y
+                    speed = (dx**2 + dy**2) ** 0.5 / dt
+                    self.current_speed = speed
+                    api_client.update_status('vel_x',speed)
+                    #self.get_logger().info(f"Robot speed: {speed:.3f} m/s")
+            
+            self._prev_pose = current_pose
+            self._prev_time = now
+            #self.get_logger().info(f"Current Pose: x={current_pose.pose.position.x}, y={current_pose.pose.position.y}")
         except tf2_ros.TransformException as ex:
             self.get_logger().warn(f'Could not transform "base_link" to "map": {ex}')
             
@@ -149,11 +207,33 @@ class DeliveryRobotMainController(Node):
             self.batt_capacity = msg.capacity
             self.batt_charge = msg.charge
             self.batt_percentage = msg.percentage
+            self.batt_design_capacity = msg.design_capacity
+            self.batt_power_supply_status = msg.power_supply_status
+            self.batt_power_supply_health = msg.power_supply_health
+            self.batt_power_supply_technology = msg.power_supply_technology
+            self.batt_present = self._parameter_to_bool(msg.present)
             self.battery_status_monitor()
 
         except Exception as e:
             self.get_logger().error(f"Battery callback exception: {e}")
     
+    def charge_state_callback(self, msg: Int16):
+        """Update cached charge/dock state from IR charge sensor feedback."""
+        try:
+            charge_code = int(msg.data)
+            if charge_code == 11:
+                self.chargestate = ChargeState.CHARGING
+            else:
+                self.chargestate = ChargeState.NOT_CHARGE
+            api_client.update_status('charge_state',self.chargestate.name)
+            
+            if charge_code in (10, 11):
+                self.dockstate = DockState.DOCKED
+                #api_client.update_status('dock_state',self.dockstate.name)
+
+        except Exception as e:
+            self.get_logger().error(f"ChargeState callback exception: {e}")
+
     def state_monitor(self):
         # Periodic task to monitor or report state
         self.get_robot_status_from_api()
@@ -189,7 +269,7 @@ class DeliveryRobotMainController(Node):
 
     def get_robot_status_from_api(self):
         try:
-            #url = 'http://localhost:8080/api/robotstatus/list'  # URL ของ API ที่เชื่อมกับ MongoDB
+            #url = 'http://localhost:8080/api/robotstatus/list'  # URL ของ API ที่เชื่อมกับ SQLite
             #response = requests.get(url, timeout=5)
             #response.raise_for_status()
             #params = response.json()
@@ -208,25 +288,23 @@ class DeliveryRobotMainController(Node):
                     self.status_id = status_id
                 else:
                     self.get_logger().warn('Robot status id missing from API response.')
-                self.location = current_status.get('position','N/A')
-                self.charging = current_status.get('charging','Not Charge')
-                self.door1 = current_status.get('door1','N/A')
-                self.door2 = current_status.get('door2','N/A')
-                self.door3 = current_status.get('door3','N/A')
-                self.door4 = current_status.get('door4','N/A')
-                self.door5 = current_status.get('door5','N/A')
-                self.door6 = current_status.get('door6','N/A')
-                self.door7 = current_status.get('door7','N/A')
-                self.door8 = current_status.get('door8','N/A')
-                self.box1 = current_status.get('box1','N/A')
-                self.box2 = current_status.get('box2','N/A')
-                self.box3 = current_status.get('box3','N/A')
-                self.box4 = current_status.get('box4','N/A')
-                self.box5 = current_status.get('box5','N/A')
-                self.box6 = current_status.get('box6','N/A')
-                self.box7 = current_status.get('box7','N/A')
-                self.box8 = current_status.get('box8','N/A')
-                self.box9 = current_status.get('box9','N/A')
+                
+                #test_param = api_client.get_robot_status_by_name('dock_state')
+                #self.get_logger().info(f"dock_state = {test_param}")
+                #self.target_station = current_status.get('target_station','')
+                #self.dock_state = current_status.get('dock_state','')
+                #self.charge_state = current_status.get('charge_state','Not Charge')
+                #self.pose_x = current_status.get('pose_x', 0.0)
+                #self.pose_y = current_status.get('pose_y',0.0)
+                #self.pose_yaw = current_status.get('pose_yaw', 0.0)
+                #self.target_x = current_status.get('pose_x', 0.0)
+                #self.target_y = current_status.get('pose_y', 0.0)
+                #self.target_yaw = current_status.get('pose_yaw',0.0)
+                #self.vel_x = current_status.get('vel_x', 0.0)
+                #self.vel_y = current_status.get('vel_y', 0.0)
+                #self.ang_vel_yaw = current_status.get('ang_vel_yaw',0.0)
+                #self.estimate_arrival_time = current_status.get('estimate_arrival_time',0.0)
+                ### add more for use in future
             else:
                 self.get_logger().warn("Invalid system current status format: 'data' is empty or not a list")
         except Exception as e:
@@ -234,29 +312,67 @@ class DeliveryRobotMainController(Node):
     
     def update_box_status(self, box_name: str, status: str):
         try:
-            payload = {
-                "box": box_name,
-                "value": status
-            }
-            status_id = self._get_status_id_for('box status update')
-            api_client.update_robot_box(status_id, payload)
+            #status_id = self._get_status_id_for('box status update')
+            api_client.update_status( box_name, status)
             self.get_logger().info(f"Updated box status: {box_name} = {status}")
         except Exception as e:
             self.get_logger().error(f"Failed to update box status: {e}")
 
     def update_door_status(self, door_name: str, status: str):
         try:
-            payload = {
-                "door": door_name,
-                "value": status
-            }
-            status_id = self._get_status_id_for('door status update')
-            api_client.update_robot_door(status_id, payload)
+            #status_id = self._get_status_id_for('door status update')
+            api_client.update_status( door_name, status)
             self.get_logger().info(f"Updated door status: {door_name} = {status}")
         except Exception as e:
             self.get_logger().error(f"Failed to update door status: {e}")
 
-    def get_system_parameters_from_api(self):
+    def poll_system_parameters(self):
+        self.get_system_parameters_from_api()
+
+    def _normalize_system_parameters(self, config: dict) -> dict:
+        return {
+            "autoHomeWaitTime": config.get("autoHomeWaitTime", 0),
+            "batteryLowToCharge": config.get("batteryLowToCharge", 20),
+            "batteryChargingLimitUpper": config.get("batteryChargingLimitUpper", 100),
+            "batteryChargingLimitLower": config.get("batteryChargingLimitLower", 95),
+            "batteryLevelCanWork": config.get("batteryLevelCanWork", 50),
+            "isSoundAlarmForRequest": self._parameter_to_bool(config.get("isSoundAlarmForRequest", 0)),
+            "isSoundAlarmForDelivery": self._parameter_to_bool(config.get("isSoundAlarmForDelivery", 0)),
+            "isLightAlarmForRequest": self._parameter_to_bool(config.get("isLightAlarmForRequest", 0)),
+            "isLightAlarmForDelivery": self._parameter_to_bool(config.get("isLightAlarmForDelivery", 0)),
+            "isSoundAlarmForObstacle": self._parameter_to_bool(config.get("isSoundAlarmForObstacle", 0)),
+            "isEnableStationPassword": self._parameter_to_bool(config.get("isEnableStationPassword", 0)),
+            "adminPassword": config.get("adminPassword", ""),
+            "waitLoadinTimeout": config.get("waitLoadinTimeout", 5),
+            "waitLoadoutTimeout": config.get("waitLoadoutTimeout", 30),
+            "doorOpenTimeout": config.get("doorOpenTimeout", 30),
+            "startPoseX": config.get("startPoseX", 0),
+            "startPoseY": config.get("startPoseY", 0),
+            "startPoseYaw": config.get("startPoseYaw", 0),
+        }
+
+    def _apply_system_parameters(self, settings: dict):
+        self.setting_autoHomeWaitTime = settings["autoHomeWaitTime"]
+        self.setting_batteryLowToCharge = settings["batteryLowToCharge"]
+        self.setting_batteryChargingLimitUpper = settings["batteryChargingLimitUpper"]
+        self.setting_batteryChargingLimitLower = settings["batteryChargingLimitLower"]
+        self.setting_batteryLevelCanWork = settings["batteryLevelCanWork"]
+        self.setting_isSoundAlarmForRequest = settings["isSoundAlarmForRequest"]
+        self.setting_isSoundAlarmForDelivery = settings["isSoundAlarmForDelivery"]
+        self.setting_isLightAlarmForRequest = settings["isLightAlarmForRequest"]
+        self.setting_isLightAlarmForDelivery = settings["isLightAlarmForDelivery"]
+        self.setting_isSoundAlarmForObstacle = settings["isSoundAlarmForObstacle"]
+        self.setting_isEnableStationPassword = settings["isEnableStationPassword"]
+        self.setting_adminPassword = settings["adminPassword"]
+        self.setting_waitLoadinTimeout = settings["waitLoadinTimeout"]
+        self.setting_waitLoadoutTimeout = settings["waitLoadoutTimeout"]
+        self.setting_doorOpenTimeout = settings["doorOpenTimeout"]
+        self.setting_startPoseX = settings["startPoseX"]
+        self.setting_startPoseY = settings["startPoseY"]
+        self.setting_startPoseYaw = settings["startPoseYaw"]
+        self.get_logger().info(f"setting_batteryLowToCharge: {self.setting_batteryLowToCharge}")
+
+    def get_system_parameters_from_api(self, report_changes: bool = True):
         try:
             #url = "http://localhost:8080/api/params/list"
             #response = requests.get(url, timeout=3)
@@ -266,27 +382,19 @@ class DeliveryRobotMainController(Node):
             params = api_client.get_system_parameters()
             data = params.get("data", [])
             if data and isinstance(data, list):
-                config = data[0]
-                self.setting_autoHomeWaitTime = config.get("autoHomeWaitTime", 0)
-                self.setting_batteryLowToCharge = config.get("batteryLowToCharge", 20)
-                self.setting_batteryChargingLimitUpper = config.get("batteryChargingLimitUpper", 100)
-                self.setting_batteryChargingLimitLower = config.get("batteryChargingLimitLower", 95)
-                self.setting_batteryLevelCanWork = config.get("batteryLevelCanWork", 50)
-                self.setting_isSoundAlarmForRequest = config.get("isSoundAlarmForRequest", 0)
-                self.setting_isSoundAlarmForDelivery = config.get("isSoundAlarmForDelivery", 0)
-                self.setting_isLightAlarmForRequest = config.get("isLightAlarmForRequest", 0)
-                self.setting_isLightAlarmForDelivery = config.get("isLightAlarmForDelivery", 0)
-                self.setting_isSoundAlarmForObstacle = config.get("isSoundAlarmForObstacle", 0)
-                self.setting_isEnableStationPassword = config.get("isEnableStationPassword", 0)
-                self.setting_adminPassword = config.get("adminPassword", "")
-                self.setting_waitLoadinTimeout = config.get("waitLoadinTimeout", 5)
-                self.setting_waitLoadoutTimeout = config.get("waitLoadoutTimeout", 30)
-                self.setting_doorOpenTimeout = config.get("doorOpenTimeout", 30)
-                self.setting_startPoseX = config.get("startPoseX", 0)
-                self.setting_startPoseY = config.get("startPoseY", 0)
-                self.setting_startPoseYaw = config.get("startPoseYaw", 0)
-
-                self.get_logger().info(f"setting_batteryLowToCharge: {self.setting_batteryLowToCharge}")
+                raw_config = data[0]
+                settings = self._normalize_system_parameters(raw_config)
+                cached = self._cached_system_parameters
+                if cached != settings:
+                    if cached and report_changes:
+                        for key, new_value in settings.items():
+                            old_value = cached.get(key)
+                            if old_value != new_value:
+                                self.get_logger().info(
+                                    f"System parameter '{key}' changed from {old_value} to {new_value}"
+                                )
+                    self._apply_system_parameters(settings)
+                    self._cached_system_parameters = settings
             else:
                 self.get_logger().warn("Invalid system parameter format: 'data' is empty or not a list")
         except Exception as e:
@@ -348,9 +456,20 @@ class DeliveryRobotMainController(Node):
 
     def battery_status_monitor(self):
         #self.get_logger().info(f"Current battery SOC: {self.batt_percentage}%")
-        status_id = self._get_status_id_for('state of charge update')
+        status_id = self._get_status_id_for('battery status')
         try:
             api_client.update_soc(status_id, self.batt_percentage)
+            api_client.update_status("voltage", self.batt_voltage)
+            api_client.update_status("temperature", self.batt_temperature)
+            api_client.update_status("current", self.batt_current)
+            api_client.update_status("charge", self.batt_charge)
+            api_client.update_status("capacity", self.batt_capacity)
+            api_client.update_status("percentage", self.batt_percentage)
+            api_client.update_status("design_capacity", self.batt_design_capacity)
+            api_client.update_status("power_supply_status", self.batt_power_supply_status)
+            api_client.update_status("power_supply_health", self.batt_power_supply_health)
+            api_client.update_status("power_supply_technology", self.batt_power_supply_technology)
+            api_client.update_status("present", self.batt_present)
         except Exception as e:
             self.get_logger().error(f'Failed to update robot SOC: {e}')
         
@@ -379,7 +498,7 @@ class DeliveryRobotMainController(Node):
         status_id = self._get_status_id_for('robot status update')
         if status_id:
             try:
-                api_client.update_robot_status(status_id, new_state.name)
+                api_client.update_robot_status(new_state.name)
             except Exception as e:
                 self.get_logger().error(f'Failed to update robot status: {e}')
 
@@ -406,6 +525,7 @@ class DeliveryRobotMainController(Node):
 
         self.get_logger().info(f"Dock State change: {self.dockstate.name} -> {new_state.name}")
         self.dockstate = new_state
+        api_client.update_status('dock_state',self.dockstate.name)
 
         # Placeholder for state entry logic
         if self.dockstate == DockState.IDLE:
@@ -464,7 +584,76 @@ class DeliveryRobotMainController(Node):
         # quat is [x, y, z, w]
         return quat[3]  # return w component
 
-    
+    def _euclidean_distance(self, p1, p2):
+        dx = p1.x - p2.x
+        dy = p1.y - p2.y
+        return hypot(dx, dy)
+
+    def _initialize_path_tracking(self, path_poses):
+        if not path_poses:
+            self._path_tracking = None
+            return
+        now = self.get_clock().now()
+        total_distance = 0.0
+        start_pose = getattr(self.current_pose, 'pose', None)
+        if start_pose is not None:
+            total_distance += self._euclidean_distance(start_pose.position, path_poses[0].pose.position)
+        for first, second in zip(path_poses[:-1], path_poses[1:]):
+            total_distance += self._euclidean_distance(first.pose.position, second.pose.position)
+        self._path_tracking = {
+            "poses": tuple(path_poses),
+            "total_distance": total_distance,
+            "current_index": 1 if len(path_poses) > 1 else 0,
+            "start_time": now,
+            "remaining_distance": total_distance,
+        }
+        self._update_path_remaining_distance()
+
+    def _update_path_remaining_distance(self):
+        if not self._path_tracking:
+            return None
+        path_info = self._path_tracking
+        path_poses = path_info.get("poses") or []
+        if not path_poses:
+            return None
+        current_position = self.current_pose.pose.position
+        index = path_info.get("current_index", 1 if len(path_poses) > 1 else 0)
+        if index < 0:
+            index = 0
+        n = len(path_poses)
+        while index < n and self._euclidean_distance(current_position, path_poses[index].pose.position) <= self._waypoint_tolerance:
+            index += 1
+        if index >= n:
+            remaining = 0.0
+            path_info["current_index"] = n
+        else:
+            path_info["current_index"] = index
+            remaining = self._euclidean_distance(current_position, path_poses[index].pose.position)
+            for first, second in zip(path_poses[index:], path_poses[index + 1:]):
+                remaining += self._euclidean_distance(first.pose.position, second.pose.position)
+        remaining = max(0.0, remaining)
+        total = path_info.get("total_distance", 0.0)
+        if total > 0.0:
+            remaining = min(remaining, total)
+        path_info["remaining_distance"] = remaining
+        return remaining
+
+    def _estimate_arrival_time(self, remaining_distance):
+        if not self._path_tracking:
+            return None
+        path_info = self._path_tracking
+        total_distance = path_info.get("total_distance", 0.0)
+        now = self.get_clock().now()
+        elapsed = (now - path_info.get("start_time", now)).nanoseconds / 1e9
+        distance_travelled = max(total_distance - remaining_distance, 0.0)
+        avg_speed = distance_travelled / elapsed if elapsed > 1e-3 else 0.0
+        speed = avg_speed if avg_speed > 1e-3 else self.current_speed
+        if speed <= 1e-3:
+            return None
+        return remaining_distance / speed
+
+    def _clear_path_tracking(self):
+        self._path_tracking = None
 
     def send_goal_pose(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
@@ -505,6 +694,8 @@ class DeliveryRobotMainController(Node):
             path_poses[-1].pose.orientation.z = quat[2]
             path_poses[-1].pose.orientation.w = quat[3]
 
+        self._initialize_path_tracking(path_poses)
+
         if self.smooth_path:
             self.navigator.goThroughPoses(path_poses)
         else:
@@ -514,6 +705,7 @@ class DeliveryRobotMainController(Node):
 
     def on_standby(self):
         self.get_logger().info("Robot is in STANDBY mode.")
+        self.touch_activity()
 
   #  def return_home_position(self,after: RobotState = RobotState.STANDBY):
   #      x, y, heading = self.get_station_position("Home")
@@ -566,18 +758,22 @@ class DeliveryRobotMainController(Node):
        #     self.get_logger().info("Waiting for DOCK to complete...")
        #     return
         
+
+
         # External dock/undock commands
         if self._should_dock:
             self._should_dock = False
             if (self.dockstate != DockState.DOCKED):
                 self.retry_move_no = 0
                 #self.return_home_position(RobotState.DOCK)
+                #self.touch_activity()
                 result = self.go_to_station("Home",RobotState.DOCK)
             return
 
         if self._should_undock:
             self._should_undock = False
             if (self.dockstate == DockState.DOCKED):
+                #self.touch_activity()
                 self.change_state(RobotState.DOCK)
             return
         
@@ -587,15 +783,19 @@ class DeliveryRobotMainController(Node):
                 self.get_logger().warn(f"Battery low ({self.batt_percentage}%), heading to Home for docking.")
                 self.retry_move_no = 0
                 #self.return_home_position(RobotState.DOCK)
+                #self.touch_activity()
                 result = self.go_to_station("Home",RobotState.DOCK)
             else:
                 if (self.chargestate == ChargeState.NOT_CHARGE):
                     self.change_charge_state(ChargeState.CHARGING)
 
-        #ตรวจสอบแบตเตอรี่ให้หยุดชาร์จเมื่อถึง limit
-        if self.batt_percentage >= self.setting_batteryChargingLimitUpper:
-            if (self.chargestate == ChargeState.CHARGING):
-                self.change_charge_state(ChargeState.NOT_CHARGE)         
+        #ตรวจสอบแบตเตอรี่ให้หยุดชาร์จเมื่อถึง limit #ย้ายไป battery_management package
+       # if self.batt_percentage >= self.setting_batteryChargingLimitUpper:
+       #     if (self.chargestate == ChargeState.CHARGING):
+       #         self.change_charge_state(ChargeState.NOT_CHARGE)         
+
+
+
 
         # ตรวจสอบ queue
         task = self.get_pending_queue_from_api()
@@ -607,6 +807,7 @@ class DeliveryRobotMainController(Node):
             self.retry_move_no = 0
             action = task.get("action", "Request")
             self.get_logger().info(f"Queue action: {action}")
+            #self.touch_activity()
             if action == "Delivery":
                 result = self.go_to_station(target_station,RobotState.LOAD_OUT)
             else: #action == "Request"
@@ -616,8 +817,18 @@ class DeliveryRobotMainController(Node):
                 if task:
                     self.remove_queue_by_id(task["_id"])
                     self.get_logger().info(f"Remove queue : {action}, target {target_station}")
+        
+        elif (self.setting_autoHomeWaitTime > 0)and(self.dockstate != DockState.DOCKED):#ตรวจสอบว่าเกินเวลา setting_autoHomeWaitTime ให้กลับไป dock
+            elapsed = ((self.get_clock().now() - self._last_activity_time).nanoseconds / 1e9) 
+            if (elapsed > self.setting_autoHomeWaitTime):
+                self.get_logger().info(f"AutoHomeWaitTime reached, go to Home and Dock")
+                self.retry_move_no = 0
+                #self.touch_activity()
+                result = self.go_to_station("Home",RobotState.DOCK)
+                return
 
-    
+
+
     def on_move(self):
         self.get_logger().info("Robot is MOVING.")
         # TODO: Implement NAV2 or custom movement logic
@@ -633,27 +844,39 @@ class DeliveryRobotMainController(Node):
         # Do something with the feedback
             i = i + 1
             feedback = self.navigator.getFeedback()
-           # if feedback and i % 5 == 0:
-              #  print(
-              #      'Estimated time of arrival: '
-              #      + '{0:.0f}'.format(
-              #          Duration.from_msg(feedback.estimated_time_remaining).nanoseconds
-              #          / 1e9
-              #      )
-              #      + ' seconds.'
-              #  )
-                
-                # Some navigation timeout to demo cancellation
-              #  if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
-              #      self.navigator.cancelTask()
+            if feedback and i % 10 == 0:
+                eta_seconds = None
+                remaining_distance = self._update_path_remaining_distance()
+                if remaining_distance is not None:
+                    eta_seconds = self._estimate_arrival_time(remaining_distance)
+                if eta_seconds is None and feedback.estimated_time_remaining is not None:
+                    eta_seconds = Duration.from_msg(feedback.estimated_time_remaining).nanoseconds / 1e9
+                if eta_seconds is None:
+                    eta_seconds = 0.0
+                eta_seconds = max(0.0, eta_seconds)
+                t = '{0:.0f}'.format(eta_seconds)
+                print(
+                    'Estimated time of arrival: '
+                    + t
+                    + ' seconds.'
+                )
+
+                #status_id = self._get_status_id_for('Estimated time of arrival')
+                api_client.update_status( "estimate_arrival_time", t)
+                self.get_current_robot_pose()
+
+               #  Some navigation timeout to demo cancellation
+               # if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+               #     self.navigator.cancelTask()
 
         # Do something depending on the return code
         result = self.navigator.getResult()
+        self._clear_path_tracking()
         if result == TaskResult.SUCCEEDED:
             if self.target_station != "":
                 status_id = self._get_status_id_for('position update')
                 try:
-                    api_client.update_robot_position(status_id, self.target_station)
+                    api_client.update_robot_current_station(self.target_station)
                 except Exception as e:
                     self.get_logger().error(f'Failed to update robot position: {e}')
                 self.target_station = ""
@@ -665,7 +888,7 @@ class DeliveryRobotMainController(Node):
                 self.retry_move_no += 1
                 self.get_logger().info('Goal failed! retrying...{0}'.format(self.retry_move_no))
                 self.go_to_station(self.target_station,self.goal_after_state)
-                return
+                return self.on_move()
             else:
                 self.get_logger().info('Goal failed! after retry {0} times'.format(self.retry_move_no))
                 self.change_state(RobotState.STANDBY)
@@ -693,6 +916,11 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info(f"Post-move action is: {action}")
 
             if action == "Request":
+                if (self.setting_isSoundAlarmForRequest):
+                    self.send_sound_command("arrive_target")
+                #if (self.setting_isLightAlarmForRequest):
+                    #implement light alarm command
+
                 self.remove_queue_by_id(task["_id"])
                 self.get_logger().info(f"Waiting {self.setting_waitLoadinTimeout}s for LOAD_IN command...")
                 self._loadin_timeout_end = time.time() + self.setting_waitLoadinTimeout
@@ -737,8 +965,6 @@ class DeliveryRobotMainController(Node):
             self.change_state(state)
             return 
 
-  
-
        # if time.time() > self._loadin_timeout_end:
        #     self.get_logger().info("Timeout. Returning to STANDBY.")
        #     self._loadin_timer.cancel()
@@ -746,12 +972,13 @@ class DeliveryRobotMainController(Node):
 
     def on_load_out(self):
         self.get_logger().info(f"Waiting {self.setting_waitLoadoutTimeout}s for LOAD_OUT action...")
-
+        self.load_out_loop_counter = 0
         self._loadout_timeout_end = time.time() + self.setting_waitLoadoutTimeout
         self._loadout_timer = self.create_timer(0.5, self.wait_for_load_out_loop)
 
     def wait_for_load_out_loop(self):
         state = self.get_state_from_api()
+        
         self.get_logger().info(f"load out loop state :{state.name}")
         if (state != RobotState.LOAD_OUT):
             self.change_state(state)
@@ -763,6 +990,14 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info(f"State changed to {self.state.name} during LOAD_OUT wait.")
             self._loadout_timer.cancel()
             return
+
+        self.load_out_loop_counter += 1
+        if self.load_out_loop_counter == 1 or self.load_out_loop_counter % 20 == 0:
+            if (self.setting_isSoundAlarmForDelivery):
+                self.send_sound_command("arrive_delivery")
+            #if (self.setting_isLightAlarmForDelivery):
+                #implement light alarm command
+            
 
         # Replace with actual condition for detecting user-triggered load out
         #if False:  # Example placeholder
@@ -886,6 +1121,13 @@ class DeliveryRobotMainController(Node):
             response.success = True
             response.message = "Undock command queued."
         return response
+    
+    def send_sound_command(self, sound_msg: str):
+        msg = String()
+        msg.data = sound_msg
+        self.sound_publisher.publish(msg)
+        self.get_logger().info(f'Published message: "{sound_msg}"')
+
 
 #def install_signal_handlers(server: RPCServer):
 #    def _graceful_shutdown(signum, frame):

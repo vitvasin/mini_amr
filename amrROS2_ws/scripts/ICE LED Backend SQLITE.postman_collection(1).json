@@ -1,0 +1,947 @@
+{
+	"info": {
+		"_postman_id": "ed1a86a0-7675-4e00-817c-b17c4e3a8c58",
+		"name": "ICE LED Backend SQLITE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11109897",
+		"_collection_link": "https://winter-meteor-693494.postman.co/workspace/My-Workspace~fa23a371-e8c5-4ac2-8d75-590c1addea1b/collection/11109897-ed1a86a0-7675-4e00-817c-b17c4e3a8c58?action=share&source=collection_link&creator=11109897"
+	},
+	"item": [
+		{
+			"name": "Station",
+			"item": [
+				{
+					"name": "List Station",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/station/list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"station",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Station",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"room422\",\r\n            \"x\": -11.9814,\r\n            \"y\": 19.958666,\r\n            \"heading\": 0,\r\n            \"deviceIP\": \"10.222.43.246\",\r\n            \"status\": \"enable\",\r\n            \"password\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/station/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"station",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Station",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"id\":\"3\"}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/station/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"station",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"status\":\"disable\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/station/updatestatus",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"station",
+								"updatestatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/station/updatepassword",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"station",
+								"updatepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "StateOfCharge",
+			"item": [
+				{
+					"name": "Add SoC Default",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"soc\":\"20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/stateOfCharge/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"stateOfCharge",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update SoC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"soc\":\"30\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/stateOfCharge/update",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"stateOfCharge",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove SoC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/stateOfCharge/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"stateOfCharge",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List State Of Charge",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/stateOfCharge/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"stateOfCharge",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Mapping",
+			"item": [
+				{
+					"name": "Add Mapping",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"door\":\"H\",\r\n    \"box\":\"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/mapping/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"mapping",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Mapping",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"2\",\r\n    \"box\":\"2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/mapping/update",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"mapping",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Mapping",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/mapping/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"mapping",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Params",
+			"item": [
+				{
+					"name": "Add Params",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/param/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"param",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Params",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"autoHomeWaitTime\": \"120\",\r\n    \"batteryLowToCharge\": \"20\",\r\n    \"batteryChargingLimit\": \"70\",\r\n    \"batteryLevelCanWork\": \"50\",\r\n    \"isSoundAlarmAtStation\": \"1\",\r\n    \"isLightAlarmAtStation\": \"1\",\r\n    \"isEnableStationPassword\": \"1\",\r\n    \"adminPassword\": \"123456\",\r\n    \"waitLoadinTimeout\": \"5\",\r\n    \"waitLoadoutTimeout\": \"30\",\r\n    \"doorOpenTimeout\": \"60\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/param/update",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"param",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Param",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/p10.222.41.76aram/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"p10.222.41.76aram",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Params",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/param/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"param",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Queue",
+			"item": [
+				{
+					"name": "Add Queue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"action\": \"Request\",\r\n   \"target\": \"room410\",\r\n   \"boxNumber\": 1,\r\n   \"priority\": \"Normal\",\r\n   \"sender\": \"api_client\",\r\n   \"status\": \"Pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/queue/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"queue",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Queue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\",\r\n    \"status\": \"Complete\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/queue/update",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"queue",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Queue",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/queue/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"queue",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Queue",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/queue/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"queue",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "History",
+			"item": [
+				{
+					"name": "Add History",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"action\": \"Request\",\r\n    \"target\": \"room420\",\r\n    \"boxNumber\": 1,\r\n    \"priority\": \"Normal\",\r\n    \"sender\": \"api_client\",\r\n    \"timeCreate\": \"2025-10-07 15:04:27\",\r\n    \"status\": \"Pending\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/history/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"history",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove History",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/history/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"history",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List History",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/history/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"history",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Robot Status",
+			"item": [
+				{
+					"name": "Add Robot Status Default",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/robotStatus/adddefault",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"robotStatus",
+								"adddefault"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Robot Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"category\":\"Alarm\",\r\n    \"name\":\"is_goal_fail\",\r\n    \"value\":\"0\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/robotStatus/add",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"robotStatus",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Robot Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"status\",\r\n    \"value\":\"STANDBY\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/robotStatus/updaterobotstatus",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"robotStatus",
+								"updaterobotstatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Robot Status",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":\"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/robotStatus/remove",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"robotStatus",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://10.222.41.76:3000/api/robotStatus/list",
+							"protocol": "http",
+							"host": [
+								"10",
+								"222",
+								"41",
+								"76"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"robotStatus",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

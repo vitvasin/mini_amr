@@ -32,6 +32,14 @@ def generate_launch_description():
             emulate_tty=True,
     )
 
+    call_robot_button = Node(
+            package='delivery_robot_main_controller',
+            executable='call_robot_button',
+            name='call_robot_button_node',
+            output='screen',
+            emulate_tty=True,
+    )
+
     launch_elements = GroupAction(
     	actions=[
         PushRosNamespace(namespace),
@@ -39,6 +47,7 @@ def generate_launch_description():
         SetRemap('/tf_static','tf_static'),
         main_controller,
         robot_sound,
+        call_robot_button,
         ]
     )
 

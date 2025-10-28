@@ -2,7 +2,7 @@
 ---
 /**:
   ros__parameters:
-    pre_dock_dist: 0.35  #ระยะห่างระหว่างจุดจอดกับตำแหน่ง pre dock
+    pre_dock_dist: 0.30  #ระยะห่างระหว่างจุดจอดกับตำแหน่ง pre dock
     dock_smooth_profile: True # False = การเข้าจอดแบบง่าย, True = การเข้าจอดแบบหมุนพร้อมกับเคลื่อนที่(smooth)
     dock_angular_speed_search: 0.3 #ความเร็วเชิงมุมในการหมุนของหุ่นยนต์ขณะค้นหา dock
     dock_wait_after_search: 1.0 #ระยะหน่วงเวลาหลังจากเสร็จสิ้นการค้นหา dock
@@ -11,7 +11,7 @@
     dock_linear_speed: -0.3 #ความเร็วในการเคลื่อนที่เข้าหา pre dock
     dock_wait_at_pre_dock: 1.0 #ระยะหน่วงเวลาหลังจากถึง pre dock
     dock_linear_speed_final: -0.05 #ความเร็วในการเคลื่อนที่ใกล้ถึงจุดหมาย pre dock
-    dock_time_final: 4.0 #ระยะเวลาในการวิ่งเข้าหา dock ซึ่งควบคุมแบบ open 
+    dock_time_final: 5.0 #ระยะเวลาในการวิ่งเข้าหา dock ซึ่งควบคุมแบบ open 
     dock_check_charge_status: True #ตรวจสอบสถานะของการชาร์จ เพื่อหยุดหุ่นยนต์หรือไม่
     dock_retry_attempts: 3
     dock_retry_backout_time: 3.0

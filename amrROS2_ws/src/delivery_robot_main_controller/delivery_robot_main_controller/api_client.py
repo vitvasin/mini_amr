@@ -132,19 +132,19 @@ def remove_station(station_id):
 
 # Params APIs
 def get_system_parameters():
-    url = f"{API_BASE_URL}/api/params/list"
+    url = f"{API_BASE_URL}/api/param/list"
     response = requests.get(url, timeout=3)
     response.raise_for_status()
     return response.json()
 
 def add_params(data):
-    url = f"{API_BASE_URL}/api/params/add"
+    url = f"{API_BASE_URL}/api/param/add"
     response = requests.post(url, data=data, timeout=3)
     response.raise_for_status()
     return response.json()
 
 def update_params(params):
-    url = f"{API_BASE_URL}/api/params/update"
+    url = f"{API_BASE_URL}/api/param/update"
     response = requests.post(url, json=params, timeout=3)
     response.raise_for_status()
     return response.json()
@@ -183,75 +183,51 @@ def list_history():
 
 # Robot Status APIs
 def get_robot_status():
-    url = f'{API_BASE_URL}/api/robotstatus/list'
+    url = f'{API_BASE_URL}/api/robotStatus/list'
     response = requests.get(url, timeout=5)
     response.raise_for_status()
     return response.json()
 
-def update_robot_status(status_id=1, state=None):
-    url = f"{API_BASE_URL}/api/robotstatus/updatestatus"
-    if state is None:
-        state = status_id
-        status_id = 1
+def get_robot_status_by_name(name = None):
+    url = f'{API_BASE_URL}/api/robotStatus/listbyname'
+    payload = {"name": name}
+    response = requests.get(url,json=payload, timeout=5)
+    response.raise_for_status()
+    data = response.json()
+    return data["value"]
+
+def update_status(name = None , value=None):
+    url = f"{API_BASE_URL}/api/robotStatus/updaterobotstatus"
+    if name is None:
+        raise ValueError("name is required to update robot status")
+    if value is None:
+        raise ValueError("status is required to update robot status")
+    payload = {"name": name, "value": value}
+    response = requests.post(url, json=payload, timeout=3)
+    response.raise_for_status()
+    return response.json()
+
+def update_robot_status(state=None):
+    url = f"{API_BASE_URL}/api/robotStatus/updaterobotstatus"
     if state is None:
         raise ValueError("status is required to update robot status")
-    status_id = status_id or 1
-    payload = {"id": status_id, "status": state}
+    payload = {"name": "status", "value": state}
     response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()
     return response.json()
 
-def update_robot_position(status_id=1, position=None):
-    url = f"{API_BASE_URL}/api/robotStatus/updateposition"
-    if position is None:
-        position = status_id
-        status_id = 1
-    if position is None:
-        raise ValueError("position is required to update robot position")
-    status_id = status_id or 1
-    payload = {"id": status_id, "position": position}
-    response = requests.post(url, json=payload, timeout=3)
-    response.raise_for_status()
-    return response.json()
+def update_robot_current_station(value=None):
+    update_status("current_station", value)
 
-def update_robot_charging(status_id=1, charging=None):
-    url = f"{API_BASE_URL}/api/robotStatus/updatecharging"
-    if charging is None:
-        charging = status_id
-        status_id = 1
-    if charging is None:
-        raise ValueError("charging is required to update robot charging")
-    status_id = status_id or 1
-    payload = {"id": status_id, "charging": charging}
-    response = requests.post(url, json=payload, timeout=3)
-    response.raise_for_status()
-    return response.json()
+def update_robot_target_station(value=None):
+    update_status("target_station", value)
 
-def update_robot_door(status_id=1, door_payload=None):
-    url = f"{API_BASE_URL}/api/robotStatus/updatedoor"
-    if door_payload is None:
-        door_payload = status_id
-        status_id = 1
-    if door_payload is None:
-        raise ValueError("door payload is required to update robot door")
-    status_id = status_id or 1
-    payload = {"id": status_id, "door": door_payload}
-    response = requests.post(url, json=payload, timeout=3)
-    response.raise_for_status()
-    return response.json()
+def update_robot_dock_state(value=None):
+    update_status("dock_state", value)
 
-def update_robot_box(status_id=1, box_payload=None):
-    url = f"{API_BASE_URL}/api/robotStatus/updatebox"
-    if box_payload is None:
-        box_payload = status_id
-        status_id = 1
-    if box_payload is None:
-        raise ValueError("box payload is required to update robot box")
-    status_id = status_id or 1
-    payload = {"id": status_id, "box": box_payload}
-    response = requests.post(url, json=payload, timeout=3)
-    response.raise_for_status()
-    return response.json()
+def update_robot_charge_state(value=None):
+    update_status("charge_state", value)
+
 
 # State of Charge APIs
 def add_soc(soc):

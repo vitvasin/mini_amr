@@ -70,10 +70,26 @@ def generate_launch_description():
     #             'serial_port': '/dev/lidar_s3',
     #     }.items()
     # ) 
+    
+    # scan = Node(
+    #         package='sllidar_ros2',
+    #         executable='sllidar_node',
+    #         name='sllidar_node',
+    #         parameters=[{'channel_type': 'udp', 
+    #                      'udp_ip': '192.168.11.2',
+    #                      'udp_port': 8089,
+    #                      'frame_id': 'laser',
+    #                      'inverted': False, 
+    #                      'angle_compensate': True,
+    #                      'scan_frequency': 10.0,
+    #                      'scan_mode': 'Sensitivity'}],
+    #         remappings=[("scan", "raw_scan")],
+    #         output='screen')
+    
     scan = Node(
-            package='sllidar_ros2',
-            executable='sllidar_node',
-            name='sllidar_node',
+            package='rplidar_ros',
+            executable='rplidar_node',
+            name='rplidar_node',
             parameters=[{'channel_type': 'udp', 
                          'udp_ip': '192.168.11.2',
                          'udp_port': 8089,

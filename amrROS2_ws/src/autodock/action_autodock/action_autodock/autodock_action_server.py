@@ -344,17 +344,17 @@ class AutodockActionServer(Node):
         
         global event_obj
         event_obj.set()
-
+        success = False
         if (goal_handle.request.is_dock): #dock
             #self.pre_charge_dist = goal_handle.request.offset_inter_point
             self.pre_charge_dist = self.pre_dock_dist
             #self.cal_intermediate_point()
-            self.dock_robot(goal_handle)
+            success = self.dock_robot(goal_handle)
         else: #undock
             #self.pre_charge_dist = goal_handle.request.offset_inter_point
             self.pre_charge_dist = self.undock_dist_step2
             #self.cal_intermediate_point()
-            self.undock_robot(goal_handle)
+            success = self.undock_robot(goal_handle)
         
         #while (event_obj.is_set):
         #    time.sleep(0.1)
@@ -416,10 +416,17 @@ class AutodockActionServer(Node):
         # #navigator.spin(spin_dist=1.57, time_allowance=10)
         
         #result = navigator.getResult()
+        message = ""
+        if success:
+            goal_handle.succeed()
+            message = "dock/undock succeed"
+        else :
+            goal_handle.abort()
+            message = "dock/undock failed"
         
-        goal_handle.succeed()
-
         result = Autodock.Result()
+        result.success = success
+        result.message = message
         #result.sequence = feedback_msg.partial_sequence
         return result
     
@@ -899,7 +906,7 @@ class AutodockActionServer(Node):
         # --- Acceleration Phase ---
         global charger_state
         for _ in range(accel_steps):
-            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL)):
                 break
             current_speed += speed_step
             if (speed > 0 and current_speed > speed) or (speed < 0 and current_speed < speed):
@@ -910,7 +917,7 @@ class AutodockActionServer(Node):
 
         # --- Constant Speed Phase ---
         for _ in range(cruise_steps):
-            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL)):
                 break
             twist.linear.x = float(speed)
             self.pub.publish(twist)
@@ -918,7 +925,7 @@ class AutodockActionServer(Node):
 
         # --- Deceleration Phase ---
         for _ in range(decel_steps):
-            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL)):
+            if ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL)):
                 break
             current_speed -= speed_step
             if (speed > 0 and current_speed < 0) or (speed < 0 and current_speed > 0):
@@ -941,7 +948,7 @@ class AutodockActionServer(Node):
         #        return False
         
         #success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
-        success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.BATT_FULL))
+        success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
         if success:
                 self.get_logger().info("Charging started successfully")
                 return True
@@ -1278,6 +1285,7 @@ class AutodockActionServer(Node):
             if self.dock_check_charge_status:
                 self.set_stop_charge(False)
                 success = self.move_open_loop_check_charge(self.dock_linear_speed_final, self.dock_time_final)
+                self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
             else:
                 self.move_open_loop(self.dock_linear_speed_final, self.dock_time_final)
                 success = True  # if not checking charge, treat as success of motion-only
@@ -1301,7 +1309,7 @@ class AutodockActionServer(Node):
             self.publisher_.publish(msg)
             found_dock = False
             event_obj.clear()
-            return
+            return False
 
         #step4 - finish docking
         self.get_logger().info('finish docking')
@@ -1324,7 +1332,7 @@ class AutodockActionServer(Node):
         self.command_rotate_robot(target_angle,current_pose,angular_speed)
         self.get_logger().info('step 4 ')
         self.command_move_robot(self.charge_pose,current_pose,linear_speed) """
-
+        return True
 
     
 
@@ -1359,7 +1367,7 @@ class AutodockActionServer(Node):
         
         event_obj.clear()
         self.get_logger().info('finish undocking')
-
+        return success
 
 
     

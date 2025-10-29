@@ -11,7 +11,9 @@ keepout_filter_mask_server:
     use_sim_time: false
     frame_id: "map"
     topic_name: "/keepout_filter_mask"
-    yaml_filename: "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml" # need to edit for filter
+    # yaml_filename: "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml" # need to edit for filter
+    yaml_filename: "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_SLAM_keepout.yaml" # For SLAM map with keepout areas
+
 
 amcl:
   ros__parameters:
@@ -53,9 +55,9 @@ amcl:
     z_short: 0.05
     scan_topic: scan
     set_initial_pose: true
-    initial_pose:
-      x: 0.0
-      y: 0.0
+    initial_pose: #currently set to NECTEC 4th floor (room 410)
+      x: 1.428
+      y: -4.288
       z: 0.0
       yaw: 0.0
 

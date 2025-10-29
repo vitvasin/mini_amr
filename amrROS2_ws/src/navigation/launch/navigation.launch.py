@@ -109,7 +109,7 @@ def generate_launch_description():
         )
     declare_bringup_cmd = DeclareLaunchArgument(
             name='bringup', 
-            default_value='false',
+            default_value='true',
             description='Bringup robot with this command'
         )
     

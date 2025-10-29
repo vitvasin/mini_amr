@@ -96,7 +96,7 @@ def generate_launch_description():
     )
 
     declare_use_keepout_zones_cmd = DeclareLaunchArgument(
-        'use_keepout_zones', default_value='True',
+        'use_keepout_zones', default_value='true',
         description='Whether to enable keepout zones or not'
     )
 

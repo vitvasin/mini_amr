@@ -10,16 +10,22 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 def generate_launch_description():
     
     namespace = LaunchConfiguration("namespace")
+    localization_mode = LaunchConfiguration("localization_mode")
+
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace',
         default_value= [EnvironmentVariable('NAMESPACE')],
         description='prefix for node name')
+    declare_localization_mode_cmd = DeclareLaunchArgument(
+        'localization_mode',
+        default_value='amcl',
+        description='Localization backend to use (amcl or slam_toolbox)')
     
     main_controller = Node(
             package='delivery_robot_main_controller',
             executable='delivery_robot_main_controller',
             name='main_controller_node',
-            parameters=[],  # ใส่ parameter file ได้ถ้ามี
+            parameters=[{'localization_mode': localization_mode}],
             output='screen',
             emulate_tty=True,
     )
@@ -64,6 +70,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         declare_namespace_cmd,
+        declare_localization_mode_cmd,
         launch_elements,
         autodock_launch
     ])

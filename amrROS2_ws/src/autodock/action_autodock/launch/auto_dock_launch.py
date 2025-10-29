@@ -9,10 +9,15 @@ import os
 def generate_launch_description():
     
     namespace = LaunchConfiguration("namespace")
+    localization_mode = LaunchConfiguration("localization_mode")
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace',
         default_value= [EnvironmentVariable('NAMESPACE')],
         description='prefix for node name')
+    declare_localization_mode_cmd = DeclareLaunchArgument(
+        'localization_mode',
+        default_value='amcl',
+        description='Localization backend to use (amcl or slam_toolbox)')
         
     dock_lidar = Node(
     	package='dock_lidar',
@@ -25,7 +30,10 @@ def generate_launch_description():
       	package='action_autodock',
     	executable='autodock_action_server',
       	name='autodock',
-    	parameters=[os.path.join(get_package_share_directory('action_autodock'),'config','auto_dock_config.yaml')]
+    	parameters=[
+            os.path.join(get_package_share_directory('action_autodock'),'config','auto_dock_config.yaml'),
+            {'localization_mode': localization_mode}
+        ]
         )
 
     battery_manager = Node(
@@ -48,6 +56,7 @@ def generate_launch_description():
     
     return LaunchDescription([
         declare_namespace_cmd,
+        declare_localization_mode_cmd,
         launch_elements
     ])
     

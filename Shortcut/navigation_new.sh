@@ -20,7 +20,7 @@ fi
 # Launch based on argument
 case "$1" in
     "slam")
-        # Launch navigation with SLAM
+        # Launch navigation with SLAM (formapping)
         ros2 launch navigation navigation_slam.launch.py \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
@@ -38,6 +38,14 @@ case "$1" in
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/smr_room.yaml" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
+        ;;
+    "slam_localization")
+        # Launch navigation with AMCL #SMR_room.yaml
+        ros2 launch navigation navigation.launch.py \
+            map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM" \
+            rviz:=true \
+            rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
+            use_keepout_zones:=true
         ;;
 
     *)

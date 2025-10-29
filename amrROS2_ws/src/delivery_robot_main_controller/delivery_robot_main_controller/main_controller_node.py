@@ -42,6 +42,7 @@ class RobotState(Enum):
     AFTER_MOVE = auto()
     LOAD_IN = auto()
     LOAD_OUT = auto()
+    WAIT_LOAD_OUT = auto()
     DOCK = auto()
     MANUAL = auto()
 
@@ -81,6 +82,8 @@ class DeliveryRobotMainController(Node):
         self.dockstate = DockState.IDLE
         self.chargestate = ChargeState.NOT_CHARGE
         self.target_station = ""
+        self.current_station = None
+        self.current_task = None
         self.retry_move_no = 0
         self.status_id = None
         self.load_out_loop_counter = 0
@@ -288,6 +291,12 @@ class DeliveryRobotMainController(Node):
                     self.status_id = status_id
                 else:
                     self.get_logger().warn('Robot status id missing from API response.')
+
+                current_station = current_status.get('current_station')
+                if isinstance(current_station, dict):
+                    current_station = current_station.get('value') or current_station.get('name')
+                if current_station:
+                    self.current_station = current_station
                 
                 #test_param = api_client.get_robot_status_by_name('dock_state')
                 #self.get_logger().info(f"dock_state = {test_param}")
@@ -401,7 +410,7 @@ class DeliveryRobotMainController(Node):
             self.get_logger().error(f"Failed to get system parameters: {e}")
 
 
-    def get_pending_queue_from_api(self):
+    def get_pending_queue_from_api(self, return_all: bool = False):
         try:
             #url = "http://localhost:8080/api/queue/list"
             #response = requests.get(url, timeout=3)
@@ -409,15 +418,24 @@ class DeliveryRobotMainController(Node):
             #data = response.json()
             data = api_client.get_pending_queue()
             queue_list = data.get("data", [])
-            if isinstance(queue_list, list) and len(queue_list) > 0:
-                self.get_logger().info(f"{len(queue_list)} pending queues ")
-                return queue_list[0]
-            else:
+            if isinstance(queue_list, str):
+                queue_list = json.loads(queue_list)
+
+            if not isinstance(queue_list, list):
                 self.get_logger().info("No pending queue found or unexpected format.")
-                return None
+                return [] if return_all else None
+
+            if len(queue_list) == 0:
+                self.get_logger().info("No pending queue found or unexpected format.")
+                return [] if return_all else None
+
+            self.get_logger().info(f"{len(queue_list)} pending queues ")
+            if return_all:
+                return queue_list
+            return queue_list[0]
         except Exception as e:
             self.get_logger().error(f"Failed to get queue: {e}")
-            return None
+            return [] if return_all else None
     
     def remove_queue_by_id(self, queue_id):
         try:
@@ -511,6 +529,8 @@ class DeliveryRobotMainController(Node):
             self.on_after_move()
         elif self.state == RobotState.LOAD_IN:
             self.on_load_in()
+        elif self.state == RobotState.WAIT_LOAD_OUT:
+            self.on_wait_load_out()
         elif self.state == RobotState.LOAD_OUT:
             self.on_load_out()
         elif self.state == RobotState.DOCK:
@@ -798,25 +818,49 @@ class DeliveryRobotMainController(Node):
 
 
         # ตรวจสอบ queue
-        task = self.get_pending_queue_from_api()
-        if task:
-            target_station = task.get("target")
+        queue_list = self.get_pending_queue_from_api(return_all=True)
+        if queue_list:
+            selected_task = None
+            if self.current_station:
+                for pending in queue_list:
+                    action = pending.get("action", "Request")
+                    if action == "Request" and pending.get("target") == self.current_station:
+                        selected_task = pending
+                        break
+
+            if not selected_task:
+                selected_task = queue_list[0]
+
+            if not selected_task:
+                return
+
+            target_station = selected_task.get("target")
             if (self.dockstate == DockState.DOCKED):
                 self._should_undock = True
                 return
             self.retry_move_no = 0
-            action = task.get("action", "Request")
+            action = selected_task.get("action", "Request")
             self.get_logger().info(f"Queue action: {action}")
-            #self.touch_activity()
+
+            self.current_task = selected_task
+
+            if action == "Request" and target_station and self.current_station and target_station == self.current_station:
+                self.get_logger().info("Already at target station for Request; handling without navigation.")
+                self.change_state(RobotState.AFTER_MOVE)
+                return
+
             if action == "Delivery":
                 result = self.go_to_station(target_station,RobotState.LOAD_OUT)
             else: #action == "Request"
                 result = self.go_to_station(target_station,RobotState.STANDBY)
 
             if (result == False):
-                if task:
-                    self.remove_queue_by_id(task["_id"])
-                    self.get_logger().info(f"Remove queue : {action}, target {target_station}")
+                if selected_task:
+                    queue_id = selected_task.get("_id") or selected_task.get("id")
+                    if queue_id:
+                        self.remove_queue_by_id(queue_id)
+                        self.get_logger().info(f"Remove queue : {action}, target {target_station}")
+                self.current_task = None
         
         elif (self.setting_autoHomeWaitTime > 0)and(self.dockstate != DockState.DOCKED):#ตรวจสอบว่าเกินเวลา setting_autoHomeWaitTime ให้กลับไป dock
             elapsed = ((self.get_clock().now() - self._last_activity_time).nanoseconds / 1e9) 
@@ -855,11 +899,11 @@ class DeliveryRobotMainController(Node):
                     eta_seconds = 0.0
                 eta_seconds = max(0.0, eta_seconds)
                 t = '{0:.0f}'.format(eta_seconds)
-                print(
-                    'Estimated time of arrival: '
-                    + t
-                    + ' seconds.'
-                )
+               # print(
+               #     'Estimated time of arrival: '
+               #     + t
+               #     + ' seconds.'
+               # )
 
                 #status_id = self._get_status_id_for('Estimated time of arrival')
                 api_client.update_status( "estimate_arrival_time", t)
@@ -879,6 +923,7 @@ class DeliveryRobotMainController(Node):
                     api_client.update_robot_current_station(self.target_station)
                 except Exception as e:
                     self.get_logger().error(f'Failed to update robot position: {e}')
+                self.current_station = self.target_station
                 self.target_station = ""
             self.get_logger().info('Goal succeeded!')
         elif result == TaskResult.CANCELED:
@@ -909,7 +954,7 @@ class DeliveryRobotMainController(Node):
     def on_after_move(self):
         self.get_logger().info("Evaluating post-move action...")
 
-        task = self.get_pending_queue_from_api()
+        task = self.current_task or self.get_pending_queue_from_api()
         if task:
             #self.remove_queue_by_id(task["_id"])
             action = task.get("action", "Request")
@@ -921,21 +966,27 @@ class DeliveryRobotMainController(Node):
                 #if (self.setting_isLightAlarmForRequest):
                     #implement light alarm command
 
-                self.remove_queue_by_id(task["_id"])
+                queue_id = task.get("_id") or task.get("id")
+                if queue_id:
+                    self.remove_queue_by_id(queue_id)
                 self.get_logger().info(f"Waiting {self.setting_waitLoadinTimeout}s for LOAD_IN command...")
                 self._loadin_timeout_end = time.time() + self.setting_waitLoadinTimeout
                 self._loadin_timer = self.create_timer(0.5, self.wait_for_load_in_loop)
+                self.current_task = None
                 return
 
             elif action == "Delivery":
-                self.change_state(RobotState.LOAD_OUT)
+                self.current_task = None
+                self.change_state(RobotState.WAIT_LOAD_OUT)
             else:
                 self.get_logger().warn("Unknown action after move, returning to STANDBY.")
+                self.current_task = None
                 self.change_state(RobotState.STANDBY)
 
         else:
             self.get_logger().info("No task found after move.")
             self.change_state(RobotState.STANDBY)
+        self.current_task = None
 
     def wait_for_load_in_loop(self):
         state = self.get_state_from_api()
@@ -970,26 +1021,24 @@ class DeliveryRobotMainController(Node):
        #     self._loadin_timer.cancel()
        #     self.change_state(RobotState.STANDBY) 
 
-    def on_load_out(self):
+    def on_wait_load_out(self):
         self.get_logger().info(f"Waiting {self.setting_waitLoadoutTimeout}s for LOAD_OUT action...")
         self.load_out_loop_counter = 0
         self._loadout_timeout_end = time.time() + self.setting_waitLoadoutTimeout
-        self._loadout_timer = self.create_timer(0.5, self.wait_for_load_out_loop)
+        self._loadout_timer = self.create_timer(0.5, self.wait_for_enter_load_out)
 
-    def wait_for_load_out_loop(self):
+    def wait_for_enter_load_out(self):
         state = self.get_state_from_api()
-        
-        self.get_logger().info(f"load out loop state :{state.name}")
-        if (state != RobotState.LOAD_OUT):
-            self.change_state(state)
-            self.get_logger().info(f"State changed to {self.state.name} during wait.")
+        if (state == RobotState.LOAD_OUT):
+            self.get_logger().info(f"State changed to {state.name} during wait.")
             self._loadout_timer.cancel()
+            self.change_state(RobotState.LOAD_OUT)
             return 
-        
-        if self.state != RobotState.LOAD_OUT:
-            self.get_logger().info(f"State changed to {self.state.name} during LOAD_OUT wait.")
+
+        if time.time() > self._loadout_timeout_end:
+            self.get_logger().info("No LOAD_OUT received. Returning to STANDBY.")
             self._loadout_timer.cancel()
-            return
+            self.change_state(RobotState.STANDBY) 
 
         self.load_out_loop_counter += 1
         if self.load_out_loop_counter == 1 or self.load_out_loop_counter % 20 == 0:
@@ -997,20 +1046,27 @@ class DeliveryRobotMainController(Node):
                 self.send_sound_command("arrive_delivery")
             #if (self.setting_isLightAlarmForDelivery):
                 #implement light alarm command
-            
 
-        # Replace with actual condition for detecting user-triggered load out
-        #if False:  # Example placeholder
-        #    self.get_logger().info("LOAD_OUT action received.")
-        #    self._loadout_timer.cancel()
-        #    # Optionally perform additional logic here
-        #    self.change_state(RobotState.STANDBY)
-        #    return
+    def on_load_out(self):
+        self.get_logger().info("Robot is LOADING OUT cargo.")
+        self._loadout_timeout_end2 = time.time() + self.setting_waitLoadoutTimeout
+        self._loadout_timer2 = self.create_timer(0.5, self.load_out_loop)
 
-        if time.time() > self._loadout_timeout_end:
-            self.get_logger().info("No LOAD_OUT received. Returning to STANDBY.")
-            self._loadout_timer.cancel()
-            self.change_state(RobotState.STANDBY)
+        # TODO: Implement load in procedure
+    
+    def load_out_loop(self):
+        state = self.get_state_from_api()
+        if (state != RobotState.LOAD_OUT):
+            self.get_logger().info(f"State changed to {state.name} during LOAD_OUT.")
+            self._loadout_timer2.cancel()
+            self.change_state(state)
+            return 
+        
+        # if time.time() > self._loadout_timeout_end2:
+        #     self.get_logger().info("Timeout. Returning to STANDBY.")
+        #     self._loadin_timer.cancel()
+        #     self.change_state(RobotState.STANDBY) 
+   
 
     def on_dock(self):
         if (self.dockstate == DockState.IDLE):

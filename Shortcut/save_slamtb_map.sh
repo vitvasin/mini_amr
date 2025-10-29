@@ -6,8 +6,8 @@ MAPS_DIR="$SCRIPT_DIR/../amrROS2_ws/maps"
 
 # Function to get next available map number
 get_next_map_number() {
-    last_num=$(ls "$MAPS_DIR"/map_[0-9]*.posegraph 2>/dev/null | \
-        sed 's/.*map_\([0-9]\+\)\.posegraph/\1/' | sort -n | tail -n 1)
+    last_num=$(ls "$MAPS_DIR"/mapSLAM_[0-9]*.posegraph 2>/dev/null | \
+        sed 's/.*mapSLAM_\([0-9]\+\)\.posegraph/\1/' | sort -n | tail -n 1)
     if [ -z "$last_num" ]; then
         echo "1"
     else
@@ -16,14 +16,14 @@ get_next_map_number() {
 }
 
 map_num=$(get_next_map_number)
-map_name="map_$(printf "%03d" $map_num)"
+map_name="mapSLAM_$(printf "%03d" $map_num)"
 map_path="$MAPS_DIR/$map_name"
 
 echo "Saving SLAM Toolbox map as: $map_path.posegraph and .data"
 
 # Call the SLAM Toolbox save_map service
-ros2 service call /slam_toolbox/save_map slam_toolbox_msgs/srv/SaveMap "{name: \"$map_path\"}" 
-
+# ros2 service call /slam_toolbox/save_map slam_toolbox_msgs/srv/SaveMap "{name: \"$map_path\"}" 
+ros2 service call /slam_toolbox/serialize_map slam_toolbox/srv/SerializePoseGraph "{filename: \"$map_path\"}"
 if [ $? -eq 0 ]; then
     echo "Posegraph and data saved successfully!"
     latest_link="$MAPS_DIR/latest_map"
@@ -34,7 +34,7 @@ if [ $? -eq 0 ]; then
     echo " - $latest_link.data"
 
     echo -e "\nAvailable saved maps:"
-    ls -1 "$MAPS_DIR"/map_*.posegraph | sed 's|.*/||' | sort
+    ls -1 "$MAPS_DIR"/mapSLAM_*.posegraph | sed 's|.*/||' | sort
 else
     echo "Error saving SLAM Toolbox map!"
 fi

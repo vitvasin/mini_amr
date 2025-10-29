@@ -33,4 +33,4 @@ fi
 
 # รัน launch file
 echo "Launching delivery_robot_main_controller..."
-ros2 launch delivery_robot_main_controller delivery.launch.py
+ros2 launch delivery_robot_main_controller delivery.launch.py localization_mode:=slam_toolbox

@@ -16,6 +16,8 @@
 import time
 from enum import Enum
 
+import math
+
 from action_msgs.msg import GoalStatus
 from geometry_msgs.msg import PoseStamped
 from geometry_msgs.msg import PoseWithCovarianceStamped
@@ -29,6 +31,11 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
 from rclpy.qos import QoSProfile
+
+try:
+    from slam_toolbox_msgs.srv import SetPose
+except ImportError:
+    SetPose = None
 
 
 class NavigationResult(Enum):
@@ -48,11 +55,50 @@ class BasicNavigator(Node):
         self.feedback = None
         self.status = None
 
-        amcl_pose_qos = QoSProfile(
-          durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
-          reliability=QoSReliabilityPolicy.RELIABLE,
-          history=QoSHistoryPolicy.KEEP_LAST,
-          depth=1)
+        self.declare_parameter('localization_mode', 'amcl')
+        self.localization_mode = self.get_parameter('localization_mode').value.lower()
+        if self.localization_mode not in ('amcl', 'slam_toolbox'):
+            self.warn('Unknown localization_mode parameter value "%s". Falling back to AMCL.' % self.localization_mode)
+            self.localization_mode = 'amcl'
+
+        default_nodes = ['amcl'] if self.localization_mode == 'amcl' else ['slam_toolbox']
+        self.declare_parameter('localization_nodes_to_wait_for', default_nodes)
+        self.localization_nodes_to_wait_for = list(self.get_parameter('localization_nodes_to_wait_for').value)
+
+        self.initial_pose_pub = None
+        self.localization_pose_sub = None
+        self.slam_set_pose_client = None
+
+        if self.localization_mode == 'amcl':
+            amcl_pose_qos = QoSProfile(
+              durability=QoSDurabilityPolicy.TRANSIENT_LOCAL,
+              reliability=QoSReliabilityPolicy.RELIABLE,
+              history=QoSHistoryPolicy.KEEP_LAST,
+              depth=1)
+            self.declare_parameter('amcl_pose_topic', 'amcl_pose')
+            self.declare_parameter('amcl_initial_pose_topic', 'initialpose')
+            self.amcl_pose_topic = self.get_parameter('amcl_pose_topic').value
+            initial_pose_topic = self.get_parameter('amcl_initial_pose_topic').value
+            self.localization_pose_sub = self.create_subscription(PoseWithCovarianceStamped,
+                                                                  self.amcl_pose_topic,
+                                                                  self._amclPoseCallback,
+                                                                  amcl_pose_qos)
+            self.initial_pose_pub = self.create_publisher(PoseWithCovarianceStamped,
+                                                          initial_pose_topic,
+                                                          10)
+        else:
+            self.declare_parameter('slam_pose_topic', 'slam_toolbox/pose')
+            self.slam_pose_topic = self.get_parameter('slam_pose_topic').value
+            self.localization_pose_sub = self.create_subscription(PoseStamped,
+                                                                  self.slam_pose_topic,
+                                                                  self._slamPoseCallback,
+                                                                  10)
+            if SetPose is not None:
+                self.declare_parameter('slam_set_pose_service', 'slam_toolbox/set_pose')
+                slam_set_pose_service = self.get_parameter('slam_set_pose_service').value
+                self.slam_set_pose_client = self.create_client(SetPose, slam_set_pose_service)
+            else:
+                self.warn('slam_toolbox_msgs not available; initial pose service calls will be skipped.')
 
         self.initial_pose_received = False
         self.nav_through_poses_client = ActionClient(self,
@@ -63,13 +109,6 @@ class BasicNavigator(Node):
         self.compute_path_to_pose_client = ActionClient(self, ComputePathToPose, 'compute_path_to_pose')
         self.compute_path_through_poses_client = ActionClient(self, ComputePathThroughPoses,
                                                               'compute_path_through_poses')
-        self.localization_pose_sub = self.create_subscription(PoseWithCovarianceStamped,
-                                                              'amcl_pose',
-                                                              self._amclPoseCallback,
-                                                              amcl_pose_qos)
-        self.initial_pose_pub = self.create_publisher(PoseWithCovarianceStamped,
-                                                      'initialpose',
-                                                      10)
         self.change_maps_srv = self.create_client(LoadMap, '/map_server/load_map')
         self.clear_costmap_global_srv = self.create_client(
             ClearEntireCostmap, '/global_costmap/clear_entirely_global_costmap')

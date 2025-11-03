@@ -1,16 +1,6 @@
-# Copyright (c) 2018 Intel Corporation
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+#!/usr/bin/env python3
+
+# Based on nav2_bringup/launch/navigation_launch.py but with nav2_route removed.
 
 import os
 
@@ -20,14 +10,12 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, SetEnvironmentVariable
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
-from launch_ros.actions import LoadComposableNodes, SetParameter
-from launch_ros.actions import Node
+from launch_ros.actions import LoadComposableNodes, Node, SetParameter
 from launch_ros.descriptions import ComposableNode, ParameterFile
 from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
-    # Get the launch directory
     bringup_dir = get_package_share_directory('nav2_bringup')
 
     namespace = LaunchConfiguration('namespace')
@@ -40,10 +28,6 @@ def generate_launch_description():
     use_respawn = LaunchConfiguration('use_respawn')
     log_level = LaunchConfiguration('log_level')
 
-    #added for keepout zones
-    keepout_mask_yaml_file = LaunchConfiguration('keepout_mask_yaml') # the param file use the same as nav2 param file
-    use_keepout_zones = LaunchConfiguration('use_keepout_zones')
-
     lifecycle_nodes = [
         'controller_server',
         'smoother_server',
@@ -51,24 +35,12 @@ def generate_launch_description():
         'behavior_server',
         'velocity_smoother',
         'collision_monitor',
-        'collision_detector',
         'bt_navigator',
         'waypoint_follower',
-         ##added for keepout zones
-        'keepout_filter_mask_server', 
-        'keepout_costmap_filter_info_server',
-        # 'docking_server',
     ]
 
-    # Map fully qualified names to relative ones so the node's namespace can be prepended.
-    # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
-    # https://github.com/ros/geometry2/issues/32
-    # https://github.com/ros/robot_state_publisher/pull/30
-    # TODO(orduno) Substitute with `PushNodeRemapping`
-    #              https://github.com/ros2/launch_ros/issues/56
     remappings = [('/tf', 'tf'), ('/tf_static', 'tf_static')]
 
-    # Create our own temporary YAML files that include substitutions
     param_substitutions = {'autostart': autostart}
 
     configured_params = ParameterFile(
@@ -87,18 +59,6 @@ def generate_launch_description():
 
     declare_namespace_cmd = DeclareLaunchArgument(
         'namespace', default_value='', description='Top-level namespace'
-    )
-     ##added for keepout zones
-    declare_keepout_mask_yaml_cmd = DeclareLaunchArgument(
-        'keepout_mask_yaml',
-        default_value='/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_SLAM_keepout.yaml',
-        #default_value='',
-        description='Full path to keepout mask yaml file to load',
-    )
-
-    declare_use_keepout_zones_cmd = DeclareLaunchArgument(
-        'use_keepout_zones', default_value='true',
-        description='Whether to enable keepout zones or not'
     )
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
@@ -128,7 +88,7 @@ def generate_launch_description():
     declare_container_name_cmd = DeclareLaunchArgument(
         'container_name',
         default_value='nav2_container',
-        description='the name of conatiner that nodes will load in if use composition',
+        description='the name of container that nodes will load in if use composition',
     )
 
     declare_use_respawn_cmd = DeclareLaunchArgument(
@@ -145,33 +105,6 @@ def generate_launch_description():
         condition=IfCondition(PythonExpression(['not ', use_composition])),
         actions=[
             SetParameter('use_sim_time', use_sim_time),
-            ##added for keepout zones
-            Node( 
-                condition=IfCondition(use_keepout_zones),
-                package='nav2_map_server',
-                executable='map_server',
-                name='keepout_filter_mask_server',
-                output='screen',
-                respawn=use_respawn,
-                respawn_delay=2.0,
-               # parameters=[configured_params, {'yaml_filename': keepout_mask_yaml_file}],
-            #    parameters=[configured_params],
-                parameters=[{'yaml_filename': LaunchConfiguration('keepout_mask_yaml')}],
-                arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings + [('/map', 'keepout_filter_mask')],
-            ),
-            Node(
-                condition=IfCondition(use_keepout_zones),
-                package='nav2_map_server',
-                executable='costmap_filter_info_server',
-                name='keepout_costmap_filter_info_server',
-                output='screen',
-                respawn=use_respawn,
-                respawn_delay=2.0,
-                parameters=[configured_params],
-                arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings,
-            ),
             Node(
                 package='nav2_controller',
                 executable='controller_server',
@@ -213,7 +146,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                #remappings=remappings + [('cmd_vel', 'cmd_vel_nav')],
+                remappings=remappings + [('cmd_vel', 'cmd_vel_nav')],
             ),
             Node(
                 package='nav2_bt_navigator',
@@ -246,8 +179,7 @@ def generate_launch_description():
                 respawn_delay=2.0,
                 parameters=[configured_params],
                 arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings
-                + [('cmd_vel', 'cmd_vel_nav')],
+                remappings=remappings + [('cmd_vel', 'cmd_vel_nav')],
             ),
             Node(
                 package='nav2_collision_monitor',
@@ -260,28 +192,6 @@ def generate_launch_description():
                 arguments=['--ros-args', '--log-level', log_level],
                 remappings=remappings,
             ),
-            Node(
-                package='nav2_collision_monitor',
-                executable='collision_detector',
-                name='collision_detector',
-                output='screen',
-                respawn=use_respawn,
-                respawn_delay=2.0,
-                parameters=[configured_params],
-                arguments=['--ros-args', '--log-level', log_level],
-                remappings=remappings,
-            ),
-            # Node(
-            #     package='opennav_docking',
-            #     executable='opennav_docking',
-            #     name='docking_server',
-            #     output='screen',
-            #     respawn=use_respawn,
-            #     respawn_delay=2.0,
-            #     parameters=[configured_params],
-            #     arguments=['--ros-args', '--log-level', log_level],
-            #     remappings=remappings,
-            # ),
             Node(
                 package='nav2_lifecycle_manager',
                 executable='lifecycle_manager',
@@ -300,17 +210,6 @@ def generate_launch_description():
             LoadComposableNodes(
                 target_container=container_name_full,
                 composable_node_descriptions=[
-                    ##added for keepout zones
-                    ComposableNode(
-                        package='nav2_map_server',
-                        plugin='nav2_map_server::MapServer',
-                        name='keepout_filter_mask_server',
-                        parameters=[configured_params],
-                        # parameters=[
-                        #     {'yaml_filename': keepout_mask_yaml_file}
-                        # ],
-                        remappings=remappings,
-                    ),
                     ComposableNode(
                         package='nav2_controller',
                         plugin='nav2_controller::ControllerServer',
@@ -369,20 +268,6 @@ def generate_launch_description():
                         remappings=remappings,
                     ),
                     ComposableNode(
-                        package='nav2_collision_monitor',
-                        plugin='nav2_collision_monitor::CollisionDetector',
-                        name='collision_detector',
-                        parameters=[configured_params],
-                        remappings=remappings,
-                    ),
-                    # ComposableNode(
-                    #     package='opennav_docking',
-                    #     plugin='opennav_docking::DockingServer',
-                    #     name='docking_server',
-                    #     parameters=[configured_params],
-                    #     remappings=remappings,
-                    # ),
-                    ComposableNode(
                         package='nav2_lifecycle_manager',
                         plugin='nav2_lifecycle_manager::LifecycleManager',
                         name='lifecycle_manager_navigation',
@@ -395,26 +280,17 @@ def generate_launch_description():
         ],
     )
 
-    # Create the launch description and populate
     ld = LaunchDescription()
 
-    # Set environment variables
     ld.add_action(stdout_linebuf_envvar)
-
-    # Declare the launch options
     ld.add_action(declare_namespace_cmd)
-    ld.add_action(declare_keepout_mask_yaml_cmd)
     ld.add_action(declare_use_sim_time_cmd)
     ld.add_action(declare_params_file_cmd)
     ld.add_action(declare_autostart_cmd)
     ld.add_action(declare_use_composition_cmd)
     ld.add_action(declare_container_name_cmd)
     ld.add_action(declare_use_respawn_cmd)
-    # added for keepout zones
-    ld.add_action(declare_use_keepout_zones_cmd)
     ld.add_action(declare_log_level_cmd)
-
-    # Add the actions to launch all of the navigation nodes
     ld.add_action(load_nodes)
     ld.add_action(load_composable_nodes)
 

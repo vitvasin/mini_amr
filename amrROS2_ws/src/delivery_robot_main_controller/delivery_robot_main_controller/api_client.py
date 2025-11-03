@@ -77,7 +77,7 @@ def add_request_queue(target: str):
         "target": target,
         "boxNumber": "1",
         "sender": "api_client",
-        "status": "Pending",
+        "status": "queued",
     }
     return add_queue(form)
 

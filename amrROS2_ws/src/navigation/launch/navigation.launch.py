@@ -87,6 +87,16 @@ def generate_launch_description():
             default_value= default_map_path,
             description='Navigation map path'
         )
+    declare_keepout_mask_yaml_cmd = DeclareLaunchArgument(
+            name='keepout_mask_yaml', 
+            default_value= default_map_path,
+            description='Keepout mask yaml file path'
+        )
+    declare_use_keepout_zones_cmd = DeclareLaunchArgument(
+            name='use_keepout_zones', 
+            default_value='true',
+            description='Enable keepout zones'
+        )
     declare_use_sim_time_cmd = DeclareLaunchArgument(
             name='sim', 
             default_value='false',
@@ -151,7 +161,9 @@ def generate_launch_description():
             launch_arguments={
                 'use_sim_time': use_sim_time,
                 'params_file':  nav_params_file,
-                'map_subscribe_transient_local': 'true'
+                'map_subscribe_transient_local': 'true',
+                'keepout_mask_yaml': LaunchConfiguration('keepout_mask_yaml'),
+                'use_keepout_zones': LaunchConfiguration('use_keepout_zones'),
             }.items()
         )
     
@@ -234,6 +246,8 @@ def generate_launch_description():
         declare_use_rviz_cmd,
         declare_use_slam_tb_cmd,
         declare_rviz_config_file_cmd,
+        declare_keepout_mask_yaml_cmd,
+        declare_use_keepout_zones_cmd,
         #Launch all navigation nodes
         launch_elements
     ])

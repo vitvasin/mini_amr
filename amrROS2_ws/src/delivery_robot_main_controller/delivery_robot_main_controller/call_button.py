@@ -8,7 +8,7 @@ import logging
 import subprocess
 import sys
 from pathlib import Path
-from typing import Iterable, Optional, Set
+from typing import Iterable, Optional
 
 import rclpy
 from rclpy.node import Node
@@ -23,8 +23,10 @@ from delivery_robot_main_controller import api_client
 
 _LOGGER = logging.getLogger(__name__)
 _REQUEST_ACTION = "Request"
-_ACTIVE_STATUS = True
-_INACTIVE_STATUS = False
+_CALL_SWITCH_ACTIVE = "true"
+_CALL_SWITCH_INACTIVE = "false"
+_CALL_SWITCH_BLINK = "blink"
+
 
 
 def _ensure_iterable_queue(raw_queue: object) -> list[dict]:
@@ -44,8 +46,8 @@ def _ensure_iterable_queue(raw_queue: object) -> list[dict]:
     return []
 
 
-def _get_request_stations(logger: Optional[logging.Logger] = None) -> Set[str]:
-    """Fetch pending queue entries and return station identifiers for Request action."""
+def _get_request_station_states(logger: Optional[logging.Logger] = None) -> dict[str, str]:
+    """Fetch pending queue entries and return desired switch status per station."""
     try:
         response = api_client.get_pending_queue()
     except Exception as exc:  # pragma: no cover - network errors are runtime concerns
@@ -53,18 +55,24 @@ def _get_request_stations(logger: Optional[logging.Logger] = None) -> Set[str]:
             logger.error("Failed to fetch pending queue: %s" % exc)
         else:
             _LOGGER.error("Failed to fetch pending queue: %s" % exc)
-        return set()
+        return {}
 
     queue_entries = _ensure_iterable_queue(response.get("data"))
-    stations: Set[str] = set()
+    station_states: dict[str, str] = {}
     for item in queue_entries:
         if item.get("action", _REQUEST_ACTION) != _REQUEST_ACTION:
             continue
         target = item.get("target") or item.get("station") or item.get("no_switch")
         if target is None:
             continue
-        stations.add(str(target))
-    return stations
+        station_key = str(target)
+        queue_status = str(item.get("status") or "").strip().lower()
+        desired_state = _CALL_SWITCH_BLINK if queue_status == "active" else _CALL_SWITCH_ACTIVE
+        # Blink takes priority if any queue entry for the station is active.
+        if station_states.get(station_key) == _CALL_SWITCH_BLINK:
+            continue
+        station_states[station_key] = desired_state
+    return station_states
 
 
 def enqueue_request_for_station(
@@ -124,8 +132,8 @@ def enqueue_request_for_station(
             logger.debug("No pending Request queue to remove for station %s." % station_id)
         return removed_any
 
-    current_requests = _get_request_stations(logger=logger)
-    if station_id in current_requests:
+    station_states = _get_request_station_states(logger=logger)
+    if station_id in station_states:
         if logger:
             logger.info("Station %s already has a pending Request queue." % station_id)
         return False
@@ -135,7 +143,7 @@ def enqueue_request_for_station(
         "target": station_id,
         "boxNumber": "1",
         "sender": "call_button",
-        "status": "Pending",
+        "status": "queued",
     }
 
     try:
@@ -178,7 +186,7 @@ class CallRobotButton(Node):
             self.get_logger().warning(
                 "call_switch.py not found. Queue notification will be disabled."
             )
-        self._active_requests: Set[str] = set()
+        self._active_requests: dict[str, str] = {}
         self.create_timer(self.poll_interval, self._check_queue_and_notify)
 
     def handle_button_event(self, station_id: str, status: bool) -> bool:
@@ -186,29 +194,29 @@ class CallRobotButton(Node):
         return enqueue_request_for_station(station_id, status=status, logger=self.get_logger())
 
     def _check_queue_and_notify(self) -> None:
-        pending_requests = _get_request_stations(logger=self.get_logger())
-        if pending_requests == self._active_requests:
+        pending_states = _get_request_station_states(logger=self.get_logger())
+        if pending_states == self._active_requests:
             return
 
-        newly_active = pending_requests - self._active_requests
-        cleared = self._active_requests - pending_requests
+        previous_states = self._active_requests
+        for station, desired_state in pending_states.items():
+            if previous_states.get(station) == desired_state:
+                continue
+            self._publish_to_switch(station, desired_state)
 
-        for station in newly_active:
-            self._publish_to_switch(station, _ACTIVE_STATUS)
+        for station in previous_states.keys() - pending_states.keys():
+            self._publish_to_switch(station, _CALL_SWITCH_INACTIVE)
 
-        for station in cleared:
-            self._publish_to_switch(station, _INACTIVE_STATUS)
+        self._active_requests = pending_states
 
-        self._active_requests = pending_requests
-
-    def _publish_to_switch(self, station: str, status: bool) -> None:
+    def _publish_to_switch(self, station: str, status: str) -> None:
         if not self.call_switch_script:
             self.get_logger().debug(
                 "call_switch.py missing. Skip publishing status %s for station %s." % (status, station)
             )
             return
 
-        status_arg = "True" if status else "False"
+        status_arg = str(status)
         try:
             subprocess.run(
                 [sys.executable, str(self.call_switch_script), station, status_arg],

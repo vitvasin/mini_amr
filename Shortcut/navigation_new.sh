@@ -30,7 +30,9 @@ case "$1" in
         ros2 launch navigation navigation_amcl.launch.py \
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor.yaml" \
             rviz:=true \
-            rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz"
+            rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
+            use_keepout_zones:=true \
+            keepout_mask_yaml:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml"
         ;;
     "amcl_smr")
         # Launch navigation with AMCL #NECTEC_4th_Floor.yaml
@@ -45,7 +47,8 @@ case "$1" in
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
-            use_keepout_zones:=true
+            use_keepout_zones:=true \
+            keepout_mask_yaml:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM_keepout.yaml"
         ;;
 
     *)

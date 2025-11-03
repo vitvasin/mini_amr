@@ -65,7 +65,10 @@ def generate_launch_description():
                  'auto_dock_launch.py'
              )
          ),
-         launch_arguments={'namespace': namespace}.items()
+         launch_arguments={
+             'namespace': namespace,
+             'localization_mode': 'slam_toolbox'
+         }.items()
     )
 
     return LaunchDescription([

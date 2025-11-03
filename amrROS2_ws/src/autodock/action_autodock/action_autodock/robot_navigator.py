@@ -31,6 +31,10 @@ from rclpy.action import ActionClient
 from rclpy.node import Node
 from rclpy.qos import QoSDurabilityPolicy, QoSHistoryPolicy, QoSReliabilityPolicy
 from rclpy.qos import QoSProfile
+from rclpy.time import Time
+
+import tf2_ros
+from tf2_ros import LookupException, ConnectivityException, ExtrapolationException
 
 try:
     from slam_toolbox_msgs.srv import SetPose
@@ -54,6 +58,7 @@ class BasicNavigator(Node):
         self.result_future = None
         self.feedback = None
         self.status = None
+        self._waiting_for_pose_logged = False
 
         self.declare_parameter('localization_mode', 'amcl')
         self.localization_mode = self.get_parameter('localization_mode').value.lower()
@@ -68,6 +73,8 @@ class BasicNavigator(Node):
         self.initial_pose_pub = None
         self.localization_pose_sub = None
         self.slam_set_pose_client = None
+        self.tf_buffer = None
+        self.tf_listener = None
 
         if self.localization_mode == 'amcl':
             amcl_pose_qos = QoSProfile(
@@ -88,17 +95,26 @@ class BasicNavigator(Node):
                                                           10)
         else:
             self.declare_parameter('slam_pose_topic', 'slam_toolbox/pose')
+            self.declare_parameter('slam_map_frame', 'map')
+            self.declare_parameter('slam_base_frame', 'base_link')
             self.slam_pose_topic = self.get_parameter('slam_pose_topic').value
-            self.localization_pose_sub = self.create_subscription(PoseStamped,
-                                                                  self.slam_pose_topic,
-                                                                  self._slamPoseCallback,
-                                                                  10)
+            self.slam_map_frame = self.get_parameter('slam_map_frame').value
+            self.slam_base_frame = self.get_parameter('slam_base_frame').value
+            if self.slam_pose_topic:
+                self.localization_pose_sub = self.create_subscription(PoseStamped,
+                                                                      self.slam_pose_topic,
+                                                                      self._slamPoseCallback,
+                                                                      10)
+            else:
+                self.info('slam_pose_topic parameter empty; relying on TF for localization pose.')
             if SetPose is not None:
                 self.declare_parameter('slam_set_pose_service', 'slam_toolbox/set_pose')
                 slam_set_pose_service = self.get_parameter('slam_set_pose_service').value
                 self.slam_set_pose_client = self.create_client(SetPose, slam_set_pose_service)
             else:
                 self.warn('slam_toolbox_msgs not available; initial pose service calls will be skipped.')
+            self.tf_buffer = tf2_ros.Buffer()
+            self.tf_listener = tf2_ros.TransformListener(self.tf_buffer, self)
 
         self.initial_pose_received = False
         self.nav_through_poses_client = ActionClient(self,
@@ -197,6 +213,11 @@ class BasicNavigator(Node):
             rclpy.spin_until_future_complete(self, future)
         return
 
+    def cancelTask(self):
+        # Compatibility alias for nav2_simple_commander interface
+        self.cancelNav()
+        return
+
     def isNavComplete(self):
         if not self.result_future:
             # task was cancelled or completed
@@ -214,6 +235,10 @@ class BasicNavigator(Node):
         self.debug('Goal succeeded!')
         return True
 
+    def isTaskComplete(self):
+        # Compatibility alias for nav2_simple_commander interface
+        return self.isNavComplete()
+
     def getFeedback(self):
         return self.feedback
 
@@ -228,7 +253,8 @@ class BasicNavigator(Node):
             return NavigationResult.UNKNOWN
 
     def waitUntilNav2Active(self):
-        self._waitForNodeToActivate('amcl')
+        for node_name in self.localization_nodes_to_wait_for:
+            self._waitForNodeToActivate(node_name)
         self._waitForInitialPose()
         self._waitForNodeToActivate('bt_navigator')
         self.info('Nav2 is ready for use!')
@@ -405,15 +431,57 @@ class BasicNavigator(Node):
 
     def _waitForInitialPose(self):
         while not self.initial_pose_received:
-            self.info('Setting initial pose')
-            self._setInitialPose()
-            self.info('Waiting for amcl_pose to be received')
+            if self.localization_mode == 'amcl':
+                self.info('Setting initial pose')
+                self._setInitialPose()
+                self.info('Waiting for %s to be received' % getattr(self, 'amcl_pose_topic', 'amcl_pose'))
+            else:
+                source = self.slam_pose_topic if getattr(self, 'slam_pose_topic', None) else 'TF'
+                if not self._waiting_for_pose_logged:
+                    self.info('Waiting for localization pose to be received from %s' % source)
+                    self._waiting_for_pose_logged = True
+                else:
+                    self.debug('Waiting for localization pose from %s' % source)
+                self._tryUpdatePoseFromTF()
             rclpy.spin_once(self, timeout_sec=1.0)
         return
 
     def _amclPoseCallback(self, msg):
         self.debug('Received amcl pose')
         self.initial_pose_received = True
+        self._waiting_for_pose_logged = False
+        return
+
+    def _slamPoseCallback(self, msg):
+        self.debug('Received slam toolbox pose')
+        self.initial_pose.pose = msg.pose
+        self.initial_pose.header = msg.header
+        self.initial_pose_received = True
+        self._waiting_for_pose_logged = False
+        return
+
+    def _tryUpdatePoseFromTF(self):
+        if self.tf_buffer is None:
+            return
+        try:
+            transform = self.tf_buffer.lookup_transform(
+                self.slam_map_frame,
+                self.slam_base_frame,
+                Time()
+            )
+        except (LookupException, ConnectivityException, ExtrapolationException):
+            return
+
+        self.initial_pose.header.frame_id = transform.header.frame_id or self.slam_map_frame
+        self.initial_pose.header.stamp = transform.header.stamp
+        self.initial_pose.pose.position.x = transform.transform.translation.x
+        self.initial_pose.pose.position.y = transform.transform.translation.y
+        self.initial_pose.pose.position.z = transform.transform.translation.z
+        self.initial_pose.pose.orientation = transform.transform.rotation
+        self.initial_pose_received = True
+        self._waiting_for_pose_logged = False
+        self.info('Acquired localization pose from TF %s->%s' %
+                  (self.slam_map_frame, self.slam_base_frame))
         return
 
     def _feedbackCallback(self, msg):
@@ -422,12 +490,36 @@ class BasicNavigator(Node):
         return
 
     def _setInitialPose(self):
-        msg = PoseWithCovarianceStamped()
-        msg.pose.pose = self.initial_pose.pose
-        msg.header.frame_id = self.initial_pose.header.frame_id
-        msg.header.stamp = self.initial_pose.header.stamp
-        self.info('Publishing Initial Pose')
-        self.initial_pose_pub.publish(msg)
+        if self.localization_mode == 'amcl':
+            if self.initial_pose_pub is None:
+                self.warn('Initial pose publisher not available; skipping initial pose publication.')
+                return
+            msg = PoseWithCovarianceStamped()
+            msg.pose.pose = self.initial_pose.pose
+            msg.header.frame_id = self.initial_pose.header.frame_id
+            msg.header.stamp = self.initial_pose.header.stamp
+            self.info('Publishing Initial Pose')
+            self.initial_pose_pub.publish(msg)
+        elif self.localization_mode == 'slam_toolbox':
+            if self.slam_set_pose_client is None:
+                self.debug('No slam_toolbox set_pose service configured; skipping initial pose request.')
+                return
+            if not self.slam_set_pose_client.service_is_ready():
+                while not self.slam_set_pose_client.wait_for_service(timeout_sec=1.0):
+                    self.info('slam_toolbox set_pose service not available, waiting...')
+            req = SetPose.Request()
+            req.pose.x = self.initial_pose.pose.position.x
+            req.pose.y = self.initial_pose.pose.position.y
+            orientation = self.initial_pose.pose.orientation
+            siny_cosp = 2.0 * (orientation.w * orientation.z + orientation.x * orientation.y)
+            cosy_cosp = 1.0 - 2.0 * (orientation.y * orientation.y + orientation.z * orientation.z)
+            req.pose.theta = math.atan2(siny_cosp, cosy_cosp)
+            future = self.slam_set_pose_client.call_async(req)
+            rclpy.spin_until_future_complete(self, future)
+            if future.result() is None:
+                self.warn('Failed to call slam_toolbox set_pose service.')
+            else:
+                self.info('Requested slam_toolbox to set initial pose.')
         return
 
     def info(self, msg):

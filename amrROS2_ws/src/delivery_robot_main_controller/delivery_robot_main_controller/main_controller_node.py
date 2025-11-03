@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from enum import Enum, auto
 from geometry_msgs.msg import PoseStamped
-from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+from .robot_navigator import BasicNavigator, NavigationResult
 from rclpy.duration import Duration
 from rclpy.action import ActionClient
 from custom_interface.action import Autodock
@@ -27,6 +27,8 @@ from . import api_client
 import signal
 from .rpc_server import RPCServer
 from .rpc_fnc import door_command, echo, dock_command_service, configure_rpc_access
+
+TaskResult = NavigationResult
 
 FUNCS = {
     "door_command": door_command,
@@ -230,9 +232,9 @@ class DeliveryRobotMainController(Node):
                 self.chargestate = ChargeState.NOT_CHARGE
             api_client.update_status('charge_state',self.chargestate.name)
             
-            if charge_code in (10, 11):
-                self.dockstate = DockState.DOCKED
-                #api_client.update_status('dock_state',self.dockstate.name)
+            if (self.dockstate != DockState.DOCKED)and(charge_code in (10, 11)):
+                self.change_dock_state(DockState.DOCKED)
+               
 
         except Exception as e:
             self.get_logger().error(f"ChargeState callback exception: {e}")
@@ -244,27 +246,30 @@ class DeliveryRobotMainController(Node):
 
     def get_state_from_api(self):
         try:
-            params = api_client.get_robot_status()
-            data = params.get("data", [])
+            #params = api_client.get_robot_status()
+            state_value = api_client.get_robot_status_by_name('status')
+            state = getattr(RobotState, state_value, RobotState.STANDBY)
+            return state
+            #data = params.get("data", [])
             # ใช้ข้อมูล เช่น:
-            if data and isinstance(data, list):
-                current_status = data[0]
-                status_id = current_status.get("_id") or current_status.get("id")
-                if status_id:
-                    self.status_id = status_id
-                state_value = current_status.get("status", "")
+            #if data and isinstance(data, list):
+            #    current_status = data[0]
+            #    status_id = current_status.get("_id") or current_status.get("id")
+            #    if status_id:
+            #        self.status_id = status_id
+            #    state_value = current_status.get("status", "")
             
                 # ถ้า state เป็น dict เช่น {"name": "STANDBY"} ให้ดึงชื่อออกมา
-                if isinstance(state_value, dict):
-                    state_str = state_value.get("status", "")
-                else:
-                    state_str = state_value
+            #if isinstance(state_value, dict):
+            #    state_str = state_value.get("status", "")
+            #    else:
+            #        state_str = state_value
 
-                state = getattr(RobotState, state_str, RobotState.STANDBY)
-                return state
-            else:
-                self.get_logger().warn("Invalid system current status format: 'data' is empty or not a list")
-                return None
+            #    state = getattr(RobotState, state_str, RobotState.STANDBY)
+            #    return state
+            #else:
+            #    self.get_logger().warn("Invalid system current status format: 'data' is empty or not a list")
+            #    return None
         
         except Exception as e:
             self.get_logger().error(f"current status API request failed: {e}")
@@ -745,8 +750,12 @@ class DeliveryRobotMainController(Node):
         x, y, heading = self.get_station_position(target_station)
         if x is not None:
             self.target_station = target_station
+            api_client.update_status('target_station',target_station)
             yaw = heading * 3.141592 / 180.0
             #self.send_goal_pose(x, y, yaw, after)
+            api_client.update_status('target_x',x)
+            api_client.update_status('target_y',y)
+            api_client.update_status('target_yaw',yaw)
             self.send_goal_pose_agv(x, y, yaw, after)
             return True
         else:
@@ -850,14 +859,23 @@ class DeliveryRobotMainController(Node):
                 return
 
             if action == "Delivery":
+                if selected_task:
+                    queue_id = selected_task.get("_id") or selected_task.get("id")
+                    if queue_id:
+                        api_client.update_queue_status(queue_id,'active')
                 result = self.go_to_station(target_station,RobotState.LOAD_OUT)
             else: #action == "Request"
+                if selected_task:
+                    queue_id = selected_task.get("_id") or selected_task.get("id")
+                    if queue_id:
+                        api_client.update_queue_status(queue_id,'active')
                 result = self.go_to_station(target_station,RobotState.STANDBY)
 
             if (result == False):
                 if selected_task:
                     queue_id = selected_task.get("_id") or selected_task.get("id")
                     if queue_id:
+                        api_client.update_queue_status(queue_id,'failed')
                         self.remove_queue_by_id(queue_id)
                         self.get_logger().info(f"Remove queue : {action}, target {target_station}")
                 self.current_task = None
@@ -921,6 +939,10 @@ class DeliveryRobotMainController(Node):
                 status_id = self._get_status_id_for('position update')
                 try:
                     api_client.update_robot_current_station(self.target_station)
+                    api_client.update_robot_target_station('')
+                    api_client.update_status('target_x','')
+                    api_client.update_status('target_y','')
+                    api_client.update_status('target_yaw','')
                 except Exception as e:
                     self.get_logger().error(f'Failed to update robot position: {e}')
                 self.current_station = self.target_station
@@ -968,6 +990,7 @@ class DeliveryRobotMainController(Node):
 
                 queue_id = task.get("_id") or task.get("id")
                 if queue_id:
+                    api_client.update_queue_status(queue_id,'completed')
                     self.remove_queue_by_id(queue_id)
                 self.get_logger().info(f"Waiting {self.setting_waitLoadinTimeout}s for LOAD_IN command...")
                 self._loadin_timeout_end = time.time() + self.setting_waitLoadinTimeout

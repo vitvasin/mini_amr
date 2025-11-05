@@ -232,7 +232,7 @@ DockPerception::DockPerception(std::shared_ptr<rclcpp::Node> node_ptr)
   */
   // Init base scan only after publishers are created
   scan_sub_ = node_ptr_->create_subscription<sensor_msgs::msg::LaserScan>(
-      "scan", 10, std::bind(&DockPerception::callback, this, _1));
+      "scan_filtered", 10, std::bind(&DockPerception::callback, this, _1));
   std::cout << "Dock perception initialized\n";
 }
 

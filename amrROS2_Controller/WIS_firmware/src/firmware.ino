@@ -811,59 +811,59 @@ void sensor_module_task()
 
     // uint64_t start_time = millis();
 
-    if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess)
-    {
-        buff = Ultrasonics_L.getResponseBuffer(0);// * 0.01; // coe = 0.01  => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_left = buff*10;// *0.01* 1000;
+    // if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess)
+    // {
+    //     buff = Ultrasonics_L.getResponseBuffer(0);// * 0.01; // coe = 0.01  => cm ==> m, addr = 0
+    //     if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+    //     range_left = buff*10;// *0.01* 1000;
 
-        pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
-        pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
+    //     pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
+    //     pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
         
-        // Serial5.printf("Range Letf : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range left error");
-    }
-    // cooperative sleep to allow other Threads to run
-    //threads.delay(5);
+    //     // Serial5.printf("Range Letf : %d\n", buff);
+    // }
+    // else
+    // {
+    //     if (DEBUG)
+    //         Serial5.println("Read range left error");
+    // }
+    // // cooperative sleep to allow other Threads to run
+    // //threads.delay(5);
 
-    if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
-    {
-        buff = Ultrasonics_R.getResponseBuffer(0);// * 0.01; // coe = 0.01 => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_right = buff*10;// *0.01* 1000;
+    // if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
+    // {
+    //     buff = Ultrasonics_R.getResponseBuffer(0);// * 0.01; // coe = 0.01 => cm ==> m, addr = 0
+    //     if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+    //     range_right = buff*10;// *0.01* 1000;
 
-        pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
-        pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
+    //     pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
+    //     pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
 
-        // Serial5.printf("Range Right : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range right error");
-    }
-    // cooperative sleep to allow other Threads to run
-    //threads.delay(5);
+    //     // Serial5.printf("Range Right : %d\n", buff);
+    // }
+    // else
+    // {
+    //     if (DEBUG)
+    //         Serial5.println("Read range right error");
+    // }
+    // // cooperative sleep to allow other Threads to run
+    // //threads.delay(5);
 
-    if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
-    {
-        buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01  => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_center = buff*10;// *0.01* 1000;
-        pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
-        pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
+    // if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
+    // {
+    //     buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01  => cm ==> m, addr = 0
+    //     if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+    //     range_center = buff*10;// *0.01* 1000;
+    //     pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
+    //     pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
 
-        // Serial5.printf("Range Center : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range center error");
-    }
+    //     // Serial5.printf("Range Center : %d\n", buff);
+    // }
+    // else
+    // {
+    //     if (DEBUG)
+    //         Serial5.println("Read range center error");
+    // }
     // cooperative sleep to allow other Threads to run
    // threads.delay(5);
 
@@ -1090,6 +1090,15 @@ void loop()
         digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN));
         LedActivity = millis();
     }
+
+    // uint8_t err;
+
+    // if (eMR_RequestErrorRegister(1, &err, 200)) {
+    //    // Serial.print("Node "); Serial.print(1);
+    //    // Serial.print(" Error Register = 0x"); Serial.println(err, HEX);
+    // } else {
+    //     Serial.println("No SDO reply / timeout");
+    // }
     //Serial5.println("DEBUG MODE");
 
 

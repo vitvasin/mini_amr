@@ -42,10 +42,10 @@ case "$1" in
     "slam_localization")
         # Launch navigation with AMCL #SMR_room.yaml
         ros2 launch navigation navigation.launch.py \
-            map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM" \
+            map:="$SCRIPT_DIR/../amrROS2_ws/maps/smr_room" \
             rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
-            use_keepout_zones:=true
+            use_keepout_zones:=false
         ;;
 
     *)

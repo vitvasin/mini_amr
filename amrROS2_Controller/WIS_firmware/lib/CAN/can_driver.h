@@ -92,7 +92,7 @@
 #define eMR_BIT02               0x0004          // bit code: operation enable
 #define eMR_BIT01               0x0002          // bit code: switched on
 #define eMR_BIT00               0x0001          // bit code: ready to switch on
-
+#define FAULT_BIT_MASK          0x0008          // bit mask to check FAULT bit
 
 #define PPM_MODE                  0x01             // Profile Position Mode
 #define PVM_MODE                  0x03             // Profile Velocity Mode
@@ -154,7 +154,16 @@ uint8_t eMR_CANOpen_Init();
 uint8_t eMR_SetTargetVelocity(float percentPwm1,bool direction1, float percentPwm2, bool direction2);
 uint8_t eMR_ReadActualVelocity();
 void eMR_ReadActualVelocity2();
-
+uint8_t eMR_CheckFaultStatus();
+void triggerTestFault();
+void testFaultDetection();
+bool eMR_ResetFault();
+uint8_t eMR_ReadErrorRegister();
+uint32_t eMR_ReadPredefinedErrorField(uint8_t subindex);
+void eMR_PrintFaultState();
+//bool Error_Drive_Flag = false;
+void eMR_HandleTPDO3();
+bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200);
 // void canSniff(const CAN_message_t &msg) ;
 
 #endif

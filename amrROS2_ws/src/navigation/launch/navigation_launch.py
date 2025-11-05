@@ -55,8 +55,8 @@ def generate_launch_description():
         'bt_navigator',
         'waypoint_follower',
          ##added for keepout zones
-        'keepout_filter_mask_server', 
-        'keepout_costmap_filter_info_server',
+        # 'keepout_filter_mask_server', 
+        # 'keepout_costmap_filter_info_server',
         # 'docking_server',
     ]
 

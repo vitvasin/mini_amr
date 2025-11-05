@@ -206,17 +206,49 @@ def generate_launch_description():
             condition=IfCondition(bringup) #default is false
         )
 
+        # Define a list of actions that should start *after* the robot bringup
+    navigation_and_localization_actions = [
+        amcl,
+        slam_toolbox,
+        slam_toolbox_localization,
+        navigation,
+        rviz_cmd,
+    ]
+
+    # Use a TimerAction to delay the start of the navigation and localization components
+    # A delay of 5.0 seconds is a common starting point, adjust as needed.
+    delayed_navigation_start = TimerAction(
+        period=5.0,  # Delay in seconds
+        actions=navigation_and_localization_actions
+    )
+
+#     launch_elements = GroupAction(
+#      actions=[
+#         PushRosNamespace(condition=IfCondition(use_namespace), namespace=namespace),
+#         SetRemap('/tf','tf'),
+#         SetRemap('/tf_static','tf_static'),
+#         amcl,
+#         bringup,
+#         slam_toolbox,
+#         slam_toolbox_localization,
+#         navigation,
+#         rviz_cmd,
+#       ]
+#    )
+
+
     launch_elements = GroupAction(
      actions=[
         PushRosNamespace(condition=IfCondition(use_namespace), namespace=namespace),
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
-        amcl,
         bringup,
-        slam_toolbox,
-        slam_toolbox_localization,
-        navigation,
-        rviz_cmd,
+        delayed_navigation_start,
+        # amcl,
+        # slam_toolbox,
+        # slam_toolbox_localization,
+        # navigation,
+        # rviz_cmd,
       ]
    )
 

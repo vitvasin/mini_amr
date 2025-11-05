@@ -200,6 +200,7 @@ uint8_t eMR_ReadActualVelocity()
   return 0;
 }
 
+
 void eMR_ReadActualVelocity2()
 {
   int32_t  velocity=0;
@@ -211,7 +212,13 @@ void eMR_ReadActualVelocity2()
   v.velocity2 = 0.1*(((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
              + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]));
 
+  //Also read fault state
+  // Error_Drive_Flag = (eMR_ReadErrorRegister() != 0x00);
+  // eMR_HandleTPDO3();
+
+
 }
+
 
 void canSniff(const CAN_message_t &msg) {
 
@@ -229,4 +236,76 @@ void canSniff(const CAN_message_t &msg) {
     Serial.print(msg.buf[i], HEX); Serial.print(" ");
   } Serial.println();
 
+}
+
+bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200)
+{
+    uint8_t req[8] = {0};
+    uint32_t req_id  = 0x381;  // SDO request COB-ID
+    uint32_t resp_id = 0x603F;  // SDO response COB-ID
+
+    req[0] = 0x40;                     // initiate upload
+    req[1] = 0x01;                     // index low (0x1001)
+    req[2] = 0x10;                     // index high
+    req[3] = 0x00;                     // subindex
+    req[4] = 0x00;                     // reserved
+    req[5] = 0x00;                     // reserved
+    req[6] = 0x00;                     // reserved
+    req[7] = 0x00;                     // reserved
+
+    
+    // req[0] = 0x40;                     // initiate upload
+    // req[1] = 0x01;                     // index low (0x1001)
+    // req[2] = 0x10;                     // index high
+    // req[3] = 0x00;                     // subindex
+    // req[4] = 0x00;                     // reserved
+    // req[5] = 0x00;                     // reserved
+    // req[6] = 0x00;                     // reserved
+    // req[7] = 0x00;                     // reserved
+
+
+    //CAN1_SendFrame(req_id, 8, req);
+
+    unsigned long start = millis();
+    while (millis() - start < timeout_ms) {
+        CAN1_ReceiveFrame(); // fills revPACKET
+        // if (revPACKET.len > 0 && revPACKET.id == resp_id) {
+        if (revPACKET.len > 0) {
+          //Serial.println("Received Error Register Response");
+            Serial.print("received from ID: 0x"); Serial.println(revPACKET.id, HEX);
+            if (revPACKET.len >= 5) {
+                //print full response for debugging
+                //Serial.print("Response Data: ");
+                for (int i = 0; i < revPACKET.len; i++) {
+                    Serial.print(revPACKET.buf[i], HEX);
+                    Serial.print(" ");
+                }
+                Serial.println();
+                
+                *out_value = revPACKET.buf[4];
+                return true;
+            }
+            break;
+        }
+        delay(1);
+    }
+    return false;
+}
+
+uint8_t CANOpen_ResetFaults(eMR_t *eMR)
+{
+  uint8_t data[8];
+  uint32_t node_id;
+
+  node_id = eMR->cobid;
+  data[0] = SDO_Expedited_2;                                  // SDO <CMD>            Byte0
+  data[1] = (uint8_t)(Controlword_Obj & 0xFF);                // SDO <Lowbyte_Index>  Byte1
+  data[2] = (uint8_t)((Controlword_Obj>>8) & 0xFF);           // SDO <Highbyte_Index> Byte2
+  data[3] = 0x00;                                             // SDO <SubIndex>       Byte3
+  data[4] = 0x80;                                             // SDO <DATA_Byte0>     Byte4
+  data[5] = 0x00;                                             // SDO <DATA_Byte1>     Byte5
+  data[6] = 0x00;                                             // SDO <DATA_Byte2>     Byte6
+  data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
+
+  return CAN1_SendFrame(node_id,DLC, data);                          // Test DLC = 6?
 }

@@ -919,34 +919,6 @@ void sensor_module_task()
     if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess)
     {
         buff = IR_Charge_State.getResponseBuffer(0); // addr = 0
-        // Serial5.print("Status Register = ");
-        // Serial5.println(buff);
-
-        //for debug
-        // switch (buff)
-        // {
-        // case 0:
-        //     // Serial5.println("Idle");
-        //     break;
-        // case 10:
-        //     // Serial5.println("RobotStopBackward");
-
-        //     ///// for debug /////////////////////////////////////////////////////////////// DB
-        //     // result = IR_Charge_State.writeSingleRegister(1, 22);
-        //     // if (result == IR_Charge_State.ku8MBSuccess)
-        //     // {
-        //     //     Serial5.println("Sent: RobotReadyToCharge (20)");
-        //     // }else {
-        //     // Serial5.println("Error sending RobotReadyToCharge");
-        //     // }
-        //     //////////////////////////////////////////////////////////////////////////////// DB
-        //     break;
-        // case 11:
-        //     // Serial5.println("RobotBattCharging");
-        //     break;
-        // default:
-        //     // Serial5.println("Unknown state");
-        // }
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         // Serial5.printf("IR Charge State : %d\n", buff);
     }

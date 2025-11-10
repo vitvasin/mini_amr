@@ -947,8 +947,8 @@ class AutodockActionServer(Node):
         #        self.get_logger().error("Charging failed to set READY before START_CHARGING")
         #        return False
         
-        #success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
-        success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
+        success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
+        # success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
         if success:
                 self.get_logger().info("Charging started successfully")
                 return True
@@ -1285,7 +1285,7 @@ class AutodockActionServer(Node):
             if self.dock_check_charge_status:
                 self.set_stop_charge(False)
                 success = self.move_open_loop_check_charge(self.dock_linear_speed_final, self.dock_time_final)
-                self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
+                # self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
             else:
                 self.move_open_loop(self.dock_linear_speed_final, self.dock_time_final)
                 success = True  # if not checking charge, treat as success of motion-only

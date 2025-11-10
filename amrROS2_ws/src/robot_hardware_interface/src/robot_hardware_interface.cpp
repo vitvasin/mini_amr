@@ -73,6 +73,22 @@ void HardwareInterface::SetChargeState(uint16_t charge_state) {
     }
 }
 
+void HardwareInterface::SetMotorDriveState(bool state) {
+
+    try {
+        uint8_t state_byte = state ? 1 : 0;
+
+        std::vector<uint8_t> cmd = {
+            state_byte
+        };
+
+        SendData(FUNC_MTR_DRIVE, cmd);
+        //std::cout << "Set Motor Drive State to: " << static_cast<int>(state_byte) << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Set Motor Drive State error: " << e.what() << std::endl;
+    }
+}
 
 void HardwareInterface::UpdateIP(char* addressBuffer) {
     uint8_t ipPart1, ipPart2, ipPart3, ipPart4;
@@ -190,6 +206,10 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
         uint16_t ir_charge_state = static_cast<int16_t>(data[_IR_CHARGE_STATE_]);
 
         ir_charge_state_ = ir_charge_state;
+
+        uint8_t motor_drive_state = static_cast<int16_t>(data[_MTR_DRIVE_STATE_]);
+        motor_drive_state_ = motor_drive_state;
+
         //std::cout << "IR Charge State: " << ir_charge_state << std::endl;
 
         //if(DEBUG_BATT){
@@ -346,14 +366,18 @@ void HardwareInterface::ReceiveData() {
                 
                 if (header == HEAD) {
                     serial_port.ReadByte(device_id, SERIALPORT_TIMEOUT_MS);
-
+                    // std::cout << "Device_id: " << (int)device_id << std::endl;
                     if (device_id == HOST_ID) {
 
                         serial_port.ReadByte(len, SERIALPORT_TIMEOUT_MS);
-                        
+                        // std::cout << "Data range: " << (int)len << std::endl;
+
                         uint8_t check_sum = header + device_id + len;// + func_type;
                         uint8_t data_len = len - 3;//4;
                         data = {};
+                        
+                        // std::cout << "data_len: " << (int)data_len << std::endl;
+
 
                         while (data.size() < data_len) {                            
                             serial_port.ReadByte(value, SERIALPORT_TIMEOUT_MS);

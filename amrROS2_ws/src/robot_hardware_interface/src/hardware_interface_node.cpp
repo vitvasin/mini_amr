@@ -4,6 +4,7 @@
 #include "sensor_msgs/msg/imu.hpp"
 #include "sensor_msgs/msg/range.hpp"
 #include "std_msgs/msg/int16.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "action_msgs/msg/goal_status_array.hpp"
 #include <sensor_msgs/msg/battery_state.hpp>
@@ -33,6 +34,11 @@ public:
 
     charge_state_sub_ = create_subscription<std_msgs::msg::Int16>(
         "set_charge_state", 1, std::bind(&HardwareInterfaceNode::ChargeStateCallback, this, _1));
+
+    mtr_drive_state_sub_ = create_subscription<std_msgs::msg::Bool>(
+        "set_mtr_state", 1, std::bind(&HardwareInterfaceNode::MotorDriveStateCallback, this, _1));
+
+
 
 
     imu_pub_    = create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 10);
@@ -96,6 +102,7 @@ private:
   std::shared_ptr<HardwareInterface> hardware_interface;
   
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
+  rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr mtr_drive_state_sub_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub_;
   rclcpp::Publisher<sensor_msgs::msg::BatteryState>::SharedPtr batt_pub_;
@@ -150,6 +157,12 @@ private:
   {
     //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetChargeState(static_cast<uint16_t>(msg.data));
+  }
+
+  void MotorDriveStateCallback(const std_msgs::msg::Bool & msg)
+  {
+    //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
+    hardware_interface->SetMotorDriveState(msg.data);
   }
 
   void timerUpdateCallback()

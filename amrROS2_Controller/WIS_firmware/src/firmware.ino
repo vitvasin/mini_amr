@@ -42,6 +42,7 @@
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
 #define FUNC_CHARGE 0x08
+#define FUNC_MTR_DRIVE 0x09
 
 /////////////////////////////////////////////////////////////////////////////////////
 #define motor_axis0 0
@@ -65,7 +66,7 @@
 #define CliffDistanceLimit 200 // 20cm
 
 //----------- Pkg data -----------------
-#define _PKG_LEN    37 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN    43 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER 0
 #define _HOST_ID 1
@@ -108,13 +109,19 @@
 #define _BMS_PERCENT_H 33
 #define _BMS_STATUS_ 34
 #define _IR_CHARGE_STATE_  35   // <-- NEW BYTE for RobotStage
+#define _MTR_DRIVE_STATE_ 36
+#define _RESERVED1_        37
+#define _RESERVED2_        38
+#define _RESERVED3_        39
+#define _RESERVED4_        40
+#define _RESERVED5_        41   
 // #define _IMU_READY_     35          // add new
 // #define _ODOM_READY_    36          // add new
 // #define _RANGER_READY_  37          // add new
 // #define _SAFETY_READY_  38          // add new
 // #define _BMS_READY_     39          // add new
 
-#define _CHK_SUM_       36
+#define _CHK_SUM_       42
 
 
 //--------------------------------------
@@ -142,6 +149,7 @@ uint16_t cliff;
 uint8_t range_limit = 200;
 uint8_t led_mode_prev;
 uint8_t alarm_mode_prev;
+static bool emer_flag = true;
 
 uint8_t imu2send[12];
 uint8_t odom2send[6];
@@ -197,7 +205,7 @@ Adafruit_MCP23X17 mcp;
 bool mcp_input[8];
 bool mcp_out_put[8];
 
-bool cliff_state, bumper_state, emer_state, stop, ack;
+bool cliff_state, bumper_state, emer_state = false, virtual_emer_state = false, stop = false, ack;
 bool connection_failed;
 
 
@@ -285,13 +293,35 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
         
         }
     }
-    else
+    if(func == FUNC_MTR_DRIVE)
     {
-        if (DEBUG_RECEIVE)
+        if (data_len >= 1)
         {
-            Serial5.println("Out of provided function");
+            uint8_t mtr_drive_state = data[0];
+            if(mtr_drive_state == 1)
+            {
+                virtual_emer_state =false;
+                mcp.digitalWrite(7, HIGH);
+                mcp.digitalWrite(6, HIGH);
+                mcp.digitalWrite(5, HIGH);
+                mcp.digitalWrite(4, HIGH);
+                
+                // delay(7000);
+                // eMR_CANOpen_Init();
+                // eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
+            }
+            else if(mtr_drive_state == 0)
+            {
+               mcp.digitalWrite(7, LOW);
+                mcp.digitalWrite(6, LOW);
+                mcp.digitalWrite(5, LOW);
+                mcp.digitalWrite(4, LOW);
+                virtual_emer_state =true;
+                emer_flag = true;
+            }
         }
     }
+    
 }
 
 // void recive_data_task(void *parameter)
@@ -669,7 +699,7 @@ void bms_task()
 
 void control_task()
 {
-    static bool emer_flag = true;
+    
 
     const float K = 0.5;
 
@@ -680,7 +710,7 @@ void control_task()
     float current_rpm_right = 0.0;
     static uint32_t LedControl = millis();
 
-    if ((millis() - prev_cmd_time > 200) || stop || emer_state)
+    if ((millis() - prev_cmd_time > 200) || stop || emer_state || virtual_emer_state)
     {
         cmd_vel.linear_x = 0.0;
         cmd_vel.linear_y = 0.0;
@@ -716,7 +746,7 @@ void control_task()
         cmd_vel.angular_z);
 
     
-    if (emer_state)
+    if (emer_state || virtual_emer_state)
     {
         if(!emer_flag)
         {
@@ -736,10 +766,12 @@ void control_task()
         if (emer_flag)
         {
             // Serial.println("Emer OFF");
+            delay(7000);
+
             eMR_CANOpen_Init();
             eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
             // Serial.println("eMR CANopen Init. eMR motor ");
-            delay(3000);
+            
             emer_flag = false;
         }
         else
@@ -774,18 +806,18 @@ void control_task()
         0,
         0);
 
-    // Serial5.print("Actual RPM1 : ");
-    // Serial5.print(current_rpm_right);
-    // Serial5.print("   ");
-    // Serial5.print("Actual RPM2 : ");
-    // Serial5.print(current_rpm_left);
+    // Serial.print("Actual RPM1 : ");
+    // Serial.print(current_rpm_right);
+    // Serial.print("   ");
+    // Serial.print("Actual RPM2 : ");
+    // Serial.print(current_rpm_left);
 
-    // Serial5.print("   ");
-    // Serial5.print("Vel_x: ");
-    // Serial5.print(current_vel.linear_x);
-    // Serial5.print("   ");
-    // Serial5.print("ang_z: ");
-    // Serial5.println(current_vel.angular_z);
+    // Serial.print("   ");
+    // Serial.print("Vel_x: ");
+    // Serial.print(current_vel.linear_x);
+    // Serial.print("   ");
+    // Serial.print("ang_z: ");
+    // Serial.println(current_vel.angular_z);
 
     int16_t Vx = static_cast<int16_t>(current_vel.linear_x * 1000);
     int16_t Vy = static_cast<int16_t>(current_vel.linear_y * 1000);
@@ -976,6 +1008,9 @@ void setup()
         }
     }
     mcp.digitalWrite(7, HIGH);
+    mcp.digitalWrite(6, HIGH);
+    mcp.digitalWrite(5, HIGH);
+    mcp.digitalWrite(4, HIGH);
     delay(3000);
     //-------------
     Serial.begin(460800);

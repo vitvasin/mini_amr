@@ -303,6 +303,7 @@ class AutodockActionServer(Node):
 
         self.request_stop_charge = self.create_publisher(Bool, 'request_stop_charge', 10)
 
+        self.drive_command_pub = self.create_publisher(Bool, 'set_mtr_state', 10)
         #tf_listener = TransformListener(tf_buffer,self)
         
         #self.event = threading.Event()
@@ -805,6 +806,12 @@ class AutodockActionServer(Node):
         twist.linear.x = 0.0
         self.pub.publish(twist)
         
+    def set_drive_state(self, is_drive_on: bool):
+        msg = Bool()
+        msg.data = bool(is_drive_on)
+        self.drive_command_pub.publish(msg)
+        self.get_logger().info(f'Published set_drive_state_on: ({msg.data})')
+    
     
     def set_stop_charge(self, is_charge: bool):
         msg = Bool()
@@ -1285,12 +1292,13 @@ class AutodockActionServer(Node):
             if self.dock_check_charge_status:
                 self.set_stop_charge(False)
                 success = self.move_open_loop_check_charge(self.dock_linear_speed_final, self.dock_time_final)
-                self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
+                #self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
             else:
                 self.move_open_loop(self.dock_linear_speed_final, self.dock_time_final)
                 success = True  # if not checking charge, treat as success of motion-only
 
             if success:
+                self.set_drive_state(False)
                 break
 
             # Back out and wait before retrying
@@ -1347,6 +1355,8 @@ class AutodockActionServer(Node):
         #success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
         success = self.wait_charge_state_with_confirm(True,5,1.0)
         if success:
+            self.set_drive_state(True)
+            time.sleep(7.0)
             self.get_logger().info("Stop charging successfully")
             time.sleep(1.0)
             self.send_feedback(goal_handle,1,'start undocking.......')

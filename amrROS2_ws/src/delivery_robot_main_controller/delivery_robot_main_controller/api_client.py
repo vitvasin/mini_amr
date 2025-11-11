@@ -21,7 +21,7 @@ def add_queue(data):
     return response.json()
 
 def update_queue_status(queue_id, status):
-    url = f"{API_BASE_URL}/api/queue/updateStatus"
+    url = f"{API_BASE_URL}/api/queue/update"
     payload = {"id": queue_id, "status": status}
     response = requests.post(url, json=payload, timeout=3)
     response.raise_for_status()

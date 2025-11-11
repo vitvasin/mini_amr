@@ -1,7 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from enum import Enum, auto
-from geometry_msgs.msg import PoseStamped
+from geometry_msgs.msg import PoseStamped, Vector3
 from .robot_navigator import BasicNavigator, NavigationResult
 from rclpy.duration import Duration
 from rclpy.action import ActionClient
@@ -11,8 +11,8 @@ from .generate_agv_path_from_building_yaml import compute_path_poses
 import tf2_ros
 import tf2_geometry_msgs 
 
-from std_msgs.msg import String, Int16
-from math import degrees, hypot
+from std_msgs.msg import String, Int16, Int8
+from math import degrees, hypot, radians
 
 
 from tf_transformations import euler_from_quaternion, quaternion_from_euler, quaternion_multiply
@@ -70,6 +70,13 @@ class DeliveryRobotMainController(Node):
         self.current_speed = 0.0
         self._path_tracking = None
         self._waypoint_tolerance = 0.3
+        self.manual_nav_target = Vector3()
+        self.manual_nav_go_state = 0
+        self.manual_x = None
+        self.manual_y = None
+        self.manual_yaw = None
+        self._manual_monitor_timer = None
+        self.toggle_manual = False
         
         #self.get_logger().info(f"Initial state: {RobotState.MOVE}")
         #api_client.update_robot_status((RobotState.MOVE).name)
@@ -120,6 +127,24 @@ class DeliveryRobotMainController(Node):
             self.battery_callback,
             1
         )
+        self.create_subscription(
+            Vector3,
+            "manual_nav/setpoint",
+            self.manual_nav_setpoint_callback,
+            10
+        )
+        self.create_subscription(
+            Int8,
+            "manual_nav/go",
+            self.manual_nav_go_callback,
+            10
+        )
+        self.create_subscription(
+            String,
+            "manual_nav/named_target",
+            self.manual_nav_named_target_callback,
+            10
+        )
         self.smooth_path = True
         self.navigator = BasicNavigator()
         time.sleep(1)
@@ -128,7 +153,7 @@ class DeliveryRobotMainController(Node):
             self.navigator.waitUntilNav2Active()
 
         #timer
-        self.create_timer(1.0, self.state_monitor) #ตรวจสอบสถานะ state ประตู box ของหุ่นยนต์
+        self.create_timer(1.0, self.state_monitor) #ตรวจสอบสถานะ state 
         self.create_timer(2.0, self.battery_status_monitor)  # update แบตเตอรี่ทุก 2 วินาที
         self.create_timer(2.0, self.on_standby_loop) #ตรวจสอบ condition ใน state standby
 
@@ -239,6 +264,52 @@ class DeliveryRobotMainController(Node):
         except Exception as e:
             self.get_logger().error(f"ChargeState callback exception: {e}")
 
+    def manual_nav_named_target_callback(self, msg: String):
+        station_name = msg.data.strip()
+        if not station_name:
+            self.get_logger().warn("Manual navigation target received with empty station name.")
+            return
+        self.touch_activity()
+        self.target_station = station_name
+        x, y, heading = self.get_station_position(station_name)
+        if x is None or y is None or heading is None:
+            self.manual_x = None
+            self.manual_y = None
+            self.manual_yaw = None
+            self.get_logger().warn(f"Manual navigation station '{station_name}' not found.")
+            return
+        self.manual_x = float(x)
+        self.manual_y = float(y)
+        self.manual_yaw = radians(float(heading))
+        self.get_logger().info(
+            f"Manual navigation target '{station_name}' resolved to x={self.manual_x:.3f}, "
+            f"y={self.manual_y:.3f}, yaw={self.manual_yaw:.3f} rad"
+        )
+
+    def manual_nav_setpoint_callback(self, msg: Vector3):
+        self.manual_nav_target = msg
+        self.manual_x = float(msg.x)
+        self.manual_y = float(msg.y)
+        self.manual_yaw = float(msg.z)
+        self.touch_activity()
+        self.get_logger().info(
+            f"Manual navigation setpoint updated: x={self.manual_x:.3f}, "
+            f"y={self.manual_y:.3f}, yaw={self.manual_yaw:.3f}"
+        )
+
+    def manual_nav_go_callback(self, msg: Int8):
+        command = int(msg.data)
+        self.manual_nav_go_state = command
+        self.touch_activity()
+        self.get_logger().info(f"Manual navigation go command received: {command}")
+        if command <= 0:
+            self.get_logger().info("Manual navigation go command ignored because value <= 0.")
+            return
+        if self.manual_x is None or self.manual_y is None or self.manual_yaw is None:
+            self.get_logger().warn("Manual navigation go command received without a valid target pose.")
+            return
+        self.send_goal_pose_agv(self.manual_x, self.manual_y, self.manual_yaw, RobotState.MANUAL)
+
     def state_monitor(self):
         # Periodic task to monitor or report state
         self.get_robot_status_from_api()
@@ -249,6 +320,10 @@ class DeliveryRobotMainController(Node):
             #params = api_client.get_robot_status()
             state_value = api_client.get_robot_status_by_name('status')
             state = getattr(RobotState, state_value, RobotState.STANDBY)
+            if state == RobotState.MANUAL:
+                    self.toggle_manual = True
+            else:
+                    self.toggle_manual = False
             return state
             #data = params.get("data", [])
             # ใช้ข้อมูล เช่น:
@@ -290,6 +365,10 @@ class DeliveryRobotMainController(Node):
                 current_status = data[0]
                 state_str = current_status.get("status", "STANDBY")
                 state = getattr(RobotState, state_str, RobotState.STANDBY)
+               # if state == RobotState.MANUAL:
+               #     self.toggle_manual = True
+               # else:
+               #     self.toggle_manual = False
                 #self.change_state(state)
                 status_id = current_status.get('_id') or current_status.get('id')
                 if status_id:
@@ -415,7 +494,7 @@ class DeliveryRobotMainController(Node):
             self.get_logger().error(f"Failed to get system parameters: {e}")
 
 
-    def get_pending_queue_from_api(self, return_all: bool = False):
+    def get_pending_queue_from_api(self, return_all: bool = False, status: str = None):
         try:
             #url = "http://localhost:8080/api/queue/list"
             #response = requests.get(url, timeout=3)
@@ -437,10 +516,77 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info(f"{len(queue_list)} pending queues ")
             if return_all:
                 return queue_list
+            if status:
+                status_lower = status.lower()
+                for queue in queue_list:
+                    queue_status = str(queue.get("status", "")).lower()
+                    if queue_status == status_lower:
+                        return queue
+                self.get_logger().info(f"No pending queue found with status '{status}'.")
+                return None
             return queue_list[0]
         except Exception as e:
             self.get_logger().error(f"Failed to get queue: {e}")
             return [] if return_all else None
+    
+    def get_active_queue_id(self):
+        """Return the first queue identifier with status 'active', if any."""
+        queue_list = self.get_pending_queue_from_api(return_all=True)
+        if not queue_list:
+            return None
+
+        for queue in queue_list:
+            status = str(queue.get("status", "")).lower()
+            if status == "active":
+                queue_id = queue.get("_id") or queue.get("id")
+                if queue_id:
+                    return queue_id
+        return None
+    
+    def get_queue_count(self):
+        """Return the count of current queues from the API."""
+        queue_list = self.get_pending_queue_from_api(return_all=True)
+        return len(queue_list) if queue_list else 0
+    
+    def move_active_queue_to_end(self, queue_list=None):
+        """Requeue entries with status 'active' by duplicating them as 'queued' and removing the originals."""
+        if queue_list is None:
+            queue_list = self.get_pending_queue_from_api(return_all=True)
+
+        if not queue_list:
+            return []
+
+        relocated = 0
+        for queue in list(queue_list):
+            status = str(queue.get("status", "")).lower()
+            if status != "active":
+                continue
+
+            queue_id = queue.get("_id") or queue.get("id")
+            payload = {k: v for k, v in queue.items() if k not in ("_id", "id")}
+            payload["status"] = "queued"
+
+            try:
+                api_client.add_queue(payload)
+            except Exception as e:
+                self.get_logger().error(f"Failed to append active queue {queue_id} to tail: {e}")
+                continue
+
+            if queue_id:
+                try:
+                    api_client.remove_queue_by_id(queue_id)
+                    relocated += 1
+                except Exception as e:
+                    self.get_logger().error(f"Failed to remove original active queue {queue_id}: {e}")
+            else:
+                self.get_logger().warn("Active queue missing identifier; cannot remove original entry.")
+
+        updated_list = self.get_pending_queue_from_api(return_all=True)
+        if isinstance(queue_list, list):
+            queue_list[:] = updated_list
+
+        self.get_logger().info(f"Requeued {relocated} active queue(s) to queue tail.")
+        return updated_list
     
     def remove_queue_by_id(self, queue_id):
         try:
@@ -514,6 +660,8 @@ class DeliveryRobotMainController(Node):
             return
         if self.state == new_state:
             return
+        if self.state == RobotState.MANUAL and new_state != RobotState.MANUAL:
+            self._cancel_manual_monitor_timer()
 
         self.get_logger().info(f"State change: {self.state.name} -> {new_state.name}")
         self.state = new_state
@@ -540,7 +688,29 @@ class DeliveryRobotMainController(Node):
             self.on_load_out()
         elif self.state == RobotState.DOCK:
             self.on_dock()
-       
+        elif self.state == RobotState.MANUAL:
+            self.on_manual()
+    
+    def on_manual(self):
+        self.touch_activity()
+        if self._manual_monitor_timer is None:
+            self._manual_monitor_timer = self.create_timer(0.5, self._manual_monitor_loop)
+        self.get_logger().info("Robot is in MANUAL mode. Monitoring toggle state.")
+
+    def _manual_monitor_loop(self):
+        state = self.get_state_from_api()
+        if not self.toggle_manual:
+            self.get_logger().info("Manual toggle disabled; switching to STANDBY.")
+            self.change_state(RobotState.STANDBY)
+            self._cancel_manual_monitor_timer()
+            return
+
+    def _cancel_manual_monitor_timer(self):
+        if self._manual_monitor_timer is not None:
+            self._manual_monitor_timer.cancel()
+            self._manual_monitor_timer = None
+
+
     def change_dock_state(self, new_state: DockState):
         if not isinstance(new_state, DockState):
             self.get_logger().error(f"Invalid dock state requested. {new_state}")
@@ -769,6 +939,13 @@ class DeliveryRobotMainController(Node):
             return
         
         state = self.get_state_from_api()
+        
+        if self.toggle_manual:
+            self.get_logger().info(f"State will be changed to {state.name}")
+            self.change_state(RobotState.MANUAL)
+            return
+
+        
         if (state == RobotState.LOAD_IN):
             self.change_state(state)
             self.get_logger().info(f"State changed to {state.name}")
@@ -824,8 +1001,6 @@ class DeliveryRobotMainController(Node):
        #         self.change_charge_state(ChargeState.NOT_CHARGE)         
 
 
-
-
         # ตรวจสอบ queue
         queue_list = self.get_pending_queue_from_api(return_all=True)
         if queue_list:
@@ -838,7 +1013,11 @@ class DeliveryRobotMainController(Node):
                         break
 
             if not selected_task:
-                selected_task = queue_list[0]
+                for pending in queue_list:
+                    status = str(pending.get("status", "")).lower()
+                    if status != "failed":
+                        selected_task = pending
+                        break
 
             if not selected_task:
                 return
@@ -876,7 +1055,8 @@ class DeliveryRobotMainController(Node):
                     queue_id = selected_task.get("_id") or selected_task.get("id")
                     if queue_id:
                         api_client.update_queue_status(queue_id,'failed')
-                        self.remove_queue_by_id(queue_id)
+                        if action == "Request":
+                            self.remove_queue_by_id(queue_id)
                         self.get_logger().info(f"Remove queue : {action}, target {target_station}")
                 self.current_task = None
         
@@ -889,7 +1069,7 @@ class DeliveryRobotMainController(Node):
                 result = self.go_to_station("Home",RobotState.DOCK)
                 return
 
-
+    
 
     def on_move(self):
         self.get_logger().info("Robot is MOVING.")
@@ -928,8 +1108,10 @@ class DeliveryRobotMainController(Node):
                 self.get_current_robot_pose()
 
                #  Some navigation timeout to demo cancellation
-               # if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
-               #     self.navigator.cancelTask()
+                #if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
+                state = self.get_state_from_api()
+                if self.toggle_manual:
+                    self.navigator.cancelTask()
 
         # Do something depending on the return code
         result = self.navigator.getResult()
@@ -950,6 +1132,12 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info('Goal succeeded!')
         elif result == TaskResult.CANCELED:
             self.get_logger().info('Goal was canceled!')
+            if self.toggle_manual:
+                api_client.update_queue_status(self.get_active_queue_id(),'queued')
+                self.change_state(RobotState.MANUAL)
+            else:
+                self.change_state(RobotState.STANDBY)
+            return
         elif result == TaskResult.FAILED:
             if (self.retry_move_no < 2):
                 self.retry_move_no += 1
@@ -958,6 +1146,20 @@ class DeliveryRobotMainController(Node):
                 return self.on_move()
             else:
                 self.get_logger().info('Goal failed! after retry {0} times'.format(self.retry_move_no))
+                if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
+                    task = self.get_pending_queue_from_api(status == 'active')
+                    if task:
+                        action = task.get("action", "Request")
+                        queue_id = task.get("_id") or task.get("id")
+                        if action == 'Request':
+                            if queue_id:
+                                api_client.update_queue_status(queue_id,'failed')
+                                self.remove_queue_by_id(queue_id)
+                        else: #Delivery ไม่ลบคิว ให้ค้างไว้
+                            if queue_id:
+                                api_client.update_queue_status(queue_id,'failed')
+                else:
+                    self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด   
                 self.change_state(RobotState.STANDBY)
         else:
             self.get_logger().info('Goal has an invalid return status!')
@@ -976,7 +1178,7 @@ class DeliveryRobotMainController(Node):
     def on_after_move(self):
         self.get_logger().info("Evaluating post-move action...")
 
-        task = self.current_task or self.get_pending_queue_from_api()
+        task = self.current_task or self.get_pending_queue_from_api(status="active")
         if task:
             #self.remove_queue_by_id(task["_id"])
             action = task.get("action", "Request")

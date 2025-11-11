@@ -4,6 +4,7 @@
 #include "sensor_msgs/msg/imu.hpp"
 #include "sensor_msgs/msg/range.hpp"
 #include "std_msgs/msg/int16.hpp"
+#include "std_msgs/msg/bool.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "action_msgs/msg/goal_status_array.hpp"
 #include <sensor_msgs/msg/battery_state.hpp>
@@ -33,6 +34,9 @@ public:
 
     charge_state_sub_ = create_subscription<std_msgs::msg::Int16>(
         "set_charge_state", 1, std::bind(&HardwareInterfaceNode::ChargeStateCallback, this, _1));
+
+    mtr_drive_state_sub_ = create_subscription<std_msgs::msg::Bool>(
+        "set_mtr_state", 1, std::bind(&HardwareInterfaceNode::MotorDriveStateCallback, this, _1));
 
 
     imu_pub_    = create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 10);
@@ -96,6 +100,7 @@ private:
   std::shared_ptr<HardwareInterface> hardware_interface;
   
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
+  rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr mtr_drive_state_sub_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub_;
   rclcpp::Publisher<sensor_msgs::msg::BatteryState>::SharedPtr batt_pub_;
@@ -152,6 +157,11 @@ private:
     hardware_interface->SetChargeState(static_cast<uint16_t>(msg.data));
   }
 
+   void MotorDriveStateCallback(const std_msgs::msg::Bool & msg)
+  {
+    //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
+    hardware_interface->SetMotorDriveState(msg.data);
+  }
   void timerUpdateCallback()
   {
     static int tCount=0;
@@ -266,19 +276,38 @@ private:
       msg_batt_.percentage = hardware_interface->percentage_;
       msg_batt_.power_supply_status = hardware_interface->status_;
 
-      //hardware_interface->update_batt_ = false;
-
+      // //print batt debug
+      // std::cout << "Battery -";
+      // std::cout << " " << hardware_interface->voltage_;
+      // std::cout << " " << hardware_interface->current_;
+      // std::cout << " " << hardware_interface->percentage_ << std::endl;
+      
+      hardware_interface->update_batt_ = false;
       batt_pub_->publish(msg_batt_);
+      
 
       msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
       charge_state_pub_->publish(msg_charge_state_);
 
       if(tCount > 10){
         hardware_interface->UpdateStatus(1);
+        // batt_pub_->publish(msg_batt_);
         tCount=0;
       }
       else
         tCount++;
+
+      // //print all status
+      // std::cout << "IMU - ";
+      // std::cout << "AngVel: " << hardware_interface->angular_velocity.x << ", " << hardware_interface->angular_velocity.y << ", " << hardware_interface->angular_velocity.z << " | ";
+      // std::cout << "LinAcc: " << hardware_interface->linear_acceleration.x << ", " << hardware_interface->linear_acceleration.y << ", " << hardware_interface->  linear_acceleration.z << std::endl; 
+      // std::cout << "Odom - ";
+      // std::cout << "Vel: " << hardware_interface->odom_velocity.x << ", " << hardware_interface->odom_velocity.y << ", " << hardware_interface->odom_velocity.z << std::endl;
+      // std::cout << "Range - ";
+      // std::cout << "Left: " << hardware_interface->range_left << ", Center: " << hardware_interface->range_center << ", Right: " << hardware_interface->range_right << std::endl;
+      // std::cout << "Battery - ";
+      // std::cout << "Voltage: " << hardware_interface->voltage_ << ", Current: " << hardware_interface->current_ << ", Percentage: " << hardware_interface->percentage_ << ", Status: " << static_cast<int>(hardware_interface->status_) << std::endl;
+
       
     //}
   }

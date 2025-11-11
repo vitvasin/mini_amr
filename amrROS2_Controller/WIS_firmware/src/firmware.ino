@@ -42,6 +42,7 @@
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
 #define FUNC_CHARGE 0x08
+#define FUNC_MTR_DRIVE 0x09
 
 /////////////////////////////////////////////////////////////////////////////////////
 #define motor_axis0 0
@@ -65,7 +66,7 @@
 #define CliffDistanceLimit 200 // 20cm
 
 //----------- Pkg data -----------------
-#define _PKG_LEN    37 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
+#define _PKG_LEN    43 //  param_len + 3(for _header, _host_id, _pkg_size) + 1(for _chk_sum)    == 36
 
 #define _HEADER 0
 #define _HOST_ID 1
@@ -107,14 +108,15 @@
 #define _BMS_PERCENT_L 32
 #define _BMS_PERCENT_H 33
 #define _BMS_STATUS_ 34
-#define _IR_CHARGE_STATE_  35   // <-- NEW BYTE for RobotStage
-// #define _IMU_READY_     35          // add new
-// #define _ODOM_READY_    36          // add new
-// #define _RANGER_READY_  37          // add new
-// #define _SAFETY_READY_  38          // add new
-// #define _BMS_READY_     39          // add new
+#define _IR_CHARGE_STATE_  35   
+#define _MTR_DRIVE_STATE_ 36
+#define _RESERVED1_        37
+#define _RESERVED2_        38
+#define _RESERVED3_        39
+#define _RESERVED4_        40
+#define _RESERVED5_        41 
 
-#define _CHK_SUM_       36
+#define _CHK_SUM_       42
 
 
 //--------------------------------------
@@ -151,7 +153,7 @@ bool imu_ready;
 bool odom_ready;
 bool batt_ready;
 bool range_ready;
-
+static bool emer_flag = true;
 // Latest BMS floats filled when valid packet received
 
 uint8_t batt_status = 0;
@@ -189,7 +191,7 @@ unsigned long prev_cmd_time = 0;
 unsigned long master_time = 0, imu_update_time = 0, control_update_time = 0, bms_update_time = 0, sensor_update_time;
 unsigned long safety_time = 0, send_data_time = 0, receive_data_time = 0;
 //const unsigned int imu_interval = 45, control_interval = 30, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 30, receive_data_interval;
-const unsigned int imu_interval = 30, control_interval = 10, bms_interval = 1000, sensor_interval = 50, safety_interval = 50, send_data_interval = 10, receive_data_interval;
+const unsigned int imu_interval = 30, control_interval = 10, bms_interval = 1000, sensor_interval = 100, safety_interval = 50, send_data_interval = 10, receive_data_interval;
 
 unsigned char pkg_data[_PKG_LEN];
 
@@ -197,7 +199,7 @@ Adafruit_MCP23X17 mcp;
 bool mcp_input[8];
 bool mcp_out_put[8];
 
-bool cliff_state, bumper_state, emer_state, stop, ack;
+bool cliff_state, bumper_state, emer_state, virtual_emer_state = false , stop, ack;
 bool connection_failed;
 
 
@@ -285,11 +287,40 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
         
         }
     }
-    else
+    if(func == FUNC_MTR_DRIVE)
     {
-        if (DEBUG_RECEIVE)
+        if (data_len >= 1)
         {
-            Serial5.println("Out of provided function");
+            uint8_t mtr_drive_state = data[0];
+            // Serial5.print("MTR Drive State: ");
+            // Serial5.println(mtr_drive_state);
+            if(mtr_drive_state == 1)
+            {
+                // mcp.digitalWrite(3, HIGH);
+                virtual_emer_state = false;
+                mcp.digitalWrite(6, HIGH);
+                mcp.digitalWrite(5, HIGH);
+                mcp.digitalWrite(4, HIGH);
+
+                // mcp.digitalWrite(8, HIGH);
+                // mcp.digitalWrite(9, HIGH);
+                // delay(10);
+            }
+            else if(mtr_drive_state == 0)
+            {
+                // mcp.digitalWrite(3, LOW);
+                mcp.digitalWrite(6, LOW);
+                mcp.digitalWrite(5, LOW);
+                mcp.digitalWrite(4, LOW);
+                virtual_emer_state = true;
+                emer_flag = true;
+
+                
+
+                // mcp.digitalWrite(8, LOW);
+                // mcp.digitalWrite(9, LOW);
+                // delay(10);
+            }
         }
     }
 }
@@ -644,7 +675,7 @@ void parse_bms_packet(uint8_t *Buf, uint8_t len)
 
 // ---------------- BMS Task -------------------
 void bms_task()
-{
+{   
     // Step A: poll non-blocking reader
     poll_bms();
 
@@ -663,13 +694,30 @@ void bms_task()
         pkg_data[_BMS_PERCENT_H] = static_cast<uint8_t>((percentage >> 8) & 0xFF);
         pkg_data[_BMS_STATUS_] = static_cast<uint8_t>(batt_status & 0xFF);
 
-        update_batt_ = false; // clear flag until next packet
+        //update_batt_ = false; // clear flag until next packet
+       // Serial.printf("BMS Update - Volt: %.1f V, Current: %.1f A, SOC: %.1f %%\n", fBattVolt, fBattCurrent, fBattSOC);
+    }else
+    {
+        int16_t voltage    = (int16_t)(fBattVolt * 100);     // scale to centivolts
+        int16_t current    = (int16_t)(fBattCurrent * 100);  // scale to centiamps
+        int16_t percentage = (int16_t)(fBattSOC * 100);      // scale to centi%
+
+
+        pkg_data[_BMS_VOLTAGE_L] = static_cast<uint8_t>(voltage & 0xFF);
+        pkg_data[_BMS_VOLTAGE_H] = static_cast<uint8_t>((voltage >> 8) & 0xFF);
+        pkg_data[_BMS_CURRENT_L] = static_cast<uint8_t>(current & 0xFF);
+        pkg_data[_BMS_CURRENT_H] = static_cast<uint8_t>((current >> 8) & 0xFF);
+        pkg_data[_BMS_PERCENT_L] = static_cast<uint8_t>(percentage & 0xFF);
+        pkg_data[_BMS_PERCENT_H] = static_cast<uint8_t>((percentage >> 8) & 0xFF);
+        pkg_data[_BMS_STATUS_] = static_cast<uint8_t>(batt_status & 0xFF);
+
+        //Serial.printf("BMS No Update - Volt: %.1f V, Current: %.1f A, SOC: %.1f %%\n", fBattVolt, fBattCurrent, fBattSOC);
     }
 }
 
 void control_task()
 {
-    static bool emer_flag = true;
+    // static bool emer_flag = true;
 
     const float K = 0.5;
 
@@ -680,7 +728,7 @@ void control_task()
     float current_rpm_right = 0.0;
     static uint32_t LedControl = millis();
 
-    if ((millis() - prev_cmd_time > 200) || stop || emer_state)
+    if ((millis() - prev_cmd_time > 200) || stop || emer_state || virtual_emer_state)
     {
         cmd_vel.linear_x = 0.0;
         cmd_vel.linear_y = 0.0;
@@ -716,7 +764,7 @@ void control_task()
         cmd_vel.angular_z);
 
     
-    if (emer_state)
+    if (emer_state || virtual_emer_state)
     {
         if(!emer_flag)
         {
@@ -735,11 +783,12 @@ void control_task()
 
         if (emer_flag)
         {
+            delay(7000);
             // Serial.println("Emer OFF");
             eMR_CANOpen_Init();
             eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
             // Serial.println("eMR CANopen Init. eMR motor ");
-            delay(3000);
+            
             emer_flag = false;
         }
         else
@@ -847,7 +896,7 @@ void sensor_module_task()
             Serial5.println("Read range right error");
     }
     // cooperative sleep to allow other Threads to run
-    //threads.delay(5);
+    // threads.delay(5);
 
     if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
     {
@@ -865,7 +914,7 @@ void sensor_module_task()
             Serial5.println("Read range center error");
     }
     // cooperative sleep to allow other Threads to run
-   // threads.delay(5);
+    threads.delay(5);
 
     if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess)
     {
@@ -887,34 +936,6 @@ void sensor_module_task()
     if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess)
     {
         buff = IR_Charge_State.getResponseBuffer(0); // addr = 0
-        // Serial5.print("Status Register = ");
-        // Serial5.println(buff);
-
-        //for debug
-        // switch (buff)
-        // {
-        // case 0:
-        //     // Serial5.println("Idle");
-        //     break;
-        // case 10:
-        //     // Serial5.println("RobotStopBackward");
-
-        //     ///// for debug /////////////////////////////////////////////////////////////// DB
-        //     // result = IR_Charge_State.writeSingleRegister(1, 22);
-        //     // if (result == IR_Charge_State.ku8MBSuccess)
-        //     // {
-        //     //     Serial5.println("Sent: RobotReadyToCharge (20)");
-        //     // }else {
-        //     // Serial5.println("Error sending RobotReadyToCharge");
-        //     // }
-        //     //////////////////////////////////////////////////////////////////////////////// DB
-        //     break;
-        // case 11:
-        //     // Serial5.println("RobotBattCharging");
-        //     break;
-        // default:
-        //     // Serial5.println("Unknown state");
-        // }
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         // Serial5.printf("IR Charge State : %d\n", buff);
     }
@@ -922,9 +943,7 @@ void sensor_module_task()
     {
         buff = 99;
         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-        //Serial5.println("READ IR ERROR");
-        if (DEBUG)
-        Serial5.println("Read IR Charge State error");
+        //Serial5.println("Read IR Charge State error");
     }
    
 }
@@ -976,6 +995,8 @@ void setup()
         }
     }
     mcp.digitalWrite(7, HIGH);
+    mcp.digitalWrite(6, HIGH);
+    mcp.digitalWrite(5, HIGH);
     delay(3000);
     //-------------
     Serial.begin(460800);
@@ -991,8 +1012,8 @@ void setup()
     eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
     //------------ BMS Init ---------------------
     BMS_SERIAL.begin(9600);
-    BMS_SERIAL.setTimeout(30);
-
+    BMS_SERIAL.setTimeout(50);
+    delay(1000);
     //------------ Clifff sensor & Ultrasonics   Init -----------------------
     SENSORS_SERIAL.begin(115200);
     SENSORS_SERIAL.setTimeout(10);

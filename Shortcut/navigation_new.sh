@@ -46,7 +46,7 @@ case "$1" in
         ros2 launch navigation navigation.launch.py \
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM" \
             rviz:=true \
-            rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
+            rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav_slam.rviz" \
             use_keepout_zones:=true \
             keepout_mask_yaml:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_SLAM_keepout.yaml"
         ;;

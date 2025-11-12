@@ -1,28 +1,45 @@
 """
-ฟังก์ชันสำหรับให้ GUI เรียกใช้งาน (ผ่าน RPC) เพื่อสื่อสารกับ ROS 2 topic และ service
-ไฟล์นี้ถูกออกแบบให้ขยายเพิ่มฟังก์ชันได้ในอนาคต โดยใช้ Node หลักของระบบเพื่อ publish / call service
+ฟังก์ชัน RPC สำหรับให้ GUI เรียกใช้ จากฝั่ง ROS2 main controller
+- ส่งข้อความไปยัง topic ที่ต้องการ
+- เรียก ROS2 service ผ่าน Node หลัก (หลีกเลี่ยงการสร้าง executor ใหม่)
 """
 
-from typing import Optional, Dict
+from __future__ import annotations
+
 import threading
-import time
+from collections import deque
+from dataclasses import dataclass
+from typing import Any, Dict, Optional
 
 from rclpy.node import Node
-from std_msgs.msg import String, Int32MultiArray
+from std_msgs.msg import String
 from std_srvs.srv import SetBool
+from hgcr_interfaces.srv import SetHoldingRegs
 
-
-# สามารถปรับชื่อ topic ได้ที่นี่ให้เหมาะกับระบบของคุณ
+# ชื่อ topic / service ที่ใช้บ่อย
 ECHO_TOPIC = '/gui/echo'
-DOOR_CMD_TOPIC = '/door/cmd'
+DOOR_SERVICE = 'mservice/holding_regs'
+DOCK_SERVICE_NAME = 'dock_command'
 
 
-class _RosAccess:
-    """ตัวช่วยสำหรับจัดการ Node/Publisher/Client โดย reuse Node หลัก"""
+@dataclass
+class _ServiceRequest:
+    service_name: str
+    srv_type: type
+    request: Any
+    timeout_sec: float
+    event: threading.Event
+    result_holder: Dict[str, Any]
+
+
+class _RosBridge:
+    """ตัวช่วยจัดการ Node หลัก, publisher และ service queue"""
+
     _lock = threading.Lock()
     _node: Optional[Node] = None
-    _pubs: Dict[str, object] = {}
-    _clients: Dict[str, object] = {}
+    _pubs: Dict[str, Any] = {}
+    _clients: Dict[str, Any] = {}
+    _service_queue: deque[_ServiceRequest] = deque()
 
     @classmethod
     def configure(cls, node: Node) -> None:
@@ -33,7 +50,7 @@ class _RosAccess:
     def _ensure_node(cls) -> Node:
         node = cls._node
         if node is None:
-            raise RuntimeError("ROS access for rpc_fnc is not configured. Call configure_rpc_access(node) first.")
+            raise RuntimeError("RPC bridge ไม่ได้รับการ configure ด้วย Node หลัก")
         return node
 
     @classmethod
@@ -41,108 +58,119 @@ class _RosAccess:
         with cls._lock:
             pub = cls._pubs.get(topic)
             if pub is None:
-                node = cls._ensure_node()
-                pub = node.create_publisher(msg_type, topic, 10)
+                pub = cls._ensure_node().create_publisher(msg_type, topic, 10)
                 cls._pubs[topic] = pub
             return pub
 
     @classmethod
-    def get_client(cls, service_name: str, srv_type):
-        with cls._lock:
-            client = cls._clients.get(service_name)
-            if client is None:
-                node = cls._ensure_node()
-                client = node.create_client(srv_type, service_name)
-                cls._clients[service_name] = client
-            return client
+    def _get_or_create_client(cls, service_name: str, srv_type):
+        client = cls._clients.get(service_name)
+        if client is None:
+            client = cls._ensure_node().create_client(srv_type, service_name)
+            cls._clients[service_name] = client
+        return client
 
     @classmethod
-    def call_service(cls, service_name: str, srv_type, request, timeout_sec: float = 5.0):
-        client = cls.get_client(service_name, srv_type)
+    def queue_service_call(cls, service_name: str, srv_type, request, timeout_sec: float):
+        event = threading.Event()
+        holder: Dict[str, Any] = {}
+        work = _ServiceRequest(service_name, srv_type, request, timeout_sec, event, holder)
+        with cls._lock:
+            cls._service_queue.append(work)
+        if not event.wait(timeout_sec):
+            raise RuntimeError(f"Service call to {service_name} timed out")
+        if 'error' in holder:
+            raise holder['error']
+        return holder.get('result')
 
-        service_deadline = time.monotonic() + timeout_sec
-        while not client.service_is_ready():
-            if time.monotonic() >= service_deadline:
-                raise RuntimeError(f"Service {service_name} not available")
-            time.sleep(0.05)
+    @classmethod
+    def process_pending_requests(cls) -> None:
+        while True:
+            with cls._lock:
+                if not cls._service_queue:
+                    return
+                call = cls._service_queue.popleft()
 
-        future = client.call_async(request)
-        result_deadline = time.monotonic() + timeout_sec
-        while not future.done():
-            if time.monotonic() >= result_deadline:
-                raise RuntimeError(f"Service call to {service_name} timed out")
-            time.sleep(0.02)
+            try:
+                client = cls._get_or_create_client(call.service_name, call.srv_type)
+                if not client.service_is_ready():
+                    raise RuntimeError(f"Service {call.service_name} not available")
 
-        result = future.result()
-        if result is None:
-            raise RuntimeError(f"Service call to {service_name} failed")
-        return result
+                future = client.call_async(call.request)
+
+                def _on_done(fut, *, call=call):
+                    try:
+                        call.result_holder['result'] = fut.result()
+                    except Exception as exc:  # pylint: disable=broad-except
+                        call.result_holder['error'] = exc
+                    finally:
+                        call.event.set()
+
+                future.add_done_callback(_on_done)
+
+            except Exception as exc:  # pylint: disable=broad-except
+                call.result_holder['error'] = exc
+                call.event.set()
 
 
 def configure_rpc_access(node: Node) -> None:
-    """กำหนด Node หลักที่ใช้สำหรับติดต่อ ROS 2"""
-    _RosAccess.configure(node)
+    """เรียกครั้งเดียวจาก main controller เพื่อบอกให้ RPC ใช้ node นี้"""
+    _RosBridge.configure(node)
 
+
+def process_rpc_requests() -> None:
+    """เรียกภายใน timer ของ main controller เพื่อประมวลผล service queue"""
+    _RosBridge.process_pending_requests()
+
+
+# ---------- ฟังก์ชัน RPC ที่ export ----------
 
 def echo(msg: str) -> str:
-    """
-    ส่งข้อความ echo ออก ROS 2 topic และคืนค่า string เดิมเพื่อแสดงผลที่ฝั่งเรียก
-    - publish ไปที่ ECHO_TOPIC ด้วย std_msgs/String
-    """
+    """publish ข้อความ echo ออก topic และคืนค่า string"""
     try:
-        pub = _RosAccess.get_publisher(ECHO_TOPIC, String)
+        pub = _RosBridge.get_publisher(ECHO_TOPIC, String)
         ros_msg = String()
         ros_msg.data = str(msg)
         pub.publish(ros_msg)
-    except Exception as e:
-        # พิมพ์ log ไว้ แต่ยังคงคืนค่าได้ตามปกติ
-        print(f"[RPC][echo] publish failed: {e}")
+    except Exception as exc:  # pylint: disable=broad-except
+        print(f"[RPC][echo] publish failed: {exc}")
     return f"echo: {msg}"
 
 
 def door_command(number: int, cmd: int) -> bool:
     """
-    สั่งเปิด/ปิดประตูผ่าน ROS 2 topic
-    - cmd: 0 = close, 1 = open
-    - publish ไปที่ DOOR_CMD_TOPIC ด้วย std_msgs/Int32MultiArray
-      โดย data[0] = door number, data[1] = cmd
-    return: True ถ้าสำเร็จในการส่งข้อความ, False ถ้าไม่สำเร็จ
+    ส่งคำสั่งผ่าน service Modbus (SetHoldingRegs)
+    - number เป็น address, cmd (0 ปิด / 1 เปิด)
     """
+    if cmd not in (0, 1):
+        print(f"[DOOR] Unknown command {cmd} for door #{number}")
+        return False
+
+    request = SetHoldingRegs.Request()
+    request.address = int(number)
+    request.value = int(cmd)
+    
+    print(f"[Door]---Address : {request.address} -- Values : {request.value}") 
+
     try:
-        if cmd not in (0, 1):
-            print(f"[DOOR] Unknown command {cmd} for door #{number}")
-            return False
-
-        pub = _RosAccess.get_publisher(DOOR_CMD_TOPIC, Int32MultiArray)
-        msg = Int32MultiArray()
-        msg.data = [int(number), int(cmd)]
-        pub.publish(msg)
-
+        response = _RosBridge.queue_service_call(DOOR_SERVICE, SetHoldingRegs, request, timeout_sec=10.0)
         action_str = 'Opening' if cmd == 1 else 'Closing'
-        print(f"[DOOR] {action_str} door #{number} (published)")
+        print(f"[DOOR] {action_str} door #{number} (service result: {getattr(response, 'result', 'N/A')})")
         return True
-
-    except Exception as e:
-        print(f"[DOOR] Error controlling door #{number}: {e}")
+    except Exception as exc:  # pylint: disable=broad-except
+        print(f"[DOOR] Error controlling door #{number}: {exc}")
         return False
 
 
-DOCK_SERVICE_NAME = 'dock_command'
-
-
 def dock_command_service(should_dock: bool) -> bool:
-    """
-    เรียก ROS 2 service 'dock_command' (std_srvs/SetBool) เพื่อ dock หรือ undock
-    - should_dock: True = dock, False = undock
-    return: True ถ้าคำสั่งสำเร็จ, False ถ้าผิดพลาดหรือ service ไม่ตอบ
-    """
+    """เรียก service dock_command (SetBool)"""
     request = SetBool.Request()
     request.data = bool(should_dock)
 
     try:
-        response = _RosAccess.call_service(DOCK_SERVICE_NAME, SetBool, request, timeout_sec=5.0)
+        response = _RosBridge.queue_service_call(DOCK_SERVICE_NAME, SetBool, request, timeout_sec=5.0)
         print(f"[DOCK] Service response success={response.success}, message='{response.message}'")
         return bool(response.success)
-    except Exception as e:
-        print(f"[DOCK] Error calling service {DOCK_SERVICE_NAME}: {e}")
+    except Exception as exc:  # pylint: disable=broad-except
+        print(f"[DOCK] Error calling service {DOCK_SERVICE_NAME}: {exc}")
         return False

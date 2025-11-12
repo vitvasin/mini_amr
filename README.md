@@ -1,7 +1,5 @@
 TO DO
 -<!--  Tune the collision monitor --> DONE
-- Port the new WP follower from ICE_LED
-- HIGHSPEED ODOM FLIP problem!!
 
 
 # 🚀 Compact Nav2 Useful Parameters / พารามิเตอร์ Nav2 ที่ควรรู้

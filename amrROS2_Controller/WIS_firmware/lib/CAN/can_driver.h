@@ -158,12 +158,15 @@ uint8_t eMR_CheckFaultStatus();
 void triggerTestFault();
 void testFaultDetection();
 bool eMR_ResetFault();
-uint8_t eMR_ReadErrorRegister();
+// uint8_t eMR_ReadErrorRegister();
 uint32_t eMR_ReadPredefinedErrorField(uint8_t subindex);
 void eMR_PrintFaultState();
 //bool Error_Drive_Flag = false;
 void eMR_HandleTPDO3();
-bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200);
+void print_statusword_debug();
+// bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200);
+bool eMR_ReadStatusWord(uint8_t node, uint16_t *out_status, uint32_t timeout_ms = 200);
+bool eMR_ReadErrorRegister(uint8_t node, uint8_t *out_error, uint32_t timeout_ms = 200);
 // void canSniff(const CAN_message_t &msg) ;
 
 #endif

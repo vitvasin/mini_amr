@@ -210,6 +210,11 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
         uint8_t motor_drive_state = static_cast<int16_t>(data[_MTR_DRIVE_STATE_]);
         motor_drive_state_ = motor_drive_state;
 
+        uint8_t drive_fault_state = static_cast<int16_t>(data[_MTR_FAULT_STATE_]);
+        drive_fault_state_ = drive_fault_state;
+
+        
+
         //std::cout << "IR Charge State: " << ir_charge_state << std::endl;
 
         //if(DEBUG_BATT){

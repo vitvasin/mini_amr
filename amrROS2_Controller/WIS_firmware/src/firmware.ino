@@ -29,6 +29,7 @@
 #define DEBUG_OLED false
 #define DEBUG_SAFTY true // false
 #define DEBUG_BATT true  // false
+#define DEBUG_DRIVE_STATE false  // false
 
 #define HEAD 0xFF
 #define HOST_ID 0x00
@@ -110,11 +111,11 @@
 #define _BMS_STATUS_ 34
 #define _IR_CHARGE_STATE_  35   // <-- NEW BYTE for RobotStage
 #define _MTR_DRIVE_STATE_ 36
-#define _RESERVED1_        37
-#define _RESERVED2_        38
-#define _RESERVED3_        39
-#define _RESERVED4_        40
-#define _RESERVED5_        41   
+#define _MTR_FAULT_STATE_ 37
+#define _RESERVED2_ 38
+#define _RESERVED3_ 39
+#define _RESERVED4_ 40
+#define _RESERVED5_ 41   
 // #define _IMU_READY_     35          // add new
 // #define _ODOM_READY_    36          // add new
 // #define _RANGER_READY_  37          // add new
@@ -957,6 +958,123 @@ void safety_task()
 
 }
 
+void print_error_register_debug(uint8_t error_reg)
+{
+    Serial.println("\n===== ERROR REGISTER DEBUG =====");
+    Serial.print("Raw Error Register: 0x");
+    Serial.println(error_reg, HEX);
+    
+    Serial.print("Bit 0 (Generic Error): ");
+    Serial.println((error_reg & 0x01) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 1 (Current): ");
+    Serial.println((error_reg & 0x02) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 2 (Voltage): ");
+    Serial.println((error_reg & 0x04) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 3 (Temperature): ");
+    Serial.println((error_reg & 0x08) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 4 (Device Hardware): ");
+    Serial.println((error_reg & 0x10) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 5 (Device Software): ");
+    Serial.println((error_reg & 0x20) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 6 (Additional Modules): ");
+    Serial.println((error_reg & 0x40) ? "1 ⚠️" : "0");
+    
+    Serial.print("Bit 7 (Monitoring): ");
+    Serial.println((error_reg & 0x80) ? "1 ⚠️" : "0");
+    
+    Serial.println("==================================\n");
+}
+
+void fault_monitor_task()
+{
+    uint16_t status_word = 0;
+    uint8_t error_reg = 0;
+    
+    if (eMR_ReadStatusWord(dual_axis, &status_word, 200)) {
+
+         // If fault detected, read error register
+        if (status_word & 0x08) {
+            if (eMR_ReadErrorRegister(dual_axis, &error_reg, 200)) {
+                // print_error_register_debug(error_reg);
+                if (error_reg & 0x01) {
+                    pkg_data[_MTR_FAULT_STATE_] = 1; // Generic Error
+                } else if (error_reg & 0x02) {
+                    pkg_data[_MTR_FAULT_STATE_] = 2; // Current Error
+                } else if (error_reg & 0x04) {
+                    pkg_data[_MTR_FAULT_STATE_] = 3; // Voltage Error
+                } else if (error_reg & 0x08) {
+                    pkg_data[_MTR_FAULT_STATE_] = 4; // Temperature Error
+                } else if (error_reg & 0x10) {
+                    pkg_data[_MTR_FAULT_STATE_] = 5; // Device Hardware Error
+                } else if (error_reg & 0x20) {
+                    pkg_data[_MTR_FAULT_STATE_] = 6; // Device Software Error
+                } else if (error_reg & 0x40) {
+                    pkg_data[_MTR_FAULT_STATE_] = 7; // Additional Modules Error
+                } else if (error_reg & 0x80) {
+                    pkg_data[_MTR_FAULT_STATE_] = 8; // Monitoring Error
+                } 
+            } else {
+                // Serial.println("Failed to read error register");
+                pkg_data[_MTR_FAULT_STATE_] = 9; // Indicate read failure Unknow error
+            }
+        }
+        else {
+            pkg_data[_MTR_FAULT_STATE_] = 0; // No fault
+            
+        }
+
+
+    } else {
+        // Serial.println("Failed to read status");
+        pkg_data[_MTR_FAULT_STATE_] = 99; // Indicate read failure
+        
+    }
+}
+
+
+void print_statusword_debug()
+{
+    uint16_t status_word = 0;
+    
+    if (eMR_ReadStatusWord(dual_axis, &status_word, 200)) 
+    {
+        Serial.println("\n===== STATUS WORD DEBUG =====");
+        Serial.print("Raw Status Word: 0x");
+        Serial.println(status_word, HEX);
+        
+        Serial.print("Bit 0 (Ready to Switch On): ");
+        Serial.println((status_word & 0x01) ? "1" : "0");
+        
+        Serial.print("Bit 1 (Switched On): ");
+        Serial.println((status_word & 0x02) ? "1" : "0");
+        
+        Serial.print("Bit 2 (Operation Enabled): ");
+        Serial.println((status_word & 0x04) ? "1" : "0");
+        
+        Serial.print("Bit 3 (FAULT): ");
+        Serial.println((status_word & 0x08) ? "1 ⚠️" : "0");
+        
+        Serial.print("Bit 4 (Voltage Enabled): ");
+        Serial.println((status_word & 0x10) ? "1" : "0");
+        
+        Serial.print("Bit 5 (Quick Stop): ");
+        Serial.println((status_word & 0x20) ? "1" : "0");
+        
+        Serial.print("Bit 6 (Switch on Disabled): ");
+        Serial.println((status_word & 0x40) ? "1" : "0");
+        
+        Serial.println("=============================\n");
+    }
+    else Serial.println("Failed to read status word");
+    
+}
+
 void setup()
 {
     pinMode(LED, OUTPUT);
@@ -1029,6 +1147,7 @@ void loop()
 {
     //char incomingChar = 0;
     static uint32_t LedActivity = millis();
+    static uint32_t fault_monitor = millis();
     //static uint16_t count = 0;
     //static uint32_t prev_time = 0;
 
@@ -1098,15 +1217,23 @@ void loop()
         LedActivity = millis();
     }
 
-    // uint8_t err;
+    
+    if(millis() - fault_monitor > 200)
+    {
+        fault_monitor_task();
+        fault_monitor = millis();
+    }
 
-    // if (eMR_RequestErrorRegister(1, &err, 200)) {
-    //    // Serial.print("Node "); Serial.print(1);
-    //    // Serial.print(" Error Register = 0x"); Serial.println(err, HEX);
-    // } else {
-    //     Serial.println("No SDO reply / timeout");
-    // }
-    //Serial5.println("DEBUG MODE");
-
+    if (DEBUG_DRIVE_STATE) 
+    {
+        static uint32_t last_statusword_print = millis();
+        if (millis() - last_statusword_print > 100) 
+        {  // Print every 1 second
+            print_statusword_debug();
+            last_statusword_print = millis();
+        }
+    }
 
 }
+
+

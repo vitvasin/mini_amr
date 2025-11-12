@@ -54,7 +54,7 @@
 #define _BMS_STATUS_        31
 #define _IR_CHARGE_STATE_  32
 #define _MTR_DRIVE_STATE_ 33
-#define _RESERVED1_        34
+#define _MTR_FAULT_STATE_        34
 #define _RESERVED2_        35
 #define _RESERVED3_        36
 #define _RESERVED4_        37
@@ -143,6 +143,7 @@ public:
     uint8_t status_;
     uint16_t ir_charge_state_;
     uint8_t motor_drive_state_;
+    uint8_t drive_fault_state_;
 
     bool update_imu_;
     bool update_odom_;

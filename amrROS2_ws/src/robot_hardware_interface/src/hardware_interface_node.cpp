@@ -5,6 +5,7 @@
 #include "sensor_msgs/msg/range.hpp"
 #include "std_msgs/msg/int16.hpp"
 #include "std_msgs/msg/bool.hpp"
+#include "std_msgs/msg/string.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "action_msgs/msg/goal_status_array.hpp"
 #include <sensor_msgs/msg/battery_state.hpp>
@@ -49,11 +50,12 @@ public:
     range_left_pub_   = create_publisher<sensor_msgs::msg::Range>("range/left", 10);
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
-    
+    fault_state_pub_  = create_publisher<std_msgs::msg::String>("drive_fault_state", 10);
 
 
     //timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
     timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_less_update_data_ = create_wall_timer(500ms , std::bind(&HardwareInterfaceNode::timerLessUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";
@@ -110,9 +112,12 @@ private:
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_center_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_right_pub_;
   rclcpp::Publisher<std_msgs::msg::Int16>::SharedPtr charge_state_pub_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr fault_state_pub_;
+  
   rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr charge_state_sub_;
 
   rclcpp::TimerBase::SharedPtr timer_update_data_;
+  rclcpp::TimerBase::SharedPtr timer_less_update_data_;
   nav_msgs::msg::Odometry msg_odom_;
   sensor_msgs::msg::Imu msg_imu_;
   sensor_msgs::msg::BatteryState msg_batt_;
@@ -163,6 +168,39 @@ private:
   {
     //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetMotorDriveState(msg.data);
+  }
+
+  void timerLessUpdateCallback() //500ms
+  {
+    std_msgs::msg::String fault_msg;
+    //check fault state
+    if (hardware_interface->drive_fault_state_ == 0)
+      fault_msg.data = "No Fault";
+    else if (hardware_interface->drive_fault_state_ == 1)
+      fault_msg.data = "Over Current Fault";
+    else if (hardware_interface->drive_fault_state_ == 2)
+      fault_msg.data = "Over Voltage Fault";
+    else if (hardware_interface->drive_fault_state_ == 3)
+      fault_msg.data = "Under Voltage Fault";
+    else if (hardware_interface->drive_fault_state_ == 4)
+      fault_msg.data = "Over Temperature Fault";
+    else if (hardware_interface->drive_fault_state_ == 5)
+      fault_msg.data = "Device Hardware Error";
+    else if (hardware_interface->drive_fault_state_ == 6)
+      fault_msg.data = "Device Software Error";
+    else if (hardware_interface->drive_fault_state_ == 7)
+      fault_msg.data = "Additional Modules Error";
+    else if (hardware_interface->drive_fault_state_ == 8)
+      fault_msg.data = "Monitoring Error";
+    else if (hardware_interface->drive_fault_state_ == 99)
+      fault_msg.data = "Drive connection lost";
+    else if (hardware_interface->drive_fault_state_ == 9)
+      fault_msg.data = "Drive fault with Unknown reason";
+    else
+      fault_msg.data = "Unknown Fault";
+
+    // fault_msg.data = std::to_string(hardware_interface->drive_fault_state_);
+    fault_state_pub_->publish(fault_msg);
   }
 
   void timerUpdateCallback()

@@ -1285,7 +1285,7 @@ class AutodockActionServer(Node):
             if self.dock_check_charge_status:
                 self.set_stop_charge(False)
                 success = self.move_open_loop_check_charge(self.dock_linear_speed_final, self.dock_time_final)
-                # self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
+                self.move_open_loop(self.dock_linear_speed_final* -1.0, 0.4)
             else:
                 self.move_open_loop(self.dock_linear_speed_final, self.dock_time_final)
                 success = True  # if not checking charge, treat as success of motion-only

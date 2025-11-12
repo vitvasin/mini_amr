@@ -237,14 +237,12 @@ void canSniff(const CAN_message_t &msg) {
   } Serial.println();
 
 }
-
-bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200)
+bool eMR_ReadErrorRegister(uint8_t node, uint8_t *out_error, uint32_t timeout_ms = 200)
 {
     uint8_t req[8] = {0};
-    uint32_t req_id  = 0x381;  // SDO request COB-ID
-    uint32_t resp_id = 0x603F;  // SDO response COB-ID
-
-    req[0] = 0x40;                     // initiate upload
+    uint32_t req_id = 0x600 + node;  // SDO request COB-ID
+    
+    req[0] = 0x40;                     // initiate upload (read)
     req[1] = 0x01;                     // index low (0x1001)
     req[2] = 0x10;                     // index high
     req[3] = 0x00;                     // subindex
@@ -253,44 +251,77 @@ bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout
     req[6] = 0x00;                     // reserved
     req[7] = 0x00;                     // reserved
 
-    
-    // req[0] = 0x40;                     // initiate upload
-    // req[1] = 0x01;                     // index low (0x1001)
-    // req[2] = 0x10;                     // index high
-    // req[3] = 0x00;                     // subindex
-    // req[4] = 0x00;                     // reserved
-    // req[5] = 0x00;                     // reserved
-    // req[6] = 0x00;                     // reserved
-    // req[7] = 0x00;                     // reserved
-
-
-    //CAN1_SendFrame(req_id, 8, req);
+    CAN1_SendFrame(req_id, 8, req);
 
     unsigned long start = millis();
     while (millis() - start < timeout_ms) {
         CAN1_ReceiveFrame(); // fills revPACKET
-        // if (revPACKET.len > 0 && revPACKET.id == resp_id) {
-        if (revPACKET.len > 0) {
-          //Serial.println("Received Error Register Response");
-            Serial.print("received from ID: 0x"); Serial.println(revPACKET.id, HEX);
-            if (revPACKET.len >= 5) {
-                //print full response for debugging
-                //Serial.print("Response Data: ");
-                for (int i = 0; i < revPACKET.len; i++) {
-                    Serial.print(revPACKET.buf[i], HEX);
-                    Serial.print(" ");
-                }
-                Serial.println();
-                
-                *out_value = revPACKET.buf[4];
+        
+        if (revPACKET.len >= 5) {
+            if ((revPACKET.buf[0] & 0xE0) == 0x40) {
+                // Extract error register from byte 4
+                *out_error = revPACKET.buf[4];
                 return true;
             }
-            break;
         }
         delay(1);
     }
     return false;
 }
+
+// bool eMR_RequestErrorRegister(uint8_t node, uint8_t *out_value, uint32_t timeout_ms = 200)
+// {
+//     uint8_t req[8] = {0};
+//     uint32_t req_id  = 0x381;  // SDO request COB-ID
+//     uint32_t resp_id = 0x603F;  // SDO response COB-ID
+
+//     req[0] = 0x40;                     // initiate upload
+//     req[1] = 0x01;                     // index low (0x1001)
+//     req[2] = 0x10;                     // index high
+//     req[3] = 0x00;                     // subindex
+//     req[4] = 0x00;                     // reserved
+//     req[5] = 0x00;                     // reserved
+//     req[6] = 0x00;                     // reserved
+//     req[7] = 0x00;                     // reserved
+
+    
+//     // req[0] = 0x40;                     // initiate upload
+//     // req[1] = 0x01;                     // index low (0x1001)
+//     // req[2] = 0x10;                     // index high
+//     // req[3] = 0x00;                     // subindex
+//     // req[4] = 0x00;                     // reserved
+//     // req[5] = 0x00;                     // reserved
+//     // req[6] = 0x00;                     // reserved
+//     // req[7] = 0x00;                     // reserved
+
+
+//     //CAN1_SendFrame(req_id, 8, req);
+
+//     unsigned long start = millis();
+//     while (millis() - start < timeout_ms) {
+//         CAN1_ReceiveFrame(); // fills revPACKET
+//         // if (revPACKET.len > 0 && revPACKET.id == resp_id) {
+//         if (revPACKET.len > 0) {
+//           //Serial.println("Received Error Register Response");
+//             Serial.print("received from ID: 0x"); Serial.println(revPACKET.id, HEX);
+//             if (revPACKET.len >= 5) {
+//                 //print full response for debugging
+//                 //Serial.print("Response Data: ");
+//                 for (int i = 0; i < revPACKET.len; i++) {
+//                     Serial.print(revPACKET.buf[i], HEX);
+//                     Serial.print(" ");
+//                 }
+//                 Serial.println();
+                
+//                 *out_value = revPACKET.buf[4];
+//                 return true;
+//             }
+//             break;
+//         }
+//         delay(1);
+//     }
+//     return false;
+// }
 
 uint8_t CANOpen_ResetFaults(eMR_t *eMR)
 {
@@ -308,4 +339,37 @@ uint8_t CANOpen_ResetFaults(eMR_t *eMR)
   data[7] = 0x00;                                             // SDO <DATA_Byte3>     Byte7
 
   return CAN1_SendFrame(node_id,DLC, data);                          // Test DLC = 6?
+}
+
+bool eMR_ReadStatusWord(uint8_t node, uint16_t *out_status, uint32_t timeout_ms = 200)
+{
+    uint8_t req[8] = {0};
+    uint32_t req_id = 0x600 + node;  // SDO request COB-ID (0x601 for node 1)
+    
+    req[0] = 0x40;                     // initiate upload (read)
+    req[1] = 0x41;                     // index low (0x6041)
+    req[2] = 0x60;                     // index high
+    req[3] = 0x00;                     // subindex
+    req[4] = 0x00;                     // reserved
+    req[5] = 0x00;                     // reserved
+    req[6] = 0x00;                     // reserved
+    req[7] = 0x00;                     // reserved
+
+    CAN1_SendFrame(req_id, 8, req);
+
+    unsigned long start = millis();
+    while (millis() - start < timeout_ms) {
+        CAN1_ReceiveFrame(); // fills revPACKET
+        
+        if (revPACKET.len >= 7) {
+            // Check if response is SDO upload reply (0x43) and matches our request
+            if ((revPACKET.buf[0] & 0xE0) == 0x40) {
+                // Extract 2-byte status word from bytes 4-5
+                *out_status = (revPACKET.buf[5] << 8) | revPACKET.buf[4];
+                return true;
+            }
+        }
+        delay(1);
+    }
+    return false;
 }

@@ -138,6 +138,30 @@ private:
   uint64_t prev_update_;
   uint64_t imu_prev_update_;
 
+    // Fault state string mapping (pre-computed, avoid repeated lookups)
+  static constexpr const char* FAULT_STRINGS[] = {
+    "No Fault",                            // 0
+    "Over Current Fault",                  // 1
+    "Over Voltage Fault",                  // 2
+    "Motor Drive Disconnection Fault",     // 3
+    "Over Temperature Fault",              // 4
+    "Device Hardware Error",               // 5
+    "Device Software Error",               // 6
+    "Additional Modules Error",            // 7
+    "Monitoring Error",                    // 8
+    "Drive fault with Unknown reason",     // 9
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr, nullptr,
+    "Drive connection lost"                // 99
+  };
+
   void odom_euler_to_quat(float roll, float pitch, float yaw, float *q)
   {
     float cy = cos(yaw * 0.5);
@@ -173,35 +197,20 @@ private:
 
   void timerLessUpdateCallback() //500ms
   {
-    std_msgs::msg::String fault_msg;
+    std_msgs::msg::String msg_fault_;
     //check fault state
-    if (hardware_interface->drive_fault_state_ == 0)
-      fault_msg.data = "No Fault";
-    else if (hardware_interface->drive_fault_state_ == 1)
-      fault_msg.data = "Over Current Fault";
-    else if (hardware_interface->drive_fault_state_ == 2)
-      fault_msg.data = "Over Voltage Fault";
-    else if (hardware_interface->drive_fault_state_ == 3)
-      fault_msg.data = "Motor Drive Disconnection Fault";
-    else if (hardware_interface->drive_fault_state_ == 4)
-      fault_msg.data = "Over Temperature Fault";
-    else if (hardware_interface->drive_fault_state_ == 5)
-      fault_msg.data = "Device Hardware Error";
-    else if (hardware_interface->drive_fault_state_ == 6)
-      fault_msg.data = "Device Software Error";
-    else if (hardware_interface->drive_fault_state_ == 7)
-      fault_msg.data = "Additional Modules Error";
-    else if (hardware_interface->drive_fault_state_ == 8)
-      fault_msg.data = "Monitoring Error";
-    else if (hardware_interface->drive_fault_state_ == 99)
-      fault_msg.data = "Drive connection lost";
-    else if (hardware_interface->drive_fault_state_ == 9)
-      fault_msg.data = "Drive fault with Unknown reason";
-    else
-      fault_msg.data = "Unknown Fault";
+    uint8_t fault_state = hardware_interface->drive_fault_state_;
+    
+    // Direct array lookup instead of if-else chain
+    if (fault_state < 10) {
+      msg_fault_.data = FAULT_STRINGS[fault_state];
+    } else if (fault_state == 99) {
+      msg_fault_.data = FAULT_STRINGS[99];
+    } else {
+      msg_fault_.data = "Unknown Fault";
+    }
 
-    // fault_msg.data = std::to_string(hardware_interface->drive_fault_state_);
-    fault_state_pub_->publish(fault_msg);
+    fault_state_pub_->publish(msg_fault_);
   }
   void timerUpdateCallback()
     {

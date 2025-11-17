@@ -191,7 +191,7 @@ unsigned long prev_cmd_time = 0;
 unsigned long master_time = 0, imu_update_time = 0, control_update_time = 0, bms_update_time = 0, sensor_update_time;
 unsigned long safety_time = 0, send_data_time = 0, receive_data_time = 0;
 //const unsigned int imu_interval = 45, control_interval = 30, bms_interval = 200, sensor_interval = 50, safety_interval = 50, send_data_interval = 30, receive_data_interval;
-const unsigned int imu_interval = 30, control_interval = 10, bms_interval = 1000, sensor_interval = 100, safety_interval = 50, send_data_interval = 10, receive_data_interval;
+const unsigned int imu_interval = 30, control_interval = 10, bms_interval = 1000, sensor_interval = 200, safety_interval = 50, send_data_interval = 10, receive_data_interval;
 
 unsigned char pkg_data[_PKG_LEN];
 
@@ -851,102 +851,170 @@ void control_task()
     
 }
 
+static uint8_t sensor_state = 0;
 void sensor_module_task()
 {
+
+
+
     int32_t buff;
     uint8_t alarm_mode;
     uint8_t led_mode;
 
     const uint8_t ultarsonic_max_range = 20;  // cm unit
-    static uint32_t fault_monitor = millis();
+        Serial.printf("Sensor State: %d\n", sensor_state);
+        Serial.printf("Range Left: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
+        Serial.printf("IR Charge State : %d\n", buff);
+        Serial.println("-------------------------------------------");
+     switch(sensor_state) {
+        case 0:  // Read Left
+            if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess) {
+                buff = Ultrasonics_L.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_left = buff * 10;
+                pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
+                pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
+            } else {
+                range_left = 99;
+            }
+            sensor_state = 1;
+            break;
+        case 1:  // Read Right
+            if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess) {
+                buff = Ultrasonics_R.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_right = buff * 10;
+                pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
+                pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
+            }else {
+                range_right = 99;
+            }
+            sensor_state = 2;
+            break;
+        case 2:  // Read Center
+            if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess) {
+                buff = Ultrasonics_C.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_center = buff * 10;
+                pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
+                pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
+            }else {
+                range_center = 99;
+            }
+            sensor_state = 3;
+            break;
+        case 3:  // Read Cliff
+            if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess) {
+                buff = Cliff_Sensor.getResponseBuffer(1);
+                cliff = buff;
+            }else {
+                cliff = 9999;
+            }
+            sensor_state = 4;
+            break;
+        case 4:  // Read IR Charge
+            if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess) {
+                buff = IR_Charge_State.getResponseBuffer(0);
+                pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+            }else 
+            {
+                buff = 99;
+                pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+            }
+            sensor_state = 0;
+            break;
 
-    // uint64_t start_time = millis();
 
-    if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess)
-    {
-        buff = Ultrasonics_L.getResponseBuffer(0);// * 0.01; // coe = 0.01  => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_left = buff*10;// *0.01* 1000;
+    }
+//     static uint32_t fault_monitor = millis();
 
-        pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
-        pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
+//     // uint64_t start_time = millis();
+
+//     if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess)
+//     {
+//         buff = Ultrasonics_L.getResponseBuffer(0);// * 0.01; // coe = 0.01  => cm ==> m, addr = 0
+//         if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+//         range_left = buff*10;// *0.01* 1000;
+
+//         pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
+//         pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
         
-        // Serial5.printf("Range Letf : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range left error");
-    }
-    // cooperative sleep to allow other Threads to run
-    //threads.delay(5);
+//         // Serial5.printf("Range Letf : %d\n", buff);
+//     }
+//     else
+//     {
+//         if (DEBUG)
+//             Serial5.println("Read range left error");
+//     }
+//     // cooperative sleep to allow other Threads to run
+//     //threads.delay(5);
 
-    if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
-    {
-        buff = Ultrasonics_R.getResponseBuffer(0);// * 0.01; // coe = 0.01 => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_right = buff*10;// *0.01* 1000;
+//     if (Ultrasonics_R.readHoldingRegisters(0, 2) == Ultrasonics_R.ku8MBSuccess)
+//     {
+//         buff = Ultrasonics_R.getResponseBuffer(0);// * 0.01; // coe = 0.01 => cm ==> m, addr = 0
+//         if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+//         range_right = buff*10;// *0.01* 1000;
 
-        pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
-        pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
+//         pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
+//         pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
 
-        // Serial5.printf("Range Right : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range right error");
-    }
-    // cooperative sleep to allow other Threads to run
-    // threads.delay(5);
+//         // Serial5.printf("Range Right : %d\n", buff);
+//     }
+//     else
+//     {
+//         if (DEBUG)
+//             Serial5.println("Read range right error");
+//     }
+//     // cooperative sleep to allow other Threads to run
+//     // threads.delay(5);
 
-    if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
-    {
-        buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01  => cm ==> m, addr = 0
-        if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
-        range_center = buff*10;// *0.01* 1000;
-        pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
-        pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
+//     if (Ultrasonics_C.readHoldingRegisters(0, 2) == Ultrasonics_C.ku8MBSuccess)
+//     {
+//         buff = Ultrasonics_C.getResponseBuffer(0);//*0.01; // coe = 0.01  => cm ==> m, addr = 0
+//         if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+//         range_center = buff*10;// *0.01* 1000;
+//         pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
+//         pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
 
-        // Serial5.printf("Range Center : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range center error");
-    }
-    // cooperative sleep to allow other Threads to run
-    // threads.delay(5);
+//         // Serial5.printf("Range Center : %d\n", buff);
+//     }
+//     else
+//     {
+//         if (DEBUG)
+//             Serial5.println("Read range center error");
+//     }
+//     // cooperative sleep to allow other Threads to run
+//     // threads.delay(5);
 
-    if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess)
-    {
-        buff = Cliff_Sensor.getResponseBuffer(1);//* 0.001; // coe = 0.001, addr = 1
-        cliff = buff;// * 1000;
+//     if (Cliff_Sensor.readHoldingRegisters(0, 2) == Cliff_Sensor.ku8MBSuccess)
+//     {
+//         buff = Cliff_Sensor.getResponseBuffer(1);//* 0.001; // coe = 0.001, addr = 1
+//         cliff = buff;// * 1000;
 
-        // Serial5.printf("Cliff distance : %d\n", buff);
-    }
-    else
-    {
-        if (DEBUG)
-            Serial5.println("Read range center error");
-    }
-    // cooperative sleep to allow other Threads to run
-    threads.delay(5);
-   // Serial5.printf("Range Letf: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
-    //pkg_data[_RANGER_READY_] = 1;
-    uint8_t result;
-    if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess)
-    {
-        buff = IR_Charge_State.getResponseBuffer(0); // addr = 0
-        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-        // Serial5.printf("IR Charge State : %d\n", buff);
-    }
-    else
-    {
-        buff = 99;
-        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-        //Serial5.println("Read IR Charge State error");
-    }
+//         // Serial5.printf("Cliff distance : %d\n", buff);
+//     }
+//     else
+//     {
+//         if (DEBUG)
+//             Serial5.println("Read range center error");
+//     }
+//     // cooperative sleep to allow other Threads to run
+//     threads.delay(5);
+//    // Serial5.printf("Range Letf: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
+//     //pkg_data[_RANGER_READY_] = 1;
+//     uint8_t result;
+//     if(IR_Charge_State.readHoldingRegisters(0, 1) == IR_Charge_State.ku8MBSuccess)
+//     {
+//         buff = IR_Charge_State.getResponseBuffer(0); // addr = 0
+//         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+//         // Serial5.printf("IR Charge State : %d\n", buff);
+//     }
+//     else
+//     {
+//         buff = 99;
+//         pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+//         //Serial5.println("Read IR Charge State error");
+//     }
    
 }
 
@@ -1048,6 +1116,7 @@ void setup()
     delay(3000);
     //-------------
     Serial.begin(460800);
+    
 
     Serial5.begin(115200);
 
@@ -1085,8 +1154,26 @@ void setup()
     }
 
     master_time = imu_update_time = control_update_time = send_data_time = safety_time = bms_update_time = sensor_update_time = millis();
+    setup_loop_frequency();
+}
+// Simple loop frequency counter
+uint32_t loop_count = 0;
+uint32_t last_report_time = 0;
+const uint32_t REPORT_INTERVAL = 1000;  // Report every 1 second
+
+void setup_loop_frequency() {
+    last_report_time = millis();
 }
 
+void monitor_loop_frequency() {
+    loop_count++;
+    
+    if (millis() - last_report_time >= REPORT_INTERVAL) {
+        Serial.printf("Loop Frequency: %u Hz\n", loop_count);
+        loop_count = 0;
+        last_report_time = millis();
+    }
+}
 void loop()
 {
     //char incomingChar = 0;
@@ -1094,6 +1181,7 @@ void loop()
     static uint32_t fault_monitor = millis();
     //static uint16_t count = 0;
     //static uint32_t prev_time = 0;
+    monitor_loop_frequency();
 
     receive_data_task();
 

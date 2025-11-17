@@ -145,6 +145,14 @@ class DeliveryRobotMainController(Node):
             self.manual_nav_named_target_callback,
             10
         )
+
+        self.create_subscription(
+            String,
+            "drive_fault_state",
+            self.drive_fault_callback,
+            10
+        )
+
         self.smooth_path = True
         self.navigator = BasicNavigator()
         time.sleep(1)
@@ -310,6 +318,21 @@ class DeliveryRobotMainController(Node):
             return
         self.send_goal_pose_agv(self.manual_x, self.manual_y, self.manual_yaw, RobotState.MANUAL)
 
+    def drive_fault_callback(self, msg: String):
+        drive_status = msg.data.strip()
+        old_drive_status = api_client.get_robot_status_by_name('is_derive_fault')
+        
+        if drive_status != old_drive_status:
+            if drive_status == 'No Fault':
+                api_client.update_status("is_derive_fault", 0)
+            else:
+                api_client.update_status("is_derive_fault", 1)
+
+        if drive_status != 'No Fault': 
+                self.get_logger().info(
+                    f"Drive Status Fault = {drive_str}"   
+                )    
+
     def state_monitor(self):
         # Periodic task to monitor or report state
         self.get_robot_status_from_api()
@@ -429,6 +452,7 @@ class DeliveryRobotMainController(Node):
             "batteryChargingLimitUpper": config.get("batteryChargingLimitUpper", 100),
             "batteryChargingLimitLower": config.get("batteryChargingLimitLower", 95),
             "batteryLevelCanWork": config.get("batteryLevelCanWork", 50),
+            "soundLevel": config.get("soundLevel", 50),
             "isSoundAlarmForRequest": self._parameter_to_bool(config.get("isSoundAlarmForRequest", 0)),
             "isSoundAlarmForDelivery": self._parameter_to_bool(config.get("isSoundAlarmForDelivery", 0)),
             "isLightAlarmForRequest": self._parameter_to_bool(config.get("isLightAlarmForRequest", 0)),
@@ -450,6 +474,7 @@ class DeliveryRobotMainController(Node):
         self.setting_batteryChargingLimitUpper = settings["batteryChargingLimitUpper"]
         self.setting_batteryChargingLimitLower = settings["batteryChargingLimitLower"]
         self.setting_batteryLevelCanWork = settings["batteryLevelCanWork"]
+        self.setting_soundLevel = settings["soundLevel"]
         self.setting_isSoundAlarmForRequest = settings["isSoundAlarmForRequest"]
         self.setting_isSoundAlarmForDelivery = settings["isSoundAlarmForDelivery"]
         self.setting_isLightAlarmForRequest = settings["isLightAlarmForRequest"]
@@ -1147,7 +1172,7 @@ class DeliveryRobotMainController(Node):
             else:
                 self.get_logger().info('Goal failed! after retry {0} times'.format(self.retry_move_no))
                 if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
-                    task = self.get_pending_queue_from_api(status == 'active')
+                    task = self.get_pending_queue_from_api(status = 'active')
                     if task:
                         action = task.get("action", "Request")
                         queue_id = task.get("_id") or task.get("id")

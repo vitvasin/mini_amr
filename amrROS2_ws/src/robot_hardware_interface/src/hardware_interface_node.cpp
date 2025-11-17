@@ -5,6 +5,7 @@
 #include "sensor_msgs/msg/range.hpp"
 #include "std_msgs/msg/int16.hpp"
 #include "std_msgs/msg/bool.hpp"
+#include "std_msgs/msg/string.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 #include "action_msgs/msg/goal_status_array.hpp"
 #include <sensor_msgs/msg/battery_state.hpp>
@@ -13,6 +14,8 @@
 #include <arpa/inet.h>
 #include <ifaddrs.h>
 #include <math.h>
+// #include <Eigen/Dense>
+#include <eigen3/Eigen/Dense>
 
 #include "hardware_interface/robot_hardware_interface.h"
 
@@ -47,11 +50,14 @@ public:
     range_left_pub_   = create_publisher<sensor_msgs::msg::Range>("range/left", 10);
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
+
+    fault_state_pub_  = create_publisher<std_msgs::msg::String>("drive_fault_state", 10);
     
 
 
     //timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
     timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_less_update_data_ = create_wall_timer(500ms , std::bind(&HardwareInterfaceNode::timerLessUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";
@@ -109,8 +115,10 @@ private:
   rclcpp::Publisher<sensor_msgs::msg::Range>::SharedPtr range_right_pub_;
   rclcpp::Publisher<std_msgs::msg::Int16>::SharedPtr charge_state_pub_;
   rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr charge_state_sub_;
+  rclcpp::Publisher<std_msgs::msg::String>::SharedPtr fault_state_pub_;
 
   rclcpp::TimerBase::SharedPtr timer_update_data_;
+  rclcpp::TimerBase::SharedPtr timer_less_update_data_;
   nav_msgs::msg::Odometry msg_odom_;
   sensor_msgs::msg::Imu msg_imu_;
   sensor_msgs::msg::BatteryState msg_batt_;
@@ -162,155 +170,310 @@ private:
     //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetMotorDriveState(msg.data);
   }
-  void timerUpdateCallback()
+
+  void timerLessUpdateCallback() //500ms
   {
-    static int tCount=0;
+    std_msgs::msg::String fault_msg;
+    //check fault state
+    if (hardware_interface->drive_fault_state_ == 0)
+      fault_msg.data = "No Fault";
+    else if (hardware_interface->drive_fault_state_ == 1)
+      fault_msg.data = "Over Current Fault";
+    else if (hardware_interface->drive_fault_state_ == 2)
+      fault_msg.data = "Over Voltage Fault";
+    else if (hardware_interface->drive_fault_state_ == 3)
+      fault_msg.data = "Motor Drive Disconnection Fault";
+    else if (hardware_interface->drive_fault_state_ == 4)
+      fault_msg.data = "Over Temperature Fault";
+    else if (hardware_interface->drive_fault_state_ == 5)
+      fault_msg.data = "Device Hardware Error";
+    else if (hardware_interface->drive_fault_state_ == 6)
+      fault_msg.data = "Device Software Error";
+    else if (hardware_interface->drive_fault_state_ == 7)
+      fault_msg.data = "Additional Modules Error";
+    else if (hardware_interface->drive_fault_state_ == 8)
+      fault_msg.data = "Monitoring Error";
+    else if (hardware_interface->drive_fault_state_ == 99)
+      fault_msg.data = "Drive connection lost";
+    else if (hardware_interface->drive_fault_state_ == 9)
+      fault_msg.data = "Drive fault with Unknown reason";
+    else
+      fault_msg.data = "Unknown Fault";
+
+    // fault_msg.data = std::to_string(hardware_interface->drive_fault_state_);
+    fault_state_pub_->publish(fault_msg);
+  }
+  void timerUpdateCallback()
+    {
+    static int tCount = 0;
+    constexpr double NANOSECONDS_TO_SECONDS = 1e-9;
+
     auto current_time = get_clock()->now();
-    // if (hardware_interface->update_odom_)
-    // {
-      msg_odom_.header.stamp = current_time;
+    uint64_t current_nanos = current_time.nanoseconds();
 
-      uint64_t dt = current_time.nanoseconds() - prev_update_;
-      //std::cout << "odom publish time : "<< dt << std::endl;
+    // ===================== Odometry Update =====================
+    if (hardware_interface->update_odom_) {
+      uint64_t dt = current_nanos - prev_update_;
+      double dt_seconds = static_cast<double>(dt) * NANOSECONDS_TO_SECONDS;
 
-      double dt_seconds = static_cast<double>(dt) / 1000000000.0f;
+      double delta_heading = hardware_interface->odom_velocity.z * dt_seconds;
+      // double cos_h = std::cos(heading_);
+      // double sin_h = std::sin(heading_);
 
-      double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z) * dt_seconds; // radians
-      double cos_h = cos(heading_);
-      double sin_h = sin(heading_);
-      double delta_x = (static_cast<double>(hardware_interface->odom_velocity.x) * cos_h - static_cast<double>(hardware_interface->odom_velocity.y) * sin_h) * dt_seconds; // m
-      double delta_y = (static_cast<double>(hardware_interface->odom_velocity.x) * sin_h + static_cast<double>(hardware_interface->odom_velocity.y) * cos_h) * dt_seconds; // m
+      double vx = hardware_interface->odom_velocity.x;
+      double vy = hardware_interface->odom_velocity.y;
 
-      pos_x_ += delta_x;
-      pos_y_ += delta_y;
+      // double delta_x = (vx * cos_h - vy * sin_h) * dt_seconds;
+      // double delta_y = (vx * sin_h + vy * cos_h) * dt_seconds;
+
+      Eigen::Vector2d velocity(vx, vy);
+      Eigen::Rotation2Dd rot(heading_);
+      Eigen::Vector2d delta = rot * velocity * dt;
+      pos_x_ += delta.x();
+      pos_y_ += delta.y();
+
+      // pos_x_ += delta_x;
+      // pos_y_ += delta_y;
+
       heading_ += delta_heading;
 
       float q[4];
-      odom_euler_to_quat(0.0, 0.0, static_cast<float>(heading_), q);
+      odom_euler_to_quat(0.0f, 0.0f, static_cast<float>(heading_), q);
 
+      msg_odom_.header.stamp = current_time;
       msg_odom_.pose.pose.position.x = pos_x_;
       msg_odom_.pose.pose.position.y = pos_y_;
       msg_odom_.pose.pose.position.z = 0.0;
 
-      msg_odom_.pose.pose.orientation.x = (double)q[1];
-      msg_odom_.pose.pose.orientation.y = (double)q[2];
-      msg_odom_.pose.pose.orientation.z = (double)q[3];
-      msg_odom_.pose.pose.orientation.w = (double)q[0];
+      msg_odom_.pose.pose.orientation.x = q[1];
+      msg_odom_.pose.pose.orientation.y = q[2];
+      msg_odom_.pose.pose.orientation.z = q[3];
+      msg_odom_.pose.pose.orientation.w = q[0];
 
-      msg_odom_.twist.twist.linear.x = hardware_interface->odom_velocity.x;
-      msg_odom_.twist.twist.linear.y = hardware_interface->odom_velocity.y;
+      msg_odom_.twist.twist.linear.x = vx;
+      msg_odom_.twist.twist.linear.y = vy;
       msg_odom_.twist.twist.angular.z = hardware_interface->odom_velocity.z;
 
-      //hardware_interface->update_odom_ = false;
       odom_pub_->publish(msg_odom_);
-    
-      prev_update_ = current_time.nanoseconds();
-      
 
-    // }
-    // else if (hardware_interface->update_imu_)
-    //{
-      msg_imu_.header.stamp = current_time;
+      prev_update_ = current_nanos;
+      hardware_interface->update_odom_ = false;
+      }
 
-      dt = current_time.nanoseconds() - imu_prev_update_;
-      dt_seconds = static_cast<double>(dt) / 1000000000.0;
+    // ===================== IMU Update =====================
+    if (hardware_interface->update_imu_) {
+      uint64_t dt = current_nanos - imu_prev_update_;
+      double dt_seconds = static_cast<double>(dt) * NANOSECONDS_TO_SECONDS;
 
-      double imu_delta_z = static_cast<double>(hardware_interface->angular_velocity.z) * dt_seconds;
+      double imu_delta_z = hardware_interface->angular_velocity.z * dt_seconds;
       yaw_ += imu_delta_z;
 
       float imu_q[4];
-      odom_euler_to_quat(0.0, 0.0, static_cast<float>(yaw_), imu_q);
+      odom_euler_to_quat(0.0f, 0.0f, static_cast<float>(yaw_), imu_q);
 
-      msg_imu_.orientation.x = (double)imu_q[1];
-      msg_imu_.orientation.y = (double)imu_q[2];
-      msg_imu_.orientation.z = (double)imu_q[3];
-      msg_imu_.orientation.w = (double)imu_q[0];
+      msg_imu_.header.stamp = current_time;
+
+      msg_imu_.orientation.x = imu_q[1];
+      msg_imu_.orientation.y = imu_q[2];
+      msg_imu_.orientation.z = imu_q[3];
+      msg_imu_.orientation.w = imu_q[0];
 
       msg_imu_.angular_velocity.x = hardware_interface->angular_velocity.y;
-      msg_imu_.angular_velocity.y = hardware_interface->angular_velocity.x * (-1);
+      msg_imu_.angular_velocity.y = -hardware_interface->angular_velocity.x;
       msg_imu_.angular_velocity.z = hardware_interface->angular_velocity.z;
 
       msg_imu_.linear_acceleration.x = hardware_interface->linear_acceleration.y;
-      msg_imu_.linear_acceleration.y = hardware_interface->linear_acceleration.x * (-1);
+      msg_imu_.linear_acceleration.y = -hardware_interface->linear_acceleration.x;
       msg_imu_.linear_acceleration.z = hardware_interface->linear_acceleration.z;
 
-      //hardware_interface->update_imu_ = false;
       imu_pub_->publish(msg_imu_);
+      imu_prev_update_ = current_nanos;
+      hardware_interface->update_imu_ = false;
+      }
 
-      imu_prev_update_ = current_time.nanoseconds();
-    // }
-    // else if (hardware_interface->update_range_)
-    // //if (hardware_interface->update_range_)
-    // {
-      msg_range_left_.header.stamp   = current_time;
+    // ===================== Range Update =====================
+      if (hardware_interface->update_range_) {
+      constexpr float MAX_RANGE = 3.5f;
+
+      msg_range_left_.header.stamp = current_time;
       msg_range_center_.header.stamp = current_time;
-      msg_range_right_.header.stamp  = current_time;
+      msg_range_right_.header.stamp = current_time;
 
-      // msg_range_left_.range = 0.3;//hardware_interface->range_left;
-      // msg_range_center_.range = 0.3;//hardware_interface->range_center;
-      // msg_range_right_.range = 0.3;//hardware_interface->range_right;
-
-      msg_range_left_.range = hardware_interface->range_left; //Convert to cm
-      msg_range_center_.range = hardware_interface->range_center; //Convert to cm
-      msg_range_right_.range = hardware_interface->range_right; //Convert to cm
-
-      // Limit ultrasonic readings to not exceed 3.5 m
-      //const float ULTRASONIC_MAX_CM = 3.5f;
-      //msg_range_left_.range   = std::min(msg_range_left_.range,   ULTRASONIC_MAX_CM);
-      //msg_range_center_.range = std::min(msg_range_center_.range, ULTRASONIC_MAX_CM);
-      //msg_range_right_.range  = std::min(msg_range_right_.range,  ULTRASONIC_MAX_CM); 
-      
-      //std::cout << "range_left:"<< msg_range_left_.range << "    range_center:"<< msg_range_center_.range << "    range_right:"<< msg_range_right_.range << std::endl;
-
-      //hardware_interface->update_range_ = false;
+      msg_range_left_.range = std::min(hardware_interface->range_left, MAX_RANGE);
+      msg_range_center_.range = std::min(hardware_interface->range_center, MAX_RANGE);
+      msg_range_right_.range = std::min(hardware_interface->range_right, MAX_RANGE);
 
       range_left_pub_->publish(msg_range_left_);
       range_center_pub_->publish(msg_range_center_);
-      range_right_pub_ ->publish(msg_range_right_);
-    // }
-    // else if (hardware_interface->update_batt_)
-    // //if (hardware_interface->update_batt_)
-    // {
+      range_right_pub_->publish(msg_range_right_);
+
+      hardware_interface->update_range_ = false;
+      }
+
+    // ===================== Battery Update =====================
+      if (hardware_interface->update_batt_) {
       msg_batt_.voltage = hardware_interface->voltage_;
       msg_batt_.current = hardware_interface->current_;
       msg_batt_.percentage = hardware_interface->percentage_;
       msg_batt_.power_supply_status = hardware_interface->status_;
 
-      // //print batt debug
-      // std::cout << "Battery -";
-      // std::cout << " " << hardware_interface->voltage_;
-      // std::cout << " " << hardware_interface->current_;
-      // std::cout << " " << hardware_interface->percentage_ << std::endl;
-      
-      hardware_interface->update_batt_ = false;
       batt_pub_->publish(msg_batt_);
-      
 
-      msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
-      charge_state_pub_->publish(msg_charge_state_);
+      // msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
+      // charge_state_pub_->publish(msg_charge_state_);
 
-      if(tCount > 10){
-        hardware_interface->UpdateStatus(1);
-        // batt_pub_->publish(msg_batt_);
-        tCount=0;
+      hardware_interface->update_batt_ = false;
       }
-      else
-        tCount++;
 
-      // //print all status
-      // std::cout << "IMU - ";
-      // std::cout << "AngVel: " << hardware_interface->angular_velocity.x << ", " << hardware_interface->angular_velocity.y << ", " << hardware_interface->angular_velocity.z << " | ";
-      // std::cout << "LinAcc: " << hardware_interface->linear_acceleration.x << ", " << hardware_interface->linear_acceleration.y << ", " << hardware_interface->  linear_acceleration.z << std::endl; 
-      // std::cout << "Odom - ";
-      // std::cout << "Vel: " << hardware_interface->odom_velocity.x << ", " << hardware_interface->odom_velocity.y << ", " << hardware_interface->odom_velocity.z << std::endl;
-      // std::cout << "Range - ";
-      // std::cout << "Left: " << hardware_interface->range_left << ", Center: " << hardware_interface->range_center << ", Right: " << hardware_interface->range_right << std::endl;
-      // std::cout << "Battery - ";
-      // std::cout << "Voltage: " << hardware_interface->voltage_ << ", Current: " << hardware_interface->current_ << ", Percentage: " << hardware_interface->percentage_ << ", Status: " << static_cast<int>(hardware_interface->status_) << std::endl;
+      if (hardware_interface->update_ir_) {
 
+        msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
+        charge_state_pub_->publish(msg_charge_state_);
+
+        hardware_interface->update_ir_ = false;
+      }
+
+    // ===================== Periodic Update (Every 10 ticks) =====================
+      if (++tCount > 10) {
+      hardware_interface->UpdateStatus(1);
+      tCount = 0;
+      }
+    }
+  // void timerUpdateCallback()
+  // {
+  //   static int tCount=0;
+  //   auto current_time = get_clock()->now();
+  //   // if (hardware_interface->update_odom_)
+  //   // {
+  //     msg_odom_.header.stamp = current_time;
+
+  //     uint64_t dt = current_time.nanoseconds() - prev_update_;
+  //     //std::cout << "odom publish time : "<< dt << std::endl;
+
+  //     double dt_seconds = static_cast<double>(dt) / 1000000000.0f;
+
+  //     double delta_heading = static_cast<double>(hardware_interface->odom_velocity.z) * dt_seconds; // radians
+  //     double cos_h = cos(heading_);
+  //     double sin_h = sin(heading_);
+  //     double delta_x = (static_cast<double>(hardware_interface->odom_velocity.x) * cos_h - static_cast<double>(hardware_interface->odom_velocity.y) * sin_h) * dt_seconds; // m
+  //     double delta_y = (static_cast<double>(hardware_interface->odom_velocity.x) * sin_h + static_cast<double>(hardware_interface->odom_velocity.y) * cos_h) * dt_seconds; // m
+
+  //     pos_x_ += delta_x;
+  //     pos_y_ += delta_y;
+  //     heading_ += delta_heading;
+
+  //     float q[4];
+  //     odom_euler_to_quat(0.0, 0.0, static_cast<float>(heading_), q);
+
+  //     msg_odom_.pose.pose.position.x = pos_x_;
+  //     msg_odom_.pose.pose.position.y = pos_y_;
+  //     msg_odom_.pose.pose.position.z = 0.0;
+
+  //     msg_odom_.pose.pose.orientation.x = (double)q[1];
+  //     msg_odom_.pose.pose.orientation.y = (double)q[2];
+  //     msg_odom_.pose.pose.orientation.z = (double)q[3];
+  //     msg_odom_.pose.pose.orientation.w = (double)q[0];
+
+  //     msg_odom_.twist.twist.linear.x = hardware_interface->odom_velocity.x;
+  //     msg_odom_.twist.twist.linear.y = hardware_interface->odom_velocity.y;
+  //     msg_odom_.twist.twist.angular.z = hardware_interface->odom_velocity.z;
+
+  //     //hardware_interface->update_odom_ = false;
+  //     odom_pub_->publish(msg_odom_);
+    
+  //     prev_update_ = current_time.nanoseconds();
       
-    //}
-  }
+
+  //   // }
+  //   // else if (hardware_interface->update_imu_)
+  //   //{
+  //     msg_imu_.header.stamp = current_time;
+
+  //     dt = current_time.nanoseconds() - imu_prev_update_;
+  //     dt_seconds = static_cast<double>(dt) / 1000000000.0;
+
+  //     double imu_delta_z = static_cast<double>(hardware_interface->angular_velocity.z) * dt_seconds;
+  //     yaw_ += imu_delta_z;
+
+  //     float imu_q[4];
+  //     odom_euler_to_quat(0.0, 0.0, static_cast<float>(yaw_), imu_q);
+
+  //     msg_imu_.orientation.x = (double)imu_q[1];
+  //     msg_imu_.orientation.y = (double)imu_q[2];
+  //     msg_imu_.orientation.z = (double)imu_q[3];
+  //     msg_imu_.orientation.w = (double)imu_q[0];
+
+  //     msg_imu_.angular_velocity.x = hardware_interface->angular_velocity.y;
+  //     msg_imu_.angular_velocity.y = hardware_interface->angular_velocity.x * (-1);
+  //     msg_imu_.angular_velocity.z = hardware_interface->angular_velocity.z;
+
+  //     msg_imu_.linear_acceleration.x = hardware_interface->linear_acceleration.y;
+  //     msg_imu_.linear_acceleration.y = hardware_interface->linear_acceleration.x * (-1);
+  //     msg_imu_.linear_acceleration.z = hardware_interface->linear_acceleration.z;
+
+  //     //hardware_interface->update_imu_ = false;
+  //     imu_pub_->publish(msg_imu_);
+
+  //     imu_prev_update_ = current_time.nanoseconds();
+  //   // }
+  //   // else if (hardware_interface->update_range_)
+  //   // //if (hardware_interface->update_range_)
+  //   // {
+  //     msg_range_left_.header.stamp   = current_time;
+  //     msg_range_center_.header.stamp = current_time;
+  //     msg_range_right_.header.stamp  = current_time;
+
+  //     // msg_range_left_.range = 0.3;//hardware_interface->range_left;
+  //     // msg_range_center_.range = 0.3;//hardware_interface->range_center;
+  //     // msg_range_right_.range = 0.3;//hardware_interface->range_right;
+
+  //     msg_range_left_.range = hardware_interface->range_left; //Convert to cm
+  //     msg_range_center_.range = hardware_interface->range_center; //Convert to cm
+  //     msg_range_right_.range = hardware_interface->range_right; //Convert to cm
+
+  //     // Limit ultrasonic readings to not exceed 3.5 m
+  //     //const float ULTRASONIC_MAX_CM = 3.5f;
+  //     //msg_range_left_.range   = std::min(msg_range_left_.range,   ULTRASONIC_MAX_CM);
+  //     //msg_range_center_.range = std::min(msg_range_center_.range, ULTRASONIC_MAX_CM);
+  //     //msg_range_right_.range  = std::min(msg_range_right_.range,  ULTRASONIC_MAX_CM); 
+      
+  //     //std::cout << "range_left:"<< msg_range_left_.range << "    range_center:"<< msg_range_center_.range << "    range_right:"<< msg_range_right_.range << std::endl;
+
+  //     //hardware_interface->update_range_ = false;
+
+  //     range_left_pub_->publish(msg_range_left_);
+  //     range_center_pub_->publish(msg_range_center_);
+  //     range_right_pub_ ->publish(msg_range_right_);
+  //   // }
+  //   // else if (hardware_interface->update_batt_)
+  //   // //if (hardware_interface->update_batt_)
+  //   // {
+  //     msg_batt_.voltage = hardware_interface->voltage_;
+  //     msg_batt_.current = hardware_interface->current_;
+  //     msg_batt_.percentage = hardware_interface->percentage_;
+  //     msg_batt_.power_supply_status = hardware_interface->status_;
+
+  //     // //print batt debug
+  //     // std::cout << "Battery -";
+  //     // std::cout << " " << hardware_interface->voltage_;
+  //     // std::cout << " " << hardware_interface->current_;
+  //     // std::cout << " " << hardware_interface->percentage_ << std::endl;
+      
+  //     hardware_interface->update_batt_ = false;
+  //     batt_pub_->publish(msg_batt_);
+      
+
+  //     msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
+  //     charge_state_pub_->publish(msg_charge_state_);
+
+  //     if(tCount > 10){
+  //       hardware_interface->UpdateStatus(1);
+  //       // batt_pub_->publish(msg_batt_);
+  //       tCount=0;
+  //     }
+  //     else
+  //       tCount++;
+  // }
 };
 
 

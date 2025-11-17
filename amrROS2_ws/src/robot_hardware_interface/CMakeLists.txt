@@ -13,6 +13,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(action_msgs REQUIRED)
 find_package(std_msgs REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 include_directories(include)
 
@@ -32,6 +33,7 @@ ament_target_dependencies(robot_hardware rclcpp geometry_msgs sensor_msgs nav_ms
 install(TARGETS
   robot_hardware
   DESTINATION lib/${PROJECT_NAME})
+  
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

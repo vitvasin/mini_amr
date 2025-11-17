@@ -6,7 +6,9 @@ HardwareInterface::HardwareInterface(const std::string& port) : port_name(port),
         // Open the serial port
         serial_port.Open(port_name);
         serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_460800);
-        std::cout << "Serial port opened at port "<< port_name << " with baudrate 115200" << std::endl;
+        // serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_1152000);
+        // serial_port.SetBaudRate(LibSerial::BaudRate::BAUD_921600);
+        std::cout << "Serial port opened at port "<< port_name << " with baudrate 460800" << std::endl;
     }
     catch (const std::exception& e) {
         std::cerr << "Open the serial port error: " << e.what() << std::endl;
@@ -200,24 +202,17 @@ void HardwareInterface::ParseData(const std::vector<uint8_t>& data) {
 
         update_batt_ = true;
 
-        // uint16_t ir_charge_state_;
-
         uint16_t ir_charge_state = static_cast<int16_t>(data[_IR_CHARGE_STATE_]);
         ir_charge_state_ = ir_charge_state;
 
-        uint8_t motor_drive_state = static_cast<int16_t>(data[_MTR_DRIVE_STATE_]);
-        motor_drive_state_ = motor_drive_state;
-        
-        //std::cout << "IR Charge State: " << ir_charge_state << std::endl;
+        update_ir_ = true;
 
-        //if(DEBUG_BATT){
-        //    std::cout << "Battery -";
-        //    std::cout << " " << voltage;
-        //    std::cout << " " << current;
-        //    std::cout << " " << percentage;
-        //    std::cout << " " << static_cast<int>(status) << std::endl;   
-       // }
-   // }
+        // uint8_t motor_drive_state = static_cast<int16_t>(data[_MTR_DRIVE_STATE_]);
+        // motor_drive_state_ = motor_drive_state;
+
+        uint8_t drive_fault_state = static_cast<int16_t>(data[_MTR_FAULT_STATE_]);
+        drive_fault_state_ = drive_fault_state;
+        
 }
 
 void HardwareInterface::ParseData(uint8_t FUNC_TYPE, const std::vector<uint8_t>& data) {

@@ -1298,7 +1298,7 @@ class AutodockActionServer(Node):
                 success = True  # if not checking charge, treat as success of motion-only
 
             if success:
-                self.set_drive_state(False)
+                #self.set_drive_state(False)
                 break
 
             # Back out and wait before retrying
@@ -1355,8 +1355,8 @@ class AutodockActionServer(Node):
         #success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
         success = self.wait_charge_state_with_confirm(True,5,1.0)
         if success:
-            self.set_drive_state(True)
-            time.sleep(7.0)
+            #self.set_drive_state(True)
+            #time.sleep(7.0)
             self.get_logger().info("Stop charging successfully")
             time.sleep(1.0)
             self.send_feedback(goal_handle,1,'start undocking.......')

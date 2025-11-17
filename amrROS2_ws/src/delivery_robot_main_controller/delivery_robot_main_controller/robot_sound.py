@@ -63,6 +63,7 @@ class RobotSoundNode(Node):
         self.last_missing_map_log = 0.0
         self.occupied_threshold = 65
         self.map_padding_cells = 1
+        self.soundLevel = 50
 
         self.obstacle_alarm_suppressed_log_interval = 5.0
         self.last_obstacle_alarm_suppressed_log = 0.0
@@ -74,17 +75,43 @@ class RobotSoundNode(Node):
         self.get_logger().info(f'Obstacle sound alarm is {state}.')
         self.get_logger().info('✅ robot_sound_node started using .wav files')
 
+    #----set Sound Volumn--------
+    def set_sound_level(self,level:int):
+        self.soundLevel = level
+
     # ============================================================
     # 🔊 Play sound helper
     # ============================================================
     def play_sound(self, filename: str) -> None:
         file_path = os.path.join(self.sound_dir, filename)
         if os.path.exists(file_path):
-            self.get_logger().info(f'🔊 Playing sound: {file_path}')
+            # 🔥 สำคัญมาก: ตั้ง volume ให้ USB speaker ทุกครั้งก่อนเล่น
             try:
-                subprocess.Popen(['aplay', '-q', file_path])  # -q = quiet mode
-            except Exception as exc:  # pragma: no cover
-                self.get_logger().error(f'Failed to play sound: {exc}')
+                volume_str = f"{self.soundLevel}%"
+                subprocess.call(["amixer", "-c", "1", "sset", "PCM", volume_str, "unmute"])
+            except Exception as e:
+                self.get_logger().error(f"Failed to set volume: {e}")
+            
+            
+            self.get_logger().info(f'🔊 Playing sound: {file_path}')
+            # ลองใช้ paplay ก่อน (ผ่าน PulseAudio)
+            try:
+                subprocess.Popen(['paplay', file_path])
+            except FileNotFoundError:
+                # ถ้าเครื่องไม่มี paplay (ไม่มี PulseAudio utils) fallback ไปใช้ aplay แบบ safe
+                try:
+                    subprocess.Popen([
+                        'aplay',
+                        '-D', 'plughw:1,0',
+                        '-c', '2',
+                        '-f', 'S16_LE',
+                        '-r', '48000',
+                        file_path
+                    ])
+                except Exception as e:
+                    self.get_logger().error(f"Failed to play sound with aplay: {e}")
+            except Exception as e:
+                self.get_logger().error(f"Failed to play sound with paplay: {e}")
         else:
             self.get_logger().warn(f'Sound file not found: {file_path}')
 
@@ -266,6 +293,23 @@ class RobotSoundNode(Node):
             return value.strip().lower() in ('1', 'true', 'yes', 'on')
         return bool(value)
 
+    @staticmethod
+    def _parameter_to_int_range(value, minimum: int = 0, maximum: int = 100) -> Optional[int]:
+        if value is None:
+            return None
+        try:
+            if isinstance(value, str):
+                value = value.strip()
+                if not value:
+                    return None
+                numeric = float(value)
+            else:
+                numeric = float(value)
+        except (TypeError, ValueError):
+            return None
+        bounded = max(minimum, min(maximum, int(numeric)))
+        return bounded
+
     def _refresh_settings_timer(self):
         self._refresh_settings_from_api()
 
@@ -290,6 +334,10 @@ class RobotSoundNode(Node):
                     self.sound_alarm_for_obstacle_enabled = new_value
                     state = 'enabled' if new_value else 'disabled'
                     self.get_logger().info(f'Obstacle sound alarm {state} (API).')
+                sound_level = self._parameter_to_int_range(config.get('soundLevel'))
+                if sound_level is not None and (initial or sound_level != self.soundLevel):
+                    self.soundLevel = sound_level
+                    self.get_logger().info(f'Sound volume set to {sound_level}% (API).')
         except Exception as exc:
             now = time.time()
             if now - self.last_settings_fetch_error_log >= self.settings_fetch_fail_log_interval:

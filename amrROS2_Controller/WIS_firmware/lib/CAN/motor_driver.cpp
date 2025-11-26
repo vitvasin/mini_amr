@@ -55,7 +55,7 @@
 
 
 
-#define ReceiveTimeOut            1            // Maximum for waiting answer from eMR in milli second
+#define ReceiveTimeOut            100            // Maximum for waiting answer from eMR in milli second
 #define Acceleration              5000            // rpm/s^2 
 #define Deceleration              5000            // rpm/s^2 
 #define MaxVelocity               160             // rpm/s      // maxspeed eMR motor hub
@@ -231,7 +231,7 @@ bool CAN1_ReceiveFrame()
   // Check CANOpen eMR Time out:
   if (millis()-timer_out >= ReceiveTimeOut)
   {
-    // Serial.println("CANOpen eMR respond time out.. ");
+   // Serial5.println("CANOpen eMR respond time out.. ");
     return false;
   }
 
@@ -246,8 +246,9 @@ bool CAN1_SendFrame(uint32_t node_id, uint32_t data_size, uint8_t* data)
 
   memcpy(&msg.buf[0], &data[0], data_size);
   can1.write(msg);  
-
-  return CAN1_ReceiveFrame();
+  //delay(1);
+  return true;
+  //return CAN1_ReceiveFrame();
 }
 //////////////////  NMT command ///////////////////////
 uint8_t NMT_SetOperational()
@@ -302,7 +303,7 @@ uint8_t NMT_Bootup()
 }
 //////////////  SYNCHRONIZATION OBJECT (SYNC) /////////
 ////////// The Synchronization object is used to simultaneously validate the time of PDO data //////////
-uint8_t Sync_message(eMR_t *eMR)
+uint8_t Sync_message()
 {
   uint8_t data[1];          
   uint32_t node_id;
@@ -620,66 +621,88 @@ uint8_t CANOpen_ReadActualPosObj_Safe(eMR_t *eMR)
 //     // The old eMR->ActualPosition value remains, but the calling function knows it's stale.
 //     return 0; 
 // }
-void eMR_Read_data()   //////////////// (Program type 1)
+
+//////////////////  Read eMR data ///////////////////////
+void eMR_Read_data(eMR_t *eMR_L, eMR_t *eMR_R)   //////////////// (Program type 1)
 {
   // volatile int32_t status_word1 = 0;
-  volatile int32_t position = 0;
+  int32_t position_L = 0;
+  int32_t position_R = 0;
+  bool get_L=false;
+  bool get_R=false;
+  static unsigned long count = 0;
+  // bool both_get=true;
 
-    
-    if (msg.id==0x380 + Motor_ID1){
-      // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
-      position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
-
+    // for ( uint8_t i = 0; i < 8; i++ ) {
+    //   Serial5.print(msg.buf[i],HEX); Serial5.print(" ");
+    // }
+    // Serial5.print(" ");
+    while(1)
+    {
+      Serial5.print("In loop"); Serial5.println(count++);
       
-      
-      // eMR->ActualPosition =
-      //   (int32_t)(((uint32_t)msg.buf[2])       |
-      //             ((uint32_t)msg.buf[3] << 8)  |
-      //             ((uint32_t)msg.buf[4] << 16) |
-      //             ((uint32_t)msg.buf[5] << 24));
-      // Serial.println("status_word1 : " + String(status_word1 )+ " word ");
-      //Serial.println("position_motor1: " + String(position)+ " count ");
+      if (msg.id==0x380 + Motor_ID1 && !get_L) {
+        // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+        position_L = (uint32_t)msg.buf[2] | (uint32_t)(msg.buf[3] << 8) | (uint32_t)(msg.buf[4] << 16) | (uint32_t)(msg.buf[5] << 24);
+        Serial5.println("position_L: " + String(position_L));
+        
+        eMR_L->ActualPosition = (int32_t)position_L;
+        
+        get_L = true;
 
+      }
+      if (msg.id==0x380 + Motor_ID2 && !get_R) {
+        // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+        position_R = (uint32_t)msg.buf[2] | (uint32_t)(msg.buf[3] << 8) | (uint32_t)(msg.buf[4] << 16) | (uint32_t)(msg.buf[5] << 24);
+        Serial5.println("position_R: " + String(position_R));
+
+        eMR_R->ActualPosition = (int32_t)position_R;
+
+        get_R = true;
+
+      }
+      if (get_L ==true && get_R ==true){
+        get_L = false;
+        get_R = false;
+        
+        Serial5.println("Both motor positions updated.");
+        break;
+      }
     }
-
-    if (msg.id==0x380 + Motor_ID2){
-      // status_word1  = msg.buf[0] | (msg.buf[1] << 8);
-      position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
-
-      // eMR->ActualPosition =
-      //   (int32_t)(((uint32_t)msg.buf[2])       |
-      //             ((uint32_t)msg.buf[3] << 8)  |
-      //             ((uint32_t)msg.buf[4] << 16) |
-      //             ((uint32_t)msg.buf[5] << 24));
-      // Serial.println("status_word1 : " + String(status_word1 )+ " word ");
-      //Serial.println("position_motor2: " + String(position)+ " count ");
-    }
-
-    // if (msg.id==0x480 + Motor_ID1){
-    //   status_word2  = msg.buf[0] | (msg.buf[1] << 8);
-    //   velocity = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
-    //   Serial.println("status_word2 : " + String(status_word2 )+ " word ");
-    //   Serial.println("velocity_motor1: " + String(velocity)+ " rpm ");
-    // }
-    // if (msg.id==0x380 + Motor_ID2) {
-    //   status_word1  = msg.buf[0] | (msg.buf[1] << 8);
-    //   position = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
-    //   Serial.println("status_word1 : " + String(status_word1 )+ " word ");
-    //   Serial.println("position_motor2: " + String(position)+ " count ");
-    // }
-
-    // if (msg.id==0x480 + Motor_ID2){
-    //   status_word2  = msg.buf[0] | (msg.buf[1] << 8);
-    //   velocity = msg.buf[2] | (msg.buf[3] << 8) | (msg.buf[4] << 16) | (msg.buf[5] << 24);
-    //   Serial.println("status_word2 : " + String(status_word2 )+ " word ");
-    //   Serial.println("velocity_motor2: " + String(velocity)+ " rpm ");
-    // }
-      
 
   
 
 }
 
+void eMR_Read_data_base()   //////////////// (Program type 1)
+{
+ // volatile int32_t status_word1 = 0;
+  // volatile int32_t position1 = 0;
+  // volatile int32_t position2 = 0;
+  CAN_message_t RXmsg;
+  unsigned long start = millis();
+
+  while ((millis() - start) < 3) 
+  {
+    if (can1.read(RXmsg)) 
+    {
+      if (RXmsg.id==0x380 + Motor_ID1)
+      {
+      //status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+      int32_t position1 = RXmsg.buf[2] | (RXmsg.buf[3] << 8) | (RXmsg.buf[4] << 16) | (RXmsg.buf[5] << 24);
+      eMR_right.ActualPosition = position1;
+
+      }
+
+      if (RXmsg.id==0x380 + Motor_ID2)
+      {
+      //status_word1  = msg.buf[0] | (msg.buf[1] << 8);
+      int32_t position2 = RXmsg.buf[2] | (RXmsg.buf[3] << 8) | (RXmsg.buf[4] << 16) | (RXmsg.buf[5] << 24);
+      eMR_left.ActualPosition = position2;
+      }
+    }
+  }
+}
 // uint8_t CANOpen_ReadActualPosObj_PDO(eMR_t *eMR)
 // {
 //     CAN_message_t rxMsg;

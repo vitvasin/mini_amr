@@ -27,7 +27,9 @@
 #include <sensor_msgs/point_cloud2_iterator.hpp>
 #include <string>
 #include <vector>
+
 #include <stdio.h>
+#include <limits>
 
 
 
@@ -291,8 +293,11 @@ bool DockPerception::getPose(geometry_msgs::msg::PoseStamped& pose,
     try {
       //listener_.waitTransform(frame, pose.header.frame_id);
       //listener_.transformPose(frame, pose, pose);
-      auto transform = tf_buffer_->lookupTransform(frame, pose.header.frame_id, pose.header.stamp);
-      tf2::doTransform(pose, pose, transform);
+      if (tf_buffer_->canTransform(frame, pose.header.frame_id, pose.header.stamp, tf2::durationFromSec(0.1)))
+      {
+        auto transform = tf_buffer_->lookupTransform(frame, pose.header.frame_id, pose.header.stamp);
+        tf2::doTransform(pose, pose, transform);
+      }
     } catch (const tf2::TransformException& ex) {
       std::cout << "Couldn't transform dock pose\n";
       return false;
@@ -310,17 +315,29 @@ void DockPerception::callback(
   }
   // lock dock_ to prevent other functions from modifying dock_
   std::lock_guard<std::mutex> lock(dock_mutex_);
+  // Limit LiDAR usable range to within `range_limit` meters (configurable via dock_coordinates.yaml).
+  // Values beyond the limit (or non-finite) are set to NaN so they are ignored downstream.
+  sensor_msgs::msg::LaserScan filtered_scan = *scan;
+  const float range_limit_m = (std::isfinite(range_limit) && range_limit > 0.0)
+                                ? static_cast<float>(range_limit)
+                                : 1.2f;  // fallback default
+  for (size_t i = 0; i < filtered_scan.ranges.size(); ++i) {
+    const float r = filtered_scan.ranges[i];
+    if (!std::isfinite(r) || r > range_limit_m) {
+      filtered_scan.ranges[i] = std::numeric_limits<float>::quiet_NaN();
+    }
+  }
   // Make sure goal is valid (orientation != 0 0 0 0)
   if (dock_.header.frame_id == "" ||
       (dock_.pose.orientation.z == 0.0 && dock_.pose.orientation.w == 0.0)) {
     // dock_ is of type geometry_msgs::msg::PoseStamped
     // If goal is invalid, set to a point directly ahead of robot
     dock_.header = scan->header;
-    for (size_t i = scan->ranges.size() / 2; i < scan->ranges.size(); i++) {
-      if (std::isfinite(scan->ranges[i])) {
-        double angle = scan->angle_min + i * scan->angle_increment;
-        dock_.pose.position.x = cos(angle) * scan->ranges[i];
-        dock_.pose.position.y = sin(angle) * scan->ranges[i];
+    for (size_t i = filtered_scan.ranges.size() / 2; i < filtered_scan.ranges.size(); i++) {
+      if (std::isfinite(filtered_scan.ranges[i])) {
+        double angle = filtered_scan.angle_min + i * filtered_scan.angle_increment;
+        dock_.pose.position.x = cos(angle) * filtered_scan.ranges[i];
+        dock_.pose.position.y = sin(angle) * filtered_scan.ranges[i];
         dock_.pose.orientation.x = 1.0;
         dock_.pose.orientation.y = 0.0;
         dock_.pose.orientation.z = 0.0;
@@ -333,13 +350,10 @@ void DockPerception::callback(
   // Make sure goal is in the tracking frame
   if (dock_.header.frame_id != tracking_frame_) {
     try {
-      // wait for the transform between the frame the dock is currently
-      // referenced to and the main reference frame
-      //listener_.waitTransform(tracking_frame_, dock_.header.frame_id);
-
-      //listener_.transformPose(tracking_frame_, dock_, dock_);
-      auto transform = tf_buffer_->lookupTransform(tracking_frame_,  dock_.header.frame_id, dock_.header.stamp);
-      tf2::doTransform(dock_, dock_, transform);
+      if (tf_buffer_->canTransform(tracking_frame_, dock_.header.frame_id, dock_.header.stamp, tf2::durationFromSec(0.1))) {
+        auto transform = tf_buffer_->lookupTransform(tracking_frame_, dock_.header.frame_id, dock_.header.stamp);
+        tf2::doTransform(dock_, dock_, transform);
+      }
     } catch (const tf2::TransformException& ex) {
       std::cout << "Couldn't transform dock pose to tracking frame";
       return;
@@ -353,7 +367,7 @@ void DockPerception::callback(
 
   // Cluster the laser scan
   laser_processor::ScanMask mask;
-  laser_processor::ScanProcessor processor(*scan, mask);
+  laser_processor::ScanProcessor processor(filtered_scan, mask);
   processor.splitConnected(point_cloud_split_dist);// Default 0.04 TODO(enhancement) parameterize
   processor.removeLessThan(minimum_point_cloud);
  /* char str2[80] = "";
@@ -511,7 +525,7 @@ void DockPerception::callback(
   // Filter the pose esitmate.
   //dock_.pose = dock_pose_filter_->filter(best_pose);
   dock_.pose = best_pose;
-  dock_stamp_ = scan->header.stamp;
+  dock_stamp_ = scan->header.stamp;  // timestamp from original (unfiltered) scan
   found_dock_ = true;
   std::cout << "found dock x= " << dock_.pose.position.x <<" y= "<< dock_.pose.position.y <<"\n";
 }
@@ -526,7 +540,10 @@ DockCandidatePtr DockPerception::extract(laser_processor::SampleSet* cluster) {
     //listener_.waitTransform(tracking_frame_, cluster->header.frame_id);
 
     //t_frame = listener_.getTransform(tracking_frame_, cluster->header.frame_id);
-    t_frame = tf_buffer_->lookupTransform(tracking_frame_,  cluster->header.frame_id, cluster->header.stamp);
+    if (tf_buffer_->canTransform(tracking_frame_, cluster->header.frame_id, cluster->header.stamp, tf2::durationFromSec(0.1)))
+    {
+      t_frame = tf_buffer_->lookupTransform(tracking_frame_,  cluster->header.frame_id, cluster->header.stamp);
+    }
     
   } catch (const tf2::TransformException& ex) {
     std::cout << "ERROR. COULD NOT TRANSFORM POINT\n";

@@ -14,7 +14,7 @@
 # limitations under the License.
 
 from geometry_msgs.msg import PoseStamped
-from nav2_simple_commander.robot_navigator import BasicNavigator, TaskResult
+from .robot_navigator import BasicNavigator, NavigationResult
 import rclpy
 from rclpy.duration import Duration
 
@@ -99,11 +99,11 @@ def main():
 
     # Do something depending on the return code
     result = navigator.getResult()
-    if result == TaskResult.SUCCEEDED:
+    if result == NavigationResult.SUCCEEDED:
         print('Goal succeeded!')
-    elif result == TaskResult.CANCELED:
+    elif result == NavigationResult.CANCELED:
         print('Goal was canceled!')
-    elif result == TaskResult.FAILED:
+    elif result == NavigationResult.FAILED:
         print('Goal failed!')
     else:
         print('Goal has an invalid return status!')

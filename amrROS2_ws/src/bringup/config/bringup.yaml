@@ -1,6 +1,6 @@
 ekf_filter_node:
     ros__parameters:
-            frequency: 30.0 #20.0
+            frequency: 50.0 #20.0
             two_d_mode: true
             publish_tf: true
     
@@ -98,17 +98,21 @@ scan_to_scan_filter_chain:
         max_z: 1.0
 
     filter2:
+      name: front_right_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        lower_angle: 1.8314 #2.25
+        upper_angle: 2.46
+        #lsmgop:
+
+    filter3:
         name: speckle_filter
         type: laser_filters/LaserScanSpeckleFilter
         params:
-          filter_type: 1
+          filter_type: 0
           max_range: 2.0
           max_range_difference: 0.1
           filter_window: 7
-          
-    filter3:
-        name: interpolation
-        type: laser_filters/InterpolationFilter 
         
 # scan_to_scan_filter_chain:
 #   ros__parameters:

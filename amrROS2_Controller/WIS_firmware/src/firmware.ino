@@ -94,6 +94,7 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define FUNC_STATUS 0x06
 #define FUNC_BATT 0x07
 #define FUNC_CHARGE 0x08
+#define FUNC_MTR_DRIVE 0x09
 
 // ---------------- Pkg data frame -----------------
 #define _PKG_LEN    43  // Total bytes: header + host + size + payload + checksum
@@ -151,6 +152,12 @@ float x=0.0f, y=0.0f, theta=0.0f;
 #define _BMS_PERCENT_H   33
 #define _BMS_STATUS_     34
 #define _IR_CHARGE_STATE_ 35
+#define _MTR_DRIVE_STATE_ 36
+#define _MTR_FAULT_STATE_ 37
+#define _RESERVED2_        38
+#define _RESERVED3_        39
+#define _RESERVED4_        40
+#define _RESERVED5_        41 
 
 #define _CHK_SUM_        42   // Final byte
 //--------------------------------------------------
@@ -190,6 +197,7 @@ bool imu_ready;
 bool odom_ready;
 bool batt_ready;
 bool range_ready;
+static bool emer_flag = true;
 
 // ---------------- Control --------------------
 Kinematics kinematics(
@@ -207,18 +215,18 @@ unsigned long prev_cmd_time = 0;
 
 Adafruit_MCP23X17 mcp;
 
-bool cliff_state, bumper_state, emer_state, stop;
+bool cliff_state, bumper_state, emer_state,virtual_emer_state = false, stop;
 bool connection_failed;
 
 static const int RX_BUF_SIZE = 128;  // safe static buffer size
 
 // ---------------- Task Timing ----------------
 const unsigned int recv_interval    = 1;   // check UART almost every cycle
-const unsigned int control_interval = 1000;  // 33 Hz motor update
+const unsigned int control_interval = 10;  // 33 Hz motor update
 const unsigned int send_interval    = 10;  // 50 Hz odometry feedback
 const unsigned int imu_interval     = 10;  // 25 Hz IMU
 const unsigned int bms_interval     = 1000;// 1 Hz BMS
-const unsigned int sensor_interval  = 50; //50;  // 20 Hz rangers
+const unsigned int sensor_interval  = 100; //50;  // 20 Hz rangers
 const unsigned int safety_interval  = 20;  // 50 Hz for safety
 
 unsigned long imu_time = 0;
@@ -323,6 +331,46 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             digitalWrite(LED_RUN, !digitalRead(LED_RUN)); // For ROS Communication
             // Serial5.printf("ROS comm start.\n");
             LedRosComm = millis();
+        }
+    }
+
+    if(func == FUNC_MTR_DRIVE)
+    {
+        if (data_len >= 1)
+        {
+            uint8_t mtr_drive_state = data[0];
+            // Serial5.print("MTR Drive State: ");
+            // Serial5.println(mtr_drive_state);
+            if(mtr_drive_state == 1)
+            {
+                // mcp.digitalWrite(3, HIGH);
+                virtual_emer_state = false;
+                mcp.digitalWrite(7, HIGH);
+                mcp.digitalWrite(6, LOW);
+                mcp.digitalWrite(5, LOW);
+                mcp.digitalWrite(4, LOW);
+
+
+                // mcp.digitalWrite(8, HIGH);
+                // mcp.digitalWrite(9, HIGH);
+                // delay(10);
+            }
+            else if(mtr_drive_state == 0)
+            {
+                // mcp.digitalWrite(3, LOW);
+                mcp.digitalWrite(7, LOW);
+                mcp.digitalWrite(6, HIGH);
+                mcp.digitalWrite(5, HIGH);
+                mcp.digitalWrite(4, HIGH);
+                virtual_emer_state = true;
+                emer_flag = true;
+
+                
+
+                // mcp.digitalWrite(8, LOW);
+                // mcp.digitalWrite(9, LOW);
+                // delay(10);
+            }
         }
     }
 }
@@ -572,8 +620,8 @@ void process_can_messages() {
                     ((uint32_t)msg.buf[5] << 24));
     }else {
       // Unknown message ID, ignore or handle as needed
-        Serial.print("Unknown CAN ID: ");
-        Serial.println(msg.id, HEX);
+        Serial5.print("Unknown CAN ID: ");
+        Serial5.println(msg.id, HEX);
     }
     // You can add more 'else if' blocks here to handle other messages
   
@@ -599,21 +647,32 @@ void update_odometry() {
     // float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
     // delay(1);
     // Right motor
-    Sync_message(&eMR);  // send SYNC message
-    eMR.cobid = DKE_TPDO3 + axis1;
-    // CANOpen_ReadActualPosObj_Safe(&eMR);
-    CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
-    float right_pos_m = right_encoder.update((uint32_t)eMR.ActualPosition);
-    //delay(1);
-    eMR.cobid = DKE_TPDO3 + axis2; // use TPDO3 for less jitter
-    CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
-    float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
 
     
-    Serial.print("L: ");
-    Serial.print(left_pos_m, 4);
-    Serial.print(" R: ");
-    Serial.println(right_pos_m, 4);
+    eMR_Read_data_base(); // read data for both motors
+    //eMR_Read_data(&eMR_left,&eMR_right); // read data for both motors
+    float left_pos_m = left_encoder.update((uint32_t)eMR_left.ActualPosition);
+    float right_pos_m = right_encoder.update((uint32_t)eMR_right.ActualPosition);
+
+    // Serial5.print("L: ");
+    // Serial5.print(left_pos_m, 4);
+    // Serial5.print(" R: ");
+    // Serial5.print(right_pos_m, 4);
+    
+    // eMR.cobid = DKE_TPDO3 + axis1;
+    // // CANOpen_ReadActualPosObj_Safe(&eMR);
+    // CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
+    // float right_pos_m = right_encoder.update((uint32_t)eMR.ActualPosition);
+    // //delay(1);
+    // eMR.cobid = DKE_TPDO3 + axis2; // use TPDO3 for less jitter
+    // CANOpen_ReadActualPosObj_PDO(&eMR); // use PDO read for less jitter
+    // float left_pos_m = left_encoder.update((uint32_t)eMR.ActualPosition);
+
+    
+    // Serial5.print("L: ");
+    // Serial5.print(left_pos_m, 4);
+    // Serial5.print(" R: ");
+    // Serial5.println(right_pos_m, 4);
     
     // Calculate position deltas
     float d_left = left_pos_m - last_left_pos_m;
@@ -645,7 +704,7 @@ void update_odometry() {
     int16_t Vx = clamp16(v);
     int16_t Vy = 0;          // no lateral motion in diff drive
     int16_t Wz = clamp16(w);
-    // Serial.print("Vx: "); Serial.println(Vx);
+    //Serial5.print(" Vx: "); Serial5.println(Vx/1000.0f);
     
 
     pkg_data[_ODOM_VX_L] = Vx & 0xFF;
@@ -669,8 +728,8 @@ void control_task(void *arg = nullptr) {
     static uint32_t LedControl = millis();
     
     // Handle command timeout
-    if ((millis() - prev_cmd_time > 100) || stop || emer_state) {
-        cmd_vel.linear_x = 0.1;
+    if ((millis() - prev_cmd_time > 100) || stop || emer_state || virtual_emer_state) {
+        cmd_vel.linear_x = 0.0;
         cmd_vel.linear_y = 0.0;
         cmd_vel.angular_z = 0.0;
     }else {
@@ -681,7 +740,7 @@ void control_task(void *arg = nullptr) {
     Kinematics::rpm req_rpm = kinematics.getRPM(cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
     
     // Handle emergency state
-    if (emer_state) {
+    if (emer_state ||virtual_emer_state) {
         if (!emer_flag) {
             // Emergency state entered - could add motor shutdown code here if needed
         }
@@ -691,30 +750,104 @@ void control_task(void *arg = nullptr) {
         if (emer_flag) {
             // Recovering from emergency state
             // Re-init communication and re-enable torque on both drives
-            // CANOpen_eMR_Init();
-            // eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
-            // eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
+            delay(7000);
+            CANOpen_eMR_Init();
+            eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
+            eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
             // delay(3000);
             emer_flag = false;
         }
         else {
             // Normal operation: send target velocity
-            eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2);
+            eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2); //left motor
            // delay(1);
-            eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1);
+            eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1); //right motor
+           
+
             //delay(1);
         }
     }
     //Sync_message(&eMR); // Send SYNC after setting velocity
     // Update odometry
     //process_can_messages();
+    Sync_message();  // se  nd SYNC message
     update_odometry();
 }
 
+static uint8_t sensor_state = 0;
 // ---------------- Sensor Task -------------------
 void sensor_module_task()
 {
     int32_t buff;
+    uint8_t alarm_mode;
+    uint8_t led_mode;
+
+    const uint8_t ultarsonic_max_range = 20;  // cm unit
+        // Serial.printf("Sensor State: %d\n", sensor_state);
+        // Serial.printf("Range Left: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
+        // Serial.printf("IR Charge State : %d\n", buff);
+        // Serial.println("-------------------------------------------");
+     switch(sensor_state) {
+        case 0:  // Read Left
+            if (Ultrasonics_1.readHoldingRegisters(0, 2) == Ultrasonics_1.ku8MBSuccess) {
+                buff = Ultrasonics_1.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_left = buff * 10;
+                pkg_data[_RANGER_LEFT_L] = static_cast<uint8_t>(range_left & 0xFF);
+                pkg_data[_RANGER_LEFT_H] = static_cast<uint8_t>((range_left >> 8) & 0xFF);
+            } else {
+                range_left = 99;
+            }
+            sensor_state = 1;
+            break;
+        case 1:  // Read Right
+            if (Ultrasonics_2.readHoldingRegisters(0, 2) == Ultrasonics_2.ku8MBSuccess) {
+                buff = Ultrasonics_2.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_right = buff * 10;
+                pkg_data[_RANGER_RIGHT_L] = static_cast<uint8_t>(range_right & 0xFF);
+                pkg_data[_RANGER_RIGHT_H] = static_cast<uint8_t>((range_right >> 8) & 0xFF);
+            }else {
+                range_right = 99;
+            }
+            sensor_state = 2;
+            break;
+        case 2:  // Read Center
+            if (Ultrasonics_3.readHoldingRegisters(0, 2) == Ultrasonics_3.ku8MBSuccess) {
+                buff = Ultrasonics_3.getResponseBuffer(0);
+                if(buff > ultarsonic_max_range) buff = ultarsonic_max_range;
+                range_center = buff * 10;
+                pkg_data[_RANGER_CENTER_L] = static_cast<uint8_t>(range_center & 0xFF);
+                pkg_data[_RANGER_CENTER_H] = static_cast<uint8_t>((range_center >> 8) & 0xFF);
+            }else {
+                range_center = 99;
+            }
+            sensor_state = 3;
+            break;
+        case 3:  // Read Cliff
+            if (Sensor_module.readHoldingRegisters(0, 2) == Sensor_module.ku8MBSuccess) {
+                buff = Sensor_module.getResponseBuffer(1);
+                cliff = buff;
+            }else {
+                cliff = 9999;
+            }
+            sensor_state = 4;
+            break;
+        case 4:  // Read IR Charge
+            if(IR_Charge_state.readHoldingRegisters(0, 1) == IR_Charge_state.ku8MBSuccess) {
+                buff = IR_Charge_state.getResponseBuffer(0);
+                pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+            }else 
+            {
+                buff = 99;
+                pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+            }
+            sensor_state = 3; // skip ultrasonic reading for next cycle
+            break;
+
+
+    }
+    // int32_t buff;
     // if (Ultrasonics_1.readHoldingRegisters(0x0101, 1) == Ultrasonics_1.ku8MBSuccess)
     //     {range_left = Ultrasonics_1.getResponseBuffer(0);
 
@@ -732,8 +865,8 @@ void sensor_module_task()
     //         if (range_center > 3000 ) range_center = 3000;
     
     // }
-    // else {range_center = 9999;}
-    // delay(5);
+    // // else {range_center = 9999;}
+    // // delay(5);
     // if (Ultrasonics_3.readHoldingRegisters(0x0101, 1) == Ultrasonics_3.ku8MBSuccess)
     // {
     //     range_right = Ultrasonics_3.getResponseBuffer(0);
@@ -741,29 +874,29 @@ void sensor_module_task()
     //         if (range_right > 3000 ) range_right = 3000;
     // }
     //     else range_right = 9999;
+    // // delay(5);
+    // if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
+    //     cliff = Sensor_module.getResponseBuffer(0);
     // delay(5);
-    if (Sensor_module.readHoldingRegisters(0x00, 1) == Sensor_module.ku8MBSuccess)
-        cliff = Sensor_module.getResponseBuffer(0);
-    delay(5);
-   // Serial5.printf("Range L: %d  C: %d  R: %d  Cliff: %d\n", range_left, range_center, range_right, cliff);
+    // //Serial5.printf("Range L: %d  C: %d  R: %d  Cliff: %d\n", range_left, range_center, range_right, cliff);
 
-    uint8_t result;
-    if(IR_Charge_state.readHoldingRegisters(0x00, 1) == IR_Charge_state.ku8MBSuccess)
-    {
-        buff = IR_Charge_state.getResponseBuffer(0); // addr = 0
+    // uint8_t result;
+    // if(IR_Charge_state.readHoldingRegisters(0x00, 1) == IR_Charge_state.ku8MBSuccess)
+    // {
+    //     buff = IR_Charge_state.getResponseBuffer(0); // addr = 0
         
-     //   Serial5.printf("IR Charge State : %d\n", buff);
-        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+    //  //   Serial5.printf("IR Charge State : %d\n", buff);
+    //     pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         
-    }
-    else
-    {
-        buff = 99;
-        pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-        //Serial5.println("READ IR ERROR");
-        //Serial5.println("Read IR Charge State error");
-    }
-    // range_center =1000;
+    // }
+    // else
+    // {
+    //     buff = 99;
+    //     pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+    //     //Serial5.println("READ IR ERROR");
+    //     //Serial5.println("Read IR Charge State error");
+    // }
+    // // range_center =1000;
 
     // pkg_data[_RANGER_LEFT_L]   = range_left & 0xFF;
     // pkg_data[_RANGER_LEFT_H]   = (range_left >> 8) & 0xFF;
@@ -771,13 +904,15 @@ void sensor_module_task()
     // pkg_data[_RANGER_CENTER_H] = (range_center >> 8) & 0xFF;
     // pkg_data[_RANGER_RIGHT_L]  = range_right & 0xFF;
     // pkg_data[_RANGER_RIGHT_H]  = (range_right >> 8) & 0xFF;
-    pkg_data[_RANGER_LEFT_L]   = 300 & 0xFF;
-    pkg_data[_RANGER_LEFT_H]   = (300 >> 8) & 0xFF;
-    pkg_data[_RANGER_CENTER_L] = 300 & 0xFF;
-    pkg_data[_RANGER_CENTER_H] = (300 >> 8) & 0xFF;
-    pkg_data[_RANGER_RIGHT_L]  = 300 & 0xFF;
-    pkg_data[_RANGER_RIGHT_H]  = (300 >> 8) & 0xFF;
+    // pkg_data[_RANGER_LEFT_L]   = 300 & 0xFF;
+    // pkg_data[_RANGER_LEFT_H]   = (300 >> 8) & 0xFF;
+    // pkg_data[_RANGER_CENTER_L] = 300 & 0xFF;
+    // pkg_data[_RANGER_CENTER_H] = (300 >> 8) & 0xFF;
+    // pkg_data[_RANGER_RIGHT_L]  = 300 & 0xFF;
+    // pkg_data[_RANGER_RIGHT_H]  = (300 >> 8) & 0xFF;
     
+
+    /////// ALARM & LED MODE ///////
     range_ready = true;
 
     bool A = (range_left < range_limit);
@@ -880,6 +1015,9 @@ void setup()
     for (uint8_t i = 0; i < 16; i++)
         mcp.pinMode(i, (i > 7) ? INPUT_PULLUP : OUTPUT);
     mcp.digitalWrite(7, HIGH);
+    mcp.digitalWrite(6, LOW);
+    mcp.digitalWrite(5, LOW);
+    mcp.digitalWrite(4, LOW);
 
     Serial.begin(460800);
     Serial5.begin(115200);
@@ -905,13 +1043,25 @@ void setup()
     // sendTimer.begin(sendTimerISR, 20000);  // 20ms interval
 }
 
-
+// Simple loop frequency counter
+uint32_t loop_count = 0;
+uint32_t last_report_time = 0;
+const uint32_t REPORT_INTERVAL = 1000;  // Report every 1 second
+void monitor_loop_frequency() {
+    loop_count++;
+    
+    if (millis() - last_report_time >= REPORT_INTERVAL) {
+        Serial.printf("Loop Frequency: %u Hz\n", loop_count);
+        loop_count = 0;
+        last_report_time = millis();
+    }
+}
 // ---------------- Superloop ------------------
 void loop()
 {
     unsigned long now = millis();
     static uint32_t LedActivity = millis();
-    
+    // monitor_loop_frequency();
 
     recive_data_task(); 
 
@@ -921,7 +1071,7 @@ void loop()
     if (now - bms_time > bms_interval) { bms_task(); bms_time = now; }
     if (now - sensor_time > sensor_interval) { sensor_module_task(); sensor_time = now; }
     if (now - safety_time > safety_interval) { safty_task(); safety_time = now; }
-    //if (now - send_time > send_interval) { send_data_task(); send_time = now; }
+    if (now - send_time > send_interval) { send_data_task(); send_time = now; }
     if (now - LedActivity > 200 ){digitalWrite(LED_BUILTIN, !digitalRead(LED_BUILTIN)); LedActivity = now; }
     
 }

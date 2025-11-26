@@ -112,6 +112,8 @@ public:
     float percentage_;
     uint8_t status_;
     uint16_t ir_charge_state_;
+    uint8_t motor_drive_state_;
+    uint8_t drive_fault_state_;
 
     bool update_imu_;
     bool update_odom_;
@@ -130,6 +132,7 @@ public:
     void SetChargeState(uint16_t charge_state); 
     void UpdateIP(char* addressBuffer);
     void UpdateStatus(int status);
+    void SetMotorDriveState(bool state);
 
 private:
     const uint8_t HEAD          = 0xFF;
@@ -144,6 +147,7 @@ private:
     const uint8_t FUNC_STATUS   = 0x06;
     const uint8_t FUNC_BATT     = 0x07;
     const uint8_t FUNC_CHARGE     = 0x08;
+    const uint8_t FUNC_MTR_DRIVE = 0x09;
 
     std::string port_name;
     std::thread receive_thread_;

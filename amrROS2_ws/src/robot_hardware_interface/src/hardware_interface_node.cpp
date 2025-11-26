@@ -9,6 +9,7 @@
 #include "tf2_ros/transform_broadcaster.h"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "std_msgs/msg/int16.hpp"
+#include "std_msgs/msg/bool.hpp"
 
 #include <chrono>
 #include <arpa/inet.h>
@@ -37,6 +38,9 @@ public:
     charge_state_sub_ = create_subscription<std_msgs::msg::Int16>(
         "set_charge_state", 1, std::bind(&HardwareInterfaceNode::ChargeStateCallback, this, _1));
 
+    mtr_drive_state_sub_ = create_subscription<std_msgs::msg::Bool>(
+        "set_mtr_state", 1, std::bind(&HardwareInterfaceNode::MotorDriveStateCallback, this, _1));
+
     imu_pub_    = create_publisher<sensor_msgs::msg::Imu>("imu/data_raw", 10);
     odom_pub_   = create_publisher<nav_msgs::msg::Odometry>("odom_raw", 10);
     batt_pub_   = create_publisher<sensor_msgs::msg::BatteryState>("battery", 10);
@@ -46,8 +50,8 @@ public:
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
 
-    timer_update_data_ = create_wall_timer(1ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
-    Battery_report = create_wall_timer(300s, std::bind(&HardwareInterfaceNode::batteryUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    // Battery_report = create_wall_timer(300s, std::bind(&HardwareInterfaceNode::batteryUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";
@@ -125,6 +129,7 @@ private:
   std::shared_ptr<HardwareInterface> hardware_interface;
   
   rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_sub_;
+  rclcpp::Subscription<std_msgs::msg::Bool>::SharedPtr mtr_drive_state_sub_;
   rclcpp::Subscription<std_msgs::msg::Int16>::SharedPtr charge_state_sub_;
   rclcpp::Publisher<nav_msgs::msg::Odometry>::SharedPtr odom_pub_;
   rclcpp::Publisher<sensor_msgs::msg::Imu>::SharedPtr imu_pub_;
@@ -181,6 +186,12 @@ private:
   {
     //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
     hardware_interface->SetChargeState(static_cast<uint16_t>(msg.data));
+  }
+
+  void MotorDriveStateCallback(const std_msgs::msg::Bool & msg)
+  {
+    //std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
+    hardware_interface->SetMotorDriveState(msg.data);
   }
 
   void batteryUpdateCallback()

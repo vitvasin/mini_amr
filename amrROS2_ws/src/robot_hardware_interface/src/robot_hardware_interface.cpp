@@ -54,6 +54,23 @@ void HardwareInterface::SetMotion(float v_x, float v_y, float v_z) {
     }
 }
 
+void HardwareInterface::SetMotorDriveState(bool state) {
+
+    try {
+        uint8_t state_byte = state ? 1 : 0;
+
+        std::vector<uint8_t> cmd = {
+            state_byte
+        };
+
+        SendData(FUNC_MTR_DRIVE, cmd);
+        //std::cout << "Set Motor Drive State to: " << static_cast<int>(state_byte) << std::endl;
+
+    } catch (const std::exception& e) {
+        std::cerr << "Set Motor Drive State error: " << e.what() << std::endl;
+    }
+}
+
 void HardwareInterface::UpdateIP(char* addressBuffer) {
     uint8_t ipPart1, ipPart2, ipPart3, ipPart4;
     try {

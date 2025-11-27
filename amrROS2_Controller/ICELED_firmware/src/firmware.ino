@@ -862,10 +862,10 @@ void sensor_module_task()
     uint8_t led_mode;
 
     const uint8_t ultarsonic_max_range = 20;  // cm unit
-        Serial.printf("Sensor State: %d\n", sensor_state);
-        Serial.printf("Range Left: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
-        Serial.printf("IR Charge State : %d\n", buff);
-        Serial.println("-------------------------------------------");
+        // Serial.printf("Sensor State: %d\n", sensor_state);
+        // Serial.printf("Range Left: %d -- Range Center: %d -- Range Right: %d -- Cliff distance : %d\n", range_left, range_center, range_right, cliff);
+        // Serial.printf("IR Charge State : %d\n", buff);
+        // Serial.println("-------------------------------------------");
      switch(sensor_state) {
         case 0:  // Read Left
             if (Ultrasonics_L.readHoldingRegisters(0, 2) == Ultrasonics_L.ku8MBSuccess) {
@@ -1181,7 +1181,7 @@ void loop()
     static uint32_t fault_monitor = millis();
     //static uint16_t count = 0;
     //static uint32_t prev_time = 0;
-    monitor_loop_frequency();
+    //monitor_loop_frequency();
 
     receive_data_task();
 

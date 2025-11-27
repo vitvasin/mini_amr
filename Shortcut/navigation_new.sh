@@ -29,7 +29,7 @@ case "$1" in
         # Launch navigation with AMCL #NECTEC_4th_Floor.yaml
         ros2 launch navigation navigation_amcl.launch.py \
             map:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor.yaml" \
-            rviz:=false \
+            rviz:=true \
             rviz_config_file:="$ROS_WS/install/navigation/share/navigation/rviz/rviz_nav.rviz" \
             use_keepout_zones:=true \
             keepout_mask_yaml:="$SCRIPT_DIR/../amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml"

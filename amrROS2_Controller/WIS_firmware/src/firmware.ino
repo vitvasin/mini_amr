@@ -341,13 +341,13 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             uint8_t mtr_drive_state = data[0];
             // Serial5.print("MTR Drive State: ");
             // Serial5.println(mtr_drive_state);
-            if(mtr_drive_state == 1)
+            if(mtr_drive_state == 0)
             {
                 // mcp.digitalWrite(3, HIGH);
                 virtual_emer_state = false;
-                mcp.digitalWrite(7, HIGH);
-                mcp.digitalWrite(6, LOW);
-                mcp.digitalWrite(5, LOW);
+                mcp.digitalWrite(7, LOW);
+                // mcp.digitalWrite(6, LOW);
+                // mcp.digitalWrite(5, LOW);
                 mcp.digitalWrite(4, LOW);
 
 
@@ -355,12 +355,12 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
                 // mcp.digitalWrite(9, HIGH);
                 // delay(10);
             }
-            else if(mtr_drive_state == 0)
+            else if(mtr_drive_state == 1)
             {
                 // mcp.digitalWrite(3, LOW);
-                mcp.digitalWrite(7, LOW);
-                mcp.digitalWrite(6, HIGH);
-                mcp.digitalWrite(5, HIGH);
+                mcp.digitalWrite(7, HIGH);
+                // mcp.digitalWrite(6, HIGH);
+                // mcp.digitalWrite(5, HIGH);
                 mcp.digitalWrite(4, HIGH);
                 virtual_emer_state = true;
                 emer_flag = true;
@@ -724,7 +724,7 @@ void update_odometry() {
 }
 
 void control_task(void *arg = nullptr) {
-    static bool emer_flag = false;
+    // static bool emer_flag = false;
     static uint32_t LedControl = millis();
     
     // Handle command timeout
@@ -740,22 +740,38 @@ void control_task(void *arg = nullptr) {
     Kinematics::rpm req_rpm = kinematics.getRPM(cmd_vel.linear_x, cmd_vel.linear_y, cmd_vel.angular_z);
     
     // Handle emergency state
-    if (emer_state ||virtual_emer_state) {
+    // Handle emergency state
+    static uint8_t recovery_state = 0;
+    static unsigned long recovery_start_time = 0;
+
+    if (emer_state || virtual_emer_state) {
         if (!emer_flag) {
             // Emergency state entered - could add motor shutdown code here if needed
         }
         emer_flag = true;
+        recovery_state = 0;
     }
     else {
         if (emer_flag) {
             // Recovering from emergency state
-            // Re-init communication and re-enable torque on both drives
-            delay(7000);
-            CANOpen_eMR_Init();
-            eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
-            eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
-            // delay(3000);
-            emer_flag = false;
+            switch (recovery_state) {
+                case 0: // Start wait timer
+                    recovery_start_time = millis();
+                    recovery_state = 1;
+                    break;
+                case 1: // Wait for 7 seconds
+                    if (millis() - recovery_start_time > 7000) {
+                        recovery_state = 2;
+                    }
+                    break;
+                case 2: // Init motors
+                    CANOpen_eMR_Init();
+                    eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
+                    eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
+                    emer_flag = false;
+                    recovery_state = 0;
+                    break;
+            }
         }
         else {
             // Normal operation: send target velocity
@@ -1015,9 +1031,9 @@ void setup()
     for (uint8_t i = 0; i < 16; i++)
         mcp.pinMode(i, (i > 7) ? INPUT_PULLUP : OUTPUT);
     mcp.digitalWrite(7, HIGH);
-    mcp.digitalWrite(6, LOW);
-    mcp.digitalWrite(5, LOW);
-    mcp.digitalWrite(4, LOW);
+    // mcp.digitalWrite(6, LOW);
+    // mcp.digitalWrite(5, LOW);
+    mcp.digitalWrite(4, HIGH);
 
     Serial.begin(460800);
     Serial5.begin(115200);
@@ -1061,7 +1077,7 @@ void loop()
 {
     unsigned long now = millis();
     static uint32_t LedActivity = millis();
-    // monitor_loop_frequency();
+    monitor_loop_frequency();
 
     recive_data_task(); 
 

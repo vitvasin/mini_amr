@@ -325,104 +325,7 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
     }
 }
 
-// void recive_data_task(void *parameter)
-// void receive_data_task()
-// {
 
-//     uint8_t header;
-//     uint8_t device_id;
-//     uint8_t len;
-//     uint8_t func;
-//     uint8_t data_len;
-//     uint8_t data_to_mem = 0;
-//     uint8_t value;
-//     uint8_t rx_check_num;
-//     uint8_t check_sum;
-
-//     // Use stack-allocated buffers to avoid dynamic allocation in the hot receive loop
-//     uint8_t data[RX_BUF_SIZE];
-
-//     while (Serial.available() > 0)
-//     {
-
-//         header = Serial.read();
-
-//         if (header == HEAD)
-//         {
-//             if (DEBUG_RECEIVE)
-//             {
-//                 Serial5.println("--------------New Data--------------");
-//                 Serial5.println("Correct header");
-//             }
-//             device_id = Serial.read();
-
-//             if (device_id == DEVICE_ID)
-//             {
-
-//                 len = Serial.read();
-//                 func = Serial.read();
-
-//                 check_sum = header + device_id + len + func;
-//                 data_len = len - 4;
-//                 data_to_mem = data_len;
-//                 memset(data, 0, RX_BUF_SIZE);
-
-//                 while (data_to_mem > 0)
-//                 {
-//                     uint8_t index = data_len - data_to_mem;
-//                     data[index] = Serial.read();
-//                     check_sum += data[index];
-
-//                     data_to_mem--;
-//                 }
-
-//                 rx_check_num = Serial.read();
-
-//                 if ((check_sum & 0xFF) == rx_check_num)
-//                 {
-//                     if (DEBUG_RECEIVE)
-//                     {
-//                         Serial5.println("Data Recived");
-//                     }
-//                     threads.delay(1);
-//                     parse_data(func, data, data_len);
-//                 }
-//                 else
-//                 {
-//                     if (DEBUG_RECEIVE)
-//                     {
-//                         Serial5.println("Check sum error");
-//                     }
-//                 }
-
-//                 if (DEBUG_RECEIVE)
-//                 {
-//                     Serial5.print("Device_id:  ");
-//                     Serial5.println(device_id);
-//                     Serial5.print("Data_range:  ");
-//                     Serial5.println(len);
-//                     Serial5.print("Function:  ");
-//                     Serial5.println(func);
-//                     for (uint8_t i = 0; i < data_len; i++)
-//                     {
-//                         Serial5.print("Data ");
-//                         Serial5.print(i);
-//                         Serial5.print(": ");
-//                         Serial5.println(data[i]);
-//                     }
-//                     Serial5.print("Rx_check:  ");
-//                     Serial5.println(rx_check_num);
-//                     Serial5.print("Check sum:  ");
-//                     Serial5.println(check_sum & 0xFF);
-//                 }
-//             }
-//         }
-//     }
-//     // threads.delay(25);
-//     //}
-//     // no dynamic memory to free
-    
-// }
 
 void receive_data_task(void *parameter = nullptr)
 {
@@ -783,13 +686,22 @@ void control_task()
 
         if (emer_flag)
         {
-            delay(7000);
-            // Serial.println("Emer OFF");
-            eMR_CANOpen_Init();
-            eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
-            // Serial.println("eMR CANopen Init. eMR motor ");
-            
-            emer_flag = false;
+            static unsigned long emer_recovery_start = 0;
+            if (emer_recovery_start == 0) {
+                emer_recovery_start = millis();
+                // Serial.println("Emer OFF - Waiting for drive init...");
+            }
+
+            if (millis() - emer_recovery_start >= 7000) {
+                // Serial.println("Drive Init Complete");
+                eMR_CANOpen_Init();
+                eMR_SetTargetVelocity(0, DIR_NEG, 0, DIR_POS);
+                // Serial.println("eMR CANopen Init. eMR motor ");
+                
+                emer_flag = false;
+                emer_recovery_start = 0; // Reset for next time
+            }
+            // Else: still waiting, do nothing (non-blocking)
         }
         else
         {
@@ -1184,6 +1096,7 @@ void loop()
     //monitor_loop_frequency();
 
     receive_data_task();
+    poll_can_bus();
 
     // pkg_data[_ODOM_VX_L] = 0;
     // pkg_data[_ODOM_VX_H] = 0;

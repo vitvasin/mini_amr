@@ -21,8 +21,7 @@ int32_t velocity = 0;
 
 bool CAN1_ReceiveFrame()
 {
-  can1.read(revPACKET);
-  return true;
+  return can1.read(revPACKET);
 }
 
 bool CAN1_SendFrame(uint32_t node_id, uint32_t data_size, uint8_t* data)
@@ -176,41 +175,42 @@ uint8_t eMR_SetTargetVelocity(float percentPwm1,bool direction1, float percentPw
 
 uint8_t eMR_ReadActualVelocity()
 {
-  int32_t  velocity=0;
   eMR_Sync_message();
 
-  velocity1 = 0.1*(((velocity | revPACKET.buf[3])<<24) + ((velocity | revPACKET.buf[2])<<16)
-              + ((velocity | revPACKET.buf[1])<<8) + (velocity | revPACKET.buf[0]));
+  unsigned long start = millis();
+  while (millis() - start < 10) { // 10ms timeout
+    if (CAN1_ReceiveFrame()) {
+       if (revPACKET.id == (RPDO1_COBID + dual_axis)) {
+          velocity1 = 0.1*(((int32_t)revPACKET.buf[3]<<24) + ((int32_t)revPACKET.buf[2]<<16)
+                      + ((int32_t)revPACKET.buf[1]<<8) + (int32_t)revPACKET.buf[0]);
 
-  velocity2 = 0.1*(((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
-             + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]));
-
-/*
-  Serial.println(revPACKET.buf[0],HEX);
-  Serial.println(revPACKET.buf[1],HEX);
-  Serial.println(revPACKET.buf[2],HEX);
-  Serial.println(revPACKET.buf[3],HEX);
-
-  Serial.println(revPACKET.buf[4],HEX);
-  Serial.println(revPACKET.buf[5],HEX);
-  Serial.println(revPACKET.buf[6],HEX);
-  Serial.println(revPACKET.buf[7],HEX);
-*/
+          velocity2 = 0.1*(((int32_t)revPACKET.buf[7]<<24) + ((int32_t)revPACKET.buf[6]<<16)
+                     + ((int32_t)revPACKET.buf[5]<<8) + (int32_t)revPACKET.buf[4]);
+          return 0;
+       }
+    }
+  }
       
-  return 0;
+  return 1; // Timeout
+}
+
+void poll_can_bus()
+{
+    if (CAN1_ReceiveFrame()) {
+       if (revPACKET.id == (RPDO1_COBID + dual_axis)) {
+          v.velocity1 = 0.1*(((int32_t)revPACKET.buf[3]<<24) + ((int32_t)revPACKET.buf[2]<<16)
+                      + ((int32_t)revPACKET.buf[1]<<8) + (int32_t)revPACKET.buf[0]);
+
+          v.velocity2 = 0.1*(((int32_t)revPACKET.buf[7]<<24) + ((int32_t)revPACKET.buf[6]<<16)
+                     + ((int32_t)revPACKET.buf[5]<<8) + (int32_t)revPACKET.buf[4]);
+       }
+    }
 }
 
 void eMR_ReadActualVelocity2()
 {
-  int32_t  velocity=0;
   eMR_Sync_message();
-
-  v.velocity1 = 0.1*(((velocity | revPACKET.buf[3])<<24) + ((velocity | revPACKET.buf[2])<<16)
-              + ((velocity | revPACKET.buf[1])<<8) + (velocity | revPACKET.buf[0]));
-
-  v.velocity2 = 0.1*(((velocity | revPACKET.buf[7])<<24) + ((velocity | revPACKET.buf[6])<<16)
-             + ((velocity | revPACKET.buf[5])<<8) + (velocity | revPACKET.buf[4]));
-
+  // No blocking wait here. Data is updated via poll_can_bus() called in the main loop.
 }
 
 void canSniff(const CAN_message_t &msg) {

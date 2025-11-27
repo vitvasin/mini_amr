@@ -154,6 +154,7 @@ uint8_t eMR_CANOpen_Init();
 uint8_t eMR_SetTargetVelocity(float percentPwm1,bool direction1, float percentPwm2, bool direction2);
 uint8_t eMR_ReadActualVelocity();
 void eMR_ReadActualVelocity2();
+void poll_can_bus();
 
 void print_statusword_debug();
 bool eMR_ReadStatusWord(uint8_t node, uint16_t *out_status, uint32_t timeout_ms = 200);

@@ -16,11 +16,11 @@ ekf_filter_node:
             #ax    , ay    , az
             odom0: odom_raw
 
-            odom0_config: [false, false, false,
-                        false, false, false,
-                        true, true, false,
-                        false, false, true,
-                        false, false, false]
+            # odom0_config: [false, false, false,
+            #             false, false, false,
+            #             true, true, false,
+            #             false, false, true,
+            #             false, false, false]
 
             # odom0_config: [false, false, false,     # x, y, z
             #    false, false, false,     # roll, pitch, yaw
@@ -29,16 +29,16 @@ ekf_filter_node:
             #    false, false, false]    # ax, ay, az
 
             imu0: imu/data_raw
-            imu0_config: [false, false, false,
-                        false, false, false,
-                        false, false, false,
-                        false, false, true,
-                        false, false, false]   
             # imu0_config: [false, false, false,
             #             false, false, false,
             #             false, false, false,
             #             false, false, true,
-            #             false, false, false]     
+            #             true, false, false]   
+            imu0_config: [false, false, false,
+                        false, false, false,
+                        false, false, false,
+                        false, false, true,
+                        false, false, false]     
             imu0_differential: true
 
 imu_filter:

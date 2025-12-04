@@ -91,6 +91,7 @@
 #define HomeOffsetMove_Obj        0x30B1
 #define HomePosition              0x30B0
 #define HomingCurrentThreshold    0x30B2
+#define RPDO4_CommParam_Obj       0x1403
 
 /* eMR Statusword */
 #define eMR_BIT15               0x8000          // bit code: position referenced to home position
@@ -1007,6 +1008,26 @@ uint8_t CANOpen_SetPolarity(eMR_t *eMR, uint8_t value)
     return CAN1_SendFrame(node_id, DLC, data);
 }
 
+uint8_t CANOpen_SetRPDOTransmissionType(eMR_t *eMR, uint8_t type)
+{
+    uint8_t data[8];
+    uint32_t node_id = eMR->cobid;
+
+    // SDO write to 0x1403 subindex 0x02 (Transmission Type)
+    // 0x1400 + (PDO_Num - 1) -> RPDO1=1400, RPDO2=1401, RPDO3=1402, RPDO4=1403
+    
+    data[0] = SDO_Expedited_1;                 // 1-byte expedited write
+    data[1] = (uint8_t)(RPDO4_CommParam_Obj & 0xFF);
+    data[2] = (uint8_t)((RPDO4_CommParam_Obj >> 8) & 0xFF);
+    data[3] = 0x02;                            // Sub-index 2: Transmission Type
+    data[4] = type;                            // 0-240=Sync, 255=Async
+    data[5] = 0x00;
+    data[6] = 0x00;
+    data[7] = 0x00;
+
+    return CAN1_SendFrame(node_id, DLC, data);
+}
+
 void CANOpen_eMR_Init(void)
 {
 
@@ -1018,6 +1039,7 @@ void CANOpen_eMR_Init(void)
                                                  
   eMR.mode = PVM_MODE;                                      //  Target velocity mode     
   CANOpen_SetOperationMode(&eMR);                           
+  CANOpen_SetRPDOTransmissionType(&eMR, 1); // Set to Synchronous (1)
   //CANOpen_SetProfileAcceleration(&eMR);  
   //CANOpen_SetProfileDeceleration(&eMR); 
   //CANOpen_Shutdown(&eMR);
@@ -1034,6 +1056,7 @@ void CANOpen_eMR_Init(void)
 
   eMR.mode = PVM_MODE; 
   CANOpen_SetOperationMode(&eMR);                   
+  CANOpen_SetRPDOTransmissionType(&eMR, 1); // Set to Synchronous (1)
   //CANOpen_SetProfileAcceleration(&eMR);  
   //CANOpen_SetProfileDeceleration(&eMR); 
   //CANOpen_Shutdown(&eMR);

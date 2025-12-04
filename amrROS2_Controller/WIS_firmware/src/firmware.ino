@@ -344,7 +344,7 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
             if(mtr_drive_state == 0)
             {
                 // mcp.digitalWrite(3, HIGH);
-                virtual_emer_state = false;
+                virtual_emer_state = true;
                 mcp.digitalWrite(7, LOW);
                 // mcp.digitalWrite(6, LOW);
                 // mcp.digitalWrite(5, LOW);
@@ -362,8 +362,8 @@ void parse_data(uint8_t func, uint8_t *data, uint8_t data_len)
                 // mcp.digitalWrite(6, HIGH);
                 // mcp.digitalWrite(5, HIGH);
                 mcp.digitalWrite(4, HIGH);
-                virtual_emer_state = true;
-                emer_flag = true;
+                virtual_emer_state = false;
+                //emer_flag = true;
 
                 
 
@@ -758,16 +758,24 @@ void control_task(void *arg = nullptr) {
                 case 0: // Start wait timer
                     recovery_start_time = millis();
                     recovery_state = 1;
+                   // Serial5.println("drive reset: state1");
                     break;
                 case 1: // Wait for 7 seconds
-                    if (millis() - recovery_start_time > 7000) {
+                     if (millis() - recovery_start_time > 1000) {
+                   // Serial5.println("drive reset: state2");
                         recovery_state = 2;
                     }
                     break;
                 case 2: // Init motors
+                    // can1.begin();
+                    // can1.setBaudRate(500000);
+                    // can1.setMBFilter(ACCEPT_ALL);
+                    // can1.distribute();
                     CANOpen_eMR_Init();
-                    eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
-                    eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
+                    //Serial5.print("drive reset complete");
+                    // delay(500);
+                   // eMRCanSpeedCntrl(0.0, DIR_NEG, axis2);
+                   // eMRCanSpeedCntrl(0.0, DIR_POS, axis1);
                     emer_flag = false;
                     recovery_state = 0;
                     break;
@@ -776,10 +784,8 @@ void control_task(void *arg = nullptr) {
         else {
             // Normal operation: send target velocity
             eMRCanSpeedCntrl(req_rpm.motor1, DIR_NEG, axis2); //left motor
-           // delay(1);
+            //delay(1);
             eMRCanSpeedCntrl(req_rpm.motor2, DIR_POS, axis1); //right motor
-           
-
             //delay(1);
         }
     }
@@ -980,6 +986,7 @@ void sensor_module_task()
 void safty_task()
 {
     emer_state = !mcp.digitalRead(8);
+    //Serial.println(emer_state);
     bumper_state = !mcp.digitalRead(9) || !mcp.digitalRead(10);
     cliff_state = (cliff > 200 && cliff < 5000);
     stop = (bumper_state || cliff_state);
@@ -1037,6 +1044,7 @@ void setup()
 
     Serial.begin(460800);
     Serial5.begin(115200);
+    //Serial5.println('start serial 5');
 
     can1.begin();
     can1.setBaudRate(500000);
@@ -1067,7 +1075,7 @@ void monitor_loop_frequency() {
     loop_count++;
     
     if (millis() - last_report_time >= REPORT_INTERVAL) {
-        Serial.printf("Loop Frequency: %u Hz\n", loop_count);
+        Serial5.printf("Loop Frequency: %u Hz\n", loop_count);
         loop_count = 0;
         last_report_time = millis();
     }
@@ -1077,7 +1085,7 @@ void loop()
 {
     unsigned long now = millis();
     static uint32_t LedActivity = millis();
-    monitor_loop_frequency();
+    //monitor_loop_frequency();
 
     recive_data_task(); 
 

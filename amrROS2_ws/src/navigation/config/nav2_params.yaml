@@ -74,7 +74,7 @@ bt_navigator:
 
 controller_server:
   ros__parameters:
-    controller_frequency: 5.0
+    controller_frequency: 20.0
     costmap_update_timeout: 0.5 #0.30
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.0
@@ -84,6 +84,7 @@ controller_server:
     goal_checker_plugins: ["goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
     use_realtime_priority: false
+    transform_tolerance: 1.0
 
     # Progress checker parameters
     progress_checker:
@@ -156,26 +157,26 @@ controller_server:
 
     FollowPath:
       plugin: "nav2_mppi_controller::MPPIController"
-      time_steps: 20
-      model_dt: 0.2
-      batch_size: 200
+      time_steps: 40
+      model_dt: 0.05
+      batch_size: 2000
 
       # eMR Controller Parameters Setting 
       ax_max: 1.6
-      ax_min: -1.6
+      ax_min: -3.6
       ay_max: 2.0
       az_max: 2.5
-      vx_std: 0.2    
+      vx_std: 0.4    
       vy_std: 0.2
       wz_std: 0.4
-      vx_max: 0.6
+      vx_max: 0.8
       vx_min: -0.35
       vy_max: 0.5
       wz_max: 1.5
 
       iteration_count: 1
       prune_distance: 1.7
-      transform_tolerance: 0.3
+      transform_tolerance: 1.0
       temperature: 0.3
       gamma: 0.015
       motion_model: "DiffDrive"
@@ -603,7 +604,7 @@ collision_detector:
       #max_points: 4
       visualize: False
       polygon_pub_topic: "/polygon_stop_detector"
-      enabled: true
+      enabled: False
     PolygonSlow:
       type: "polygon"
       #points: "[[0.35, 0.2], [0.35, -0.2], [0.0, -0.2], [0.0, 0.2]]"
@@ -613,13 +614,13 @@ collision_detector:
       slowdown_ratio: 0.5
       visualize: False
       polygon_pub_topic: "/polygon_slowdown_detector"
-      enabled: True
+      enabled: False
     #observation_sources: ["range_center", "range_left", "range_right", "scan"]
     observation_sources: ["scan"]
     scan:
       type: "scan"
       topic: "/scan"
-      enabled: True
+      enabled: False
     # pointcloud:
     #   type: "pointcloud"
     #   topic: "/intel_realsense_r200_depth/points"
@@ -628,11 +629,11 @@ collision_detector:
     range_left:
       type: "range"
       topic: "/range/left"
-      enabled: false
+      enabled: False
     range_center:
       type: "range"
       topic: "/range/center"
-      enabled: false
+      enabled: False
     range_right:
       type: "range"
       topic: "/range/right"

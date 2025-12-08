@@ -1,6 +1,6 @@
 ekf_filter_node:
     ros__parameters:
-            frequency: 30.0 #20.0
+            frequency: 50.0 #20.0
             two_d_mode: true
             publish_tf: true
     
@@ -15,31 +15,18 @@ ekf_filter_node:
             #vroll , vpitch, vyaw,
             #ax    , ay    , az
             odom0: odom_raw
-
-            # odom0_config: [false, false, false,
-            #             false, false, false,
-            #             true, true, false,
-            #             false, false, true,
-            #             false, false, false]
-
-            # odom0_config: [false, false, false,     # x, y, z
-            #    false, false, false,     # roll, pitch, yaw
-            #    true,  false,  false,     # vx, vy, vz
-            #    false, false, false,    # vroll, vpitch, vyaw
-            #    false, false, false]    # ax, ay, az
+            odom0_config: [false, false, false,
+                        false, false, false,
+                        true, false, false,
+                        false, false, true,
+                        false, false, false]
 
             imu0: imu/data_raw
-            # imu0_config: [false, false, false,
-            #             false, false, false,
-            #             false, false, false,
-            #             false, false, true,
-            #             true, false, false]   
             imu0_config: [false, false, false,
-                        false, false, false,
+                        false, false, true,
                         false, false, false,
                         false, false, true,
-                        false, false, false]     
-            imu0_differential: true
+                        true, false, false]  
 
 imu_filter:
     ros__parameters:

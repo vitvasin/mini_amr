@@ -50,7 +50,7 @@ public:
     range_center_pub_ = create_publisher<sensor_msgs::msg::Range>("range/center", 10);
     range_right_pub_  = create_publisher<sensor_msgs::msg::Range>("range/right", 10);
 
-    timer_update_data_ = create_wall_timer(20ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
     // Battery_report = create_wall_timer(300s, std::bind(&HardwareInterfaceNode::batteryUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
@@ -212,8 +212,8 @@ private:
   void timerUpdateCallback()
   {
     auto current_time = get_clock()->now();
-    if (hardware_interface->update_odom_)
-    {
+    // if (hardware_interface->update_odom_)
+    // {
       msg_odom_.header.stamp = current_time;
 
       // uint64_t dt = current_time.nanoseconds() - prev_update_;
@@ -253,9 +253,9 @@ private:
       odom_pub_->publish(msg_odom_);
 
       prev_update_ = current_time.nanoseconds();
-    }
-    if (hardware_interface->update_imu_)
-    {
+    // }
+    // if (hardware_interface->update_imu_)
+    // {
       msg_imu_.header.stamp = current_time;
 
       uint64_t dt = current_time.nanoseconds() - imu_prev_update_;
@@ -284,9 +284,9 @@ private:
       imu_pub_->publish(msg_imu_);
 
       imu_prev_update_ = current_time.nanoseconds();
-    }
-    if (hardware_interface->update_range_)
-    {
+    // }
+    // if (hardware_interface->update_range_)
+    // {
       msg_range_left_.header.stamp   = current_time;
       msg_range_center_.header.stamp = current_time;
       msg_range_right_.header.stamp  = current_time;
@@ -302,9 +302,9 @@ private:
       range_right_pub_ ->publish(msg_range_right_);
       
       // std::cout << "Received linear.x:"<< msg.linear.x << std::endl;
-    }
-    if (hardware_interface->update_batt_)
-    {
+    // }
+    // if (hardware_interface->update_batt_)
+    // {
       msg_batt_.voltage = hardware_interface->voltage_;
       msg_batt_.current = hardware_interface->current_;
       msg_batt_.percentage = hardware_interface->percentage_;
@@ -313,7 +313,7 @@ private:
       hardware_interface->update_batt_ = false;
 
       batt_pub_->publish(msg_batt_);
-    }
+    // }
       msg_charge_state_.data = static_cast<int16_t>(hardware_interface->ir_charge_state_);
       charge_state_pub_->publish(msg_charge_state_);
   }

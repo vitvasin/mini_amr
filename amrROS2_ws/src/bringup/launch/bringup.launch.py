@@ -80,6 +80,7 @@ def generate_launch_description():
                          'angle_compensate': True, 
                          'scan_mode': 'Sensitivity'}],
             remappings=[("scan", "raw_scan")],
+            arguments=['--ros-args', '-p', 'enable_topic_statistics:=true'],
             output='screen')
 
     laser_filter = Node(
@@ -87,6 +88,7 @@ def generate_launch_description():
             executable='scan_to_scan_filter_chain',
             remappings=[('scan', 'raw_scan'),
                 ('scan_filtered','scan')],
+                
             parameters=[params_file],
         )
 
@@ -105,7 +107,8 @@ def generate_launch_description():
             name='ekf_filter_node',
             output='screen',
             parameters=[params_file],
-            remappings=[("odometry/filtered", "odom")]
+            remappings=[("odometry/filtered", "odom")],
+            arguments=['--ros-args', '-p', 'enable_topic_statistics:=true']
         ) 
 
     hardware_node = Node(
@@ -114,6 +117,7 @@ def generate_launch_description():
         name="robot_hardware",
         output="screen",
         parameters=[{'serial_port': "/dev/teensy"}],
+        arguments=['--ros-args', '-p', 'enable_topic_statistics:=true']
     )
 
     launch_elements = GroupAction(

@@ -26,3 +26,7 @@ File: nav2_param.yaml
 | velocity_smoother           | max_accel        | Max acceleration / การเร่งสูงสุด |
 | velocity_smoother           | max_decel        | Max deceleration / การเบรกสูงสุด |
 | planner_server/GridBased    | tolerance        | Goal tolerance in planner (m) / ค่าคลาดเคลื่อนของ global planner |
+
+
+Rviz/Lidar framerate drop problem (From Linux Kernel) and Network Lidar
+https://github.com/ouster-lidar/ouster-ros/issues/458

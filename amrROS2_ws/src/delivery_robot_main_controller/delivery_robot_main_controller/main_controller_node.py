@@ -26,7 +26,7 @@ from . import api_client
 
 import signal
 from .rpc_server import RPCServer
-from .rpc_fnc import door_command, echo, dock_command_service, configure_rpc_access
+from .rpc_fnc import door_command, echo, dock_command_service, configure_rpc_access, process_rpc_requests
 
 TaskResult = NavigationResult
 
@@ -64,6 +64,8 @@ class DeliveryRobotMainController(Node):
         super().__init__('delivery_robot_main_controller')
         self.get_logger().info("Delivery Robot Main Controller Node started.")
         configure_rpc_access(self)
+        # Pump RPC service queue so RPC calls can trigger ROS service clients
+        self.create_timer(0.05, process_rpc_requests)
         self._should_dock = False #สำหรับเรียกเข้า dock และ undock แบบ manual
         self._should_undock = False
         self.current_pose = PoseStamped()
@@ -1447,7 +1449,8 @@ def main(args=None):
     rclpy.init(args=args)
     node = None
     node = DeliveryRobotMainController()
-    server = RPCServer(host="0.0.0.0", port=6000, authkey=b"secret")
+    # Use localhost by default; override with RPC_HOST / RPC_INTERFACE if needed
+    server = RPCServer(host=None, port=6000, authkey=b"secret")
     server.register_funcs(FUNCS)
     server.start(daemon=True)
     

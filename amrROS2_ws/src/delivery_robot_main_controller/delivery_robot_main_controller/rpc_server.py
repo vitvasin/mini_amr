@@ -4,6 +4,7 @@ from threading import Thread, Event
 import traceback
 import logging
 from typing import Callable, Dict, Any
+from .rpc_net import resolve_rpc_host
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
@@ -18,8 +19,9 @@ class RPCServer:
       server ตอบ: {"ok": True, "result": obj} หรือ {"ok": False, "error": str}
     """
 
-    def __init__(self, host: str = "0.0.0.0", port: int = 6000, authkey: bytes = b"secret"):
-        self.address = (host, port)
+    def __init__(self, host: str | None = None, port: int = 6000, authkey: bytes = b"secret"):
+        resolved_host = host or resolve_rpc_host(default="127.0.0.1")
+        self.address = (resolved_host, port)
         self.authkey = authkey
         self._stop_event = Event()
         self._thread: Thread | None = None

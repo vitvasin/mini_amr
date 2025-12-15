@@ -115,11 +115,11 @@ void Modbus_TCP_Server::init_modbus_server()
                 this, &Modbus_TCP_Server::handleDeviceError);
 
         // const QUrl url = QUrl::fromUserInput("192.168.1.254:1502");
-        const QUrl url = QUrl::fromUserInput("localhost:1520");
+        const QUrl url = QUrl::fromUserInput("localhost:1502");
         mpModbusDevice->setConnectionParameter(QModbusDevice::NetworkPortParameter, url.port());
         mpModbusDevice->setConnectionParameter(QModbusDevice::NetworkAddressParameter, url.host());
         // mpModbusDevice->setServerAddress(10);
-        mpModbusDevice->setServerAddress(10);
+        mpModbusDevice->setServerAddress(1);
 
         if (!mpModbusDevice->connectDevice())
         {
@@ -128,6 +128,7 @@ void Modbus_TCP_Server::init_modbus_server()
         }
         else
         {
+            // RCLCPP_INFO(this->get_logger(), "Server start at : %d -- %d", mpModbusDevice->serverAddress());
             RCLCPP_INFO(this->get_logger(), "Server Address : %d", mpModbusDevice->serverAddress());
 
             RCLCPP_INFO(this->get_logger(), "Modbus Server is Ready!");

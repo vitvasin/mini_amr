@@ -1,11 +1,15 @@
 # client_example.py
 import os
 from multiprocessing.connection import Client
+try:
+    from .rpc_net import resolve_rpc_host
+except ImportError:  # Allows running as a standalone script
+    from rpc_net import resolve_rpc_host
 
-
-RPC_HOST = 'localhost'
-RPC_PORT =  6000
-
+#RPC_HOST = resolve_rpc_host()  # env: RPC_HOST or RPC_INTERFACE (e.g., eth0)
+RPC_HOST = "localhost"
+RPC_PORT = int(os.getenv("RPC_PORT", "6000"))
+print("IP:", RPC_HOST)
 
 def call_remote(fn, *args, **kwargs):
     conn = Client((RPC_HOST,RPC_PORT), authkey=b"secret")
@@ -17,7 +21,7 @@ def call_remote(fn, *args, **kwargs):
     return resp.get("result")
 
 if __name__ == "__main__":
-    print("Open door #1:", call_remote("door_command", 0, 0))
-    print("Close door #2:", call_remote("door_command", 1, 0))
+    print("Open door #1:", call_remote("door_command", 1, 1))
+    print("Close door #2:", call_remote("door_command", 2, 1))
     #print("Dock robot:", call_remote("dock_command", True))
     #print("Undock robot:", call_remote("dock_command", False))

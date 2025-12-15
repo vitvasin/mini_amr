@@ -62,6 +62,11 @@ def generate_launch_description():
         executable = "map_shutdown"
     )
 
+    node9 = Node(
+        package = "wis_pkg",
+        executable = "battery_charge"
+    )
+
     # Create a LaunchDescription and add nodes
     ld = LaunchDescription()
     ld.add_action(node1)
@@ -72,6 +77,7 @@ def generate_launch_description():
     ld.add_action(node6)
     ld.add_action(node7)
     ld.add_action(node8)
+    ld.add_action(node9)
 
     return ld
     

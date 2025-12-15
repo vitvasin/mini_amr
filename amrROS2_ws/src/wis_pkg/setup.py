@@ -31,6 +31,7 @@ setup(
 	"map_nav = wis_pkg.map_nav_subscriber_node:main",
 	"point_save = wis_pkg.point_save_subscriber_node:main",
 	"map_shutdown = wis_pkg.map_shutdown_subscriber_node:main",
+	"battery_charge = wis_pkg.battery_charge_subscriber_node:main",
         ],
     },
 )

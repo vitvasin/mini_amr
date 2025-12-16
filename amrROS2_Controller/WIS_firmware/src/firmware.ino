@@ -859,10 +859,12 @@ void sensor_module_task()
             if(IR_Charge_state.readHoldingRegisters(0, 1) == IR_Charge_state.ku8MBSuccess) {
                 buff = IR_Charge_state.getResponseBuffer(0);
                 pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+                Serial5.println(buff);
             }else 
             {
                 buff = 99;
                 pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
+                Serial5.println(buff);
             }
             sensor_state = 3; // skip ultrasonic reading for next cycle
             break;

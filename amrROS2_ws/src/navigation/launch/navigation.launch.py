@@ -19,6 +19,8 @@ def generate_launch_description():
     robot_bringup_dir = get_package_share_directory("bringup")
     nav2_bringup_dir = get_package_share_directory("nav2_bringup")
     slam_toolbox_dir = get_package_share_directory("slam_toolbox")
+    action_autodock_dir = get_package_share_directory("action_autodock")
+    dock_lidar_dir = get_package_share_directory("dock_lidar")
 
     namespace = LaunchConfiguration('namespace')
     use_namespace = LaunchConfiguration('use_namespace')
@@ -134,6 +136,16 @@ def generate_launch_description():
         description='Full path to the RVIZ config file to use',
     )
     
+    declare_auto_dock_params_file_cmd = DeclareLaunchArgument(
+        'auto_dock_params_file',
+        default_value=PathJoinSubstitution([action_autodock_dir, "config", "auto_dock_config.yaml"]),
+        description='Full path to the autodock parameters file')
+
+    declare_dock_lidar_params_file_cmd = DeclareLaunchArgument(
+        'dock_lidar_params_file',
+        default_value=PathJoinSubstitution([dock_lidar_dir, "config", "dock_config.yaml"]),
+        description='Full path to the dock_lidar parameters file')
+    
     rviz_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(robot_navigation_dir, "launch", 'rviz_launch.py')),
         condition=IfCondition(use_rviz),
@@ -206,6 +218,22 @@ def generate_launch_description():
             condition=IfCondition(bringup)
         )
 
+    autodock_action_server = Node(
+        package='action_autodock',
+        executable='autodock_action_server',
+        name='autodock_action_server',
+        output='screen',
+        parameters=[LaunchConfiguration('auto_dock_params_file')]
+    )
+
+    dock_lidar_node = Node(
+        package='dock_lidar',
+        executable='dock_coordinates',
+        name='dock_coordinates',
+        output='screen',
+        parameters=[LaunchConfiguration('dock_lidar_params_file')]
+    )
+
     launch_elements = GroupAction(
      actions=[
         PushRosNamespace(condition=IfCondition(use_namespace), namespace=namespace),
@@ -217,6 +245,8 @@ def generate_launch_description():
         slam_toolbox_localization,
         navigation,
         rviz_cmd,
+        autodock_action_server,
+        dock_lidar_node,
       ]
    )
 
@@ -234,6 +264,8 @@ def generate_launch_description():
         declare_use_rviz_cmd,
         declare_use_slam_tb_cmd,
         declare_rviz_config_file_cmd,
+        declare_auto_dock_params_file_cmd,
+        declare_dock_lidar_params_file_cmd,
         #Launch all navigation nodes
         launch_elements
     ])

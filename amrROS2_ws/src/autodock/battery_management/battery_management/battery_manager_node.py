@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
+import json
 import time
 import math
 from enum import Enum, IntEnum
+import requests
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import BatteryState
@@ -42,6 +44,7 @@ class BatteryManager(Node):
         self.set_charge_retries = self.declare_parameter('set_charge_retries', 5).value
         self.ready_wait_timeout_sec = self.declare_parameter('ready_wait_timeout_sec', 5.0).value
         self.debug_interval_sec = self.declare_parameter('debug_interval_sec', 2.0).value
+        self.soc_api_refresh_sec = 30.0
 
         # ---- State ----
         self.state = ManagerState.IDLE_ON_DOCK
@@ -61,6 +64,11 @@ class BatteryManager(Node):
 
         self.timer = self.create_timer(0.5, self.loop)
         self.last_debug_time = 0.0
+        self.params_api_url = 'http://localhost:3000/api/param/list'
+
+        # Prefer SOC limits from API; fall back to configured parameters on failure
+        self.refresh_soc_limits_from_api(initial=True)
+        self.create_timer(self.soc_api_refresh_sec, self.refresh_soc_limits_from_api)
 
     def set_state(self, new_state: ManagerState):
         if self.state != new_state:
@@ -127,6 +135,41 @@ class BatteryManager(Node):
                 return True
             time.sleep(0.05)
         return self.ir_state == desired
+
+    def _parse_soc_limit(self, value, default: float) -> float:
+        try:
+            v = float(value)
+            if v > 1.0:
+                v = v / 100.0
+            return max(0.0, min(1.0, v))
+        except Exception:
+            return default
+
+    def refresh_soc_limits_from_api(self, initial: bool = False):
+        try:
+            resp = requests.get(self.params_api_url, timeout=3)
+            resp.raise_for_status()
+            payload = resp.json()
+            data = payload.get('data', [])
+            if isinstance(data, str):
+                data = json.loads(data)
+            if not isinstance(data, list) or len(data) == 0:
+                raise ValueError('API data is empty or not a list')
+            cfg = data[0]
+            new_target = self._parse_soc_limit(cfg.get('batteryChargingLimitUpper'), self.soc_target)
+            new_resume = self._parse_soc_limit(cfg.get('batteryChargingLimitLower'), self.soc_resume)
+            changed = (new_target != self.soc_target) or (new_resume != self.soc_resume)
+            self.soc_target = new_target
+            self.soc_resume = new_resume
+            if changed or initial:
+                self.get_logger().info(
+                    f'SOC limits from API: target={self.soc_target:.2f}, resume={self.soc_resume:.2f}'
+                )
+        except Exception as e:
+            # Keep using configured parameters when API is unreachable
+            self.get_logger().warn(
+                f'Failed to refresh SOC limits from API ({e}); using config values target={self.soc_target:.2f}, resume={self.soc_resume:.2f}'
+            )
 
     # Note: Dock/undock control removed. This node only
     # starts/stops charging based on battery and dock state.

@@ -15,7 +15,7 @@ setup(
             'config/battery_manager.yaml',
         ]),
     ],
-    install_requires=['setuptools'],
+    install_requires=['setuptools', 'requests'],
     zip_safe=True,
     maintainer='emr',
     maintainer_email='vasin22315@hotmail.com',

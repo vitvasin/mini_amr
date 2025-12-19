@@ -26,7 +26,7 @@ amcl:
     beam_skip_distance: 0.5
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
-    do_beamskip: false
+    do_beamskip: true #false
     global_frame_id: "map"
     lambda_short: 0.1
     laser_likelihood_max_dist: 2.0
@@ -49,9 +49,9 @@ amcl:
     transform_tolerance: 1.0
     update_min_a: 0.2
     update_min_d: 0.25
-    z_hit: 0.5
+    z_hit: 0.9 #0.5
     z_max: 0.05
-    z_rand: 0.5
+    z_rand: 0.1 #0.5
     z_short: 0.05
     scan_topic: scan
     set_initial_pose: true
@@ -70,7 +70,7 @@ bt_navigator:
     default_server_timeout: 120
     wait_for_service_timeout: 1000
     action_server_result_timeout: 900.0
-    default_nav_to_pose_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_to_pose_w_replanning_and_recovery.xml # or $(find-pkg-share my_package)/behavior_tree/my_nav_to_pose_bt.xml
+    #default_nav_to_pose_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_to_pose_w_replanning_and_recovery.xml # or $(find-pkg-share my_package)/behavior_tree/my_nav_to_pose_bt.xml
     default_nav_through_poses_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_through_pose.xml
     navigators: ["navigate_to_pose", "navigate_through_poses"]
     navigate_to_pose:
@@ -124,11 +124,11 @@ behavior_server:
 controller_server:
   ros__parameters:
     controller_frequency: 20.0
-    costmap_update_timeout: 0.3 #0.30
-    min_x_velocity_threshold: 0.05
+    costmap_update_timeout: 1.0 #0.3 #0.30
+    min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    failure_tolerance: 0.3
+    failure_tolerance: 1.0
     progress_checker_plugins: ["progress_checker"]
     goal_checker_plugins: ["goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
@@ -192,7 +192,7 @@ controller_server:
       plugin: "nav2_mppi_controller::MPPIController"
       time_steps: 35 #56
       model_dt: 0.05
-      batch_size: 800
+      batch_size: 400
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.4
@@ -207,7 +207,7 @@ controller_server:
       az_max: 3.5
       iteration_count: 1
       prune_distance: 1.7
-      transform_tolerance: 0.1
+      transform_tolerance: 0.5
       temperature: 0.3
       gamma: 0.015
       motion_model: "DiffDrive"
@@ -521,7 +521,7 @@ planner_server:
       max_iterations: 1000000               # maximum total iterations to search for before failing (in case unreachable), set to -1 to disable
       max_on_approach_iterations: 1000      # maximum number of iterations to attempt to reach goal once in tolerance
       max_planning_time: 2.0                # max time in s for planner to plan, smooth
-      cost_travel_multiplier: 3.0           # Cost multiplier to apply to search to steer away from high cost areas. Larger values will place in the center of aisles more exactly (if non-`FREE` cost potential field exists) but take slightly longer to compute. To optimize for speed, a value of 1.0 is reasonable. A reasonable tradeoff value is 2.0. A value of 0.0 effective disables steering away from obstacles and acts like a naive binary search A*.
+      cost_travel_multiplier: 4.0           # Cost multiplier to apply to search to steer away from high cost areas. Larger values will place in the center of aisles more exactly (if non-`FREE` cost potential field exists) but take slightly longer to compute. To optimize for speed, a value of 1.0 is reasonable. A reasonable tradeoff value is 2.0. A value of 0.0 effective disables steering away from obstacles and acts like a naive binary search A*.
       use_final_approach_orientation: false # Whether to set the final path pose at the goal's orientation to the requested orientation (false) or in line with the approach angle so the robot doesn't rotate to heading (true)
       smoother:
         max_iterations: 1000
@@ -585,14 +585,14 @@ smoother_server:
 waypoint_follower:
   ros__parameters:
     loop_rate: 20
-    stop_on_failure: true
+    stop_on_failure: false
     retry_forever: false        # NEW, keep retrying same waypoint edit on waypoint_follower node
     action_server_result_timeout: 900.0
     waypoint_task_executor_plugin: "wait_at_waypoint"
     wait_at_waypoint:
       plugin: "nav2_waypoint_follower::WaitAtWaypoint"
       enabled: True
-      waypoint_pause_duration: 50
+      waypoint_pause_duration: 200
 
 # velocity_smoother:
 #   ros__parameters:
@@ -817,7 +817,7 @@ collision_detector:
 
 loopback_simulator:
   ros__parameters:
-    base_frame_id: "base_footprint"
+    base_frame_id: "center_footprint"
     odom_frame_id: "odom"
     map_frame_id: "map"
     scan_frame_id: "base_scan"  # tb4_loopback_simulator.launch.py remaps to 'rplidar_link'

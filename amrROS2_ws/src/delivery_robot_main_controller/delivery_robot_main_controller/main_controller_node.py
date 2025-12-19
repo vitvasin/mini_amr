@@ -1450,7 +1450,7 @@ def main(args=None):
     node = None
     node = DeliveryRobotMainController()
     # Use localhost by default; override with RPC_HOST / RPC_INTERFACE if needed
-    server = RPCServer(host=None, port=6000, authkey=b"secret")
+    server = RPCServer(host='localhost', port=6000, authkey=b"secret")
     server.register_funcs(FUNCS)
     server.start(daemon=True)
     

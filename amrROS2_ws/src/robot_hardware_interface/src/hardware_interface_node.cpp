@@ -56,8 +56,8 @@ public:
 
 
     //timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
-    timer_update_data_ = create_wall_timer(10ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
-    timer_less_update_data_ = create_wall_timer(500ms , std::bind(&HardwareInterfaceNode::timerLessUpdateCallback, this));
+    timer_update_data_ = create_wall_timer(15ms , std::bind(&HardwareInterfaceNode::timerUpdateCallback, this));
+    //timer_less_update_data_ = create_wall_timer(500ms , std::bind(&HardwareInterfaceNode::timerLessUpdateCallback, this));
 
     msg_odom_.header.frame_id = "odom_frame";
     msg_odom_.child_frame_id  = "base_footprint";

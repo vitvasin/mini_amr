@@ -18,7 +18,7 @@ from ament_index_python.packages import get_package_share_directory
 
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, GroupAction, SetEnvironmentVariable
-from launch.conditions import IfCondition
+from launch.conditions import IfCondition, UnlessCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
 from launch_ros.actions import LoadComposableNodes, SetParameter
 from launch_ros.actions import Node
@@ -54,11 +54,14 @@ def generate_launch_description():
         'collision_detector',
         'bt_navigator',
         'waypoint_follower',
-         ##added for keepout zones
+    ]
+
+    keepout_nodes = [
         'keepout_filter_mask_server', 
         'keepout_costmap_filter_info_server',
-        # 'docking_server',
     ]
+    
+    lifecycle_nodes_with_keepout = lifecycle_nodes + keepout_nodes
 
     # Map fully qualified names to relative ones so the node's namespace can be prepended.
     # In case of the transforms (tf), currently, there doesn't seem to be a better alternative
@@ -283,6 +286,16 @@ def generate_launch_description():
             #     remappings=remappings,
             # ),
             Node(
+                condition=IfCondition(use_keepout_zones),
+                package='nav2_lifecycle_manager',
+                executable='lifecycle_manager',
+                name='lifecycle_manager_navigation',
+                output='screen',
+                arguments=['--ros-args', '--log-level', log_level],
+                parameters=[{'autostart': autostart}, {'node_names': lifecycle_nodes_with_keepout}],
+            ),
+            Node(
+                condition=UnlessCondition(use_keepout_zones),
                 package='nav2_lifecycle_manager',
                 executable='lifecycle_manager',
                 name='lifecycle_manager_navigation',

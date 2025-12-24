@@ -185,10 +185,32 @@ def clear_all_queues() -> int:
     return 0
 
 
+def check_queue() -> int:
+    """Print current pending queues. Returns 0 even if empty."""
+    try:
+        resp = api_client.get_pending_queue()
+        queues = _normalize_list_payload(resp, "data")
+    except Exception as e:
+        print(f"Error fetching queue list: {e}")
+        return 5
+
+    if not queues:
+        print("Queue is empty.")
+        return 0
+
+    print("Current queue:")
+    for idx, item in enumerate(queues, 1):
+        target = item.get("target", "")
+        action = item.get("action", "Request")
+        status = item.get("status", "")
+        qid = item.get("_id") or item.get("id") or ""
+        print(f"  {idx}. target={target} action={action} status={status} id={qid}")
+    return 0
+
+
 def main(argv: List[str]) -> int:
     if len(argv) < 2:
-        print("Usage: python test_amr.py <station-name | random | clearall>")
-        return 1
+        return check_queue()
 
     target = argv[1].strip()
     if not target:
@@ -199,6 +221,8 @@ def main(argv: List[str]) -> int:
         return run_random_mode()
     if target.lower() == "clearall":
         return clear_all_queues()
+    if target.lower() == "queue":
+        return check_queue()
     else:
         return run_single_station(target)
 

@@ -164,11 +164,11 @@ def create_pose(x, y, yaw=None, frame='map'):
     else:
         half_yaw = yaw * 0.5
         pose.pose.orientation.z = math.sin(half_yaw)
-        pose.pose.orientation.w = math.cos(half_yaw)
+    pose.pose.orientation.w = math.cos(half_yaw)
     return pose
 
 
-def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1'):
+def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1', blocked_lanes=None):
     start_x, start_y = start_pos[:2]
     goal_x, goal_y = goal_pos[:2]
     goal_yaw = None
@@ -179,7 +179,19 @@ def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1')
     start_wp = find_nearest_vertex(start_x, start_y, vertex_map)
     goal_wp = find_nearest_vertex(goal_x, goal_y, vertex_map)
 
-    path_nodes = nx.shortest_path(G, source=start_wp, target=goal_wp, weight='weight')
+    # Remove blocked lanes (edges)
+    if blocked_lanes:
+        for lane in blocked_lanes:
+            if isinstance(lane, (list, tuple)) and len(lane) >= 2:
+                v1, v2 = lane[:2]
+                if G.has_edge(v1, v2):
+                    G.remove_edge(v1, v2)
+
+    print("Graph before shortest_path:", G)
+    try:
+        path_nodes = nx.shortest_path(G, source=start_wp, target=goal_wp, weight='weight')
+    except (nx.NetworkXNoPath, nx.NodeNotFound):
+        return [], vertex_map, [], start_wp, goal_wp
 
     path_points = []
     for i, node in enumerate(path_nodes):
@@ -205,4 +217,4 @@ def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1')
         yaws[-1] = goal_yaw
 
     path_poses = [create_pose(x, y, yaw) for (x, y), yaw in zip(path_points, yaws)]
-    return path_poses
+    return path_poses, vertex_map, path_nodes, start_wp, goal_wp

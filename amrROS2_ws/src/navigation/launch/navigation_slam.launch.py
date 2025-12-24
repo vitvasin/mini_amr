@@ -100,7 +100,8 @@ def generate_launch_description():
         launch_arguments={
             'use_sim_time': use_sim_time,
             'params_file': nav_params_file,
-            'map_subscribe_transient_local': 'true'
+            'map_subscribe_transient_local': 'true',
+            'use_keepout_zones': 'false'
         }.items()
     )
 
@@ -119,7 +120,7 @@ def generate_launch_description():
 
     bringup = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
-            [robot_bringup_dir, 'launch', 'bringup.launch.py']))
+            [robot_bringup_dir, 'launch', 'bringup_map.launch.py']))
     )
 
     # Group all actions

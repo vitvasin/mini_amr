@@ -98,6 +98,12 @@ class DeliveryRobotMainController(Node):
         self.retry_move_no = 0
         self.status_id = None
         self.load_out_loop_counter = 0
+        self.replan_on_blocked_lane = True  # True=replan on blocked lane, False=stop with FAILED
+        self.blocked_lanes = set()
+        self._last_vertex_map = None
+        self._last_path_nodes = None
+        self._last_start_vertex = None
+        self._last_goal_vertex = None
 
         self.get_logger().info(f"Initial state: {self.state.name}")
 
@@ -876,6 +882,67 @@ class DeliveryRobotMainController(Node):
 
     def _clear_path_tracking(self):
         self._path_tracking = None
+        self._last_vertex_map = None
+        self._last_path_nodes = None
+        self._last_start_vertex = None
+        self._last_goal_vertex = None
+
+    def _current_lane_vertices(self):
+        """
+        Return (start_vertex, end_vertex) for the lane segment the robot is currently on.
+        """
+        if not self._path_tracking or not self._last_path_nodes:
+            return None
+        idx = self._path_tracking.get("current_index", 1)
+        if idx <= 0:
+            idx = 1
+        if idx >= len(self._last_path_nodes):
+            idx = len(self._last_path_nodes) - 1
+        if idx < 1:
+            return None
+        start_v = self._last_path_nodes[idx - 1]
+        end_v = self._last_path_nodes[idx]
+        return (start_v, end_v)
+
+    def _vertex_pose(self, vertex_name):
+        if not self._last_vertex_map or vertex_name not in self._last_vertex_map:
+            return None
+        vx, vy = self._last_vertex_map[vertex_name]
+        pose = PoseStamped()
+        pose.header.frame_id = "map"
+        pose.header.stamp = self.navigator.get_clock().now().to_msg()
+        pose.pose.position.x = vx
+        pose.pose.position.y = vy
+        pose.pose.orientation.w = 1.0
+        return pose
+
+    def _navigate_to_pose_blocking(self, pose: PoseStamped):
+        """
+        Send a single pose to Nav2 and wait synchronously for the result.
+        Returns True on success.
+        """
+        self.navigator.goToPose(pose)
+        while not self.navigator.isTaskComplete():
+            rclpy.spin_once(self, timeout_sec=0.1)
+        return self.navigator.getResult() == TaskResult.SUCCEEDED
+
+    def _handle_move_failure_cleanup(self):
+        self.blocked_lanes.clear()
+        if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
+            task = self.get_pending_queue_from_api(status = 'active')
+            if task:
+                action = task.get("action", "Request")
+                queue_id = task.get("_id") or task.get("id")
+                if action == 'Request':
+                    if queue_id:
+                        api_client.update_queue_status(queue_id,'failed')
+                        self.remove_queue_by_id(queue_id)
+                else: #Delivery ไม่ลบคิว ให้ค้างไว้
+                    if queue_id:
+                        api_client.update_queue_status(queue_id,'failed')
+        else:
+            self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด   
+        self.change_state(RobotState.STANDBY)
 
     def send_goal_pose(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
@@ -899,7 +966,13 @@ class DeliveryRobotMainController(Node):
         self.get_logger().info(f"AGV start_pos: x={start_pos[0]:.2f}, y={start_pos[1]:.2f}")
         self.get_logger().info(f"AGV goal_pos: x={goal_pos[0]:.2f}, y={goal_pos[1]:.2f}")
 
-        path_poses = compute_path_poses(building_yaml, start_pos, goal_pos)
+        path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
+            building_yaml, start_pos, goal_pos, blocked_lanes=self.blocked_lanes
+        )
+        self._last_vertex_map = vertex_map
+        self._last_path_nodes = path_nodes
+        self._last_start_vertex = start_wp
+        self._last_goal_vertex = goal_wp
 
         # Print out each waypoint in the path
         self.get_logger().info("Computed AGV path waypoints:")
@@ -915,6 +988,9 @@ class DeliveryRobotMainController(Node):
             path_poses[-1].pose.orientation.y = quat[1]
             path_poses[-1].pose.orientation.z = quat[2]
             path_poses[-1].pose.orientation.w = quat[3]
+        else:
+            self.get_logger().warn("No available path to goal (all lanes blocked?).")
+            return False
 
         self._initialize_path_tracking(path_poses)
 
@@ -924,6 +1000,7 @@ class DeliveryRobotMainController(Node):
             self.navigator.followWaypoints(path_poses)
         
         self.change_state(RobotState.MOVE)
+        return True
 
     def on_standby(self):
         self.get_logger().info("Robot is in STANDBY mode.")
@@ -1141,9 +1218,10 @@ class DeliveryRobotMainController(Node):
                     self.navigator.cancelTask()
 
         # Do something depending on the return code
+        path_info = self._path_tracking
         result = self.navigator.getResult()
-        self._clear_path_tracking()
         if result == TaskResult.SUCCEEDED:
+            self.blocked_lanes.clear()
             if self.target_station != "":
                 status_id = self._get_status_id_for('position update')
                 try:
@@ -1164,32 +1242,43 @@ class DeliveryRobotMainController(Node):
                 self.change_state(RobotState.MANUAL)
             else:
                 self.change_state(RobotState.STANDBY)
+            self.blocked_lanes.clear()
             return
         elif result == TaskResult.FAILED:
-            if (self.retry_move_no < 2):
-                self.retry_move_no += 1
-                self.get_logger().info('Goal failed! retrying...{0}'.format(self.retry_move_no))
-                self.go_to_station(self.target_station,self.goal_after_state)
+            current_lane = self._current_lane_vertices()
+            if current_lane:
+                lane_key = tuple(sorted(current_lane))
+                self.blocked_lanes.add(lane_key)
+                self.get_logger().info(f"Marking blocked lane: {lane_key}")
+
+            if not self.replan_on_blocked_lane:
+                self.get_logger().warn("Blocked lane encountered; stopping with FAILED per setting.")
+                self._handle_move_failure_cleanup()
+                return
+
+            retreat_pose = self._vertex_pose(current_lane[0]) if current_lane else None
+            if retreat_pose:
+                self.get_logger().info("Retreating to lane start before replanning...")
+                ret_ok = self._navigate_to_pose_blocking(retreat_pose)
+                if not ret_ok:
+                    self.get_logger().warn("Retreat failed; stopping with FAILED.")
+                    self._handle_move_failure_cleanup()
+                    return
+            else:
+                self.get_logger().warn("Could not determine retreat pose; stopping with FAILED.")
+                self._handle_move_failure_cleanup()
+                return
+
+            replanned = self.go_to_station(self.target_station,self.goal_after_state)
+            if replanned:
                 return self.on_move()
             else:
-                self.get_logger().info('Goal failed! after retry {0} times'.format(self.retry_move_no))
-                if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
-                    task = self.get_pending_queue_from_api(status = 'active')
-                    if task:
-                        action = task.get("action", "Request")
-                        queue_id = task.get("_id") or task.get("id")
-                        if action == 'Request':
-                            if queue_id:
-                                api_client.update_queue_status(queue_id,'failed')
-                                self.remove_queue_by_id(queue_id)
-                        else: #Delivery ไม่ลบคิว ให้ค้างไว้
-                            if queue_id:
-                                api_client.update_queue_status(queue_id,'failed')
-                else:
-                    self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด   
-                self.change_state(RobotState.STANDBY)
+                self.get_logger().warn("Replan found no path; stopping with FAILED.")
+                self._handle_move_failure_cleanup()
         else:
             self.get_logger().info('Goal has an invalid return status!')
+            self.blocked_lanes.clear()
+        self._clear_path_tracking()
         
         # กรณีเป็นการ move เพื่อเตรียม Dock (ไม่เกี่ยวกับ queue)
         if self.goal_after_state == RobotState.DOCK:
@@ -1199,6 +1288,8 @@ class DeliveryRobotMainController(Node):
             else:
                 self.change_state(RobotState.STANDBY) #กลับไปพยายามเคลื่อนที่ไปยัง Home อีกครั้ง
                 return 
+        elif self.goal_after_state == RobotState.MANUAL:
+            self.change_state(RobotState.MANUAL)
         else:
             self.change_state(RobotState.AFTER_MOVE)
 

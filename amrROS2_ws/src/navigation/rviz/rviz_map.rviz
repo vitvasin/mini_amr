@@ -86,6 +86,11 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         center_footprint:
           Alpha: 1
           Show Axes: false
@@ -120,11 +125,6 @@ Visualization Manager:
           Show Trail: false
           Value: true
         rear_caster_wheel_link:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-          Value: true
-        rgbd_frame:
           Alpha: 1
           Show Axes: false
           Show Trail: false
@@ -158,6 +158,8 @@ Visualization Manager:
           Value: true
         base_link:
           Value: true
+        camera_link:
+          Value: true
         center_footprint:
           Value: true
         center_ranger_link:
@@ -178,8 +180,6 @@ Visualization Manager:
           Value: true
         rear_caster_wheel_link:
           Value: true
-        rgbd_frame:
-          Value: true
         right_ranger_link:
           Value: true
         right_wheel_link:
@@ -194,6 +194,8 @@ Visualization Manager:
           odom:
             base_footprint:
               base_link:
+                camera_link:
+                  {}
                 center_ranger_link:
                   {}
                 front_caster_wheel_link:
@@ -207,8 +209,6 @@ Visualization Manager:
                 left_wheel_link:
                   {}
                 rear_caster_wheel_link:
-                  {}
-                rgbd_frame:
                   {}
                 right_ranger_link:
                   {}
@@ -773,7 +773,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 65.41011810302734
+      Scale: 21.563068389892578
       Target Frame: <Fixed Frame>
       Value: TopDownOrtho (rviz_default_plugins)
       X: -0.11764944344758987
@@ -820,5 +820,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1854
-  X: 66
-  Y: 32
+  X: -720
+  Y: 87

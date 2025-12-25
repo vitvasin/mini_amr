@@ -28,10 +28,12 @@ class BatteryChargeSubscriberNode(Node):
 
         # self.get_logger().info(f'Received: "{msg.data}"') # Log the received string
 
-        if msg.data == "Charge":
+        if msg.data == "Dock":
             self.start_charging()
             # self.get_logger().info(f"Start charging!")
-
+        elif msg.da == "Undock":
+            self.stop_charging()
+            # self.get_logger().info(f"Stop charging!")
         else:
             self.get_logger().warning(f"Invalid request: {msg.data}")
 
@@ -40,7 +42,7 @@ class BatteryChargeSubscriberNode(Node):
         # 1. Start charging
         try:
             # Construct the MQTT message
-            mqtt_message_charge = f"charge"
+            mqtt_message_charge = f"dock"
 
             publish.single(
             topic="mode",
@@ -49,14 +51,31 @@ class BatteryChargeSubscriberNode(Node):
             port=1883
             )
 
-            # self.get_logger().info(f"Published MQTT message: {mqtt_message_charge}")
+            # self.get_logger().info(f"Published MQTT message: {mqtt_message_dock}")
 
         except:
             self.get_logger().error(f"Failed to publish MQTT message")
 
+    def stop_charging(self):
+
+        # 1. Stop charging
+        try:
+            # Construct the MQTT message
+            mqtt_message_charge = f"undock"
+
+            publish.single(
+            topic="mode",
+            payload=mqtt_message_charge,
+            hostname="localhost",
+            port=1883
+            )
+
+            # self.get_logger().info(f"Published MQTT message: {mqtt_message_undock}")
+
+        except:
+            self.get_logger().error(f"Failed to publish MQTT message")
     def destroy_node(self):
         super().destroy_node()
-
 
 # Initializes the node and keeps it running until interrupted
 def main(args=None):

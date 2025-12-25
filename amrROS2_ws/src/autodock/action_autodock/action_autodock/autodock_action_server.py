@@ -87,70 +87,7 @@ class CmdCharger(IntEnum):
     BATTERY_FULL   = 21
     STOP_CHARGING  = 22
 
-class Robot_Pose(Node):
-         
-    def __init__(self):
-   
-      # Initialize the class using the constructor
-      super().__init__('robot_pose_docking')
-      self.tf_buffer = Buffer()
-      self.tf_listener = TransformListener(self.tf_buffer,self)
-      self.thread_update_pose = threading.Thread(target=self.loop_update_pose)
-      self.thread_update_pose.start()
-      #timer_period = 0.02  # seconds
-      #self.timer = self.create_timer(timer_period, self.update_pose)
-      
-    def loop_update_pose(self):
-        global current_pose
-        global current_head_angle
-        while (True):
-            self.update_pose()
-            #self.get_logger().info('current x= ' + '{:.3f}'.format(current_pose.position.x) + ' y='+ '{:.3f}'.format(current_pose.position.y))
-            time.sleep(0.02)
 
-    def update_pose(self):
-        global current_pose
-        global current_head_angle
-        try:
-            #self.get_logger().info(f'3')
-            transf_stamped = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
-            #self.get_logger().info(f'0')
-            t = transf_stamped.transform.translation
-            r = transf_stamped.transform.rotation
-            
-            current_pose.position.x = t.x
-            current_pose.position.y = t.y
-            current_pose.position.z = t.z
-            current_pose.orientation = r
-            #self.get_logger().info(f'1')
-            current_head_angle = self.calculate_heading(current_pose)
-            
-           # transf_dock_stamped = self.tf_buffer.lookup_transform('odom', 'dock', rclpy.time.Time())
-            #self.get_logger().info(f'0')
-            #t_dock = transf_dock_stamped.transform.translation
-            #r_dock = transf_dock_stamped.transform.rotation
-            
-            #dock_pose.position.x = t_dock.x
-            #dock_pose.position.y = t_dock.y
-            #dock_pose.position.z = 0.0
-            #dock_pose.orientation = r_dock
-            #self.get_logger().info(f'1')
-            #current_head_angle = self.calculate_heading(current_pose)
-            
-            #angle = yaw * 180 / math.pi
-            #self.get_logger().info(f'2')
-            #self.get_logger().info('dock x= ' + '{:.3f}'.format(dock_pose.position.x) + ' y='+ '{:.3f}'.format(dock_pose.position.y))
-            #self.get_logger().info('current head='+ '{:.2f}'.format(self.current_head_angle))
-        except TransformException as ex:
-            self.get_logger().info(f'Could not transform base_link to odom!')
-            #self.get_logger().info(ex)     
-
-    def calculate_heading(self, pose):
-        quant = pose.orientation
-        orie_list = [quant.x,quant.y,quant.z,quant.w]
-        (roll, pitch, yaw) = euler_from_quaternion(orie_list)
-        #self.get_logger().info('current head='+ '{:.2f}'.format(yaw))
-        return yaw
     
 class ReadDock_Pose(Node):
          
@@ -216,8 +153,8 @@ class AutodockActionServer(Node):
     
     def __init__(self):
         super().__init__('autodock_action_server')
-        global current_pose
-        global current_head_angle
+        # global current_pose
+        # global current_head_angle
         global dock_pose
         global found_dock
         global event_obj
@@ -284,8 +221,13 @@ class AutodockActionServer(Node):
         self.dock_retry_backout_speed = self.get_parameter('dock_retry_backout_speed').get_parameter_value().double_value
         self.dock_retry_wait = self.get_parameter('dock_retry_wait').get_parameter_value().double_value
 
-        current_pose = Pose()
-        current_head_angle = 0.0 #radian
+
+        self.current_pose = Pose()
+        self.current_head_angle = 0.0 #radian
+        
+        self.tf_buffer = Buffer()
+        self.tf_listener = TransformListener(self.tf_buffer, self)
+        self.create_timer(0.02, self.update_pose)
         
         #found_dock = False
         #dock_pose = Pose()
@@ -336,6 +278,22 @@ class AutodockActionServer(Node):
         self.pub = self.create_publisher(Twist, 'cmd_vel', 	10)
         self.get_logger().info('auto_dock_init_complete')
         
+
+    def update_pose(self):
+        try:
+            transf_stamped = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
+            t = transf_stamped.transform.translation
+            r = transf_stamped.transform.rotation
+            
+            self.current_pose.position.x = t.x
+            self.current_pose.position.y = t.y
+            self.current_pose.position.z = t.z
+            self.current_pose.orientation = r
+            self.current_head_angle = self.calculate_heading(self.current_pose)
+        except TransformException as ex:
+            # Only log occasionally or debug to avoid spam
+            # self.get_logger().info(f'Could not transform base_link to odom!')
+            pass
 
     def execute_callback(self, goal_handle):
         self.get_logger().info('Executing goal...')
@@ -496,7 +454,7 @@ class AutodockActionServer(Node):
 
     def cal_undock_point(self,dist):    
         #self.get_logger().info('dock x= ' + '{:.2f}'.format(self.dock_pose.position.x) + ' y='+ '{:.2f}'.format(self.dock_pose.position.y))
-        q_ori = [current_pose.orientation.x , current_pose.orientation.y, current_pose.orientation.z, current_pose.orientation.w]
+        q_ori = [self.current_pose.orientation.x , self.current_pose.orientation.y, self.current_pose.orientation.z, self.current_pose.orientation.w]
         # Rotate the previous pose by 180* about Z
         q_rot = quaternion_from_euler(0, 0, 0)
         q_new = quaternion_multiply(q_rot, q_ori)
@@ -509,8 +467,8 @@ class AutodockActionServer(Node):
         (roll, pitch, yaw) = euler_from_quaternion(q_new)
 
         
-        self.undock_pose.position.x = current_pose.position.x + math.cos(yaw)*dist
-        self.undock_pose.position.y = current_pose.position.y + math.sin(yaw)*dist
+        self.undock_pose.position.x = self.current_pose.position.x + math.cos(yaw)*dist
+        self.undock_pose.position.y = self.current_pose.position.y + math.sin(yaw)*dist
         self.undock_pose.orientation.z = q_new[2]
         self.undock_pose.orientation.w = q_new[3]
 
@@ -585,13 +543,13 @@ class AutodockActionServer(Node):
     
     def calculate_dist(self, target_pose):
         # คำนวณระยะห่างระหว่างจุด
-        global current_pose
-        dist = math.sqrt(math.pow(target_pose.position.x-current_pose.position.x,2)+math.pow(target_pose.position.y-current_pose.position.y,2))
+        # global current_pose
+        dist = math.sqrt(math.pow(target_pose.position.x-self.current_pose.position.x,2)+math.pow(target_pose.position.y-self.current_pose.position.y,2))
         return dist
     
     def calculate_direction_to_target(self, target_pose,is_backward):
-        global current_pose
-        quant = current_pose.orientation
+        # global current_pose
+        quant = self.current_pose.orientation
         orie_list = [quant.x,quant.y,quant.z,quant.w]
         (roll, pitch, yaw) = euler_from_quaternion(orie_list)
         if (is_backward)    :
@@ -599,7 +557,7 @@ class AutodockActionServer(Node):
         else:
             robot_yaw = yaw
         
-        target_vector = math.atan2(target_pose.position.y-current_pose.position.y,target_pose.position.x-current_pose.position.x)
+        target_vector = math.atan2(target_pose.position.y-self.current_pose.position.y,target_pose.position.x-self.current_pose.position.x)
         robot_yaw = robot_yaw % (2 * math.pi)
         target_vector = target_vector % (2 * math.pi)
         
@@ -704,8 +662,8 @@ class AutodockActionServer(Node):
         self.command_complete = False
 
         def get_angle_error():
-            global current_pose
-            current_head_angle = self.calculate_heading(current_pose)
+            # global current_pose
+            current_head_angle = self.calculate_heading(self.current_pose)
             return self.calculate_angle_distance(current_head_angle, target_angle)
 
         # --- Acceleration phase ---
@@ -947,8 +905,8 @@ class AutodockActionServer(Node):
         #        self.get_logger().error("Charging failed to set READY before START_CHARGING")
         #        return False
         
-        #success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
-        success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
+        success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
+        #success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
         if success:
                 self.get_logger().info("Charging started successfully")
                 return True
@@ -969,7 +927,7 @@ class AutodockActionServer(Node):
 
 
     def move_linear_robot(self,target_pose,speed):
-        global current_pose
+        # global current_pose
         #self.current_head_angle = self.calculate_heading(current_pose)
         #angle_speed = 0.05
         dist = self.calculate_dist(target_pose)
@@ -990,7 +948,7 @@ class AutodockActionServer(Node):
        
     
     def command_move_robot(self, target_pose,speed):
-        global current_pose
+        # global current_pose
         dist = self.calculate_dist(target_pose)
         #self.get_logger().info('distance pose = ' + '{:.3f}'.format(dist))
         if (dist > 0.02):
@@ -1012,11 +970,11 @@ class AutodockActionServer(Node):
                     break
     
     def move_robot(self,target_pose,speed,rotate_speed):
-        global current_pose
-        global current_head_angle
+        # global current_pose
+        # global current_head_angle
         dist = self.calculate_dist(target_pose)
-        current_head_angle = self.calculate_heading(current_pose)
-        angle = math.atan2(target_pose.position.y-current_pose.position.y,target_pose.position.x-current_pose.position.x)
+        current_head_angle = self.calculate_heading(self.current_pose)
+        angle = math.atan2(target_pose.position.y-self.current_pose.position.y,target_pose.position.x-self.current_pose.position.x)
         if (speed < 0.0 ): #backward
             target_angle = self.opposite_angle(angle)
         else: #forward
@@ -1062,7 +1020,7 @@ class AutodockActionServer(Node):
    
         
     def move_to_pre_charge(self, speed,rotate_speed):
-        global current_pose
+        # global current_pose
         global dock_pose
         
         dist = self.calculate_dist(dock_pose)
@@ -1092,7 +1050,7 @@ class AutodockActionServer(Node):
     
 
     def move_to_pre_charge_smooth(self, speed,rotate_speed):
-        global current_pose
+        # global current_pose
         global dock_pose
         
         dist = self.calculate_dist(dock_pose)
@@ -1116,9 +1074,9 @@ class AutodockActionServer(Node):
             step = 0
             #rho = np.hypot(x_diff, y_diff)
             while(not command_complete):
-                x = current_pose.position.x
-                y = current_pose.position.y
-                theta = self.calculate_heading(current_pose)
+                x = self.current_pose.position.x
+                y = self.current_pose.position.y
+                theta = self.calculate_heading(self.current_pose)
                 self.cal_intermediate_point(dock_pose)
                 x_goal = self.pre_charge_pose.position.x
                 y_goal = self.pre_charge_pose.position.y
@@ -1166,7 +1124,7 @@ class AutodockActionServer(Node):
     
 
     def command_move_rotate_robot(self, target_pose,speed,rotate_speed):
-        global current_pose
+        # global current_pose
         
         dist = self.calculate_dist(target_pose)
         #self.get_logger().info('distance pose = ' + '{:.3f}'.format(dist))
@@ -1178,7 +1136,7 @@ class AutodockActionServer(Node):
            
 
             while(not command_complete):
-                global current_pose
+                # global current_pose
                 #self.update_pose()
                 #self.cal_intermediate_point(dock_pose)
 
@@ -1201,8 +1159,8 @@ class AutodockActionServer(Node):
         global event_obj
         global found_dock
         global dock_pose
-        global current_head_angle
-        global current_pose
+        # global current_head_angle
+        # global current_pose
 
        # big robot
        # search_angular_speed = 0.15
@@ -1227,7 +1185,7 @@ class AutodockActionServer(Node):
         msg.data = 'start'
         self.publisher_.publish(msg) # command to start finding dock coordinate with topic /command_dock
 
-        start_angle = self.calculate_heading(current_pose)
+        start_angle = self.calculate_heading(self.current_pose)
         #ts = time.time()
         
         self.rotate_openloop_until_condition_smooth_with_limit(self.dock_angular_speed_search,self.is_found_dock,2.0 * math.pi,0.2,0.2,self.dock_smooth_sampling_time)
@@ -1252,7 +1210,7 @@ class AutodockActionServer(Node):
             self.send_feedback(goal_handle,2,'move to pre charge point' + os.linesep + ss)  
 
         #step2 - move to precharge pose
-        dock_angle = math.atan2(dock.position.y-current_pose.position.y,dock.position.x-current_pose.position.x)
+        dock_angle = math.atan2(dock.position.y-self.current_pose.position.y,dock.position.x-self.current_pose.position.x)
         target_angle = self.opposite_angle(dock_angle)
         self.command_rotate_robot(target_angle,self.dock_angular_speed)
         
@@ -1263,11 +1221,11 @@ class AutodockActionServer(Node):
         
         time.sleep(self.dock_wait_at_pre_dock)
         dock = dock_pose #check dock position again
-        angle = math.atan2(dock.position.y-current_pose.position.y,dock.position.x-current_pose.position.x)
+        angle = math.atan2(dock.position.y-self.current_pose.position.y,dock.position.x-self.current_pose.position.x)
         #angle = self.calculate_heading(dock)
         target_angle = self.opposite_angle(angle)
         self.command_rotate_robot(target_angle,self.dock_angular_speed_final)
-        ss = 'current position x= ' + '{:.2f}'.format(current_pose.position.x) + ' y='+ '{:.2f}'.format(current_pose.position.y) + os.linesep \
+        ss = 'current position x= ' + '{:.2f}'.format(self.current_pose.position.x) + ' y='+ '{:.2f}'.format(self.current_pose.position.y) + os.linesep \
                 + 'dock x= ' + '{:.2f}'.format(dock.position.x) + ' y='+ '{:.2f}'.format(dock.position.y)
         self.send_feedback(goal_handle,3,'move to dock' + os.linesep + ss)  
 
@@ -1277,7 +1235,7 @@ class AutodockActionServer(Node):
         for attempt in range(1, attempts + 1):
             # Align to current dock pose before each attempt
             dock = dock_pose  # refresh dock pose
-            angle = math.atan2(dock.position.y-current_pose.position.y,dock.position.x-current_pose.position.x)
+            angle = math.atan2(dock.position.y-self.current_pose.position.y,dock.position.x-self.current_pose.position.x)
             target_angle = self.opposite_angle(angle)
             self.command_rotate_robot(target_angle, self.dock_angular_speed_final)
             self.send_feedback(goal_handle, 3, f'Approach attempt {attempt}/{attempts}')
@@ -1339,13 +1297,13 @@ class AutodockActionServer(Node):
 
     def undock_robot(self,goal_handle): 
         global event_obj
-        global current_pose
+        # global current_pose
         #angular_speed = 0.1
         #linear_speed = 0.1 #forward
         self.cal_undock_point(self.undock_dist_step2)
         
-        #success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
-        success = self.wait_charge_state_with_confirm(True,5,1.0)
+        success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
+        #success = self.wait_charge_state_with_confirm(True,5,1.0)
         if success:
             self.get_logger().info("Stop charging successfully")
             time.sleep(1.0)
@@ -1379,7 +1337,7 @@ def main(args=None):
     
     #SPIN_QUEUE.append(AutodockActionServer())
     #SPIN_QUEUE.append(RobotPose())
-    robot_pose = Robot_Pose()
+    # robot_pose = Robot_Pose()
     readdock_pose = ReadDock_Pose()
     autodock_action_server = AutodockActionServer()
     charge_status = Charge_Status()
@@ -1391,7 +1349,7 @@ def main(args=None):
         #rclpy.spin(autodock_action_server)
         # Set up mulithreading
         executor = MultiThreadedExecutor(num_threads=8)
-        executor.add_node(robot_pose)
+        # executor.add_node(robot_pose)
         executor.add_node(autodock_action_server)
         executor.add_node(readdock_pose)
         executor.add_node(charge_status)
@@ -1403,7 +1361,7 @@ def main(args=None):
             # Shutdown the nodes
             executor.shutdown()
             autodock_action_server.destroy_node()
-            robot_pose.destroy_node()
+            # robot_pose.destroy_node()
             readdock_pose.destroy_node()
             charge_status.destroy_node()
  

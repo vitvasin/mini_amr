@@ -510,11 +510,13 @@ void poll_bms()
     {
         SendDataToBMS(VOLT_AMP_CMD);     
         last_bms_request = millis();
+        Serial5.println("Send data to BMS");
     }
-
+    Serial5.println("Pass A");
     // Step B: accumulate incoming bytes
     while (BMS_SERIAL.available())
     {
+        Serial5.println("Pass B");
         uint8_t c = BMS_SERIAL.read();
         if (bms_index < sizeof(bms_buf))
         {
@@ -524,6 +526,7 @@ void poll_bms()
         // Simple heuristic: check minimum length for packet
         if (bms_index >= 13) // enough for 0x90 packet
         {
+            Serial5.println("Pass C");
             // calculate checksum
             uint8_t chk = calChecksum((char*)bms_buf, bms_index-1);
             if (chk == bms_buf[bms_index-1])
@@ -560,6 +563,7 @@ void parse_bms_packet(uint8_t *Buf, uint8_t len)
         else batt_status = 0; // unknown
 
         update_batt_ = true;
+        Serial5.println("Pass D");
     }
     else if (Buf[2] == 0x93) // info frame
     {
@@ -568,6 +572,7 @@ void parse_bms_packet(uint8_t *Buf, uint8_t len)
         uint32_t BattCap = (Buf[8]<<24) | (Buf[9]<<16) | (Buf[10]<<8) | Buf[11];
         // store / log if you want
         update_batt_ = true;
+        Serial5.println("Pass E");
     }
 }
 
@@ -580,10 +585,11 @@ void bms_task()
     // Step B: if new packet parsed, update pkg_data
     if (update_batt_)
     {
+        Serial5.println("Pass F");
         int16_t voltage    = (int16_t)(fBattVolt * 100);     // scale to centivolts
         int16_t current    = (int16_t)(fBattCurrent * 100);  // scale to centiamps
         int16_t percentage = (int16_t)(fBattSOC * 100);      // scale to centi%
-
+        Serial5.print("Battery: "); Serial5.print(voltage); Serial5.print(" mV, "); Serial5.print(current); Serial5.print(" mA, "); Serial5.println(percentage); Serial5.println(batt_status);
         pkg_data[_BMS_VOLTAGE_L] = voltage & 0xFF;
         pkg_data[_BMS_VOLTAGE_H] = (voltage >> 8) & 0xFF;
 
@@ -859,12 +865,12 @@ void sensor_module_task()
             if(IR_Charge_state.readHoldingRegisters(0, 1) == IR_Charge_state.ku8MBSuccess) {
                 buff = IR_Charge_state.getResponseBuffer(0);
                 pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-                Serial5.println(buff);
+                //Serial5.println(buff);
             }else 
             {
                 buff = 99;
                 pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
-                Serial5.println(buff);
+                //Serial5.println(buff);
             }
             sensor_state = 3; // skip ultrasonic reading for next cycle
             break;

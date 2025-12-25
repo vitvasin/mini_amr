@@ -9,7 +9,7 @@
   <BehaviorTree ID="MainTree">
   
     <!-- Outer recovery node, never give up this waypoint -->
-    <RecoveryNode number_of_retries="-1" name="NavigateRecovery">
+    <RecoveryNode number_of_retries="6" name="NavigateRecovery">
       
       <!-- Normal pipeline -->
       <PipelineSequence name="NavigateOnce">
@@ -56,7 +56,7 @@
             <ClearEntireCostmap name="ClearGlobalCostmap-Subtree"
                                 service_name="global_costmap/clear_entirely_global_costmap"/>
           </Sequence>
-          <Wait wait_duration="3.0"/>
+          <Wait wait_duration="5.0"/>
           <!-- You can re‑enable backup/spin if you want additional chances -->
           <!-- <BackUp backup_dist="0.30" backup_speed="0.15" server_timeout="10"/> -->
           <!-- <Spin spin_dist="1.57" server_name="spin" server_timeout="10"/> -->

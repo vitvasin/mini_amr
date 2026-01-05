@@ -4,7 +4,7 @@ from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, GroupAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, TextSubstitution, IfElseSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution, TextSubstitution, IfElseSubstitution, PythonExpression
 from launch.conditions import IfCondition
 from launch_ros.actions import Node, PushRosNamespace, SetRemap
 from nav2_common.launch import RewrittenYaml, ReplaceString
@@ -34,8 +34,15 @@ def generate_launch_description():
     )
 
     # Parameter file configurations
+    # Select source file based on use_keepout_zones
+    no_keepout_params = os.path.join(robot_navigation_dir, "config", "nav2_params_no_keepout.yaml")
+    
+    source_params_file = PythonExpression([
+        f"'{no_keepout_params}' if '", LaunchConfiguration('use_keepout_zones'), "'.lower() == 'false' else '", nav_params_file, "'"
+    ])
+
     nav_params_file = ReplaceString(
-        source_file=nav_params_file,
+        source_file=source_params_file,
         replacements={'<robot_namespace>': namespace_replacement})
 
     # Launch arguments
@@ -81,6 +88,18 @@ def generate_launch_description():
         description='Full path to the RVIZ config file to use'
     )
 
+    declare_use_keepout_zones_cmd = DeclareLaunchArgument(
+        'use_keepout_zones',
+        default_value='true',
+        description='Whether to use keepout zones'
+    )
+
+    declare_keepout_mask_yaml_cmd = DeclareLaunchArgument(
+        'keepout_mask_yaml',
+        default_value=os.path.join(robot_navigation_dir, 'maps', 'NECTEC_4th_Floor_keepout.yaml'), # Default or empty
+        description='Path to keepout mask yaml'
+    )
+
     # Include required launch files
     rviz_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(os.path.join(robot_navigation_dir, "launch", 'rviz_launch.py')),
@@ -99,6 +118,8 @@ def generate_launch_description():
         launch_arguments={
             'use_sim_time': use_sim_time,
             'params_file': nav_params_file,
+            'use_keepout_zones': LaunchConfiguration('use_keepout_zones'),
+            'keepout_mask_yaml': LaunchConfiguration('keepout_mask_yaml'),
             'map_subscribe_transient_local': 'true'
         }.items()
     )
@@ -139,7 +160,10 @@ def generate_launch_description():
         declare_map_cmd,
         declare_use_sim_time_cmd,
         declare_use_rviz_cmd,
+        declare_use_rviz_cmd,
         declare_rviz_config_file_cmd,
+        declare_use_keepout_zones_cmd,
+        declare_keepout_mask_yaml_cmd,
         # Launch all navigation nodes
         launch_elements
     ])

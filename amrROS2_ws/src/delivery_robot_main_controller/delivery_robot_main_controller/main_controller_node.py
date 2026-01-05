@@ -1,5 +1,6 @@
 import rclpy
 from rclpy.node import Node
+from rclpy.callback_groups import ReentrantCallbackGroup
 from enum import Enum, auto
 from geometry_msgs.msg import PoseStamped, Vector3
 from .robot_navigator import BasicNavigator, NavigationResult
@@ -26,14 +27,16 @@ from . import api_client
 
 import signal
 from .rpc_server import RPCServer
-from .rpc_fnc import door_command, echo, dock_command_service, configure_rpc_access, process_rpc_requests
+from .rpc_fnc import door_command, echo, dock_command_service, cancel_move_service, pause_move_service, configure_rpc_access, process_rpc_requests
 
 TaskResult = NavigationResult
 
 FUNCS = {
     "door_command": door_command,
     "echo": echo,
-    "dock_command": dock_command_service
+    "dock_command": dock_command_service,
+    "cancel_move": cancel_move_service,
+    "pause_move": pause_move_service
 }
 
 
@@ -42,6 +45,8 @@ class RobotState(Enum):
     STANDBY = auto()
     MOVE = auto()
     AFTER_MOVE = auto()
+    PAUSED = auto()
+    SAFE_STOP = auto()
     LOAD_IN = auto()
     LOAD_OUT = auto()
     WAIT_LOAD_OUT = auto()
@@ -65,7 +70,8 @@ class DeliveryRobotMainController(Node):
         self.get_logger().info("Delivery Robot Main Controller Node started.")
         configure_rpc_access(self)
         # Pump RPC service queue so RPC calls can trigger ROS service clients
-        self.create_timer(0.05, process_rpc_requests)
+        self._reentrant_group = ReentrantCallbackGroup()
+        self.create_timer(0.05, process_rpc_requests, callback_group=self._reentrant_group)
         self._should_dock = False #สำหรับเรียกเข้า dock และ undock แบบ manual
         self._should_undock = False
         self.current_pose = PoseStamped()
@@ -104,6 +110,11 @@ class DeliveryRobotMainController(Node):
         self._last_path_nodes = None
         self._last_start_vertex = None
         self._last_goal_vertex = None
+        self._cancel_move_requested = False
+        self._pause_move_requested = False
+        self._pause_move_active = False
+        self._pause_monitor_timer = None
+        self._safestop_monitor_timer = None
 
         self.get_logger().info(f"Initial state: {self.state.name}")
 
@@ -180,7 +191,9 @@ class DeliveryRobotMainController(Node):
         self.autodock_client = ActionClient(self, Autodock, 'autodock')
 
         # Add dock_command service for external dock/undock requests
-        self.dock_command_srv = self.create_service(SetBool, 'dock_command', self.handle_dock_command)
+        self.dock_command_srv = self.create_service(SetBool, 'dock_command', self.handle_dock_command, callback_group=self._reentrant_group)
+        self.cancel_move_srv = self.create_service(SetBool, 'cancel_move', self.handle_cancel_move, callback_group=self._reentrant_group)
+        self.pause_move_srv = self.create_service(SetBool, 'pause_move', self.handle_pause_move, callback_group=self._reentrant_group)
 
         # Add sound publisher
         self.sound_publisher = self.create_publisher(String, '/robot_sound_command', 10)
@@ -695,6 +708,10 @@ class DeliveryRobotMainController(Node):
             return
         if self.state == RobotState.MANUAL and new_state != RobotState.MANUAL:
             self._cancel_manual_monitor_timer()
+        if self.state == RobotState.PAUSED and new_state != RobotState.PAUSED:
+            self._cancel_pause_monitor_timer()
+        if self.state == RobotState.SAFE_STOP and new_state != RobotState.SAFE_STOP:
+            self._cancel_safestop_monitor_timer()
 
         self.get_logger().info(f"State change: {self.state.name} -> {new_state.name}")
         self.state = new_state
@@ -713,6 +730,12 @@ class DeliveryRobotMainController(Node):
             self.on_move()
         elif self.state == RobotState.AFTER_MOVE:
             self.on_after_move()
+        elif self.state == RobotState.PAUSED:
+            self.get_logger().info("Robot is PAUSED. Awaiting user to switch to STANDBY.")
+            self.on_pause()
+        elif self.state == RobotState.SAFE_STOP:
+            self.get_logger().info("Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.")
+            self.on_safestop()
         elif self.state == RobotState.LOAD_IN:
             self.on_load_in()
         elif self.state == RobotState.WAIT_LOAD_OUT:
@@ -742,6 +765,52 @@ class DeliveryRobotMainController(Node):
         if self._manual_monitor_timer is not None:
             self._manual_monitor_timer.cancel()
             self._manual_monitor_timer = None
+
+    def on_pause(self):
+        """Pause state: wait for GUI/API to switch back to STANDBY."""
+        self.touch_activity()
+        if self._pause_monitor_timer is None:
+            self._pause_monitor_timer = self.create_timer(1.0, self._pause_monitor_loop)
+        self.get_logger().info("Robot is PAUSED. Awaiting user to switch to STANDBY.")
+
+    def _pause_monitor_loop(self):
+        state = self.get_state_from_api()
+        if state == RobotState.STANDBY:
+            self.get_logger().info("Pause cleared to STANDBY via API/GUI.")
+            self._cancel_pause_monitor_timer()
+            self.change_state(RobotState.STANDBY)
+        elif state != RobotState.PAUSED:
+            self.get_logger().info(f"Pause state changed to {state.name}; switching.")
+            self._cancel_pause_monitor_timer()
+            self.change_state(state)
+
+    def _cancel_pause_monitor_timer(self):
+        if self._pause_monitor_timer is not None:
+            self._pause_monitor_timer.cancel()
+            self._pause_monitor_timer = None
+
+    def on_safestop(self):
+        """Safe stop state: wait for GUI/API to switch back to STANDBY."""
+        self.touch_activity()
+        if self._safestop_monitor_timer is None:
+            self._safestop_monitor_timer = self.create_timer(1.0, self._safestop_monitor_loop)
+        self.get_logger().info("Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.")
+
+    def _safestop_monitor_loop(self):
+        state = self.get_state_from_api()
+        if state == RobotState.STANDBY:
+            self.get_logger().info("SAFE_STOP cleared to STANDBY via API/GUI.")
+            self._cancel_safestop_monitor_timer()
+            self.change_state(RobotState.STANDBY)
+        elif state != RobotState.SAFE_STOP:
+            self.get_logger().info(f"SAFE_STOP state changed to {state.name}; switching.")
+            self._cancel_safestop_monitor_timer()
+            self.change_state(state)
+
+    def _cancel_safestop_monitor_timer(self):
+        if self._safestop_monitor_timer is not None:
+            self._safestop_monitor_timer.cancel()
+            self._safestop_monitor_timer = None
 
 
     def change_dock_state(self, new_state: DockState):
@@ -798,7 +867,6 @@ class DeliveryRobotMainController(Node):
     
     def on_charge_charging(self):
         return
-    
 
     def calculate_heading(self, pose):
         quant = pose.orientation
@@ -942,7 +1010,7 @@ class DeliveryRobotMainController(Node):
                         api_client.update_queue_status(queue_id,'failed')
         else:
             self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด   
-        self.change_state(RobotState.STANDBY)
+        self.change_state(RobotState.SAFE_STOP)
 
     def send_goal_pose(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
@@ -1077,6 +1145,7 @@ class DeliveryRobotMainController(Node):
                 self.retry_move_no = 0
                 #self.return_home_position(RobotState.DOCK)
                 #self.touch_activity()
+                self.blocked_lanes.clear()
                 result = self.go_to_station("Home",RobotState.DOCK)
             return
 
@@ -1136,22 +1205,24 @@ class DeliveryRobotMainController(Node):
 
             self.current_task = selected_task
 
-            if action == "Request" and target_station and self.current_station and target_station == self.current_station:
-                self.get_logger().info("Already at target station for Request; handling without navigation.")
-                self.change_state(RobotState.AFTER_MOVE)
-                return
+           # if action == "Request" and target_station and self.current_station and target_station == self.current_station:
+           #     self.get_logger().info("Already at target station for Request; handling without navigation.")
+           #     self.change_state(RobotState.AFTER_MOVE)
+           #     return
 
             if action == "Delivery":
                 if selected_task:
                     queue_id = selected_task.get("_id") or selected_task.get("id")
                     if queue_id:
                         api_client.update_queue_status(queue_id,'active')
+                self.blocked_lanes.clear()
                 result = self.go_to_station(target_station,RobotState.LOAD_OUT)
             else: #action == "Request"
                 if selected_task:
                     queue_id = selected_task.get("_id") or selected_task.get("id")
                     if queue_id:
                         api_client.update_queue_status(queue_id,'active')
+                self.blocked_lanes.clear()
                 result = self.go_to_station(target_station,RobotState.STANDBY)
 
             if (result == False):
@@ -1179,15 +1250,26 @@ class DeliveryRobotMainController(Node):
         self.get_logger().info("Robot is MOVING.")
         # TODO: Implement NAV2 or custom movement logic
         i = 0
+        self._pause_move_active = False
         
         while not self.navigator.isTaskComplete():
-        ################################################
-        #
-        # Implement some code here for your application!
-        #
-        ################################################
+            ################################################
+            #
+            # Implement some code here for your application!
+            #
+            ################################################
+            if self._cancel_move_requested:
+                self.get_logger().info("Cancelling navigation task due to cancel_move request.")
+                self.navigator.cancelTask()
+                self._cancel_move_requested = False
 
-        # Do something with the feedback
+            if self._pause_move_requested and not self._pause_move_active:
+                self.get_logger().info("Cancelling navigation task due to pause_move request.")
+                self.navigator.cancelTask()
+                self._pause_move_active = True
+                self._pause_move_requested = False
+
+            # Do something with the feedback
             i = i + 1
             feedback = self.navigator.getFeedback()
             if feedback and i % 10 == 0:
@@ -1237,11 +1319,14 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info('Goal succeeded!')
         elif result == TaskResult.CANCELED:
             self.get_logger().info('Goal was canceled!')
+            self._pause_move_active = False
+            self._pause_move_requested = False
+            self._cancel_move_requested = False
             if self.toggle_manual:
                 api_client.update_queue_status(self.get_active_queue_id(),'queued')
                 self.change_state(RobotState.MANUAL)
             else:
-                self.change_state(RobotState.STANDBY)
+                self.change_state(RobotState.PAUSED)
             self.blocked_lanes.clear()
             return
         elif result == TaskResult.FAILED:
@@ -1275,6 +1360,7 @@ class DeliveryRobotMainController(Node):
             else:
                 self.get_logger().warn("Replan found no path; stopping with FAILED.")
                 self._handle_move_failure_cleanup()
+                return
         else:
             self.get_logger().info('Goal has an invalid return status!')
             self.blocked_lanes.clear()
@@ -1333,6 +1419,8 @@ class DeliveryRobotMainController(Node):
 
     def wait_for_load_in_loop(self):
         state = self.get_state_from_api()
+        remaining_time = self._loadin_timeout_end - time.time()
+        self.get_logger().info(f"Enter to wait_for_load_in_loop and wait for timeout...in {remaining_time} seconds")
         if (state == RobotState.LOAD_IN):
             self.get_logger().info(f"State changed to {state.name} during wait.")
             self._loadin_timer.cancel()
@@ -1343,6 +1431,7 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info("No LOAD_IN received. Returning to STANDBY.")
             self._loadin_timer.cancel()
             self.change_state(RobotState.STANDBY) 
+            return
 
     def on_load_in(self):
         self.get_logger().info("Robot is LOADING IN cargo.")
@@ -1520,6 +1609,39 @@ class DeliveryRobotMainController(Node):
             response.success = True
             response.message = "Undock command queued."
         return response
+
+    def handle_cancel_move(self, request, response):
+        if not request.data:
+            response.success = False
+            response.message = "Set data=True to cancel current move."
+            return response
+
+        self.get_logger().info("External cancel_move requested; cancelling current navigation.")
+        if self.state == RobotState.MOVE:
+            self._cancel_move_requested = True
+        else:
+            # Not moving; still reflect paused state so user can resume from GUI
+            self.change_state(RobotState.PAUSED)
+        response.success = True
+        response.message = "Cancel move requested."
+        return response
+
+    def handle_pause_move(self, request, response):
+        should_pause = bool(request.data)
+        if should_pause:
+            self.get_logger().info("External pause_move requested; cancelling current navigation.")
+            if self.state == RobotState.MOVE:
+                self._pause_move_requested = True
+            else:
+                self.change_state(RobotState.PAUSED)
+            response.message = "Pause move requested."
+        else:
+            self.get_logger().info("External pause_move resume requested; clearing pause flag.")
+            self._pause_move_requested = False
+            self._pause_move_active = False
+            response.message = "Pause flag cleared."
+        response.success = True
+        return response
     
     def send_sound_command(self, sound_msg: str):
         msg = String()
@@ -1540,18 +1662,22 @@ def main(args=None):
     rclpy.init(args=args)
     node = None
     node = DeliveryRobotMainController()
+    executor = rclpy.executors.MultiThreadedExecutor()
+    executor.add_node(node)
+
     # Use localhost by default; override with RPC_HOST / RPC_INTERFACE if needed
     server = RPCServer(host='localhost', port=6000, authkey=b"secret")
     server.register_funcs(FUNCS)
     server.start(daemon=True)
     
     try:
-        rclpy.spin(node)
+        executor.spin()
     except KeyboardInterrupt:
         if node is not None:
             node.get_logger().info("Node stopped by user.")
     finally:
         if node is not None:
+            executor.remove_node(node)
             node.destroy_node()
         server.stop()
         rclpy.shutdown()

@@ -1248,7 +1248,7 @@ class AutodockActionServer(Node):
             msg.data = 'shutdown'
             self.publisher_.publish(msg)
             event_obj.clear()
-            return
+            return False
         else:
             #delay for stable docking position 
             time.sleep(self.dock_wait_after_search)

@@ -20,6 +20,8 @@ from hgcr_interfaces.srv import SetHoldingRegs
 ECHO_TOPIC = '/gui/echo'
 DOOR_SERVICE = 'mservice/holding_regs'
 DOCK_SERVICE_NAME = 'dock_command'
+CANCEL_MOVE_SERVICE_NAME = 'cancel_move'
+PAUSE_MOVE_SERVICE_NAME = 'pause_move'
 
 
 @dataclass
@@ -173,4 +175,33 @@ def dock_command_service(should_dock: bool) -> bool:
         return bool(response.success)
     except Exception as exc:  # pylint: disable=broad-except
         print(f"[DOCK] Error calling service {DOCK_SERVICE_NAME}: {exc}")
+        return False
+
+
+def cancel_move_service() -> bool:
+    """เรียก service cancel_move เพื่อยกเลิกการนำทางปัจจุบัน"""
+    request = SetBool.Request()
+    request.data = True
+
+    try:
+        response = _RosBridge.queue_service_call(CANCEL_MOVE_SERVICE_NAME, SetBool, request, timeout_sec=5.0)
+        print(f"[MOVE] cancel_move success={response.success}, message='{response.message}'")
+        return bool(response.success)
+    except Exception as exc:  # pylint: disable=broad-except
+        print(f"[MOVE] Error calling service {CANCEL_MOVE_SERVICE_NAME}: {exc}")
+        return False
+
+
+def pause_move_service(should_pause: bool = True) -> bool:
+    """เรียก service pause_move เพื่อหยุด/ยกเลิกการนำทางชั่วคราว"""
+    request = SetBool.Request()
+    request.data = bool(should_pause)
+
+    try:
+        response = _RosBridge.queue_service_call(PAUSE_MOVE_SERVICE_NAME, SetBool, request, timeout_sec=5.0)
+        action = "pause" if should_pause else "resume"
+        print(f"[MOVE] pause_move({action}) success={response.success}, message='{response.message}'")
+        return bool(response.success)
+    except Exception as exc:  # pylint: disable=broad-except
+        print(f"[MOVE] Error calling service {PAUSE_MOVE_SERVICE_NAME}: {exc}")
         return False

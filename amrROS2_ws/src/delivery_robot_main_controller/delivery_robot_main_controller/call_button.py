@@ -142,6 +142,7 @@ def enqueue_request_for_station(
         "action": _REQUEST_ACTION,
         "target": station_id,
         "boxNumber": "1",
+        "priority": "Normal",
         "sender": "call_button",
         "status": "queued",
     }

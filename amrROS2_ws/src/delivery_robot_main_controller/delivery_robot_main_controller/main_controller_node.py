@@ -104,7 +104,7 @@ class DeliveryRobotMainController(Node):
         self.retry_move_no = 0
         self.status_id = None
         self.load_out_loop_counter = 0
-        self.replan_on_blocked_lane = True  # True=replan on blocked lane, False=stop with FAILED
+        self.replan_on_blocked_lane = False  # True=replan on blocked lane, False=stop with FAILED
         self.blocked_lanes = set()
         self._last_vertex_map = None
         self._last_path_nodes = None
@@ -1338,6 +1338,7 @@ class DeliveryRobotMainController(Node):
 
             if not self.replan_on_blocked_lane:
                 self.get_logger().warn("Blocked lane encountered; stopping with FAILED per setting.")
+                self.blocked_lanes.clear()
                 self._handle_move_failure_cleanup()
                 return
 

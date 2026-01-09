@@ -996,7 +996,7 @@ class DeliveryRobotMainController(Node):
 
     def _handle_move_failure_cleanup(self):
         self.blocked_lanes.clear()
-        if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
+        """  if (self.get_queue_count() == 1): #ถ้าเป็นงานเดียวที่เหลืออยู่ ให้ใส่สถานะงานว่า failed เพื่อไม่ต้องทำงานซ้ำไม่รู้จบ
             task = self.get_pending_queue_from_api(status = 'active')
             if task:
                 action = task.get("action", "Request")
@@ -1009,7 +1009,7 @@ class DeliveryRobotMainController(Node):
                     if queue_id:
                         api_client.update_queue_status(queue_id,'failed')
         else:
-            self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด   
+            self.move_active_queue_to_end() #ถ้าไม่ใช่คำสั่งเดียวที่เหลืออยู่ ให้ย้ายคิวนี้ไปทำท้ายสุด    """
         self.change_state(RobotState.SAFE_STOP)
 
     def send_goal_pose(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
@@ -1029,14 +1029,20 @@ class DeliveryRobotMainController(Node):
         building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
         current_pose = self.current_pose
         start_pos = (current_pose.pose.position.x, current_pose.pose.position.y)
-        goal_pos = (x, y)
+        goal_pos = (x, y, yaw)
 
         self.get_logger().info(f"AGV start_pos: x={start_pos[0]:.2f}, y={start_pos[1]:.2f}")
         self.get_logger().info(f"AGV goal_pos: x={goal_pos[0]:.2f}, y={goal_pos[1]:.2f}")
 
+        #path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
+        #    building_yaml, start_pos, goal_pos, blocked_lanes=self.blocked_lanes
+        #)
+        
+        #เอา block lane ออกชั่วคราวก่อน
         path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
-            building_yaml, start_pos, goal_pos, blocked_lanes=self.blocked_lanes
-        )
+            building_yaml, start_pos, goal_pos)
+
+
         self._last_vertex_map = vertex_map
         self._last_path_nodes = path_nodes
         self._last_start_vertex = start_wp
@@ -1330,17 +1336,18 @@ class DeliveryRobotMainController(Node):
             self.blocked_lanes.clear()
             return
         elif result == TaskResult.FAILED:
-            current_lane = self._current_lane_vertices()
-            if current_lane:
-                lane_key = tuple(sorted(current_lane))
-                self.blocked_lanes.add(lane_key)
-                self.get_logger().info(f"Marking blocked lane: {lane_key}")
-
+            self.get_logger().warn('Goal failed!')
             if not self.replan_on_blocked_lane:
                 self.get_logger().warn("Blocked lane encountered; stopping with FAILED per setting.")
                 self.blocked_lanes.clear()
                 self._handle_move_failure_cleanup()
                 return
+            
+            current_lane = self._current_lane_vertices()
+            if current_lane:
+                lane_key = tuple(sorted(current_lane))
+                self.blocked_lanes.add(lane_key)
+                self.get_logger().info(f"Marking blocked lane: {lane_key}")
 
             retreat_pose = self._vertex_pose(current_lane[0]) if current_lane else None
             if retreat_pose:

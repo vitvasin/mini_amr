@@ -66,9 +66,9 @@ def _reset_conn():
     _conn = None
 
 if __name__ == "__main__":
-    print("Open door #1:", call_remote("door_command", 1, 1))
-    print("Close door #2:", call_remote("door_command", 2, 1))
-    print("Close door #2:", call_remote("door_command", 3, 1))
-    print("Close door #2:", call_remote("door_command", 4, 1))
+    print("Open door #1:", call_remote("door_command", 1, 0))
+    print("Close door #2:", call_remote("door_command", 2, 0))
+    print("Close door #2:", call_remote("door_command", 3, 0))
+    print("Close door #2:", call_remote("door_command", 4, 0))
     #print("Dock robot:", call_remote("dock_command", True))
     #print("Undock robot:", call_remote("dock_command", False))

@@ -26,18 +26,7 @@ from sensor_msgs.msg import BatteryState
 from . import api_client
 
 import signal
-from .rpc_server import RPCServer
-from .rpc_fnc import door_command, echo, dock_command_service, cancel_move_service, pause_move_service, configure_rpc_access, process_rpc_requests
-
 TaskResult = NavigationResult
-
-FUNCS = {
-    "door_command": door_command,
-    "echo": echo,
-    "dock_command": dock_command_service,
-    "cancel_move": cancel_move_service,
-    "pause_move": pause_move_service
-}
 
 
 class RobotState(Enum):
@@ -68,10 +57,7 @@ class DeliveryRobotMainController(Node):
     def __init__(self):
         super().__init__('delivery_robot_main_controller')
         self.get_logger().info("Delivery Robot Main Controller Node started.")
-        configure_rpc_access(self)
-        # Pump RPC service queue so RPC calls can trigger ROS service clients
         self._reentrant_group = ReentrantCallbackGroup()
-        self.create_timer(0.05, process_rpc_requests, callback_group=self._reentrant_group)
         self._should_dock = False #สำหรับเรียกเข้า dock และ undock แบบ manual
         self._should_undock = False
         self.current_pose = PoseStamped()
@@ -1473,12 +1459,18 @@ class DeliveryRobotMainController(Node):
             self.get_logger().info(f"State changed to {state.name} during wait.")
             self._loadout_timer.cancel()
             self.change_state(RobotState.LOAD_OUT)
-            return 
-
-        if time.time() > self._loadout_timeout_end:
-            self.get_logger().info("No LOAD_OUT received. Returning to STANDBY.")
+            return
+        elif (state == RobotState.STANDBY):
+            self.get_logger().info(f"State changed to {state.name} during wait.")
             self._loadout_timer.cancel()
-            self.change_state(RobotState.STANDBY) 
+            self.change_state(RobotState.STANDBY)
+            return
+
+
+        #if time.time() > self._loadout_timeout_end:
+        #    self.get_logger().info("No LOAD_OUT received. Returning to STANDBY.")
+        #    self._loadout_timer.cancel()
+        #    self.change_state(RobotState.STANDBY) 
 
         self.load_out_loop_counter += 1
         if self.load_out_loop_counter == 1 or self.load_out_loop_counter % 20 == 0:
@@ -1673,11 +1665,6 @@ def main(args=None):
     executor = rclpy.executors.MultiThreadedExecutor()
     executor.add_node(node)
 
-    # Use localhost by default; override with RPC_HOST / RPC_INTERFACE if needed
-    server = RPCServer(host='localhost', port=6000, authkey=b"secret")
-    server.register_funcs(FUNCS)
-    server.start(daemon=True)
-    
     try:
         executor.spin()
     except KeyboardInterrupt:
@@ -1687,7 +1674,6 @@ def main(args=None):
         if node is not None:
             executor.remove_node(node)
             node.destroy_node()
-        server.stop()
         rclpy.shutdown()
 
 

@@ -23,7 +23,8 @@ setup(
         'console_scripts': [
             'delivery_robot_main_controller = delivery_robot_main_controller.main_controller_node:main',
             'robot_sound = delivery_robot_main_controller.robot_sound:main',
-            'call_robot_button = delivery_robot_main_controller.call_button:main'
+            'call_robot_button = delivery_robot_main_controller.call_button:main',
+            'rpc_run_node = delivery_robot_main_controller.rpc_run_node:main',
         ],
     },
 )

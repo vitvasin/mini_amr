@@ -46,6 +46,14 @@ def generate_launch_description():
             emulate_tty=True,
     )
 
+    rpc_run_node = Node(
+            package='delivery_robot_main_controller',
+            executable='rpc_run_node',
+            name='rpc_run_node',
+            output='screen',
+            emulate_tty=True,
+    )
+
     launch_elements = GroupAction(
     	actions=[
         PushRosNamespace(namespace),
@@ -54,6 +62,7 @@ def generate_launch_description():
         main_controller,
         robot_sound,
         call_robot_button,
+        rpc_run_node,
         ]
     )
 

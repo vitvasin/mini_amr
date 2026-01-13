@@ -49,9 +49,6 @@ from tf2_msgs.msg import TFMessage
 from rclpy.duration import Duration
 #from robot_navigator import BasicNavigator, NavigationResult # Helper module
 from tf_transformations import euler_from_quaternion, quaternion_from_euler, quaternion_multiply
-from tf2_ros import TransformException, LookupException, ConnectivityException, ExtrapolationException
-from tf2_ros.buffer import Buffer
-from tf2_ros.transform_listener import TransformListener
 import math
 import threading 
 # Enables publishers, subscribers, and action servers to be in a single node
@@ -60,6 +57,7 @@ from rclpy.executors import MultiThreadedExecutor
 from std_msgs.msg import String, Bool, Int16
 
 import numpy as np
+from nav_msgs.msg import Odometry
 
 import sys
 sys.path.append(os.path.join(os.path.dirname(__file__)))
@@ -72,6 +70,8 @@ current_head_angle = 0.0
 dock_pose = Pose()
 found_dock = False
 event_obj = None
+pose_tracking_enabled = False
+robot_pose_node = None
 
 class ChargerState(IntEnum):
     IDLE = 0
@@ -88,62 +88,46 @@ class CmdCharger(IntEnum):
     STOP_CHARGING  = 22
 
 class Robot_Pose(Node):
-         
+
     def __init__(self):
    
       # Initialize the class using the constructor
       super().__init__('robot_pose_docking')
-      self.tf_buffer = Buffer()
-      self.tf_listener = TransformListener(self.tf_buffer,self)
-      self.thread_update_pose = threading.Thread(target=self.loop_update_pose)
-      self.thread_update_pose.start()
-      #timer_period = 0.02  # seconds
-      #self.timer = self.create_timer(timer_period, self.update_pose)
-      
-    def loop_update_pose(self):
-        global current_pose
-        global current_head_angle
-        while (True):
-            self.update_pose()
-            #self.get_logger().info('current x= ' + '{:.3f}'.format(current_pose.position.x) + ' y='+ '{:.3f}'.format(current_pose.position.y))
-            time.sleep(0.02)
+      global robot_pose_node
+      robot_pose_node = self
+      self._odom_sub = None
+      self._odom_cb_group = ReentrantCallbackGroup()
 
-    def update_pose(self):
+    def start_pose_tracking(self):
+        global pose_tracking_enabled
+        if self._odom_sub is None:
+            self._odom_sub = self.create_subscription(
+                Odometry,
+                'odom',
+                self.odom_callback,
+                callback_group=self._odom_cb_group,
+                qos_profile=10
+            )
+        pose_tracking_enabled = True
+
+    def stop_pose_tracking(self):
+        global pose_tracking_enabled
+        if self._odom_sub is not None:
+            self.destroy_subscription(self._odom_sub)
+            self._odom_sub = None
+        pose_tracking_enabled = False
+
+    def odom_callback(self, msg: Odometry):
         global current_pose
         global current_head_angle
-        try:
-            #self.get_logger().info(f'3')
-            transf_stamped = self.tf_buffer.lookup_transform('odom', 'base_link', rclpy.time.Time())
-            #self.get_logger().info(f'0')
-            t = transf_stamped.transform.translation
-            r = transf_stamped.transform.rotation
-            
-            current_pose.position.x = t.x
-            current_pose.position.y = t.y
-            current_pose.position.z = t.z
-            current_pose.orientation = r
-            #self.get_logger().info(f'1')
-            current_head_angle = self.calculate_heading(current_pose)
-            
-           # transf_dock_stamped = self.tf_buffer.lookup_transform('odom', 'dock', rclpy.time.Time())
-            #self.get_logger().info(f'0')
-            #t_dock = transf_dock_stamped.transform.translation
-            #r_dock = transf_dock_stamped.transform.rotation
-            
-            #dock_pose.position.x = t_dock.x
-            #dock_pose.position.y = t_dock.y
-            #dock_pose.position.z = 0.0
-            #dock_pose.orientation = r_dock
-            #self.get_logger().info(f'1')
-            #current_head_angle = self.calculate_heading(current_pose)
-            
-            #angle = yaw * 180 / math.pi
-            #self.get_logger().info(f'2')
-            #self.get_logger().info('dock x= ' + '{:.3f}'.format(dock_pose.position.x) + ' y='+ '{:.3f}'.format(dock_pose.position.y))
-            #self.get_logger().info('current head='+ '{:.2f}'.format(self.current_head_angle))
-        except TransformException as ex:
-            self.get_logger().info(f'Could not transform base_link to odom!')
-            #self.get_logger().info(ex)     
+        global pose_tracking_enabled
+        if not pose_tracking_enabled:
+            return
+        current_pose.position.x = msg.pose.pose.position.x
+        current_pose.position.y = msg.pose.pose.position.y
+        current_pose.position.z = msg.pose.pose.position.z
+        current_pose.orientation = msg.pose.pose.orientation
+        current_head_angle = self.calculate_heading(current_pose)
 
     def calculate_heading(self, pose):
         quant = pose.orientation
@@ -1210,6 +1194,9 @@ class AutodockActionServer(Node):
         global dock_pose
         global current_head_angle
         global current_pose
+        global robot_pose_node
+        if robot_pose_node:
+            robot_pose_node.start_pose_tracking()
 
        # big robot
        # search_angular_speed = 0.15
@@ -1248,6 +1235,8 @@ class AutodockActionServer(Node):
             msg.data = 'shutdown'
             self.publisher_.publish(msg)
             event_obj.clear()
+            if robot_pose_node:
+                robot_pose_node.stop_pose_tracking()
             return False
         else:
             #delay for stable docking position 
@@ -1317,6 +1306,8 @@ class AutodockActionServer(Node):
             self.publisher_.publish(msg)
             found_dock = False
             event_obj.clear()
+            if robot_pose_node:
+                robot_pose_node.stop_pose_tracking()
             return False
 
         #step4 - finish docking
@@ -1324,6 +1315,8 @@ class AutodockActionServer(Node):
         msg.data = 'shutdown'
         self.publisher_.publish(msg)
         found_dock = False
+        if robot_pose_node:
+            robot_pose_node.stop_pose_tracking()
         
         """ self.current_head_angle = self.calculate_heading(current_pose)
         angle = math.atan2(self.pre_charge_pose.position.y-current_pose.position.y,self.pre_charge_pose.position.x-current_pose.position.x)
@@ -1348,8 +1341,11 @@ class AutodockActionServer(Node):
     def undock_robot(self,goal_handle): 
         global event_obj
         global current_pose
+        global robot_pose_node
         #angular_speed = 0.1
         #linear_speed = 0.1 #forward
+        if robot_pose_node:
+            robot_pose_node.start_pose_tracking()
         self.cal_undock_point(self.undock_dist_step2)
         
         #success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
@@ -1377,6 +1373,8 @@ class AutodockActionServer(Node):
         
         event_obj.clear()
         self.get_logger().info('finish undocking')
+        if robot_pose_node:
+            robot_pose_node.stop_pose_tracking()
         return success
 
 

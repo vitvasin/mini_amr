@@ -18,7 +18,7 @@ from hgcr_interfaces.srv import SetHoldingRegs
 
 # ชื่อ topic / service ที่ใช้บ่อย
 ECHO_TOPIC = '/gui/echo'
-DOOR_SERVICE = 'mservice/holding_regs'
+DOOR_SERVICE = '/mservice/holding_regs'
 DOCK_SERVICE_NAME = 'dock_command'
 CANCEL_MOVE_SERVICE_NAME = 'cancel_move'
 PAUSE_MOVE_SERVICE_NAME = 'pause_move'
@@ -42,11 +42,23 @@ class _RosBridge:
     _pubs: Dict[str, Any] = {}
     _clients: Dict[str, Any] = {}
     _service_queue: deque[_ServiceRequest] = deque()
+    _work_event = threading.Event()
+    _stop_event = threading.Event()
+    _workers: list[threading.Thread] = []
+    _max_workers = 8
 
     @classmethod
     def configure(cls, node: Node) -> None:
         with cls._lock:
             cls._node = node
+            # Spawn worker threads once so queued calls get dispatched immediately
+            if not cls._workers:
+                for idx in range(cls._max_workers):
+                    worker = threading.Thread(
+                        target=cls._worker_loop, name=f"rpc-bridge-{idx}", daemon=True
+                    )
+                    cls._workers.append(worker)
+                    worker.start()
 
     @classmethod
     def _ensure_node(cls) -> Node:
@@ -79,6 +91,7 @@ class _RosBridge:
         work = _ServiceRequest(service_name, srv_type, request, timeout_sec, event, holder)
         with cls._lock:
             cls._service_queue.append(work)
+            cls._work_event.set()  # wake workers immediately
         if not event.wait(timeout_sec):
             raise RuntimeError(f"Service call to {service_name} timed out")
         if 'error' in holder:
@@ -86,33 +99,43 @@ class _RosBridge:
         return holder.get('result')
 
     @classmethod
+    def _worker_loop(cls):
+        """Worker thread: dispatch queued service calls as soon as they arrive"""
+        while not cls._stop_event.is_set():
+            cls._work_event.wait()
+
+            while True:
+                with cls._lock:
+                    if not cls._service_queue:
+                        cls._work_event.clear()
+                        break
+                    call = cls._service_queue.popleft()
+
+                try:
+                    client = cls._get_or_create_client(call.service_name, call.srv_type)
+                    if not client.wait_for_service(timeout_sec=min(1.0, call.timeout_sec)):
+                        raise RuntimeError(f"Service {call.service_name} not available")
+
+                    future = client.call_async(call.request)
+
+                    def _on_done(fut, *, call=call):
+                        try:
+                            call.result_holder['result'] = fut.result()
+                        except Exception as exc:  # pylint: disable=broad-except
+                            call.result_holder['error'] = exc
+                        finally:
+                            call.event.set()
+
+                    future.add_done_callback(_on_done)
+
+                except Exception as exc:  # pylint: disable=broad-except
+                    call.result_holder['error'] = exc
+                    call.event.set()
+
+    @classmethod
     def process_pending_requests(cls) -> None:
-        while True:
-            with cls._lock:
-                if not cls._service_queue:
-                    return
-                call = cls._service_queue.popleft()
-
-            try:
-                client = cls._get_or_create_client(call.service_name, call.srv_type)
-                if not client.service_is_ready():
-                    raise RuntimeError(f"Service {call.service_name} not available")
-
-                future = client.call_async(call.request)
-
-                def _on_done(fut, *, call=call):
-                    try:
-                        call.result_holder['result'] = fut.result()
-                    except Exception as exc:  # pylint: disable=broad-except
-                        call.result_holder['error'] = exc
-                    finally:
-                        call.event.set()
-
-                future.add_done_callback(_on_done)
-
-            except Exception as exc:  # pylint: disable=broad-except
-                call.result_holder['error'] = exc
-                call.event.set()
+        # Keep timer compatibility by waking workers; they drain the queue concurrently
+        cls._work_event.set()
 
 
 def configure_rpc_access(node: Node) -> None:

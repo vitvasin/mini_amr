@@ -16,7 +16,7 @@ print("IP:", RPC_HOST)
 
 _conn: Connection | None = None
 _CONNECT_RETRIES = 3
-_CONNECT_RETRY_DELAY = 1.0  # seconds
+_CONNECT_RETRY_DELAY = 0.5  # seconds
 
 
 def _get_conn() -> Connection:
@@ -66,9 +66,9 @@ def _reset_conn():
     _conn = None
 
 if __name__ == "__main__":
-    print("Open door #1:", call_remote("door_command", 1, 0))
-    print("Close door #2:", call_remote("door_command", 2, 0))
-    print("Close door #2:", call_remote("door_command", 3, 0))
-    print("Close door #2:", call_remote("door_command", 4, 0))
+    print("command door #1:", call_remote("door_command", 1, 0))
+    print("command door #2:", call_remote("door_command", 2, 0))
+    print("command door #3:", call_remote("door_command", 3, 0))
+    print("command door #4:", call_remote("door_command", 4, 0))
     #print("Dock robot:", call_remote("dock_command", True))
     #print("Undock robot:", call_remote("dock_command", False))

@@ -27,12 +27,24 @@ volatile unsigned long lastIRReceiveTime = 0; // ตัวแปรสำหร�
 
 int prevRobotStage = -1;
 
+// === DEBUG MACROS ===
+#define DEBUG_ENABLE 1  // Set to 0 for ESP32-C3 (2 UARTs limit), 1 for boards with 3+ UARTs
+#if DEBUG_ENABLE
+  #define DEBUG_BEGIN(...) Serial.begin(__VA_ARGS__)
+  #define DEBUG_PRINT(...) Serial.print(__VA_ARGS__)
+  #define DEBUG_PRINTLN(...) Serial.println(__VA_ARGS__)
+#else
+  #define DEBUG_BEGIN(...)
+  #define DEBUG_PRINT(...)
+  #define DEBUG_PRINTLN(...)
+#endif
+
 // ========== IR Protocol ==========
 void sendIRCommand(uint8_t cmd) {
   IRSerial.write(IR_HEADER);
   IRSerial.write(cmd);
   IRSerial.write(IR_HEADER ^ cmd);
-  Serial.print("📤 IR Sent: 0x"); Serial.println(cmd, HEX);
+  DEBUG_PRINT("📤 IR Sent: 0x"); DEBUG_PRINTLN(cmd, HEX);
 }
 
 bool receiveIRCommand(uint8_t &cmd) {
@@ -46,7 +58,7 @@ bool receiveIRCommand(uint8_t &cmd) {
     else if (state==3) {
       if ((buf[0]^buf[1])==buf[2]) {
         cmd=buf[1]; state=0;
-        Serial.print("📥 IR Received: 0x"); Serial.println(cmd, HEX);
+        DEBUG_PRINT("📥 IR Received: 0x"); DEBUG_PRINTLN(cmd, HEX);
         return true;
       }
       state=0;
@@ -79,7 +91,7 @@ void IRCommu_loop() {
   while (receiveIRCommand(recv)) {
     if (recv == 0xF0 && lastSent != 0) {
       gotAck = true; retry = 0;
-      Serial.println("✅ Got ACK from Dock");
+      DEBUG_PRINTLN("✅ Got ACK from Dock");
     } else {
       // always reply ACK
       sendIRCommand(0xF0);
@@ -100,7 +112,7 @@ void IRCommu_loop() {
     if (!gotAck && cmd == lastSent) {
       if (++retry >= 10) {
         RobotStage = 0; retry = 0; gotAck = false; lastSent = 0;
-        Serial.println("⚠️ Max retry reached, reset stage");
+        DEBUG_PRINTLN("⚠️ Max retry reached, reset stage");
         return;
       }
     }
@@ -127,27 +139,27 @@ void Modbus_loop() {
 
   // log เมื่อ event เปลี่ยน
   if (holdingRegs[0] != prevReg0) {
-    Serial.print("📤 Modbus Event updated -> holdingRegs[0] = ");
-    Serial.println(holdingRegs[0]);
+    DEBUG_PRINT("📤 Modbus Event updated -> holdingRegs[0] = ");
+    DEBUG_PRINTLN(holdingRegs[0]);
     prevReg0 = holdingRegs[0];
   }
 
   // command from PC
   uint16_t cmd = holdingRegs[1];
   if (cmd != 0 && cmd != prevReg1) {
-    Serial.print("📥 Modbus Received from PC -> holdingRegs[1] = ");
-    Serial.println(cmd);
+    DEBUG_PRINT("📥 Modbus Received from PC -> holdingRegs[1] = ");
+    DEBUG_PRINTLN(cmd);
     prevReg1 = cmd;
   }
 
   if (cmd == 20) {
-    RobotStage = 3; holdingRegs[1] = 0; Serial.println("➡️ PC Command: ReadyToCharge executed");
+    RobotStage = 3; holdingRegs[1] = 0; DEBUG_PRINTLN("➡️ PC Command: ReadyToCharge executed");
   }
   else if (cmd == 21) {
-    RobotStage = 7; holdingRegs[1] = 0; Serial.println("➡️ PC Command: FullyCharged executed");
+    RobotStage = 7; holdingRegs[1] = 0; DEBUG_PRINTLN("➡️ PC Command: FullyCharged executed");
   }
   else if (cmd == 22) {
-    RobotStage = 8; holdingRegs[1] = 0; Serial.println("➡️ PC Command: StopCharging executed");
+    RobotStage = 8; holdingRegs[1] = 0; DEBUG_PRINTLN("➡️ PC Command: StopCharging executed");
   }
 
   // keep Modbus stack running
@@ -168,12 +180,12 @@ void Watchdog_loop() {
         // Clear incoming command and move to safe idle state
         holdingRegs[1] = 0;
         RobotStage = 0;
-        Serial.println("⚠️ Watchdog: Dock power lost detected during charging -> reported to Modbus (holdingRegs[0]=12) and reset RobotStage");
+        DEBUG_PRINTLN("⚠️ Watchdog: Dock power lost detected during charging -> reported to Modbus (holdingRegs[0]=12) and reset RobotStage");
       } else {
         RobotStage = 0;
         holdingRegs[0] = 0;
         holdingRegs[1] = 0;
-        Serial.println("Watchdog Triggered: No IR seen in 2s --> Reset RobotStage and Modbus Reg");
+        DEBUG_PRINTLN("Watchdog Triggered: No IR seen in 2s --> Reset RobotStage and Modbus Reg");
       }
     }
   }
@@ -185,38 +197,50 @@ void Monitor_loop() {
   const unsigned long interval = 500;
   if (millis() - last >= interval) {
     last = millis();
-    Serial.print("🧭 RobotStage changed: ");
-    Serial.println(RobotStage);
+    DEBUG_PRINT("🧭 RobotStage changed: ");
+    DEBUG_PRINTLN(RobotStage);
     prevRobotStage = RobotStage;
-    Serial.print("485 command[0,1]: ");
-    Serial.print(holdingRegs[0]); Serial.print(" , "); Serial.println(holdingRegs[1]);
+    DEBUG_PRINT("485 command[0,1]: ");
+    DEBUG_PRINT(holdingRegs[0]); DEBUG_PRINT(" , "); DEBUG_PRINTLN(holdingRegs[1]);
   }
 }
 
 // ========== Setup ==========
 void setup(){
+  // Add delay for power stabilization (Fix cold start freeze)
+  delay(2000);
+
   pinMode(CONST_HIGH_PIN,OUTPUT); digitalWrite(CONST_HIGH_PIN,HIGH);
-  Serial.begin(9600);
+  DEBUG_BEGIN(9600);
 
   IRSerial.begin(9600,SERIAL_8N1,RX1_PIN,TX1_PIN);
+  delay(1000);
   RS485Serial.begin(115200,SERIAL_8N1,RS485_RX,RS485_TX);
+  delay(1000);
   modbus.begin(SLAVE_ID,115200,SERIAL_8N1);
+  delay(1000);
   modbus.configureHoldingRegisters(holdingRegs,2);
   // Run in superloop (no RTOS): initialize peripherals and timers
   pinMode(LED_BUILTIN, OUTPUT);
   lastIRReceiveTime = millis();
-  Serial.println("Setup complete - running in superloop mode");
+  DEBUG_PRINTLN("Setup complete - running in superloop mode");
 }
 
 void loop(){
   // cooperative multitasking by calling each loop function
-  IRCommu_loop();
-  Modbus_loop();
-  Watchdog_loop();
+
+  //Watchdog_loop();
   Monitor_loop();
   Blink_loop();
+
+  static unsigned long last2 = 0;
+  if (millis() - last2 >= 50) {
+    last2 = millis();
+    IRCommu_loop();
+    Modbus_loop();
+  }
   // small sleep to yield CPU and keep timing stability
-  delay(10);
+  delay(2);
 }
 
 /*

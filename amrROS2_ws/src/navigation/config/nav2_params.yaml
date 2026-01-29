@@ -56,8 +56,8 @@ amcl:
     scan_topic: scan
     set_initial_pose: true
     initial_pose: #currently set to NECTEC 4th floor (room 410)
-      x: 1.428
-      y: -4.288
+      x: 0.0 #1.428
+      y: 0.0 #-4.288
       z: 0.0
       yaw: 0.0
 
@@ -71,8 +71,10 @@ bt_navigator:
     wait_for_service_timeout: 5000
     action_server_result_timeout: 900.0
     default_nav_to_pose_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_to_pose_w_replanning_and_recovery.xml # or $(find-pkg-share my_package)/behavior_tree/my_nav_to_pose_bt.xml
-    default_nav_through_poses_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_through_pose.xml
+    #default_nav_through_poses_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_through_pose_noreplan.xml
+    default_nav_through_poses_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_through_pose.xml 
     #default_nav_through_poses_bt_xml: /home/smr/workspaces/mini_amr/Shortcut/navigate_through_pose_r2.xml
+    
     navigators: ["navigate_to_pose", "navigate_through_poses"]
     navigate_to_pose:
       plugin: "nav2_bt_navigator::NavigateToPoseNavigator" # In Iron and older versions, "/" was used instead of "::"
@@ -223,7 +225,7 @@ controller_server:
         collision_lookahead_time: 2.0
         consider_footprint: false
       AckermannConstraints:
-        min_turning_r: 0.2
+        min_turning_r: 0.0 # 0.2
       critics: ["ConstraintCritic", "CostCritic", "GoalCritic", "GoalAngleCritic", "PathAlignCritic", "PathFollowCritic", "PathAngleCritic", "PreferForwardCritic"]
       ConstraintCritic:
         enabled: true
@@ -484,11 +486,11 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0 #3.0
-        inflation_radius: 0.6
+        inflation_radius: 0.55
       inflation_layer2:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0 #3.0
-        inflation_radius: 0.6
+        inflation_radius: 0.55
       always_send_full_costmap: True
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"

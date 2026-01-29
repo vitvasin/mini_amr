@@ -7,17 +7,17 @@ from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
     # Define paths
-    map_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.yaml"
+    map_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map"
     keepout_mask_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml"
     amr_ui_path = "/home/smr/workspaces/mini_amr/amrROS2_UI/ICEAMR"
     
-    # 1. Navigation Launch
+    # 1. Navigation Launch (SLAM Localization)
     navigation_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
             PathJoinSubstitution([
                 FindPackageShare('navigation'),
                 'launch',
-                'navigation_amcl.launch.py'
+                'navigation.launch.py'
             ])
         ]),
         launch_arguments={
@@ -26,7 +26,7 @@ def generate_launch_description():
             'rviz_config_file': PathJoinSubstitution([
                 FindPackageShare('navigation'),
                 'rviz',
-                'rviz_nav.rviz'
+                'rviz_nav_slam.rviz'
             ]),
             'use_keepout_zones': 'true',
             'keepout_mask_yaml': keepout_mask_yaml
@@ -43,7 +43,7 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={
-            'localization_mode': 'amcl'
+            'localization_mode': 'slam_toolbox'
         }.items()
     )
 

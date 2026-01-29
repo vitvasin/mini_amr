@@ -94,24 +94,18 @@ class RobotSoundNode(Node):
             
             
             self.get_logger().info(f'🔊 Playing sound: {file_path}')
-            # ลองใช้ paplay ก่อน (ผ่าน PulseAudio)
+            # ใช้ aplay ตรงผ่าน ALSA/USB (การ์ด 1) เพราะ paplay ไม่ออกเสียงบนเครื่องนี้
             try:
-                subprocess.Popen(['paplay', file_path])
-            except FileNotFoundError:
-                # ถ้าเครื่องไม่มี paplay (ไม่มี PulseAudio utils) fallback ไปใช้ aplay แบบ safe
-                try:
-                    subprocess.Popen([
-                        'aplay',
-                        '-D', 'plughw:1,0',
-                        '-c', '2',
-                        '-f', 'S16_LE',
-                        '-r', '48000',
-                        file_path
-                    ])
-                except Exception as e:
-                    self.get_logger().error(f"Failed to play sound with aplay: {e}")
+                subprocess.Popen([
+                    'aplay',
+                    '-D', 'plughw:1,0',
+                    '-c', '2',
+                    '-f', 'S16_LE',
+                    '-r', '48000',
+                    file_path
+                ])
             except Exception as e:
-                self.get_logger().error(f"Failed to play sound with paplay: {e}")
+                self.get_logger().error(f"Failed to play sound with aplay: {e}")
         else:
             self.get_logger().warn(f'Sound file not found: {file_path}')
 

@@ -1,0 +1,92 @@
+coordinate_system: reference_image
+crowd_sim:
+  agent_groups:
+    - {agents_name: [], agents_number: 0, group_id: 0, profile_selector: external_agent, state_selector: external_static, x: 0, y: 0}
+  agent_profiles:
+    - {ORCA_tau: 1, ORCA_tauObst: 0.40000000000000002, class: 1, max_accel: 0, max_angle_vel: 0, max_neighbors: 10, max_speed: 0, name: external_agent, neighbor_dist: 5, obstacle_set: 1, pref_speed: 0, r: 0.25}
+  enable: 0
+  goal_sets: []
+  model_types: []
+  obstacle_set: {class: 1, file_name: L1_navmesh.nav, type: nav_mesh}
+  states:
+    - {final: 1, goal_set: -1, name: external_static, navmesh_file_name: ""}
+  transitions: []
+  update_time_step: 0.10000000000000001
+graphs:
+  {}
+levels:
+  L1:
+    drawing:
+      filename: map_000.png
+    elevation: 0
+    lanes:
+      - [14, 15, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [10, 16, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [16, 17, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [17, 18, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [18, 19, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [19, 20, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [21, 22, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [22, 4, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [4, 23, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [23, 24, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [24, 25, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [25, 26, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [26, 6, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [25, 7, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [22, 5, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [23, 27, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [27, 0, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [27, 3, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [21, 8, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [20, 2, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [19, 13, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [15, 9, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [18, 12, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [16, 11, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [28, 29, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [20, 28, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [28, 21, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [14, 29, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [29, 0, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [0, 14, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [14, 1, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [19, 30, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [15, 30, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+      - [30, 10, {bidirectional: [4, true], demo_mock_floor_name: [1, ""], demo_mock_lift_name: [1, ""], graph_idx: [2, 0], mutex: [1, ""], orientation: [1, ""], speed_limit: [3, 0]}]
+    layers:
+      {}
+    vertices:
+      - [314.38299999999998, 855.14300000000003, 0, Home]
+      - [325.09100000000001, 943.44000000000005, 0, room410]
+      - [134, 944.44500000000005, 0, room420]
+      - [319.76600000000002, 580, 0, room409]
+      - [229.947, 465, 0, Prajim]
+      - [51.119, 463.21499999999997, 0, room422]
+      - [321.09500000000003, 349.976, 0, printer1]
+      - [393.24099999999999, 435.22500000000002, 0, room408]
+      - [130.52699999999999, 666.86500000000001, 0, room421]
+      - [323.56700000000001, 1050.0070000000001, 0, room411]
+      - [322.50400000000002, 1553.2239999999999, 0, printer2]
+      - [235.596, 1621.6969999999999, 0, canteen]
+      - [135.095, 1408.0799999999999, 0, room418]
+      - [133.06700000000001, 1090.854, 0, room419]
+      - [314.08499999999998, 941.95299999999997, 0, ""]
+      - [314.42200000000003, 1047.528, 0, ""]
+      - [258.47699999999998, 1553.0999999999999, 0, ""]
+      - [144.874, 1551.3589999999999, 0, ""]
+      - [144.10499999999999, 1406.4059999999999, 0, ""]
+      - [144.10499999999999, 1088.393, 0, ""]
+      - [144.27000000000001, 940.56899999999996, 0, ""]
+      - [140.75299999999999, 663.60599999999999, 0, ""]
+      - [137.23599999999999, 466.65499999999997, 0, ""]
+      - [307.81, 464.89600000000002, 0, ""]
+      - [365.83999999999997, 464.89600000000002, 0, ""]
+      - [365.83999999999997, 434.12200000000001, 0, ""]
+      - [364.08199999999999, 349.71499999999997, 0, ""]
+      - [308.64699999999999, 579.63599999999997, 0, ""]
+      - [143.339, 904.90200000000004, 0, ""]
+      - [312.94999999999999, 902.75, 0, ""]
+      - [313.50299999999999, 1087.3979999999999, 0, ""]
+lifts: {}
+name: building

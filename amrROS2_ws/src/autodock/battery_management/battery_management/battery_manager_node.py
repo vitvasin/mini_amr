@@ -227,11 +227,17 @@ class BatteryManager(Node):
             return
         
         if (self.request_stop_charge):
-            if (self.state == ManagerState.CHARGING):
-                self.get_logger().warn('Request stop charge for undock')
-                self.send_cmd(CMD_STOP_CHG)
+            # ระหว่างถูกสั่งหยุดชาร์จ ให้ยิง STOP ซ้ำหาก IR ยังรายงานว่า CHARGING
+            if (self.ir_state == ChargerState.CHARGING):
+                # กันสแปมด้วยการหน่วงเวลาสั้น ๆ
+                if (now - self.last_stop_time) >= 0.5:
+                    self.get_logger().warn('Request stop charge for undock')
+                    self.send_cmd(CMD_STOP_CHG)
+                    self.last_stop_time = now
                 self.set_state(ManagerState.COOLDOWN)
-                self.last_stop_time = now
+            else:
+                # ถ้า IR ไม่ได้ชาร์จแล้ว รักษา state ไว้บนแท่น
+                self.set_state(ManagerState.IDLE_ON_DOCK)
             return
 
         # Safety stop

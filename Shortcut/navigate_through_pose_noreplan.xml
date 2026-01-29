@@ -1,0 +1,15 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <Sequence name="NavigateSequence">
+      <ComputePathThroughPoses goals="{goals}" path="{path}" planner_id="{selected_planner}" error_code_id="{compute_path_error_code}"/>
+      <RecoveryNode number_of_retries="9999" name="FollowOrWait">
+        <FollowPath path="{path}" controller_id="FollowPath"/>
+        <Sequence name="WaitLogic">
+           <Wait wait_duration="5.0"/>
+           <ClearEntireCostmap service_name="local_costmap/clear_entirely_local_costmap"/>
+           <ClearEntireCostmap service_name="global_costmap/clear_entirely_global_costmap"/>  
+        </Sequence>
+      </RecoveryNode>
+    </Sequence>
+  </BehaviorTree>
+</root>

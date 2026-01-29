@@ -28,6 +28,14 @@ def update_queue_status(queue_id, status):
     return response.json()
 
 def remove_queue_by_id(queue_id):
+    url = f"{API_BASE_URL}/api/queue/removebyrobot"
+    headers = {"Content-Type": "application/json"}
+    payload = {"id": queue_id}
+    response = requests.post(url, headers=headers, json=payload, timeout=3)
+    response.raise_for_status()
+    return response.json()
+
+def remove_queue_no_history(queue_id):
     url = f"{API_BASE_URL}/api/queue/remove"
     headers = {"Content-Type": "application/json"}
     payload = {"id": queue_id}

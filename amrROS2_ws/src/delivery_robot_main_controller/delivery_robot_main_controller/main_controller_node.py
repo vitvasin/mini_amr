@@ -102,6 +102,8 @@ class DeliveryRobotMainController(Node):
         self._pause_monitor_timer = None
         self._safestop_monitor_timer = None
 
+        self._loadin_timeout_end = time.time()  # Initialize to current time
+
         self.get_logger().info(f"Initial state: {self.state.name}")
 
         self._cached_system_parameters = None
@@ -272,7 +274,8 @@ class DeliveryRobotMainController(Node):
                 self.chargestate = ChargeState.NOT_CHARGE
             api_client.update_status('charge_state',self.chargestate.name)
             
-            if (self.dockstate != DockState.DOCKED)and(charge_code in (10, 11)):
+            # อย่ากลับไป DOCKED ระหว่างกำลัง UNDOCKING เพื่อกัน state เด้งสวนทาง
+            if (self.dockstate != DockState.DOCKED)and(charge_code in (10, 11))and(self.dockstate != DockState.UNDOCKING):
                 self.change_dock_state(DockState.DOCKED)
                
 
@@ -1012,7 +1015,8 @@ class DeliveryRobotMainController(Node):
 
     def send_goal_pose_agv(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
-        building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
+        #building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
+        building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/map_000.building.yaml"
         current_pose = self.current_pose
         start_pos = (current_pose.pose.position.x, current_pose.pose.position.y)
         goal_pos = (x, y, yaw)
@@ -1098,15 +1102,23 @@ class DeliveryRobotMainController(Node):
 
     def on_standby_loop(self):
         #self.get_logger().info(f"on_standby_loop : {self.state.name}")
-        
         if (self.state != RobotState.STANDBY):
             return
-        
+
+        if (self._loadin_timeout_end > time.time()):
+            self.wait_for_load_in_loop()
+            return
+
         state = self.get_state_from_api()
         
         if self.toggle_manual:
             self.get_logger().info(f"State will be changed to {state.name}")
             self.change_state(RobotState.MANUAL)
+            return
+
+        if state == RobotState.PAUSED:
+            self.get_logger().info(f"State will be changed to {state.name}")
+            self.change_state(state)
             return
 
         
@@ -1288,7 +1300,7 @@ class DeliveryRobotMainController(Node):
                #  Some navigation timeout to demo cancellation
                 #if Duration.from_msg(feedback.navigation_time) > Duration(seconds=600.0):
                 state = self.get_state_from_api()
-                if self.toggle_manual:
+                if self.toggle_manual or state == RobotState.MANUAL or state == RobotState.PAUSED:
                     self.navigator.cancelTask()
 
         # Do something depending on the return code
@@ -1392,10 +1404,12 @@ class DeliveryRobotMainController(Node):
                 if queue_id:
                     api_client.update_queue_status(queue_id,'completed')
                     self.remove_queue_by_id(queue_id)
+                
                 self.get_logger().info(f"Waiting {self.setting_waitLoadinTimeout}s for LOAD_IN command...")
                 self._loadin_timeout_end = time.time() + self.setting_waitLoadinTimeout
-                self._loadin_timer = self.create_timer(0.5, self.wait_for_load_in_loop)
+                #self._loadin_timer = self.create_timer(0.5, self.wait_for_load_in_loop)
                 self.current_task = None
+                self.change_state(RobotState.STANDBY)
                 return
 
             elif action == "Delivery":
@@ -1416,16 +1430,19 @@ class DeliveryRobotMainController(Node):
         remaining_time = self._loadin_timeout_end - time.time()
         self.get_logger().info(f"Enter to wait_for_load_in_loop and wait for timeout...in {remaining_time} seconds")
         if (state == RobotState.LOAD_IN):
+            self.change_state(state)
             self.get_logger().info(f"State changed to {state.name} during wait.")
-            self._loadin_timer.cancel()
-            self.change_state(RobotState.LOAD_IN)
+            return 
+        elif (state == RobotState.LOAD_OUT):
+            self.change_state(state)
+            self.get_logger().info(f"State changed to {self.state.name} during wait.")
             return 
 
-        if time.time() > self._loadin_timeout_end:
-            self.get_logger().info("No LOAD_IN received. Returning to STANDBY.")
-            self._loadin_timer.cancel()
-            self.change_state(RobotState.STANDBY) 
-            return
+       # if time.time() > self._loadin_timeout_end:
+       #     self.get_logger().info("No LOAD_IN received. Returning to STANDBY.")
+       #     self._loadin_timer.cancel()
+       #     self.change_state(RobotState.STANDBY) 
+       #     return
 
     def on_load_in(self):
         self.get_logger().info("Robot is LOADING IN cargo.")

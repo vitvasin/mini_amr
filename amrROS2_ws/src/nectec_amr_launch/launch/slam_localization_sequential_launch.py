@@ -1,8 +1,10 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction, ExecuteProcess
+from launch.actions import IncludeLaunchDescription, TimerAction, ExecuteProcess, RegisterEventHandler, EmitEvent
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import PathJoinSubstitution
+from launch.event_handlers import OnProcessExit
+from launch.events import Shutdown
 from launch_ros.substitutions import FindPackageShare
 
 def generate_launch_description():
@@ -67,8 +69,17 @@ def generate_launch_description():
         actions=[ui_action]
     )
 
+    # 4. Shutdown Handler (Close everything when UI closes)
+    shutdown_handler = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=ui_action,
+            on_exit=[EmitEvent(event=Shutdown())]
+        )
+    )
+
     return LaunchDescription([
         navigation_launch,
         delayed_delivery_launch,
-        delayed_ui_launch
+        delayed_ui_launch,
+        shutdown_handler
     ])

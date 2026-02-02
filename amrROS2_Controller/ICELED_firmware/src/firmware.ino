@@ -835,7 +835,7 @@ void sensor_module_task()
         }
         else
         {
-            cliff = 9999;
+            //cliffcliff = -1;
         }
         sensor_state = 4;
         break;
@@ -850,7 +850,7 @@ void sensor_module_task()
             buff = 99;
             pkg_data[_IR_CHARGE_STATE_] = static_cast<uint8_t>(buff & 0xFF);
         }
-        sensor_state = 4;
+        sensor_state = 3;
         break;
     }
 
@@ -1000,8 +1000,8 @@ void safety_task()
     bumper_state = !mcp.digitalRead(9) || !mcp.digitalRead(10);
 
     if (cliff > 100.0)
-        // cliff_state = true; // 50 mm. for flat surface
-        cliff_state = false; // hardcode to test without cliff sensor
+        cliff_state = true; // 50 mm. for flat surface
+        // cliff_state = false; // hardcode to test without cliff sensor
     else
         cliff_state = false;
 
@@ -1011,7 +1011,7 @@ void safety_task()
         stop = false;
 
     // pkg_data[_SAFETY_READY_] = 1;
-    // Serial5.printf("bumper_state: %d  --- emer_state: %d --- cliff: %d\n", bumper_state, emer_state, cliff);
+    //Serial.printf("bumper_state: %d  --- emer_state: %d --- cliff: %d\n", bumper_state, emer_state, cliff);
 }
 
 void fault_monitor_task()

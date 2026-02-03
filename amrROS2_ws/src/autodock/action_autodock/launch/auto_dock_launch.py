@@ -29,7 +29,7 @@ def generate_launch_description():
     auto_dock = Node(
       	package='action_autodock',
     	executable='autodock_action_server',
-      	name='autodock',
+      	# name='autodock',
     	parameters=[
             os.path.join(get_package_share_directory('action_autodock'),'config','auto_dock_config.yaml'),
             {'localization_mode': localization_mode}

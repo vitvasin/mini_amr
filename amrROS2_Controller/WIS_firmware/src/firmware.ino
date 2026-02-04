@@ -988,6 +988,7 @@ void sensor_module_task()
     alarm_mode_prev = alarm_mode;
     A = B = C = false;   
 
+    delay(10);
 }
 
 // ---------------- Safety ---------------------

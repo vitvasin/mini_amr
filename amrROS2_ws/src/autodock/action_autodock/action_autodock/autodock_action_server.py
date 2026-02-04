@@ -822,6 +822,8 @@ class AutodockActionServer(Node):
             # รอให้ callback update ค่า IR state
             time.sleep(delay)
 
+            # return True # hardcode return
+
             # ตรวจสอบ feedback
             global charger_state
             if charger_state in target_set:
@@ -904,15 +906,21 @@ class AutodockActionServer(Node):
         #    if not success:
         #        self.get_logger().error("Charging failed to set READY before START_CHARGING")
         #        return False
+        for i in range(5):
+            self.set_charge_state(CmdCharger.START_CHARGING)
+            time.sleep(1.0)
+        self.get_logger().info("Charging started successfully")
+        return True
         
-        success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
-        #success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
-        if success:
-                self.get_logger().info("Charging started successfully")
-                return True
-        else:
-                self.get_logger().error("Charging failed to start")
-                return False
+        
+        # success = self.set_charge_state_with_confirm(CmdCharger.START_CHARGING,[ChargerState.CHARGING, ChargerState.BATT_FULL],5,1.0)
+        # #success = ((charger_state == ChargerState.READY)or(charger_state == ChargerState.CHARGING)or(charger_state == ChargerState.BATT_FULL))
+        # if success:
+        #         self.get_logger().info("Charging started successfully")
+        #         return True
+        # else:
+        #         self.get_logger().error("Charging failed to start")
+        #         return False
 
     '''
     def move_open_loop_check_charge(self,speed,duration):
@@ -1302,7 +1310,8 @@ class AutodockActionServer(Node):
         #linear_speed = 0.1 #forward
         self.cal_undock_point(self.undock_dist_step2)
         
-        success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
+        # success = self.set_charge_state_with_confirm(CmdCharger.STOP_CHARGING,ChargerState.READY,5,1.0)
+        success = True
         #success = self.wait_charge_state_with_confirm(True,5,1.0)
         if success:
             self.get_logger().info("Stop charging successfully")

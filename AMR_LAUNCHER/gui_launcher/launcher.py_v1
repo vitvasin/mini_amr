@@ -8,7 +8,7 @@ import time
 import subprocess
 import shutil
 
-from PySide6.QtGui import QPixmap, QMovie
+from PySide6.QtGui import QPixmap
 
 DELIVERY_ROBOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'amrROS2_ws/src/delivery_robot_main_controller'))
 sys.path.insert(0, DELIVERY_ROBOT_PATH)
@@ -27,14 +27,13 @@ class ClickableLabel(QLabel):
 class PasswordDialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Enter Admin Password")
+        self.setWindowTitle("Password Required")
         self.setModal(True)
         self.setMinimumSize(400, 500)
 
         layout = QVBoxLayout(self)
 
         self.password_input = QLineEdit()
-        self.password_input.setPlaceholderText("Enter Admin Password")
         self.password_input.setEchoMode(QLineEdit.Password)
         self.password_input.setStyleSheet("font-size: 32px; height: 50px;")
         layout.addWidget(self.password_input)
@@ -96,93 +95,6 @@ class PasswordDialog(QDialog):
     def get_password(self):
         return self.password_input.text()
 
-class DevMenuDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Developer Menu")
-        self.setModal(True)
-        self.setMinimumSize(400, 350)
-        
-        # Styles
-        self.setStyleSheet("""
-            QDialog {
-                background-color: #F9F8F8;
-            }
-            QPushButton {
-                min-height: 80px;
-                font-size: 24px;
-                font-weight: bold;
-                border-radius: 10px;
-                border: 2px solid #555;
-                margin: 5px;
-            }
-        """)
-
-        layout = QVBoxLayout(self)
-        layout.setSpacing(15)
-        layout.setContentsMargins(30, 30, 30, 30)
-        
-        title_label = QLabel("Developer Tools")
-        title_label.setAlignment(Qt.AlignCenter)
-        title_label.setStyleSheet("font-size: 28px; font-weight: bold; color: #333; margin-bottom: 10px; border: none;")
-        layout.addWidget(title_label)
-
-        buttons_config = [
-            ("Dock", "dock.sh", True),
-            ("Undock", "undock.sh", True)
-        ]
-        
-        for label, script, run_terminal in buttons_config:
-            btn = QPushButton(label)
-            btn.setStyleSheet("background-color: #E0E0E0; color: #333;")
-            # Connect to parent's run_script
-            btn.clicked.connect(lambda checked=False, s=script, rt=run_terminal: parent.run_script(s, run_in_terminal=rt))
-            layout.addWidget(btn)
-
-        layout.addStretch()
-
-        close_btn = QPushButton("Close")
-        close_btn.setStyleSheet("background-color: #ffcccc; color: #333;")
-        close_btn.clicked.connect(self.accept)
-        layout.addWidget(close_btn)
-
-class IntroWindow(QWidget):
-    finished = Signal()
-
-    def __init__(self, gif_path):
-        super().__init__()
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setGeometry(QApplication.primaryScreen().availableGeometry())
-        self.setStyleSheet("background-color: black;") 
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        
-        self.label = QLabel()
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setScaledContents(True)
-        layout.addWidget(self.label)
-
-        self.movie = QMovie(gif_path)
-        self.movie.setCacheMode(QMovie.CacheAll)
-        self.label.setMovie(self.movie)
-        
-        self.movie.frameChanged.connect(self.on_frame_changed)
-        self.movie.start()
-
-    def on_frame_changed(self, frame_number):
-        if frame_number == self.movie.frameCount() - 1:
-            # Last frame reached
-            delay = self.movie.nextFrameDelay()
-            if delay <= 0: delay = 100
-            self.movie.setPaused(True)
-            QTimer.singleShot(delay, self.finalize)
-
-    def finalize(self):
-        self.close()
-        self.finished.emit()
-
 class LauncherApp(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -214,17 +126,11 @@ class LauncherApp(QMainWindow):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         self.layout = QVBoxLayout(central_widget)
-        self.layout.setSpacing(10) # Reduced spacing
-        self.layout.setContentsMargins(10, 5, 10, 10) # Reduce top margin
+        self.layout.setSpacing(20) # Increase spacing
 
         # Top Header (Close Button)
         top_layout = QHBoxLayout()
-        
-        # Spacer to push close button to right
-        top_layout.addItem(QSpacerItem(20, 10, QSizePolicy.Expanding, QSizePolicy.Minimum))
-
-        # Reduce spacer height preference to minimize vertical impact
-        top_layout.addItem(QSpacerItem(20, 10, QSizePolicy.Expanding, QSizePolicy.Minimum))
+        top_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Expanding, QSizePolicy.Minimum))
         
         self.close_btn = QPushButton("X")
         self.close_btn.setFixedSize(50, 50)
@@ -247,7 +153,7 @@ class LauncherApp(QMainWindow):
         if os.path.exists(logo_path):
             pixmap = QPixmap(logo_path)
             # Scale if too large, e.g. height 200
-            pixmap = pixmap.scaledToHeight(350, Qt.SmoothTransformation) 
+            pixmap = pixmap.scaledToHeight(400, Qt.SmoothTransformation) 
             logo_label.setPixmap(pixmap)
         self.layout.addWidget(logo_label)
 
@@ -260,7 +166,7 @@ class LauncherApp(QMainWindow):
         # Script Buttons Configuration
         # (Label, Script Filename, IsDeveloper, RunInTerminal)
         self.buttons_config = [
-            ("Navigate", "navigation.sh", False, False),
+            ("Navigation", "navigation.sh", False, False),
             ("Create Map", "create_map.sh", False, False),
             ("Save Map", "save_map.sh", False, False),
             ("Edit Map", "edit_map.sh", False, False),
@@ -279,44 +185,35 @@ class LauncherApp(QMainWindow):
         self.grid_layout = QGridLayout()
         self.grid_layout.setSpacing(20)
 
-        self.script_buttons = []
+        # Keep track of buttons to show/hide
+        self.dev_buttons = []
 
-        # --- Left Column (Col 0) ---
-        # Navigation Button
-        nav_btn = QPushButton("Navigate")
-        nav_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-        # Pastel Green with border
-        nav_btn.setStyleSheet("font-size: 96px; font-weight: bold; border-radius: 15px; border: 2px solid #555555; background-color: #C1FFC1;")
-        nav_btn.clicked.connect(lambda: self.run_script("navigation.sh", run_in_terminal=False))
-        self.script_buttons.append(nav_btn)
-        
-        # Add to grid: Row 0, Col 0, RowSpan 4, ColSpan 1
-        self.grid_layout.addWidget(nav_btn, 0, 0, 4, 1)
-
-        # --- Right Column (Col 1) ---
-        # "Map Tools" Label (Row 0)
-        map_tools_label = QLabel("Map Tools")
-        map_tools_label.setAlignment(Qt.AlignCenter)
-        map_tools_label.setStyleSheet("font-size: 30px; font-weight: bold; color: #333333;")
-        self.grid_layout.addWidget(map_tools_label, 0, 1)
-
-        # Map Buttons (Rows 1-3)
-        map_buttons_config = [
-            ("Create Map", "create_map.sh", 1, "protected_script"),
-            ("Save Map", "save_map.sh", 2, "protected_script"),
-            ("Edit Map", "edit_map.sh", 3, "protected_script")
-        ]
-
-        for label, script, row, action_type in map_buttons_config:
+        visible_count = 0
+        for label, script, is_dev, run_terminal in self.buttons_config:
             btn = QPushButton(label)
-            btn.setMinimumHeight(100)
-            btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
-            btn.setStyleSheet("font-size: 40px; font-weight: bold; border-radius: 15px; border: 2px solid #555555;")
-            btn.clicked.connect(lambda checked=False, s=script, a=action_type: self.run_script(s, action_type=a, run_in_terminal=False))
+            btn.setMinimumHeight(100) # Taller buttons for touch
+            btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding) # Expand to fill grid cells
+            
+            style = "font-size: 48px; font-weight: bold;border-radius: 15px; border: 2px solid #555555;  "
+            if label == "Navigation":
+                style += " background-color: #C1FFC1; " # Pastel Green with border
+            elif is_dev:
+                style += " background-color: #E0E0E0; color: #555; border-radius: 15px; border: 2px solid #555555;" # Grey for dev buttons
+            
+            btn.setStyleSheet(style) # Larger text and color
+            btn.clicked.connect(lambda checked=False, s=script, t=run_terminal: self.run_script(s, run_in_terminal=t))
+            
             self.script_buttons.append(btn)
-            self.grid_layout.addWidget(btn, row, 1)
 
-        # --- Dev Buttons logic moved to DevMenuDialog ---
+            if is_dev:
+                self.dev_buttons.append(btn)
+                btn.hide()
+            else:
+                 # Layout for visible buttons
+                row = visible_count // 2
+                col = visible_count % 2
+                self.grid_layout.addWidget(btn, row, col)
+                visible_count += 1
         
         self.layout.addLayout(self.grid_layout)
 
@@ -334,7 +231,7 @@ class LauncherApp(QMainWindow):
         if os.path.exists(nectec_logo_path):
             logo_pixmap = QPixmap(nectec_logo_path)
             # Scale to height 100
-            logo_pixmap = logo_pixmap.scaledToHeight(150, Qt.SmoothTransformation)
+            logo_pixmap = logo_pixmap.scaledToHeight(125, Qt.SmoothTransformation)
             nectec_logo_label.setPixmap(logo_pixmap)
             nectec_logo_label.setContentsMargins(0, 0, 20, 20) # Left, Top, Right, Bottom
 
@@ -416,12 +313,23 @@ class LauncherApp(QMainWindow):
             self.dev_click_times = [] # Reset
 
     def enable_developer_mode(self):
-        # Open the Developer Menu Dialog
-        dialog = DevMenuDialog(self)
-        dialog.exec()
-        # After dialog closes, we are technically "done" with this interaction
-        # We don't persist "dev mode" state on the main window anymore
-        self.dev_mode_enabled = False
+        self.dev_mode_enabled = True
+        QMessageBox.information(self, "Developer Mode", "Developer Mode Enabled!")
+        
+        # Add dev buttons to the grid
+        # Currently we have 4 normal buttons (0,0), (0,1), (1,0), (1,1)
+        # So next starts at row 2
+        
+        # Calculate current visible count to know where to start adding
+        # We know we have 4 standard buttons
+        current_count = 4 
+        
+        for btn in self.dev_buttons:
+            btn.show()
+            row = current_count // 2
+            col = current_count % 2
+            self.grid_layout.addWidget(btn, row, col)
+            current_count += 1
 
     def verify_password(self, expected_password=None):
         # Helper to get admin password from system params
@@ -469,9 +377,6 @@ class LauncherApp(QMainWindow):
                                          QMessageBox.Yes | QMessageBox.No, 
                                          QMessageBox.No)
             if reply == QMessageBox.No:
-                return
-        elif action_type == "protected_script":
-            if not self.verify_password():
                 return
 
         # Determine script path
@@ -616,27 +521,9 @@ class LauncherApp(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     print("Launcher started")
+    # print(get_system_parameters())
 
-    # Check for intro
-    intro_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "Init_vid.gif")
-    
-    # We instantiate window ONLY after intro or if no intro, 
-    # BUT constructing LauncherApp might take time (get_system_parameters).
-    # To hide that loading time, we could construct it while Intro plays.
-    # However, keeping it simple:
-    
-    # Pre-construct window to ensure it's ready? 
-    # Or just construct it.
-    
     window = LauncherApp()
     window.setGeometry(app.primaryScreen().availableGeometry())
-
-    # if os.path.exists(intro_path):
-    #     intro = IntroWindow(intro_path)
-    #     intro.finished.connect(window.show)
-    #     intro.show()
-    # else:
-    #     window.show()
     window.show()
-
     sys.exit(app.exec())

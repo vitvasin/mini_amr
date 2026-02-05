@@ -11,7 +11,7 @@ export NAMESPACE=
 export ROS_DOMAIN_ID=31 
 export CYCLONEDDS_URI=$HOME/cyclonedds.xml
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-export ROS_AUTOMATIC_DISCOVERY_RANGE=SUBNET
+export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
 # Source ROS 2 Jazzy and Workspace
 source /opt/ros/jazzy/setup.bash
 source /home/smr/workspaces/mini_amr/install/setup.bash

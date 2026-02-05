@@ -1,14 +1,19 @@
 import sys
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
-                               QPushButton, QMessageBox, QLabel, QSpacerItem, QSizePolicy, QProgressDialog, QInputDialog, QLineEdit, QDialog)
+                               QPushButton, QMessageBox, QLabel, QSpacerItem, QSizePolicy, QProgressDialog, QInputDialog, QLineEdit, QDialog, QTextEdit)
 from PySide6.QtCore import QProcess, Qt, QTimer, Signal, QObject
 from PySide6.QtGui import QMouseEvent
 import time
 import subprocess
 import shutil
+import signal
+import os
 
-from PySide6.QtGui import QPixmap, QMovie
+from PySide6.QtGui import QPixmap, QMovie, QPainter, QPen, QBrush, QColor, QRadialGradient
+from PySide6.QtCore import QThread, QPointF, QRectF
+import math
+
 
 DELIVERY_ROBOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'amrROS2_ws/src/delivery_robot_main_controller'))
 sys.path.insert(0, DELIVERY_ROBOT_PATH)
@@ -139,12 +144,28 @@ class DevMenuDialog(QDialog):
             btn.clicked.connect(lambda checked=False, s=script, rt=run_terminal: parent.run_script(s, run_in_terminal=rt))
             layout.addWidget(btn)
 
+        # Teleop Button
+        teleop_btn = QPushButton("Teleop Controller")
+        teleop_btn.setStyleSheet("background-color: #b3e0ff; color: #004080; border: 2px solid #0059b3;")
+        teleop_btn.clicked.connect(self.open_teleop)
+        layout.addWidget(teleop_btn)
+
         layout.addStretch()
 
         close_btn = QPushButton("Close")
         close_btn.setStyleSheet("background-color: #ffcccc; color: #333;")
         close_btn.clicked.connect(self.accept)
         layout.addWidget(close_btn)
+
+    def open_teleop(self):
+        # Delegate to parent's dedicated method
+        if hasattr(self.parent(), 'start_teleop_session'):
+            self.parent().start_teleop_session()
+        else:
+             QMessageBox.warning(self, "Error", "Teleop session not supported by parent.")
+        
+        # We can close the menu or keep it open. Keeping it open is fine.
+        pass
 
 class IntroWindow(QWidget):
     finished = Signal()
@@ -182,6 +203,71 @@ class IntroWindow(QWidget):
     def finalize(self):
         self.close()
         self.finished.emit()
+
+class LogWindow(QWidget):
+    def __init__(self, title="Log Output"):
+        super().__init__()
+        self.setWindowTitle(title)
+        self.resize(600, 400)
+        self.layout = QVBoxLayout(self)
+        
+        self.text_edit = QTextEdit()
+        self.text_edit.setReadOnly(True)
+        self.text_edit.setStyleSheet("background-color: black; color: #00FF00; font-family: Monospace;")
+        self.layout.addWidget(self.text_edit)
+        
+        self.process = QProcess()
+        self.process.readyReadStandardOutput.connect(self.handle_stdout)
+        self.process.readyReadStandardError.connect(self.handle_stderr)
+        self.process.finished.connect(self.on_finished)
+
+    def start_process(self, command, args):
+        self.process.start(command, args)
+        self.text_edit.append(f"Starting command: {command} {' '.join(args)}\n")
+
+    def handle_stdout(self):
+        data = self.process.readAllStandardOutput()
+        text = data.data().decode().strip()
+        if text: self.text_edit.append(text)
+
+    def handle_stderr(self):
+        data = self.process.readAllStandardError()
+        text = data.data().decode().strip()
+        if text: self.text_edit.append(f"<span style='color:red'>{text}</span>")
+
+    def on_finished(self):
+        self.text_edit.append("\nProcess Finished.")
+
+    def closeEvent(self, event):
+        self.kill_process()
+        super().closeEvent(event)
+    
+    def kill_process(self):
+         if self.process.state() != QProcess.NotRunning:
+            pid = self.process.processId()
+            print(f"Stopping process {pid}...")
+            
+            # 1. Try SIGINT (Ctrl+C)
+            try:
+                os.kill(pid, signal.SIGINT)
+            except ProcessLookupError:
+                pass
+            
+            # Wait for graceful shutdown (5 seconds)
+            if self.process.waitForFinished(5000):
+                print("Process stopped gracefully.")
+                return
+
+            print("Process did not stop, sending SIGTERM...")
+            # 2. Try SIGTERM
+            self.process.terminate()
+            if self.process.waitForFinished(2000):
+                print("Process terminated.")
+                return
+            
+            print("Process stuck, sending SIGKILL...")
+            # 3. Force SIGKILL
+            self.process.kill()
 
 class LauncherApp(QMainWindow):
     def __init__(self):
@@ -271,6 +357,7 @@ class LauncherApp(QMainWindow):
         self.script_buttons = []
         self.main_process = None
         self.aux_process = None
+        self.teleop_bringup_window = None # Changed from process to window logic
         self.progress_dialog = None
         self.progress_timer = None
         self.current_main_script = None
@@ -604,8 +691,37 @@ class LauncherApp(QMainWindow):
 
         self.main_process = None
         self.current_main_script = None
+        
+        # Check if we need to kill bringup (Teleop finished)
+        if self.teleop_bringup_window:
+            print("Terminating Bringup Log Window...")
+            self.teleop_bringup_window.kill_process()
+            self.teleop_bringup_window.close()
+            self.teleop_bringup_window = None
+
         self.update_ui_state()
         # QMessageBox.information(self, "Finished", "Script execution completed.")
+
+    def start_teleop_session(self):
+        # Check if something is already running
+        if self.main_process and self.main_process.state() == QProcess.Running:
+            QMessageBox.warning(self, "Busy", "Another process is running. Stop it first.")
+            return
+
+        # 1. Start Bringup (Background, managed via LogWindow)
+        script_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "scripts", "bringup_robot.sh")
+        if not os.path.exists(script_path):
+             QMessageBox.critical(self, "Error", f"Script not found: {script_path}")
+             return
+
+        self.teleop_bringup_window = LogWindow("Bringup Robot Log")
+        self.teleop_bringup_window.show()
+        # Run bash directly since script uses exec and sets env
+        self.teleop_bringup_window.start_process("/bin/bash", [script_path])
+        
+        # 2. Start Teleop App (As Main Process via run_script)
+        # Using run_in_terminal=True for teleop is still fine as user requested it for errors
+        self.run_script("teleop.sh", run_in_terminal=True)
 
     def on_aux_finished(self):
         self.aux_process = None
@@ -616,8 +732,9 @@ class LauncherApp(QMainWindow):
 if __name__ == "__main__":
     app = QApplication(sys.argv)
     print("Launcher started")
-
-    # Check for intro
+    
+    # Export current python executable for scripts to use
+    os.environ["LAUNCHER_PYTHON"] = sys.executable
     intro_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "assets", "Init_vid.gif")
     
     # We instantiate window ONLY after intro or if no intro, 

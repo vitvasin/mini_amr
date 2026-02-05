@@ -1,19 +1,18 @@
 import sys
 import os
 from PySide6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, QGridLayout,
-                               QPushButton, QMessageBox, QLabel, QSpacerItem, QSizePolicy, QProgressDialog, QInputDialog, QLineEdit, QDialog, QTextEdit)
-from PySide6.QtCore import QProcess, Qt, QTimer, Signal, QObject
-from PySide6.QtGui import QMouseEvent
+                               QPushButton, QMessageBox, QLabel, QSpacerItem, QSizePolicy, QProgressDialog, QDialog)
+from PySide6.QtCore import QProcess, Qt, QTimer
+from PySide6.QtGui import QPixmap
 import time
 import subprocess
 import shutil
 import signal
-import os
+import socket
 
-from PySide6.QtGui import QPixmap, QMovie, QPainter, QPen, QBrush, QColor, QRadialGradient
-from PySide6.QtCore import QThread, QPointF, QRectF
-import math
-
+# Custom Imports
+from custom_widgets import ClickableLabel, IntroWindow, LogWindow
+from dialogs import PasswordDialog, DevMenuDialog, BringupCheckDialog, NavigationConfirmDialog
 
 DELIVERY_ROBOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..', 'amrROS2_ws/src/delivery_robot_main_controller'))
 sys.path.insert(0, DELIVERY_ROBOT_PATH)
@@ -21,253 +20,7 @@ sys.path.insert(0, DELIVERY_ROBOT_PATH)
 # Now you can import normally
 from delivery_robot_main_controller.api_client import *
 
-class ClickableLabel(QLabel):
-    clicked = Signal()
-
-    def mousePressEvent(self, event: QMouseEvent):
-        if event.button() == Qt.LeftButton:
-            self.clicked.emit()
-        super().mousePressEvent(event)
-
-class PasswordDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Enter Admin Password")
-        self.setModal(True)
-        self.setMinimumSize(400, 500)
-
-        layout = QVBoxLayout(self)
-
-        self.password_input = QLineEdit()
-        self.password_input.setPlaceholderText("Enter Admin Password")
-        self.password_input.setEchoMode(QLineEdit.Password)
-        self.password_input.setStyleSheet("font-size: 32px; height: 50px;")
-        layout.addWidget(self.password_input)
-
-        grid_layout = QGridLayout()
-        grid_layout.setSpacing(10)
-        
-        buttons = [
-            ('7', 0, 0), ('8', 0, 1), ('9', 0, 2),
-            ('4', 1, 0), ('5', 1, 1), ('6', 1, 2),
-            ('1', 2, 0), ('2', 2, 1), ('3', 2, 2),
-            ('0', 3, 1)
-        ]
-
-        for text, r, c in buttons:
-            btn = QPushButton(text)
-            btn.setFixedSize(80, 80)
-            btn.setFocusPolicy(Qt.NoFocus) # Don't steal focus
-            btn.setStyleSheet("font-size: 24px; font-weight: bold;")
-            # Fix: Accept the 'checked' boolean from clicked signal so it doesn't overwrite 't'
-            btn.clicked.connect(lambda checked, t=text: self.password_input.insert(t))
-            grid_layout.addWidget(btn, r, c)
-
-        # Clear and Backspace
-        clear_btn = QPushButton("C")
-        clear_btn.setFixedSize(80, 80)
-        clear_btn.setFocusPolicy(Qt.NoFocus)
-        clear_btn.setStyleSheet("font-size: 24px; font-weight: bold; background-color: #ffcccc;")
-        clear_btn.clicked.connect(self.password_input.clear)
-        grid_layout.addWidget(clear_btn, 3, 0)
-        
-        back_btn = QPushButton("<-")
-        back_btn.setFixedSize(80, 80)
-        back_btn.setFocusPolicy(Qt.NoFocus)
-        back_btn.setStyleSheet("font-size: 24px; font-weight: bold; background-color: #ffe0b3;")
-        back_btn.clicked.connect(self.backspace)
-        grid_layout.addWidget(back_btn, 3, 2)
-        
-        layout.addLayout(grid_layout)
-
-        # Action Buttons
-        action_layout = QHBoxLayout()
-        ok_btn = QPushButton("OK")
-        ok_btn.setStyleSheet("font-size: 24px; padding: 10px; background-color: #C1FFC1;")
-        ok_btn.clicked.connect(self.accept)
-        
-        cancel_btn = QPushButton("Cancel")
-        cancel_btn.setStyleSheet("font-size: 24px; padding: 10px; background-color: #ffcccc;")
-        cancel_btn.clicked.connect(self.reject)
-
-        action_layout.addWidget(cancel_btn)
-        action_layout.addWidget(ok_btn)
-        layout.addLayout(action_layout)
-
-    def backspace(self):
-        text = self.password_input.text()
-        self.password_input.setText(text[:-1])
-
-    def get_password(self):
-        return self.password_input.text()
-
-class DevMenuDialog(QDialog):
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("Developer Menu")
-        self.setModal(True)
-        self.setMinimumSize(400, 350)
-        
-        # Styles
-        self.setStyleSheet("""
-            QDialog {
-                background-color: #F9F8F8;
-            }
-            QPushButton {
-                min-height: 80px;
-                font-size: 24px;
-                font-weight: bold;
-                border-radius: 10px;
-                border: 2px solid #555;
-                margin: 5px;
-            }
-        """)
-
-        layout = QVBoxLayout(self)
-        layout.setSpacing(15)
-        layout.setContentsMargins(30, 30, 30, 30)
-        
-        title_label = QLabel("Developer Tools")
-        title_label.setAlignment(Qt.AlignCenter)
-        title_label.setStyleSheet("font-size: 28px; font-weight: bold; color: #333; margin-bottom: 10px; border: none;")
-        layout.addWidget(title_label)
-
-        buttons_config = [
-            ("Dock", "dock.sh", True),
-            ("Undock", "undock.sh", True)
-        ]
-        
-        for label, script, run_terminal in buttons_config:
-            btn = QPushButton(label)
-            btn.setStyleSheet("background-color: #E0E0E0; color: #333;")
-            # Connect to parent's run_script
-            btn.clicked.connect(lambda checked=False, s=script, rt=run_terminal: parent.run_script(s, run_in_terminal=rt))
-            layout.addWidget(btn)
-
-        # Teleop Button
-        teleop_btn = QPushButton("Teleop Controller")
-        teleop_btn.setStyleSheet("background-color: #b3e0ff; color: #004080; border: 2px solid #0059b3;")
-        teleop_btn.clicked.connect(self.open_teleop)
-        layout.addWidget(teleop_btn)
-
-        layout.addStretch()
-
-        close_btn = QPushButton("Close")
-        close_btn.setStyleSheet("background-color: #ffcccc; color: #333;")
-        close_btn.clicked.connect(self.accept)
-        layout.addWidget(close_btn)
-
-    def open_teleop(self):
-        # Delegate to parent's dedicated method
-        if hasattr(self.parent(), 'start_teleop_session'):
-            self.parent().start_teleop_session()
-        else:
-             QMessageBox.warning(self, "Error", "Teleop session not supported by parent.")
-        
-        # We can close the menu or keep it open. Keeping it open is fine.
-        pass
-
-class IntroWindow(QWidget):
-    finished = Signal()
-
-    def __init__(self, gif_path):
-        super().__init__()
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)
-        self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setGeometry(QApplication.primaryScreen().availableGeometry())
-        self.setStyleSheet("background-color: black;") 
-
-        layout = QVBoxLayout(self)
-        layout.setContentsMargins(0, 0, 0, 0)
-        
-        self.label = QLabel()
-        self.label.setAlignment(Qt.AlignCenter)
-        self.label.setScaledContents(True)
-        layout.addWidget(self.label)
-
-        self.movie = QMovie(gif_path)
-        self.movie.setCacheMode(QMovie.CacheAll)
-        self.label.setMovie(self.movie)
-        
-        self.movie.frameChanged.connect(self.on_frame_changed)
-        self.movie.start()
-
-    def on_frame_changed(self, frame_number):
-        if frame_number == self.movie.frameCount() - 1:
-            # Last frame reached
-            delay = self.movie.nextFrameDelay()
-            if delay <= 0: delay = 100
-            self.movie.setPaused(True)
-            QTimer.singleShot(delay, self.finalize)
-
-    def finalize(self):
-        self.close()
-        self.finished.emit()
-
-class LogWindow(QWidget):
-    def __init__(self, title="Log Output"):
-        super().__init__()
-        self.setWindowTitle(title)
-        self.resize(600, 400)
-        self.layout = QVBoxLayout(self)
-        
-        self.text_edit = QTextEdit()
-        self.text_edit.setReadOnly(True)
-        self.text_edit.setStyleSheet("background-color: black; color: #00FF00; font-family: Monospace;")
-        self.layout.addWidget(self.text_edit)
-        
-        self.process = QProcess()
-        self.process.readyReadStandardOutput.connect(self.handle_stdout)
-        self.process.readyReadStandardError.connect(self.handle_stderr)
-        self.process.finished.connect(self.on_finished)
-
-    def start_process(self, command, args):
-        self.process.start(command, args)
-        self.text_edit.append(f"Starting command: {command} {' '.join(args)}\n")
-
-    def handle_stdout(self):
-        data = self.process.readAllStandardOutput()
-        text = data.data().decode().strip()
-        if text: self.text_edit.append(text)
-
-    def handle_stderr(self):
-        data = self.process.readAllStandardError()
-        text = data.data().decode().strip()
-        if text: self.text_edit.append(f"<span style='color:red'>{text}</span>")
-
-    def on_finished(self):
-        self.text_edit.append("\nProcess Finished.")
-
-    def closeEvent(self, event):
-        self.kill_process()
-        super().closeEvent(event)
-    
-    def kill_process(self):
-         if self.process.state() != QProcess.NotRunning:
-            pid = self.process.processId()
-            print(f"Stopping process {pid}...")
-            
-            # 1. Try SIGINT (Ctrl+C)
-            try:
-                os.kill(pid, signal.SIGINT)
-            except ProcessLookupError:
-                pass
-            
-            # Wait for graceful shutdown (5 seconds)
-            if self.process.waitForFinished(5000):
-                print("Process stopped gracefully.")
-                return
-
-            print("Process did not stop, sending SIGTERM...")
-            # 2. Try SIGTERM
-            self.process.terminate()
-            if self.process.waitForFinished(2000):
-                print("Process terminated.")
-                return
-            
-            print("Process stuck, sending SIGKILL...")
-            # 3. Force SIGKILL
-            self.process.kill()
+NET_INTERFACE = "wlxe84e06b0d3de"
 
 class LauncherApp(QMainWindow):
     def __init__(self):
@@ -374,7 +127,7 @@ class LauncherApp(QMainWindow):
         nav_btn.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         # Pastel Green with border
         nav_btn.setStyleSheet("font-size: 96px; font-weight: bold; border-radius: 15px; border: 2px solid #555555; background-color: #C1FFC1;")
-        nav_btn.clicked.connect(lambda: self.run_script("navigation.sh", run_in_terminal=False))
+        nav_btn.clicked.connect(self.start_navigation_flow)
         self.script_buttons.append(nav_btn)
         
         # Add to grid: Row 0, Col 0, RowSpan 4, ColSpan 1
@@ -425,23 +178,18 @@ class LauncherApp(QMainWindow):
             nectec_logo_label.setPixmap(logo_pixmap)
             nectec_logo_label.setContentsMargins(0, 0, 20, 20) # Left, Top, Right, Bottom
 
-        # Dummy Spacer (Left) to balance Logo (Right)
-        dummy_label = QLabel()
-        if logo_pixmap:
-             # Set same size as logo but invisible
-             dummy_label.setFixedWidth(logo_pixmap.width())
-             dummy_label.setFixedHeight(logo_pixmap.height())
-             # Balance the margins too (20px)
-             dummy_label.setContentsMargins(20, 0, 0, 20) 
-             # Actually contents margins on a label don't increase its size in the layout necessarily in the same way 
-             # unless we are careful. But a fixed width widget effectively acts as a strut.
-             # The right logo has 20px right margin. We should add 20px to the dummy width or use a spacer.
-             # Easiest is to just use a fixed width that equals logo width + margin.
-             dummy_label.setFixedWidth(logo_pixmap.width() + 20)
-        else:
-             dummy_label.setVisible(False)
-             
-        system_controls_layout.addWidget(dummy_label)
+        # IP Address Label (Left)
+        ip_address = self.get_ip_address()
+        
+        self.ip_label = QLabel(f"IP: {ip_address}")
+        # Professional Style: Dark Grey, Bold, with background to ensure visibility
+        self.ip_label.setStyleSheet("font-size: 30px; font-weight: bold; color: black; padding-left: 20px; background-color: #FFFFFF; border: 1px solid #CCCCCC; border-radius: 10px;")
+        self.ip_label.setAlignment(Qt.AlignCenter)
+        # Ensure it has sufficient height/width to not be collapsed
+        self.ip_label.setMinimumHeight(60)
+        self.ip_label.setMinimumWidth(250) 
+
+        system_controls_layout.addWidget(self.ip_label)
 
         system_controls_layout.addStretch()
 
@@ -480,10 +228,32 @@ class LauncherApp(QMainWindow):
         self.system_params_timer.timeout.connect(self.update_system_parameters)
         self.system_params_timer.start(10000) # 10000 ms = 10 s
 
+    def get_ip_address(self):
+        interface = NET_INTERFACE
+        try:
+            # Use ip command to get address for specific interface
+            # ip -4 addr show wlxe84e06b0d3de
+            result = subprocess.check_output(["ip", "-4", "addr", "show", interface], stderr=subprocess.DEVNULL, text=True)
+            
+            for line in result.split('\n'):
+                line = line.strip()
+                if line.startswith("inet "):
+                    # Example: inet 192.168.1.105/24 ...
+                    parts = line.split()
+                    if len(parts) >= 2:
+                        ip_with_cidr = parts[1]
+                        return ip_with_cidr.split('/')[0]
+            
+            return "No Network"
+        except Exception:
+            return "No Network"
+
     def update_system_parameters(self):
         try:
             self.system_params = get_system_parameters()
-            # print(f"System Parameters Updated: {self.system_params}")
+            # Update IP periodically in case network changes
+            current_ip = self.get_ip_address()
+            self.ip_label.setText(f"IP: {current_ip}")
         except Exception as e:
             print(f"Failed to get system parameters: {e}")
 
@@ -532,7 +302,20 @@ class LauncherApp(QMainWindow):
                 return True
             else:
                 QMessageBox.warning(self, "Access Denied", "Incorrect Password")
+        if dialog.exec() == QDialog.Accepted:
+            password = dialog.get_password()
+            if password == real_password:
+                return True
+            else:
+                QMessageBox.warning(self, "Access Denied", "Incorrect Password")
         return False
+
+    def start_navigation_flow(self):
+        # Show confirmation dialog
+        dialog = NavigationConfirmDialog(self)
+        if dialog.exec() == QDialog.Accepted:
+            # User confirmed, start navigation
+            self.run_script("navigation.sh", run_in_terminal=False)
 
     def close_app(self):
         if self.verify_password():
@@ -688,6 +471,30 @@ class LauncherApp(QMainWindow):
             self.progress_dialog.close()
             self.progress_dialog = None
             self.progress_timer = None
+
+        # Check if we need to show "Clearing the process" dialog
+        if self.current_main_script in ["navigation.sh", "create_map.sh"]:
+             # Show indeterminate progress dialog
+             self.progress_dialog = QProgressDialog("Clearing the process please wait...", None, 0, 0, self)
+             self.progress_dialog.setWindowModality(Qt.WindowModal)
+             self.progress_dialog.setCancelButton(None)
+             self.progress_dialog.setMinimumDuration(0) # Force show immediately
+             self.progress_dialog.setStyleSheet("""
+                QProgressDialog { font-size: 24px; }
+                QLabel { font-size: 24px; font-weight: bold; min-height: 50px; }
+             """)
+             self.progress_dialog.setMinimumSize(500, 150)
+             self.progress_dialog.show()
+             
+             # Delay final cleanup
+             QTimer.singleShot(2000, self.finalize_main_process)
+        else:
+             self.finalize_main_process()
+
+    def finalize_main_process(self):
+        if self.progress_dialog:
+            self.progress_dialog.close()
+            self.progress_dialog = None
 
         self.main_process = None
         self.current_main_script = None

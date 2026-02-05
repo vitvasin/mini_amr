@@ -835,7 +835,7 @@ void sensor_module_task()
         }
         else
         {
-            //cliffcliff = -1;
+            // cliffcliff = -1;
         }
         sensor_state = 4;
         break;
@@ -854,6 +854,7 @@ void sensor_module_task()
         break;
     }
 
+    //------ For Alarm ---------------
     bool A = (range_left < range_limit);
     bool B = (range_center < range_limit);
     bool C = (range_right < range_limit);
@@ -865,6 +866,12 @@ void sensor_module_task()
                  (static_cast<uint8_t>(B) << 1) |
                  (static_cast<uint8_t>(C));
 
+    alarm_mode = 0; //  alarm_mode = 0  is not check all alarm
+
+    Cliff_Sensor.writeSingleRegister(7, alarm_mode); // Cliff_Sensor is used for led and alarm
+    delay(10);
+
+    //------- For LED Mode ---------------
     if (cmd_vel.linear_x == 0 && cmd_vel.angular_z == 0)
     {
         led_mode = 0;
@@ -873,27 +880,26 @@ void sensor_module_task()
     {
         led_mode = 1;
     }
-    else if (((cmd_vel.angular_z < -0.2) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z > 0.2) && (cmd_vel.linear_x < 0)))
+    else if (((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x < 0))) // 0.2
     {
         led_mode = 2;
     }
-    else if (((cmd_vel.angular_z > 0.2) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z < -0.2) && (cmd_vel.linear_x < 0)))
+    else if (((cmd_vel.angular_z > 0.05) && (cmd_vel.linear_x >= 0)) || ((cmd_vel.angular_z < -0.05) && (cmd_vel.linear_x < 0))) // 0.2
     {
         led_mode = 3;
     }
 
-    if (led_mode != led_mode_prev)
-    {
-        if (DEBUG)
-            Serial.println(led_mode);
-        //    Led_Module.writeSingleRegister(6, led_mode);
-        // Cliff_Sensor.writeSingleRegister(6, led_mode); // Cliff_Sensor is used for led and alarm
-        delay(10);
-    }
-
-    // Led_Module.writeSingleRegister(7, alarm_mode);
-    // Cliff_Sensor.writeSingleRegister(7, alarm_mode); // Cliff_Sensor is used for led and alarm
+    Cliff_Sensor.writeSingleRegister(6, led_mode); // Cliff_Sensor is used for led and alarm
     delay(10);
+
+    // if (led_mode != led_mode_prev)
+    // {
+    //     if (DEBUG)
+    //         Serial.println(led_mode);
+    //     //    Led_Module.writeSingleRegister(6, led_mode);
+    //     Cliff_Sensor.writeSingleRegister(6, led_mode); // Cliff_Sensor is used for led and alarm
+    //     delay(10);
+    // }
 
     // Serial5.printf("alarm & led status : alarm : %d  --- led : %d \n", alarm_mode, led_mode);
 
@@ -1001,7 +1007,7 @@ void safety_task()
 
     if (cliff > 100.0)
         cliff_state = true; // 50 mm. for flat surface
-        // cliff_state = false; // hardcode to test without cliff sensor
+    // cliff_state = false; // hardcode to test without cliff sensor
     else
         cliff_state = false;
 
@@ -1011,7 +1017,7 @@ void safety_task()
         stop = false;
 
     // pkg_data[_SAFETY_READY_] = 1;
-    //Serial.printf("bumper_state: %d  --- emer_state: %d --- cliff: %d\n", bumper_state, emer_state, cliff);
+    // Serial.printf("bumper_state: %d  --- emer_state: %d --- cliff: %d\n", bumper_state, emer_state, cliff);
 }
 
 void fault_monitor_task()

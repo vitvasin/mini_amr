@@ -5,6 +5,7 @@ This manual provides an overview of the configuration and operation of the Mini 
 ## 1. Workspace Structure
 
 The primary workspace is located at:
+
 - **Root**: `/home/smr/workspaces/mini_amr`
 - **ROS2 Workspace**: `$HOME/workspaces/mini_amr/amrROS2_ws` (Defined as `$ROS_WS`)
 - **Scripts & Shortcuts**: `$HOME/workspaces/mini_amr/Shortcut`
@@ -15,7 +16,9 @@ The primary workspace is located at:
 The `.bashrc` file is configured to set up the ROS2 environment and provide convenient aliases for common tasks.
 
 ### Environment Variables
+
 The following key variables are exported:
+
 - `ROS_WS`: Points to the main ROS2 workspace (`/home/smr/workspaces/mini_amr/amrROS2_ws`).
 - `AMR_UI`: Points to the UI directory.
 - `ROS_DOMAIN_ID`: Set to `31`.
@@ -23,7 +26,9 @@ The following key variables are exported:
 - `RMW_IMPLEMENTATION`: Set to `rmw_cyclonedds_cpp`.
 
 ### Sourcing
+
 The environment sources:
+
 - ROS2 Jazzy: `/opt/ros/jazzy/setup.bash`
 - Workspace Setup: `$ROS_WS/install/setup.bash`
 - Traffic Editor Setup: `~/workspaces/mini_amr/traffic_editor/install/setup.bash`
@@ -31,6 +36,7 @@ The environment sources:
 ### Essential Aliases
 
 #### Navigation & Commands
+
 - **`cw`**: Change directory to the ROS workspace (`$ROS_WS`).
 - **`sb`**: Source `.bashrc` (`source ~/.bashrc`).
 - **`eb`**: Edit `.bashrc` (`nano ~/.bashrc`).
@@ -41,11 +47,13 @@ The environment sources:
 - **`amr_gui`**: Launch the AMR GUI (`./amr_GUI.sh`).
 
 #### Docking
+
 - **`dock`**: Send action goal to dock the robot.
 - **`udock`**: Send action goal to undock the robot.
 - **`dockserver`**: Launch the docking action server (`ros2 launch action_autodock auto_dock_launch.py`).
 
 #### Drive Control
+
 - **`drive_on`**: Enable motor state.
 - **`drive_off`**: Disable motor state.
 - **`drive_reset`**: Cycle motor state (Off -> Wait 1s -> On -> Wait 7s).
@@ -88,6 +96,7 @@ The "ROS2 App" and background services are managed via **systemd**. These servic
 You can manage these services using standard `systemctl` commands.
 
 **Check Status:**
+
 ```bash
 systemctl status robot_ctr_mode.service
 systemctl status rosbridge.service
@@ -95,17 +104,69 @@ systemctl status rosbridge.service
 ```
 
 **Restart a Service:**
+
 ```bash
 sudo systemctl restart robot_ctr_mode.service
 ```
 
 **Stop a Service:**
+
 ```bash
 sudo systemctl stop robot_ctr_mode.service
 ```
 
 **View Logs:**
 Use `journalctl` to view logs for a specific service:
+
 ```bash
 journalctl -u robot_ctr_mode.service -f
 ```
+
+## 4. AMR Control Panel (Launcher)
+
+The **AMR Control Panel** is the primary interface for operating the robot. It provides a touch-friendly GUI for navigation, mapping, and system control.
+
+### Launching the Application
+
+Execute the launch script to start the GUI:
+
+```bash
+~/workspaces/mini_amr/AMR_LAUNCHER/start_launcher.sh
+```
+
+Or use the alias:
+
+```bash
+amr_gui
+```
+
+### Main Interface Features
+
+1.  **Navigation**
+    - **"Navigate" Button**: Initiates the navigation mode.
+    - **Safety Check**: A confirmation dialog will appear. Ensure the robot is undocked and the emergency stop is released before confirming.
+
+2.  **Map Tools**
+    - **Create Map**: Starts the SLAM mapping process.
+    - **Save Map**: Saves the current map (Protected by password).
+    - **Edit Map**: Opens the map editor (Protected by password).
+    - _Note: Password protected features require authorization._
+
+3.  **System Control**
+    - **IP Address**: Displays the current IP address of the robot.
+    - **Reboot / Shutdown**: Safely restarts or shuts down the onboard computer.
+
+### Developer Mode & Hidden Features
+
+To access advanced features, enable **Developer Mode**:
+
+1.  **Access**: Tap the **Logo** (top center) **4 times** rapidly.
+2.  **Authentication**: Enter the developer password (`12120`).
+3.  **Developer Menu**:
+    - **Dock / Undock**: Manually trigger docking actions.
+    - **Teleop Controller**: Launches a joystick/keyboard controller in a new window.
+    - **Bringup Check**: Diagnostic tool to verify sensor status (`/odom`, `/scan`, `/ir_charge_state`) and frequency.
+
+---
+
+**Note**: The interface is designed for a definition of 1920x1080.

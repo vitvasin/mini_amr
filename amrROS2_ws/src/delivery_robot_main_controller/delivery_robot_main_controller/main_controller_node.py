@@ -1168,19 +1168,28 @@ class DeliveryRobotMainController(Node):
                 #self.return_home_position(RobotState.DOCK)
                 #self.touch_activity()
                 result = self.go_to_station("Home",RobotState.DOCK)
-            else:
-                if (self.chargestate == ChargeState.NOT_CHARGE):
-                    self.change_charge_state(ChargeState.CHARGING)
+                return
+           # else:
+           #     if (self.chargestate == ChargeState.NOT_CHARGE):
+           #         self.change_charge_state(ChargeState.CHARGING)
 
         #ตรวจสอบแบตเตอรี่ให้หยุดชาร์จเมื่อถึง limit #ย้ายไป battery_management package
        # if self.batt_percentage >= self.setting_batteryChargingLimitUpper:
        #     if (self.chargestate == ChargeState.CHARGING):
-       #         self.change_charge_state(ChargeState.NOT_CHARGE)         
+       #         self.change_charge_state(ChargeState.NOT_CHARGE)
 
+
+        # ถ้า state ถูกเปลี่ยนไปแล้ว (เช่น MOVE/DOCK/MANUAL) ให้หยุด loop นี้เพื่อไม่ให้เลือกงานซ้อน
+        if self.state != RobotState.STANDBY:
+            return
 
         # ตรวจสอบ queue
         queue_list = self.get_pending_queue_from_api(return_all=True)
         if queue_list:
+            if self.batt_percentage < self.setting_batteryLevelCanWork:
+                if self.dockstate == DockState.DOCKED:
+                    self.get_logger().warn(f"Battery too low ({self.batt_percentage}%) to process queues.")
+                    return
             selected_task = None
             if self.current_station:
                 for pending in queue_list:

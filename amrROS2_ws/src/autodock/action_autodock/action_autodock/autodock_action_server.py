@@ -1417,7 +1417,8 @@ def main(args=None):
  
     finally:
     # Shutdown
-        rclpy.shutdown()   
+        if rclpy.ok():
+            rclpy.shutdown()   
         
         
     #except KeyboardInterrupt:

@@ -20,7 +20,7 @@ sys.path.insert(0, DELIVERY_ROBOT_PATH)
 # Now you can import normally
 from delivery_robot_main_controller.api_client import *
 
-NET_INTERFACE = "wlxe84e06b0d3de"
+NET_INTERFACE = "wlxe84e06b0d3e0"
 
 class LauncherApp(QMainWindow):
     def __init__(self):
@@ -191,11 +191,28 @@ class LauncherApp(QMainWindow):
 
         system_controls_layout.addWidget(self.ip_label)
 
+        # Disk Drive Label
+        current_disk = self.get_disk_usage()
+        self.disk_label = QLabel(current_disk)
+        self.disk_label.setStyleSheet("font-size: 30px; font-weight: bold; color: black; padding-left: 20px; background-color: #FFFFFF; border: 1px solid #CCCCCC; border-radius: 10px;")
+        self.disk_label.setAlignment(Qt.AlignCenter)
+        self.disk_label.setMinimumHeight(60)
+        self.disk_label.setMinimumWidth(250)
+        
+        system_controls_layout.addWidget(self.disk_label)
+
         system_controls_layout.addStretch()
 
         # Container for Buttons
         buttons_layout = QHBoxLayout()
         buttons_layout.setSpacing(40)
+
+        # Clear Cache Button
+        self.clear_cache_btn = QPushButton("Clear Cache/Log")
+        self.clear_cache_btn.setFixedSize(250, 60)
+        self.clear_cache_btn.setStyleSheet("background-color: #ffb3b3; color: #b30000; font-size: 24px; font-weight: bold; border-radius: 10px;")
+        self.clear_cache_btn.clicked.connect(lambda: self.run_script("clear_cache_logs.sh", action_type="protected_script"))
+        buttons_layout.addWidget(self.clear_cache_btn)
 
         # Reboot Button
         self.reboot_btn = QPushButton("Reboot")
@@ -248,12 +265,25 @@ class LauncherApp(QMainWindow):
         except Exception:
             return "No Network"
 
+    def get_disk_usage(self):
+        try:
+            total, used, free = shutil.disk_usage('/')
+            # Convert to GB
+            total_gb = total // (2**30)
+            free_gb = free // (2**30)
+            return f"Disk: {free_gb}GB / {total_gb}GB Free"
+        except Exception:
+            return "Disk: Unknown"
+
     def update_system_parameters(self):
         try:
             self.system_params = get_system_parameters()
             # Update IP periodically in case network changes
             current_ip = self.get_ip_address()
             self.ip_label.setText(f"IP: {current_ip}")
+            
+            # Update disk periodically
+            self.disk_label.setText(self.get_disk_usage())
         except Exception as e:
             print(f"Failed to get system parameters: {e}")
 

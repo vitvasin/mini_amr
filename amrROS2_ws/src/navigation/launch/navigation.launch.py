@@ -195,7 +195,6 @@ def generate_launch_description():
                 'map_file_name': map2run,
             }.items()
         )
-    
     slam_toolbox_localization = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [robot_navigation_dir, 'launch', 'slam_localization_launch.py'])),

@@ -8,7 +8,7 @@ source /home/smr/workspaces/mini_amr/amrROS2_ws/install/setup.bash
 source /home/smr/workspaces/mini_amr/traffic_editor/install/setup.bash
 
 # Export Environment Variables
-export ROS_DOMAIN_ID=31
+export ROS_DOMAIN_ID=41
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI=/home/smr/cyclonedds.xml
 export QT_QPA_PLATFORM=xcb

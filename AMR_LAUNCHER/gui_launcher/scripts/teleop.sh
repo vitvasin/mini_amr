@@ -1,6 +1,6 @@
 #!/bin/bash
 export NAMESPACE=
-export ROS_DOMAIN_ID=31 
+export ROS_DOMAIN_ID=41
 export CYCLONEDDS_URI=$HOME/cyclonedds.xml
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST

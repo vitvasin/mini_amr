@@ -8,7 +8,7 @@ ekf_filter_node:
     
             map_frame: map             
             odom_frame: odom            
-            base_link_frame: base_footprint
+            base_link_frame: base_link
             world_frame: odom 
 
             #x     , y     , z,
@@ -22,13 +22,21 @@ ekf_filter_node:
                         true, true, false,
                         false, false, true,
                         false, false, false]
+            
+
+            # odom1: /mola/odometry  
+            # odom1_config: [true,  true,  false,
+            #               false, false, true,
+            #               true,  true,  false,
+            #               false, false, true,
+            #               false, false, false]     
 
             imu0: imu/data_raw
             imu0_config: [false, false, false,
                         false, false, true,
                         false, false, false,
                         false, false, true,
-                        false, false, false]
+                        false, false, false]     
 
 imu_filter:
     ros__parameters:
@@ -85,22 +93,22 @@ scan_to_scan_filter_chain:
         max_y: 0.27
         min_z: -0.1
         max_z: 0.1
-    # filter2:
-    #   name: front_right_angle 
-    #   type: laser_filters/LaserScanAngularBoundsFilterInPlace
-    #   params:
-    #     lower_angle: 1.8314 #2.25
-    #     upper_angle: 2.46
-    #     #lsmgop:
+    filter2:
+      name: front_right_angle 
+      type: laser_filters/LaserScanAngularBoundsFilterInPlace
+      params:
+        lower_angle: 1.8314 #2.25
+        upper_angle: 2.46
+        #lsmgop:
 
-    # filter3:
-    #     name: speckle_filter
-    #     type: laser_filters/LaserScanSpeckleFilter
-    #     params:
-    #       filter_type: 0
-    #       max_range: 2.0
-    #       max_range_difference: 0.1
-    #       filter_window: 7
+    filter3:
+        name: speckle_filter
+        type: laser_filters/LaserScanSpeckleFilter
+        params:
+          filter_type: 0
+          max_range: 2.0
+          max_range_difference: 0.1
+          filter_window: 7
           
     # filter3: ## -> this make ghost ladar point
     #     name: interpolation

@@ -72,6 +72,7 @@ class DeliveryRobotMainController(Node):
         self._manual_monitor_timer = None
         self.toggle_manual = False
         
+        
         #self.get_logger().info(f"Initial state: {RobotState.MOVE}")
         #api_client.update_robot_status((RobotState.MOVE).name)
         #return
@@ -90,6 +91,7 @@ class DeliveryRobotMainController(Node):
         self.retry_move_no = 0
         self.status_id = None
         self.load_out_loop_counter = 0
+        self.safestop_loop_counter = 0 
         self.replan_on_blocked_lane = False  # True=replan on blocked lane, False=stop with FAILED
         self.blocked_lanes = set()
         self._last_vertex_map = None
@@ -782,10 +784,17 @@ class DeliveryRobotMainController(Node):
         """Safe stop state: wait for GUI/API to switch back to STANDBY."""
         self.touch_activity()
         if self._safestop_monitor_timer is None:
+            self.safestop_loop_counter = 0
             self._safestop_monitor_timer = self.create_timer(1.0, self._safestop_monitor_loop)
         self.get_logger().info("Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.")
 
     def _safestop_monitor_loop(self):
+        self.safestop_loop_counter += 1
+        if self.safestop_loop_counter == 1 or self.safestop_loop_counter % 20 == 0:
+            if (True): #TODO: add condition for play sound or light alarm for obstacle
+                self.send_sound_command("safe_stop")
+            
+
         state = self.get_state_from_api()
         if state == RobotState.STANDBY:
             self.get_logger().info("SAFE_STOP cleared to STANDBY via API/GUI.")
@@ -1480,6 +1489,13 @@ class DeliveryRobotMainController(Node):
         self._loadout_timer = self.create_timer(0.5, self.wait_for_enter_load_out)
 
     def wait_for_enter_load_out(self):
+        self.load_out_loop_counter += 1
+        if self.load_out_loop_counter == 1 or self.load_out_loop_counter % 20 == 0:
+            if (self.setting_isSoundAlarmForDelivery):
+                self.send_sound_command("arrive_delivery")
+            #if (self.setting_isLightAlarmForDelivery):
+                #implement light alarm command
+        
         state = self.get_state_from_api()
         if (state == RobotState.LOAD_OUT):
             self.get_logger().info(f"State changed to {state.name} during wait.")
@@ -1498,12 +1514,7 @@ class DeliveryRobotMainController(Node):
         #    self._loadout_timer.cancel()
         #    self.change_state(RobotState.STANDBY) 
 
-        self.load_out_loop_counter += 1
-        if self.load_out_loop_counter == 1 or self.load_out_loop_counter % 20 == 0:
-            if (self.setting_isSoundAlarmForDelivery):
-                self.send_sound_command("arrive_delivery")
-            #if (self.setting_isLightAlarmForDelivery):
-                #implement light alarm command
+        
 
     def on_load_out(self):
         self.get_logger().info("Robot is LOADING OUT cargo.")

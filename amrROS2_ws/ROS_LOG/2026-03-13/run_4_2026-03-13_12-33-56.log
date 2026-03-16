@@ -1,0 +1,465 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-13-12-33-57-494566-two-15004
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [15019]
+[INFO] [joint_state_publisher-2]: process started with pid [15020]
+[INFO] [rplidar_node-3]: process started with pid [15021]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [15022]
+[INFO] [ekf_node-5]: process started with pid [15023]
+[INFO] [robot_hardware-6]: process started with pid [15024]
+[INFO] [taskset-7]: process started with pid [15025]
+[INFO] [map_server-8]: process started with pid [15026]
+[INFO] [costmap_filter_info_server-9]: process started with pid [15027]
+[INFO] [controller_server-10]: process started with pid [15030]
+[INFO] [smoother_server-11]: process started with pid [15043]
+[INFO] [planner_server-12]: process started with pid [15049]
+[INFO] [behavior_server-13]: process started with pid [15084]
+[INFO] [bt_navigator-14]: process started with pid [15087]
+[INFO] [waypoint_follower-15]: process started with pid [15115]
+[INFO] [velocity_smoother-16]: process started with pid [15116]
+[INFO] [collision_monitor-17]: process started with pid [15117]
+[INFO] [collision_detector-18]: process started with pid [15130]
+[INFO] [lifecycle_manager-19]: process started with pid [15143]
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[robot_state_publisher-1] [INFO] [1773380038.720665049] [robot_state_publisher]: Robot initialized
+[rplidar_node-3] [INFO] [1773380038.644714054] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1773380038.705270283] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1773380038.705346113] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1773380038.705366821] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1773380038.705770181] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1773380038.705808388] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1773380038.706293995] [rplidar_node]: Start
+[taskset-7] [INFO] [1773380038.626513557] [slam_toolbox]: Node using stack size 40000000
+[taskset-7] [INFO] [1773380038.823411350] [slam_toolbox]: Configuring
+[map_server-8] [INFO] [1773380038.769725368] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1773380038.770371386] [keepout_filter_mask_server]: Creating
+[costmap_filter_info_server-9] [INFO] [1773380038.727238974] [costmap_filter_info_server]: This is costmap filter info publisher
+[controller_server-10] [INFO] [1773380038.780700089] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[taskset-7] [INFO] [1773380038.850100492] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[taskset-7] [INFO] [1773380038.853705068] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[costmap_filter_info_server-9] [INFO] [1773380038.856575254] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rplidar_node-3] [INFO] [1773380038.873792287] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[smoother_server-11] [INFO] [1773380038.914227465] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-11] [INFO] [1773380038.917939953] [smoother_server]: Creating smoother server
+[velocity_smoother-16] [INFO] [1773380038.936890006] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773380038.938570527] [controller_server]: Creating controller server
+[collision_monitor-17] [INFO] [1773380038.941053394] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773380038.997048124] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773380039.007930974] [waypoint_follower]: Creating
+[controller_server-10] [INFO] [1773380039.082160033] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773380039.094563284] [local_costmap.local_costmap]: Creating Costmap
+[behavior_server-13] [INFO] [1773380039.114207770] [behavior_server]: 
+[planner_server-12] [INFO] [1773380039.114971908] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773380039.154325334] [planner_server]: Creating
+[bt_navigator-14] [INFO] [1773380039.174387762] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1773380039.190646705] [lifecycle_manager_navigation]: Creating
+[planner_server-12] [INFO] [1773380039.193710843] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773380039.199648957] [global_costmap.global_costmap]: Creating Costmap
+[lifecycle_manager-19] [INFO] [1773380039.208738414] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[bt_navigator-14] [INFO] [1773380039.240052053] [bt_navigator]: Creating
+[taskset-7] [ERROR] [1773380039.250049435] [slam_toolbox]: LocalizationSlamToolbox: Incorrect number of arguments for map starting pose. Must be in format: [x, y, theta]. Starting at the origin
+[collision_detector-18] [INFO] [1773380039.319564751] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1773380039.547012044] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1773380039.547088458] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1773380039.547491527] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1773380039.547527692] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1773380039.547804182] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1773380039.550901568] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1773380039.551000148] [local_costmap.local_costmap]: Configuring
+[rplidar_node-3] [INFO] [1773380039.573641981] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[controller_server-10] [INFO] [1773380039.587534428] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773380039.614180697] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1773380039.629071773] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773380039.629132438] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1773380039.631688219] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1773380039.631741884] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1773380039.635097677] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1773380039.635146383] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773380039.640817924] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773380039.640918546] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773380039.641048333] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[scan_to_scan_filter_chain-4] [WARN] [1773380039.662920486] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[controller_server-10] [INFO] [1773380039.689780830] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1773380039.691087157] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1773380039.692032414] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1773380039.693427113] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1773380039.695817525] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1773380039.704790611] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1773380039.709253530] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1773380039.709316236] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1773380039.712991976] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1773380039.713051765] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1773380039.714466588] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1773380039.714511503] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1773380039.715967158] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1773380039.716015864] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1773380039.718692391] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1773380039.718741389] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1773380039.721349085] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1773380039.725367228] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1773380039.725424101] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1773380039.727278158] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1773380039.727329490] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1773380039.729019927] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380039.738657697] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773380039.738695904] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1773380039.756467667] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773380039.757435965] [smoother_server]: Configuring smoother server
+[smoother_server-11] [INFO] [1773380039.800030563] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1773380039.805341326] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1773380039.821573728] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1773380039.822144791] [planner_server]: Configuring
+[planner_server-12] [INFO] [1773380039.822196997] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1773380039.839757017] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1773380039.849075424] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1773380039.852000733] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1773380039.852055856] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773380039.855815009] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[taskset-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[taskset-7] Mapper <- Module
+[taskset-7] Mapper <- m_pSequentialScanMatcher
+[taskset-7] Mapper <- m_pGraph
+[taskset-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[taskset-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[taskset-7] Mapper <- m_pMapperSensorManager
+[taskset-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[taskset-7] Mapper <- m_Listeners
+[taskset-7] **Finished serializing Mapper**
+[taskset-7] Load From File
+[taskset-7] **Serializing Dataset**
+[taskset-7] Dataset <- m_SensorNameLookup
+[taskset-7] Dataset <- m_Data
+[taskset-7] Dataset <- m_Lasers
+[taskset-7] Dataset <- m_pDatasetInfo
+[taskset-7] **Finished serializing Dataset**
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[taskset-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[taskset-7] W20260313 12:33:59.860728 15025 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[planner_server-12] [INFO] [1773380039.873885428] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773380039.873935301] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1773380039.878328514] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1773380039.878376929] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[taskset-7] [INFO] [1773380039.880886336] [slam_toolbox]: Activating
+[planner_server-12] [INFO] [1773380039.890423485] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773380039.890470734] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773380039.898933714] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[planner_server-12] [INFO] [1773380040.009397230] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1773380040.009471603] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1773380040.024387470] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1773380040.028842515] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1773380040.028907262] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1773380040.073052012] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773380040.074119764] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1773380040.103386854] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[joint_state_publisher-2] [INFO] [1773380040.108228050] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[behavior_server-13] [INFO] [1773380040.138034120] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1773380040.157474446] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773380040.158141171] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1773380040.176557493] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773380040.177328340] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1773380040.206764589] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1773380040.216495398] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380040.216587561] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1773380040.224402190] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380040.231135942] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380040.231949954] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1773380040.238845867] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1773380040.257002615] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773380040.257688298] [collision_detector]: Configuring
+[planner_server-12] [INFO] [1773380040.278298748] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[collision_detector-18] [INFO] [1773380040.289105766] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1773380040.295994680] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1773380040.296088009] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1773380040.305555744] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1773380040.313679820] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773380040.313996850] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1773380040.326426643] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1773380040.441008341] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1773380040.484027007] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773380040.484734273] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1773380040.554789152] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1773380040.556892866] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773380040.557269978] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1773380040.557421639] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1773380040.558167111] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1773380040.558200068] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1773380040.558220193] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1773380040.558236817] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1773380040.558254025] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1773380040.558270941] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1773380040.558290482] [map_io]: mode: trinary
+[map_server-8] [INFO] [1773380040.558308856] [map_io]: negate: 0
+[map_server-8] [INFO] [1773380040.558881668] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1773380040.604229790] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1773380040.620150121] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773380040.620705142] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1773380040.629415738] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1773380040.629697769] [controller_server]: Activating
+[controller_server-10] [INFO] [1773380040.629748809] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1773380040.629763392] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1773380040.629915053] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1773380040.631167424] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1773380040.733181376] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1773380040.783269199] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1773380040.783797388] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380040.784141542] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773380040.784182374] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380040.897747943] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380040.897881230] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773380040.898976690] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1773380040.899127476] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380041.013572096] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380041.013638885] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1773380041.014194490] [planner_server]: Activating
+[planner_server-12] [INFO] [1773380041.014326318] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1773380041.014369483] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1773380041.014787426] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1773380041.017475910] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1773380041.561100106] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1773380041.622966453] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773380041.625028460] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380041.736010250] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380041.736078789] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773380041.736659184] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1773380041.736741139] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1773380041.736811720] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380041.848349697] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380041.848426986] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773380041.849006798] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1773380041.849131627] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380041.957566968] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1773380041.957635216] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773380041.958110323] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1773380041.958171571] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380042.068479927] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.068731917] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773380042.069648009] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1773380042.069748922] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380042.210311622] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.210379286] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773380042.210831353] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1773380042.344060656] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380042.450899765] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.450970929] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773380042.451512242] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1773380042.451582240] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380042.560159034] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.560283863] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773380042.561396530] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1773380042.562464574] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380042.674552031] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.674703692] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773380042.675834151] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1773380042.675999811] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[planner_server-12] [INFO] [1773380042.676118224] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380042.676167514] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1773380042.676308967] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773380042.676411921] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773380042.691709566] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1773380042.793230037] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380042.793367991] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1773380042.793412614] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[controller_server-10] [WARN] [1773380042.830901484] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [INFO] [1773380042.890119595] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[INFO] [delivery_robot_main_controller-20]: process started with pid [15298]
+[INFO] [robot_sound-21]: process started with pid [15299]
+[INFO] [call_robot_button-22]: process started with pid [15300]
+[INFO] [rpc_run_node-23]: process started with pid [15301]
+[INFO] [dock_coordinates-24]: process started with pid [15302]
+[INFO] [autodock_action_server-25]: process started with pid [15303]
+[INFO] [battery_manager_node-26]: process started with pid [15304]
+[dock_coordinates-24] [INFO] [1773380043.952752517] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1773380043.953014424] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1773380043.953029298] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1773380043.953033965] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1773380043.953038631] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1773380043.953043006] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1773380043.953047089] [dock coordinates]: range_limit: 1.200000
+[rpc_run_node-23] [0m[INFO] [1773380045.034162539] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-13 12:34:05,048 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1773380045.601985427] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1773380045.636857559] [battery_manager]: IR state: IDLE -> READY (10)
+[robot_sound-21] [0m[INFO] [1773380045.712217660] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1773380045.715244174] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1773380045.718714004] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [0m[INFO] [1773380045.720466273] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [33m[WARN] [1773380045.722546947] [robot_sound_node]: Map not available yet; skipping obstacle classification.[0m
+[robot_sound-21] [0m[INFO] [1773380045.724844320] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[robot_sound-21] [0m[INFO] [1773380045.729323280] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[battery_manager_node-26] [INFO] [1773380046.045881960] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773380046.143218335] [autodock_action_server]: auto_dock_init_start
+[battery_manager_node-26] [INFO] [1773380046.150223619] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[autodock_action_server-25] [INFO] [1773380046.247139426] [autodock_action_server]: auto_dock_init_complete
+[delivery_robot_main_controller-20] [0m[INFO] [1773380046.313418236] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380046.319392807] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380046.323411826] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380046.343479212] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380046.386569334] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[battery_manager_node-26] [INFO] [1773380046.544073453] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773380046.545609604] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773380046.583104891] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773380046.647452355] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773380046.648752266] [battery_manager]: IR state: READY -> CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773380047.541756057] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [15419]
+[delivery_robot_main_controller-20] [0m[INFO] [1773380049.563233513] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380049.569156170] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380051.579645488] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380051.621872309] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380051.652921416] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380051.669891999] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380052.585908902] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380053.596067964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380053.665079298] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380054.643385157] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380055.639776309] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380055.729475382] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380056.595574206] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380057.652226722] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380057.740108487] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380058.639994775] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380059.590439035] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380059.672372185] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380060.623930863] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380061.588030453] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380061.664074779] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380062.589152265] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380063.646426592] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380063.738200505] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380064.667357382] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380065.658890421] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380065.746023505] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380066.594041119] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380067.595157389] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380067.709792460] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380068.610616130] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380069.618476360] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380069.674050231] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380070.677872192] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380071.586046759] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380071.670431277] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380072.593357217] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380073.586724772] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380073.687951837] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380074.609229629] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380075.598096350] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380075.682099090] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380076.623398770] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380077.590927652] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380077.646731347] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380078.588040069] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380079.592962740] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380079.688730297] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380080.608674347] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380081.603788629] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380081.658441742] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380082.588717120] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380083.589120291] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380083.687222846] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380084.642146649] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380085.624801099] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380085.735213576] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380086.617223105] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380087.635804315] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380087.722771447] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380088.585889547] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380089.635869851] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380089.747893727] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380090.599467793] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380091.598597011] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380091.679581696] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380092.604187866] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380093.599980831] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380093.710043613] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380094.588090413] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380095.685937872] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380095.777917694] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380096.660152090] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380097.592888752] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380097.701075311] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380098.589549977] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380099.591211352] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380099.688607516] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380100.632254152] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380101.637810299] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380101.732472190] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380102.640110984] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380103.586317483] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380103.665086458] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380104.589006945] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380105.592148473] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380105.679822579] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380106.642456599] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380107.599897101] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380107.695951940] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380108.635429937] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380109.589988587] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380109.658539105] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380110.591742417] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380111.597421935] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380111.667039331] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380112.637279154] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380113.635515321] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380113.708531966] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380114.585705257] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380115.591033330] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380115.668656097] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380116.589072046] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380117.587051265] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380117.681436665] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380118.589887721] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380119.590343681] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380119.661883381] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380120.648162530] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380121.591229354] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380121.681898766] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380122.640778007] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380123.593038992] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380123.673590276] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380124.608770723] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380125.595066789] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380125.686510547] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380126.592606190] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380127.594203983] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380127.661293305] [main_controller_node]: No pending queue found or unexpected format.[0m

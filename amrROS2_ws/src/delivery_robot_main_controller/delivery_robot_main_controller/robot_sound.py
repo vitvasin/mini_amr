@@ -49,6 +49,7 @@ class RobotSoundNode(Node):
             'arrive_delivery': 'robot_delivery.wav',
             'arrive_target': 'robot_target.wav',
             'obstacle_alert': 'robot_obstacle.wav',
+            'safe_stop': 'robot_safestop.wav',
         }
 
         self.tf_buffer = tf2_ros.Buffer(cache_time=Duration(seconds=10.0))

@@ -200,11 +200,11 @@ controller_server:
       vx_std: 0.2
       vy_std: 0.2
       wz_std: 0.4
-      vx_max: 1.0 #1.5
+      vx_max: 0.6 #1.5
       vx_min: -0.35
       vy_max: 0.5
       wz_max: 1.9
-      ax_max: 3.0
+      ax_max: 2.0
       ax_min: -3.0
       ay_min: -3.0
       ay_max: 3.0
@@ -403,7 +403,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0 #3.0
-        inflation_radius: 0.6
+        inflation_radius: 0.5
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"
         enabled: true
@@ -643,7 +643,7 @@ velocity_smoother: #WIS PARAM
     feedback: "OPEN_LOOP"
     max_velocity: [1.0, 0.0, 0.5]
     min_velocity: [-0.35, 0.0, -0.5]
-    max_accel: [1.0, 0.0, 1.6]
+    max_accel: [0.8, 0.0, 1.6]
     max_decel: [-2.0, 0.0, -1.6]
     odom_topic: "odom"
     odom_duration: 0.1

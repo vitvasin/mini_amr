@@ -1,0 +1,1423 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-13-12-37-58-765579-two-3996
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [4013]
+[INFO] [joint_state_publisher-2]: process started with pid [4014]
+[INFO] [rplidar_node-3]: process started with pid [4015]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [4016]
+[INFO] [ekf_node-5]: process started with pid [4017]
+[INFO] [robot_hardware-6]: process started with pid [4018]
+[INFO] [taskset-7]: process started with pid [4019]
+[INFO] [map_server-8]: process started with pid [4020]
+[INFO] [costmap_filter_info_server-9]: process started with pid [4021]
+[INFO] [controller_server-10]: process started with pid [4024]
+[INFO] [smoother_server-11]: process started with pid [4025]
+[INFO] [planner_server-12]: process started with pid [4028]
+[INFO] [behavior_server-13]: process started with pid [4031]
+[INFO] [bt_navigator-14]: process started with pid [4034]
+[INFO] [waypoint_follower-15]: process started with pid [4035]
+[INFO] [velocity_smoother-16]: process started with pid [4038]
+[INFO] [collision_monitor-17]: process started with pid [4041]
+[INFO] [collision_detector-18]: process started with pid [4049]
+[INFO] [lifecycle_manager-19]: process started with pid [4050]
+[rplidar_node-3] [INFO] [1773380279.945199776] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1773380279.966330249] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1773380279.966479868] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1773380279.966559490] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1773380279.979188484] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1773380279.979260232] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1773380279.990982176] [rplidar_node]: Start
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[planner_server-12] [INFO] [1773380280.122644709] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[velocity_smoother-16] [INFO] [1773380280.140084568] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-13] [INFO] [1773380280.147104434] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rplidar_node-3] [INFO] [1773380280.152335284] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[robot_state_publisher-1] [INFO] [1773380280.180614535] [robot_state_publisher]: Robot initialized
+[bt_navigator-14] [INFO] [1773380280.207560919] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[costmap_filter_info_server-9] [INFO] [1773380280.233636127] [costmap_filter_info_server]: This is costmap filter info publisher
+[bt_navigator-14] [INFO] [1773380280.237664479] [bt_navigator]: Creating
+[planner_server-12] [INFO] [1773380280.261700137] [planner_server]: Creating
+[planner_server-12] [INFO] [1773380280.363011203] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773380280.393961731] [global_costmap.global_costmap]: Creating Costmap
+[costmap_filter_info_server-9] [INFO] [1773380280.433454571] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773380280.451625902] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_monitor-17] [INFO] [1773380280.457892714] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[taskset-7] [INFO] [1773380280.483865259] [slam_toolbox]: Node using stack size 40000000
+[waypoint_follower-15] [INFO] [1773380280.491304818] [waypoint_follower]: Creating
+[controller_server-10] [INFO] [1773380280.494017510] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1773380280.501652479] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1773380280.515211564] [keepout_filter_mask_server]: Creating
+[collision_detector-18] [INFO] [1773380280.562060550] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1773380280.623044057] [lifecycle_manager_navigation]: Creating
+[taskset-7] [INFO] [1773380280.675420214] [slam_toolbox]: Configuring
+[controller_server-10] [INFO] [1773380280.715800563] [controller_server]: Creating controller server
+[smoother_server-11] [INFO] [1773380280.737001033] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-11] [INFO] [1773380280.770164355] [smoother_server]: Creating smoother server
+[taskset-7] [INFO] [1773380280.779314477] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[lifecycle_manager-19] [INFO] [1773380280.788808169] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[taskset-7] [INFO] [1773380280.795370428] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[rplidar_node-3] [INFO] [1773380280.876224746] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[taskset-7] [ERROR] [1773380280.920360748] [slam_toolbox]: LocalizationSlamToolbox: Incorrect number of arguments for map starting pose. Must be in format: [x, y, theta]. Starting at the origin
+[lifecycle_manager-19] [INFO] [1773380280.939131141] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1773380280.939211638] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1773380280.944456196] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773380280.949582632] [local_costmap.local_costmap]: Creating Costmap
+[scan_to_scan_filter_chain-4] [WARN] [1773380280.967284981] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[controller_server-10] [INFO] [1773380280.987797143] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1773380280.987883765] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1773380280.990759493] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1773380280.993408895] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1773380280.993608388] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1773380281.035500972] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773380281.072470113] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1773380281.097218869] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773380281.097279534] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1773380281.101205515] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1773380281.101257429] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1773380281.106767393] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1773380281.106817850] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773380281.120995828] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773380281.121056785] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773380281.121179572] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773380281.198746636] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1773380281.201830606] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1773380281.203974569] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1773380281.206881212] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1773380281.220809824] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1773380281.282456849] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1773380281.294657400] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1773380281.294728273] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1773380281.299432100] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1773380281.299493639] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1773380281.305980067] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1773380281.306047732] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1773380281.308577555] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1773380281.308631220] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1773380281.312432372] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1773380281.312485162] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1773380281.315124648] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1773380281.325539390] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1773380281.325598596] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1773380281.330304173] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1773380281.330364254] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1773380281.332910410] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380281.355079762] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773380281.355122927] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1773380281.403635810] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773380281.404888180] [smoother_server]: Configuring smoother server
+[joint_state_publisher-2] [INFO] [1773380281.424842696] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[smoother_server-11] [INFO] [1773380281.466264840] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1773380281.474044470] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1773380281.498388408] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1773380281.498944596] [planner_server]: Configuring
+[planner_server-12] [INFO] [1773380281.499064175] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1773380281.522232448] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1773380281.532893639] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1773380281.536097772] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1773380281.536154353] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773380281.541800520] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1773380281.556490938] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773380281.556548978] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1773380281.562548341] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1773380281.562604922] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773380281.570939865] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773380281.571006071] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773380281.575519739] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[taskset-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[taskset-7] Mapper <- Module
+[taskset-7] Mapper <- m_pSequentialScanMatcher
+[taskset-7] Mapper <- m_pGraph
+[taskset-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[taskset-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[taskset-7] Mapper <- m_pMapperSensorManager
+[taskset-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[taskset-7] Mapper <- m_Listeners
+[taskset-7] **Finished serializing Mapper**
+[taskset-7] Load From File
+[taskset-7] **Serializing Dataset**
+[taskset-7] Dataset <- m_SensorNameLookup
+[taskset-7] Dataset <- m_Data
+[taskset-7] Dataset <- m_Lasers
+[taskset-7] Dataset <- m_pDatasetInfo
+[taskset-7] **Finished serializing Dataset**
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[taskset-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[taskset-7] W20260313 12:38:01.580583  4019 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[taskset-7] [INFO] [1773380281.615172697] [slam_toolbox]: Activating
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[planner_server-12] [INFO] [1773380281.677993637] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1773380281.678070342] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1773380281.682644091] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1773380281.689332345] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1773380281.690026194] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1773380281.720950182] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773380281.722043309] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1773380281.745150917] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1773380281.788960264] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1773380281.807777614] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773380281.808674456] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1773380281.822200000] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773380281.822888600] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1773380281.843370139] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1773380281.851144228] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380281.851203434] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1773380281.860287933] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380281.866776111] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1773380281.867574665] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1773380281.872962134] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1773380281.893798909] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773380281.894867245] [collision_detector]: Configuring
+[planner_server-12] [INFO] [1773380281.956917630] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[collision_detector-18] [INFO] [1773380281.959030968] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1773380281.968407999] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1773380281.968475663] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1773380281.995182014] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1773380282.022667378] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773380282.023530097] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1773380282.054504249] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1773380282.336992861] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1773380282.397257145] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773380282.397958577] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1773380282.478989639] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1773380282.481757162] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773380282.482511093] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1773380282.482689003] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1773380282.484095660] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1773380282.484152824] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1773380282.484174990] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1773380282.484192489] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1773380282.484209989] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1773380282.484227196] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1773380282.484247904] [map_io]: mode: trinary
+[map_server-8] [INFO] [1773380282.484266278] [map_io]: negate: 0
+[map_server-8] [INFO] [1773380282.492300233] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1773380282.508827208] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1773380282.523295968] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773380282.524037357] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1773380282.555234335] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1773380282.555772149] [controller_server]: Activating
+[controller_server-10] [INFO] [1773380282.555831063] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1773380282.555847396] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1773380282.556008390] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1773380282.556690282] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1773380282.659494334] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1773380282.709271545] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1773380282.709804109] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380282.710118514] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773380282.710147680] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380282.822378053] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380282.822450383] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773380282.822843244] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1773380282.822889326] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380282.934382975] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380282.934441890] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1773380282.934858666] [planner_server]: Activating
+[planner_server-12] [INFO] [1773380282.934912623] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1773380282.934930705] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1773380282.935104241] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1773380282.935812090] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1773380283.482694978] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1773380283.538363056] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773380283.539287605] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380283.648582753] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380283.648639042] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773380283.649066318] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1773380283.649111233] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1773380283.649137774] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380283.759503007] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380283.759609170] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773380283.760346184] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1773380283.760429598] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380283.868546164] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1773380283.868607120] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773380283.869083102] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1773380283.869135309] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380283.977161753] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1773380283.977287165] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773380283.978489954] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1773380283.978578909] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380284.120708391] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1773380284.120772555] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773380284.121285578] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1773380284.253324347] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380284.364530133] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1773380284.364636295] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773380284.365376518] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1773380284.365426100] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380284.478040292] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1773380284.478101539] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773380284.478625062] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1773380284.481620952] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773380284.597724807] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380284.597795679] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773380284.598322702] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1773380284.598589859] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[planner_server-12] [INFO] [1773380284.598727520] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380284.598769519] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1773380284.598764852] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773380284.598817934] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1773380284.617973604] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[planner_server-12] [INFO] [1773380284.619053898] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1773380284.711955356] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773380284.712060936] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1773380284.712102934] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [delivery_robot_main_controller-20]: process started with pid [4283]
+[INFO] [robot_sound-21]: process started with pid [4284]
+[INFO] [call_robot_button-22]: process started with pid [4285]
+[INFO] [rpc_run_node-23]: process started with pid [4286]
+[INFO] [dock_coordinates-24]: process started with pid [4287]
+[INFO] [autodock_action_server-25]: process started with pid [4288]
+[INFO] [battery_manager_node-26]: process started with pid [4289]
+[dock_coordinates-24] [INFO] [1773380285.364135081] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1773380285.364825431] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1773380285.364873554] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1773380285.364889595] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1773380285.364905928] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1773380285.364921677] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1773380285.364936843] [dock coordinates]: range_limit: 1.200000
+[rpc_run_node-23] [0m[INFO] [1773380287.184488139] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-13 12:38:07,188 [INFO] RPCServer listening on localhost:6000
+[robot_sound-21] [0m[INFO] [1773380287.637477939] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1773380287.638247910] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [0m[INFO] [1773380287.639593611] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1773380287.640241670] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [33m[WARN] [1773380287.645000912] [robot_sound_node]: Map not available yet; skipping obstacle classification.[0m
+[robot_sound-21] [0m[INFO] [1773380287.646841261] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[battery_manager_node-26] [INFO] [1773380287.773755635] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1773380287.779868161] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[battery_manager_node-26] [INFO] [1773380288.238959111] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773380288.337467363] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380288.406252376] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380288.416857277] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380288.472267240] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380288.530144028] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[autodock_action_server-25] [INFO] [1773380288.533924181] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1773380288.678423658] [autodock_action_server]: auto_dock_init_complete
+[autodock_action_server-25] [INFO] [1773380288.957181116] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773380289.806207893] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [4395]
+[delivery_robot_main_controller-20] [0m[INFO] [1773380291.834820792] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380291.835656095] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[robot_sound-21] [0m[INFO] [1773380291.968713910] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380293.852067276] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380293.904026365] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380293.936093352] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380293.962920449] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380294.863384543] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380295.863851335] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380295.954706536] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380296.914491115] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773380297.647738359] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380297.917483064] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380298.007887073] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380298.891569284] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380299.857780211] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380299.921106007] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380300.932614893] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380301.871609945] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380301.973907683] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380302.912128972] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380303.885469428] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380303.980118197] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380304.861768150] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380305.864174454] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380305.979342385] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380306.916597418] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380307.905067526] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773380307.920455002] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380307.998034607] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380308.890941313] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380309.861011139] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380309.975473263] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380310.869378015] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380311.933509216] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380312.017131057] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380312.897513474] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380313.892348972] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380313.955580272] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380314.864026989] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380315.864477740] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380315.961346886] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380316.862795319] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380317.899125584] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380317.999063825] [main_controller_node]: No pending queue found or unexpected format.[0m
+[robot_sound-21] [0m[INFO] [1773380318.207716236] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380318.869399569] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380319.918168960] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380320.016557925] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380320.880984428] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380321.869130214] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380321.973746034] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380322.888430688] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380323.893065827] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380324.002624048] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380324.918699901] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380325.866995278] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380325.955103080] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380326.865266192] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380327.865703235] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380327.947901796] [main_controller_node]: No pending queue found or unexpected format.[0m
+[robot_sound-21] [0m[INFO] [1773380328.801039756] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380328.872521418] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380329.869327345] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380329.963826203] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380330.864246257] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380331.860402369] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380331.926756305] [main_controller_node]: 1 pending queues [0m
+[call_robot_button-22] 2026-03-13 12:38:52 mosquitto_pub -u smr -P smrbot25 -m "Production1,true" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380332.896220442] [call_robot_button_node]: call_switch notified: station=Production1 status=true.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380332.913580542] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.875349656] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.946991678] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.963917229] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.967548195] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.984465581] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.987349063] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773380333.992601861] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773380333.997050305] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773380333.997525393] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773380333.999887999] [battery_manager]: request_stop_charge received: False -> True
+[battery_manager_node-26] [WARN] [1773380334.234559521] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773380334.336534837] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [WARN] [1773380334.737404860] [battery_manager]: Request stop charge for undock
+[autodock_action_server-25] [INFO] [1773380334.784832859] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773380334.840348434] [battery_manager]: IR state: CHARGING -> READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773380334.881253527] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773380334.997772247] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773380334.998270083] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773380335.233500686] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773380335.905722278] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380336.006924738] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380336.942948991] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773380337.629657992] [battery_manager]: IR state: READY -> IDLE (0)
+[autodock_action_server-25] [INFO] [1773380337.635530824] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1773380337.733485246] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773380337.942394408] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380338.864243894] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380339.861930990] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380340.864128942] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1773380341.016294999] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380341.880036780] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773380342.201576757] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773380342.211282082] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773380342.214686149] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773380342.309689719] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380342.311935376] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380342.335981121] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380342.350643807] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380342.879059605] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380343.885269118] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380343.950598509] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380343.951771500] [main_controller_node]: Queue action: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.009722301] [main_controller_node]: AGV start_pos: x=0.57, y=-0.01[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.010272633] [main_controller_node]: AGV goal_pos: x=3.40, y=-0.73[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.034984492] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.035708936] [main_controller_node]:   Waypoint 0: x=0.57, y=-0.01[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.036285224] [main_controller_node]:   Waypoint 1: x=1.99, y=-1.51[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.036821849] [main_controller_node]:   Waypoint 2: x=3.40, y=-0.73[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.037749276] [main_controller_node]: Navigating with 3 goals....[0m
+[bt_navigator-14] [INFO] [1773380344.041468319] [bt_navigator]: Begin navigating from current location through 3 poses to (3.40, -0.73)
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.041926491] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380344.052976294] [main_controller_node]: Robot is MOVING.[0m
+[controller_server-10] [INFO] [1773380344.064329406] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1773380344.064481935] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded goal_checker . This warning will appear once.
+[controller_server-10] [WARN] [1773380344.064532973] [controller_server]: No progress checker was specified in parameter 'current_progress_checker'. Server will use only plugin loaded progress_checker . This warning will appear once.
+[controller_server-10] [INFO] [1773380344.264818517] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380344.364858776] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380344.464785003] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380344.664799901] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380344.764847160] [controller_server]: Passing new path to controller.
+[call_robot_button-22] 2026-03-13 12:39:04 mosquitto_pub -u smr -P smrbot25 -m "Production1,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380344.791423498] [call_robot_button_node]: call_switch notified: station=Production1 status=blink.[0m
+[controller_server-10] [INFO] [1773380344.864813342] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380344.966567300] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.164798797] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.264795018] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.364801155] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.564792138] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.664776694] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.764768248] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380345.864856337] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.064855487] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.164814669] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.264767435] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.464769210] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.564768347] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.664769526] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.764786162] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380346.964769272] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.064769576] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.164768130] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.264794974] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.464797915] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.664813397] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.764767038] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380347.864767342] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.064773783] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.264798889] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.364726574] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.464769166] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.664795730] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.764799826] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.864775048] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380348.964766603] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.164771877] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.264766640] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.364779776] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.464766665] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.664801104] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.764797033] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380349.864795879] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.064798528] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.164798832] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.264795637] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.364798274] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.564767093] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.664768855] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.764768867] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380350.964839178] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.064805068] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.164775333] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.264761055] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.464776245] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.564794339] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.664857638] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.864773670] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380351.964819470] [controller_server]: Passing new path to controller.
+[robot_sound-21] [0m[INFO] [1773380352.016886356] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[controller_server-10] [INFO] [1773380352.064768737] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.164768749] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.364815728] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.464909358] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.564809920] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.764795654] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.864773502] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380352.964772348] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.064765361] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.264849379] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.364801853] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.464775326] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.664766018] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.764767780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.864768959] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380353.964767805] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.164768122] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.264773967] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.364767271] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.564766130] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.664767892] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.764768487] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.864773166] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380354.966056411] [controller_server]: Reached the goal!
+[controller_server-10] [INFO] [1773380354.966689862] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380354.973423044] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1773380354.978709089] [controller_server]: Reached the goal!
+[controller_server-10] [INFO] [1773380354.980323921] [controller_server]: Optimizer reset
+[bt_navigator-14] [INFO] [1773380355.002568473] [bt_navigator]: Goal succeeded
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.072132532] [main_controller_node]: Goal succeeded![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.072743234] [main_controller_node]: State change: MOVE -> AFTER_MOVE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.083166294] [main_controller_node]: Evaluating post-move action...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.083649256] [main_controller_node]: Post-move action is: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.084195505] [main_controller_node]: Published message: "arrive_target"[0m
+[robot_sound-21] [0m[INFO] [1773380355.086822050] [robot_sound_node]: 🔔 Received sound command: arrive_target[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.112104656] [main_controller_node]: Successfully removed queue ID: 1899[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.113744278] [main_controller_node]: Waiting 15s for LOAD_IN command...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.114294026] [main_controller_node]: State change: AFTER_MOVE -> STANDBY[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1773380355.118105811] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_target.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_target.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.129133741] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.149834330] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.233527076] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 14.880812168121338 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380355.898162720] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380356.012561190] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 14.101808309555054 seconds[0m
+[call_robot_button-22] 2026-03-13 12:39:16 mosquitto_pub -u smr -P smrbot25 -m "Production1,false" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380356.836898969] [call_robot_button_node]: call_switch notified: station=Production1 status=false.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380356.919977805] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380357.886172614] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380357.977174247] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 12.138440132141113 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380358.866365453] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380359.897885862] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380359.953905397] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 10.16048526763916 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380360.872117501] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380361.864224284] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380361.938621757] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 8.177078008651733 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380362.896287150] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1773380363.704271000] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380363.874300535] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380363.978145288] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 6.139350652694702 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380364.926520366] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380365.857817072] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380365.916274458] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 4.198125123977661 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380366.858039720] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380367.872254857] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380367.927298552] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 2.188772439956665 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380368.882965018] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380369.909522523] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380369.974991611] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 0.14067721366882324 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380370.860935072] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380371.863467248] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380371.968462828] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380372.864092656] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380373.866489800] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380373.930162946] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380373.933724500] [main_controller_node]: Queue action: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380373.992871333] [main_controller_node]: AGV start_pos: x=3.32, y=-0.71[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380373.993403583] [main_controller_node]: AGV goal_pos: x=-0.32, y=-7.98[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.018042531] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.018768432] [main_controller_node]:   Waypoint 0: x=3.32, y=-0.71[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.019461087] [main_controller_node]:   Waypoint 1: x=1.99, y=-1.51[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.020083746] [main_controller_node]:   Waypoint 2: x=2.11, y=-6.76[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.020675200] [main_controller_node]:   Waypoint 3: x=-0.34, y=-6.81[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.021251488] [main_controller_node]:   Waypoint 4: x=-0.32, y=-7.98[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.022152376] [main_controller_node]: Navigating with 5 goals....[0m
+[bt_navigator-14] [INFO] [1773380374.023416361] [bt_navigator]: Begin navigating from current location through 5 poses to (-0.32, -7.98)
+[planner_server-12] [WARN] [1773380374.029665414] [planner_server]: GridBased plugin failed to plan from (1.98, -1.51) to (2.11, -6.76): "no valid path found"
+[planner_server-12] [WARN] [1773380374.029746491] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380374.045089874] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380374.048729006] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380374.052517751] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380374.052662407] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380374.074076065] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.078186494] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380374.089739674] [main_controller_node]: Robot is MOVING.[0m
+[robot_sound-21] [0m[INFO] [1773380374.110453970] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[planner_server-12] [WARN] [1773380374.560976652] [planner_server]: GridBased plugin failed to plan from (1.98, -1.56) to (2.11, -6.76): "no valid path found"
+[planner_server-12] [WARN] [1773380374.563534077] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1773380374.574487928] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1773380374.580799393] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380374.583109504] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1773380374.583906567] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773380374.583952646] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773380374.588394382] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380374.599362233] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380374.599420270] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1773380374.605415593] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380374.629612409] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[call_robot_button-22] 2026-03-13 12:39:34 mosquitto_pub -u smr -P smrbot25 -m "Packing,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380374.835927106] [call_robot_button_node]: call_switch notified: station=Packing status=blink.[0m
+[planner_server-12] [WARN] [1773380375.091890962] [planner_server]: GridBased plugin failed to plan from (3.32, -0.71) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380375.091967665] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380375.104422607] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380375.108227101] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380375.111729453] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380375.111776990] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380375.125835391] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380375.556936925] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 2.2467 Hz
+[controller_server-10] [INFO] [1773380375.574973931] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1773380375.775347843] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380375.875484345] [controller_server]: Passing new path to controller.
+[planner_server-12] [WARN] [1773380376.049467696] [planner_server]: GridBased plugin failed to plan from (1.98, -1.51) to (2.11, -6.76): "no valid path found"
+[planner_server-12] [WARN] [1773380376.049554606] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380376.064067387] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380376.066892833] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380376.070788612] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380376.070838483] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380376.079534719] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380376.555007533] [planner_server]: GridBased plugin failed to plan from (1.98, -1.51) to (2.11, -6.76): "no valid path found"
+[planner_server-12] [WARN] [1773380376.555086860] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1773380376.575276781] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-10] [INFO] [1773380376.575324319] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[controller_server-10] [INFO] [1773380376.575942895] [controller_server]: Optimizer reset
+[behavior_server-13] [INFO] [1773380376.576194001] [behavior_server]: Running wait
+[behavior_server-13] [INFO] [1773380381.576392354] [behavior_server]: wait completed successfully
+[controller_server-10] [INFO] [1773380381.615106326] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1773380381.815386038] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380381.915388091] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.015390145] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.215356923] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.315356643] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.415353156] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.615359305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.815384411] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380382.915354093] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.115398739] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.215398752] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.415385652] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.615393260] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.715383940] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380383.815377536] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.015382518] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.115383406] [controller_server]: Passing new path to controller.
+[robot_sound-21] [0m[INFO] [1773380384.308092042] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[controller_server-10] [INFO] [1773380384.315360974] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.415358653] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.515354291] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.715362773] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.815360744] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380384.915356382] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.115357573] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.215361085] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.315362264] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.515356748] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.615355010] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.715353565] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380385.915359714] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.015360309] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.115359739] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.315354514] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.415358901] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.515358330] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.715358646] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.815360700] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380386.915354005] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.115357529] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.215358708] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.315355804] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.415359316] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.615359341] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.815361990] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380387.915356462] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.115357070] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.215356499] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.415355357] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.615361798] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.715374934] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380388.915360377] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.015362722] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.115356902] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.315358385] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.415355189] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.515363367] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.615362213] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.815363113] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380389.915359042] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.015366637] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.215357038] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.315358509] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.415360562] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.515358242] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.715368474] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.815357112] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380390.915362083] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.015358304] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.215356287] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.315358341] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.415365644] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.615360711] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.715388138] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.815396025] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380391.915384663] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.115356107] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.215361368] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.415364601] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.515390570] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.615385333] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.815383608] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380392.915383620] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.115402893] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.215393865] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.415397973] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.515390694] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.615390706] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.715387802] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380393.915385202] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.015390464] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.115387268] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.215379406] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.415387889] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.515389359] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.615392580] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.815387355] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380394.915452404] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.015385922] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.115382726] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.315381292] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.415364681] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.515356819] [controller_server]: Passing new path to controller.
+[robot_sound-21] [0m[INFO] [1773380395.614304289] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[controller_server-10] [INFO] [1773380395.715357135] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.815364147] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380395.915357814] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.015363665] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.215358744] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.315355846] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.415361406] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.515351800] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.715361753] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.815363521] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380396.915360040] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.015756124] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.215357762] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.315353988] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.415356340] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.615366585] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.715356687] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380397.915357016] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.015366075] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.115361427] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.215355904] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.415354191] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.615360061] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.715367662] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380398.915361283] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.015362468] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.115364528] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.215352005] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.415364583] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.515354977] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.615359953] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.715383304] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380399.915389757] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.015391234] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.115394752] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.315364749] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.415353684] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.515356911] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.715397488] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.815384673] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380400.915382358] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.015380335] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.215401080] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.315439305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.415450406] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.615394737] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.715386881] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.815397107] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380401.915446415] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.115362164] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.215361599] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.315442405] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.415387593] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.615394629] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.715387940] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380402.815362876] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.015365538] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.115357973] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.215357700] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.315352177] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.515466250] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.615389272] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.715436830] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380403.915361912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.015357264] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.115356699] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.315355861] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.415357337] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.515360564] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.615358249] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.815357119] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380404.915363262] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380405.015364156] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380405.017142954] [controller_server]: Reached the goal!
+[controller_server-10] [INFO] [1773380405.017657724] [controller_server]: Optimizer reset
+[bt_navigator-14] [INFO] [1773380405.053833913] [bt_navigator]: Goal succeeded
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.166012822] [main_controller_node]: Goal succeeded![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.166607505] [main_controller_node]: State change: MOVE -> AFTER_MOVE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.176219840] [main_controller_node]: Evaluating post-move action...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.176707194] [main_controller_node]: Post-move action is: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.177277086] [main_controller_node]: Published message: "arrive_target"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.206957847] [main_controller_node]: Successfully removed queue ID: 1900[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.207562738] [main_controller_node]: Waiting 15s for LOAD_IN command...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.208121547] [main_controller_node]: State change: AFTER_MOVE -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.219325730] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.234984929] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.299299029] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 14.910991668701172 seconds[0m
+[robot_sound-21] [0m[INFO] [1773380405.499317149] [robot_sound_node]: 🔔 Received sound command: arrive_target[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1773380405.530835330] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_target.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_target.wav' : Signed 16 bit Little Endian, Rate 44100 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.871743662] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380405.968510112] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 14.239773511886597 seconds[0m
+[call_robot_button-22] 2026-03-13 12:40:06 mosquitto_pub -u smr -P smrbot25 -m "Packing,false" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380406.783600150] [call_robot_button_node]: call_switch notified: station=Packing status=false.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380406.878154695] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380407.884565144] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380407.954637662] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 12.253511428833008 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380408.861017469] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380409.915240522] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380409.984964513] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 10.224471092224121 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380410.865409856] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380411.917843028] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380412.008219628] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 8.201565027236938 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380412.905287795] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380413.856922691] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380413.937278349] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 6.272197723388672 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380414.863366097] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380415.919989463] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380416.030131169] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 4.180002927780151 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380416.862211516] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380417.918026416] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380418.036215442] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 2.173537254333496 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380418.908146818] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380419.864832580] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380419.956225886] [main_controller_node]: Enter to wait_for_load_in_loop and wait for timeout...in 0.253284215927124 seconds[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380420.898744551] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380421.879276533] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380421.973079777] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380422.869809334] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380423.910997491] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380424.003269843] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380424.865009659] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380425.861517869] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380425.933631091] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380426.921057484] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380427.924246906] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380428.032685352] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380428.867732404] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380429.864835588] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380429.935542453] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380429.939178796] [main_controller_node]: Queue action: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.013917780] [main_controller_node]: AGV start_pos: x=-0.28, y=-7.92[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.016119477] [main_controller_node]: AGV goal_pos: x=0.16, y=3.61[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.097621918] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.099761201] [main_controller_node]:   Waypoint 0: x=-0.28, y=-7.92[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.100364925] [main_controller_node]:   Waypoint 1: x=-0.34, y=-6.81[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.100913526] [main_controller_node]:   Waypoint 2: x=2.11, y=-6.76[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.103529663] [main_controller_node]:   Waypoint 3: x=1.99, y=-1.51[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.104119971] [main_controller_node]:   Waypoint 4: x=0.39, y=0.04[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.104661281] [main_controller_node]:   Waypoint 5: x=0.16, y=3.61[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.105574158] [main_controller_node]: Navigating with 6 goals....[0m
+[bt_navigator-14] [INFO] [1773380430.107135383] [bt_navigator]: Begin navigating from current location through 6 poses to (0.16, 3.61)
+[controller_server-10] [INFO] [1773380430.130313716] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1773380430.330480870] [controller_server]: Passing new path to controller.
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.354641495] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380430.367219077] [main_controller_node]: Robot is MOVING.[0m
+[controller_server-10] [INFO] [1773380430.430483805] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380430.630624711] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380430.731251786] [controller_server]: Passing new path to controller.
+[call_robot_button-22] 2026-03-13 12:40:30 mosquitto_pub -u smr -P smrbot25 -m "Production2,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380430.785959092] [call_robot_button_node]: call_switch notified: station=Production2 status=blink.[0m
+[controller_server-10] [INFO] [1773380430.830486212] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.030640826] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.130597388] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.330479305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.430486614] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.530483716] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.730481128] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.830485230] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380431.930481165] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.030480017] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.230521177] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.330516820] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.430510422] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.630516001] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.730506978] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380432.930508181] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.130480511] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.230482279] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.430483483] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.630486144] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.730484413] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380433.930483866] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.030478927] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.130478362] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.330515147] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.430508458] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.630516661] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.730488389] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380434.830476158] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.030507110] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.130489046] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.230478564] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.430484143] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.530480370] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.630480096] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.730499947] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380435.930496776] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.030519543] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.130514604] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.330509391] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.430515534] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.530495720] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.730493423] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380436.830481776] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.030514186] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.130563202] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.230520056] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.430491511] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.630557170] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.830486043] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380437.930479645] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.130490181] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.230483783] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.330479135] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.630479774] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.730487084] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380438.930481579] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.030483639] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.130478408] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.330484277] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.430480504] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.530484314] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.730476476] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.830490786] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380439.930527844] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.130512715] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.230536941] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.330513919] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.430567310] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.630480434] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.730479285] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380440.830504678] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.030535922] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.130510858] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.230511751] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.430571869] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.530488182] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.630480034] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.730508927] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380441.930509255] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.030503732] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.130516292] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.330509912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.430512555] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.630486052] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.730514944] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773380442.930518772] [controller_server]: Passing new path to controller.
+[planner_server-12] [WARN] [1773380443.097946881] [planner_server]: GridBased plugin failed to plan from (1.83, -4.33) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380443.098047210] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380443.117921686] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380443.122045383] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380443.129587849] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380443.129692845] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380443.139026067] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380443.572144045] [planner_server]: GridBased plugin failed to plan from (1.84, -3.98) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380443.572218708] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1773380443.630478361] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-10] [INFO] [1773380443.630536109] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[controller_server-10] [INFO] [1773380443.631052920] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1773380443.631322991] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773380443.634720470] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380443.638577595] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1773380443.638663633] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773380443.638734505] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773380443.642999071] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380443.653642987] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380443.653745357] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1773380443.659025754] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380443.670095485] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380444.071448250] [planner_server]: GridBased plugin failed to plan from (1.89, -3.72) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380444.071525539] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380444.088363020] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380444.091585798] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380444.094615209] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380444.094661582] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380444.102580282] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380444.604339340] [planner_server]: GridBased plugin failed to plan from (1.91, -3.55) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380444.604428003] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[behavior_server-13] [INFO] [1773380444.618915336] [behavior_server]: Running wait
+[behavior_server-13] [INFO] [1773380449.619230076] [behavior_server]: wait completed successfully
+[planner_server-12] [WARN] [1773380449.660689579] [planner_server]: GridBased plugin failed to plan from (1.99, -3.30) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380449.660770367] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380449.678145659] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380449.682495096] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380449.685925240] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380449.686024111] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380449.700227373] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380450.068347614] [planner_server]: GridBased plugin failed to plan from (1.99, -3.30) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380450.069146163] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1773380450.088096678] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1773380450.091641734] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380450.095108043] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1773380450.095348949] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773380450.095421862] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773380450.098629766] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380450.109314513] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380450.109370510] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1773380450.109538503] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380450.136708706] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380450.603078457] [planner_server]: GridBased plugin failed to plan from (1.99, -3.30) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380450.603158079] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[planner_server-12] [INFO] [1773380450.618021354] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1773380450.621399583] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773380450.627331244] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773380450.627386367] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773380450.648089140] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773380451.069544746] [planner_server]: GridBased plugin failed to plan from (1.99, -3.30) to (1.99, -1.51): "no valid path found"
+[planner_server-12] [WARN] [1773380451.069627868] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[bt_navigator-14] [WARN] [1773380451.097618493] [bt_navigator]: [navigate_through_poses] [ActionServer] Aborting handle.
+[bt_navigator-14] [ERROR] [1773380451.097849192] [bt_navigator]: Goal failed
+[delivery_robot_main_controller-20] [33m[WARN] [1773380451.251834672] [main_controller_node]: Goal failed![0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773380451.254210195] [main_controller_node]: Blocked lane encountered; stopping with FAILED per setting.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380451.254785628] [main_controller_node]: State change: MOVE -> SAFE_STOP[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380451.265230636] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380451.266190470] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380451.282262651] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773380451.861371288] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] Traceback (most recent call last):
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller", line 33, in <module>
+[delivery_robot_main_controller-20]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'delivery_robot_main_controller')())
+[delivery_robot_main_controller-20]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 1704, in main
+[delivery_robot_main_controller-20]     executor.spin()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 312, in spin
+[delivery_robot_main_controller-20]     self.spin_once()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 917, in spin_once
+[delivery_robot_main_controller-20]     self._spin_once_impl(timeout_sec)
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 914, in _spin_once_impl
+[delivery_robot_main_controller-20]     future.result()  # raise any exceptions
+[delivery_robot_main_controller-20]     ^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 106, in result
+[delivery_robot_main_controller-20]     raise self.exception()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 269, in __call__
+[delivery_robot_main_controller-20]     self._handler.send(None)
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 524, in handler
+[delivery_robot_main_controller-20]     await call_coroutine()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 386, in _execute
+[delivery_robot_main_controller-20]     await await_or_execute(tmr.callback)
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 111, in await_or_execute
+[delivery_robot_main_controller-20]     return callback(*args)
+[delivery_robot_main_controller-20]            ^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 789, in _safestop_monitor_loop
+[delivery_robot_main_controller-20]     self.safestop_loop_counter += 1
+[delivery_robot_main_controller-20]     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20] AttributeError: 'DeliveryRobotMainController' object has no attribute 'safestop_loop_counter'
+[ERROR] [delivery_robot_main_controller-20]: process has died [pid 4283, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller --ros-args -r __node:=main_controller_node -r __ns:=/ --params-file /tmp/launch_params_a9tcdgde -r /tf:=tf -r /tf_static:=tf_static'].
+[call_robot_button-22] 2026-03-13 12:43:32 mosquitto_pub -u smr -P smrbot25 -m "Production1,true" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380612.832517772] [call_robot_button_node]: call_switch notified: station=Production1 status=true.[0m
+[call_robot_button-22] 2026-03-13 12:44:44 mosquitto_pub -u smr -P smrbot25 -m "Production2,false" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773380684.837955609] [call_robot_button_node]: call_switch notified: station=Production2 status=false.[0m
+[battery_manager_node-26] [INFO] [1773381106.560606984] [battery_manager]: IR state: IDLE -> READY (10)
+[autodock_action_server-25] [INFO] [1773381106.565298482] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773381106.733706478] [battery_manager]: State change: UNKNOWN -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773381106.734848946] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773381106.837061469] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773381107.233652129] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773381107.234560970] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773381107.336373324] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773381107.733786782] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773381107.734851082] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773381107.792850069] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773381107.838708037] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773381107.842688153] [battery_manager]: IR state: READY -> CHARGING (11)
+[bash-27] 4
+[bash-27] Queue empty: current state-> STANDBY : queue_action-> 
+[bash-27] queue action->Idle :  current state-> STANDBY : previous state-> 
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> MOVE : previous state-> STANDBY
+[bash-27] Queue empty: current state-> STANDBY : queue_action-> Request
+[bash-27] queue action->Idle :  current state-> STANDBY : previous state-> MOVE
+[bash-27] queue action->Request :  current state-> MOVE : previous state-> STANDBY
+[bash-27] Queue empty: current state-> AFTER_MOVE : queue_action-> Request
+[bash-27] queue action->Request :  current state-> AFTER_MOVE : previous state-> MOVE
+[bash-27] Queue empty: current state-> STANDBY : queue_action-> Request
+[bash-27] queue action->Idle :  current state-> STANDBY : previous state-> AFTER_MOVE
+[bash-27] queue action->Request :  current state-> MOVE : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> SAFE_STOP : previous state-> MOVE
+[bash-27] Dialog rejected!
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> SAFE_STOP
+[bash-27] queue action->Request :  current state-> PAUSED : previous state-> STANDBY
+[bash-27] Dialog rejected!
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> PAUSED
+[bash-27] queue action->Request :  current state-> PAUSED : previous state-> STANDBY
+[bash-27] Dialog rejected!
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> PAUSED
+[INFO] [bash-27]: process has finished cleanly [pid 4395]
+[INFO] [battery_manager_node-26]: sending signal 'SIGINT' to process[battery_manager_node-26]
+[INFO] [autodock_action_server-25]: sending signal 'SIGINT' to process[autodock_action_server-25]
+[INFO] [dock_coordinates-24]: sending signal 'SIGINT' to process[dock_coordinates-24]
+[INFO] [rpc_run_node-23]: sending signal 'SIGINT' to process[rpc_run_node-23]
+[INFO] [call_robot_button-22]: sending signal 'SIGINT' to process[call_robot_button-22]
+[INFO] [robot_sound-21]: sending signal 'SIGINT' to process[robot_sound-21]
+[INFO] [lifecycle_manager-19]: sending signal 'SIGINT' to process[lifecycle_manager-19]
+[INFO] [collision_detector-18]: sending signal 'SIGINT' to process[collision_detector-18]
+[INFO] [collision_monitor-17]: sending signal 'SIGINT' to process[collision_monitor-17]
+[INFO] [velocity_smoother-16]: sending signal 'SIGINT' to process[velocity_smoother-16]
+[INFO] [waypoint_follower-15]: sending signal 'SIGINT' to process[waypoint_follower-15]
+[INFO] [dock_coordinates-24]: process has finished cleanly [pid 4287]
+[INFO] [bt_navigator-14]: sending signal 'SIGINT' to process[bt_navigator-14]
+[INFO] [behavior_server-13]: sending signal 'SIGINT' to process[behavior_server-13]
+[INFO] [planner_server-12]: sending signal 'SIGINT' to process[planner_server-12]
+[INFO] [smoother_server-11]: sending signal 'SIGINT' to process[smoother_server-11]
+[INFO] [controller_server-10]: sending signal 'SIGINT' to process[controller_server-10]
+[INFO] [costmap_filter_info_server-9]: sending signal 'SIGINT' to process[costmap_filter_info_server-9]
+[INFO] [map_server-8]: sending signal 'SIGINT' to process[map_server-8]
+[INFO] [taskset-7]: sending signal 'SIGINT' to process[taskset-7]
+[INFO] [robot_hardware-6]: sending signal 'SIGINT' to process[robot_hardware-6]
+[INFO] [ekf_node-5]: sending signal 'SIGINT' to process[ekf_node-5]
+[INFO] [scan_to_scan_filter_chain-4]: sending signal 'SIGINT' to process[scan_to_scan_filter_chain-4]
+[INFO] [rplidar_node-3]: sending signal 'SIGINT' to process[rplidar_node-3]
+[INFO] [joint_state_publisher-2]: sending signal 'SIGINT' to process[joint_state_publisher-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[battery_manager_node-26] Traceback (most recent call last):
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node", line 33, in <module>
+[battery_manager_node-26]     sys.exit(load_entry_point('battery-management==0.0.0', 'console_scripts', 'battery_manager_node')())
+[battery_manager_node-26]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/python3.12/site-packages/battery_management/battery_manager_node.py", line 311, in main
+[battery_manager_node-26]     rclpy.spin(node)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[battery_manager_node-26]     executor.spin_once()
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 845, in spin_once
+[battery_manager_node-26]     self._spin_once_impl(timeout_sec)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 829, in _spin_once_impl
+[battery_manager_node-26]     handler, entity, node = self.wait_for_ready_callbacks(
+[battery_manager_node-26]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[battery_manager_node-26]     return next(self._cb_iter)
+[battery_manager_node-26]            ^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[battery_manager_node-26]     wait_set.wait(timeout_nsec)
+[battery_manager_node-26] KeyboardInterrupt
+[dock_coordinates-24] [INFO] [1773381153.363449554] [rclcpp]: signal_handler(signum=2)
+[rpc_run_node-23] [0m[INFO] [1773381153.370767240] [rpc_run_node]: RPC run node stopped by user.[0m
+[rpc_run_node-23] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[call_robot_button-22] [0m[INFO] [1773381153.377506839] [call_robot_button_node]: CallRobotButton interrupted by user.[0m
+[call_robot_button-22] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[rpc_run_node-23] 2026-03-13 12:52:33,378 [INFO] RPCServer stopped.
+[robot_sound-21] [0m[INFO] [1773381153.381937001] [robot_sound_node]: 🔚 robot_sound_node stopped by user.[0m
+[robot_sound-21] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[lifecycle_manager-19] [INFO] [1773381153.388956601] [rclcpp]: signal_handler(signum=2)
+[lifecycle_manager-19] [INFO] [1773381153.389400522] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-19] [INFO] [1773381153.389531189] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[collision_detector-18] [INFO] [1773381153.392888301] [rclcpp]: signal_handler(signum=2)
+[collision_detector-18] [INFO] [1773381153.393157220] [collision_detector]: Running Nav2 LifecycleNode rcl preshutdown (collision_detector)
+[collision_detector-18] [INFO] [1773381153.393328430] [collision_detector]: Deactivating
+[collision_detector-18] [INFO] [1773381153.393385888] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_monitor-17] [INFO] [1773381153.398823767] [rclcpp]: signal_handler(signum=2)
+[collision_monitor-17] [INFO] [1773381153.398955602] [collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[collision_monitor-17] [INFO] [1773381153.399050103] [collision_monitor]: Deactivating
+[collision_monitor-17] [INFO] [1773381153.399071394] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_detector-18] [WARN] [1773381153.404189896] [LifecyclePublisher]: Trying to publish message on the topic '/collision_detector_state', but the publisher is not activated
+[collision_detector-18] [WARN] [1773381153.404228979] [LifecyclePublisher]: Trying to publish message on the topic '/polygon_stop_detector', but the publisher is not activated
+[collision_detector-18] [WARN] [1773381153.404235104] [LifecyclePublisher]: Trying to publish message on the topic '/polygon_slowdown_detector', but the publisher is not activated
+[velocity_smoother-16] [INFO] [1773381153.407911010] [rclcpp]: signal_handler(signum=2)
+[velocity_smoother-16] [INFO] [1773381153.408095053] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-16] [INFO] [1773381153.408187513] [velocity_smoother]: Deactivating
+[velocity_smoother-16] [INFO] [1773381153.408214929] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[collision_detector-18] [INFO] [1773381153.414577691] [collision_detector]: Cleaning up
+[collision_detector-18] [INFO] [1773381153.414680067] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_detector-18] [INFO] [1773381153.414699317] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_detector-18] [INFO] [1773381153.414722359] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_detector-18] [INFO] [1773381153.414742484] [collision_monitor]: [scan]: Destroying Scan
+[collision_detector-18] [INFO] [1773381153.430202406] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_monitor-17] [INFO] [1773381153.419478899] [collision_monitor]: Cleaning up
+[collision_monitor-17] [INFO] [1773381153.419536358] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_monitor-17] [INFO] [1773381153.419549191] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773381153.419560275] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773381153.419569608] [collision_monitor]: [FootprintApproach]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773381153.419581566] [collision_monitor]: [scan]: Destroying Scan
+[waypoint_follower-15] [INFO] [1773381153.428435766] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1773381153.428634392] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-15] [INFO] [1773381153.428730643] [waypoint_follower]: Deactivating
+[waypoint_follower-15] [INFO] [1773381153.428762727] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[collision_monitor-17] [INFO] [1773381153.443456725] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[bt_navigator-14] [INFO] [1773381153.444469400] [rclcpp]: signal_handler(signum=2)
+[bt_navigator-14] [INFO] [1773381153.444594818] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-14] [INFO] [1773381153.444700110] [bt_navigator]: Deactivating
+[bt_navigator-14] [INFO] [1773381153.444732194] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[behavior_server-13] [INFO] [1773381153.458227141] [rclcpp]: signal_handler(signum=2)
+[behavior_server-13] [INFO] [1773381153.458596394] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-13] [INFO] [1773381153.458817187] [behavior_server]: Deactivating
+[behavior_server-13] [INFO] [1773381153.458883104] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1773381153.458730270] [velocity_smoother]: Cleaning up
+[velocity_smoother-16] [INFO] [1773381153.458781312] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1773381153.459496485] [waypoint_follower]: Cleaning up
+[planner_server-12] [INFO] [1773381153.477833138] [rclcpp]: signal_handler(signum=2)
+[planner_server-12] [INFO] [1773381153.477919764] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-12] [INFO] [1773381153.478014848] [planner_server]: Deactivating
+[planner_server-12] [INFO] [1773381153.478049557] [global_costmap.global_costmap]: Deactivating
+[waypoint_follower-15] [INFO] [1773381153.512913641] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[smoother_server-11] [INFO] [1773381153.513216977] [rclcpp]: signal_handler(signum=2)
+[smoother_server-11] [INFO] [1773381153.513377103] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-11] [INFO] [1773381153.513464021] [smoother_server]: Deactivating
+[smoother_server-11] [INFO] [1773381153.513485312] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773381153.532260637] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1773381153.532364762] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-10] [INFO] [1773381153.532492805] [controller_server]: Deactivating
+[controller_server-10] [INFO] [1773381153.532527805] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773381153.532547056] [local_costmap.local_costmap]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1773381153.542494431] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1773381153.542659807] [keepout_costmap_filter_info_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_costmap_filter_info_server)
+[costmap_filter_info_server-9] [INFO] [1773381153.542754016] [keepout_costmap_filter_info_server]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1773381153.542771808] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[behavior_server-13] [INFO] [1773381153.549847701] [behavior_server]: Cleaning up
+[map_server-8] [INFO] [1773381153.553274229] [rclcpp]: signal_handler(signum=2)
+[map_server-8] [INFO] [1773381153.553627149] [keepout_filter_mask_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_filter_mask_server)
+[map_server-8] [INFO] [1773381153.553730983] [keepout_filter_mask_server]: Deactivating
+[map_server-8] [INFO] [1773381153.553750817] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773381153.556514965] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1773381153.563861235] [smoother_server]: Cleaning up
+[smoother_server-11] [INFO] [1773381153.705170545] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1773381153.722998236] [smoother_server]: Destroying
+[costmap_filter_info_server-9] [INFO] [1773381153.564018736] [keepout_costmap_filter_info_server]: Cleaning up
+[costmap_filter_info_server-9] [INFO] [1773381153.564074445] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[map_server-8] [INFO] [1773381153.564200738] [keepout_filter_mask_server]: Cleaning up
+[map_server-8] [INFO] [1773381153.564249738] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[bt_navigator-14] [INFO] [1773381153.584373157] [bt_navigator]: Cleaning up
+[velocity_smoother-16] [INFO] [1773381153.590081121] [velocity_smoother]: Destroying
+[collision_detector-18] [INFO] [1773381153.598185731] [collision_detector]: Destroying
+[collision_monitor-17] [INFO] [1773381153.604968496] [collision_monitor]: Destroying
+[behavior_server-13] [INFO] [1773381153.608960571] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[taskset-7] [INFO] [1773381153.625380667] [rclcpp]: signal_handler(signum=2)
+[taskset-7] Unregistering sensor: Custom Described Lidar
+[waypoint_follower-15] [INFO] [1773381153.642497269] [waypoint_follower]: Destroying
+[controller_server-10] [INFO] [1773381153.657285185] [controller_server]: Cleaning up
+[controller_server-10] [INFO] [1773381153.657410311] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773381153.657546812] [local_costmap.local_costmap]: Cleaning up
+[map_server-8] [INFO] [1773381153.756322016] [keepout_filter_mask_server]: Destroying
+[costmap_filter_info_server-9] [INFO] [1773381153.758027988] [keepout_costmap_filter_info_server]: Destroying
+[behavior_server-13] [INFO] [1773381153.765732428] [behavior_server]: Destroying
+[robot_hardware-6] [INFO] [1773381153.890515766] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1773381153.911905904] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773381153.940466435] [local_costmap.local_costmap]: Destroying
+[ekf_node-5] [INFO] [1773381153.989871099] [rclcpp]: signal_handler(signum=2)
+[scan_to_scan_filter_chain-4] [INFO] [1773381154.006473197] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-1] [INFO] [1773381154.063677093] [rclcpp]: signal_handler(signum=2)
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1409, in main
+[autodock_action_server-25]     executor.spin()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 312, in spin
+[autodock_action_server-25]     self.spin_once()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 917, in spin_once
+[autodock_action_server-25]     self._spin_once_impl(timeout_sec)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 896, in _spin_once_impl
+[autodock_action_server-25]     handler, entity, node = self.wait_for_ready_callbacks(
+[autodock_action_server-25]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[autodock_action_server-25]     return next(self._cb_iter)
+[autodock_action_server-25]            ^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[autodock_action_server-25]     wait_set.wait(timeout_nsec)
+[autodock_action_server-25] KeyboardInterrupt
+[autodock_action_server-25] 
+[autodock_action_server-25] During handling of the above exception, another exception occurred:
+[autodock_action_server-25] 
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server", line 33, in <module>
+[autodock_action_server-25]     sys.exit(load_entry_point('action-autodock==0.0.0', 'console_scripts', 'autodock_action_server')())
+[autodock_action_server-25]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1420, in main
+[autodock_action_server-25]     rclpy.shutdown()   
+[autodock_action_server-25]     ^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[autodock_action_server-25]     _shutdown(context=context)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[autodock_action_server-25]     context.shutdown()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[autodock_action_server-25]     self.__context.shutdown()
+[autodock_action_server-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[controller_server-10] [INFO] [1773381154.129767564] [controller_server]: Destroying
+[planner_server-12] [INFO] [1773381154.138870557] [planner_server]: Deactivating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773381154.139019017] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-12] [INFO] [1773381154.149475938] [planner_server]: Cleaning up
+[planner_server-12] [INFO] [1773381154.209611401] [global_costmap.global_costmap]: Cleaning up
+[lifecycle_manager-19] [INFO] [1773381154.210343198] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[rplidar_node-3] [INFO] [1773381154.217605468] [rplidar_node]: Stop motor
+[planner_server-12] [INFO] [1773381154.275554579] [planner_server]: Cleaning up plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773381154.284211901] [planner_server]: Destroying plugin GridBased of type SmacPlanner2D
+[bt_navigator-14] [INFO] [1773381154.317842808] [bt_navigator]: Completed Cleaning up
+[bt_navigator-14] [INFO] [1773381154.317929434] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[planner_server-12] [INFO] [1773381154.343440565] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[bt_navigator-14] [INFO] [1773381154.350679209] [bt_navigator]: Destroying
+[planner_server-12] [INFO] [1773381154.362367265] [global_costmap.global_costmap]: Destroying
+[planner_server-12] [INFO] [1773381154.414130658] [planner_server]: Destroying
+[rpc_run_node-23] Traceback (most recent call last):
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node", line 33, in <module>
+[rpc_run_node-23]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'rpc_run_node')())
+[rpc_run_node-23]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/rpc_run_node.py", line 57, in main
+[rpc_run_node-23]     rclpy.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[rpc_run_node-23]     _shutdown(context=context)
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[rpc_run_node-23]     context.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[rpc_run_node-23]     self.__context.shutdown()
+[rpc_run_node-23] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[call_robot_button-22] Traceback (most recent call last):
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button", line 33, in <module>
+[call_robot_button-22]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'call_robot_button')())
+[call_robot_button-22]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/call_button.py", line 251, in main
+[call_robot_button-22]     rclpy.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[call_robot_button-22]     _shutdown(context=context)
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[call_robot_button-22]     context.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[call_robot_button-22]     self.__context.shutdown()
+[call_robot_button-22] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[robot_sound-21] Traceback (most recent call last):
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound", line 33, in <module>
+[robot_sound-21]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'robot_sound')())
+[robot_sound-21]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 369, in main
+[robot_sound-21]     rclpy.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[robot_sound-21]     _shutdown(context=context)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[robot_sound-21]     context.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-21]     self.__context.shutdown()
+[robot_sound-21] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[ERROR] [rpc_run_node-23]: process has died [pid 4286, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node --ros-args -r __node:=rpc_run_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [call_robot_button-22]: process has died [pid 4285, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button --ros-args -r __node:=call_robot_button_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [collision_detector-18]: process has finished cleanly [pid 4049]
+[INFO] [velocity_smoother-16]: process has finished cleanly [pid 4038]
+[ERROR] [robot_sound-21]: process has died [pid 4284, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound --ros-args -r __node:=robot_sound_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [smoother_server-11]: process has finished cleanly [pid 4025]
+[INFO] [costmap_filter_info_server-9]: process has finished cleanly [pid 4021]
+[INFO] [collision_monitor-17]: process has finished cleanly [pid 4041]
+[INFO] [waypoint_follower-15]: process has finished cleanly [pid 4035]
+[INFO] [map_server-8]: process has finished cleanly [pid 4020]
+[ERROR] [battery_manager_node-26]: process has died [pid 4289, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node --ros-args -r __node:=battery_manager -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/share/battery_management/config/battery_manager.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [robot_hardware-6]: process has finished cleanly [pid 4018]
+[INFO] [behavior_server-13]: process has finished cleanly [pid 4031]
+[INFO] [joint_state_publisher-2]: process has finished cleanly [pid 4014]
+[INFO] [controller_server-10]: process has finished cleanly [pid 4024]
+[INFO] [lifecycle_manager-19]: process has finished cleanly [pid 4050]
+[ERROR] [autodock_action_server-25]: process has died [pid 4288, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server --ros-args -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config/auto_dock_config.yaml --params-file /tmp/launch_params_jle9ikia -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [bt_navigator-14]: process has finished cleanly [pid 4034]
+[INFO] [planner_server-12]: process has finished cleanly [pid 4028]
+[INFO] [taskset-7]: process has finished cleanly [pid 4019]
+[INFO] [ekf_node-5]: process has finished cleanly [pid 4017]
+[INFO] [scan_to_scan_filter_chain-4]: process has finished cleanly [pid 4016]
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 4013]
+[INFO] [rplidar_node-3]: process has finished cleanly [pid 4015]

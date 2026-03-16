@@ -21,4 +21,23 @@ if [ -f ~/workspaces/mini_amr/traffic_editor/install/setup.bash ]; then
 fi
 
 # Run the launch file
-ros2 launch nectec_amr_launch slam_localization_sequential_launch.py
+#ros2 launch nectec_amr_launch slam_localization_sequential_launch.py
+# Generate base date string (YYYY-MM-DD)
+CURRENT_DATE=$(date +"%Y-%m-%d")
+
+# Create logs directory for the current date if it doesn't exist
+LOG_DIR="$ROS_WS/ROS_LOG/$CURRENT_DATE"
+mkdir -p "$LOG_DIR"
+
+# Find the next counter for today
+COUNTER=1
+while [ -f "$LOG_DIR/run_${COUNTER}_"*.log ]; do
+    ((COUNTER++))
+done
+
+# Generate the full timestamped filename
+TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
+LOG_FILE="$LOG_DIR/run_${COUNTER}_${TIMESTAMP}.log"
+
+# Run the launch file and record output
+ros2 launch nectec_amr_launch slam_localization_sequential_launch.py 2>&1 | tee "$LOG_FILE"

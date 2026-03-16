@@ -1,0 +1,1176 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-13-14-53-48-004828-two-35746
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [35767]
+[INFO] [joint_state_publisher-2]: process started with pid [35768]
+[INFO] [rplidar_node-3]: process started with pid [35769]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [35770]
+[INFO] [ekf_node-5]: process started with pid [35771]
+[INFO] [robot_hardware-6]: process started with pid [35772]
+[INFO] [taskset-7]: process started with pid [35773]
+[INFO] [map_server-8]: process started with pid [35774]
+[INFO] [costmap_filter_info_server-9]: process started with pid [35775]
+[INFO] [controller_server-10]: process started with pid [35778]
+[INFO] [smoother_server-11]: process started with pid [35779]
+[INFO] [planner_server-12]: process started with pid [35792]
+[INFO] [behavior_server-13]: process started with pid [35799]
+[INFO] [bt_navigator-14]: process started with pid [35812]
+[INFO] [waypoint_follower-15]: process started with pid [35815]
+[INFO] [velocity_smoother-16]: process started with pid [35825]
+[INFO] [collision_monitor-17]: process started with pid [35836]
+[INFO] [collision_detector-18]: process started with pid [35853]
+[INFO] [lifecycle_manager-19]: process started with pid [35865]
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[rplidar_node-3] [INFO] [1773388429.089892764] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1773388429.117378422] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1773388429.117431503] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1773388429.117442003] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1773388429.118033190] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1773388429.118076938] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1773388429.118877242] [rplidar_node]: Start
+[taskset-7] [INFO] [1773388429.185139727] [slam_toolbox]: Node using stack size 40000000
+[map_server-8] [INFO] [1773388429.137218319] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1773388429.137347814] [keepout_filter_mask_server]: Creating
+[rplidar_node-3] [INFO] [1773388429.287508928] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[costmap_filter_info_server-9] [INFO] [1773388429.301498206] [costmap_filter_info_server]: This is costmap filter info publisher
+[velocity_smoother-16] [INFO] [1773388429.360425252] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773388429.363909082] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773388429.368354794] [waypoint_follower]: Creating
+[lifecycle_manager-19] [INFO] [1773388429.458116583] [lifecycle_manager_navigation]: Creating
+[controller_server-10] [INFO] [1773388429.469691241] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[robot_state_publisher-1] [INFO] [1773388429.487798702] [robot_state_publisher]: Robot initialized
+[lifecycle_manager-19] [INFO] [1773388429.489791003] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[taskset-7] [INFO] [1773388429.492366034] [slam_toolbox]: Configuring
+[taskset-7] [INFO] [1773388429.508804931] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[taskset-7] [INFO] [1773388429.509467281] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[costmap_filter_info_server-9] [INFO] [1773388429.600375278] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_detector-18] [INFO] [1773388429.631428763] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-14] [INFO] [1773388429.668057544] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-13] [INFO] [1773388429.683109617] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[taskset-7] [ERROR] [1773388429.706269142] [slam_toolbox]: LocalizationSlamToolbox: Incorrect number of arguments for map starting pose. Must be in format: [x, y, theta]. Starting at the origin
+[controller_server-10] [INFO] [1773388429.736034966] [controller_server]: Creating controller server
+[bt_navigator-14] [INFO] [1773388429.740708169] [bt_navigator]: Creating
+[planner_server-12] [INFO] [1773388429.753448868] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-11] [INFO] [1773388429.759774594] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773388429.800609054] [planner_server]: Creating
+[smoother_server-11] [INFO] [1773388429.866303101] [smoother_server]: Creating smoother server
+[collision_monitor-17] [INFO] [1773388429.907311388] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773388429.967313769] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773388429.992163440] [local_costmap.local_costmap]: Creating Costmap
+[planner_server-12] [INFO] [1773388430.035719050] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773388430.039509119] [global_costmap.global_costmap]: Creating Costmap
+[rplidar_node-3] [INFO] [1773388430.133969777] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[scan_to_scan_filter_chain-4] [WARN] [1773388430.256101586] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[lifecycle_manager-19] [INFO] [1773388430.443034684] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1773388430.444539337] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1773388430.448209827] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1773388430.448257367] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1773388430.448492150] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1773388430.448717892] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1773388430.448767182] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1773388430.525206709] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773388430.634078964] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1773388430.693361246] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773388430.695678744] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1773388430.708702350] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1773388430.708805013] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1773388430.717402739] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1773388430.717512401] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[taskset-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[taskset-7] Mapper <- Module
+[taskset-7] Mapper <- m_pSequentialScanMatcher
+[taskset-7] Mapper <- m_pGraph
+[taskset-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[taskset-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[taskset-7] Mapper <- m_pMapperSensorManager
+[taskset-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[taskset-7] Mapper <- m_Listeners
+[taskset-7] **Finished serializing Mapper**
+[taskset-7] Load From File
+[taskset-7] **Serializing Dataset**
+[taskset-7] Dataset <- m_SensorNameLookup
+[taskset-7] Dataset <- m_Data
+[taskset-7] Dataset <- m_Lasers
+[taskset-7] Dataset <- m_pDatasetInfo
+[taskset-7] **Finished serializing Dataset**
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[taskset-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[taskset-7] W20260313 14:53:50.721465 35773 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[taskset-7] [INFO] [1773388430.737135598] [slam_toolbox]: Activating
+[controller_server-10] [INFO] [1773388430.737671370] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773388430.737761491] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773388430.737973525] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773388430.805572669] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1773388430.808838049] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1773388430.809709517] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1773388430.811716694] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[controller_server-10] [INFO] [1773388430.814100690] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1773388430.825293862] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1773388430.829777198] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1773388430.829953941] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1773388430.834641436] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1773388430.834693642] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1773388430.836287834] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1773388430.836337998] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1773388430.838016770] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1773388430.838067518] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1773388430.841762216] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1773388430.841812964] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1773388430.843709020] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1773388430.845442331] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1773388430.845492204] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1773388430.846416754] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1773388430.846472168] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1773388430.847873283] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773388430.855759952] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773388430.855802534] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1773388430.874881792] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773388430.875505061] [smoother_server]: Configuring smoother server
+[smoother_server-11] [INFO] [1773388430.919622692] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1773388430.929574868] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1773388430.955096515] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1773388430.955750699] [planner_server]: Configuring
+[planner_server-12] [INFO] [1773388430.955866778] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1773388430.983876542] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1773388430.996191131] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1773388430.999790166] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1773388430.999847039] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773388431.006790201] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1773388431.027806638] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773388431.027859427] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1773388431.040804286] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1773388431.040864075] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773388431.068161615] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773388431.068223446] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773388431.075445139] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773388431.167306559] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[planner_server-12] [INFO] [1773388431.199454629] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1773388431.199517919] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1773388431.201642341] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1773388431.203593811] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1773388431.203653017] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1773388431.230672025] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773388431.231880939] [behavior_server]: Configuring
+[joint_state_publisher-2] [INFO] [1773388431.248968479] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[behavior_server-13] [INFO] [1773388431.275655583] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1773388431.309928075] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1773388431.327932581] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773388431.328872880] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1773388431.347528945] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773388431.348159797] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1773388431.379190824] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1773388431.390817106] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1773388431.390922102] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1773388431.400455752] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1773388431.409323552] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1773388431.410363889] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1773388431.418465216] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1773388431.438745514] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773388431.442628621] [collision_detector]: Configuring
+[collision_detector-18] [INFO] [1773388431.500954564] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1773388431.506452570] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1773388431.506489902] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1773388431.515123502] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1773388431.523592608] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773388431.524329622] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1773388431.544454759] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1773388431.700088797] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1773388431.756870421] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773388431.758654480] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1773388431.815260236] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1773388431.819980105] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773388431.820618540] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1773388431.820718286] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1773388431.821039691] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1773388431.821056023] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1773388431.821061857] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1773388431.821066231] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1773388431.821070898] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1773388431.821075273] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1773388431.821081106] [map_io]: mode: trinary
+[map_server-8] [INFO] [1773388431.821086647] [map_io]: negate: 0
+[map_server-8] [INFO] [1773388431.821302181] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1773388431.834429033] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1773388431.851406910] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773388431.853283424] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1773388431.863163853] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1773388431.863684459] [controller_server]: Activating
+[controller_server-10] [INFO] [1773388431.863738124] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1773388431.863752415] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1773388431.863925075] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1773388431.867806141] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1773388431.965374102] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1773388431.972554963] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1773388431.973089568] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773388431.973410390] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773388431.973444805] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388432.089756911] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388432.089866866] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773388432.090803373] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1773388432.090888245] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388432.199748250] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388432.199799289] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1773388432.200364519] [planner_server]: Activating
+[planner_server-12] [INFO] [1773388432.200419058] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1773388432.200434808] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1773388432.200592010] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1773388432.202082372] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1773388432.746867127] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1773388432.803730998] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773388432.807736601] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388432.923402981] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388432.923526352] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773388432.925148542] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1773388432.925229039] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1773388432.925298745] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.037590082] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.037661246] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773388433.038748248] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1773388433.038962323] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.155831784] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.155908198] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773388433.157370269] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1773388433.157500639] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.271024223] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.271092470] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773388433.271863608] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1773388433.271970646] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.401670928] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.401738008] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773388433.402553479] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1773388433.552318232] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.661875002] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.661941792] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773388433.662801010] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1773388433.662866924] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.776662914] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.776792410] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773388433.780110871] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1773388433.780420901] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773388433.886512799] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388433.886585130] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773388433.887305812] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1773388433.887460681] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773388433.887719963] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773388433.887841292] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773388433.887743296] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773388433.887832251] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773388433.917509703] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-10] [INFO] [1773388433.917609741] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1773388434.002840946] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773388434.002970733] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1773388434.003017398] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [delivery_robot_main_controller-20]: process started with pid [36057]
+[INFO] [robot_sound-21]: process started with pid [36058]
+[INFO] [call_robot_button-22]: process started with pid [36059]
+[INFO] [rpc_run_node-23]: process started with pid [36060]
+[INFO] [dock_coordinates-24]: process started with pid [36061]
+[INFO] [autodock_action_server-25]: process started with pid [36062]
+[INFO] [battery_manager_node-26]: process started with pid [36063]
+[dock_coordinates-24] [INFO] [1773388434.263838325] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1773388434.267918301] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1773388434.267984798] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1773388434.268000548] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1773388434.268016589] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1773388434.268032338] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1773388434.268048088] [dock coordinates]: range_limit: 1.200000
+[robot_sound-21] [0m[INFO] [1773388436.078658509] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1773388436.079274194] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [0m[INFO] [1773388436.080085873] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1773388436.080697475] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [33m[WARN] [1773388436.082131548] [robot_sound_node]: Map not available yet; skipping obstacle classification.[0m
+[robot_sound-21] [0m[INFO] [1773388436.082638446] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[robot_sound-21] [0m[INFO] [1773388436.371187105] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[rpc_run_node-23] [0m[INFO] [1773388436.384064008] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-13 14:53:56,386 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1773388436.403088435] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1773388436.404869869] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773388436.703118714] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1773388436.731763121] [autodock_action_server]: auto_dock_init_complete
+[battery_manager_node-26] [INFO] [1773388436.868438647] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[autodock_action_server-25] [INFO] [1773388437.149274464] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773388437.155368324] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388437.179416816] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388437.184503880] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773388437.209067145] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773388437.255183494] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388438.427057441] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [36191]
+[delivery_robot_main_controller-20] [0m[INFO] [1773388440.445799099] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388440.452039369] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388442.466698135] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388442.511858436] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388442.538312506] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773388442.556513297] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388443.474932088] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388444.488974954] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388444.601367495] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388445.479101739] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773388446.118955546] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388446.546526978] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388446.623602316] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388447.472390288] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388448.472262174] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388448.554394534] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388449.505036935] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388450.480571005] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388450.572180726] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388451.512456216] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388452.488054159] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388452.555145530] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388453.476765829] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388454.472419786] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388454.543923328] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388455.551410351] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388456.543318570] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388456.650930287] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388457.543911138] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773388458.196209905] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388458.510872273] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388458.604455921] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388459.475732318] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388460.507605279] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388460.569862453] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388461.489689359] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388462.495047002] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388462.572108923] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388463.473002400] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388464.473843750] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388464.556416803] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388465.476992099] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388466.488861544] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388466.572273107] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388467.511829082] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388468.513377114] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388468.577294685] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388469.471907350] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773388469.493570388] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388470.489775867] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388470.605807691] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388471.489578921] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388472.559917221] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388472.657314854] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388473.478535213] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388474.480889966] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388474.568774657] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388475.473623863] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388476.483123604] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388476.544833339] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388477.538789858] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[call_robot_button-22] 2026-03-13 14:54:38 mosquitto_pub -u smr -P smrbot25 -m "Production1,true" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773388478.148719764] [call_robot_button_node]: call_switch notified: station=Production1 status=true.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388478.490752877] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388478.553966390] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388479.510731233] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[robot_sound-21] [0m[INFO] [1773388479.604108973] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.477010185] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.559147212] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.574097205] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.575518736] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.589815711] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.590859548] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773388480.599455232] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773388480.616007583] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773388480.616541897] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773388480.640426187] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773388480.868705309] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773388480.970571987] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [WARN] [1773388481.371218323] [battery_manager]: Request stop charge for undock
+[delivery_robot_main_controller-20] [0m[INFO] [1773388481.485182307] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773388481.616895015] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773388481.617517992] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773388481.625179502] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773388481.626843691] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773388481.869971893] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773388482.553346895] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773388482.618229847] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773388482.618720704] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773388483.473468374] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388483.659430549] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388484.476168739] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773388484.502682016] [battery_manager]: IR state: READY -> IDLE (0)
+[autodock_action_server-25] [INFO] [1773388484.504604612] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1773388484.870084531] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773388485.487165841] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388486.545734072] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388487.500966846] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388488.475633532] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388489.476801245] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773388489.840523937] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773388489.841122707] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773388489.843514869] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773388489.859956099] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388489.861862945] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388489.878475961] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388489.892043796] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.480225208] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.585340059] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.586551889] [main_controller_node]: Queue action: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.651220474] [main_controller_node]: AGV start_pos: x=0.51, y=0.04[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.652809707] [main_controller_node]: AGV goal_pos: x=3.40, y=-0.73[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.679025495] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.679657222] [main_controller_node]:   Waypoint 0: x=0.51, y=0.04[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.680378487] [main_controller_node]:   Waypoint 1: x=1.99, y=-1.51[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.681074670] [main_controller_node]:   Waypoint 2: x=3.40, y=-0.73[0m
+[bt_navigator-14] [INFO] [1773388490.685980323] [bt_navigator]: Begin navigating from current location through 3 poses to (3.40, -0.73)
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.683899358] [main_controller_node]: Navigating with 3 goals....[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.688620101] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[controller_server-10] [INFO] [1773388490.688368985] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1773388490.699559241] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[delivery_robot_main_controller-20] [0m[INFO] [1773388490.703365935] [main_controller_node]: Robot is MOVING.[0m
+[controller_server-10] [INFO] [1773388490.706905763] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773388490.707028842] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773388490.707570447] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [WARN] [1773388490.720363061] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [INFO] [1773388490.725215633] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1773388490.736004862] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773388490.736070485] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1773388490.754633512] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1773388491.390038982] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 1.5222 Hz
+[controller_server-10] [INFO] [1773388491.409080325] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1773388491.409144198] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded goal_checker . This warning will appear once.
+[controller_server-10] [WARN] [1773388491.409159947] [controller_server]: No progress checker was specified in parameter 'current_progress_checker'. Server will use only plugin loaded progress_checker . This warning will appear once.
+[controller_server-10] [INFO] [1773388491.609309435] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388491.709313014] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388491.909375880] [controller_server]: Passing new path to controller.
+[robot_sound-21] [0m[INFO] [1773388491.985020353] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[controller_server-10] [INFO] [1773388492.009297504] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388492.109286501] [controller_server]: Passing new path to controller.
+[call_robot_button-22] 2026-03-13 14:54:52 mosquitto_pub -u smr -P smrbot25 -m "Production1,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773388492.128049895] [call_robot_button_node]: call_switch notified: station=Production1 status=blink.[0m
+[controller_server-10] [INFO] [1773388492.409329905] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388492.509289736] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388492.609300607] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388492.809292892] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388492.909296763] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.009290427] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.109292840] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.309326540] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.409305912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.509294325] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.609291488] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.809292815] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388493.909294353] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.009292391] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.109282846] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.309285339] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.409296793] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.509290748] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.709292074] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.809292154] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388494.909293692] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.009317979] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.209330971] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.309382966] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.409295549] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.609294250] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.709278289] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.809323867] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388495.909315780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.109407811] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.209309020] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.409300138] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.509387714] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.609325088] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388496.909336702] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388497.009318407] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1773388497.109326945] [controller_server]: Passing new path to controller.
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.169704687] [main_controller_node]: Canceling current goal.[0m
+[controller_server-10] [INFO] [1773388497.209403147] [controller_server]: Cancellation was successful. Stopping the robot.
+[controller_server-10] [INFO] [1773388497.209529142] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[bt_navigator-14] [INFO] [1773388497.210173410] [bt_navigator]: [navigate_through_poses] [ActionServer] Client requested to cancel the goal. Cancelling.
+[bt_navigator-14] [INFO] [1773388497.210426859] [bt_navigator]: Goal canceled
+[controller_server-10] [INFO] [1773388497.212575780] [controller_server]: Optimizer reset
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.227684143] [main_controller_node]: Goal was canceled![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.228329869] [main_controller_node]: State change: MOVE -> PAUSED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.235672308] [main_controller_node]: Robot is PAUSED. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.236956761] [main_controller_node]: Robot is PAUSED. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.255212382] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388497.509102397] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388498.488758150] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388499.475899252] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388500.474449353] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388501.507780886] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388502.492873397] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388503.525762487] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388504.479233659] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388505.474207183] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388506.478881475] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388507.532747921] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388508.539455055] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388509.475579697] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388510.475849401] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388511.476739458] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388512.520049124] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388513.545787685] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388514.479519582] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388515.476474324] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388516.492762357] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388517.539090663] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388518.482170132] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388519.480029008] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388520.477071248] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388521.480102059] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388522.477902604] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388523.494922693] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388524.529912290] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388525.508133678] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388526.480939891] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388527.543599763] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388528.478497992] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388529.526245204] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388530.509936308] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388531.473894553] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388532.480136497] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388533.475054606] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388534.509619551] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388535.507078275] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388536.477073799] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388537.476916227] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388538.536875366] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388539.508804568] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388540.491409546] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388541.488253459] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388542.477299659] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388543.477708774] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388544.478893695] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388545.483528906] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388546.507031924] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388547.476336223] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388548.480641279] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388549.497420752] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388550.476657104] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388551.487879073] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388552.478967447] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388553.476101266] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388554.478527766] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388555.479392449] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388556.536330907] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388557.496237759] [main_controller_node]: Current state: PAUSED, dock_state IDLE, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773388557.628112044] [battery_manager]: IR state: IDLE -> READY (10)
+[autodock_action_server-25] [INFO] [1773388557.629293250] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773388557.718236653] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[battery_manager_node-26] [INFO] [1773388557.868386975] [battery_manager]: State change: UNKNOWN -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773388557.869260485] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773388557.973389246] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773388558.370237056] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773388558.373551143] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773388558.477121966] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773388558.479008397] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773388558.869969423] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773388558.873173263] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773388558.966076187] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773388558.974932029] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773388558.976345102] [battery_manager]: IR state: READY -> CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773388559.474625314] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388560.475860399] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388561.489010506] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388562.481245380] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388563.502643517] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388564.474250440] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388565.514482844] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388566.488278936] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388567.508567323] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388568.488648601] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388569.473582743] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388570.479743315] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388571.529071010] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388572.487280133] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388573.479147229] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388574.472878298] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388575.479472854] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388576.513855806] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388577.504035089] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388578.505234592] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388579.487135220] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388580.477941855] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388581.473949883] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388582.509666286] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388583.488448820] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388584.521736896] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388585.471475455] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388586.477122129] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388587.479246181] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388588.523124868] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388589.478273354] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388590.475179681] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388591.477681137] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388592.474918203] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388593.475017871] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388594.480754667] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388595.481129659] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388596.474964557] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388597.509232597] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388598.509856663] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388599.479887769] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388600.543617144] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388601.474076661] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388602.475117503] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388603.474918225] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388604.519491053] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388605.478707847] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388606.474017358] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388607.503268041] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388608.517205618] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388609.522446307] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388610.474419534] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388611.477164814] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388612.479791098] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388613.488732609] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388614.505397753] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388615.522052106] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388616.496243392] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388617.478943450] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[call_robot_button-22] 2026-03-13 14:56:58 mosquitto_pub -u smr -P smrbot25 -m "Production1,false" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773388618.129847810] [call_robot_button_node]: call_switch notified: station=Production1 status=false.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388618.523469321] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388619.495848549] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388620.492442513] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388621.472669328] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388622.476394281] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388623.517631148] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388624.482656854] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388625.482089797] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388626.541969022] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388627.472001262] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388628.501133532] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388629.512104094] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388630.475536483] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388631.478374510] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388632.474369996] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388633.474891400] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388634.500522048] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388635.493548768] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388636.478090050] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388637.472634547] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388638.473176075] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388639.489429401] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388640.490902186] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388641.474099808] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388642.478475445] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[bash-27] 4
+[bash-27] Queue empty: current state-> STANDBY : queue_action-> 
+[bash-27] queue action->Idle :  current state-> STANDBY : previous state-> 
+[bash-27] Production1
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> MOVE : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> PAUSED : previous state-> MOVE
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[delivery_robot_main_controller-20] [0m[INFO] [1773388643.472828033] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388644.475281657] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388645.498460354] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388646.478362264] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388647.554309982] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388648.476426972] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388649.545754100] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388650.480301758] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388651.522483882] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388652.479346721] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388653.477359008] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388654.477316641] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388655.539926640] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388656.492287769] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388657.473008066] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388658.509184994] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388659.473791007] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388660.527470793] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388661.490941098] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388662.568431384] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388663.485306441] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388664.477119872] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388665.480010106] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388666.528020391] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388667.540546645] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388668.518887613] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[delivery_robot_main_controller-20] [0m[INFO] [1773388669.475023062] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388670.480724567] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388671.487679900] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388672.518098373] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388673.487422505] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388674.476429331] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388675.482991512] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388676.481655359] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388677.478723556] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388678.480307170] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388679.520221377] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388680.478784571] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388681.488036695] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388682.476536332] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388683.519050360] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388684.487663435] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388685.476350897] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388686.487397873] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388687.519269375] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388688.499037999] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388689.482851890] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388690.498868975] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388691.479062249] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388692.535222861] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388693.538508579] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388694.483815717] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388695.476780315] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[bash-27] Queue empty: current state-> PAUSED : queue_action-> Request
+[delivery_robot_main_controller-20] [0m[INFO] [1773388696.476530288] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388697.476313802] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388698.517453256] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388699.536455148] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388700.481381675] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388701.473165940] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388702.474083121] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388703.488510680] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388704.488529852] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388705.489627568] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388706.472969268] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388707.473745579] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388708.473447429] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388709.487544251] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388710.481942045] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388711.489642560] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388712.477095735] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388713.535372018] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388714.491724460] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388715.510796640] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388716.490303940] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388717.478238930] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388718.474228875] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773388719.475288967] [main_controller_node]: Current state: PAUSED, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [31m[ERROR] [1773388719.680213737] [main_controller_node]: ChargeState callback exception: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/robotStatus/updaterobotstatus (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffffa41e6870>: Failed to establish a new connection: [Errno 111] Connection refused'))[0m
+[delivery_robot_main_controller-20] [31m[ERROR] [1773388719.748285364] [main_controller_node]: ChargeState callback exception: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/robotStatus/updaterobotstatus (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffffa41e65a0>: Failed to establish a new connection: [Errno 111] Connection refused'))[0m
+[delivery_robot_main_controller-20] [31m[ERROR] [1773388719.752685286] [main_controller_node]: Failed to update robot SOC: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/stateOfCharge/update (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffffa41e4dd0>: Failed to establish a new connection: [Errno 111] Connection refused'))[0m
+[delivery_robot_main_controller-20] [31m[ERROR] [1773388719.769979026] [main_controller_node]: ChargeState callback exception: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/robotStatus/updaterobotstatus (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0xffffa41be5d0>: Failed to establish a new connection: [Errno 111] Connection refused'))[0m

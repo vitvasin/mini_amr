@@ -157,9 +157,7 @@ def generate_launch_description():
     laser_filter = Node(
             package='laser_filters',
             executable='scan_to_scan_filter_chain',
-            # remappings=[('scan', 'raw_scan'),
-            #     ('scan_filtered','scan')],
-            remappings=[('scan_filtered','scan')],
+            # remappings=[('scan', 'raw_scan')],
             parameters=[params_file],
         )
 

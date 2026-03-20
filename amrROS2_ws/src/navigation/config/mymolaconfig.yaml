@@ -253,7 +253,7 @@ collision_monitor:
       min_points: 4
       visualize: True
       polygon_pub_topic: "polygon_stop"
-      enabled: false
+      enabled: true
     PolygonSlow:
       # type: "circle"
       # radius: 0.70
@@ -264,7 +264,7 @@ collision_monitor:
       slowdown_ratio: 0.8
       visualize: True
       polygon_pub_topic: "polygon_slowdown"
-      enabled: false
+      enabled: true
     observation_sources: ["scan", "pointcloud"] 
     scan:
       type: "scan"

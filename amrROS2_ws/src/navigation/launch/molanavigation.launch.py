@@ -7,7 +7,7 @@ from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     # --- 1. CONFIG: ตรวจสอบ Path ให้ถูกต้อง ---
-    map_yaml_file = '/home/smr/molamaps/test0503map_processed.yaml'
+    map_yaml_file = '/home/smr/molamaps/test1103_processed.yaml'
     nav2_params_file = '/home/smr/workspaces/mini_amr/amrROS2_ws/src/navigation/config/mymolaconfig.yaml'
     # -----------------------------------------------
 

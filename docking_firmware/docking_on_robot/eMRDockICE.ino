@@ -234,13 +234,13 @@ void loop(){
   Blink_loop();
 
   static unsigned long last2 = 0;
-  if (millis() - last2 >= 50) {
+  if (millis() - last2 >= 20) {
     last2 = millis();
     IRCommu_loop();
     Modbus_loop();
   }
   // small sleep to yield CPU and keep timing stability
-  delay(2);
+  // delay(2);
 }
 
 /*

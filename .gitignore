@@ -18,3 +18,8 @@ amrROS2_UI/ICEAMR/logs
 amrROS2_ws/maps/*.posegraph
 amrROS2_ws/maps/*.data
 AMR_LAUNCHER/.venv
+
+# Ignore generated resource and cache files
+amrROS2_UI/ICEAMR/resources_rc.py
+amrROS2_UI/ICEAMR/__pycache__/
+*.pyc

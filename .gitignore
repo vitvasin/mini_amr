@@ -3,12 +3,23 @@ amrROS2_ws/temp
 amrROS2_ws/temp2
 amrROS2_ws/install
 amrROS2_ws/log
-amrROS2_ws/ROS_LOG
 amrROS2_ws/build
 amrROS2_ws/src/sllidar_ros2
 
 traffic_editor
-amrROS2_UI
+amrROS2_UI/env
+amrROS2_UI/logs
+amrROS2_UI/ICEAMR/.vscode
+amrROS2_UI/ICEAMR/backupui
+amrROS2_UI/ICEAMR/Icons
+amrROS2_UI/ICEAMR/icons_white
+amrROS2_UI/ICEAMR/logs
+
 amrROS2_ws/maps/*.posegraph
 amrROS2_ws/maps/*.data
 AMR_LAUNCHER/.venv
+
+# Ignore generated resource and cache files
+amrROS2_UI/ICEAMR/resources_rc.py
+amrROS2_UI/ICEAMR/__pycache__/
+*.pyc

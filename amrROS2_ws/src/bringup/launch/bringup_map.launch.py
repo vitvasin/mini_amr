@@ -85,21 +85,29 @@ def generate_launch_description():
     #                      'scan_mode': 'Sensitivity'}],
     #         remappings=[("scan", "raw_scan")],
     #         output='screen')
-    
-    scan = Node(
-            package='rplidar_ros',
-            executable='rplidar_node',
-            name='rplidar_node',
-            parameters=[{'channel_type': 'udp', 
-                         'udp_ip': '192.168.11.2',
-                         'udp_port': 8089,
-                         'frame_id': 'laser',
-                         'inverted': False, 
-                         'angle_compensate': True,
-                         'scan_frequency': 10.0,
-                         'scan_mode': 'Sensitivity'}],
-            remappings=[("scan", "raw_scan")],
-            output='screen')
+    scan = IncludeLaunchDescription(os.path.join(
+        get_package_share_directory("sllidar_ros2"),
+        "launch",
+        "sllidar_s2_launch.py"),
+        launch_arguments={
+                'serial_port': '/dev/rplidar',
+        
+        }.items(),
+    )     
+    # scan = Node(
+    #         package='rplidar_ros',
+    #         executable='rplidar_node',
+    #         name='rplidar_node',
+    #         parameters=[{'channel_type': 'udp', 
+    #                      'udp_ip': '192.168.11.2',
+    #                      'udp_port': 8089,
+    #                      'frame_id': 'laser',
+    #                      'inverted': False, 
+    #                      'angle_compensate': True,
+    #                      'scan_frequency': 10.0,
+    #                      'scan_mode': 'Sensitivity'}],
+    #         remappings=[("scan", "raw_scan")],
+    #         output='screen')
 
     # oak_d = IncludeLaunchDescription(os.path.join(
     #     get_package_share_directory("depthai_ros_driver"),
@@ -128,8 +136,7 @@ def generate_launch_description():
     laser_filter = Node(
             package='laser_filters',
             executable='scan_to_scan_filter_chain',
-            remappings=[('scan', 'raw_scan'),
-                ('scan_filtered','scan')],
+            # remappings=[('scan', 'raw_scan')],
             parameters=[params_file],
         )
 

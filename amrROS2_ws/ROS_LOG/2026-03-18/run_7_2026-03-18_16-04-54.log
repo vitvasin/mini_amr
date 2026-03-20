@@ -1,0 +1,1388 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-18-16-04-55-354512-two-32574
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [32589]
+[INFO] [joint_state_publisher-2]: process started with pid [32590]
+[INFO] [rplidar_node-3]: process started with pid [32591]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [32592]
+[INFO] [ekf_node-5]: process started with pid [32593]
+[INFO] [robot_hardware-6]: process started with pid [32594]
+[INFO] [taskset-7]: process started with pid [32595]
+[INFO] [map_server-8]: process started with pid [32596]
+[INFO] [costmap_filter_info_server-9]: process started with pid [32597]
+[INFO] [controller_server-10]: process started with pid [32598]
+[INFO] [smoother_server-11]: process started with pid [32603]
+[INFO] [planner_server-12]: process started with pid [32608]
+[INFO] [behavior_server-13]: process started with pid [32609]
+[INFO] [bt_navigator-14]: process started with pid [32618]
+[INFO] [waypoint_follower-15]: process started with pid [32625]
+[INFO] [velocity_smoother-16]: process started with pid [32629]
+[INFO] [collision_monitor-17]: process started with pid [32641]
+[INFO] [collision_detector-18]: process started with pid [32642]
+[INFO] [lifecycle_manager-19]: process started with pid [32645]
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[taskset-7] [INFO] [1773824696.461859556] [slam_toolbox]: Node using stack size 40000000
+[robot_state_publisher-1] [INFO] [1773824696.504208009] [robot_state_publisher]: Robot initialized
+[rplidar_node-3] [INFO] [1773824696.509947800] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1773824696.519818606] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1773824696.519874604] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1773824696.519889186] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1773824696.520726822] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1773824696.520772612] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1773824696.521406089] [rplidar_node]: Start
+[controller_server-10] [INFO] [1773824696.650458916] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773824696.664870806] [controller_server]: Creating controller server
+[map_server-8] [INFO] [1773824696.668560838] [keepout_filter_mask_server]: 
+[rplidar_node-3] [INFO] [1773824696.669080861] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1773824696.673149171] [keepout_filter_mask_server]: Creating
+[taskset-7] [INFO] [1773824696.723288047] [slam_toolbox]: Configuring
+[velocity_smoother-16] [INFO] [1773824696.731025681] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[taskset-7] [INFO] [1773824696.740359257] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[taskset-7] [INFO] [1773824696.746581446] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[smoother_server-11] [INFO] [1773824696.746916267] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-11] [INFO] [1773824696.751166862] [smoother_server]: Creating smoother server
+[controller_server-10] [INFO] [1773824696.751672302] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1773824696.758306601] [local_costmap.local_costmap]: Creating Costmap
+[planner_server-12] [INFO] [1773824696.760892132] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773824696.784416522] [planner_server]: Creating
+[waypoint_follower-15] [INFO] [1773824696.812153592] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1773824696.827239208] [waypoint_follower]: Creating
+[bt_navigator-14] [INFO] [1773824696.860913811] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-14] [INFO] [1773824696.869195092] [bt_navigator]: Creating
+[costmap_filter_info_server-9] [INFO] [1773824696.899644854] [costmap_filter_info_server]: This is costmap filter info publisher
+[planner_server-12] [INFO] [1773824696.907228785] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[costmap_filter_info_server-9] [INFO] [1773824696.932932721] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1773824696.954176362] [global_costmap.global_costmap]: Creating Costmap
+[lifecycle_manager-19] [INFO] [1773824697.102761683] [lifecycle_manager_navigation]: Creating
+[lifecycle_manager-19] [INFO] [1773824697.152534532] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[collision_detector-18] [INFO] [1773824697.284179014] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[behavior_server-13] [INFO] [1773824697.300298842] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rplidar_node-3] [INFO] [1773824697.430053101] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[scan_to_scan_filter_chain-4] [WARN] [1773824697.579998706] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[collision_monitor-17] [INFO] [1773824697.641237136] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1773824697.756497841] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1773824697.756711042] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1773824697.758301734] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1773824697.758471186] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1773824697.763387631] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1773824697.765883915] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1773824697.766163030] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1773824697.802004054] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773824697.834925018] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1773824697.864360984] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1773824697.864454606] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1773824697.869727163] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1773824697.869819910] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1773824697.876602078] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1773824697.876693075] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773824697.886181520] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1773824697.886262601] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1773824697.886397637] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[taskset-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[taskset-7] Mapper <- Module
+[taskset-7] Mapper <- m_pSequentialScanMatcher
+[taskset-7] Mapper <- m_pGraph
+[taskset-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[taskset-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[taskset-7] Mapper <- m_pMapperSensorManager
+[taskset-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[taskset-7] Mapper <- m_Listeners
+[taskset-7] **Finished serializing Mapper**
+[taskset-7] Load From File
+[taskset-7] **Serializing Dataset**
+[taskset-7] Dataset <- m_SensorNameLookup
+[taskset-7] Dataset <- m_Data
+[taskset-7] Dataset <- m_Lasers
+[taskset-7] Dataset <- m_pDatasetInfo
+[taskset-7] **Finished serializing Dataset**
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[taskset-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[taskset-7] W20260318 16:04:57.954727 32595 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[controller_server-10] [INFO] [1773824697.955469947] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1773824697.957490540] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1773824697.958426464] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1773824697.963344659] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[controller_server-10] [INFO] [1773824697.965809444] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1773824697.981983228] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1773824697.987963052] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1773824697.988058715] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1773824697.995647021] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1773824697.995727810] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1773824697.998243926] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1773824697.998318882] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1773824698.001451267] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1773824698.001533514] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1773824698.017492640] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1773824698.017742005] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[taskset-7] [INFO] [1773824697.998437877] [slam_toolbox]: Activating
+[controller_server-10] [INFO] [1773824698.030557954] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1773824698.041172774] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1773824698.041258813] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1773824698.051267572] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1773824698.051478440] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1773824698.056358136] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773824698.072173183] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773824698.072237639] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1773824698.108458108] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773824698.109041712] [smoother_server]: Configuring smoother server
+[taskset-7] Registering sensor: [Custom Described Lidar]
+[smoother_server-11] [INFO] [1773824698.185632913] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1773824698.198926011] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1773824698.244171775] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1773824698.245844130] [planner_server]: Configuring
+[planner_server-12] [INFO] [1773824698.245957584] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1773824698.276833165] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1773824698.290804946] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1773824698.293909041] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1773824698.295310740] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773824698.305041259] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1773824698.326708384] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1773824698.326793548] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[joint_state_publisher-2] [INFO] [1773824698.327363152] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[planner_server-12] [INFO] [1773824698.333579217] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1773824698.334480142] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773824698.344875637] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1773824698.344990841] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773824698.353886350] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1773824698.435650654] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[planner_server-12] [INFO] [1773824698.452522663] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1773824698.452646325] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1773824698.462733831] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1773824698.470374344] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1773824698.470480798] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1773824698.511702292] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773824698.512456223] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1773824698.522030707] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1773824698.534657079] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1773824698.553250149] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773824698.553773380] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1773824698.561442767] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773824698.562280111] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1773824698.584625336] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1773824698.590904399] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1773824698.590982563] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1773824698.595643809] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1773824698.599058809] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1773824698.599517584] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1773824698.603762637] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1773824698.623107306] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773824698.624198099] [collision_detector]: Configuring
+[collision_detector-18] [INFO] [1773824698.667042367] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1773824698.678349871] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1773824698.678380786] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1773824698.685520234] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1773824698.692647140] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773824698.693597064] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1773824698.704016475] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1773824698.844113440] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1773824698.908525961] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773824698.909517300] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1773824698.986416782] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1773824698.989556459] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773824698.990435219] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1773824698.990558589] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1773824698.990849954] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1773824698.990861912] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1773824698.990867453] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1773824698.990871536] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1773824698.990876203] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1773824698.990880578] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1773824698.990886994] [map_io]: mode: trinary
+[map_server-8] [INFO] [1773824698.990891952] [map_io]: negate: 0
+[map_server-8] [INFO] [1773824698.991099611] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1773824699.003666486] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1773824699.021171388] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773824699.022548879] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1773824699.055765874] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1773824699.056327020] [controller_server]: Activating
+[controller_server-10] [INFO] [1773824699.056410142] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1773824699.056448641] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1773824699.056639967] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1773824699.057386898] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1773824699.159087349] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1773824699.160440633] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1773824699.161026278] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1773824699.161381515] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773824699.161414181] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824699.272387543] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824699.272571578] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1773824699.273816366] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1773824699.273890738] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824699.384075754] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824699.384169084] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1773824699.384743063] [planner_server]: Activating
+[planner_server-12] [INFO] [1773824699.384831435] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1773824699.384869642] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1773824699.385062718] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1773824699.385811983] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1773824699.930607912] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1773824699.987095265] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773824699.988932406] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.095742088] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.095868375] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1773824700.096467436] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1773824700.096590515] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1773824700.096668387] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.204803353] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.205556992] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1773824700.206396087] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1773824700.206557372] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.315000327] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.315088407] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1773824700.315711384] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1773824700.315843796] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.424417121] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.424499368] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1773824700.425201384] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1773824700.425331171] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.562334541] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.562503118] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1773824700.564061436] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1773824700.704166568] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.811488105] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.811571227] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1773824700.812229203] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1773824700.812312908] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824700.918043171] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1773824700.918424365] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1773824700.920684407] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1773824700.921032061] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824701.030175866] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824701.030269487] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1773824701.031119664] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1773824701.031433486] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773824701.031535274] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1773824701.031669728] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773824701.031683144] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1773824701.031815556] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1773824701.055513773] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-10] [INFO] [1773824701.056239413] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1773824701.148656745] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1773824701.148750075] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1773824701.148782157] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [delivery_robot_main_controller-20]: process started with pid [32857]
+[INFO] [robot_sound-21]: process started with pid [32858]
+[INFO] [call_robot_button-22]: process started with pid [32859]
+[INFO] [rpc_run_node-23]: process started with pid [32860]
+[INFO] [dock_coordinates-24]: process started with pid [32861]
+[INFO] [autodock_action_server-25]: process started with pid [32862]
+[INFO] [battery_manager_node-26]: process started with pid [32863]
+[dock_coordinates-24] [INFO] [1773824701.718502718] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1773824701.728207572] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1773824701.728295360] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1773824701.728312568] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1773824701.728329192] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1773824701.728344942] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1773824701.728360400] [dock coordinates]: range_limit: 1.200000
+[rpc_run_node-23] [0m[INFO] [1773824703.388760405] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-18 16:05:03,389 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1773824703.402374616] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1773824703.410705187] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824703.751536151] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[robot_sound-21] [0m[INFO] [1773824703.802303838] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1773824703.806166239] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [0m[INFO] [1773824703.809948726] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1773824703.816636690] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [0m[INFO] [1773824703.929148246] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[autodock_action_server-25] [INFO] [1773824704.097520969] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1773824704.210842454] [autodock_action_server]: auto_dock_init_complete
+[autodock_action_server-25] [INFO] [1773824704.427349794] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824704.722983410] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824704.738705711] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824704.744075098] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773824704.764757009] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773824704.802435174] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[call_robot_button-22] 2026-03-18 16:05:05 mosquitto_pub -u smr -P smrbot25 -m "Office1,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773824705.720998199] [call_robot_button_node]: call_switch notified: station=Office1 status=blink.[0m
+[call_robot_button-22] 2026-03-18 16:05:05 mosquitto_pub -u smr -P smrbot25 -m "Production1,true" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1773824705.786056155] [call_robot_button_node]: call_switch notified: station=Production1 status=true.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824705.989576637] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [32996]
+[delivery_robot_main_controller-20] [0m[INFO] [1773824708.013919887] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824708.017295514] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824710.029030184] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824710.071206268] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824710.097510140] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1773824710.126156885] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824711.085976694] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824712.034242550] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824712.104991007] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824713.042295555] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.035869006] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.105774577] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.117957924] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.119499617] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.132487059] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.136731529] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824714.139212647] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824714.145534583] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824714.152699696] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824714.152812275] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773824714.251850199] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824714.362379660] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [WARN] [1773824714.754727868] [battery_manager]: Request stop charge for undock
+[delivery_robot_main_controller-20] [0m[INFO] [1773824715.042667890] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824715.153761415] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824715.154658840] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [WARN] [1773824715.254196079] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824716.019483953] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824716.024724428] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824716.050748019] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824716.165253627] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824716.167542544] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824716.253094877] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824717.110544009] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824717.201028828] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824718.060906288] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824719.054384367] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824720.037042008] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824721.037879735] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824722.076178052] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.059876905] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824723.394375726] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824723.395908087] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773824723.401402303] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.425882450] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.427004451] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.442388139] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.450912952] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824723.466291099] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824724.051149773] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824724.165742878] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824725.040611749] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824725.751896305] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824725.853743167] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.034818385] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.118453663] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.129251643] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.130559137] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.142069342] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.142945768] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824726.150312416] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824726.154417474] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824726.154899873] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824726.163919627] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824726.251508302] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824727.119930700] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824727.158670493] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824727.161230358] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824727.194745133] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824727.195898633] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824727.251470186] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824727.252362070] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824727.354764537] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824728.108358464] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824728.175758126] [main_controller_node]: Received feedback undock: 1[0m
+[battery_manager_node-26] [INFO] [1773824728.201718428] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824728.202463609] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824728.251482235] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824729.036765753] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824730.052471229] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824731.050489809] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824732.049108617] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824733.073432236] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.069205356] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824734.389736479] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824734.390457744] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773824734.390761650] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.486010087] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.486656105] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.493063204] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.503236166] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824734.526733141] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824735.049500875] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824736.083658843] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824736.175376492] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824737.077696319] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824737.754409429] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824737.856561655] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.036839485] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.100846022] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.111177936] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.113160030] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.125326461] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.127238558] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824738.135990280] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824738.141732112] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824738.146076328] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824738.175241929] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824738.251505309] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824739.110336891] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824739.148742738] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824739.151446098] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824739.270773655] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824739.274844006] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824739.751481093] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824739.752330395] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824739.854001389] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824740.039467488] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824740.153999637] [main_controller_node]: Received feedback undock: 1[0m
+[battery_manager_node-26] [WARN] [1773824740.251831271] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [WARN] [1773824740.754102004] [battery_manager]: Request stop charge for undock
+[delivery_robot_main_controller-20] [0m[INFO] [1773824741.038027090] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[battery_manager_node-26] [WARN] [1773824741.254091696] [battery_manager]: Request stop charge for undock
+[autodock_action_server-25] [INFO] [1773824741.327203733] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824741.357111016] [battery_manager]: IR state: CHARGING -> READY (10)
+[battery_manager_node-26] [INFO] [1773824741.751483024] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824742.042618721] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824743.094020559] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824744.039795090] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824745.043214264] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.087067461] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824746.369272068] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824746.369720051] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824746.371492153] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.385073699] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.387286784] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.411013584] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.422602244] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824746.433215315] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824747.147753585] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824748.035478069] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824748.134469036] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824749.037422339] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.034754069] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.098403619] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.109506671] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.110739793] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.121625270] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.122559736] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824750.127021490] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773824750.132567621] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824750.135548345] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824750.163769564] [main_controller_node]: Undock goal response callback triggered[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824751.092326473] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824751.143169116] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824751.143739595] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824752.091707087] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824752.179180266] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824753.080933113] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824754.036323834] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824755.041988759] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824756.042745698] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824757.044906960] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.096591995] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824758.319462103] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824758.320093830] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773824758.322433495] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.390230684] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.391016989] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.395357997] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.412270254] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824758.436706070] [main_controller_node]: Robot is in STANDBY mode.[0m
+[battery_manager_node-26] [INFO] [1773824758.757283566] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824758.863347774] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824759.046847237] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824759.251585674] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824759.252609095] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824759.356956908] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824759.753092268] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824759.756505519] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824759.860735794] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824760.036941232] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824760.132895768] [main_controller_node]: 4 pending queues [0m
+[battery_manager_node-26] [INFO] [1773824760.251479310] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824760.252395402] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824760.353959066] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824760.751487085] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824760.752405218] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824760.854114710] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824761.040522567] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824761.251464818] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824761.252379160] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773824761.351648367] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824761.353932325] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824761.355283275] [battery_manager]: IR state: READY -> CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.065065219] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.150728381] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.165356680] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.166574927] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.177494820] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.178352289] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824762.184170826] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773824762.189238349] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824762.190843916] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824762.216076536] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773824762.254180518] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824762.358487208] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824763.054393908] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824763.191772348] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824763.194875859] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [WARN] [1773824763.254255857] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824763.390650832] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824763.391538633] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824763.751499315] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824764.043244282] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824764.198183913] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824764.208961186] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824765.043373284] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824765.221993342] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824766.037644960] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824767.044273517] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824768.034853410] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824769.083314772] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824770.055170058] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.067234500] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824771.394689537] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824771.396242313] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773824771.397690677] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.428972242] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.429591720] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.442658784] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.453317353] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824771.473765648] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824772.042278752] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824772.180929979] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824773.041304129] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824773.254414260] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824773.357328583] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824773.751473100] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824773.752407274] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824773.854113850] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.035425018] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.107571382] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.118948300] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.120195129] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.133955460] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.134798054] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824774.140424099] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824774.146216387] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824774.146659996] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824774.173736465] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824774.251516457] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824775.053428159] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824775.149590646] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824775.152665284] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824775.584827162] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824775.585059903] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824775.751430409] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824775.752289044] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824775.855756639] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824776.036497619] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824776.217725081] [main_controller_node]: Received feedback undock: 1[0m
+[battery_manager_node-26] [WARN] [1773824776.254171583] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824776.814810267] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824776.820007286] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824777.044860946] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824777.253100713] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824778.045343728] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824779.043674088] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824780.039225550] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824781.073034405] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.074694602] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824782.348134946] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824782.348402977] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824782.348858253] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.373671763] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.374848303] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.376625071] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.384953309] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824782.407801641] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824783.054274106] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824784.044444514] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824784.159028286] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824785.040603495] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.041286936] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.099748509] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.113980447] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.118835061] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.134443325] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.137790952] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824786.140678930] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773824786.144135345] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824786.144892193] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824786.155251231] [main_controller_node]: Undock goal response callback triggered[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824787.067473362] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824787.147653391] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824787.148374365] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824788.057729809] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824788.176705046] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824789.035912572] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824790.037039622] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824791.037181749] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824792.043978883] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824793.045601457] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.063101200] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824794.341688397] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824794.342341415] [autodock_action_server]: finish undocking
+[battery_manager_node-26] [INFO] [1773824794.343775196] [battery_manager]: request_stop_charge received: True -> False
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.361152936] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.361856410] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.366234750] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.376167387] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824794.394612297] [main_controller_node]: Robot is in STANDBY mode.[0m
+[battery_manager_node-26] [INFO] [1773824794.753672929] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824794.857450554] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824795.040925809] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824795.251574363] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824795.254866285] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824795.358282548] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824795.753100499] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824795.756302299] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824795.860277667] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824796.037584689] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824796.107351140] [main_controller_node]: 4 pending queues [0m
+[battery_manager_node-26] [INFO] [1773824796.253075608] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824796.256286740] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824796.360025575] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824796.435539692] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824796.437124842] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824797.035467066] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.037168969] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.104876329] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.125021301] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.129650174] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.148816640] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.151819239] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824798.155075287] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773824798.159464418] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824798.160417841] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824798.165171251] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773824798.251787253] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824798.356055736] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [WARN] [1773824798.751817194] [battery_manager]: Request stop charge for undock
+[delivery_robot_main_controller-20] [0m[INFO] [1773824799.095945621] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824799.161133365] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824799.162188284] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824799.481634155] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824799.487523565] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824799.751971862] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824800.132456961] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824800.162933556] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824800.163491786] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824801.070210660] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824801.180630459] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824802.109891718] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824803.038108848] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824804.045375548] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824805.048003460] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824806.069380478] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.067465555] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824807.365556665] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824807.365827613] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824807.366174392] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.388155048] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.393619806] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.409528767] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.422085725] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824807.448829706] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824808.049532593] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824808.183783022] [main_controller_node]: 4 pending queues [0m
+[battery_manager_node-26] [INFO] [1773824808.754403925] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824808.858403792] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824809.042892552] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824809.253179161] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824809.256452416] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824809.360370911] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824809.753021566] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824809.756263906] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1773824809.845346735] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824809.860299647] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824809.864387497] [battery_manager]: IR state: READY -> CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.041634439] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.125336506] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.147490405] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.148727026] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.158169681] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.159055149] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824810.167976323] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824810.178182533] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824810.178206741] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824810.191170267] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773824810.254201798] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824810.357499357] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [INFO] [1773824810.970296052] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824810.971370513] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824811.098236212] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824811.180548829] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824811.182788164] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824811.252738067] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824812.090311134] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824812.188493922] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824813.054242126] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824814.050746719] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824815.038505132] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824816.034887522] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824817.100159353] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.093985378] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824818.402478691] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824818.403261787] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824818.405645784] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.432276894] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.435510193] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.444595569] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.460032630] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824818.474709635] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824819.124059287] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824820.037976815] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824820.136914408] [main_controller_node]: 4 pending queues [0m
+[battery_manager_node-26] [INFO] [1773824820.751848359] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824820.854009627] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824821.043510203] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824821.251507313] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824821.252494277] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824821.354863495] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824821.751492921] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824821.752423012] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824821.854241876] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.042913274] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.128507897] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.140881404] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.142716795] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.157184100] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.159710132] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824822.166512134] [autodock_action_server]: Executing goal...
+[delivery_robot_main_controller-20] [0m[INFO] [1773824822.168444647] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824822.172605703] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824822.176041411] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824822.253014099] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824822.283501193] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824822.297416393] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824822.751510803] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824822.752409979] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824822.854260049] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824823.043081942] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824823.176950885] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824823.177764897] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824823.299732816] [battery_manager]: IR state: CHARGING -> IDLE (0)
+[autodock_action_server-25] [INFO] [1773824823.306568358] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1773824823.753086711] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824824.097842491] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824824.179063732] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824824.179735707] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824824.199654646] [battery_manager]: IR state: IDLE -> READY (10)
+[autodock_action_server-25] [INFO] [1773824824.200910517] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824825.064430469] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824825.194463844] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824826.049080996] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824827.089511318] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824828.044471846] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824829.115653212] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824830.038616450] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.044209337] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824831.389974538] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824831.391358154] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824831.393811273] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.410011014] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.414672261] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.430972915] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.446063197] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824831.594272866] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824832.162548563] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824832.245017800] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824833.051441129] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824833.251957845] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824833.355983087] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824833.753344569] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824833.757130264] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824833.859313698] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.061869673] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.119822889] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.131206514] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.132505259] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.142735093] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.143587312] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824834.148490633] [autodock_action_server]: Executing goal...
+[autodock_action_server-25] [INFO] [1773824834.153824730] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824834.154981438] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824834.174586555] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824834.253559128] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824834.477790102] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824834.479958856] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824834.753484655] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824834.757095648] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824834.862833493] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824835.073787995] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824835.154739162] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824835.155423096] [autodock_action_server]: Published request_stop_charge: (True)
+[autodock_action_server-25] [INFO] [1773824835.513614301] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824835.513862209] [battery_manager]: IR state: CHARGING -> READY (10)
+[battery_manager_node-26] [INFO] [1773824835.751514026] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824836.090133655] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824836.159369292] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824836.161702249] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824837.048934126] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824837.170927711] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824838.051195426] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824839.043564046] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824840.037521899] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824841.086091174] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824842.069619117] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.076298714] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824843.371361559] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824843.371801084] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824843.373759263] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.409488874] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.415282329] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.430003083] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.441653282] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824843.461448559] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824844.053858499] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824844.179321916] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824845.046394821] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824845.251845482] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824845.355120292] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824845.751645306] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824845.752620312] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824845.856969874] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.041745040] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.097133725] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.112049014] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.113646413] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.127425410] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.128380875] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824846.139051402] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824846.151117211] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824846.153212760] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824846.165557100] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [INFO] [1773824846.253310853] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824846.790192696] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824846.794026806] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824847.062278589] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824847.154185815] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824847.155094907] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824847.251556633] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [WARN] [1773824847.252513556] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824847.354211091] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824848.043580905] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824848.157848230] [autodock_action_server]: Attempt 2: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824848.162106700] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [WARN] [1773824848.254189211] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824848.829955217] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824848.836018746] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824849.049898848] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824849.162880846] [autodock_action_server]: Confirm: Robot stop charge (after 3 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824849.163407868] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824849.253112216] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824850.053896668] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824850.167776383] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824851.043024115] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824852.037903893] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824853.069177966] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824854.051689488] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824855.042875151] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.074896447] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824856.359579838] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824856.359646043] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824856.361580598] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.382218177] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.382993690] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.388405368] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.401229191] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824856.414782737] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824857.070325996] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824858.045347791] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824858.105014778] [main_controller_node]: 4 pending queues [0m
+[battery_manager_node-26] [INFO] [1773824858.751888270] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824858.853858211] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824859.038917159] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824859.251476060] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824859.252461565] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824859.354079770] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824859.753052943] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824859.756454236] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824859.859082153] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824860.004330347] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1773824860.005912580] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.095477808] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.170912011] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.183029443] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.184295813] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.193856881] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.194714641] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824860.202520523] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824860.212886269] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824860.222947818] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824860.248629005] [main_controller_node]: Undock goal response callback triggered[0m
+[battery_manager_node-26] [WARN] [1773824860.251756724] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824860.354693213] [battery_manager]: State change: CHARGING -> COOLDOWN
+[battery_manager_node-26] [WARN] [1773824860.754751931] [battery_manager]: Request stop charge for undock
+[delivery_robot_main_controller-20] [0m[INFO] [1773824861.040468659] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[autodock_action_server-25] [WARN] [1773824861.225602270] [autodock_action_server]: Attempt 1: IR state = CHARGING, want Stop Charge
+[autodock_action_server-25] [INFO] [1773824861.227839272] [autodock_action_server]: Published request_stop_charge: (True)
+[autodock_action_server-25] [INFO] [1773824861.430713735] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1773824861.432970277] [battery_manager]: IR state: CHARGING -> IDLE (0)
+[battery_manager_node-26] [INFO] [1773824861.753224036] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824862.050503175] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824862.231009664] [autodock_action_server]: Confirm: Robot stop charge (after 2 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824862.233037839] [autodock_action_server]: Stop charging successfully
+[battery_manager_node-26] [INFO] [1773824862.253034942] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[battery_manager_node-26] [INFO] [1773824862.347277749] [battery_manager]: IR state: IDLE -> READY (10)
+[autodock_action_server-25] [INFO] [1773824862.348994728] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1773824862.751481774] [battery_manager]: State change: UNKNOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824863.069201916] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824863.238751763] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824864.062803949] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824865.034733315] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824866.076696873] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824867.071987594] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824868.053247620] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.060730437] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824869.455947665] [autodock_action_server]: Published request_stop_charge: (False)
+[battery_manager_node-26] [INFO] [1773824869.458267497] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824869.464396065] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.500720946] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.505653433] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.525812988] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.537171823] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824869.662964227] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824870.072756964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824870.155028167] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824871.035624578] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824871.254429293] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824871.357183789] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1773824871.751490466] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824871.752413558] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1773824871.853977514] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.037323565] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.089550991] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.101947246] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.103226741] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.114706613] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.115984067] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824872.125297518] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824872.131603413] [battery_manager]: request_stop_charge received: False -> True
+[delivery_robot_main_controller-20] [0m[INFO] [1773824872.143267611] [main_controller_node]: Undock goal response callback triggered[0m
+[autodock_action_server-25] [INFO] [1773824872.143572392] [autodock_action_server]: Published request_stop_charge: (True)
+[battery_manager_node-26] [INFO] [1773824872.251480158] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1773824872.711768175] [battery_manager]: IR state: READY -> IDLE (0)
+[autodock_action_server-25] [INFO] [1773824872.713700980] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1773824872.753395071] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824873.039194046] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824873.144433160] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824873.144966015] [autodock_action_server]: Stop charging successfully
+[autodock_action_server-25] [INFO] [1773824873.625423212] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824873.627868165] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[battery_manager_node-26] [INFO] [1773824873.751468774] [battery_manager]: State change: UNKNOWN -> CHARGING
+[battery_manager_node-26] [WARN] [1773824873.752313410] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824873.854724627] [battery_manager]: State change: CHARGING -> COOLDOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1773824874.045298497] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824874.149738765] [main_controller_node]: Received feedback undock: 1[0m
+[battery_manager_node-26] [WARN] [1773824874.251782204] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [WARN] [1773824874.754121476] [battery_manager]: Request stop charge for undock
+[battery_manager_node-26] [INFO] [1773824874.857200002] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1773824874.865181460] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824875.047002151] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824875.251474598] [battery_manager]: State change: COOLDOWN -> IDLE_ON_DOCK
+[delivery_robot_main_controller-20] [0m[INFO] [1773824876.071625592] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824877.083172053] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824878.043130690] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824879.039369002] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.042342526] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1773824880.354794486] [battery_manager]: request_stop_charge received: True -> False
+[autodock_action_server-25] [INFO] [1773824880.355963735] [autodock_action_server]: Published request_stop_charge: (False)
+[autodock_action_server-25] [INFO] [1773824880.361799480] [autodock_action_server]: finish undocking
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.371045559] [main_controller_node]: Undock successful. Proceeding to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.371634995] [main_controller_node]: Dock State change: UNDOCKING -> IDLE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.388747912] [main_controller_node]: State change: DOCK -> STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.403706949] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824880.452621162] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824881.065646515] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824882.050418371] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824882.105569939] [main_controller_node]: 4 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824883.047865305] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.037565856] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.127312202] [main_controller_node]: State change: STANDBY -> DOCK[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.142180825] [main_controller_node]: Robot is UNDOCKING.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.143454487] [main_controller_node]: Dock State change: DOCKED -> UNDOCKING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.152486199] [main_controller_node]: Sending autodock UNDOCK goal...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.153376625] [main_controller_node]: Undock goal sent (future created)[0m
+[autodock_action_server-25] [INFO] [1773824884.160972805] [autodock_action_server]: Executing goal...
+[battery_manager_node-26] [INFO] [1773824884.168229790] [battery_manager]: request_stop_charge received: False -> True
+[autodock_action_server-25] [INFO] [1773824884.175502816] [autodock_action_server]: Published request_stop_charge: (True)
+[delivery_robot_main_controller-20] [0m[INFO] [1773824884.185344165] [main_controller_node]: Undock goal response callback triggered[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824885.114684754] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1773824885.178972739] [autodock_action_server]: Confirm: Robot stop charge (after 1 attempt(s)) ✅
+[autodock_action_server-25] [INFO] [1773824885.181186700] [autodock_action_server]: Stop charging successfully
+[delivery_robot_main_controller-20] [0m[INFO] [1773824886.049011786] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824886.187576099] [main_controller_node]: Received feedback undock: 1[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1773824887.036657037] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[bash-27] 4
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> 
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[bash-27] queue action->Request :  current state-> STANDBY : previous state-> DOCK
+[bash-27] queue action->Request :  current state-> DOCK : previous state-> STANDBY
+[INFO] [bash-27]: process has finished cleanly [pid 32996]
+[INFO] [battery_manager_node-26]: sending signal 'SIGINT' to process[battery_manager_node-26]
+[INFO] [autodock_action_server-25]: sending signal 'SIGINT' to process[autodock_action_server-25]
+[INFO] [dock_coordinates-24]: sending signal 'SIGINT' to process[dock_coordinates-24]
+[INFO] [rpc_run_node-23]: sending signal 'SIGINT' to process[rpc_run_node-23]
+[INFO] [call_robot_button-22]: sending signal 'SIGINT' to process[call_robot_button-22]
+[INFO] [robot_sound-21]: sending signal 'SIGINT' to process[robot_sound-21]
+[INFO] [delivery_robot_main_controller-20]: sending signal 'SIGINT' to process[delivery_robot_main_controller-20]
+[INFO] [dock_coordinates-24]: process has finished cleanly [pid 32861]
+[INFO] [lifecycle_manager-19]: sending signal 'SIGINT' to process[lifecycle_manager-19]
+[INFO] [collision_detector-18]: sending signal 'SIGINT' to process[collision_detector-18]
+[INFO] [collision_monitor-17]: sending signal 'SIGINT' to process[collision_monitor-17]
+[INFO] [velocity_smoother-16]: sending signal 'SIGINT' to process[velocity_smoother-16]
+[INFO] [waypoint_follower-15]: sending signal 'SIGINT' to process[waypoint_follower-15]
+[INFO] [bt_navigator-14]: sending signal 'SIGINT' to process[bt_navigator-14]
+[INFO] [behavior_server-13]: sending signal 'SIGINT' to process[behavior_server-13]
+[INFO] [planner_server-12]: sending signal 'SIGINT' to process[planner_server-12]
+[INFO] [smoother_server-11]: sending signal 'SIGINT' to process[smoother_server-11]
+[INFO] [controller_server-10]: sending signal 'SIGINT' to process[controller_server-10]
+[INFO] [costmap_filter_info_server-9]: sending signal 'SIGINT' to process[costmap_filter_info_server-9]
+[INFO] [map_server-8]: sending signal 'SIGINT' to process[map_server-8]
+[INFO] [taskset-7]: sending signal 'SIGINT' to process[taskset-7]
+[INFO] [robot_hardware-6]: sending signal 'SIGINT' to process[robot_hardware-6]
+[INFO] [ekf_node-5]: sending signal 'SIGINT' to process[ekf_node-5]
+[INFO] [scan_to_scan_filter_chain-4]: sending signal 'SIGINT' to process[scan_to_scan_filter_chain-4]
+[INFO] [rplidar_node-3]: sending signal 'SIGINT' to process[rplidar_node-3]
+[INFO] [joint_state_publisher-2]: sending signal 'SIGINT' to process[joint_state_publisher-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[delivery_robot_main_controller-20] [0m[INFO] [1773824888.065179335] [main_controller_node]: Current state: DOCK, dock_state UNDOCKING, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] Traceback (most recent call last):
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node", line 33, in <module>
+[battery_manager_node-26]     sys.exit(load_entry_point('battery-management==0.0.0', 'console_scripts', 'battery_manager_node')())
+[battery_manager_node-26]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/python3.12/site-packages/battery_management/battery_manager_node.py", line 311, in main
+[battery_manager_node-26]     rclpy.spin(node)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[battery_manager_node-26]     executor.spin_once()
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 845, in spin_once
+[battery_manager_node-26]     self._spin_once_impl(timeout_sec)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 829, in _spin_once_impl
+[battery_manager_node-26]     handler, entity, node = self.wait_for_ready_callbacks(
+[battery_manager_node-26]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[battery_manager_node-26]     return next(self._cb_iter)
+[battery_manager_node-26]            ^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[battery_manager_node-26]     wait_set.wait(timeout_nsec)
+[battery_manager_node-26] KeyboardInterrupt
+[dock_coordinates-24] [INFO] [1773824888.623888132] [rclcpp]: signal_handler(signum=2)
+[rpc_run_node-23] [0m[INFO] [1773824888.636314136] [rpc_run_node]: RPC run node stopped by user.[0m
+[rpc_run_node-23] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[call_robot_button-22] [0m[INFO] [1773824888.648164703] [call_robot_button_node]: CallRobotButton interrupted by user.[0m
+[call_robot_button-22] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[autodock_action_server-25] [ERROR] [1773824888.646990204] [autodock_action_server.action_server]: Error raised in execute callback: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[autodock_action_server-25] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/action/server.py", line 337, in _execute_goal
+[autodock_action_server-25]     execute_result = await await_or_execute(execute_callback, goal_handle)
+[autodock_action_server-25]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 111, in await_or_execute
+[autodock_action_server-25]     return callback(*args)
+[autodock_action_server-25]            ^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 342, in execute_callback
+[autodock_action_server-25]     success = self.undock_robot(goal_handle)
+[autodock_action_server-25]               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1359, in undock_robot
+[autodock_action_server-25]     self.move_open_loop(self.undock_speed_step1,self.undock_time_step1)
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 779, in move_open_loop
+[autodock_action_server-25]     self.pub.publish(twist)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/publisher.py", line 70, in publish
+[autodock_action_server-25]     self.__publisher.publish(msg)
+[autodock_action_server-25] rclpy._rclpy_pybind11.RCLError: Failed to publish: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[autodock_action_server-25] [WARN] [1773824888.649039380] [autodock_action_server.action_server]: Goal state not set, assuming aborted. Goal ID: [ 11  30  25   9 249 227  66 170 178  53 129 203 248 243  47  44]
+[autodock_action_server-25] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[rpc_run_node-23] 2026-03-18 16:08:08,649 [INFO] RPCServer stopped.
+[delivery_robot_main_controller-20] [0m[INFO] [1773824888.712850215] [main_controller_node]: Node stopped by user.[0m
+[delivery_robot_main_controller-20] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[lifecycle_manager-19] [INFO] [1773824888.734124188] [rclcpp]: signal_handler(signum=2)
+[lifecycle_manager-19] [INFO] [1773824888.734356346] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-19] [INFO] [1773824888.734664335] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[collision_detector-18] [INFO] [1773824888.769778260] [rclcpp]: signal_handler(signum=2)
+[collision_detector-18] [INFO] [1773824888.769979211] [collision_detector]: Running Nav2 LifecycleNode rcl preshutdown (collision_detector)
+[collision_detector-18] [INFO] [1773824888.770107540] [collision_detector]: Deactivating
+[collision_detector-18] [INFO] [1773824888.770151580] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_detector-18] [INFO] [1773824888.790704871] [collision_detector]: Cleaning up
+[collision_detector-18] [INFO] [1773824888.790936737] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_detector-18] [INFO] [1773824888.790951320] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_detector-18] [INFO] [1773824888.790960361] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_detector-18] [INFO] [1773824888.790967069] [collision_monitor]: [scan]: Destroying Scan
+[collision_detector-18] [INFO] [1773824888.812311331] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_monitor-17] [INFO] [1773824888.802108912] [rclcpp]: signal_handler(signum=2)
+[collision_monitor-17] [INFO] [1773824888.802350987] [collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[collision_monitor-17] [INFO] [1773824888.802691349] [collision_monitor]: Deactivating
+[collision_monitor-17] [INFO] [1773824888.803325701] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1773824888.826442940] [rclcpp]: signal_handler(signum=2)
+[velocity_smoother-16] [INFO] [1773824888.826791469] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-16] [INFO] [1773824888.827204746] [velocity_smoother]: Deactivating
+[velocity_smoother-16] [INFO] [1773824888.827402488] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1773824888.851644353] [velocity_smoother]: Cleaning up
+[velocity_smoother-16] [INFO] [1773824888.851895468] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[collision_monitor-17] [INFO] [1773824888.838188219] [collision_monitor]: Cleaning up
+[collision_monitor-17] [INFO] [1773824888.838376629] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_monitor-17] [INFO] [1773824888.838465001] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773824888.839000481] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773824888.839171392] [collision_monitor]: [FootprintApproach]: Destroying Polygon
+[collision_monitor-17] [INFO] [1773824888.839393634] [collision_monitor]: [scan]: Destroying Scan
+[collision_monitor-17] [INFO] [1773824888.862927649] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1773824888.890019867] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1773824888.890368105] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-15] [INFO] [1773824888.890654511] [waypoint_follower]: Deactivating
+[waypoint_follower-15] [INFO] [1773824888.890784006] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1773824888.921883578] [waypoint_follower]: Cleaning up
+[bt_navigator-14] [INFO] [1773824888.938540053] [rclcpp]: signal_handler(signum=2)
+[bt_navigator-14] [INFO] [1773824888.938652924] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-14] [INFO] [1773824888.938781544] [bt_navigator]: Deactivating
+[bt_navigator-14] [INFO] [1773824888.938828209] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[behavior_server-13] [INFO] [1773824888.970936328] [rclcpp]: signal_handler(signum=2)
+[behavior_server-13] [INFO] [1773824888.971124446] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-13] [INFO] [1773824888.971264149] [behavior_server]: Deactivating
+[behavior_server-13] [INFO] [1773824888.971307314] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[collision_detector-18] [INFO] [1773824888.973133956] [collision_detector]: Destroying
+[bt_navigator-14] [INFO] [1773824888.989540481] [bt_navigator]: Cleaning up
+[behavior_server-13] [INFO] [1773824888.992283506] [behavior_server]: Cleaning up
+[behavior_server-13] [INFO] [1773824889.001479420] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[planner_server-12] [INFO] [1773824889.001881614] [rclcpp]: signal_handler(signum=2)
+[planner_server-12] [INFO] [1773824889.002124272] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-12] [INFO] [1773824889.002368388] [planner_server]: Deactivating
+[planner_server-12] [INFO] [1773824889.002510424] [global_costmap.global_costmap]: Deactivating
+[collision_monitor-17] [INFO] [1773824889.008065596] [collision_monitor]: Destroying
+[velocity_smoother-16] [INFO] [1773824889.029043247] [velocity_smoother]: Destroying
+[smoother_server-11] [INFO] [1773824889.054564606] [rclcpp]: signal_handler(signum=2)
+[smoother_server-11] [INFO] [1773824889.054875803] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-11] [INFO] [1773824889.055237456] [smoother_server]: Deactivating
+[smoother_server-11] [INFO] [1773824889.055382701] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1773824889.066422756] [smoother_server]: Cleaning up
+[controller_server-10] [INFO] [1773824889.119873678] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1773824889.120011048] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-10] [INFO] [1773824889.120136169] [controller_server]: Deactivating
+[controller_server-10] [INFO] [1773824889.120188375] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773824889.120208499] [local_costmap.local_costmap]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1773824889.132818539] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1773824889.133206149] [keepout_costmap_filter_info_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_costmap_filter_info_server)
+[costmap_filter_info_server-9] [INFO] [1773824889.133348186] [keepout_costmap_filter_info_server]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1773824889.133732880] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[map_server-8] [INFO] [1773824889.138677616] [rclcpp]: signal_handler(signum=2)
+[map_server-8] [INFO] [1773824889.139398006] [keepout_filter_mask_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_filter_mask_server)
+[map_server-8] [INFO] [1773824889.140163604] [keepout_filter_mask_server]: Deactivating
+[map_server-8] [INFO] [1773824889.140856870] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[taskset-7] [INFO] [1773824889.145922060] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1773824889.154116135] [keepout_costmap_filter_info_server]: Cleaning up
+[costmap_filter_info_server-9] [INFO] [1773824889.154218798] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1773824889.159734597] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[map_server-8] [INFO] [1773824889.161636777] [keepout_filter_mask_server]: Cleaning up
+[map_server-8] [INFO] [1773824889.161818187] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[robot_hardware-6] [INFO] [1773824889.166102906] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1773824889.171196095] [controller_server]: Cleaning up
+[controller_server-10] [INFO] [1773824889.171591580] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1773824889.171829280] [local_costmap.local_costmap]: Cleaning up
+[ekf_node-5] [INFO] [1773824889.179589080] [rclcpp]: signal_handler(signum=2)
+[taskset-7] Unregistering sensor: Custom Described Lidar
+[scan_to_scan_filter_chain-4] [INFO] [1773824889.210065091] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1773824889.245571878] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1773824889.259908812] [waypoint_follower]: Destroying
+[smoother_server-11] [INFO] [1773824889.249586231] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1773824889.302398718] [smoother_server]: Destroying
+[robot_state_publisher-1] [INFO] [1773824889.307005716] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1773824889.337507977] [keepout_costmap_filter_info_server]: Destroying
+[behavior_server-13] [INFO] [1773824889.341702865] [behavior_server]: Destroying
+[map_server-8] [INFO] [1773824889.351002026] [keepout_filter_mask_server]: Destroying
+[planner_server-12] [INFO] [1773824889.385690133] [planner_server]: Deactivating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773824889.385779380] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-12] [INFO] [1773824889.396036047] [planner_server]: Cleaning up
+[rplidar_node-3] [INFO] [1773824889.437170044] [rplidar_node]: Stop motor
+[planner_server-12] [INFO] [1773824889.483139407] [global_costmap.global_costmap]: Cleaning up
+[planner_server-12] [INFO] [1773824889.541639769] [planner_server]: Cleaning up plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1773824889.543122840] [planner_server]: Destroying plugin GridBased of type SmacPlanner2D
+[controller_server-10] [INFO] [1773824889.575677484] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1773824889.598578022] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[controller_server-10] [INFO] [1773824889.602740829] [local_costmap.local_costmap]: Destroying
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1409, in main
+[planner_server-12] [INFO] [1773824889.726262108] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[autodock_action_server-25]     executor.spin()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 312, in spin
+[autodock_action_server-25]     self.spin_once()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 917, in spin_once
+[autodock_action_server-25]     self._spin_once_impl(timeout_sec)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 896, in _spin_once_impl
+[autodock_action_server-25]     handler, entity, node = self.wait_for_ready_callbacks(
+[autodock_action_server-25]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[autodock_action_server-25]     return next(self._cb_iter)
+[autodock_action_server-25]            ^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[autodock_action_server-25]     wait_set.wait(timeout_nsec)
+[autodock_action_server-25] KeyboardInterrupt
+[autodock_action_server-25] 
+[autodock_action_server-25] During handling of the above exception, another exception occurred:
+[autodock_action_server-25] 
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server", line 33, in <module>
+[autodock_action_server-25]     sys.exit(load_entry_point('action-autodock==0.0.0', 'console_scripts', 'autodock_action_server')())
+[autodock_action_server-25]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1420, in main
+[autodock_action_server-25]     rclpy.shutdown()   
+[autodock_action_server-25]     ^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[autodock_action_server-25]     _shutdown(context=context)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[autodock_action_server-25]     context.shutdown()
+[controller_server-10] [INFO] [1773824889.740772286] [controller_server]: Destroying
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[autodock_action_server-25]     self.__context.shutdown()
+[autodock_action_server-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[planner_server-12] [INFO] [1773824889.809315532] [global_costmap.global_costmap]: Destroying
+[delivery_robot_main_controller-20] Traceback (most recent call last):
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller", line 33, in <module>
+[delivery_robot_main_controller-20]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'delivery_robot_main_controller')())
+[delivery_robot_main_controller-20]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 1714, in main
+[delivery_robot_main_controller-20]     rclpy.shutdown()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[delivery_robot_main_controller-20]     _shutdown(context=context)
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[delivery_robot_main_controller-20]     context.shutdown()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[delivery_robot_main_controller-20]     self.__context.shutdown()
+[delivery_robot_main_controller-20] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[call_robot_button-22] Traceback (most recent call last):
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button", line 33, in <module>
+[call_robot_button-22]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'call_robot_button')())
+[call_robot_button-22]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/call_button.py", line 251, in main
+[call_robot_button-22]     rclpy.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[call_robot_button-22]     _shutdown(context=context)
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[call_robot_button-22]     context.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[call_robot_button-22]     self.__context.shutdown()
+[call_robot_button-22] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[planner_server-12] [INFO] [1773824889.998680780] [planner_server]: Destroying
+[rpc_run_node-23] Traceback (most recent call last):
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node", line 33, in <module>
+[rpc_run_node-23]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'rpc_run_node')())
+[rpc_run_node-23]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/rpc_run_node.py", line 57, in main
+[rpc_run_node-23]     rclpy.shutdown()
+[robot_sound-21] Traceback (most recent call last):
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 364, in main
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[bt_navigator-14] [INFO] [1773824890.148848335] [bt_navigator]: Completed Cleaning up
+[rpc_run_node-23]     _shutdown(context=context)
+[bt_navigator-14] [INFO] [1773824890.149654764] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[robot_sound-21]     rclpy.spin(node)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[robot_sound-21]     executor.spin_once()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 845, in spin_once
+[robot_sound-21]     self._spin_once_impl(timeout_sec)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 840, in _spin_once_impl
+[robot_sound-21]     raise handler.exception()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/task.py", line 269, in __call__
+[robot_sound-21]     self._handler.send(None)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 516, in handler
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[rpc_run_node-23]     context.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-21]     call_coroutine = take_from_wait_list(entity)
+[robot_sound-21]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 402, in _take_subscription
+[robot_sound-21]     msg_info = sub.handle.take_message(sub.msg_type, sub.raw)
+[robot_sound-21]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21] RuntimeError: Unable to convert call argument '0' to Python object (#define PYBIND11_DETAILED_ERROR_MESSAGES or compile in debug mode for details)
+[robot_sound-21] 
+[robot_sound-21] During handling of the above exception, another exception occurred:
+[robot_sound-21] 
+[robot_sound-21] Traceback (most recent call last):
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound", line 33, in <module>
+[robot_sound-21]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'robot_sound')())
+[robot_sound-21]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 369, in main
+[robot_sound-21]     rclpy.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[robot_sound-21]     _shutdown(context=context)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[robot_sound-21]     context.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-21]     self.__context.shutdown()
+[robot_sound-21] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[rpc_run_node-23]     self.__context.shutdown()
+[rpc_run_node-23] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[autodock_action_server-25] The following exception was never retrieved: Failed get goal status array: feedback publisher is invalid, at ./src/rcl_action/action_server.c:1002
+[ERROR] [call_robot_button-22]: process has died [pid 32859, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button --ros-args -r __node:=call_robot_button_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [battery_manager_node-26]: process has died [pid 32863, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node --ros-args -r __node:=battery_manager -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/share/battery_management/config/battery_manager.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [collision_monitor-17]: process has finished cleanly [pid 32641]
+[ERROR] [rpc_run_node-23]: process has died [pid 32860, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node --ros-args -r __node:=rpc_run_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[bt_navigator-14] [INFO] [1773824890.462779283] [bt_navigator]: Destroying
+[ERROR] [robot_sound-21]: process has died [pid 32858, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound --ros-args -r __node:=robot_sound_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [velocity_smoother-16]: process has finished cleanly [pid 32629]
+[INFO] [robot_hardware-6]: process has finished cleanly [pid 32594]
+[INFO] [waypoint_follower-15]: process has finished cleanly [pid 32625]
+[INFO] [collision_detector-18]: process has finished cleanly [pid 32642]
+[INFO] [costmap_filter_info_server-9]: process has finished cleanly [pid 32597]
+[INFO] [smoother_server-11]: process has finished cleanly [pid 32603]
+[INFO] [map_server-8]: process has finished cleanly [pid 32596]
+[INFO] [behavior_server-13]: process has finished cleanly [pid 32609]
+[INFO] [joint_state_publisher-2]: process has finished cleanly [pid 32590]
+[INFO] [lifecycle_manager-19]: process has finished cleanly [pid 32645]
+[INFO] [controller_server-10]: process has finished cleanly [pid 32598]
+[INFO] [planner_server-12]: process has finished cleanly [pid 32608]
+[ERROR] [autodock_action_server-25]: process has died [pid 32862, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server --ros-args -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config/auto_dock_config.yaml --params-file /tmp/launch_params_02ojohr1 -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 32589]
+[INFO] [rplidar_node-3]: process has finished cleanly [pid 32591]
+[INFO] [scan_to_scan_filter_chain-4]: process has finished cleanly [pid 32592]
+[INFO] [ekf_node-5]: process has finished cleanly [pid 32593]
+[INFO] [taskset-7]: process has finished cleanly [pid 32595]
+[INFO] [bt_navigator-14]: process has finished cleanly [pid 32618]
+[ERROR] [delivery_robot_main_controller-20]: process has died [pid 32857, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller --ros-args -r __node:=main_controller_node -r __ns:=/ --params-file /tmp/launch_params_u8hmsxj4 -r /tf:=tf -r /tf_static:=tf_static'].

@@ -70,8 +70,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         # self.passwd_ui = Ui_mpPasswdDialog()
         self.ui.setupUi(self)
-        self.setWindowFlags(Qt.FramelessWindowHint) # Remove title bar
-        # self.setWindowFlags(self.windowFlags() | QtCore.Qt.WindowStaysOnTopHint)        
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint) # Remove title bar and keep on top
         self.w = None
         
         self.doorA_state = 0

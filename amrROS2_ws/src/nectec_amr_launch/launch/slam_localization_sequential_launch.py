@@ -65,7 +65,7 @@ def generate_launch_description():
     )
 
     delayed_ui_launch = TimerAction(
-        period=10.0,
+        period=13.0,
         actions=[ui_action]
     )
 

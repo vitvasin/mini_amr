@@ -2,7 +2,7 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import ReentrantCallbackGroup
 from enum import Enum, auto
-from geometry_msgs.msg import PoseStamped, Vector3
+from geometry_msgs.msg import PoseStamped, Vector3, Twist
 from .robot_navigator import BasicNavigator, NavigationResult
 from rclpy.duration import Duration
 from rclpy.action import ActionClient
@@ -26,6 +26,7 @@ from sensor_msgs.msg import BatteryState
 from . import api_client
 
 import signal
+import threading
 TaskResult = NavigationResult
 
 
@@ -187,6 +188,7 @@ class DeliveryRobotMainController(Node):
 
         # Add sound publisher
         self.sound_publisher = self.create_publisher(String, '/robot_sound_command', 10)
+        self.cmd_vel_pub = self.create_publisher(Twist, 'cmd_vel', 10)
         #time.sleep(2.0)
         #self.send_goal_pose(1.0,0.0,0.0) #test
         self.on_standby()
@@ -769,7 +771,7 @@ class DeliveryRobotMainController(Node):
         if state == RobotState.STANDBY:
             self.get_logger().info("Pause cleared to STANDBY via API/GUI.")
             self._cancel_pause_monitor_timer()
-            self.change_state(RobotState.STANDBY)
+            threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
         elif state != RobotState.PAUSED:
             self.get_logger().info(f"Pause state changed to {state.name}; switching.")
             self._cancel_pause_monitor_timer()
@@ -799,7 +801,7 @@ class DeliveryRobotMainController(Node):
         if state == RobotState.STANDBY:
             self.get_logger().info("SAFE_STOP cleared to STANDBY via API/GUI.")
             self._cancel_safestop_monitor_timer()
-            self.change_state(RobotState.STANDBY)
+            threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
         elif state != RobotState.SAFE_STOP:
             self.get_logger().info(f"SAFE_STOP state changed to {state.name}; switching.")
             self._cancel_safestop_monitor_timer()
@@ -810,6 +812,36 @@ class DeliveryRobotMainController(Node):
             self._safestop_monitor_timer.cancel()
             self._safestop_monitor_timer = None
 
+    def _pre_resume_wiggle_then_standby(self):
+        """หน่วงเวลา 3 วินาที แล้วทำ wiggle ก่อนเปลี่ยนสถานะเป็น STANDBY"""
+        self.get_logger().info("Pre-resume: waiting 3 seconds before wiggle...")
+        time.sleep(3.0)
+
+        twist = Twist()
+        speed = 0.3  # rad/sec
+
+        def rotate(angular_z, angle_rad):
+            duration = abs(angle_rad) / speed
+            twist.angular.z = angular_z
+            end_time = time.time() + duration
+            while time.time() < end_time:
+                self.cmd_vel_pub.publish(twist)
+                time.sleep(0.05)
+            twist.angular.z = 0.0
+            self.cmd_vel_pub.publish(twist)
+            time.sleep(0.1)
+
+        self.get_logger().info("Pre-resume wiggle: หมุนตามเข็ม 0.5 rad")
+        rotate(-speed, 0.3)   # หมุนตามเข็ม (CW) 0.3 rad
+
+        self.get_logger().info("Pre-resume wiggle: หมุนทวนเข็ม 1.0 rad")
+        rotate(+speed, 0.6)   # หมุนทวนเข็ม (CCW) 0.6 rad
+
+        self.get_logger().info("Pre-resume wiggle: หมุนซ้าย 0.5 rad")
+        rotate(+speed, 0.3)   # หมุนซ้าย (CCW) 0.3 rad
+
+        self.get_logger().info("Pre-resume wiggle complete. Switching to STANDBY.")
+        self.change_state(RobotState.STANDBY)
 
     def change_dock_state(self, new_state: DockState):
         if not isinstance(new_state, DockState):

@@ -27,7 +27,7 @@ class LauncherApp(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("AMR Control Panel")
-        self.setWindowFlags(Qt.FramelessWindowHint) # Remove title bar
+        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnBottomHint) # Remove title bar
         self.resize(1280, 800) # Larger default size for modern screens
 
         # Global stylesheet for Dialogs (QMessageBox)

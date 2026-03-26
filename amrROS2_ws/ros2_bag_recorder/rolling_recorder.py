@@ -15,7 +15,7 @@ class RollingRecorder(Node):
         super().__init__('rolling_recorder')
 
         # --- CONFIGURATION ---
-        self.declare_parameter('bag_dir', './robot_recordings')
+        self.declare_parameter('bag_dir', '/media/smr/LaCie/ROS_LOG/rosbag/robot_recordings')
         self.declare_parameter('chunk_duration_sec', 300)
         self.declare_parameter('keep_buffer_sec', 600)
         self.declare_parameter('min_disk_space_gb', 1.0)

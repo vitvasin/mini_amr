@@ -2,13 +2,21 @@ import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import ReentrantCallbackGroup
 from enum import Enum, auto
-from geometry_msgs.msg import PoseStamped, Vector3
+from geometry_msgs.msg import PoseStamped, Vector3, Twist
 from .robot_navigator import BasicNavigator, NavigationResult
 from rclpy.duration import Duration
 from rclpy.action import ActionClient
 from custom_interface.action import Autodock
 from std_srvs.srv import SetBool
 from .generate_agv_path_from_building_yaml import compute_path_poses
+from .generate_agv_path_from_db import compute_path_poses_from_db
+
+# ---------------------------------------------------------------------------
+# Path-source flag
+#   True  → use station/route database (recommended)
+#   False → use building YAML file (legacy)
+# ---------------------------------------------------------------------------
+USE_DB_ROUTES = False
 import tf2_ros
 import tf2_geometry_msgs 
 
@@ -26,6 +34,7 @@ from sensor_msgs.msg import BatteryState
 from . import api_client
 
 import signal
+import threading
 TaskResult = NavigationResult
 
 
@@ -91,9 +100,10 @@ class DeliveryRobotMainController(Node):
         self.retry_move_no = 0
         self.status_id = None
         self.load_out_loop_counter = 0
-        self.safestop_loop_counter = 0 
+        self.safestop_loop_counter = 0
         self.replan_on_blocked_lane = False  # True=replan on blocked lane, False=stop with FAILED
         self.blocked_lanes = set()
+        self._obstacle_retry_count = 0  # จำนวนครั้งที่ FAILED แล้ว wiggle retry (reset เมื่อ SUCCEEDED หรือ SAFE_STOP)
         self._last_vertex_map = None
         self._last_path_nodes = None
         self._last_start_vertex = None
@@ -116,8 +126,7 @@ class DeliveryRobotMainController(Node):
         )
 
         # Example publisher (placeholder for /cmd_vel or similar)
-        # self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
-
+        self.cmd_vel_pub = self.create_publisher(Twist, '/cmd_vel', 10)
         # Example timer to periodically print state (can remove later)
         self.batt_percentage = 80  # battery state of charge
         self._last_activity_time = self.get_clock().now()
@@ -189,6 +198,7 @@ class DeliveryRobotMainController(Node):
         self.sound_publisher = self.create_publisher(String, '/robot_sound_command', 10)
         #time.sleep(2.0)
         #self.send_goal_pose(1.0,0.0,0.0) #test
+        self.clear_request_queues_on_startup()
         self.on_standby()
 
         # TODO: Add action clients / services / subscribers as needed
@@ -223,10 +233,13 @@ class DeliveryRobotMainController(Node):
             current_pose.pose.orientation = transform.transform.rotation
             self.current_pose =  current_pose
             #status_id = self._get_status_id_for('update robot pose')
-            api_client.update_status('pose_x',current_pose.pose.position.x)
-            api_client.update_status('pose_y',current_pose.pose.position.y)
-            yaw = degrees(self.calculate_heading(current_pose.pose))
-            api_client.update_status('pose_yaw',yaw)
+            try:
+                api_client.update_status('pose_x',current_pose.pose.position.x)
+                api_client.update_status('pose_y',current_pose.pose.position.y)
+                yaw = degrees(self.calculate_heading(current_pose.pose))
+                api_client.update_status('pose_yaw',yaw)
+            except Exception:
+                pass
 
              # คำนวณความเร็วเชิงเส้น (m/s)
             prev_pose = getattr(self, "_prev_pose", None)
@@ -238,9 +251,12 @@ class DeliveryRobotMainController(Node):
                     dy = current_pose.pose.position.y - prev_pose.pose.position.y
                     speed = (dx**2 + dy**2) ** 0.5 / dt
                     self.current_speed = speed
-                    api_client.update_status('vel_x',speed)
+                    try:
+                        api_client.update_status('vel_x',speed)
+                    except Exception:
+                        pass
                     #self.get_logger().info(f"Robot speed: {speed:.3f} m/s")
-            
+
             self._prev_pose = current_pose
             self._prev_time = now
             #self.get_logger().info(f"Current Pose: x={current_pose.pose.position.x}, y={current_pose.pose.position.y}")
@@ -333,7 +349,7 @@ class DeliveryRobotMainController(Node):
     def drive_fault_callback(self, msg: String):
         drive_status = msg.data.strip()
         old_drive_status = api_client.get_robot_status_by_name('is_derive_fault')
-        
+
         if drive_status != old_drive_status:
             if drive_status == 'No Fault':
                 api_client.update_status("is_derive_fault", 0)
@@ -769,7 +785,7 @@ class DeliveryRobotMainController(Node):
         if state == RobotState.STANDBY:
             self.get_logger().info("Pause cleared to STANDBY via API/GUI.")
             self._cancel_pause_monitor_timer()
-            self.change_state(RobotState.STANDBY)
+            threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
         elif state != RobotState.PAUSED:
             self.get_logger().info(f"Pause state changed to {state.name}; switching.")
             self._cancel_pause_monitor_timer()
@@ -791,7 +807,7 @@ class DeliveryRobotMainController(Node):
     def _safestop_monitor_loop(self):
         self.safestop_loop_counter += 1
         if self.safestop_loop_counter == 1 or self.safestop_loop_counter % 20 == 0:
-            if (True): #TODO: add condition for play sound or light alarm for obstacle
+            if (self.setting_isSoundAlarmForObstacle): 
                 self.send_sound_command("safe_stop")
             
 
@@ -799,7 +815,7 @@ class DeliveryRobotMainController(Node):
         if state == RobotState.STANDBY:
             self.get_logger().info("SAFE_STOP cleared to STANDBY via API/GUI.")
             self._cancel_safestop_monitor_timer()
-            self.change_state(RobotState.STANDBY)
+            threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
         elif state != RobotState.SAFE_STOP:
             self.get_logger().info(f"SAFE_STOP state changed to {state.name}; switching.")
             self._cancel_safestop_monitor_timer()
@@ -810,6 +826,63 @@ class DeliveryRobotMainController(Node):
             self._safestop_monitor_timer.cancel()
             self._safestop_monitor_timer = None
 
+    def _pre_resume_wiggle_then_standby(self):
+        """หน่วงเวลา แล้วทำ wiggle ก่อนเปลี่ยนสถานะเป็น STANDBY"""
+        try:
+            self.get_logger().info("Pre-resume: waiting 3 seconds before wiggle...")
+            #time.sleep(0.5)
+
+            twist = Twist()
+            angular_speed = 0.5  # rad/sec
+            linear_speed = 0.05  # m/sec
+
+            def rotate(angular_z, angle_rad):
+                duration = abs(angle_rad) / angular_speed
+                twist.angular.z = angular_z
+                end_time = time.time() + duration
+                while time.time() < end_time:
+                    self.cmd_vel_pub.publish(twist)
+                    time.sleep(0.05)
+                twist.angular.z = 0.0
+                self.cmd_vel_pub.publish(twist)
+                time.sleep(0.1)
+
+            def move_linear(linear_x, distance_m):
+                duration = abs(distance_m) / linear_speed
+                twist.linear.x = linear_x
+                end_time = time.time() + duration
+                while time.time() < end_time:
+                    self.cmd_vel_pub.publish(twist)
+                    time.sleep(0.05)
+                twist.linear.x = 0.0
+                self.cmd_vel_pub.publish(twist)
+                time.sleep(0.1)
+
+           # self.get_logger().info("Pre-resume wiggle: ถอยหลัง 10 cm")
+           # move_linear(-linear_speed, 0.20)
+
+           # self.get_logger().info("Pre-resume wiggle: เดินหน้า 10 cm")
+           # move_linear(+linear_speed, 0.20)
+
+           # self.get_logger().info("Pre-resume wiggle: หมุนตามเข็ม 0.5 rad")
+           # rotate(-angular_speed, 1.57)   # หมุนตามเข็ม (CW) 0.3 rad
+
+           # self.get_logger().info("Pre-resume wiggle: หมุนทวนเข็ม 1.0 rad")
+           # rotate(+angular_speed, 1.57)   # หมุนทวนเข็ม (CCW) 0.6 rad
+
+           # self.get_logger().info("Pre-resume wiggle: หมุนซ้าย 0.5 rad")
+           # rotate(-angular_speed, 0.78)   # หมุนตามเข็ม (CCW) 0.3 rad
+            time.sleep(0.3)
+
+            self.get_logger().info("Pre-resume: clearing local/global costmaps.")
+            self.navigator.clearAllCostmaps()
+            time.sleep(1.0)
+
+            self.get_logger().info("Pre-resume wiggle complete. Switching to STANDBY.")
+        except Exception as e:
+            self.get_logger().error(f"Pre-resume wiggle failed with exception: {e}")
+        finally:
+            self.change_state(RobotState.STANDBY)
 
     def change_dock_state(self, new_state: DockState):
         if not isinstance(new_state, DockState):
@@ -1024,8 +1097,6 @@ class DeliveryRobotMainController(Node):
 
     def send_goal_pose_agv(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
         self.goal_after_state = after
-        #building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor.building.yaml"
-        building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/map_000.building.yaml"
         current_pose = self.current_pose
         start_pos = (current_pose.pose.position.x, current_pose.pose.position.y)
         goal_pos = (x, y, yaw)
@@ -1033,13 +1104,18 @@ class DeliveryRobotMainController(Node):
         self.get_logger().info(f"AGV start_pos: x={start_pos[0]:.2f}, y={start_pos[1]:.2f}")
         self.get_logger().info(f"AGV goal_pos: x={goal_pos[0]:.2f}, y={goal_pos[1]:.2f}")
 
-        #path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
-        #    building_yaml, start_pos, goal_pos, blocked_lanes=self.blocked_lanes
-        #)
-        
-        #เอา block lane ออกชั่วคราวก่อน
-        path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
-            building_yaml, start_pos, goal_pos)
+        if USE_DB_ROUTES:
+            # ─── New: compute path from station/route database ───────────────
+            self.get_logger().info("Path source: database routes")
+            path_poses, vertex_map, path_nodes, start_wp, goal_wp = \
+                compute_path_poses_from_db(start_pos, goal_pos,
+                                           blocked_lanes=self.blocked_lanes)
+        else:
+            # ─── Legacy: compute path from building YAML ─────────────────────
+            building_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/map_000.building.yaml"
+            self.get_logger().info(f"Path source: building YAML ({building_yaml})")
+            path_poses, vertex_map, path_nodes, start_wp, goal_wp = compute_path_poses(
+                building_yaml, start_pos, goal_pos)
 
 
         self._last_vertex_map = vertex_map
@@ -1074,6 +1150,23 @@ class DeliveryRobotMainController(Node):
         
         self.change_state(RobotState.MOVE)
         return True
+
+    def clear_request_queues_on_startup(self):
+        """Remove all 'Request' queues when node starts up."""
+        queue_list = self.get_pending_queue_from_api(return_all=True)
+        if not queue_list:
+            return
+        removed = 0
+        for queue in queue_list:
+            if queue.get("action", "Request") == "Request":
+                queue_id = queue.get("_id") or queue.get("id")
+                if queue_id:
+                    try:
+                        api_client.remove_queue_by_id(queue_id)
+                        removed += 1
+                    except Exception as e:
+                        self.get_logger().error(f"Failed to remove Request queue {queue_id}: {e}")
+        self.get_logger().info(f"Startup cleanup: removed {removed} Request queue(s).")
 
     def on_standby(self):
         self.get_logger().info("Robot is in STANDBY mode.")
@@ -1326,6 +1419,7 @@ class DeliveryRobotMainController(Node):
         result = self.navigator.getResult()
         if result == TaskResult.SUCCEEDED:
             self.blocked_lanes.clear()
+            self._obstacle_retry_count = 0
             if self.target_station != "":
                 status_id = self._get_status_id_for('position update')
                 try:
@@ -1352,37 +1446,21 @@ class DeliveryRobotMainController(Node):
             self.blocked_lanes.clear()
             return
         elif result == TaskResult.FAILED:
-            self.get_logger().warn('Goal failed!')
-            if not self.replan_on_blocked_lane:
-                self.get_logger().warn("Blocked lane encountered; stopping with FAILED per setting.")
+            self._obstacle_retry_count += 1
+            self.get_logger().warn(f'Goal failed! (obstacle retry {self._obstacle_retry_count}/3)')
+            if self._obstacle_retry_count <= 3:
+                # ร้อง obstacle_alert แล้ว wiggle แล้วกลับ STANDBY เพื่อลองใหม่
+                if self.setting_isSoundAlarmForObstacle:
+                    self.send_sound_command("obstacle_alert")
+                self._clear_path_tracking()
                 self.blocked_lanes.clear()
-                self._handle_move_failure_cleanup()
+                threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
                 return
-            
-            current_lane = self._current_lane_vertices()
-            if current_lane:
-                lane_key = tuple(sorted(current_lane))
-                self.blocked_lanes.add(lane_key)
-                self.get_logger().info(f"Marking blocked lane: {lane_key}")
-
-            retreat_pose = self._vertex_pose(current_lane[0]) if current_lane else None
-            if retreat_pose:
-                self.get_logger().info("Retreating to lane start before replanning...")
-                ret_ok = self._navigate_to_pose_blocking(retreat_pose)
-                if not ret_ok:
-                    self.get_logger().warn("Retreat failed; stopping with FAILED.")
-                    self._handle_move_failure_cleanup()
-                    return
             else:
-                self.get_logger().warn("Could not determine retreat pose; stopping with FAILED.")
-                self._handle_move_failure_cleanup()
-                return
-
-            replanned = self.go_to_station(self.target_station,self.goal_after_state)
-            if replanned:
-                return self.on_move()
-            else:
-                self.get_logger().warn("Replan found no path; stopping with FAILED.")
+                # ครบ 3 รอบแล้วยังไม่สำเร็จ → SAFE_STOP
+                self.get_logger().warn("3 obstacle retries exhausted; switching to SAFE_STOP.")
+                self._obstacle_retry_count = 0
+                self.blocked_lanes.clear()
                 self._handle_move_failure_cleanup()
                 return
         else:
@@ -1422,7 +1500,7 @@ class DeliveryRobotMainController(Node):
                 if queue_id:
                     api_client.update_queue_status(queue_id,'completed')
                     self.remove_queue_by_id(queue_id)
-                
+
                 self.get_logger().info(f"Waiting {self.setting_waitLoadinTimeout}s for LOAD_IN command...")
                 self._loadin_timeout_end = time.time() + self.setting_waitLoadinTimeout
                 #self._loadin_timer = self.create_timer(0.5, self.wait_for_load_in_loop)

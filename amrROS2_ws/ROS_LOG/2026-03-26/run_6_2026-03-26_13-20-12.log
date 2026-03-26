@@ -1,0 +1,1455 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-26-13-20-12-763491-two-70073
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [70090]
+[INFO] [joint_state_publisher-2]: process started with pid [70091]
+[INFO] [rplidar_node-3]: process started with pid [70092]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [70093]
+[INFO] [ekf_node-5]: process started with pid [70094]
+[INFO] [robot_hardware-6]: process started with pid [70095]
+[INFO] [localization_slam_toolbox_node-7]: process started with pid [70096]
+[INFO] [map_server-8]: process started with pid [70097]
+[INFO] [costmap_filter_info_server-9]: process started with pid [70098]
+[INFO] [controller_server-10]: process started with pid [70099]
+[INFO] [smoother_server-11]: process started with pid [70100]
+[INFO] [planner_server-12]: process started with pid [70101]
+[INFO] [behavior_server-13]: process started with pid [70102]
+[INFO] [bt_navigator-14]: process started with pid [70103]
+[INFO] [waypoint_follower-15]: process started with pid [70106]
+[INFO] [velocity_smoother-16]: process started with pid [70107]
+[INFO] [collision_monitor-17]: process started with pid [70108]
+[INFO] [collision_detector-18]: process started with pid [70114]
+[INFO] [lifecycle_manager-19]: process started with pid [70126]
+[rplidar_node-3] [INFO] [1774506014.054636125] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1774506014.083543317] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1774506014.083661438] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1774506014.083783058] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1774506014.089016242] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1774506014.089127654] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1774506014.092486364] [rplidar_node]: Start
+[velocity_smoother-16] [INFO] [1774506014.116339741] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-14] [INFO] [1774506014.194656956] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774506014.244745372] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774506014.250006263] [keepout_filter_mask_server]: Creating
+[rplidar_node-3] [INFO] [1774506014.253131065] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[costmap_filter_info_server-9] [INFO] [1774506014.265539861] [costmap_filter_info_server]: This is costmap filter info publisher
+[bt_navigator-14] [INFO] [1774506014.293016771] [bt_navigator]: Creating
+[robot_state_publisher-1] [INFO] [1774506014.337080449] [robot_state_publisher]: Robot initialized
+[smoother_server-11] [INFO] [1774506014.337361897] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[localization_slam_toolbox_node-7] [INFO] [1774506014.371739389] [slam_toolbox]: Node using stack size 40000000
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[smoother_server-11] [INFO] [1774506014.402181566] [smoother_server]: Creating smoother server
+[robot_hardware-6] Created receive data thread
+[costmap_filter_info_server-9] [INFO] [1774506014.445950963] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774506014.495918633] [lifecycle_manager_navigation]: Creating
+[collision_monitor-17] [INFO] [1774506014.586705017] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1774506014.615256388] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1774506014.634259817] [waypoint_follower]: Creating
+[lifecycle_manager-19] [INFO] [1774506014.641405680] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[localization_slam_toolbox_node-7] [INFO] [1774506014.713958315] [slam_toolbox]: Configuring
+[collision_detector-18] [INFO] [1774506014.751165161] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774506014.758384522] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774506014.765133733] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774506014.784220867] [planner_server]: Creating
+[controller_server-10] [INFO] [1774506014.810753396] [controller_server]: Creating controller server
+[behavior_server-13] [INFO] [1774506014.868078088] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774506014.913608796] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774506014.959324414] [global_costmap.global_costmap]: Creating Costmap
+[rplidar_node-3] [INFO] [1774506015.012900744] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[controller_server-10] [INFO] [1774506015.014640763] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774506015.029241062] [local_costmap.local_costmap]: Creating Costmap
+[scan_to_scan_filter_chain-4] [WARN] [1774506015.049054420] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[localization_slam_toolbox_node-7] [INFO] [1774506015.105341983] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[localization_slam_toolbox_node-7] [INFO] [1774506015.107103877] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[lifecycle_manager-19] [INFO] [1774506015.931206741] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1774506015.932316492] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1774506015.933182419] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1774506015.935152264] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1774506015.937069610] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1774506015.941014549] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1774506015.941266831] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1774506015.962791918] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774506015.994874077] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1774506016.013369733] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774506016.014692976] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1774506016.019712084] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1774506016.020616509] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1774506016.026250719] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1774506016.026340841] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774506016.036731377] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774506016.038024872] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774506016.038873299] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774506016.113510691] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1774506016.119357518] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1774506016.122497195] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1774506016.123446827] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1774506016.127368725] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1774506016.134883825] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1774506016.142123601] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1774506016.142217515] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1774506016.153011703] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1774506016.153454728] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1774506016.157346294] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1774506016.157527412] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1774506016.162046622] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1774506016.162234157] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1774506016.173783150] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1774506016.173994601] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1774506016.181590781] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1774506016.183446005] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1774506016.183513669] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1774506016.184363846] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1774506016.184420427] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1774506016.185842542] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774506016.193585425] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774506016.193624215] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1774506016.221621440] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774506016.222198627] [smoother_server]: Configuring smoother server
+[smoother_server-11] [INFO] [1774506016.273026391] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1774506016.284968537] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1774506016.308656253] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1774506016.310122699] [planner_server]: Configuring
+[planner_server-12] [INFO] [1774506016.310437980] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1774506016.354023925] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1774506016.366933202] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1774506016.369486651] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1774506016.369578231] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774506016.375054947] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1774506016.388101594] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774506016.388186174] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1774506016.421274838] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1774506016.422017685] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774506016.436161834] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774506016.437016094] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774506016.443567271] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774506016.552923392] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1774506016.553050845] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1774506016.557875127] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1774506016.563415133] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1774506016.563569710] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1774506016.609093418] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774506016.612489461] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1774506016.641836761] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[joint_state_publisher-2] [INFO] [1774506016.649640017] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[behavior_server-13] [INFO] [1774506016.663556966] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1774506016.687868825] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774506016.691073541] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1774506016.704212643] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774506016.704716917] [collision_monitor]: Configuring
+[localization_slam_toolbox_node-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[localization_slam_toolbox_node-7] Mapper <- Module
+[localization_slam_toolbox_node-7] Mapper <- m_pSequentialScanMatcher
+[localization_slam_toolbox_node-7] Mapper <- m_pGraph
+[localization_slam_toolbox_node-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[localization_slam_toolbox_node-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[localization_slam_toolbox_node-7] Mapper <- m_pMapperSensorManager
+[localization_slam_toolbox_node-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[localization_slam_toolbox_node-7] Mapper <- m_Listeners
+[localization_slam_toolbox_node-7] **Finished serializing Mapper**
+[localization_slam_toolbox_node-7] Load From File
+[localization_slam_toolbox_node-7] **Serializing Dataset**
+[localization_slam_toolbox_node-7] Dataset <- m_SensorNameLookup
+[localization_slam_toolbox_node-7] Dataset <- m_Data
+[localization_slam_toolbox_node-7] Dataset <- m_Lasers
+[localization_slam_toolbox_node-7] Dataset <- m_pDatasetInfo
+[localization_slam_toolbox_node-7] **Finished serializing Dataset**
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[localization_slam_toolbox_node-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[localization_slam_toolbox_node-7] W20260326 13:20:16.716038 70096 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[collision_monitor-17] [INFO] [1774506016.735878026] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1774506016.744397880] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1774506016.744476919] [collision_monitor]: [PolygonStop]: Creating Circle
+[localization_slam_toolbox_node-7] [INFO] [1774506016.750178502] [slam_toolbox]: Activating
+[collision_monitor-17] [INFO] [1774506016.757406904] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1774506016.774441363] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1774506016.779254271] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1774506016.792783900] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[lifecycle_manager-19] [INFO] [1774506016.818649411] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774506016.819349677] [collision_detector]: Configuring
+[collision_detector-18] [INFO] [1774506016.846819588] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1774506016.857011215] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1774506016.858315792] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1774506016.885663207] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1774506016.903079153] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774506016.903824042] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1774506016.916011471] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1774506017.139391083] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[planner_server-12] [INFO] [1774506017.172950479] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[lifecycle_manager-19] [INFO] [1774506017.265802954] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774506017.266500887] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1774506017.350756801] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1774506017.354341837] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774506017.355913571] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1774506017.356192394] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1774506017.357770836] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1774506017.357796793] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1774506017.357802627] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1774506017.357807293] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1774506017.357811960] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1774506017.357816334] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1774506017.357822751] [map_io]: mode: trinary
+[map_server-8] [INFO] [1774506017.357827709] [map_io]: negate: 0
+[map_server-8] [INFO] [1774506017.358297275] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1774506017.374093363] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1774506017.390314978] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774506017.391205403] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1774506017.404743783] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1774506017.405456882] [controller_server]: Activating
+[controller_server-10] [INFO] [1774506017.405646166] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1774506017.405738913] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1774506017.406440054] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1774506017.410659441] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1774506017.507747927] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1774506017.515393981] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1774506017.515960668] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774506017.517146833] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774506017.517196706] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506017.629458596] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506017.629609673] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774506017.631201240] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1774506017.631374775] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506017.745819710] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506017.745988870] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1774506017.747585395] [planner_server]: Activating
+[planner_server-12] [INFO] [1774506017.747879384] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1774506017.747967756] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1774506017.748343409] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1774506017.751000687] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1774506018.286973685] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1774506018.315966915] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774506018.319248045] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506018.427062180] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506018.427166301] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774506018.427861609] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1774506018.427997813] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1774506018.428113600] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506018.541800229] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506018.542164215] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774506018.544171975] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1774506018.544416091] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506018.655165452] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1774506018.655284740] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774506018.656175165] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1774506018.656339659] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506018.766901194] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1774506018.767009398] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774506018.768786750] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1774506018.768913037] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506018.904514113] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1774506018.904723522] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774506018.906351254] [bt_navigator]: Activating
+[INFO] [delivery_robot_main_controller-20]: process started with pid [70391]
+[INFO] [robot_sound-21]: process started with pid [70392]
+[INFO] [call_robot_button-22]: process started with pid [70393]
+[INFO] [rpc_run_node-23]: process started with pid [70394]
+[INFO] [dock_coordinates-24]: process started with pid [70395]
+[INFO] [autodock_action_server-25]: process started with pid [70396]
+[INFO] [battery_manager_node-26]: process started with pid [70397]
+[bt_navigator-14] [INFO] [1774506019.149804089] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506019.264503931] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1774506019.266942175] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774506019.270717078] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1774506019.270822075] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[dock_coordinates-24] [INFO] [1774506019.321647505] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1774506019.328532336] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1774506019.331760968] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1774506019.333992136] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1774506019.335920857] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1774506019.341414198] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1774506019.342775940] [dock coordinates]: range_limit: 1.200000
+[lifecycle_manager-19] [INFO] [1774506019.414554228] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1774506019.420480386] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774506019.422748886] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1774506019.427492379] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[controller_server-10] [WARN] [1774506019.509058934] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[lifecycle_manager-19] [INFO] [1774506019.580607689] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506019.580711810] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774506019.582712570] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1774506019.583361213] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774506019.583523665] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774506019.583601246] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774506019.588009918] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774506019.588227493] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774506019.621373321] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-10] [INFO] [1774506019.651823956] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1774506019.757057519] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774506019.758378721] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1774506019.758509091] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[robot_sound-21] [0m[INFO] [1774506020.888810201] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [0m[INFO] [1774506020.890716173] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[ekf_node-5] [ERROR] [1774506021.228044320] [ekf_filter_node]: Failed to meet update rate! Took 0.028724906000000001438seconds. Try decreasing the rate, limiting sensor output frequency, or limiting the number of sensors.
+[battery_manager_node-26] [INFO] [1774506021.370468688] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[rpc_run_node-23] [0m[INFO] [1774506021.434146523] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-26 13:20:21,436 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1774506021.599425054] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[battery_manager_node-26] [INFO] [1774506021.829862158] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[autodock_action_server-25] [INFO] [1774506022.318229024] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1774506022.498105521] [autodock_action_server]: auto_dock_init_complete
+[ekf_node-5] [ERROR] [1774506022.566411936] [ekf_filter_node]: Failed to meet update rate! Took 0.039200897999999997912seconds. Try decreasing the rate, limiting sensor output frequency, or limiting the number of sensors.
+[autodock_action_server-25] [INFO] [1774506022.572730080] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1774506022.656372350] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506022.663428967] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506022.671660666] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774506022.710489410] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774506022.765211073] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[INFO] [bash-27]: process started with pid [70527]
+[delivery_robot_main_controller-20] [0m[INFO] [1774506024.008096644] [main_controller_node]: Waiting for Nav2 system...[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506026.034283281] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506026.035111001] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506028.044659539] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506028.099437200] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506028.100368166] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506028.135832950] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774506028.157814770] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506029.054198738] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506030.065989521] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506030.182737371] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506031.055403290] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506032.095831191] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506032.203890026] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506033.090085283] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506034.081377900] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506034.166691942] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506035.056961925] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506036.056266624] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506036.157857695] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506037.057500918] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506038.095275916] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506038.189966116] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506039.062593536] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506040.062671415] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506040.120552295] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506041.054224481] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506042.147428116] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506042.216124184] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[call_robot_button-22] 2026-03-26 13:20:43 mosquitto_pub -u smr -P smrbot25 -m "Packing,true" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1774506043.056621906] [call_robot_button_node]: call_switch notified: station=Packing status=true.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506043.149402050] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506044.103051212] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506044.181139477] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506045.089930782] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506046.053187092] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506046.117939388] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506047.057125621] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506048.097004917] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506048.185889704] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506049.107682158] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506050.055230168] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506050.133046027] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506051.052585438] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506052.083463064] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506052.165659596] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506053.113525803] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506054.089835468] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506054.157390870] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506055.057337415] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506056.052383353] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506056.098076513] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506057.057073771] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506058.055221470] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506058.125261780] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506059.098297607] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506060.093126845] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506060.173814348] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506061.092991523] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506062.054872383] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506062.145378778] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506063.059032571] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506064.059876046] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506064.119321661] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506065.061417163] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506066.061309257] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506066.120459132] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506067.053814288] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506068.166382714] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506068.392182779] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506069.056885438] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506070.094642645] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506070.160110373] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506071.107548137] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506072.107056412] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506072.190782096] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506073.055615302] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506074.060118768] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506074.139201581] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506075.058518458] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506076.071526030] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506076.154325998] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506077.068400651] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506078.053846441] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506078.127372331] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506079.057264655] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506080.055977875] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506080.120544386] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506081.061570969] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506082.065459624] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506082.140809240] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506083.054100505] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506084.053898394] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506084.130402092] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506085.112516879] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506086.098473066] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506086.163997083] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506087.067311964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506088.071025334] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506088.145080581] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506089.053023458] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506090.056086436] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506090.122030146] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506091.107342648] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506092.106991793] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506092.182705687] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506093.057165582] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506094.054334484] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506094.109582294] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506095.053817676] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506096.095359411] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506096.194426783] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506097.089826412] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506098.057756801] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506098.130248771] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506099.082094624] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506100.053104026] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506100.112591931] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506101.053131448] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506102.065014686] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506102.168764303] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506103.057184312] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506104.076864681] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506104.138544381] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506105.055740336] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506106.053848954] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506106.118643248] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506107.082055302] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506108.057005268] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506108.098537955] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506109.053431613] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506110.057136817] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506110.142216077] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506111.050913177] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506112.055686133] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506112.136625628] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506113.059541540] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506114.084143604] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506114.169068286] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506115.107262889] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506116.053284664] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506116.102544485] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506117.096846700] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506118.124533901] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506118.173233742] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506119.083132756] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506120.057546366] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506120.111457809] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506121.056916104] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506122.057975114] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506122.156389468] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506123.072876408] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506124.125645732] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506124.186068394] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506125.098838762] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506126.054140738] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506126.133307839] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506127.054283073] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506128.070786433] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506128.133727253] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506129.121886902] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506130.113865785] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506130.175971886] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506131.054637752] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506132.058614779] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506132.138793343] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506133.058739906] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506134.114060054] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506134.183065277] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506135.056320633] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506136.064499840] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506136.160935600] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506137.056217108] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506138.063455141] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506138.134746363] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506139.059251218] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506140.082855818] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506140.136942838] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506141.063164379] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506142.056919156] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506142.159926217] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506143.053251296] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506144.097724174] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506144.154121693] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506145.059927898] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506146.089017964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506146.153655347] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506147.137069753] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506148.053517027] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506148.126001998] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506149.090608384] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506150.125055587] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506150.185879276] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506151.068481040] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506152.084525917] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506152.183073559] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506153.060441847] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506154.056213134] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506154.113508661] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506155.091758130] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506156.083025081] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506156.162703164] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506157.057402526] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506158.056850428] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506158.131317784] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506159.058208384] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506160.068622551] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506160.148282551] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506161.060770012] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506162.118663148] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506162.178121013] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506163.050536399] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506164.055198527] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506164.120094609] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506165.055433025] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506166.070656890] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506166.130399411] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506167.087332619] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506168.103137755] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506168.167693475] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506169.055191559] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506170.054009484] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506170.119206846] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506171.057343118] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506172.060461219] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506172.158160724] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506173.059414472] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506174.055087178] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506174.115133021] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506175.054106346] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506176.056499973] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506176.138116984] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506177.062451220] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506178.057904601] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506178.109094018] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506179.068607215] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506180.053225868] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506180.132206018] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506181.079139801] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506182.059299326] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506182.147598176] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506183.079624546] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506184.053093774] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506184.111973576] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506185.060008652] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506186.057176096] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506186.139452249] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506187.122840698] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506188.058149948] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506188.135594529] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506189.061031807] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506190.054741086] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506190.126039016] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506191.057288707] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506192.097272124] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506192.172920104] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506193.092780920] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506194.079674782] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506194.142395985] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506195.064858080] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506196.053761743] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506196.124141833] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506197.060039936] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506198.065543783] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506198.144202528] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506199.090119889] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506200.091222064] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506200.185980219] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506201.054617494] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506202.054423258] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506202.155080447] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506203.059483787] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506204.095321314] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506204.159776704] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506205.052924748] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506206.054244790] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506206.112226000] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506207.055528666] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506208.124542937] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506208.197511181] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506209.058220080] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506210.072625851] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506210.155844053] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506211.061722590] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506212.055393661] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506212.138675445] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506213.100756090] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506214.058921253] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506214.125457608] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506215.103926112] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506216.056085495] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506216.143581416] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506217.053836542] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506218.058066435] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506218.123235799] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506219.099602046] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506220.083651095] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506220.169536200] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506221.061797901] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506222.056688678] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506222.136717039] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506223.051694076] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506224.056570862] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506224.118328725] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506225.085597347] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506226.091395475] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506226.150647721] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506227.060136667] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506228.056605011] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506228.132079748] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506229.056847967] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506230.055277698] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506230.114772311] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506231.103025872] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506232.080878107] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506232.173481507] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506233.052570858] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506234.061952271] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506234.111700032] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506235.067505990] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506236.058523867] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506236.119736626] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506237.079785304] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506238.056725821] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506238.117839708] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506239.057778122] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506240.108831051] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506240.187847949] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506241.059084754] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506242.071824877] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506242.176705828] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506243.103284065] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506244.057081680] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506244.119144616] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506245.121313668] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506246.062755277] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506246.154792573] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506247.060301290] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506248.055470015] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506248.117345124] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506249.062209608] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506250.054865425] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506250.108263844] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506251.088797272] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506252.057590379] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506252.130198137] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506253.063436047] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506254.081512308] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506254.139114657] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506255.053970948] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506256.065702816] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506256.129869467] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506257.059283475] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506258.107326805] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506258.155874694] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506259.105641332] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506260.053446583] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506260.123994958] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506261.057180661] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506262.105999213] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506262.196054415] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506263.067372884] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506264.106945941] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506264.164631412] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506265.053385950] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506266.055080478] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506266.116175116] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506267.068193921] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506268.066930182] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506268.158898647] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506269.081127418] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506270.055596443] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506270.103261781] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506271.053283034] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506272.053847395] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506272.132920874] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506273.062831572] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506274.085528539] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506274.161594171] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506275.088142367] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506276.055731518] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506276.102880042] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506277.053493357] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506278.056064602] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506278.107369224] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506279.082044157] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506280.062728080] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506280.114593555] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506281.052967818] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506282.057324290] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506282.163142624] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506283.114228713] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506284.068994917] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506284.162203213] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506285.056614127] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506286.087408631] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506286.156760050] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506287.058827809] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506288.095415184] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506288.155993299] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506289.105129085] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506290.124100438] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506290.195698775] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506291.082940493] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506292.055634500] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506292.142912554] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506293.053110224] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506294.089946089] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506294.167760198] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506295.090625654] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506296.072716817] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506296.119147866] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506297.053584482] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506298.052416698] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506298.142699683] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506299.071168726] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506300.094790534] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506300.146670592] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506301.054124363] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506302.089449451] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506302.173410209] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506303.056499039] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506304.058374101] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506304.121893275] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506305.098849834] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506306.064718507] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506306.144692620] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506307.052883988] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506308.054721428] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506308.131933267] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506309.097859979] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506310.133104862] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506310.222525421] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506311.060757559] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506312.061671615] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506312.148275069] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506313.052934192] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506314.057862309] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506314.121066787] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506315.086949751] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506316.115118184] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506316.162585779] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506317.074210522] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506318.079800115] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506318.132799841] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506319.056551056] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506320.086125271] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506320.149886520] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506321.072571441] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506322.066375799] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506322.164704115] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506323.054930641] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506324.055272177] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506324.120409750] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506325.054226013] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506326.054929202] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506326.112156482] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506327.071067701] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506328.065097509] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506328.138724897] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506329.052664221] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506330.052910677] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506330.104684281] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506331.061108258] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506332.062222390] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506332.155223901] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506333.129836713] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506334.052994699] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506334.102989785] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506335.056172006] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506336.055516370] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506336.109703719] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506337.061016717] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506338.073539556] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506338.135941979] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506339.060078764] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506340.057347120] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506340.121724638] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506341.081644695] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506342.096807313] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506342.195650402] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506343.064498544] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506344.059133247] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506344.128238508] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506345.055510303] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506346.052386965] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506346.129710509] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506347.095253694] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506348.058898782] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506348.143816464] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506349.094773933] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506350.057228481] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506350.108568101] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506351.050511358] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506352.104399766] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506352.188732386] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506353.060717289] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506354.113015588] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506354.162414821] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506355.068306774] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506356.055512707] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506356.117246363] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506357.053713779] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506358.113754087] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506358.196068739] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506359.070209855] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506360.137909632] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506360.220667893] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506361.055925141] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506362.058574258] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506362.155478418] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506363.056950908] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506364.107181950] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506364.166311993] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506365.056839216] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506366.057250166] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506366.134465797] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506367.054488482] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506368.058012276] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506368.115706788] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506369.065905077] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506370.088933365] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506370.158190579] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506371.077966523] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506372.055937461] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506372.117879359] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506373.120420564] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506374.062200786] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506374.138871603] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506375.058886414] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506376.062920314] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506376.112087097] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506377.058791930] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506378.053860909] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506378.112677713] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506379.051387964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506380.106706070] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506380.167953827] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506381.069595768] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506382.053725314] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506382.149039657] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506383.053117510] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506384.055170774] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506384.118395084] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506385.096852213] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506386.078583471] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506386.146463194] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506387.067284433] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506388.054090798] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506388.115120688] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506389.058408480] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506390.068078340] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506390.143758402] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506391.083708191] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506392.113181493] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506392.191222510] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506393.056141755] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506394.060034785] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506394.127867843] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506395.069738770] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506396.074229695] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506396.135227503] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506397.074202869] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506398.053908285] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506398.105804968] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506399.059146142] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506400.057781781] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506400.132103310] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506401.057537380] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506402.060978052] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506402.130742164] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506403.097920664] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506404.071581219] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506404.159575871] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506405.115836813] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506406.083478754] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506406.157839073] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506407.062519486] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506408.054067011] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506408.131190186] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506409.055596461] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506410.055888998] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506410.114461978] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506411.098235121] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506412.056609985] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506412.147894517] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506413.076410224] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506414.063407624] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506414.112426245] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506415.054774348] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506416.069886251] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506416.130163962] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506417.083760073] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506418.061203437] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506418.121868176] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506419.053448634] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506420.057353946] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506420.115756310] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506421.054174059] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506422.093372372] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506422.168550788] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506423.081380974] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506424.081427386] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506424.153936275] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506425.052541523] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506426.053395530] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506426.118956881] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506427.092488263] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506428.084071401] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506428.143474728] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506429.109091441] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506430.054286985] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506430.115903980] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506431.056192120] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506432.148161502] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506432.239128716] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506433.065199409] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506434.078869364] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506434.139359693] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506435.060057007] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506436.053203422] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506436.122561842] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506437.098626840] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506438.063911648] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506438.138450755] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506439.063016303] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506440.058227058] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506440.108662838] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506441.053979127] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506442.053237485] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506442.119171281] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506443.090530700] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506444.085395260] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506444.170294570] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506445.085196097] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506446.060666992] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506446.123540150] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506447.056613303] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506448.073518015] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506448.169184681] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506449.133130206] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506450.099145321] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506450.143551405] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506451.055913191] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506452.057674832] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506452.141341021] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506453.056323336] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506454.073712197] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506454.139053348] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506455.054585727] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506456.087410481] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506456.150139561] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506457.054484016] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506458.054251313] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506458.134966526] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506459.068454415] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506460.109890312] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506460.201107767] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506461.062478169] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506462.110133339] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506462.209215005] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506463.057446888] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506464.053641107] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506464.109007332] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506465.061222743] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506466.064057095] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506466.143635433] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506467.079664812] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506468.059064313] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506468.129204080] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506469.098340789] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506470.116135635] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506470.206953229] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506471.081374362] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506472.060431458] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506472.129133361] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506473.056470225] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506474.055719249] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506474.121717501] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506475.133846054] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506476.067076119] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506476.135411119] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506477.061532944] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506478.055286586] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506478.109597307] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506479.053453858] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506480.073541995] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506480.142294646] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506481.122881478] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506482.105173039] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506482.196192459] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506483.052889657] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506484.053826203] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506484.112147778] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506485.052698699] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506486.072198858] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506486.154054738] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506487.120522503] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506488.056944451] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506488.143633654] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506489.056337845] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506490.058203899] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506490.113982816] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506491.107136522] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506492.081107721] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506492.137503783] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506493.084556008] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506494.056170627] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506494.108701080] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506495.057913310] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506496.058576282] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506496.123811854] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506497.058661484] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506498.106521105] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506498.167562372] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506499.114648430] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506500.057108823] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506500.142146670] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506501.103857818] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506502.147679170] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506502.236861449] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506503.095590614] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506504.094196245] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506504.140676878] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506505.054762351] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506506.053470645] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506506.112412864] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506507.082651450] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506508.067299883] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506508.127955289] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506509.053543675] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506510.052983442] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506510.102021023] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506511.053980652] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506512.074904384] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506512.153451426] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506513.108101582] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506514.088014981] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506514.141159078] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506515.064817868] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506516.056156307] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506516.115331850] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506517.053533774] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506518.065457585] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506518.121576865] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506519.096350118] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506520.078276526] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506520.119368814] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506521.053452556] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506522.065095210] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506522.141249799] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506523.068938983] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506524.066436322] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506524.156260827] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506525.082768804] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506526.055124229] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506526.123563350] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506527.055619499] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506528.059691347] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506528.138935448] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506529.065594503] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506530.098626916] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506530.180431173] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506531.064143008] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506532.053947044] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506532.115741950] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506533.063279783] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506534.088783097] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506534.139810063] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506535.061019526] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506536.057858597] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506536.148423908] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506537.057249074] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506538.053848404] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506538.124137207] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506539.087868656] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506540.103619285] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506540.152193716] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506541.070828148] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506542.066317143] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506542.141471643] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506543.055121091] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506544.059210438] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506544.116232685] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506545.081672363] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506546.111302026] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506546.181296549] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506547.054402605] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506548.058663737] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506548.111055070] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506549.059096885] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506550.073762553] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506550.167363712] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506551.079165227] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506552.078857860] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506552.171671548] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506553.053282293] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506554.055475293] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506554.111107507] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506555.062844312] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506556.064172260] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506556.121921314] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506557.122485707] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506558.057089763] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506558.111963963] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506559.053398019] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506560.112780969] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506560.181506496] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506561.056992465] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506562.083387663] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506562.164192998] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506563.063406932] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506564.054825576] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506564.107400361] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506565.109604152] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506566.057899416] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506566.116889757] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506567.066253940] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506568.050895082] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506568.098142770] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506569.052686180] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506570.055265916] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506570.101850670] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506571.081811608] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506572.110852126] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506572.180916646] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506573.084138516] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506574.057035255] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506574.109810116] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506575.055145071] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506576.111496548] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506576.179634680] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506577.117119714] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506578.059800307] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506578.130465347] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506579.052732938] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506580.054270878] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774506580.132787297] [main_controller_node]: Startup: costmap not yet available, will retry.[0m
+[bash-27] 4
+[bash-27] Queue empty: current state-> STANDBY : queue_action-> 
+[bash-27] queue action->Idle :  current state-> STANDBY : previous state-> 
+[bash-27] Packing
+[delivery_robot_main_controller-20] [0m[INFO] [1774506581.059108615] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[INFO] [bash-27]: process has finished cleanly [pid 70527]
+[INFO] [battery_manager_node-26]: sending signal 'SIGINT' to process[battery_manager_node-26]
+[INFO] [autodock_action_server-25]: sending signal 'SIGINT' to process[autodock_action_server-25]
+[INFO] [dock_coordinates-24]: sending signal 'SIGINT' to process[dock_coordinates-24]
+[INFO] [rpc_run_node-23]: sending signal 'SIGINT' to process[rpc_run_node-23]
+[INFO] [call_robot_button-22]: sending signal 'SIGINT' to process[call_robot_button-22]
+[INFO] [dock_coordinates-24]: process has finished cleanly [pid 70395]
+[INFO] [robot_sound-21]: sending signal 'SIGINT' to process[robot_sound-21]
+[INFO] [delivery_robot_main_controller-20]: sending signal 'SIGINT' to process[delivery_robot_main_controller-20]
+[INFO] [lifecycle_manager-19]: sending signal 'SIGINT' to process[lifecycle_manager-19]
+[INFO] [collision_detector-18]: sending signal 'SIGINT' to process[collision_detector-18]
+[INFO] [collision_monitor-17]: sending signal 'SIGINT' to process[collision_monitor-17]
+[INFO] [velocity_smoother-16]: sending signal 'SIGINT' to process[velocity_smoother-16]
+[INFO] [waypoint_follower-15]: sending signal 'SIGINT' to process[waypoint_follower-15]
+[INFO] [bt_navigator-14]: sending signal 'SIGINT' to process[bt_navigator-14]
+[INFO] [behavior_server-13]: sending signal 'SIGINT' to process[behavior_server-13]
+[INFO] [planner_server-12]: sending signal 'SIGINT' to process[planner_server-12]
+[INFO] [smoother_server-11]: sending signal 'SIGINT' to process[smoother_server-11]
+[INFO] [controller_server-10]: sending signal 'SIGINT' to process[controller_server-10]
+[INFO] [costmap_filter_info_server-9]: sending signal 'SIGINT' to process[costmap_filter_info_server-9]
+[INFO] [map_server-8]: sending signal 'SIGINT' to process[map_server-8]
+[INFO] [localization_slam_toolbox_node-7]: sending signal 'SIGINT' to process[localization_slam_toolbox_node-7]
+[INFO] [robot_hardware-6]: sending signal 'SIGINT' to process[robot_hardware-6]
+[INFO] [ekf_node-5]: sending signal 'SIGINT' to process[ekf_node-5]
+[INFO] [scan_to_scan_filter_chain-4]: sending signal 'SIGINT' to process[scan_to_scan_filter_chain-4]
+[INFO] [rplidar_node-3]: sending signal 'SIGINT' to process[rplidar_node-3]
+[INFO] [joint_state_publisher-2]: sending signal 'SIGINT' to process[joint_state_publisher-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[battery_manager_node-26] Traceback (most recent call last):
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node", line 33, in <module>
+[battery_manager_node-26]     sys.exit(load_entry_point('battery-management==0.0.0', 'console_scripts', 'battery_manager_node')())
+[battery_manager_node-26]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/python3.12/site-packages/battery_management/battery_manager_node.py", line 311, in main
+[battery_manager_node-26]     rclpy.spin(node)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[battery_manager_node-26]     executor.spin_once()
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 845, in spin_once
+[battery_manager_node-26]     self._spin_once_impl(timeout_sec)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 829, in _spin_once_impl
+[battery_manager_node-26]     handler, entity, node = self.wait_for_ready_callbacks(
+[battery_manager_node-26]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[battery_manager_node-26]     return next(self._cb_iter)
+[battery_manager_node-26]            ^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[battery_manager_node-26]     wait_set.wait(timeout_nsec)
+[battery_manager_node-26] KeyboardInterrupt
+[dock_coordinates-24] [INFO] [1774506581.482850070] [rclcpp]: signal_handler(signum=2)
+[rpc_run_node-23] [0m[INFO] [1774506581.506372709] [rpc_run_node]: RPC run node stopped by user.[0m
+[rpc_run_node-23] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[rpc_run_node-23] 2026-03-26 13:29:41,512 [INFO] RPCServer stopped.
+[call_robot_button-22] [0m[INFO] [1774506581.526167693] [call_robot_button_node]: CallRobotButton interrupted by user.[0m
+[call_robot_button-22] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[robot_sound-21] [0m[INFO] [1774506581.548916278] [robot_sound_node]: 🔚 robot_sound_node stopped by user.[0m
+[robot_sound-21] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[delivery_robot_main_controller-20] [0m[INFO] [1774506581.622365174] [main_controller_node]: Node stopped by user.[0m
+[delivery_robot_main_controller-20] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[lifecycle_manager-19] [INFO] [1774506581.620370830] [rclcpp]: signal_handler(signum=2)
+[lifecycle_manager-19] [INFO] [1774506581.620817647] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-19] [INFO] [1774506581.621033473] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[collision_detector-18] [INFO] [1774506581.655122225] [rclcpp]: signal_handler(signum=2)
+[collision_detector-18] [INFO] [1774506581.655243846] [collision_detector]: Running Nav2 LifecycleNode rcl preshutdown (collision_detector)
+[collision_detector-18] [INFO] [1774506581.655391716] [collision_detector]: Deactivating
+[collision_detector-18] [INFO] [1774506581.655586833] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_monitor-17] [INFO] [1774506581.665822209] [rclcpp]: signal_handler(signum=2)
+[collision_monitor-17] [INFO] [1774506581.666080908] [collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[collision_monitor-17] [INFO] [1774506581.666260860] [collision_monitor]: Deactivating
+[collision_monitor-17] [INFO] [1774506581.666339315] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_detector-18] [INFO] [1774506581.687118346] [collision_detector]: Cleaning up
+[collision_detector-18] [INFO] [1774506581.696754077] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_detector-18] [INFO] [1774506581.696785576] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[velocity_smoother-16] [INFO] [1774506581.697139063] [rclcpp]: signal_handler(signum=2)
+[velocity_smoother-16] [INFO] [1774506581.697370930] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-16] [INFO] [1774506581.697496925] [velocity_smoother]: Deactivating
+[velocity_smoother-16] [INFO] [1774506581.697540965] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[collision_monitor-17] [INFO] [1774506581.697765540] [collision_monitor]: Cleaning up
+[collision_monitor-17] [INFO] [1774506581.698095695] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_monitor-17] [INFO] [1774506581.698190191] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774506581.698265147] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774506581.698336894] [collision_monitor]: [FootprintApproach]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774506581.698431683] [collision_monitor]: [scan]: Destroying Scan
+[waypoint_follower-15] [INFO] [1774506581.711098011] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1774506581.711300712] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-15] [INFO] [1774506581.711421749] [waypoint_follower]: Deactivating
+[waypoint_follower-15] [INFO] [1774506581.711484455] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1774506581.711172091] [velocity_smoother]: Cleaning up
+[velocity_smoother-16] [INFO] [1774506581.711269505] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[collision_detector-18] [INFO] [1774506581.715001535] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774506581.739175734] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_detector-18] [INFO] [1774506581.753999441] [collision_monitor]: [scan]: Destroying Scan
+[collision_detector-18] [INFO] [1774506581.778903072] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[bt_navigator-14] [INFO] [1774506581.775099003] [rclcpp]: signal_handler(signum=2)
+[bt_navigator-14] [INFO] [1774506581.775631858] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-14] [INFO] [1774506581.775962596] [bt_navigator]: Deactivating
+[bt_navigator-14] [INFO] [1774506581.778107434] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[behavior_server-13] [INFO] [1774506581.793618575] [rclcpp]: signal_handler(signum=2)
+[behavior_server-13] [INFO] [1774506581.793974395] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-13] [INFO] [1774506581.794112640] [behavior_server]: Deactivating
+[behavior_server-13] [INFO] [1774506581.795224433] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1774506581.812037818] [waypoint_follower]: Cleaning up
+[collision_detector-18] [INFO] [1774506581.817280334] [collision_detector]: Destroying
+[planner_server-12] [INFO] [1774506581.822794091] [rclcpp]: signal_handler(signum=2)
+[planner_server-12] [INFO] [1774506581.823017208] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-12] [INFO] [1774506581.823279698] [planner_server]: Deactivating
+[planner_server-12] [INFO] [1774506581.823413860] [global_costmap.global_costmap]: Deactivating
+[smoother_server-11] [INFO] [1774506581.867512830] [rclcpp]: signal_handler(signum=2)
+[bt_navigator-14] [INFO] [1774506581.872083954] [bt_navigator]: Cleaning up
+[smoother_server-11] [INFO] [1774506581.875183674] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-11] [INFO] [1774506581.875334169] [smoother_server]: Deactivating
+[smoother_server-11] [INFO] [1774506581.875378209] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774506581.890380701] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1774506581.890629192] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-10] [INFO] [1774506581.890902182] [controller_server]: Deactivating
+[controller_server-10] [INFO] [1774506581.891073676] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774506581.891135507] [local_costmap.local_costmap]: Deactivating
+[behavior_server-13] [INFO] [1774506581.897197285] [behavior_server]: Cleaning up
+[collision_monitor-17] [INFO] [1774506581.898951888] [collision_monitor]: Destroying
+[velocity_smoother-16] [INFO] [1774506581.906170665] [velocity_smoother]: Destroying
+[costmap_filter_info_server-9] [INFO] [1774506581.910230809] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1774506581.910423593] [keepout_costmap_filter_info_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_costmap_filter_info_server)
+[costmap_filter_info_server-9] [INFO] [1774506581.910547839] [keepout_costmap_filter_info_server]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1774506581.910584587] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774506581.914537109] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[map_server-8] [INFO] [1774506581.920242776] [rclcpp]: signal_handler(signum=2)
+[map_server-8] [INFO] [1774506581.920423311] [keepout_filter_mask_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_filter_mask_server)
+[map_server-8] [INFO] [1774506581.920549306] [keepout_filter_mask_server]: Deactivating
+[map_server-8] [INFO] [1774506581.920584305] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[localization_slam_toolbox_node-7] [INFO] [1774506581.929578976] [rclcpp]: signal_handler(signum=2)
+[smoother_server-11] [INFO] [1774506581.976663045] [smoother_server]: Cleaning up
+[behavior_server-13] [INFO] [1774506581.989484242] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1774506582.012927260] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[costmap_filter_info_server-9] [INFO] [1774506582.013468865] [keepout_costmap_filter_info_server]: Cleaning up
+[costmap_filter_info_server-9] [INFO] [1774506582.013560445] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774506582.016049729] [controller_server]: Cleaning up
+[controller_server-10] [INFO] [1774506582.018704965] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774506582.023650576] [local_costmap.local_costmap]: Cleaning up
+[map_server-8] [INFO] [1774506582.025212393] [keepout_filter_mask_server]: Cleaning up
+[map_server-8] [INFO] [1774506582.025321473] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[robot_hardware-6] [INFO] [1774506582.084639928] [rclcpp]: signal_handler(signum=2)
+[ekf_node-5] [INFO] [1774506582.091222603] [rclcpp]: signal_handler(signum=2)
+[scan_to_scan_filter_chain-4] [INFO] [1774506582.098294095] [rclcpp]: signal_handler(signum=2)
+[behavior_server-13] [INFO] [1774506582.142317817] [behavior_server]: Destroying
+[robot_state_publisher-1] [INFO] [1774506582.178828773] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1774506582.220946816] [waypoint_follower]: Destroying
+[map_server-8] [INFO] [1774506582.238733748] [keepout_filter_mask_server]: Destroying
+[planner_server-12] [INFO] [1774506582.250408446] [planner_server]: Deactivating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774506582.250617272] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[costmap_filter_info_server-9] [INFO] [1774506582.278669912] [keepout_costmap_filter_info_server]: Destroying
+[smoother_server-11] [INFO] [1774506582.307962090] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[rplidar_node-3] [INFO] [1774506582.329860206] [rplidar_node]: Stop motor
+[planner_server-12] [INFO] [1774506582.353287474] [planner_server]: Cleaning up
+[planner_server-12] [INFO] [1774506582.445338189] [global_costmap.global_costmap]: Cleaning up
+[smoother_server-11] [INFO] [1774506582.392510830] [smoother_server]: Destroying
+[planner_server-12] [INFO] [1774506582.578707518] [planner_server]: Cleaning up plugin GridBased of type SmacPlanner2D
+[delivery_robot_main_controller-20] Traceback (most recent call last):
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller", line 33, in <module>
+[delivery_robot_main_controller-20]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'delivery_robot_main_controller')())
+[delivery_robot_main_controller-20]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 1834, in main
+[planner_server-12] [INFO] [1774506582.601155113] [planner_server]: Destroying plugin GridBased of type SmacPlanner2D
+[delivery_robot_main_controller-20]     rclpy.shutdown()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[delivery_robot_main_controller-20]     _shutdown(context=context)
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[delivery_robot_main_controller-20]     context.shutdown()
+[delivery_robot_main_controller-20]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[delivery_robot_main_controller-20]     self.__context.shutdown()
+[delivery_robot_main_controller-20] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1409, in main
+[autodock_action_server-25]     executor.spin()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 312, in spin
+[autodock_action_server-25]     self.spin_once()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 917, in spin_once
+[autodock_action_server-25]     self._spin_once_impl(timeout_sec)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 896, in _spin_once_impl
+[autodock_action_server-25]     handler, entity, node = self.wait_for_ready_callbacks(
+[autodock_action_server-25]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[autodock_action_server-25]     return next(self._cb_iter)
+[autodock_action_server-25]            ^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[autodock_action_server-25]     wait_set.wait(timeout_nsec)
+[autodock_action_server-25] KeyboardInterrupt
+[autodock_action_server-25] 
+[autodock_action_server-25] During handling of the above exception, another exception occurred:
+[autodock_action_server-25] 
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server", line 33, in <module>
+[autodock_action_server-25]     sys.exit(load_entry_point('action-autodock==0.0.0', 'console_scripts', 'autodock_action_server')())
+[autodock_action_server-25]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1420, in main
+[autodock_action_server-25]     rclpy.shutdown()   
+[autodock_action_server-25]     ^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[autodock_action_server-25]     _shutdown(context=context)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[autodock_action_server-25]     context.shutdown()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[autodock_action_server-25]     self.__context.shutdown()
+[autodock_action_server-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[controller_server-10] [INFO] [1774506582.743075796] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774506582.780721002] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[controller_server-10] [INFO] [1774506582.792305286] [local_costmap.local_costmap]: Destroying
+[rpc_run_node-23] Traceback (most recent call last):
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node", line 33, in <module>
+[rpc_run_node-23]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'rpc_run_node')())
+[rpc_run_node-23]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/rpc_run_node.py", line 57, in main
+[rpc_run_node-23]     rclpy.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[rpc_run_node-23]     _shutdown(context=context)
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[rpc_run_node-23]     context.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[rpc_run_node-23]     self.__context.shutdown()
+[rpc_run_node-23] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[planner_server-12] [INFO] [1774506583.041151140] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[call_robot_button-22] Traceback (most recent call last):
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button", line 33, in <module>
+[call_robot_button-22]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'call_robot_button')())
+[call_robot_button-22]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/call_button.py", line 251, in main
+[call_robot_button-22]     rclpy.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[call_robot_button-22]     _shutdown(context=context)
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[call_robot_button-22]     context.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[call_robot_button-22]     self.__context.shutdown()
+[call_robot_button-22] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[controller_server-10] [INFO] [1774506583.055190585] [controller_server]: Destroying
+[planner_server-12] [INFO] [1774506583.191835794] [global_costmap.global_costmap]: Destroying
+[bt_navigator-14] [INFO] [1774506583.311172386] [bt_navigator]: Completed Cleaning up
+[bt_navigator-14] [INFO] [1774506583.311303923] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-14] [INFO] [1774506583.322208941] [bt_navigator]: Destroying
+[INFO] [collision_detector-18]: process has finished cleanly [pid 70114]
+[ERROR] [battery_manager_node-26]: process has died [pid 70397, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node --ros-args -r __node:=battery_manager -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/share/battery_management/config/battery_manager.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[robot_sound-21] Traceback (most recent call last):
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound", line 33, in <module>
+[robot_sound-21]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'robot_sound')())
+[robot_sound-21]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 147, in main
+[robot_sound-21]     rclpy.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[robot_sound-21]     _shutdown(context=context)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[robot_sound-21]     context.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-21]     self.__context.shutdown()
+[robot_sound-21] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[localization_slam_toolbox_node-7] terminate called after throwing an instance of 'std::runtime_error'
+[localization_slam_toolbox_node-7]   what():  context cannot be slept with because it's invalid
+[planner_server-12] [INFO] [1774506583.436485010] [planner_server]: Destroying
+[INFO] [costmap_filter_info_server-9]: process has finished cleanly [pid 70098]
+[INFO] [collision_monitor-17]: process has finished cleanly [pid 70108]
+[INFO] [velocity_smoother-16]: process has finished cleanly [pid 70107]
+[ERROR] [localization_slam_toolbox_node-7]: process has died [pid 70096, exit code -6, cmd '/opt/ros/jazzy/lib/slam_toolbox/localization_slam_toolbox_node --ros-args -r __node:=slam_toolbox -r __ns:=/ --params-file /tmp/launch_params_lsu8uz2d --params-file /tmp/launch_params_onw9q4is -r /tf:=tf -r /tf_static:=tf_static -r /tf:=tf -r /tf_static:=tf_static -r /map:=map -r /map_metadata:=map_metadata'].
+[ERROR] [robot_sound-21]: process has died [pid 70392, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound --ros-args -r __node:=robot_sound_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [waypoint_follower-15]: process has finished cleanly [pid 70106]
+[ERROR] [rpc_run_node-23]: process has died [pid 70394, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node --ros-args -r __node:=rpc_run_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [robot_hardware-6]: process has finished cleanly [pid 70095]
+[ERROR] [call_robot_button-22]: process has died [pid 70393, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button --ros-args -r __node:=call_robot_button_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [joint_state_publisher-2]: process has finished cleanly [pid 70091]
+[INFO] [smoother_server-11]: process has finished cleanly [pid 70100]
+[INFO] [map_server-8]: process has finished cleanly [pid 70097]
+[INFO] [behavior_server-13]: process has finished cleanly [pid 70102]
+[INFO] [lifecycle_manager-19]: process has finished cleanly [pid 70126]
+[INFO] [controller_server-10]: process has finished cleanly [pid 70099]
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 70090]
+[INFO] [rplidar_node-3]: process has finished cleanly [pid 70092]
+[INFO] [ekf_node-5]: process has finished cleanly [pid 70094]
+[INFO] [bt_navigator-14]: process has finished cleanly [pid 70103]
+[INFO] [planner_server-12]: process has finished cleanly [pid 70101]
+[INFO] [scan_to_scan_filter_chain-4]: process has finished cleanly [pid 70093]
+[ERROR] [autodock_action_server-25]: process has died [pid 70396, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server --ros-args -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config/auto_dock_config.yaml --params-file /tmp/launch_params_absc4s0b -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [delivery_robot_main_controller-20]: process has died [pid 70391, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller --ros-args -r __node:=main_controller_node -r __ns:=/ --params-file /tmp/launch_params_9kpvm7on -r /tf:=tf -r /tf_static:=tf_static'].

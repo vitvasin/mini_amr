@@ -23,3 +23,4 @@ class BoxStatusDialog(QDialog):
         
         self.ui.setupUi(self)
         self.setWindowFlags(Qt.FramelessWindowHint) # Remove title bar
+#	self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint)

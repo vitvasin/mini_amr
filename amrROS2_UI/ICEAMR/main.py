@@ -70,7 +70,9 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         # self.passwd_ui = Ui_mpPasswdDialog()
         self.ui.setupUi(self)
-        self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint) # Remove title bar and keep on top
+        #self.setWindowFlags(Qt.FramelessWindowHint | Qt.WindowStaysOnTopHint) # Remove title bar and keep on top
+        self.setWindowFlags(Qt.FramelessWindowHint)
+	
         self.w = None
         
         self.doorA_state = 0
@@ -149,6 +151,7 @@ class MainWindow(QMainWindow):
         self.wait_load_out_flag = True
         
         self.ui.mpSendConfirmBtn.setDisabled(True)
+        # self.ui.mpOkBtn.setDisabled(True)
 
         ########################################################################
         ## QSTACKWIDGETS NAVIGATION
@@ -417,8 +420,15 @@ class MainWindow(QMainWindow):
         # SHOW WINDOW
         #######################################################################
         self.show()
+        #QTimer.singleShot(500, self.release_top_level)
+	    
+	    #self.setWindowFlag(Qt.WindowStaysOnTopHint, False)
         ########################################################################
-    
+
+    # def release_top_level(self):
+	#     self.setWindowFlags(Qt.FramelessWindowHint | ~Qt.WindowStaysOnTopHint)
+	#     self.show()
+   
     def closeEvent(self, event):
         """Clean up resources when window is closed."""
         # Stop the update timer
@@ -551,10 +561,12 @@ class MainWindow(QMainWindow):
                     if (self.current_status == "MOVE"):
                         # self.ui.mpStationTargetLb_2.setText(self.current_queue_target)
                         self.ui.mpStationTargetLb_2.setText(self.target_station)
-                        self.ui.myStackedWidget.setCurrentWidget(self.ui.Move2Target_page) 
+                        self.ui.myStackedWidget.setCurrentWidget(self.ui.Move2Target_page)
+                        self.ui.mpOkBtn.setDisabled(False) 
                    
                     if (self.prev_status == "AFTER_MOVE" or self.prev_status == "MOVE") and (self.current_status == "STANDBY"):
                         self.ui.myStackedWidget.setCurrentWidget(self.ui.home_page) 
+                        self.ui.mpOkBtn.setDisabled(False)
                 
                 
                                          
@@ -669,6 +681,7 @@ class MainWindow(QMainWindow):
         add_queue(data)
         
         update_robot_status("STANDBY")
+        self.ui.mpOkBtn.setDisabled(True)
     
     # ------------ Send page --------------------------------------------- 
     def remove_selected_row(self):

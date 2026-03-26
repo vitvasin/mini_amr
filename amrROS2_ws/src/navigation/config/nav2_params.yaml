@@ -132,7 +132,7 @@ controller_server:
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    failure_tolerance: 1.0
+    failure_tolerance: 1.0 # เดิมเป็น 1.0 (รอให้ Controller คำนวณรอด 1.0 วิ)
     progress_checker_plugins: ["progress_checker"]
     goal_checker_plugins: ["goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
@@ -142,7 +142,7 @@ controller_server:
     progress_checker:
       plugin: "nav2_controller::SimpleProgressChecker"
       required_movement_radius: 0.5
-      movement_time_allowance: 10.0
+      movement_time_allowance: 5.0 # ปรับเป็น 5.0 วินาที เพื่อให้มีเวลายึกยักหลบหลีกบ้าง
 
     # Goal checker parameters
     #precise_goal_checker:
@@ -402,8 +402,8 @@ local_costmap:
           obstacle_min_range: 0.0
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0 #3.0
-        inflation_radius: 0.5
+        cost_scaling_factor: 10.0 #3.0
+        inflation_radius: 0.55
       denoise_layer:
         plugin: "nav2_costmap_2d::DenoiseLayer"
         enabled: true
@@ -483,13 +483,14 @@ global_costmap:
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         map_subscribe_transient_local: True
+        # clearing: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0 #3.0
+        cost_scaling_factor: 10.0 #3.0
         inflation_radius: 0.55
       inflation_layer2:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 3.0 #3.0
+        cost_scaling_factor: 10.0 #3.0
         inflation_radius: 0.55
       always_send_full_costmap: True
       denoise_layer:

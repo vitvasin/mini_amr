@@ -1,0 +1,627 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-24-13-32-54-452300-two-5611
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [5627]
+[INFO] [joint_state_publisher-2]: process started with pid [5628]
+[INFO] [rplidar_node-3]: process started with pid [5629]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [5630]
+[INFO] [ekf_node-5]: process started with pid [5631]
+[INFO] [robot_hardware-6]: process started with pid [5632]
+[INFO] [localization_slam_toolbox_node-7]: process started with pid [5633]
+[INFO] [map_server-8]: process started with pid [5634]
+[INFO] [costmap_filter_info_server-9]: process started with pid [5635]
+[INFO] [controller_server-10]: process started with pid [5638]
+[INFO] [smoother_server-11]: process started with pid [5644]
+[INFO] [planner_server-12]: process started with pid [5655]
+[INFO] [behavior_server-13]: process started with pid [5660]
+[INFO] [bt_navigator-14]: process started with pid [5667]
+[INFO] [waypoint_follower-15]: process started with pid [5671]
+[INFO] [velocity_smoother-16]: process started with pid [5677]
+[INFO] [collision_monitor-17]: process started with pid [5678]
+[INFO] [collision_detector-18]: process started with pid [5688]
+[INFO] [lifecycle_manager-19]: process started with pid [5693]
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[map_server-8] [INFO] [1774333975.564127224] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774333975.579156843] [keepout_filter_mask_server]: Creating
+[costmap_filter_info_server-9] [INFO] [1774333975.553589107] [costmap_filter_info_server]: This is costmap filter info publisher
+[rplidar_node-3] [INFO] [1774333975.605184230] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1774333975.616564941] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1774333975.616674895] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1774333975.616713393] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1774333975.617406368] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1774333975.617476366] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1774333975.618382541] [rplidar_node]: Start
+[localization_slam_toolbox_node-7] [INFO] [1774333975.677164069] [slam_toolbox]: Node using stack size 40000000
+[robot_state_publisher-1] [INFO] [1774333975.717785341] [robot_state_publisher]: Robot initialized
+[costmap_filter_info_server-9] [INFO] [1774333975.724754462] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774333975.745700325] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-14] [INFO] [1774333975.754019814] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774333975.760165590] [planner_server]: Creating
+[bt_navigator-14] [INFO] [1774333975.760670447] [bt_navigator]: Creating
+[rplidar_node-3] [INFO] [1774333975.762890241] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[velocity_smoother-16] [INFO] [1774333975.776483455] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774333975.779065486] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774333975.780094740] [global_costmap.global_costmap]: Creating Costmap
+[controller_server-10] [INFO] [1774333975.800402168] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[localization_slam_toolbox_node-7] [INFO] [1774333975.832745074] [slam_toolbox]: Configuring
+[controller_server-10] [INFO] [1774333975.832982190] [controller_server]: Creating controller server
+[behavior_server-13] [INFO] [1774333975.836511812] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_detector-18] [INFO] [1774333975.845050043] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774333975.901576486] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774333975.912775204] [local_costmap.local_costmap]: Creating Costmap
+[localization_slam_toolbox_node-7] [INFO] [1774333975.943386256] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[localization_slam_toolbox_node-7] [INFO] [1774333975.945967996] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[waypoint_follower-15] [INFO] [1774333975.968536633] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1774333975.985419435] [waypoint_follower]: Creating
+[lifecycle_manager-19] [INFO] [1774333976.047474219] [lifecycle_manager_navigation]: Creating
+[smoother_server-11] [INFO] [1774333976.107515117] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774333976.118325932] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[smoother_server-11] [INFO] [1774333976.127416851] [smoother_server]: Creating smoother server
+[collision_monitor-17] [INFO] [1774333976.129319324] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774333976.247291864] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1774333976.247453442] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1774333976.248467238] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1774333976.248544235] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1774333976.249909477] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1774333976.253635675] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1774333976.253744754] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1774333976.275699747] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774333976.303491069] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1774333976.326746265] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774333976.326806346] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1774333976.329880984] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1774333976.329939898] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1774333976.335291204] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1774333976.335339619] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774333976.341438438] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774333976.341500853] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774333976.341612557] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774333976.383656819] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1774333976.385486960] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1774333976.386396636] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1774333976.388313691] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1774333976.391024926] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1774333976.398824100] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1774333976.402857995] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1774333976.402924201] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1774333976.406255788] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1774333976.406309161] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1774333976.407667112] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1774333976.407762775] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1774333976.409443297] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1774333976.409492879] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1774333976.413036791] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1774333976.413091623] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1774333976.415039593] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1774333976.417945071] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1774333976.417995819] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1774333976.419179651] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1774333976.419229233] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1774333976.420673222] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774333976.428813926] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774333976.428860299] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1774333976.446543697] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774333976.447221214] [smoother_server]: Configuring smoother server
+[rplidar_node-3] [INFO] [1774333976.482072654] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[smoother_server-11] [INFO] [1774333976.505770292] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1774333976.512970988] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1774333976.528315888] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1774333976.529002155] [planner_server]: Configuring
+[planner_server-12] [INFO] [1774333976.529116776] [global_costmap.global_costmap]: Configuring
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[localization_slam_toolbox_node-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[localization_slam_toolbox_node-7] Mapper <- Module
+[localization_slam_toolbox_node-7] Mapper <- m_pSequentialScanMatcher
+[localization_slam_toolbox_node-7] Mapper <- m_pGraph
+[localization_slam_toolbox_node-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[localization_slam_toolbox_node-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[localization_slam_toolbox_node-7] Mapper <- m_pMapperSensorManager
+[localization_slam_toolbox_node-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[localization_slam_toolbox_node-7] Mapper <- m_Listeners
+[localization_slam_toolbox_node-7] **Finished serializing Mapper**
+[localization_slam_toolbox_node-7] Load From File
+[localization_slam_toolbox_node-7] **Serializing Dataset**
+[localization_slam_toolbox_node-7] Dataset <- m_SensorNameLookup
+[localization_slam_toolbox_node-7] Dataset <- m_Data
+[localization_slam_toolbox_node-7] Dataset <- m_Lasers
+[localization_slam_toolbox_node-7] Dataset <- m_pDatasetInfo
+[localization_slam_toolbox_node-7] **Finished serializing Dataset**
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[localization_slam_toolbox_node-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[localization_slam_toolbox_node-7] W20260324 13:32:56.549465  5633 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[scan_to_scan_filter_chain-4] [WARN] [1774333976.551568167] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[localization_slam_toolbox_node-7] [INFO] [1774333976.571674352] [slam_toolbox]: Activating
+[planner_server-12] [INFO] [1774333976.611161082] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1774333976.663520052] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[planner_server-12] [INFO] [1774333976.673098328] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1774333976.673220240] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774333976.687472305] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[joint_state_publisher-2] [INFO] [1774333976.713623937] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[planner_server-12] [INFO] [1774333976.717953862] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774333976.718007235] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1774333976.722282330] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1774333976.722338328] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774333976.736856091] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774333976.737024668] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774333976.741487881] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774333976.790307021] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1774333976.790370894] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1774333976.793893807] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1774333976.797620588] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1774333976.797695252] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1774333976.816381656] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774333976.817208209] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1774333976.827165347] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1774333976.840253412] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1774333976.851583083] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774333976.851970986] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1774333976.866974648] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774333976.867423507] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1774333976.890614830] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1774333976.899863243] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1774333976.899961823] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1774333976.906464586] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1774333976.915560755] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1774333976.918082413] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1774333976.930111184] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1774333976.945018308] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774333976.945364504] [collision_detector]: Configuring
+[collision_detector-18] [INFO] [1774333976.960433206] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1774333976.961862320] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1774333976.961895277] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_detector-18] [INFO] [1774333976.963552175] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1774333976.969091890] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774333976.970833660] [bt_navigator]: Configuring
+[bt_navigator-14] [INFO] [1774333976.979997785] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1774333977.081631462] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1774333977.154222904] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774333977.154746135] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1774333977.199224558] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1774333977.202619726] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774333977.203198955] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1774333977.203281785] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1774333977.203583649] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1774333977.203596482] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1774333977.203602024] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1774333977.203606398] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1774333977.203611065] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1774333977.203615440] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1774333977.203621273] [map_io]: mode: trinary
+[map_server-8] [INFO] [1774333977.203626523] [map_io]: negate: 0
+[map_server-8] [INFO] [1774333977.203844681] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1774333977.217436437] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1774333977.235059171] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774333977.236809399] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1774333977.266784058] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1774333977.267195876] [controller_server]: Activating
+[controller_server-10] [INFO] [1774333977.267303789] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1774333977.267347829] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1774333977.267788813] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1774333977.270622252] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1774333977.370817772] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1774333977.376240242] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1774333977.377820434] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774333977.379524580] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774333977.379632201] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333977.493938917] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333977.494036038] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774333977.494775095] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1774333977.494819718] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333977.600344670] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333977.600450249] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1774333977.601184639] [planner_server]: Activating
+[planner_server-12] [INFO] [1774333977.601234513] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1774333977.601251720] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1774333977.601409215] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1774333977.602093731] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1774333978.101899169] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333978.102183242] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[planner_server-12] [WARN] [1774333978.102656600] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1774333978.105483330] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774333978.106489835] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333978.214138918] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.214222040] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774333978.214786103] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1774333978.214864267] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1774333978.214934556] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333978.326289712] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.326507871] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774333978.327674203] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1774333978.327804282] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333978.436474744] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.436590532] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774333978.437399294] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1774333978.437450625] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333978.545224245] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.545369782] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774333978.546444534] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1774333978.546550405] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[planner_server-12] [WARN] [1774333978.601738439] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333978.602033303] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[lifecycle_manager-19] [INFO] [1774333978.676698711] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.676754417] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774333978.677275024] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1774333978.802335098] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333978.910639240] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1774333978.910692613] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774333978.911545999] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1774333978.911858362] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774333979.021081805] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1774333979.021249215] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774333979.022562834] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1774333979.024441391] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[planner_server-12] [WARN] [1774333979.101754744] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333979.101868490] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[lifecycle_manager-19] [INFO] [1774333979.133113603] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333979.133237848] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774333979.134161231] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1774333979.134485553] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774333979.134540968] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774333979.134602215] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774333979.134610673] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774333979.134668421] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774333979.149451300] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1774333979.248203707] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774333979.248256205] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1774333979.248270496] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[planner_server-12] [INFO] [1774333979.356823421] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[planner_server-12] [WARN] [1774333979.601756466] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333979.601939918] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[planner_server-12] [WARN] [1774333980.101719981] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333980.101806603] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[planner_server-12] [WARN] [1774333980.601720829] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333980.601800742] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[INFO] [delivery_robot_main_controller-20]: process started with pid [5940]
+[INFO] [robot_sound-21]: process started with pid [5941]
+[INFO] [call_robot_button-22]: process started with pid [5942]
+[INFO] [rpc_run_node-23]: process started with pid [5943]
+[INFO] [dock_coordinates-24]: process started with pid [5944]
+[INFO] [autodock_action_server-25]: process started with pid [5945]
+[INFO] [battery_manager_node-26]: process started with pid [5946]
+[dock_coordinates-24] [INFO] [1774333980.742282131] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1774333980.742962856] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1774333980.743003979] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1774333980.743019145] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1774333980.743035478] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1774333980.743050936] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1774333980.743066102] [dock coordinates]: range_limit: 1.200000
+[planner_server-12] [WARN] [1774333981.101748508] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333981.101855546] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[planner_server-12] [WARN] [1774333981.601765397] [nav2_costmap_2d]: Robot is out of bounds of the costmap!
+[planner_server-12] [WARN] [1774333981.601874768] [global_costmap.global_costmap]: Sensor origin at (-0.02, -0.00) is out of map bounds (0.00, 0.00) to (4.95, 4.95). The costmap cannot raytrace for it.
+[rpc_run_node-23] [0m[INFO] [1774333981.892298866] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-24 13:33:01,900 [INFO] RPCServer listening on localhost:6000
+[planner_server-12] [INFO] [1774333982.078893410] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[robot_sound-21] [0m[INFO] [1774333982.275728580] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [0m[INFO] [1774333982.276765418] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[battery_manager_node-26] [INFO] [1774333982.326572980] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1774333982.484990924] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1774333982.609977501] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1774333982.691583448] [autodock_action_server]: auto_dock_init_complete
+[battery_manager_node-26] [INFO] [1774333982.795759490] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1774333982.948073656] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774333982.957448357] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774333982.966767934] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[autodock_action_server-25] [INFO] [1774333982.982132084] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-20] [33m[WARN] [1774333982.987798377] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774333983.018333891] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774333984.190630816] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [6048]
+[bash-27]   File "/home/smr/workspaces/mini_amr/amrROS2_UI/ICEAMR/main.py", line 422
+[bash-27]     QTimer.singleShort(500, self.release_top_level)
+[bash-27] TabError: inconsistent use of tabs and spaces in indentation
+[ERROR] [bash-27]: process has died [pid 6048, exit code 1, cmd '/bin/bash -c cd /home/smr/workspaces/mini_amr/amrROS2_UI/ICEAMR && source ../env/bin/activate && python main.py'].
+[INFO] [battery_manager_node-26]: sending signal 'SIGINT' to process[battery_manager_node-26]
+[INFO] [autodock_action_server-25]: sending signal 'SIGINT' to process[autodock_action_server-25]
+[INFO] [dock_coordinates-24]: sending signal 'SIGINT' to process[dock_coordinates-24]
+[INFO] [rpc_run_node-23]: sending signal 'SIGINT' to process[rpc_run_node-23]
+[INFO] [call_robot_button-22]: sending signal 'SIGINT' to process[call_robot_button-22]
+[INFO] [robot_sound-21]: sending signal 'SIGINT' to process[robot_sound-21]
+[INFO] [delivery_robot_main_controller-20]: sending signal 'SIGINT' to process[delivery_robot_main_controller-20]
+[INFO] [dock_coordinates-24]: process has finished cleanly [pid 5944]
+[INFO] [lifecycle_manager-19]: sending signal 'SIGINT' to process[lifecycle_manager-19]
+[INFO] [collision_detector-18]: sending signal 'SIGINT' to process[collision_detector-18]
+[INFO] [collision_monitor-17]: sending signal 'SIGINT' to process[collision_monitor-17]
+[INFO] [velocity_smoother-16]: sending signal 'SIGINT' to process[velocity_smoother-16]
+[INFO] [waypoint_follower-15]: sending signal 'SIGINT' to process[waypoint_follower-15]
+[INFO] [bt_navigator-14]: sending signal 'SIGINT' to process[bt_navigator-14]
+[INFO] [behavior_server-13]: sending signal 'SIGINT' to process[behavior_server-13]
+[INFO] [planner_server-12]: sending signal 'SIGINT' to process[planner_server-12]
+[INFO] [smoother_server-11]: sending signal 'SIGINT' to process[smoother_server-11]
+[INFO] [controller_server-10]: sending signal 'SIGINT' to process[controller_server-10]
+[INFO] [costmap_filter_info_server-9]: sending signal 'SIGINT' to process[costmap_filter_info_server-9]
+[INFO] [map_server-8]: sending signal 'SIGINT' to process[map_server-8]
+[INFO] [localization_slam_toolbox_node-7]: sending signal 'SIGINT' to process[localization_slam_toolbox_node-7]
+[INFO] [robot_hardware-6]: sending signal 'SIGINT' to process[robot_hardware-6]
+[INFO] [ekf_node-5]: sending signal 'SIGINT' to process[ekf_node-5]
+[INFO] [scan_to_scan_filter_chain-4]: sending signal 'SIGINT' to process[scan_to_scan_filter_chain-4]
+[INFO] [rplidar_node-3]: sending signal 'SIGINT' to process[rplidar_node-3]
+[INFO] [joint_state_publisher-2]: sending signal 'SIGINT' to process[joint_state_publisher-2]
+[INFO] [robot_state_publisher-1]: sending signal 'SIGINT' to process[robot_state_publisher-1]
+[battery_manager_node-26] Traceback (most recent call last):
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node", line 33, in <module>
+[battery_manager_node-26]     sys.exit(load_entry_point('battery-management==0.0.0', 'console_scripts', 'battery_manager_node')())
+[battery_manager_node-26]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/python3.12/site-packages/battery_management/battery_manager_node.py", line 311, in main
+[battery_manager_node-26]     rclpy.spin(node)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[battery_manager_node-26]     executor.spin_once()
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 845, in spin_once
+[battery_manager_node-26]     self._spin_once_impl(timeout_sec)
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 829, in _spin_once_impl
+[battery_manager_node-26]     handler, entity, node = self.wait_for_ready_callbacks(
+[battery_manager_node-26]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[battery_manager_node-26]     return next(self._cb_iter)
+[battery_manager_node-26]            ^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-26]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[battery_manager_node-26]     wait_set.wait(timeout_nsec)
+[battery_manager_node-26] KeyboardInterrupt
+[dock_coordinates-24] [INFO] [1774333985.913900150] [rclcpp]: signal_handler(signum=2)
+[rpc_run_node-23] [0m[INFO] [1774333985.919885224] [rpc_run_node]: RPC run node stopped by user.[0m
+[rpc_run_node-23] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[rpc_run_node-23] 2026-03-24 13:33:05,928 [INFO] RPCServer stopped.
+[robot_sound-21] [0m[INFO] [1774333985.952478371] [robot_sound_node]: 🔚 robot_sound_node stopped by user.[0m
+[robot_sound-21] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[delivery_robot_main_controller-20] Traceback (most recent call last):
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller", line 33, in <module>
+[delivery_robot_main_controller-20]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'delivery_robot_main_controller')())
+[delivery_robot_main_controller-20]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 1739, in main
+[delivery_robot_main_controller-20]     node = DeliveryRobotMainController()
+[delivery_robot_main_controller-20]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 180, in __init__
+[delivery_robot_main_controller-20]     self.navigator.waitUntilNav2Active()
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_navigator.py", line 258, in waitUntilNav2Active
+[delivery_robot_main_controller-20]     self._waitForNodeToActivate(node_name)
+[delivery_robot_main_controller-20]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_navigator.py", line 430, in _waitForNodeToActivate
+[delivery_robot_main_controller-20]     time.sleep(2)
+[delivery_robot_main_controller-20] KeyboardInterrupt
+[call_robot_button-22] [0m[INFO] [1774333985.991982601] [call_robot_button_node]: CallRobotButton interrupted by user.[0m
+[call_robot_button-22] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[lifecycle_manager-19] [INFO] [1774333986.015852315] [rclcpp]: signal_handler(signum=2)
+[lifecycle_manager-19] [INFO] [1774333986.016125889] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-19] [INFO] [1774333986.016241968] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[collision_detector-18] [INFO] [1774333986.044460858] [rclcpp]: signal_handler(signum=2)
+[collision_detector-18] [INFO] [1774333986.044689808] [collision_detector]: Running Nav2 LifecycleNode rcl preshutdown (collision_detector)
+[collision_detector-18] [INFO] [1774333986.044858093] [collision_detector]: Deactivating
+[collision_detector-18] [INFO] [1774333986.044912050] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[collision_monitor-17] [INFO] [1774333986.066874042] [rclcpp]: signal_handler(signum=2)
+[collision_monitor-17] [INFO] [1774333986.067126033] [collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[collision_monitor-17] [INFO] [1774333986.067309193] [collision_monitor]: Deactivating
+[collision_monitor-17] [INFO] [1774333986.067367816] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_monitor-17] [INFO] [1774333986.078311918] [collision_monitor]: Cleaning up
+[collision_monitor-17] [INFO] [1774333986.078419247] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_monitor-17] [INFO] [1774333986.078457162] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774333986.078493328] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774333986.078525410] [collision_monitor]: [FootprintApproach]: Destroying Polygon
+[collision_monitor-17] [INFO] [1774333986.078561867] [collision_monitor]: [scan]: Destroying Scan
+[collision_detector-18] [INFO] [1774333986.077740855] [collision_detector]: Cleaning up
+[collision_detector-18] [INFO] [1774333986.077797145] [collision_monitor]: [PolygonStop]: Destroying Circle
+[collision_detector-18] [INFO] [1774333986.077804728] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_detector-18] [INFO] [1774333986.077814352] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_detector-18] [INFO] [1774333986.077821644] [collision_monitor]: [scan]: Destroying Scan
+[collision_detector-18] [INFO] [1774333986.083198615] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1774333986.098388645] [rclcpp]: signal_handler(signum=2)
+[velocity_smoother-16] [INFO] [1774333986.099116619] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-16] [INFO] [1774333986.099312612] [velocity_smoother]: Deactivating
+[velocity_smoother-16] [INFO] [1774333986.099380859] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[velocity_smoother-16] [INFO] [1774333986.112927991] [velocity_smoother]: Cleaning up
+[velocity_smoother-16] [INFO] [1774333986.113036779] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[collision_monitor-17] [INFO] [1774333986.112889201] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1774333986.134485748] [rclcpp]: signal_handler(signum=2)
+[waypoint_follower-15] [INFO] [1774333986.134748822] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-15] [INFO] [1774333986.134841277] [waypoint_follower]: Deactivating
+[waypoint_follower-15] [INFO] [1774333986.134873651] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1774333986.145690299] [waypoint_follower]: Cleaning up
+[collision_monitor-17] [INFO] [1774333986.175925990] [collision_monitor]: Destroying
+[bt_navigator-14] [INFO] [1774333986.184643590] [rclcpp]: signal_handler(signum=2)
+[bt_navigator-14] [INFO] [1774333986.184878956] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-14] [INFO] [1774333986.185090990] [bt_navigator]: Deactivating
+[bt_navigator-14] [INFO] [1774333986.185165946] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-14] [INFO] [1774333986.196057258] [bt_navigator]: Cleaning up
+[waypoint_follower-15] [INFO] [1774333986.208248773] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[behavior_server-13] [INFO] [1774333986.217764635] [rclcpp]: signal_handler(signum=2)
+[behavior_server-13] [INFO] [1774333986.218024792] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-13] [INFO] [1774333986.218211160] [behavior_server]: Deactivating
+[behavior_server-13] [INFO] [1774333986.218269783] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[collision_detector-18] [INFO] [1774333986.217994460] [collision_detector]: Destroying
+[velocity_smoother-16] [INFO] [1774333986.221366004] [velocity_smoother]: Destroying
+[behavior_server-13] [INFO] [1774333986.239033069] [behavior_server]: Cleaning up
+[planner_server-12] [INFO] [1774333986.252162841] [rclcpp]: signal_handler(signum=2)
+[planner_server-12] [INFO] [1774333986.252307503] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-12] [INFO] [1774333986.252395875] [planner_server]: Deactivating
+[planner_server-12] [INFO] [1774333986.252427082] [global_costmap.global_costmap]: Deactivating
+[behavior_server-13] [INFO] [1774333986.271474555] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1774333986.275712318] [rclcpp]: signal_handler(signum=2)
+[smoother_server-11] [INFO] [1774333986.276386335] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-11] [INFO] [1774333986.276621410] [smoother_server]: Deactivating
+[smoother_server-11] [INFO] [1774333986.276689657] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[waypoint_follower-15] [INFO] [1774333986.283917186] [waypoint_follower]: Destroying
+[smoother_server-11] [INFO] [1774333986.288196072] [smoother_server]: Cleaning up
+[controller_server-10] [INFO] [1774333986.300269174] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1774333986.300582413] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-10] [INFO] [1774333986.300674576] [controller_server]: Deactivating
+[controller_server-10] [INFO] [1774333986.300706658] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774333986.300725616] [local_costmap.local_costmap]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1774333986.332705994] [rclcpp]: signal_handler(signum=2)
+[costmap_filter_info_server-9] [INFO] [1774333986.333044606] [keepout_costmap_filter_info_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_costmap_filter_info_server)
+[costmap_filter_info_server-9] [INFO] [1774333986.333234766] [keepout_costmap_filter_info_server]: Deactivating
+[costmap_filter_info_server-9] [INFO] [1774333986.333289598] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[behavior_server-13] [INFO] [1774333986.340626789] [behavior_server]: Destroying
+[smoother_server-11] [INFO] [1774333986.353189582] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[smoother_server-11] [INFO] [1774333986.359909921] [smoother_server]: Destroying
+[controller_server-10] [INFO] [1774333986.368276074] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[map_server-8] [INFO] [1774333986.379703450] [rclcpp]: signal_handler(signum=2)
+[map_server-8] [INFO] [1774333986.379901776] [keepout_filter_mask_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_filter_mask_server)
+[map_server-8] [INFO] [1774333986.379987523] [keepout_filter_mask_server]: Deactivating
+[map_server-8] [INFO] [1774333986.380002689] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[costmap_filter_info_server-9] [INFO] [1774333986.393956973] [keepout_costmap_filter_info_server]: Cleaning up
+[costmap_filter_info_server-9] [INFO] [1774333986.394094635] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[localization_slam_toolbox_node-7] [INFO] [1774333986.425924518] [rclcpp]: signal_handler(signum=2)
+[controller_server-10] [INFO] [1774333986.438848673] [controller_server]: Cleaning up
+[controller_server-10] [INFO] [1774333986.438983126] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774333986.439128663] [local_costmap.local_costmap]: Cleaning up
+[localization_slam_toolbox_node-7] Unregistering sensor: Custom Described Lidar
+[map_server-8] [INFO] [1774333986.450685242] [keepout_filter_mask_server]: Cleaning up
+[map_server-8] [INFO] [1774333986.450751448] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[robot_hardware-6] [INFO] [1774333986.479233412] [rclcpp]: signal_handler(signum=2)
+[scan_to_scan_filter_chain-4] [INFO] [1774333986.491133270] [rclcpp]: signal_handler(signum=2)
+[ekf_node-5] [INFO] [1774333986.502687225] [rclcpp]: signal_handler(signum=2)
+[robot_state_publisher-1] [INFO] [1774333986.507800831] [rclcpp]: signal_handler(signum=2)
+[map_server-8] [INFO] [1774333986.539978368] [keepout_filter_mask_server]: Destroying
+[costmap_filter_info_server-9] [INFO] [1774333986.549172825] [keepout_costmap_filter_info_server]: Destroying
+[planner_server-12] [INFO] [1774333986.601763370] [planner_server]: Deactivating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774333986.601832492] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-12] [INFO] [1774333986.612029955] [planner_server]: Cleaning up
+[controller_server-10] [INFO] [1774333986.633341846] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774333986.664292678] [local_costmap.local_costmap]: Destroying
+[rplidar_node-3] [INFO] [1774333986.673475760] [rplidar_node]: Stop motor
+[planner_server-12] [INFO] [1774333986.729373393] [global_costmap.global_costmap]: Cleaning up
+[planner_server-12] [INFO] [1774333986.752427346] [planner_server]: Cleaning up plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774333986.752861330] [planner_server]: Destroying plugin GridBased of type SmacPlanner2D
+[lifecycle_manager-19] [INFO] [1774333986.768203313] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1409, in main
+[autodock_action_server-25]     executor.spin()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 312, in spin
+[autodock_action_server-25]     self.spin_once()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 917, in spin_once
+[autodock_action_server-25]     self._spin_once_impl(timeout_sec)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 896, in _spin_once_impl
+[autodock_action_server-25]     handler, entity, node = self.wait_for_ready_callbacks(
+[autodock_action_server-25]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 799, in wait_for_ready_callbacks
+[autodock_action_server-25]     return next(self._cb_iter)
+[autodock_action_server-25]            ^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 703, in _wait_for_ready_callbacks
+[autodock_action_server-25]     wait_set.wait(timeout_nsec)
+[autodock_action_server-25] KeyboardInterrupt
+[autodock_action_server-25] 
+[autodock_action_server-25] During handling of the above exception, another exception occurred:
+[autodock_action_server-25] 
+[autodock_action_server-25] Traceback (most recent call last):
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server", line 33, in <module>
+[autodock_action_server-25]     sys.exit(load_entry_point('action-autodock==0.0.0', 'console_scripts', 'autodock_action_server')())
+[autodock_action_server-25]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1420, in main
+[autodock_action_server-25]     rclpy.shutdown()   
+[autodock_action_server-25]     ^^^^^^^^^^^^^^^^
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[autodock_action_server-25]     _shutdown(context=context)
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[autodock_action_server-25]     context.shutdown()
+[autodock_action_server-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[autodock_action_server-25]     self.__context.shutdown()
+[autodock_action_server-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[controller_server-10] [INFO] [1774333986.802207201] [controller_server]: Destroying
+[planner_server-12] [INFO] [1774333986.878839829] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-12] [INFO] [1774333986.902307350] [global_costmap.global_costmap]: Destroying
+[planner_server-12] [INFO] [1774333986.974883626] [planner_server]: Destroying
+[robot_sound-21] Traceback (most recent call last):
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound", line 33, in <module>
+[robot_sound-21]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'robot_sound')())
+[robot_sound-21]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 147, in main
+[robot_sound-21]     rclpy.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[robot_sound-21]     _shutdown(context=context)
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[robot_sound-21]     context.shutdown()
+[robot_sound-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-21]     self.__context.shutdown()
+[robot_sound-21] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[rpc_run_node-23] Traceback (most recent call last):
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node", line 33, in <module>
+[rpc_run_node-23]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'rpc_run_node')())
+[rpc_run_node-23]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rpc_run_node-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/rpc_run_node.py", line 57, in main
+[rpc_run_node-23]     rclpy.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[rpc_run_node-23]     _shutdown(context=context)
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[rpc_run_node-23]     context.shutdown()
+[rpc_run_node-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[rpc_run_node-23]     self.__context.shutdown()
+[rpc_run_node-23] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[bt_navigator-14] [INFO] [1774333987.224679161] [bt_navigator]: Completed Cleaning up
+[bt_navigator-14] [INFO] [1774333987.224872529] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[bt_navigator-14] [INFO] [1774333987.280541795] [bt_navigator]: Destroying
+[ERROR] [battery_manager_node-26]: process has died [pid 5946, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node --ros-args -r __node:=battery_manager -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/share/battery_management/config/battery_manager.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [robot_sound-21]: process has died [pid 5941, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound --ros-args -r __node:=robot_sound_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[call_robot_button-22] Traceback (most recent call last):
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button", line 33, in <module>
+[call_robot_button-22]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'call_robot_button')())
+[call_robot_button-22]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[call_robot_button-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/call_button.py", line 251, in main
+[call_robot_button-22]     rclpy.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[call_robot_button-22]     _shutdown(context=context)
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[call_robot_button-22]     context.shutdown()
+[call_robot_button-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[call_robot_button-22]     self.__context.shutdown()
+[call_robot_button-22] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[INFO] [collision_detector-18]: process has finished cleanly [pid 5688]
+[ERROR] [rpc_run_node-23]: process has died [pid 5943, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node --ros-args -r __node:=rpc_run_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [collision_monitor-17]: process has finished cleanly [pid 5678]
+[INFO] [velocity_smoother-16]: process has finished cleanly [pid 5677]
+[ERROR] [call_robot_button-22]: process has died [pid 5942, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button --ros-args -r __node:=call_robot_button_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [smoother_server-11]: process has finished cleanly [pid 5644]
+[INFO] [map_server-8]: process has finished cleanly [pid 5634]
+[INFO] [robot_hardware-6]: process has finished cleanly [pid 5632]
+[INFO] [costmap_filter_info_server-9]: process has finished cleanly [pid 5635]
+[INFO] [joint_state_publisher-2]: process has finished cleanly [pid 5628]
+[INFO] [behavior_server-13]: process has finished cleanly [pid 5660]
+[INFO] [waypoint_follower-15]: process has finished cleanly [pid 5671]
+[INFO] [lifecycle_manager-19]: process has finished cleanly [pid 5693]
+[INFO] [controller_server-10]: process has finished cleanly [pid 5638]
+[INFO] [planner_server-12]: process has finished cleanly [pid 5655]
+[ERROR] [autodock_action_server-25]: process has died [pid 5945, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server --ros-args -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config/auto_dock_config.yaml --params-file /tmp/launch_params__d3dswda -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [delivery_robot_main_controller-20]: process has died [pid 5940, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller --ros-args -r __node:=main_controller_node -r __ns:=/ --params-file /tmp/launch_params_u981mnux -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [bt_navigator-14]: process has finished cleanly [pid 5667]
+[INFO] [robot_state_publisher-1]: process has finished cleanly [pid 5627]
+[INFO] [scan_to_scan_filter_chain-4]: process has finished cleanly [pid 5630]
+[INFO] [rplidar_node-3]: process has finished cleanly [pid 5629]
+[INFO] [ekf_node-5]: process has finished cleanly [pid 5631]
+[INFO] [localization_slam_toolbox_node-7]: process has finished cleanly [pid 5633]

@@ -84,6 +84,7 @@ def add_request_queue(target: str):
         "action": "Request",
         "target": target,
         "boxNumber": "1",
+        "priority": "Normal",
         "sender": "api_client",
         "status": "queued",
     }
@@ -121,6 +122,13 @@ def remove_request_queue_by_target(target: str) -> int:
 # Station APIs
 def get_station_list():
     url = f"{API_BASE_URL}/api/station/list"
+    response = requests.get(url, timeout=3)
+    response.raise_for_status()
+    return response.json()
+
+# Route APIs
+def get_route_list():
+    url = f"{API_BASE_URL}/api/route/list"
     response = requests.get(url, timeout=3)
     response.raise_for_status()
     return response.json()

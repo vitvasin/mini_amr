@@ -1,0 +1,686 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-24-11-38-19-476617-two-6763
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [6778]
+[INFO] [joint_state_publisher-2]: process started with pid [6779]
+[INFO] [rplidar_node-3]: process started with pid [6780]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [6781]
+[INFO] [ekf_node-5]: process started with pid [6782]
+[INFO] [robot_hardware-6]: process started with pid [6783]
+[INFO] [localization_slam_toolbox_node-7]: process started with pid [6784]
+[INFO] [map_server-8]: process started with pid [6785]
+[INFO] [costmap_filter_info_server-9]: process started with pid [6786]
+[INFO] [controller_server-10]: process started with pid [6787]
+[INFO] [smoother_server-11]: process started with pid [6788]
+[INFO] [planner_server-12]: process started with pid [6789]
+[INFO] [behavior_server-13]: process started with pid [6792]
+[INFO] [bt_navigator-14]: process started with pid [6793]
+[INFO] [waypoint_follower-15]: process started with pid [6794]
+[INFO] [velocity_smoother-16]: process started with pid [6797]
+[INFO] [collision_monitor-17]: process started with pid [6798]
+[INFO] [collision_detector-18]: process started with pid [6799]
+[INFO] [lifecycle_manager-19]: process started with pid [6802]
+[rplidar_node-3] [INFO] [1774327100.581725025] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1774327100.613133159] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1774327100.613197032] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1774327100.613211323] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1774327100.614352573] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1774327100.614407112] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1774327100.618473962] [rplidar_node]: Start
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[velocity_smoother-16] [INFO] [1774327100.685382455] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774327100.746942853] [lifecycle_manager_navigation]: Creating
+[robot_state_publisher-1] [INFO] [1774327100.747794779] [robot_state_publisher]: Robot initialized
+[bt_navigator-14] [INFO] [1774327100.756794989] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rplidar_node-3] [INFO] [1774327100.764171259] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[smoother_server-11] [INFO] [1774327100.786245821] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774327100.821116202] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774327100.825437376] [keepout_filter_mask_server]: Creating
+[bt_navigator-14] [INFO] [1774327100.850429080] [bt_navigator]: Creating
+[smoother_server-11] [INFO] [1774327100.851800738] [smoother_server]: Creating smoother server
+[collision_detector-18] [INFO] [1774327100.854556886] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[controller_server-10] [INFO] [1774327100.857525360] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1774327100.866909389] [waypoint_follower]: 
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774327100.870533214] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774327100.888616173] [costmap_filter_info_server]: This is costmap filter info publisher
+[waypoint_follower-15] [INFO] [1774327100.893358790] [waypoint_follower]: Creating
+[collision_monitor-17] [INFO] [1774327100.930898698] [collision_monitor]: 
+[costmap_filter_info_server-9] [INFO] [1774327100.931834621] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774327100.938335632] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774327100.978289868] [planner_server]: Creating
+[behavior_server-13] [INFO] [1774327100.999269261] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[localization_slam_toolbox_node-7] [INFO] [1774327101.025695037] [slam_toolbox]: Node using stack size 40000000
+[controller_server-10] [INFO] [1774327101.045498766] [controller_server]: Creating controller server
+[planner_server-12] [INFO] [1774327101.106465060] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774327101.117922180] [global_costmap.global_costmap]: Creating Costmap
+[controller_server-10] [INFO] [1774327101.236441520] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774327101.244034198] [local_costmap.local_costmap]: Creating Costmap
+[localization_slam_toolbox_node-7] [INFO] [1774327101.284600328] [slam_toolbox]: Configuring
+[lifecycle_manager-19] [INFO] [1774327101.374573846] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1774327101.374712091] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1774327101.375361317] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1774327101.375396024] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1774327101.375698762] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1774327101.376053416] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1774327101.376117872] [local_costmap.local_costmap]: Configuring
+[localization_slam_toolbox_node-7] [INFO] [1774327101.383978291] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[localization_slam_toolbox_node-7] [INFO] [1774327101.395445035] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[controller_server-10] [INFO] [1774327101.399971243] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774327101.434303228] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1774327101.459737373] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774327101.459916450] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1774327101.462934797] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1774327101.462992254] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1774327101.467654373] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1774327101.467715038] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774327101.482728026] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774327101.482793649] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774327101.482909728] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774327101.538602300] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1774327101.539756674] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1774327101.541602565] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1774327101.543333542] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1774327101.551063299] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1774327101.560200587] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1774327101.568616319] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1774327101.568680483] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1774327101.572543466] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1774327101.572597131] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1774327101.573970538] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1774327101.574018370] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1774327101.575229617] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1774327101.575274532] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1774327101.577601946] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1774327101.577650653] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1774327101.579182138] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1774327101.581207688] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1774327101.581255228] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1774327101.582340480] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1774327101.582389478] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1774327101.583807509] [controller_server]: Optimizer reset
+[rplidar_node-3] [INFO] [1774327101.585911515] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[controller_server-10] [INFO] [1774327101.593706311] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774327101.593745393] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1774327101.616254230] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774327101.617151655] [smoother_server]: Configuring smoother server
+[scan_to_scan_filter_chain-4] [WARN] [1774327101.651819336] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[smoother_server-11] [INFO] [1774327101.676448511] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1774327101.694460889] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1774327101.734993479] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1774327101.735612081] [planner_server]: Configuring
+[planner_server-12] [INFO] [1774327101.735665746] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1774327101.747361731] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1774327101.763835916] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1774327101.769026224] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1774327101.772648591] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774327101.780148231] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1774327101.807366145] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774327101.807486307] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1774327101.814830203] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1774327101.814936949] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774327101.832094775] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774327101.832155148] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774327101.841936412] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[joint_state_publisher-2] [INFO] [1774327101.860047370] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[planner_server-12] [INFO] [1774327101.918908200] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1774327101.918978198] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1774327101.924662572] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1774327101.931378824] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1774327101.931459321] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1774327101.958118422] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774327101.958737316] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1774327101.976941603] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1774327102.013411134] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1774327102.028879689] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774327102.029223843] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1774327102.035744686] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774327102.036235251] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1774327102.066912204] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1774327102.077540437] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1774327102.077651850] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1774327102.088663610] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1774327102.096423408] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1774327102.097471036] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1774327102.104470486] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1774327102.129561062] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774327102.129888008] [collision_detector]: Configuring
+[localization_slam_toolbox_node-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[localization_slam_toolbox_node-7] Mapper <- Module
+[localization_slam_toolbox_node-7] Mapper <- m_pSequentialScanMatcher
+[localization_slam_toolbox_node-7] Mapper <- m_pGraph
+[localization_slam_toolbox_node-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[localization_slam_toolbox_node-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[localization_slam_toolbox_node-7] Mapper <- m_pMapperSensorManager
+[localization_slam_toolbox_node-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[localization_slam_toolbox_node-7] Mapper <- m_Listeners
+[localization_slam_toolbox_node-7] **Finished serializing Mapper**
+[localization_slam_toolbox_node-7] Load From File
+[localization_slam_toolbox_node-7] **Serializing Dataset**
+[localization_slam_toolbox_node-7] Dataset <- m_SensorNameLookup
+[localization_slam_toolbox_node-7] Dataset <- m_Data
+[localization_slam_toolbox_node-7] Dataset <- m_Lasers
+[localization_slam_toolbox_node-7] Dataset <- m_pDatasetInfo
+[localization_slam_toolbox_node-7] **Finished serializing Dataset**
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[localization_slam_toolbox_node-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[localization_slam_toolbox_node-7] W20260324 11:38:22.151578  6784 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[collision_detector-18] [INFO] [1774327102.155201991] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1774327102.161186771] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1774327102.161220603] [collision_monitor]: [PolygonStop]: Creating Circle
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[localization_slam_toolbox_node-7] [INFO] [1774327102.174386826] [slam_toolbox]: Activating
+[collision_detector-18] [INFO] [1774327102.183365745] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1774327102.195349887] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774327102.195684708] [bt_navigator]: Configuring
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[bt_navigator-14] [INFO] [1774327102.207604393] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-14] [INFO] [1774327102.436495374] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-19] [INFO] [1774327102.491116403] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774327102.491492056] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1774327102.546285161] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1774327102.549554916] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774327102.549946026] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1774327102.550125686] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1774327102.551865414] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1774327102.551934536] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1774327102.551955535] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1774327102.551972743] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1774327102.551990242] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1774327102.552007450] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1774327102.552029324] [map_io]: mode: trinary
+[map_server-8] [INFO] [1774327102.552048574] [map_io]: negate: 0
+[planner_server-12] [INFO] [1774327102.552532139] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[map_server-8] [INFO] [1774327102.558779117] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1774327102.574238922] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1774327102.588756679] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774327102.589130874] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1774327102.598733645] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1774327102.599116006] [controller_server]: Activating
+[controller_server-10] [INFO] [1774327102.599171129] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1774327102.599185128] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1774327102.600063887] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1774327102.602316054] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1774327102.702894764] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1774327102.706925157] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1774327102.707460929] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774327102.707779126] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774327102.707812666] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327102.817004850] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327102.817072223] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774327102.817647368] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1774327102.817782988] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327102.928624195] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327102.928694484] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1774327102.929306378] [planner_server]: Activating
+[planner_server-12] [INFO] [1774327102.929435581] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1774327102.929477871] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1774327102.929887065] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1774327102.932972493] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1774327103.479264442] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1774327103.537732412] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774327103.540000912] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327103.648594326] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327103.648668990] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774327103.649127473] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1774327103.649177638] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1774327103.649207679] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327103.758358447] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327103.758423195] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774327103.758977341] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1774327103.759088170] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327103.865216226] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1774327103.865282141] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774327103.865792247] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1774327103.865853203] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327103.972873488] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1774327103.972940861] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774327103.973395261] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1774327103.973494424] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327104.092612895] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1774327104.092682600] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774327104.093153625] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1774327104.203439291] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327104.315529725] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1774327104.315599723] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774327104.316178952] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1774327104.316247491] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327104.424238990] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1774327104.424324154] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774327104.425221872] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1774327104.426219044] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774327104.531926876] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327104.531995123] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774327104.532491814] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1774327104.532620434] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-10] [INFO] [1774327104.532702390] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774327104.532764804] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774327104.532730680] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774327104.532777637] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774327104.554303314] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-10] [INFO] [1774327104.564627356] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1774327104.644794574] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774327104.644859905] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1774327104.644876237] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [delivery_robot_main_controller-20]: process started with pid [7068]
+[INFO] [robot_sound-21]: process started with pid [7069]
+[INFO] [call_robot_button-22]: process started with pid [7070]
+[INFO] [rpc_run_node-23]: process started with pid [7071]
+[INFO] [dock_coordinates-24]: process started with pid [7072]
+[INFO] [autodock_action_server-25]: process started with pid [7073]
+[INFO] [battery_manager_node-26]: process started with pid [7074]
+[dock_coordinates-24] [INFO] [1774327105.787129512] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1774327105.788383634] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1774327105.788493880] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1774327105.788499713] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1774327105.788504963] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1774327105.788509337] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1774327105.788513712] [dock coordinates]: range_limit: 1.200000
+[rpc_run_node-23] [0m[INFO] [1774327107.020623311] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-24 11:38:27,023 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1774327107.033637589] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-26] [INFO] [1774327107.490915252] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[robot_sound-21] [0m[INFO] [1774327107.555769942] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1774327107.556595912] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [0m[INFO] [1774327107.557658706] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1774327107.558643337] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [33m[WARN] [1774327107.560669764] [robot_sound_node]: Map not available yet; skipping obstacle classification.[0m
+[robot_sound-21] [0m[INFO] [1774327107.565312345] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[autodock_action_server-25] [INFO] [1774327107.907621512] [autodock_action_server]: auto_dock_init_start
+[autodock_action_server-25] [INFO] [1774327107.976169442] [autodock_action_server]: auto_dock_init_complete
+[delivery_robot_main_controller-20] [0m[INFO] [1774327107.978729016] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327108.030543470] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327108.040580523] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774327108.076251229] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774327108.127708696] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[call_robot_button-22] 2026-03-24 11:38:28 mosquitto_pub -u smr -P smrbot25 -m "Packing,blink" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1774327109.064446217] [call_robot_button_node]: call_switch notified: station=Packing status=blink.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327109.278324334] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [7182]
+[delivery_robot_main_controller-20] [0m[INFO] [1774327111.305660796] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327111.308274035] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327113.315035618] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327113.343199971] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774327113.367704916] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327114.373172653] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.374121762] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.443605033] [main_controller_node]: 1 pending queues [0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.444601622] [main_controller_node]: Queue action: Request[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.481880228] [main_controller_node]: AGV start_pos: x=-0.28, y=-0.14[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.485392934] [main_controller_node]: AGV goal_pos: x=-0.32, y=-7.98[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.509446686] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.510047206] [main_controller_node]:   Waypoint 0: x=-0.28, y=-0.14[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.510602811] [main_controller_node]:   Waypoint 1: x=1.99, y=-1.51[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.511131875] [main_controller_node]:   Waypoint 2: x=2.11, y=-6.76[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.511666773] [main_controller_node]:   Waypoint 3: x=-0.34, y=-6.81[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.512211878] [main_controller_node]:   Waypoint 4: x=-0.32, y=-7.98[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.513419042] [main_controller_node]: Navigating with 5 goals....[0m
+[bt_navigator-14] [INFO] [1774327115.517585058] [bt_navigator]: Begin navigating from current location through 5 poses to (-0.32, -7.98)
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.518442235] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[controller_server-10] [INFO] [1774327115.518152037] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774327115.521542248] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774327115.524683384] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774327115.524731215] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774327115.528172465] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1774327115.532534182] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[delivery_robot_main_controller-20] [0m[INFO] [1774327115.536899107] [main_controller_node]: Robot is MOVING.[0m
+[planner_server-12] [INFO] [1774327115.542985386] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774327115.543037593] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1774327115.551775609] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774327115.570916415] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774327116.051441402] [planner_server]: GridBased plugin failed to plan from (-0.28, -0.14) to (1.99, -1.51): "Start occupied"
+[planner_server-12] [WARN] [1774327116.051656644] [planner_server]: [compute_path_through_poses] [ActionServer] Aborting handle.
+[bt_navigator-14] [WARN] [1774327116.078049770] [bt_navigator]: [navigate_through_poses] [ActionServer] Aborting handle.
+[bt_navigator-14] [ERROR] [1774327116.078315760] [bt_navigator]: Goal failed
+[delivery_robot_main_controller-20] [33m[WARN] [1774327116.092541286] [main_controller_node]: Goal failed![0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774327116.097524522] [main_controller_node]: Blocked lane encountered; stopping with FAILED per setting.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327116.101782409] [main_controller_node]: State change: MOVE -> SAFE_STOP[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327116.120371985] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327116.121519360] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327116.349984947] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327117.128762990] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327117.353416925] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327117.466496948] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327117.482170838] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327118.326877448] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327119.354674666] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327120.349588827] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327121.377573872] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327122.320507336] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327123.325498215] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327124.324343025] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327125.339023886] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327126.384188058] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327127.402206631] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327128.321634364] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327129.323624102] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327130.326576597] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327131.331877798] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327132.371486505] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327133.325388862] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327134.322682062] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327135.324896084] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327136.124569244] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327136.330224992] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327136.525733150] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327136.554903134] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327137.406626989] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327138.321766794] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327139.324512505] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327140.408918712] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327141.395590089] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327142.329579043] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327143.334846412] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327144.327798311] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327145.323565567] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327146.361838780] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327147.385237242] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327148.362395089] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[call_robot_button-22] 2026-03-24 11:39:08 mosquitto_pub -u smr -P smrbot25 -m "Packing,false" -t "Rsp" -r
+[call_robot_button-22] [0m[INFO] [1774327148.977992426] [call_robot_button_node]: call_switch notified: station=Packing status=false.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327149.321506715] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327150.328433316] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327151.327014469] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327152.384711103] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327153.398632200] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327154.324664193] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327155.321886812] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327156.122312153] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327156.323918549] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327156.460601716] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327156.490152311] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327157.344074670] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327158.390854908] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327159.356460841] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327160.324779758] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327161.401918187] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327162.328510160] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327163.394374914] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327164.357530353] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327165.323203658] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327166.324437715] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327167.367440715] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327168.372085690] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327169.327680236] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327170.326791620] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327171.322076476] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327172.340221045] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327173.336365703] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327174.324513735] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327175.336484528] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327176.165999938] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327176.321379719] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327176.518447946] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327176.546738294] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327177.323660530] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327178.330445969] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327179.340903941] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327180.347804293] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327181.326319216] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327182.322900483] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327183.367718167] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327184.326443641] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327185.338882542] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327186.320698720] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327187.330198602] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327188.335378183] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327189.324612634] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327190.325578950] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327191.332620463] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327192.326694655] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327193.385385253] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327194.372087546] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327195.330806895] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327196.127554453] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327196.327062382] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327196.437679078] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327196.467733655] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327197.321406939] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327198.323080522] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327199.367481138] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327200.344899726] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327201.382931448] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327202.326697590] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327203.321985363] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327204.363966983] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327205.330337055] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327206.349975486] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327207.326803470] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327208.323590064] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327209.326618681] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327210.337669298] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327211.374507564] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327212.338982746] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327213.325172015] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327214.320736570] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327215.343251021] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327216.124674677] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327216.329169926] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327216.360837069] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327216.390660362] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327217.350995194] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327218.324136354] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327219.324995924] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327220.330778941] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327221.395065545] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327222.344148285] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327223.322363385] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327224.325329296] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327225.384198971] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327226.391491892] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327227.394130273] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327228.328943447] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327229.325466675] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327230.329650542] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327231.363906193] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327232.402417981] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327233.334172568] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327234.322701562] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327235.325948107] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327236.174546044] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327236.353061454] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327236.538337162] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327236.549866327] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327237.362191286] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327238.371195997] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327239.322852077] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327240.322009020] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327241.323874573] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327242.378435676] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327243.403643634] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327244.324898939] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327245.332319958] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327246.325365830] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327247.331250696] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327248.418568863] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327249.361644420] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327250.323970446] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327251.326559015] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327252.378713080] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327253.337331283] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327254.360778221] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327255.361822762] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327256.191146313] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327256.327140014] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327256.479129593] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327256.490040156] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327257.402100711] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327258.328790445] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327259.351144840] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327260.357180783] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327261.324765953] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327262.324894985] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327263.355074805] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327264.381171730] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327265.400841722] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327266.322344352] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327267.321354592] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327268.388299996] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327269.335136167] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327270.327198867] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327271.324315092] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327272.322779060] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327273.326859449] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327274.370057922] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327275.390590341] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327276.156356486] [main_controller_node]: Published message: "safe_stop"[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327276.355773139] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] [0m[INFO] [1774327276.391708380] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327276.424358697] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327277.325126328] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327278.372432486] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327279.326584267] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327280.328966634] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327281.337429740] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327282.338099211] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327283.321644095] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327284.326619577] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327285.375258311] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327286.331316356] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327287.351705572] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327288.325291566] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327289.354441839] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327290.330058926] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327291.401615122] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327292.372119769] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327293.323519483] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327294.328443925] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327295.356269788] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327296.125289648] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774327296.355634098] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327296.370639513] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774327296.383336470] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774327297.392004319] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327298.320621430] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327299.323380963] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327300.354329918] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327301.412611411] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327302.324957016] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327303.324562582] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327304.322325173] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327305.322871912] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327306.345839703] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327307.411826163] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327308.352161406] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327309.323450387] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327310.328061060] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774327311.339640560] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m

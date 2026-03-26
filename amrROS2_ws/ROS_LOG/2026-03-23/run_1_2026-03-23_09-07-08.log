@@ -1,0 +1,1672 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-03-23-09-07-09-486506-two-4146
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [robot_state_publisher-1]: process started with pid [4181]
+[INFO] [joint_state_publisher-2]: process started with pid [4182]
+[INFO] [rplidar_node-3]: process started with pid [4183]
+[INFO] [scan_to_scan_filter_chain-4]: process started with pid [4184]
+[INFO] [ekf_node-5]: process started with pid [4185]
+[INFO] [robot_hardware-6]: process started with pid [4186]
+[INFO] [localization_slam_toolbox_node-7]: process started with pid [4187]
+[INFO] [map_server-8]: process started with pid [4188]
+[INFO] [costmap_filter_info_server-9]: process started with pid [4189]
+[INFO] [controller_server-10]: process started with pid [4190]
+[INFO] [smoother_server-11]: process started with pid [4195]
+[INFO] [planner_server-12]: process started with pid [4196]
+[INFO] [behavior_server-13]: process started with pid [4197]
+[INFO] [bt_navigator-14]: process started with pid [4200]
+[INFO] [waypoint_follower-15]: process started with pid [4203]
+[INFO] [velocity_smoother-16]: process started with pid [4204]
+[INFO] [collision_monitor-17]: process started with pid [4205]
+[INFO] [collision_detector-18]: process started with pid [4206]
+[INFO] [lifecycle_manager-19]: process started with pid [4207]
+[rplidar_node-3] [INFO] [1774231630.585144566] [rplidar_node]: RPLidar running on ROS2 package rplidar_ros. RPLIDAR SDK Version:2.1.0
+[rplidar_node-3] [INFO] [1774231630.639139457] [rplidar_node]: RPLidar S/N: CEDCEDF9C7E29BCEA7E39EF25E0F4304
+[rplidar_node-3] [INFO] [1774231630.639270117] [rplidar_node]: Firmware Ver: 1.02
+[rplidar_node-3] [INFO] [1774231630.639306573] [rplidar_node]: Hardware Rev: 18
+[rplidar_node-3] [INFO] [1774231630.640142446] [rplidar_node]: RPLidar health status : 0
+[rplidar_node-3] [INFO] [1774231630.640247149] [rplidar_node]: RPLidar health status : OK.
+[rplidar_node-3] [INFO] [1774231630.644024035] [rplidar_node]: Start
+[robot_state_publisher-1] [INFO] [1774231630.681003981] [robot_state_publisher]: Robot initialized
+[robot_hardware-6] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-6] Created receive data thread
+[behavior_server-13] [INFO] [1774231630.746118666] [behavior_server]: 
+[behavior_server-13] 	behavior_server lifecycle node launched. 
+[behavior_server-13] 	Waiting on external lifecycle transitions to activate
+[behavior_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774231630.765042179] [lifecycle_manager_navigation]: Creating
+[bt_navigator-14] [INFO] [1774231630.779237438] [bt_navigator]: 
+[bt_navigator-14] 	bt_navigator lifecycle node launched. 
+[bt_navigator-14] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[rplidar_node-3] [INFO] [1774231630.788608199] [rplidar_node]: current scan mode: Sensitivity, sample rate: 32 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[velocity_smoother-16] [INFO] [1774231630.811739659] [velocity_smoother]: 
+[velocity_smoother-16] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-16] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774231630.821638892] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[bt_navigator-14] [INFO] [1774231630.823000321] [bt_navigator]: Creating
+[costmap_filter_info_server-9] [INFO] [1774231630.858487886] [costmap_filter_info_server]: This is costmap filter info publisher
+[localization_slam_toolbox_node-7] [INFO] [1774231630.895373628] [slam_toolbox]: Node using stack size 40000000
+[waypoint_follower-15] [INFO] [1774231630.919496702] [waypoint_follower]: 
+[smoother_server-11] [INFO] [1774231630.921384270] [smoother_server]: 
+[smoother_server-11] 	smoother_server lifecycle node launched. 
+[smoother_server-11] 	Waiting on external lifecycle transitions to activate
+[smoother_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774231630.927321127] [keepout_filter_mask_server]: 
+[map_server-8] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-8] 	Waiting on external lifecycle transitions to activate
+[map_server-8] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-8] [INFO] [1774231630.927440996] [keepout_filter_mask_server]: Creating
+[waypoint_follower-15] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-15] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-15] [INFO] [1774231630.952185288] [waypoint_follower]: Creating
+[planner_server-12] [INFO] [1774231630.968559767] [planner_server]: 
+[planner_server-12] 	planner_server lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-11] [INFO] [1774231630.982361005] [smoother_server]: Creating smoother server
+[planner_server-12] [INFO] [1774231630.999299246] [planner_server]: Creating
+[collision_monitor-17] [INFO] [1774231631.135437184] [collision_monitor]: 
+[collision_monitor-17] 	collision_monitor lifecycle node launched. 
+[collision_monitor-17] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_detector-18] [INFO] [1774231631.219021864] [collision_detector]: 
+[collision_detector-18] 	collision_detector lifecycle node launched. 
+[collision_detector-18] 	Waiting on external lifecycle transitions to activate
+[collision_detector-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774231631.261172789] [controller_server]: 
+[controller_server-10] 	controller_server lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774231631.277560101] [global_costmap.global_costmap]: 
+[planner_server-12] 	global_costmap lifecycle node launched. 
+[planner_server-12] 	Waiting on external lifecycle transitions to activate
+[planner_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-12] [INFO] [1774231631.301021710] [global_costmap.global_costmap]: Creating Costmap
+[localization_slam_toolbox_node-7] [INFO] [1774231631.309886456] [slam_toolbox]: Configuring
+[costmap_filter_info_server-9] [INFO] [1774231631.338916857] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-9] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-9] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] [INFO] [1774231631.356470191] [controller_server]: Creating controller server
+[costmap_filter_info_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-10] [INFO] [1774231631.471227745] [local_costmap.local_costmap]: 
+[controller_server-10] 	local_costmap lifecycle node launched. 
+[controller_server-10] 	Waiting on external lifecycle transitions to activate
+[controller_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[lifecycle_manager-19] [INFO] [1774231631.473664784] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-19] [INFO] [1774231631.474617318] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-10] [INFO] [1774231631.484560591] [local_costmap.local_costmap]: Creating Costmap
+[controller_server-10] [INFO] [1774231631.509179473] [controller_server]: Configuring controller interface
+[controller_server-10] [INFO] [1774231631.511228032] [controller_server]: getting progress checker plugins..
+[controller_server-10] [INFO] [1774231631.513213012] [controller_server]: getting goal checker plugins..
+[controller_server-10] [INFO] [1774231631.517593617] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-10] [INFO] [1774231631.518592523] [local_costmap.local_costmap]: Configuring
+[controller_server-10] [INFO] [1774231631.542140169] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[localization_slam_toolbox_node-7] [INFO] [1774231631.550201415] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[localization_slam_toolbox_node-7] [INFO] [1774231631.557470828] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[controller_server-10] [INFO] [1774231631.572382383] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-10] [INFO] [1774231631.605050553] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-10] [INFO] [1774231631.606825835] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-10] [INFO] [1774231631.616479498] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-10] [INFO] [1774231631.616559411] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-10] [INFO] [1774231631.619840198] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-10] [INFO] [1774231631.619906986] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[rplidar_node-3] [INFO] [1774231631.642941326] [rplidar_node]: set lidar scan frequency to 10.0 Hz(600.0 Rpm) 
+[controller_server-10] [INFO] [1774231631.644430206] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-10] [INFO] [1774231631.644586823] [local_costmap.local_costmap]: Using costmap filter "inflation_layer"
+[controller_server-10] [INFO] [1774231631.644711650] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer"
+[scan_to_scan_filter_chain-4] [WARN] [1774231631.670059077] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[controller_server-10] [INFO] [1774231631.691705448] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-10] [INFO] [1774231631.693322363] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-10] [INFO] [1774231631.696070012] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-10] [INFO] [1774231631.697313613] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[controller_server-10] [INFO] [1774231631.706689624] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-10] [INFO] [1774231631.718582295] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-10] [INFO] [1774231631.748764137] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-10] [INFO] [1774231631.748840841] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-10] [INFO] [1774231631.756526732] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-10] [INFO] [1774231631.756597020] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-10] [INFO] [1774231631.759887140] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-10] [INFO] [1774231631.760041132] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-10] [INFO] [1774231631.767874890] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-10] [INFO] [1774231631.768039089] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-10] [INFO] [1774231631.776439526] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-10] [INFO] [1774231631.776629100] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-10] [INFO] [1774231631.781114407] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-10] [INFO] [1774231631.784534312] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-10] [INFO] [1774231631.784587101] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-10] [INFO] [1774231631.786292095] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-10] [INFO] [1774231631.786351009] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-10] [INFO] [1774231631.787920677] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774231631.798143060] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774231631.798185058] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-19] [INFO] [1774231631.820857750] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774231631.821558588] [smoother_server]: Configuring smoother server
+[smoother_server-11] [INFO] [1774231631.884976446] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-11] [INFO] [1774231631.892733208] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-19] [INFO] [1774231631.925854021] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-12] [INFO] [1774231631.926834553] [planner_server]: Configuring
+[planner_server-12] [INFO] [1774231631.926959963] [global_costmap.global_costmap]: Configuring
+[planner_server-12] [INFO] [1774231631.969195759] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-12] [INFO] [1774231631.985506366] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-12] [INFO] [1774231631.989345666] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-12] [INFO] [1774231631.989405455] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774231631.996035275] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[planner_server-12] [INFO] [1774231632.021221711] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-12] [INFO] [1774231632.022003629] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-12] [INFO] [1774231632.033983212] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-12] [INFO] [1774231632.034042709] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774231632.042769795] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-12] [INFO] [1774231632.042828709] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-12] [INFO] [1774231632.049255248] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[joint_state_publisher-2] [INFO] [1774231632.105785757] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[planner_server-12] [INFO] [1774231632.154294975] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-12] [INFO] [1774231632.154378388] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-12] [ERROR] [1774231632.162561836] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-12] [INFO] [1774231632.169495557] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-12] [INFO] [1774231632.169573428] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-19] [INFO] [1774231632.197925448] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774231632.198636495] [behavior_server]: Configuring
+[behavior_server-13] [INFO] [1774231632.219160007] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-13] [INFO] [1774231632.259647353] [behavior_server]: Configuring wait
+[lifecycle_manager-19] [INFO] [1774231632.282619862] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774231632.283216873] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-19] [INFO] [1774231632.292857120] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774231632.293387925] [collision_monitor]: Configuring
+[collision_monitor-17] [INFO] [1774231632.328598130] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-17] [INFO] [1774231632.342881759] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-17] [INFO] [1774231632.342991129] [collision_monitor]: [PolygonStop]: Creating Circle
+[collision_monitor-17] [INFO] [1774231632.354720183] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-17] [INFO] [1774231632.366161961] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-17] [INFO] [1774231632.367186241] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[collision_monitor-17] [INFO] [1774231632.376457257] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-19] [INFO] [1774231632.407533011] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774231632.408001111] [collision_detector]: Configuring
+[collision_detector-18] [INFO] [1774231632.439076865] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-18] [INFO] [1774231632.445603732] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-18] [INFO] [1774231632.445638439] [collision_monitor]: [PolygonStop]: Creating Circle
+[localization_slam_toolbox_node-7] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[localization_slam_toolbox_node-7] Mapper <- Module
+[localization_slam_toolbox_node-7] Mapper <- m_pSequentialScanMatcher
+[localization_slam_toolbox_node-7] Mapper <- m_pGraph
+[localization_slam_toolbox_node-7] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[localization_slam_toolbox_node-7] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[localization_slam_toolbox_node-7] Mapper <- m_pMapperSensorManager
+[localization_slam_toolbox_node-7] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[localization_slam_toolbox_node-7] Mapper <- m_Listeners
+[localization_slam_toolbox_node-7] **Finished serializing Mapper**
+[localization_slam_toolbox_node-7] Load From File
+[localization_slam_toolbox_node-7] **Serializing Dataset**
+[localization_slam_toolbox_node-7] Dataset <- m_SensorNameLookup
+[localization_slam_toolbox_node-7] Dataset <- m_Data
+[localization_slam_toolbox_node-7] Dataset <- m_Lasers
+[localization_slam_toolbox_node-7] Dataset <- m_pDatasetInfo
+[localization_slam_toolbox_node-7] **Finished serializing Dataset**
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[localization_slam_toolbox_node-7] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[localization_slam_toolbox_node-7] W20260323 09:07:12.450584  4187 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[collision_detector-18] [INFO] [1774231632.456749192] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-19] [INFO] [1774231632.471390095] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774231632.472064976] [bt_navigator]: Configuring
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[localization_slam_toolbox_node-7] [INFO] [1774231632.482855497] [slam_toolbox]: Activating
+[bt_navigator-14] [INFO] [1774231632.492460745] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[localization_slam_toolbox_node-7] Registering sensor: [Custom Described Lidar]
+[bt_navigator-14] [INFO] [1774231632.792445258] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[planner_server-12] [INFO] [1774231632.809539241] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 787 X 922 at 0.050000 m/pix
+[lifecycle_manager-19] [INFO] [1774231632.864144850] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774231632.865044595] [waypoint_follower]: Configuring
+[waypoint_follower-15] [INFO] [1774231632.950147612] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-19] [INFO] [1774231632.957808712] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774231632.958284396] [keepout_filter_mask_server]: Configuring
+[map_server-8] [INFO] [1774231632.958367517] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-8] [INFO] [1774231632.959193473] [map_io]: resolution: 0.05
+[map_server-8] [INFO] [1774231632.959220889] [map_io]: origin[0]: -26.12
+[map_server-8] [INFO] [1774231632.959226722] [map_io]: origin[1]: -29.258
+[map_server-8] [INFO] [1774231632.959231388] [map_io]: origin[2]: 0
+[map_server-8] [INFO] [1774231632.959236055] [map_io]: free_thresh: 0.196
+[map_server-8] [INFO] [1774231632.959240429] [map_io]: occupied_thresh: 0.65
+[map_server-8] [INFO] [1774231632.959246554] [map_io]: mode: trinary
+[map_server-8] [INFO] [1774231632.959251804] [map_io]: negate: 0
+[map_server-8] [INFO] [1774231632.967310717] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm
+[map_server-8] [INFO] [1774231633.015130471] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.pgm: 787 X 922 map @ 0.05 m/cell
+[lifecycle_manager-19] [INFO] [1774231633.030548333] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774231633.031136594] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-19] [INFO] [1774231633.040024089] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-10] [INFO] [1774231633.040431526] [controller_server]: Activating
+[controller_server-10] [INFO] [1774231633.040534770] [local_costmap.local_costmap]: Activating
+[controller_server-10] [INFO] [1774231633.040572977] [local_costmap.local_costmap]: Checking transform
+[controller_server-10] [INFO] [1774231633.040892043] [local_costmap.local_costmap]: start
+[controller_server-10] [INFO] [1774231633.043236921] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1774231633.141422548] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-10] [WARN] [1774231633.148219193] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-10] [INFO] [1774231633.149815110] [controller_server]: Optimizer reset
+[controller_server-10] [INFO] [1774231633.151183830] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-10] [INFO] [1774231633.151298740] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231633.263335769] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231633.263438139] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-11] [INFO] [1774231633.264236972] [smoother_server]: Activating
+[smoother_server-11] [INFO] [1774231633.264344591] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231633.376017639] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231633.376127883] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-12] [INFO] [1774231633.376955590] [planner_server]: Activating
+[planner_server-12] [INFO] [1774231633.377014212] [global_costmap.global_costmap]: Activating
+[planner_server-12] [INFO] [1774231633.377029670] [global_costmap.global_costmap]: Checking transform
+[planner_server-12] [INFO] [1774231633.377179870] [global_costmap.global_costmap]: start
+[planner_server-12] [INFO] [1774231633.378270646] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [WARN] [1774231633.925902528] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-12] [INFO] [1774231633.981991184] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-12] [INFO] [1774231633.983598475] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.093460076] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.093522489] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-13] [INFO] [1774231634.093930510] [behavior_server]: Activating
+[behavior_server-13] [INFO] [1774231634.093965216] [behavior_server]: Activating wait
+[behavior_server-13] [INFO] [1774231634.093987382] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.201812963] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.201870127] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-16] [INFO] [1774231634.202336769] [velocity_smoother]: Activating
+[velocity_smoother-16] [INFO] [1774231634.202421932] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.311799099] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.311909927] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-17] [INFO] [1774231634.312901542] [collision_monitor]: Activating
+[collision_monitor-17] [INFO] [1774231634.313013827] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.424654210] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.424753955] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-18] [INFO] [1774231634.425720488] [collision_detector]: Activating
+[collision_detector-18] [INFO] [1774231634.425893729] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.539084239] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.539327184] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-14] [INFO] [1774231634.540155766] [bt_navigator]: Activating
+[bt_navigator-14] [INFO] [1774231634.668975586] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.778868684] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.779164711] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[waypoint_follower-15] [INFO] [1774231634.779587897] [waypoint_follower]: Activating
+[waypoint_follower-15] [INFO] [1774231634.779635144] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231634.888468965] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-19] [INFO] [1774231634.888528462] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-8] [INFO] [1774231634.889008520] [keepout_filter_mask_server]: Activating
+[map_server-8] [INFO] [1774231634.889913515] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-19] [INFO] [1774231635.002057579] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231635.002116493] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-9] [INFO] [1774231635.002582552] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-9] [INFO] [1774231635.002700671] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[planner_server-12] [INFO] [1774231635.002795166] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231635.002835705] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774231635.002806832] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231635.002855246] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231635.023654077] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-10] [INFO] [1774231635.039492501] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-19] [INFO] [1774231635.116105545] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-19] [INFO] [1774231635.116160375] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-19] [INFO] [1774231635.116175541] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[INFO] [delivery_robot_main_controller-20]: process started with pid [4504]
+[INFO] [robot_sound-21]: process started with pid [4505]
+[INFO] [call_robot_button-22]: process started with pid [4506]
+[INFO] [rpc_run_node-23]: process started with pid [4507]
+[INFO] [dock_coordinates-24]: process started with pid [4508]
+[INFO] [autodock_action_server-25]: process started with pid [4509]
+[INFO] [battery_manager_node-26]: process started with pid [4510]
+[dock_coordinates-24] [INFO] [1774231635.814381037] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-24] [INFO] [1774231635.816175597] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-24] [INFO] [1774231635.819655929] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-24] [INFO] [1774231635.820914424] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-24] [INFO] [1774231635.821966428] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-24] [INFO] [1774231635.822813105] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-24] [INFO] [1774231635.823753404] [dock coordinates]: range_limit: 1.200000
+[rpc_run_node-23] [0m[INFO] [1774231637.344980531] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-23] 2026-03-23 09:07:17,346 [INFO] RPCServer listening on localhost:6000
+[battery_manager_node-26] [INFO] [1774231637.719199722] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[robot_sound-21] [0m[INFO] [1774231637.739989256] [robot_sound_node]: Obstacle sound alarm is enabled.[0m
+[robot_sound-21] [0m[INFO] [1774231637.742357211] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-21] [33m[WARN] [1774231637.746976751] [robot_sound_node]: Map not available yet; skipping obstacle classification.[0m
+[robot_sound-21] [0m[INFO] [1774231637.750537580] [robot_sound_node]: Obstacle detected but sound alarm disabled.[0m
+[robot_sound-21] [0m[INFO] [1774231637.755002833] [robot_sound_node]: Obstacle sound alarm disabled (API).[0m
+[robot_sound-21] [0m[INFO] [1774231637.769165650] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[robot_sound-21] [0m[INFO] [1774231637.900984262] [robot_sound_node]: Received map (width=787, height=922, resolution=0.050 m/cell)[0m
+[battery_manager_node-26] [INFO] [1774231638.147585563] [battery_manager]: State change: IDLE_ON_DOCK -> UNKNOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1774231638.352891287] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231638.432500260] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231638.450551144] [main_controller_node]: setting_batteryLowToCharge: 40[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774231638.501477204] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[autodock_action_server-25] [INFO] [1774231638.524384161] [autodock_action_server]: auto_dock_init_start
+[delivery_robot_main_controller-20] [33m[WARN] [1774231638.568699253] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[autodock_action_server-25] [INFO] [1774231638.641475017] [autodock_action_server]: auto_dock_init_complete
+[delivery_robot_main_controller-20] [0m[INFO] [1774231639.766945029] [main_controller_node]: Waiting for Nav2 system...[0m
+[INFO] [bash-27]: process started with pid [4617]
+[delivery_robot_main_controller-20] [0m[INFO] [1774231641.793760516] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231641.794440367] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231643.801584821] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231643.838591888] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774231643.920427363] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231644.857868189] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.809018598] [main_controller_node]: Current state: STANDBY, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774231645.890705037] [main_controller_node]: Battery low (0.0%), heading to Home for docking.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.952373080] [main_controller_node]: AGV start_pos: x=-0.03, y=0.00[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.953037764] [main_controller_node]: AGV goal_pos: x=0.39, y=0.04[0m
+[delivery_robot_main_controller-20] Graph before shortest_path: Graph with 11 nodes and 10 edges
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.978856615] [main_controller_node]: Computed AGV path waypoints:[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.979733041] [main_controller_node]:   Waypoint 0: x=-0.03, y=0.00[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.983701896] [main_controller_node]: Navigating with 1 goals....[0m
+[bt_navigator-14] [INFO] [1774231645.986918571] [bt_navigator]: Begin navigating from current location through 1 poses to (-0.03, 0.00)
+[controller_server-10] [INFO] [1774231645.987476217] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[delivery_robot_main_controller-20] [0m[INFO] [1774231645.989295276] [main_controller_node]: State change: STANDBY -> MOVE[0m
+[controller_server-10] [INFO] [1774231645.992118506] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231646.000182212] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231646.000247835] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231646.000485243] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[delivery_robot_main_controller-20] [0m[INFO] [1774231646.005308650] [main_controller_node]: Robot is MOVING.[0m
+[planner_server-12] [INFO] [1774231646.009788487] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231646.020748629] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231646.020851584] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1774231646.032093174] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231646.050206764] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231646.500075697] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 2.0773 Hz
+[controller_server-10] [INFO] [1774231646.518849013] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1774231646.519004174] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded goal_checker . This warning will appear once.
+[controller_server-10] [WARN] [1774231646.519053755] [controller_server]: No progress checker was specified in parameter 'current_progress_checker'. Server will use only plugin loaded progress_checker . This warning will appear once.
+[collision_monitor-17] [INFO] [1774231646.584435747] [collision_monitor]: Robot to stop due to PolygonStop polygon
+[controller_server-10] [INFO] [1774231646.719287581] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231646.819305184] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.019273311] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.219269145] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.319270708] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.519305624] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.619289104] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.819296021] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231647.919276876] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.019264731] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.219268148] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.319270295] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.419267482] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.519267295] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.719271587] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.819268775] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231648.919272671] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.019264026] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.219268027] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.319271339] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.419269694] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.619269611] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.719277882] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.819266904] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231649.919278383] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.119274217] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.219268196] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.319270634] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.419266947] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.619266864] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.719272510] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.819269115] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231650.919263386] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.119272345] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.219270116] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.319272262] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.519266930] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.619270826] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.719272972] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231651.819269576] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.019266286] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.119275140] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.219264745] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.319268057] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.519270891] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.619267204] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.719272558] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231652.919279184] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.019267914] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.219270748] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.319273477] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.419268915] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.519416014] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.719272437] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231653.819266125] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.019268667] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.119266730] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.319270147] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.419269960] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.519268898] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.719267940] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.819276502] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231654.919275440] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.019270587] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.219264962] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.319269150] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.419276838] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.519263818] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.719281234] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.819265881] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231655.919274443] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.119272902] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.219266299] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.319268153] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.419265633] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.619260884] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231656.621000029] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231656.621643422] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231656.621666754] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231656.648085541] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231656.651085223] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231656.653957744] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231656.656468027] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231656.656569232] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1774231656.664102416] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[controller_server-10] [INFO] [1774231656.754142467] [controller_server]: Passing new path to controller.
+[controller_server-10] [WARN] [1774231656.755986024] [controller_server]: Control loop missed its desired rate of 10.0000 Hz. Current loop rate is 9.8125 Hz.
+[controller_server-10] [INFO] [1774231656.854110780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231656.954115843] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.054117114] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.154117802] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.354116553] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.454118990] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.554126386] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.754129512] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231657.854127866] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.054131284] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.154127305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.354127805] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.454138118] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.554127431] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.654154660] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231658.854150494] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.054162952] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.154117267] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.354124767] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.454134496] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.554126143] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.654121872] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.854129664] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231659.954130352] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.054125498] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.254133874] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.354129603] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.454124750] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.554131854] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.754130313] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.854147042] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231660.954170479] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.054159500] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.254133752] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.354128607] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.454125794] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.554130857] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.754133691] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.854127671] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231661.954247354] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.054207502] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.254133047] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.354124693] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.454124798] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.554130735] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.754137652] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231662.854128424] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.054161590] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.154123196] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.354172111] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.454165799] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.554126530] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.654288504] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231663.854118094] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.054112761] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.154116074] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.354109867] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.454115804] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.554110659] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.654123888] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.854121180] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231664.954116618] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.054117889] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.154129952] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.354193159] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.454129682] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.554131536] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.654127849] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.854134766] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231665.954130496] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.054124767] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.154194869] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.354128289] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.454126060] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.554408196] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.654138227] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231666.854123562] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231666.854605961] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231666.855150191] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231666.855171773] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231666.877937277] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231666.882764767] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231666.887084777] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1774231666.887917746] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231666.887971994] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231666.895025112] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231666.901221928] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[planner_server-12] [INFO] [1774231666.905903007] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231666.905982921] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774231666.908875274] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231666.917588498] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1774231666.921332195] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231666.921387026] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231666.922292618] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231666.933418421] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231666.933473836] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1774231666.937704890] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231666.948326127] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231667.499047384] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 1.7535 Hz
+[controller_server-10] [INFO] [1774231667.518974491] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231667.719827502] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231667.819754693] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.019754027] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.219735278] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.319809171] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.419797318] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.519737341] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.719734925] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.819732405] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231668.919821756] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.019729114] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.219746531] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.319713386] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.419702700] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.619699992] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.719711471] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.819711867] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231669.919708764] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.119720930] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.219714035] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.319725514] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.519718432] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.619708912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.719709016] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231670.819711454] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.019708163] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.119712059] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.219710997] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.319705851] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.519715685] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.619710248] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.719714436] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231671.919725436] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.019712124] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.119718062] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.219707083] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.419712250] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.519709438] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.619712459] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.719715480] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231672.919716273] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.019702961] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.219706087] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.319706774] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.419707170] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.519707858] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.719709817] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.819702630] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231673.919712943] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.019703422] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.219703923] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.319706652] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.419706174] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.619731465] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.719795442] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.819731091] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231674.919728279] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.119735779] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.219733550] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.319755821] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.519753988] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.619747384] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.719728823] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231675.819711720] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.019715720] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.119715533] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.219707763] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.319748116] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.519755908] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.619806760] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.719724034] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231676.919753701] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.019813303] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.119726786] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.219709682] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.419711933] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.519713496] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231677.520237893] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231677.520832288] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231677.520857954] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231677.548008798] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231677.553878375] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231677.561596760] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231677.561712548] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774231677.561856334] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1774231677.581419455] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[controller_server-10] [INFO] [1774231677.652066421] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.762069161] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231677.962071703] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.062063349] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.162062287] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.362067454] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.562063580] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.662057560] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.862054852] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231678.962057873] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.062053019] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.162056624] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.362059458] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.462056062] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.562072208] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.662062396] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.862062897] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231679.962061834] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.062061939] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.262060398] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.362057003] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.462060899] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.562069461] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.762063837] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.862063650] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231680.962059379] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.162063380] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.262063776] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.362067672] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.462059610] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.662070319] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.762063715] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.862062070] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231681.962061591] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.162064716] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.262066862] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.362063467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.462059780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.662064655] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.762068843] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231682.862061073] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.062065948] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.162070136] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.362065095] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.462083866] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.562055971] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.662054617] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231683.862058909] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.062058827] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.162054556] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.262058744] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.462064494] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.562060516] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.662065287] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.862061121] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231684.962066475] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.062064538] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.162069601] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.362063976] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.462066414] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.562072643] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.762067311] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.862071790] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231685.962067520] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.062063833] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.262067833] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.362072604] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.462069209] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.662071459] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.762064273] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.862064669] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231686.962071481] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231687.162070815] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231687.262064795] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231687.362068108] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231687.462061796] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231687.662068713] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231687.662586985] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231687.663166214] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231687.663207046] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[behavior_server-13] [INFO] [1774231687.689153642] [behavior_server]: Running wait
+[behavior_server-13] [INFO] [1774231692.689661389] [behavior_server]: wait completed successfully
+[controller_server-10] [INFO] [1774231692.707639942] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231692.712659634] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231692.719554675] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[controller_server-10] [INFO] [1774231692.719979326] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231692.720107071] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231692.731488948] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [WARN] [1774231692.740324959] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [INFO] [1774231692.742425466] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231692.742483797] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [WARN] [1774231692.771232332] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231692.992314898] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 3.9878 Hz
+[controller_server-10] [INFO] [1774231693.007956994] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231693.208251484] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231693.308207257] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231693.408204445] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231693.608202612] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231693.708206508] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231693.808205446] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.108199123] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.208212929] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.308214193] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.408207000] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.608210987] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.708210210] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.808207683] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231694.908207490] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.108212060] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.208202825] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.308205548] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.408207104] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.608238799] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.708239188] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.808242494] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231695.908231509] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.108206331] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.208204096] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.308204777] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.508208765] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.608208279] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.708204002] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231696.808205558] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.008205171] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.108202352] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.208205367] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.408204688] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.508210327] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.608205175] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.708206731] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231697.908206344] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.008195067] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.208197305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.308195944] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.508198765] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.708205669] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.808197892] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231698.908200323] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.108205769] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.208206158] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.308205090] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.408204313] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.608209467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.708207231] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231699.808203538] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.008199359] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.108204123] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.208207429] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.308206069] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.508205098] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.608211612] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.708206752] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231700.908205781] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.008205004] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.108205977] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.208207242] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.408203646] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.508208994] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.608204717] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.808195580] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231701.908205594] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.008204817] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.108204331] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.308203360] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.408205500] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.508210264] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.608206279] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.808209683] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231702.908203656] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231703.008262669] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231703.008817397] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231703.008844812] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231703.009112843] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231703.209228243] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231703.309222508] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231703.409222897] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231703.509220079] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231703.709221149] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231703.809227372] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.009222027] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.209225722] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.309226403] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.409225335] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.609222031] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.709225628] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.809223393] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231704.909225241] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.109221937] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.209229035] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.309223883] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.509225245] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.609226510] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.709224566] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231705.809219414] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.009232151] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.109231374] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.209221264] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.409226418] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.509227099] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.609222822] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.709217379] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231706.909230407] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.009225547] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.109220395] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.309223216] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.409226522] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.509221662] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.609232843] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.809230705] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231707.909227595] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.009213693] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.209217681] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.309213696] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.509218266] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.709223420] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.809227893] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231708.909221574] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.009215548] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.209220410] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.309218174] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.409219731] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.609227218] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.709221774] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.809226247] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231709.909222262] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.109270581] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.209264846] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.309260277] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.509264264] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.609246280] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.709249294] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231710.809243851] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.009244630] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.109250852] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.209224701] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.309215758] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.509220912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.609215177] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.709218774] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231711.909253094] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.009265733] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.109257081] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.209252804] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.409255917] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.509322804] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.609254946] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.809264766] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231712.909258448] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.009243963] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231713.010266214] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231713.011789238] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231713.011864193] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231713.037748881] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231713.039571725] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231713.043153542] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231713.043264955] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774231713.043647023] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1774231713.050933152] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[controller_server-10] [INFO] [1774231713.143780699] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.343780020] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.543779632] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.643780605] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.843823383] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231713.943836605] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.043817162] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.143793053] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.343790623] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.443784597] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.543792278] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.743789265] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.843785280] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231714.943787711] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.043786351] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.243788005] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.343827184] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.443867822] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.643788396] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.743820868] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.843818633] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231715.943829230] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.143825343] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.243819316] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.343822331] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.543826318] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.643821458] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.743818056] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231716.843812612] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.043816891] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.143787532] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.243787046] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.443795117] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.543795798] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.643788896] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.743800952] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231717.943788023] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.043783455] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.243789484] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.343786374] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.543786278] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.643780834] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231718.843782197] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.043780351] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.143777241] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.343787061] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.443779284] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.543786965] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.643778897] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.843781134] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231719.943779774] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.043777830] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.143786969] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.343778707] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.443782305] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.543784444] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.743787557] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.843779780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231720.943779295] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.043777934] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.243777838] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.343780853] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.443777451] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.643819062] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.743816826] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.843779884] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231721.943790190] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.143791552] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.243789025] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.343799623] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.443785138] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.643785334] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.743797973] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231722.843787863] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231723.043783976] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231723.143841530] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231723.144441173] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231723.144474130] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231723.149006451] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231723.349370632] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231723.549265249] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231723.649238806] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231723.849212753] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231723.949247558] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.049217907] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.149221797] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.349240950] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.449276338] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.549218980] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.749215384] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.849303562] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231724.949247079] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.049238719] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.249220832] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.349210430] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.449213736] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.649340219] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.749361024] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.849345956] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231725.949263807] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.149230171] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.249209562] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.349214034] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.449205966] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.649230661] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.749243883] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.849243106] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231726.949209955] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.149229984] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.249225124] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.349226096] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.449233486] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.649313595] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.749219780] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231727.849212586] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.049242531] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.149300960] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.349306114] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.449394000] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.549218813] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.649237577] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231728.849294354] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.049254010] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.149274524] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.349273844] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.449218528] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.549216293] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.649222224] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.849299708] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231729.949230100] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.049212991] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.149219797] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.349223784] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.449215132] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.549218147] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.749217467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.849326061] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231730.949215038] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.049212803] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.249210374] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.349264136] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.449268318] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.549372536] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.749711052] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.849220003] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231731.949214268] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.149260253] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.249323057] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.349251991] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.449214757] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.649223119] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.749227300] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231732.849216899] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231733.049212428] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231733.149234983] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231733.149693174] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231733.150552098] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231733.150591472] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231733.177937060] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231733.181646622] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231733.184876994] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231733.184932117] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231733.184981115] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1774231733.189534144] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231733.194831769] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231733.198706699] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[planner_server-12] [INFO] [1774231733.200247222] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231733.200293303] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231733.207379649] [global_costmap.global_costmap]: Received request to clear entirely the global_costmap
+[planner_server-12] [INFO] [1774231733.211583566] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231733.214216046] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231733.214409705] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-12] [INFO] [1774231733.222183482] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-12] [INFO] [1774231733.222230438] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [WARN] [1774231733.230763102] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231733.237290927] [global_costmap.global_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[planner_server-12] [WARN] [1774231733.489894632] [planner_server]: Planner loop missed its desired rate of 5.0000 Hz. Current loop rate is 3.6943 Hz
+[controller_server-10] [INFO] [1774231733.508126580] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231733.708347558] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231733.808340073] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.008335311] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.208341923] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.308343188] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.508340467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.708339205] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.808342219] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231734.908339692] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.008338040] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.208342611] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.308342125] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.408343390] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.608338044] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.708352142] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.808349906] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231735.908347671] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.108352242] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.208349131] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.308345729] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.408352535] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.608349231] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.708353704] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.808348844] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231736.908348358] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.108346804] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.208349527] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.308350208] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.408346806] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.608354294] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.708350892] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231737.808346615] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.108341950] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.208340007] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.408338744] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.508343217] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.708341371] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.808341177] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231738.908343317] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.108341179] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.208339527] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.308340500] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.408339140] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.608345169] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.708345267] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.808346531] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231739.908342546] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.108346533] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.208348673] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.308355770] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.508345467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.608346440] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.708350329] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231740.908348775] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.008346540] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.108348971] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.208349944] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.408347806] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.508351987] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.608347419] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.808347031] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231741.908350046] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.008347227] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.108350533] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.308349271] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.408346744] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.508349467] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.708354037] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.808669706] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231742.908379024] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231743.108345679] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231743.208385151] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231743.308380874] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231743.508615269] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231743.510279453] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231743.510416822] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231743.511339036] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [INFO] [1774231743.711574598] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231743.811571196] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.011538726] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.211527547] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.311532312] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.411530660] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.611528814] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.711629825] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.811580924] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231744.911572856] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.111575093] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.211571983] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.311576164] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.411569262] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.611543501] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.711537474] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231745.811531156] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.011536310] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.111539032] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.211536505] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.311535728] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.511539132] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.611536897] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.711537870] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231746.911571314] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.011538164] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.111535637] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.211540984] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.411536222] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.511539820] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.611538459] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.811535739] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231747.911536712] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.011529226] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.211528547] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.311528937] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.511530883] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.711529912] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.811530301] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231748.911535941] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.011529622] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.211525735] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.311526416] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.411530889] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.511532445] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.711529724] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.811529239] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231749.911530212] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.011528268] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.211539547] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.311535562] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.411531868] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.611575229] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.711542078] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.811536634] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231750.911535274] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.111536053] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.211536443] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.311540332] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.511537320] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.611538001] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.711576889] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231751.811571154] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.011574558] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.111575822] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.211570379] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.311573685] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.511578256] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.611580979] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.711596534] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231752.911569023] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.011557454] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.211559109] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.311558331] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.511560569] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231753.512742356] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231753.514312627] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231753.514389916] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[controller_server-10] [INFO] [1774231753.537666623] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[controller_server-10] [INFO] [1774231753.540684087] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-10] [INFO] [1774231753.544510894] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-10] [INFO] [1774231753.544610349] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[controller_server-10] [INFO] [1774231753.544897921] [controller_server]: Received a goal, begin computing control effort.
+[controller_server-10] [WARN] [1774231753.566051378] [local_costmap.local_costmap]: KeepoutFilter: New filter mask arrived from /keepout_filter_mask topic. Updating old filter mask.
+[controller_server-10] [INFO] [1774231753.645032180] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.845031209] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231753.945044432] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.045111319] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.145072335] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.345067864] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.445068254] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.545123183] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.745063589] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.845060187] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231754.945076326] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.045079924] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.245072537] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.345085176] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.445077691] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.545079539] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.745080026] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.845070499] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231755.945084597] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.145077501] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.245071766] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.345088488] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.445078670] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.645067783] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.745074880] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231756.845075562] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.045069924] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.145095688] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.245069245] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.345086259] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.545150036] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.645074012] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.745148773] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231757.845075666] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.045034738] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.145041253] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.345072947] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.445059046] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.545063641] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.745129975] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231758.845066166] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.045117625] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.145051191] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.345037028] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.445033883] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.545045905] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.745042533] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.845037347] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231759.945035369] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.045038641] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.245042560] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.345049332] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.445041521] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.545049751] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.745042588] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.845041193] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231760.945043299] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.145051884] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.245041740] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.345051137] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.445045951] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.645040245] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.745054017] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231761.845039498] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.045040501] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.145044648] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.245046753] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.345093190] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.545050444] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.645044383] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.745042697] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231762.945041658] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231763.045039097] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231763.245114764] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231763.345072537] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231763.545075873] [controller_server]: Passing new path to controller.
+[controller_server-10] [INFO] [1774231763.645131060] [controller_server]: Passing new path to controller.
+[controller_server-10] [ERROR] [1774231763.646130568] [controller_server]: Failed to make progress
+[controller_server-10] [INFO] [1774231763.647673140] [controller_server]: Optimizer reset
+[controller_server-10] [WARN] [1774231763.647730888] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[bt_navigator-14] [WARN] [1774231763.687280713] [bt_navigator]: [navigate_through_poses] [ActionServer] Aborting handle.
+[bt_navigator-14] [ERROR] [1774231763.687514913] [bt_navigator]: Goal failed
+[delivery_robot_main_controller-20] [33m[WARN] [1774231763.995470626] [main_controller_node]: Goal failed![0m
+[delivery_robot_main_controller-20] [33m[WARN] [1774231764.000200424] [main_controller_node]: Blocked lane encountered; stopping with FAILED per setting.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231764.005428080] [main_controller_node]: State change: MOVE -> SAFE_STOP[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231764.036045915] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231764.037393953] [main_controller_node]: Robot is in SAFE_STOP. Awaiting user to switch to STANDBY.[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231764.060312050] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231764.812874879] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231765.038538469] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231765.316137379] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231765.335102652] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231765.808961483] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231766.827419620] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231767.816305510] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231768.813412330] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231769.847266444] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231770.809819519] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231771.854136820] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231772.820475601] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231773.875252004] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231774.812345194] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231775.813664704] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231776.809850764] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231777.852345501] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231778.819770411] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231779.863638560] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231780.812274650] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231781.815628466] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231782.835531179] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231783.847395247] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231784.038261560] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231784.450783807] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231784.476560432] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231784.871777224] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231785.811337831] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231786.811078894] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231787.809598499] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231788.815244446] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231789.834913541] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231790.820324341] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231791.812736362] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231792.885665191] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231793.814822984] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231794.819092018] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231795.827695073] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231796.808427115] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231797.816637599] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231798.854414497] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231799.819430906] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231800.810082778] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231801.865163671] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231802.814751145] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231803.833882426] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231804.046765908] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231804.409495345] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231804.439244335] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231804.857219397] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231805.848931733] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231806.810113438] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231807.811251538] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231808.814835179] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231809.829422156] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231810.814174686] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231811.842023879] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231812.825651489] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231813.807286209] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231814.834341512] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231815.826641828] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231816.825025521] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231817.815004833] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231818.815008971] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231819.821307353] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231820.821943220] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231821.835518439] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231822.848607466] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231823.815334471] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231824.071500644] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231824.287904765] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231824.315850080] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231824.858537113] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231825.868035107] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231826.891272435] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231827.828968794] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231828.808116185] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231829.812263457] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231830.863742715] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231831.818155631] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231832.822411983] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231833.809681412] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231834.815651243] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231835.834128744] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231836.840478603] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231837.833728731] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231838.813879419] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231839.811001280] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231840.810571303] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231841.819951468] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231842.844609452] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231843.845172855] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231844.039869891] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231844.381808316] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231844.407555421] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231844.811809369] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231845.813463857] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231846.813444239] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231847.842255114] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231848.817493147] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231849.811146927] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231850.807033334] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231851.849699037] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231852.817134105] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231853.899198457] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231854.862565798] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231855.810116048] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231856.844561717] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231857.818396301] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231858.892187538] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231859.858063704] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231860.809994045] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231861.812932403] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231862.873522412] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231863.836182487] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231864.040503589] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231864.274642439] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231864.286817913] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231864.853645025] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231865.811105747] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231866.810422904] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231867.861313599] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231868.811311427] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231869.918086629] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231870.809634252] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231871.810407355] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231872.813213010] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231873.842494034] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231874.835261471] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231875.810232056] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231876.809889575] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231877.813246751] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231878.872521392] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231879.815627387] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231880.815313780] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231881.813088076] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231882.813206704] [main_controller_node]: Current state: SAFE_STOP, dock_state IDLE, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1774231883.275726822] [battery_manager]: IR state: IDLE -> READY (10)
+[autodock_action_server-25] [INFO] [1774231883.280471483] [charge_status]: IR Charge State: READY (10)
+[delivery_robot_main_controller-20] [0m[INFO] [1774231883.284116308] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[battery_manager_node-26] [INFO] [1774231883.649063771] [battery_manager]: State change: UNKNOWN -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231883.652203448] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231883.756740267] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1774231883.898023414] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231884.053447505] [main_controller_node]: Published message: "safe_stop"[0m
+[battery_manager_node-26] [INFO] [1774231884.147489665] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231884.148319134] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231884.250162801] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1774231884.312737606] [battery_manager]: IR state: READY -> CHARGING (11)
+[autodock_action_server-25] [INFO] [1774231884.314263842] [charge_status]: IR Charge State: CHARGING (11)
+[robot_sound-21] [0m[INFO] [1774231884.457393464] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231884.486901182] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231884.809832091] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[battery_manager_node-26] [INFO] [1774231885.331700423] [battery_manager]: IR state: CHARGING -> IDLE (0)
+[autodock_action_server-25] [INFO] [1774231885.334632441] [charge_status]: IR Charge State: IDLE (0)
+[battery_manager_node-26] [INFO] [1774231885.647625753] [battery_manager]: State change: CHARGING -> UNKNOWN
+[delivery_robot_main_controller-20] [0m[INFO] [1774231885.819171424] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[autodock_action_server-25] [INFO] [1774231886.231776068] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1774231886.232867153] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[battery_manager_node-26] [INFO] [1774231886.647623344] [battery_manager]: State change: UNKNOWN -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1774231886.829628675] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231887.865606997] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231888.814607283] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231889.813078999] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231890.810411557] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231891.814694411] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231892.859915500] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231893.868776148] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231894.812362702] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231895.810637494] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231896.809066572] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231897.822685254] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231898.869677847] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231899.813093200] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231900.809708192] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231901.852530431] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231902.904542672] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231903.811436008] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231904.039192306] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231904.391827095] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231904.422788129] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231904.812142470] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231905.808759887] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231906.813170353] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231907.837626335] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231908.874487905] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231909.861613961] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231910.812624255] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231911.807910555] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231912.818598041] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231913.847839223] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231914.820338439] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231915.810493343] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231916.814797938] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231917.818751962] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231918.821757812] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231919.812411739] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231920.814571787] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231921.808118650] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231922.899299108] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231923.848999575] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231924.041117464] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231924.323436678] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231924.352844644] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231924.826162079] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231925.859303577] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231926.809231828] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231927.809511569] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231928.874838473] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231929.856569768] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231930.811795950] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231931.808531780] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231932.814901590] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[battery_manager_node-26] [INFO] [1774231932.850788986] [battery_manager]: IR state: CHARGING -> READY (10)
+[autodock_action_server-25] [INFO] [1774231932.853221980] [charge_status]: IR Charge State: READY (10)
+[battery_manager_node-26] [INFO] [1774231933.147520381] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231933.148360934] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231933.250983888] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1774231933.647618253] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231933.648476597] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231933.752171095] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1774231933.812445599] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1774231934.147615796] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231934.148465390] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231934.250285707] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1774231934.647625005] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231934.648509306] [battery_manager]: Charger READY; starting charge
+[battery_manager_node-26] [INFO] [1774231934.750461160] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[delivery_robot_main_controller-20] [0m[INFO] [1774231934.813916755] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state NOT_CHARGE[0m
+[battery_manager_node-26] [INFO] [1774231935.147615840] [battery_manager]: State change: CHARGING -> IDLE_ON_DOCK
+[battery_manager_node-26] [INFO] [1774231935.148467767] [battery_manager]: Charger READY; starting charge
+[autodock_action_server-25] [INFO] [1774231935.206782342] [charge_status]: IR Charge State: CHARGING (11)
+[battery_manager_node-26] [INFO] [1774231935.251735864] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[battery_manager_node-26] [INFO] [1774231935.255968084] [battery_manager]: IR state: READY -> CHARGING (11)
+[delivery_robot_main_controller-20] [0m[INFO] [1774231935.814051544] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231936.862128454] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231937.823987476] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231938.860410687] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231939.808972529] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231940.824253014] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231941.820748227] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231942.838980271] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231943.869327121] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231944.038074031] [main_controller_node]: Published message: "safe_stop"[0m
+[robot_sound-21] [0m[INFO] [1774231944.427299168] [robot_sound_node]: 🔔 Received sound command: safe_stop[0m
+[robot_sound-21] Simple mixer control 'PCM',0
+[robot_sound-21]   Capabilities: pvolume pswitch pswitch-joined
+[robot_sound-21]   Playback channels: Front Left - Front Right
+[robot_sound-21]   Limits: Playback 0 - 147
+[robot_sound-21]   Mono:
+[robot_sound-21]   Front Left: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21]   Front Right: Playback 147 [100%] [-0.94dB] [on]
+[robot_sound-21] [0m[INFO] [1774231944.455169815] [robot_sound_node]: 🔊 Playing sound: /home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav[0m
+[robot_sound-21] Playing WAVE '/home/smr/workspaces/mini_amr/amrROS2_ws/sounds/robot_safestop.wav' : Signed 16 bit Little Endian, Rate 22050 Hz, Mono
+[delivery_robot_main_controller-20] [0m[INFO] [1774231944.815614921] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231945.809119786] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231946.880474344] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231947.823818752] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231948.814966744] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231949.848828341] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231950.810811317] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231951.876697909] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231952.836062397] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231953.888228324] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231954.846426480] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231955.815152959] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231956.810786877] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231957.867242497] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231958.817084927] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231959.824511383] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231960.849457629] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231961.817097214] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-20] [0m[INFO] [1774231962.836451826] [main_controller_node]: Current state: SAFE_STOP, dock_state DOCKED, charge_state CHARGING[0m
+                                                                                                                                                                      

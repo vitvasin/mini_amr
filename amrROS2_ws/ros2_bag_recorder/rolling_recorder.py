@@ -125,8 +125,8 @@ class RollingRecorder(Node):
             '-s', 'mcap',
             '-o', output_path,
             '--max-bag-duration', str(self.chunk_duration),
-            '-e', "(.*)/costmap(.*)|(.*)/voxels(.*)|(.*)/visualization_marker(.*)",
-            '--topics', '/scan', '/tf', '/tf_static', '/imu', '/odom', '/initialpose', '/cmd_vel', '/map', '/map_metadata'
+            '--qos-profile-overrides-path', '/home/smr/workspaces/mini_amr/amrROS2_ws/ros2_bag_recorder/qos_override.yaml',
+            '--topics', '/scan', '/tf', '/tf_static', '/imu', '/odom', '/initialpose', '/cmd_vel', '/map', '/map_metadata', '/rosout'
         ]
         
         self.bag_proc = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)

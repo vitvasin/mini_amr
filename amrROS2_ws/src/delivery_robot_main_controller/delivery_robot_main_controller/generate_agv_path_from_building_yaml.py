@@ -139,6 +139,23 @@ def load_graph_from_building_yaml(building_yaml_path, level_name='L1'):
     return G, vertex_map
 
 
+def _interpolate_path(path_points, step=0.5):
+    """Insert intermediate points every *step* metres along each segment."""
+    if len(path_points) < 2:
+        return list(path_points)
+    dense = []
+    for i in range(len(path_points) - 1):
+        x1, y1 = path_points[i]
+        x2, y2 = path_points[i + 1]
+        seg_len = math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2)
+        n = max(1, math.ceil(seg_len / step))
+        for j in range(n):
+            t = j / n
+            dense.append((x1 + t * (x2 - x1), y1 + t * (y2 - y1)))
+    dense.append(path_points[-1])
+    return dense
+
+
 def find_nearest_vertex(x, y, vertex_map):
     nearest = None
     min_dist = float('inf')
@@ -164,7 +181,7 @@ def create_pose(x, y, yaw=None, frame='map'):
     else:
         half_yaw = yaw * 0.5
         pose.pose.orientation.z = math.sin(half_yaw)
-    pose.pose.orientation.w = math.cos(half_yaw)
+        pose.pose.orientation.w = math.cos(half_yaw)
     return pose
 
 
@@ -193,14 +210,17 @@ def compute_path_poses(building_yaml_path, start_pos, goal_pos, level_name='L1',
     except (nx.NetworkXNoPath, nx.NodeNotFound):
         return [], vertex_map, [], start_wp, goal_wp
 
-    path_points = []
-    for i, node in enumerate(path_nodes):
-        if i == 0:
-            path_points.append((start_x, start_y))
-        elif i == len(path_nodes) - 1:
-            path_points.append((goal_x, goal_y))
-        else:
-            path_points.append(vertex_map[node])
+    path_points = [(start_x, start_y)]
+    for node in path_nodes:
+        point = vertex_map[node]
+        if path_points[-1] != point:
+            path_points.append(point)
+    goal_point = (goal_x, goal_y)
+    if path_points[-1] != goal_point:
+        path_points.append(goal_point)
+
+    # Densify path so NAV2 cannot deviate far between waypoints
+    path_points = _interpolate_path(path_points, step=0.5)
 
     yaws = []
     for i, (x, y) in enumerate(path_points):

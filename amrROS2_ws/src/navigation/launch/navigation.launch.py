@@ -155,6 +155,7 @@ def generate_launch_description():
         }.items(),
     )
  
+ 
     navigation = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(PathJoinSubstitution(
                 [robot_navigation_dir, 'launch', 'navigation_launch.py'])),
@@ -217,6 +218,18 @@ def generate_launch_description():
             condition=IfCondition(bringup) #default is false
         )
 
+    localization_monitor_node = Node(
+        package='localization_monitor',
+        executable='localization_monitor',
+        name='localization_monitor',
+        output='screen',
+        parameters=[{
+            'covariance_position_threshold': 2.0,
+            'covariance_yaw_threshold': 0.3,
+            'lost_counter_threshold': 5
+        }]
+    )
+
     launch_elements = GroupAction(
      actions=[
         PushRosNamespace(condition=IfCondition(use_namespace), namespace=namespace),
@@ -228,6 +241,7 @@ def generate_launch_description():
         slam_toolbox_localization,
         navigation,
         rviz_cmd,
+        localization_monitor_node,
       ]
    )
 

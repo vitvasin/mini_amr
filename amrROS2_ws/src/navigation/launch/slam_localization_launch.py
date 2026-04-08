@@ -79,7 +79,6 @@ def generate_launch_description():
         executable='localization_slam_toolbox_node',
         name='slam_toolbox',
         output='screen',
-        prefix=['taskset -c 4-7 '],
         namespace='',
         remappings=[
                 ("/map", "map"),

@@ -1,8 +1,9 @@
 import rclpy
 from rclpy.node import Node
 from rclpy.callback_groups import ReentrantCallbackGroup
+from rclpy.parameter_client import AsyncParameterClient
 from enum import Enum, auto
-from geometry_msgs.msg import PoseStamped, Vector3, Twist
+from geometry_msgs.msg import PoseStamped, Vector3, Twist, PoseWithCovarianceStamped
 from .robot_navigator import BasicNavigator, NavigationResult
 from rclpy.duration import Duration
 from rclpy.action import ActionClient
@@ -16,11 +17,11 @@ from .generate_agv_path_from_db import compute_path_poses_from_db
 #   True  → use station/route database (recommended)
 #   False → use building YAML file (legacy)
 # ---------------------------------------------------------------------------
-USE_DB_ROUTES = False
+USE_DB_ROUTES = True
 import tf2_ros
 import tf2_geometry_msgs 
 
-from std_msgs.msg import String, Int16, Int8
+from std_msgs.msg import String, Int16, Int8, Bool
 from math import degrees, hypot, radians
 
 
@@ -50,6 +51,8 @@ class RobotState(Enum):
     WAIT_LOAD_OUT = auto()
     DOCK = auto()
     MANUAL = auto()
+    LOST = auto()
+    RETRYING = auto()
 
 class DockState(Enum):
     IDLE = auto()
@@ -113,6 +116,11 @@ class DeliveryRobotMainController(Node):
         self._pause_move_active = False
         self._pause_monitor_timer = None
         self._safestop_monitor_timer = None
+        self._lost_monitor_timer = None
+        self._lost_loop_counter = 0
+        self._localization_lost_count = 0       # debounce counter สำหรับ false
+        self._localization_recovered_count = 0  # debounce counter สำหรับ true
+        self._last_goal = None  # เก็บ goal ล่าสุดสำหรับ RETRYING
 
         self._loadin_timeout_end = time.time()  # Initialize to current time
 
@@ -171,6 +179,13 @@ class DeliveryRobotMainController(Node):
             10
         )
 
+        self.create_subscription(
+            Bool,
+            '/localization_status',
+            self.localization_status_callback,
+            10
+        )
+
         self.smooth_path = True
         self.navigator = BasicNavigator()
         time.sleep(1)
@@ -196,6 +211,8 @@ class DeliveryRobotMainController(Node):
 
         # Add sound publisher
         self.sound_publisher = self.create_publisher(String, '/robot_sound_command', 10)
+        self.initial_pose_pub = self.create_publisher(PoseWithCovarianceStamped, '/initialpose', 10)
+        self.slam_param_client = AsyncParameterClient(self, '/slam_toolbox')
         #time.sleep(2.0)
         #self.send_goal_pose(1.0,0.0,0.0) #test
         self.clear_request_queues_on_startup()
@@ -719,6 +736,8 @@ class DeliveryRobotMainController(Node):
             self._cancel_pause_monitor_timer()
         if self.state == RobotState.SAFE_STOP and new_state != RobotState.SAFE_STOP:
             self._cancel_safestop_monitor_timer()
+        if self.state == RobotState.LOST and new_state != RobotState.LOST:
+            self._cancel_lost_monitor_timer()
 
         self.get_logger().info(f"State change: {self.state.name} -> {new_state.name}")
         self.state = new_state
@@ -753,6 +772,11 @@ class DeliveryRobotMainController(Node):
             self.on_dock()
         elif self.state == RobotState.MANUAL:
             self.on_manual()
+        elif self.state == RobotState.LOST:
+            self.get_logger().warn("Robot is LOST. Awaiting localization recovery.")
+            self.on_lost()
+        elif self.state == RobotState.RETRYING:
+            self.on_retrying()
     
     def on_manual(self):
         self.touch_activity()
@@ -825,6 +849,94 @@ class DeliveryRobotMainController(Node):
         if self._safestop_monitor_timer is not None:
             self._safestop_monitor_timer.cancel()
             self._safestop_monitor_timer = None
+
+    def on_lost(self):
+        """Lost state: robot cannot localize. Play warning sound and wait for recovery."""
+        self.touch_activity()
+        if self._lost_monitor_timer is None:
+            self._lost_loop_counter = 0
+            self._lost_monitor_timer = self.create_timer(1.0, self._lost_monitor_loop)
+
+    def _lost_monitor_loop(self):
+        self._lost_loop_counter += 1
+        if self._lost_loop_counter == 1 or self._lost_loop_counter % 20 == 0:
+            self.send_sound_command("lost")
+
+        state = self.get_state_from_api()
+        if state == RobotState.STANDBY:
+            self.get_logger().info("LOST cleared to STANDBY via GUI. Setting initial pose at dock (0,0,0).")
+            self._cancel_lost_monitor_timer()
+            self.publish_initial_pose()
+            self.change_state(RobotState.STANDBY)
+        elif state != RobotState.LOST:
+            self.get_logger().info(f"LOST state changed to {state.name} via GUI; switching.")
+            self._cancel_lost_monitor_timer()
+            self.change_state(state)
+
+    def _cancel_lost_monitor_timer(self):
+        if self._lost_monitor_timer is not None:
+            self._lost_monitor_timer.cancel()
+            self._lost_monitor_timer = None
+
+    def on_retrying(self):
+        """Re-send last goal directly without going through STANDBY."""
+        if not self._last_goal:
+            self.get_logger().warn("RETRYING: no saved goal, falling back to STANDBY.")
+            self.change_state(RobotState.STANDBY)
+            return
+        g = self._last_goal
+        self.get_logger().info(f"RETRYING: re-sending goal x={g['x']:.2f} y={g['y']:.2f} yaw={g['yaw']:.2f} mode={g['mode']}")
+        if g['mode'] == 'agv':
+            self.send_goal_pose_agv(g['x'], g['y'], g['yaw'], g['after'])
+        else:
+            self.send_goal_pose(g['x'], g['y'], g['yaw'], g['after'])
+
+    def _pre_resume_wiggle_then_retry(self):
+        """Wiggle แล้วเปลี่ยนสถานะเป็น RETRYING (ไม่ผ่าน STANDBY)"""
+        try:
+            twist = Twist()
+            angular_speed = 0.5
+
+            def rotate(angular_z, angle_rad):
+                duration = abs(angle_rad) / angular_speed
+                twist.angular.z = angular_z
+                end_time = time.time() + duration
+                while time.time() < end_time:
+                    self.cmd_vel_pub.publish(twist)
+                    time.sleep(0.05)
+                twist.angular.z = 0.0
+                self.cmd_vel_pub.publish(twist)
+                time.sleep(0.1)
+
+            #rotate(+0.5, 0.3)
+            #rotate(-0.5, 0.3)
+        except Exception as e:
+            self.get_logger().error(f"Wiggle error: {e}")
+        finally:
+            if self.state != RobotState.LOST:
+                self.change_state(RobotState.RETRYING)
+
+    def localization_status_callback(self, msg: Bool):
+        if not msg.data:
+            self._localization_lost_count += 1
+            self._localization_recovered_count = 0
+            if self._localization_lost_count >= 5 and self.state != RobotState.LOST:
+                self.get_logger().warn("Localization lost! Switching to LOST state.")
+                self._obstacle_retry_count = 0
+                if self.state == RobotState.MOVE or self.state == RobotState.RETRYING:
+                    self.navigator.cancelTask()
+                self.change_state(RobotState.LOST)
+        else:
+            self._localization_lost_count = 0
+            if self.state == RobotState.LOST:
+                self._localization_recovered_count += 1
+                self.get_logger().info(f"Localization recovering... ({self._localization_recovered_count}/5)")
+                if self._localization_recovered_count >= 5:
+                    self._localization_recovered_count = 0
+                    self.get_logger().info("Localization recovered. Auto-resuming to STANDBY.")
+                    self._cancel_lost_monitor_timer()
+                    self.publish_initial_pose()
+                    self.change_state(RobotState.STANDBY)
 
     def _pre_resume_wiggle_then_standby(self):
         """หน่วงเวลา แล้วทำ wiggle ก่อนเปลี่ยนสถานะเป็น STANDBY"""
@@ -1084,6 +1196,7 @@ class DeliveryRobotMainController(Node):
         self.change_state(RobotState.SAFE_STOP)
 
     def send_goal_pose(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
+        self._last_goal = {'x': x, 'y': y, 'yaw': yaw, 'after': after, 'mode': 'direct'}
         self.goal_after_state = after
         goal_pose = PoseStamped()
         goal_pose.header.frame_id = 'map'
@@ -1096,6 +1209,7 @@ class DeliveryRobotMainController(Node):
         self.change_state(RobotState.MOVE)
 
     def send_goal_pose_agv(self, x, y, yaw, after: RobotState = RobotState.STANDBY):
+        self._last_goal = {'x': x, 'y': y, 'yaw': yaw, 'after': after, 'mode': 'agv'}
         self.goal_after_state = after
         current_pose = self.current_pose
         start_pos = (current_pose.pose.position.x, current_pose.pose.position.y)
@@ -1243,6 +1357,13 @@ class DeliveryRobotMainController(Node):
        #     return
         
 
+
+        # ถ้า localization ยังไม่พร้อม ให้เปลี่ยนเป็น LOST
+        if self._localization_lost_count >= 5:
+            self.get_logger().warn("Localization not ready in STANDBY, switching to LOST.")
+            self._obstacle_retry_count = 0
+            self.change_state(RobotState.LOST)
+            return
 
         # External dock/undock commands
         if self._should_dock:
@@ -1447,18 +1568,18 @@ class DeliveryRobotMainController(Node):
             return
         elif result == TaskResult.FAILED:
             self._obstacle_retry_count += 1
-            self.get_logger().warn(f'Goal failed! (obstacle retry {self._obstacle_retry_count}/3)')
-            if self._obstacle_retry_count <= 3:
-                # ร้อง obstacle_alert แล้ว wiggle แล้วกลับ STANDBY เพื่อลองใหม่
+            self.get_logger().warn(f'Goal failed! (obstacle retry {self._obstacle_retry_count}/5)')
+            if self._obstacle_retry_count <= 5:
+                # ร้อง obstacle_alert แล้ว wiggle แล้ว retry goal เดิม (ไม่ผ่าน STANDBY)
                 if self.setting_isSoundAlarmForObstacle:
                     self.send_sound_command("obstacle_alert")
                 self._clear_path_tracking()
                 self.blocked_lanes.clear()
-                threading.Thread(target=self._pre_resume_wiggle_then_standby, daemon=True).start()
+                threading.Thread(target=self._pre_resume_wiggle_then_retry, daemon=True).start()
                 return
             else:
-                # ครบ 3 รอบแล้วยังไม่สำเร็จ → SAFE_STOP
-                self.get_logger().warn("3 obstacle retries exhausted; switching to SAFE_STOP.")
+                # ครบ 5 รอบแล้วยังไม่สำเร็จ → SAFE_STOP
+                self.get_logger().warn("5 obstacle retries exhausted; switching to SAFE_STOP.")
                 self._obstacle_retry_count = 0
                 self.blocked_lanes.clear()
                 self._handle_move_failure_cleanup()
@@ -1669,8 +1790,62 @@ class DeliveryRobotMainController(Node):
         #self._charging_timer = self.create_timer(2.0, self.charging_loop)
 
 
+    def publish_initial_pose(self):
+        if not self.slam_param_client.services_are_ready():
+            self.get_logger().warn("slam_toolbox parameter service not ready")
+            return
+
+        future = self.slam_param_client.get_parameters(['map_start_pose'])
+        future.add_done_callback(self._publish_initial_pose_from_parameter)
+
+    def _publish_initial_pose_from_parameter(self, future):
+        try:
+            result = future.result()
+            if result is None or not result.values:
+                self.get_logger().error("Failed to get map_start_pose parameter")
+                return
+
+            param_value = result.values[0]
+            if param_value.type == param_value.PARAMETER_DOUBLE_ARRAY:
+                values = list(param_value.double_array_value)
+            elif param_value.type == param_value.PARAMETER_INTEGER_ARRAY:
+                values = [float(v) for v in param_value.integer_array_value]
+            else:
+                self.get_logger().error(
+                    f"map_start_pose has unsupported parameter type: {param_value.type}"
+                )
+                return
+
+            if len(values) != 6:
+                self.get_logger().error(f"map_start_pose must contain 6 values, got {values}")
+                return
+
+            x, y, z, roll, pitch, yaw = values
+        except Exception as e:
+            self.get_logger().error(f"Failed to read map_start_pose: {e}")
+            return
+
+        quat = quaternion_from_euler(roll, pitch, yaw)
+        msg = PoseWithCovarianceStamped()
+        msg.header.frame_id = 'map'
+        msg.header.stamp = self.get_clock().now().to_msg()
+        msg.pose.pose.position.x = x
+        msg.pose.pose.position.y = y
+        msg.pose.pose.position.z = z
+        msg.pose.pose.orientation.x = quat[0]
+        msg.pose.pose.orientation.y = quat[1]
+        msg.pose.pose.orientation.z = quat[2]
+        msg.pose.pose.orientation.w = quat[3]
+        msg.pose.covariance[0]  = 0.25
+        msg.pose.covariance[7]  = 0.25
+        msg.pose.covariance[35] = 0.07
+        self.initial_pose_pub.publish(msg)
+        self.get_logger().info(f"Initial pose set: x={x}, y={y}, z={z}, roll={roll}, pitch={pitch}, yaw={yaw}")
+
     def undock(self):
         self.get_logger().info("Robot is UNDOCKING.")
+
+        self.publish_initial_pose()
 
         if not self.autodock_client.wait_for_server(timeout_sec=5.0):
             self.get_logger().error("Autodock action server not available.")

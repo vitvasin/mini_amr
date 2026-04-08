@@ -4,6 +4,8 @@ import subprocess
 import threading
 import time
 
+SOUND_CARD = 0  # ALSA card number (ดูได้จาก: aplay -l)
+
 import rclpy
 from rclpy.node import Node
 
@@ -31,6 +33,7 @@ class RobotSoundNode(Node):
             'arrive_target': 'robot_target.wav',
             'obstacle_alert': 'robot_obstacle.wav',
             'safe_stop': 'robot_safestop.wav',
+            'lost': 'robot_lost.wav',
         }
 
         self.soundLevel = 50
@@ -49,7 +52,7 @@ class RobotSoundNode(Node):
             # 🔥 สำคัญมาก: ตั้ง volume ให้ USB speaker ทุกครั้งก่อนเล่น
             try:
                 volume_str = f"{self.soundLevel}%"
-                subprocess.call(["amixer", "-c", "1", "sset", "PCM", volume_str, "unmute"])
+                subprocess.call(["amixer", "-c", str(SOUND_CARD), "sset", "PCM", volume_str, "unmute"])
             except Exception as e:
                 self.get_logger().error(f"Failed to set volume: {e}")
 
@@ -58,7 +61,7 @@ class RobotSoundNode(Node):
             try:
                 subprocess.Popen([
                     'aplay',
-                    '-D', 'plughw:1,0',
+                    '-D', f'plughw:{SOUND_CARD},0',
                     '-c', '2',
                     '-f', 'S16_LE',
                     '-r', '48000',

@@ -6,12 +6,25 @@ from launch.substitutions import PathJoinSubstitution
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 from launch_ros.substitutions import FindPackageShare
+from launch_ros.actions import Node
 
 def generate_launch_description():
     # Define paths
     map_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map"
     keepout_mask_yaml = "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml"
     amr_ui_path = "/home/smr/workspaces/mini_amr/amrROS2_UI/ICEAMR"
+    
+    # 0. Localization Monitor
+    localization_monitor_node = Node(
+        package='localization_monitor',
+        executable='localization_monitor',
+        name='localization_monitor',
+        output='screen',
+        parameters=[{
+            'pose_timeout': 10.0,
+            'covariance_threshold': 0.5
+        }]
+    )
     
     # 1. Navigation Launch (SLAM Localization)
     navigation_launch = IncludeLaunchDescription(
@@ -78,6 +91,7 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        localization_monitor_node,
         navigation_launch,
         delayed_delivery_launch,
         delayed_ui_launch,

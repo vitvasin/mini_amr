@@ -1,0 +1,1276 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-04-07-13-40-29-881971-one-33507
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [localization_monitor-1]: process started with pid [33530]
+[INFO] [robot_state_publisher-2]: process started with pid [33531]
+[INFO] [joint_state_publisher-3]: process started with pid [33532]
+[INFO] [sllidar_node-4]: process started with pid [33533]
+[INFO] [scan_to_scan_filter_chain-5]: process started with pid [33534]
+[INFO] [ekf_node-6]: process started with pid [33535]
+[INFO] [robot_hardware-7]: process started with pid [33536]
+[INFO] [localization_slam_toolbox_node-8]: process started with pid [33537]
+[INFO] [map_server-9]: process started with pid [33540]
+[INFO] [costmap_filter_info_server-10]: process started with pid [33543]
+[INFO] [controller_server-11]: process started with pid [33546]
+[INFO] [smoother_server-12]: process started with pid [33551]
+[INFO] [planner_server-13]: process started with pid [33568]
+[INFO] [behavior_server-14]: process started with pid [33586]
+[INFO] [bt_navigator-15]: process started with pid [33587]
+[INFO] [waypoint_follower-16]: process started with pid [33588]
+[INFO] [velocity_smoother-17]: process started with pid [33589]
+[INFO] [collision_monitor-18]: process started with pid [33590]
+[INFO] [collision_detector-19]: process started with pid [33593]
+[INFO] [lifecycle_manager-20]: process started with pid [33596]
+[INFO] [localization_monitor-21]: process started with pid [33599]
+[robot_hardware-7] Serial port opened at port /dev/teensy with baudrate 460800
+[robot_hardware-7] Created receive data thread
+[sllidar_node-4] [INFO] [1775544030.916700102] [sllidar_node]: SLLidar running on ROS2 package SLLidar.ROS2 SDK Version:1.0.1, SLLIDAR SDK Version:2.1.0
+[sllidar_node-4] [INFO] [1775544030.948159173] [sllidar_node]: SLLidar S/N: 6E42ED93C5E19FD9B5E192F9EE904B72
+[sllidar_node-4] [INFO] [1775544030.948215463] [sllidar_node]: Firmware Ver: 1.00
+[sllidar_node-4] [INFO] [1775544030.948227712] [sllidar_node]: Hardware Rev: 18
+[sllidar_node-4] [INFO] [1775544030.950187342] [sllidar_node]: SLLidar health status : 0
+[sllidar_node-4] [INFO] [1775544030.950245965] [sllidar_node]: SLLidar health status : OK.
+[controller_server-11] [INFO] [1775544031.079760310] [controller_server]: 
+[controller_server-11] 	controller_server lifecycle node launched. 
+[controller_server-11] 	Waiting on external lifecycle transitions to activate
+[controller_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-11] [INFO] [1775544031.169319966] [controller_server]: Creating controller server
+[bt_navigator-15] [INFO] [1775544031.184119997] [bt_navigator]: 
+[planner_server-13] [INFO] [1775544031.192685612] [planner_server]: 
+[bt_navigator-15] 	bt_navigator lifecycle node launched. 
+[smoother_server-12] [INFO] [1775544031.198371717] [smoother_server]: 
+[planner_server-13] 	planner_server lifecycle node launched. 
+[planner_server-13] 	Waiting on external lifecycle transitions to activate
+[planner_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[smoother_server-12] 	smoother_server lifecycle node launched. 
+[smoother_server-12] 	Waiting on external lifecycle transitions to activate
+[smoother_server-12] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-13] [INFO] [1775544031.206274692] [planner_server]: Creating
+[bt_navigator-15] 	Waiting on external lifecycle transitions to activate
+[bt_navigator-15] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[bt_navigator-15] [INFO] [1775544031.211105956] [bt_navigator]: Creating
+[smoother_server-12] [INFO] [1775544031.217304499] [smoother_server]: Creating smoother server
+[planner_server-13] [INFO] [1775544031.243564237] [global_costmap.global_costmap]: 
+[planner_server-13] 	global_costmap lifecycle node launched. 
+[planner_server-13] 	Waiting on external lifecycle transitions to activate
+[planner_server-13] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[planner_server-13] [INFO] [1775544031.247296546] [global_costmap.global_costmap]: Creating Costmap
+[map_server-9] [INFO] [1775544031.271116007] [keepout_filter_mask_server]: 
+[sllidar_node-4] [INFO] [1775544031.272129508] [sllidar_node]: current scan mode: Standard, sample rate: 11 Khz, max_distance: 30.0 m, scan frequency:10.0 Hz, 
+[map_server-9] 	keepout_filter_mask_server lifecycle node launched. 
+[map_server-9] 	Waiting on external lifecycle transitions to activate
+[map_server-9] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[map_server-9] [INFO] [1775544031.275392252] [keepout_filter_mask_server]: Creating
+[costmap_filter_info_server-10] [INFO] [1775544031.309582380] [costmap_filter_info_server]: This is costmap filter info publisher
+[robot_state_publisher-2] [INFO] [1775544031.380775940] [robot_state_publisher]: Robot initialized
+[velocity_smoother-17] [INFO] [1775544031.433424619] [velocity_smoother]: 
+[velocity_smoother-17] 	velocity_smoother lifecycle node launched. 
+[velocity_smoother-17] 	Waiting on external lifecycle transitions to activate
+[velocity_smoother-17] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-11] [INFO] [1775544031.479038289] [local_costmap.local_costmap]: 
+[controller_server-11] 	local_costmap lifecycle node launched. 
+[controller_server-11] 	Waiting on external lifecycle transitions to activate
+[controller_server-11] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[costmap_filter_info_server-10] [INFO] [1775544031.508605977] [keepout_costmap_filter_info_server]: 
+[costmap_filter_info_server-10] 	keepout_costmap_filter_info_server lifecycle node launched. 
+[costmap_filter_info_server-10] 	Waiting on external lifecycle transitions to activate
+[costmap_filter_info_server-10] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[controller_server-11] [INFO] [1775544031.512236498] [local_costmap.local_costmap]: Creating Costmap
+[lifecycle_manager-20] [INFO] [1775544031.548618414] [lifecycle_manager_navigation]: Creating
+[waypoint_follower-16] [INFO] [1775544031.576887654] [waypoint_follower]: 
+[waypoint_follower-16] 	waypoint_follower lifecycle node launched. 
+[waypoint_follower-16] 	Waiting on external lifecycle transitions to activate
+[waypoint_follower-16] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[waypoint_follower-16] [INFO] [1775544031.579767455] [waypoint_follower]: Creating
+[lifecycle_manager-20] [INFO] [1775544031.632757954] [lifecycle_manager_navigation]: [34m[1mCreating and initializing lifecycle service clients[0m[0m
+[localization_slam_toolbox_node-8] [INFO] [1775544031.713274849] [slam_toolbox]: Node using stack size 40000000
+[behavior_server-14] [INFO] [1775544031.788042057] [behavior_server]: 
+[behavior_server-14] 	behavior_server lifecycle node launched. 
+[behavior_server-14] 	Waiting on external lifecycle transitions to activate
+[behavior_server-14] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[collision_detector-19] [INFO] [1775544031.888073293] [collision_detector]: 
+[collision_detector-19] 	collision_detector lifecycle node launched. 
+[collision_detector-19] 	Waiting on external lifecycle transitions to activate
+[collision_detector-19] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[localization_slam_toolbox_node-8] [INFO] [1775544031.896738071] [slam_toolbox]: Configuring
+[collision_monitor-18] [INFO] [1775544031.903794662] [collision_monitor]: 
+[collision_monitor-18] 	collision_monitor lifecycle node launched. 
+[collision_monitor-18] 	Waiting on external lifecycle transitions to activate
+[collision_monitor-18] 	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[localization_slam_toolbox_node-8] [INFO] [1775544031.918303330] [slam_toolbox]: Using solver plugin solver_plugins::CeresSolver
+[scan_to_scan_filter_chain-5] [WARN] [1775544031.938865880] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[localization_slam_toolbox_node-8] [INFO] [1775544031.981346884] [slam_toolbox]: CeresSolver: Using SCHUR_JACOBI preconditioner.
+[lifecycle_manager-20] [INFO] [1775544032.881605262] [lifecycle_manager_navigation]: [34m[1mStarting managed nodes bringup...[0m[0m
+[lifecycle_manager-20] [INFO] [1775544032.882452228] [lifecycle_manager_navigation]: [34m[1mConfiguring controller_server[0m[0m
+[controller_server-11] [INFO] [1775544032.883794424] [controller_server]: Configuring controller interface
+[controller_server-11] [INFO] [1775544032.883884545] [controller_server]: getting progress checker plugins..
+[controller_server-11] [INFO] [1775544032.884213532] [controller_server]: getting goal checker plugins..
+[controller_server-11] [INFO] [1775544032.886504482] [controller_server]: Controller frequency set to 10.0000Hz
+[controller_server-11] [INFO] [1775544032.886625227] [local_costmap.local_costmap]: Configuring
+[controller_server-11] [INFO] [1775544032.916548735] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[controller_server-11] [INFO] [1775544032.946989638] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[controller_server-11] [INFO] [1775544032.994829802] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[controller_server-11] [INFO] [1775544032.994963380] [local_costmap.local_costmap]: Using plugin "denoise_layer"
+[controller_server-11] [INFO] [1775544033.001513951] [local_costmap.local_costmap]: Initialized plugin "denoise_layer"
+[controller_server-11] [INFO] [1775544033.001578698] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[controller_server-11] [INFO] [1775544033.002295003] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[controller_server-11] [INFO] [1775544033.002353625] [local_costmap.local_costmap]: Using costmap filter "keepout_filter"
+[controller_server-11] [INFO] [1775544033.018790424] [local_costmap.local_costmap]: Initialized costmap filter "keepout_filter"
+[controller_server-11] [INFO] [1775544033.018997791] [local_costmap.local_costmap]: Using costmap filter "inflation_layer2"
+[controller_server-11] [INFO] [1775544033.029741776] [local_costmap.local_costmap]: Initialized costmap filter "inflation_layer2"
+[localization_slam_toolbox_node-8] Load From File /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map.posegraph 
+[localization_slam_toolbox_node-8] Mapper <- Module
+[localization_slam_toolbox_node-8] Mapper <- m_pSequentialScanMatcher
+[localization_slam_toolbox_node-8] Mapper <- m_pGraph
+[localization_slam_toolbox_node-8] MapperGraph <- Graph; Graph <- m_Edges; Graph <- m_Vertices
+[localization_slam_toolbox_node-8] MapperGraph <- m_pMapper; MapperGraph <- m_pLoopScanMatcher; MapperGraph <- m_pTraversal
+[localization_slam_toolbox_node-8] Mapper <- m_pMapperSensorManager
+[localization_slam_toolbox_node-8] MapperSensorManager <- m_ScanManagers; MapperSensorManager <- m_Scans
+[localization_slam_toolbox_node-8] Mapper <- m_Listeners
+[localization_slam_toolbox_node-8] **Finished serializing Mapper**
+[localization_slam_toolbox_node-8] Load From File
+[localization_slam_toolbox_node-8] **Serializing Dataset**
+[localization_slam_toolbox_node-8] Dataset <- m_SensorNameLookup
+[localization_slam_toolbox_node-8] Dataset <- m_Data
+[localization_slam_toolbox_node-8] Dataset <- m_Lasers
+[localization_slam_toolbox_node-8] Dataset <- m_pDatasetInfo
+[localization_slam_toolbox_node-8] **Finished serializing Dataset**
+[localization_slam_toolbox_node-8] Registering sensor: [Custom Described Lidar]
+[localization_slam_toolbox_node-8] WARNING: Logging before InitGoogleLogging() is written to STDERR
+[localization_slam_toolbox_node-8] W20260407 13:40:33.058353 33537 preprocessor.cc:67] Specified options.num_threads: 50 exceeds maximum available from the threading model Ceres was compiled with: 8.  Bounding to maximum number available.
+[INFO] [launch.user]: [LifecycleLaunch] Slamtoolbox node is activating.
+[controller_server-11] [INFO] [1775544033.107923681] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[controller_server-11] [INFO] [1775544033.109803981] [controller_server]: Controller Server has progress_checker  progress checkers available.
+[controller_server-11] [INFO] [1775544033.110849564] [controller_server]: Created goal checker : goal_checker of type nav2_controller::SimpleGoalChecker
+[controller_server-11] [INFO] [1775544033.112259424] [controller_server]: Controller Server has goal_checker  goal checkers available.
+[localization_slam_toolbox_node-8] [INFO] [1775544033.113360713] [slam_toolbox]: Activating
+[controller_server-11] [INFO] [1775544033.121736168] [controller_server]: Created controller : FollowPath of type nav2_mppi_controller::MPPIController
+[controller_server-11] [INFO] [1775544033.171922696] [controller_server]: Controller period is equal to model dt. Control sequence shifting is ON
+[controller_server-11] [INFO] [1775544033.186085170] [controller_server]: ConstraintCritic instantiated with 1 power and 4.000000 weight.
+[controller_server-11] [INFO] [1775544033.186192207] [controller_server]: Critic loaded : mppi::critics::ConstraintCritic
+[controller_server-11] [INFO] [1775544033.194986479] [controller_server]: InflationCostCritic instantiated with 1 power and 300.000000 / 0.015000 weights. Critic will collision check based on footprint cost.
+[controller_server-11] [INFO] [1775544033.195110433] [controller_server]: Critic loaded : mppi::critics::CostCritic
+[controller_server-11] [INFO] [1775544033.205887084] [controller_server]: GoalCritic instantiated with 1 power and 5.000000 weight.
+[controller_server-11] [INFO] [1775544033.205966414] [controller_server]: Critic loaded : mppi::critics::GoalCritic
+[controller_server-11] [INFO] [1775544033.217964807] [controller_server]: GoalAngleCritic instantiated with 1 power, 3.000000 weight, and 0.500000 angular threshold.
+[controller_server-11] [INFO] [1775544033.218068637] [controller_server]: Critic loaded : mppi::critics::GoalAngleCritic
+[controller_server-11] [INFO] [1775544033.238073834] [controller_server]: ReferenceTrajectoryCritic instantiated with 1 power and 2.000000 weight
+[controller_server-11] [INFO] [1775544033.238159872] [controller_server]: Critic loaded : mppi::critics::PathAlignCritic
+[controller_server-11] [INFO] [1775544033.240245205] [controller_server]: Critic loaded : mppi::critics::PathFollowCritic
+[controller_server-11] [INFO] [1775544033.254860035] [controller_server]: PathAngleCritic instantiated with 1 power and 1.500000 weight. Mode set to: Forward Preference
+[controller_server-11] [INFO] [1775544033.254957740] [controller_server]: Critic loaded : mppi::critics::PathAngleCritic
+[controller_server-11] [INFO] [1775544033.261939085] [controller_server]: PreferForwardCritic instantiated with 1 power and 10.000000 weight.
+[controller_server-11] [INFO] [1775544033.262028623] [controller_server]: Critic loaded : mppi::critics::PreferForwardCritic
+[controller_server-11] [INFO] [1775544033.263378110] [controller_server]: Optimizer reset
+[controller_server-11] [INFO] [1775544033.289316444] [MPPIController]: Configured MPPI Controller: FollowPath
+[controller_server-11] [INFO] [1775544033.289363401] [controller_server]: Controller Server has FollowPath  controllers available.
+[lifecycle_manager-20] [INFO] [1775544033.310841456] [lifecycle_manager_navigation]: [34m[1mConfiguring smoother_server[0m[0m
+[smoother_server-12] [INFO] [1775544033.311721379] [smoother_server]: Configuring smoother server
+[smoother_server-12] [INFO] [1775544033.352102467] [smoother_server]: Created smoother : simple_smoother of type nav2_smoother::SimpleSmoother
+[smoother_server-12] [INFO] [1775544033.375806724] [smoother_server]: Smoother Server has simple_smoother  smoothers available.
+[lifecycle_manager-20] [INFO] [1775544033.399555021] [lifecycle_manager_navigation]: [34m[1mConfiguring planner_server[0m[0m
+[planner_server-13] [INFO] [1775544033.401362115] [planner_server]: Configuring
+[planner_server-13] [INFO] [1775544033.401472069] [global_costmap.global_costmap]: Configuring
+[localization_slam_toolbox_node-8] [INFO] [1775544033.412783032] [slam_toolbox]: Message Filter dropping message: frame 'laser' at time 1775544033.278 for reason 'discarding message because the queue is full'
+[planner_server-13] [INFO] [1775544033.495720954] [global_costmap.global_costmap]: Using plugin "static_layer"
+[planner_server-13] [INFO] [1775544033.559693137] [global_costmap.global_costmap]: Subscribing to the map topic (/map) with transient local durability
+[planner_server-13] [INFO] [1775544033.576100479] [global_costmap.global_costmap]: Initialized plugin "static_layer"
+[planner_server-13] [INFO] [1775544033.578358180] [global_costmap.global_costmap]: Using plugin "obstacle_layer"
+[planner_server-13] [INFO] [1775544033.619680147] [global_costmap.global_costmap]: Subscribed to Topics: scan
+[localization_monitor-21] [INFO] [1775544033.661364058] [localization_monitor]: Localization Monitor Started
+[planner_server-13] [INFO] [1775544033.675244209] [global_costmap.global_costmap]: Initialized plugin "obstacle_layer"
+[planner_server-13] [INFO] [1775544033.676606238] [global_costmap.global_costmap]: Using plugin "inflation_layer"
+[planner_server-13] [INFO] [1775544033.688224022] [global_costmap.global_costmap]: Initialized plugin "inflation_layer"
+[planner_server-13] [INFO] [1775544033.688350892] [global_costmap.global_costmap]: Using costmap filter "keepout_filter"
+[planner_server-13] [INFO] [1775544033.700845682] [global_costmap.global_costmap]: Initialized costmap filter "keepout_filter"
+[planner_server-13] [INFO] [1775544033.701865016] [global_costmap.global_costmap]: Using costmap filter "inflation_layer2"
+[planner_server-13] [INFO] [1775544033.711480005] [global_costmap.global_costmap]: Initialized costmap filter "inflation_layer2"
+[localization_monitor-1] [INFO] [1775544033.728656441] [localization_monitor]: Localization Monitor Started
+[planner_server-13] [INFO] [1775544033.789234344] [global_costmap.global_costmap]: StaticLayer: Resizing costmap to 276 X 287 at 0.050000 m/pix
+[planner_server-13] [INFO] [1775544033.804062666] [planner_server]: Created global planner plugin GridBased of type nav2_smac_planner::SmacPlanner2D
+[planner_server-13] [INFO] [1775544033.804183702] [planner_server]: Configuring GridBased of type SmacPlanner2D
+[planner_server-13] [ERROR] [1775544033.809079423] [planner_server]: Inflation layer either not found or inflation is not set sufficiently for optimized non-circular collision checking capabilities. It is HIGHLY recommended to set the inflation radius to be at MINIMUM half of the robot's largest cross-section. See github.com/ros-planning/navigation2/tree/main/nav2_smac_planner#potential-fields for full instructions. This will substantially impact run-time performance.
+[planner_server-13] [INFO] [1775544033.814040182] [planner_server]: Configured plugin GridBased of type SmacPlanner2D with tolerance 0.12, maximum iterations 1000000, max on approach iterations 1000, and not allowing unknown traversal.
+[planner_server-13] [INFO] [1775544033.815122805] [planner_server]: Planner Server has GridBased  planners available.
+[lifecycle_manager-20] [INFO] [1775544033.867660072] [lifecycle_manager_navigation]: [34m[1mConfiguring behavior_server[0m[0m
+[behavior_server-14] [INFO] [1775544033.868303171] [behavior_server]: Configuring
+[behavior_server-14] [INFO] [1775544033.889248081] [behavior_server]: Creating behavior plugin backup of type nav2_behaviors::BackUp
+[behavior_server-14] [INFO] [1775544033.895950604] [behavior_server]: Creating behavior plugin wait of type nav2_behaviors::Wait
+[behavior_server-14] [INFO] [1775544033.930687585] [behavior_server]: Configuring backup
+[behavior_server-14] [INFO] [1775544033.979841946] [behavior_server]: Configuring wait
+[lifecycle_manager-20] [INFO] [1775544034.010725582] [lifecycle_manager_navigation]: [34m[1mConfiguring velocity_smoother[0m[0m
+[velocity_smoother-17] [INFO] [1775544034.013628132] [velocity_smoother]: Configuring velocity smoother
+[lifecycle_manager-20] [INFO] [1775544034.050051171] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_monitor[0m[0m
+[collision_monitor-18] [INFO] [1775544034.050817931] [collision_monitor]: Configuring
+[collision_monitor-18] [INFO] [1775544034.092610046] [collision_monitor]: [scan]: Creating Scan
+[collision_monitor-18] [INFO] [1775544034.108129590] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_monitor-18] [INFO] [1775544034.122620175] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[collision_monitor-18] [INFO] [1775544034.149405767] [collision_monitor]: [FootprintApproach]: Creating Polygon
+[collision_monitor-18] [INFO] [1775544034.152208572] [collision_monitor]: [FootprintApproach]: Polygon points are not defined. Using dynamic subscription instead.
+[joint_state_publisher-3] [INFO] [1775544034.168018895] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[collision_monitor-18] [INFO] [1775544034.169447422] [collision_monitor]: [FootprintApproach]: Making footprint subscriber on /local_costmap/published_footprint topic
+[lifecycle_manager-20] [INFO] [1775544034.215283916] [lifecycle_manager_navigation]: [34m[1mConfiguring collision_detector[0m[0m
+[collision_detector-19] [INFO] [1775544034.217084885] [collision_detector]: Configuring
+[collision_detector-19] [INFO] [1775544034.242836852] [collision_monitor]: [scan]: Creating Scan
+[collision_detector-19] [INFO] [1775544034.248724199] [collision_monitor]: [PolygonStop]: Creating Polygon
+[collision_detector-19] [INFO] [1775544034.257968203] [collision_monitor]: [PolygonSlow]: Creating Polygon
+[lifecycle_manager-20] [INFO] [1775544034.281599838] [lifecycle_manager_navigation]: [34m[1mConfiguring bt_navigator[0m[0m
+[bt_navigator-15] [INFO] [1775544034.283697421] [bt_navigator]: Configuring
+[bt_navigator-15] [INFO] [1775544034.296315581] [bt_navigator]: Creating navigator id navigate_to_pose of type nav2_bt_navigator::NavigateToPoseNavigator
+[bt_navigator-15] [INFO] [1775544034.454097417] [bt_navigator]: Creating navigator id navigate_through_poses of type nav2_bt_navigator::NavigateThroughPosesNavigator
+[lifecycle_manager-20] [INFO] [1775544034.546425754] [lifecycle_manager_navigation]: [34m[1mConfiguring waypoint_follower[0m[0m
+[waypoint_follower-16] [INFO] [1775544034.547115226] [waypoint_follower]: Configuring
+[waypoint_follower-16] [INFO] [1775544034.645336452] [waypoint_follower]: Created waypoint_task_executor : wait_at_waypoint of type nav2_waypoint_follower::WaitAtWaypoint
+[lifecycle_manager-20] [INFO] [1775544034.648038635] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_filter_mask_server[0m[0m
+[map_server-9] [INFO] [1775544034.648602112] [keepout_filter_mask_server]: Configuring
+[map_server-9] [INFO] [1775544034.648736274] [map_io]: Loading yaml file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/latest_map_keepout.yaml
+[map_server-9] [INFO] [1775544034.649060886] [map_io]: resolution: 0.05
+[map_server-9] [INFO] [1775544034.649074010] [map_io]: origin[0]: -7.999
+[map_server-9] [INFO] [1775544034.649078968] [map_io]: origin[1]: -4.602
+[map_server-9] [INFO] [1775544034.649083052] [map_io]: origin[2]: 0
+[map_server-9] [INFO] [1775544034.649088010] [map_io]: free_thresh: 0.196
+[map_server-9] [INFO] [1775544034.649092384] [map_io]: occupied_thresh: 0.65
+[map_server-9] [INFO] [1775544034.649098218] [map_io]: mode: trinary
+[map_server-9] [INFO] [1775544034.649104342] [map_io]: negate: 0
+[map_server-9] [INFO] [1775544034.649310542] [map_io]: Loading image_file: /home/smr/workspaces/mini_amr/amrROS2_ws/maps/map_000.pgm
+[map_server-9] [INFO] [1775544034.651020224] [map_io]: Read map /home/smr/workspaces/mini_amr/amrROS2_ws/maps/map_000.pgm: 276 X 287 map @ 0.05 m/cell
+[lifecycle_manager-20] [INFO] [1775544034.665300817] [lifecycle_manager_navigation]: [34m[1mConfiguring keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-10] [INFO] [1775544034.666217197] [keepout_costmap_filter_info_server]: Configuring
+[lifecycle_manager-20] [INFO] [1775544034.678114095] [lifecycle_manager_navigation]: [34m[1mActivating controller_server[0m[0m
+[controller_server-11] [INFO] [1775544034.678765361] [controller_server]: Activating
+[controller_server-11] [INFO] [1775544034.678947645] [local_costmap.local_costmap]: Activating
+[controller_server-11] [INFO] [1775544034.679045349] [local_costmap.local_costmap]: Checking transform
+[controller_server-11] [INFO] [1775544034.679539704] [local_costmap.local_costmap]: start
+[controller_server-11] [INFO] [1775544034.681698826] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[controller_server-11] [WARN] [1775544034.781766519] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[controller_server-11] [WARN] [1775544034.789432962] [controller_server]: Parameter controller_server.verbose not found
+[controller_server-11] [INFO] [1775544034.791102686] [controller_server]: Optimizer reset
+[controller_server-11] [INFO] [1775544034.792795743] [MPPIController]: Activated MPPI Controller: FollowPath
+[controller_server-11] [INFO] [1775544034.792923197] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544034.900778077] [lifecycle_manager_navigation]: Server controller_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544034.900876365] [lifecycle_manager_navigation]: [34m[1mActivating smoother_server[0m[0m
+[smoother_server-12] [INFO] [1775544034.901585378] [smoother_server]: Activating
+[smoother_server-12] [INFO] [1775544034.901676666] [smoother_server]: Creating bond (smoother_server) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544035.005180930] [lifecycle_manager_navigation]: Server smoother_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544035.005272510] [lifecycle_manager_navigation]: [34m[1mActivating planner_server[0m[0m
+[planner_server-13] [INFO] [1775544035.005918525] [planner_server]: Activating
+[planner_server-13] [INFO] [1775544035.006028771] [global_costmap.global_costmap]: Activating
+[planner_server-13] [INFO] [1775544035.006068436] [global_costmap.global_costmap]: Checking transform
+[planner_server-13] [INFO] [1775544035.006139308] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[planner_server-13] [INFO] [1775544035.506210910] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[localization_slam_toolbox_node-8] [INFO] [1775544035.982520798] [slam_toolbox]: Message Filter dropping message: frame 'laser' at time 1775544035.783 for reason 'discarding message because the queue is full'
+[planner_server-13] [INFO] [1775544036.006197057] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[INFO] [delivery_robot_main_controller-22]: process started with pid [33844]
+[INFO] [robot_sound-23]: process started with pid [33845]
+[INFO] [call_robot_button-24]: process started with pid [33846]
+[INFO] [rpc_run_node-25]: process started with pid [33847]
+[INFO] [dock_coordinates-26]: process started with pid [33848]
+[INFO] [autodock_action_server-27]: process started with pid [33849]
+[INFO] [battery_manager_node-28]: process started with pid [33850]
+[dock_coordinates-26] [INFO] [1775544036.329352507] [dock_coordinates]: begin dock_coordinates
+[dock_coordinates-26] [INFO] [1775544036.330970900] [dock coordinates]: max_alignment_error: 0.010000
+[dock_coordinates-26] [INFO] [1775544036.332310472] [dock coordinates]: minimum_point_cloud: 5
+[dock_coordinates-26] [INFO] [1775544036.334209145] [dock coordinates]: point_cloud_split_dist: 0.050000
+[dock_coordinates-26] [INFO] [1775544036.335593048] [dock coordinates]: max_dock_width: 0.380000
+[dock_coordinates-26] [INFO] [1775544036.336852414] [dock coordinates]: min_dock_width: 0.310000
+[dock_coordinates-26] [INFO] [1775544036.338418602] [dock coordinates]: range_limit: 1.200000
+[planner_server-13] [INFO] [1775544036.514100177] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[controller_server-11] [WARN] [1775544036.880537516] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-13] [INFO] [1775544037.006645914] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[planner_server-13] [INFO] [1775544037.506252035] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[planner_server-13] [INFO] [1775544038.006208433] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[localization_slam_toolbox_node-8] [INFO] [1775544038.489051101] [slam_toolbox]: Message Filter dropping message: frame 'laser' at time 1775544038.294 for reason 'discarding message because the queue is full'
+[robot_sound-23] [0m[INFO] [1775544038.487298838] [robot_sound_node]: ✅ robot_sound_node started using .wav files[0m
+[robot_sound-23] [0m[INFO] [1775544038.501638346] [robot_sound_node]: Sound volume set to 100% (API).[0m
+[planner_server-13] [INFO] [1775544038.506236578] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[battery_manager_node-28] [INFO] [1775544038.571301009] [battery_manager]: SOC limits from API: target=1.00, resume=0.95
+[battery_manager_node-28] [INFO] [1775544038.573138727] [battery_manager]: IR state: IDLE -> CHARGING (11)
+[rpc_run_node-25] [0m[INFO] [1775544038.646230377] [rpc_run_node]: RPC run node started; RPC bridge configured.[0m
+[rpc_run_node-25] 2026-04-07 13:40:38,648 [INFO] RPCServer listening on localhost:6000
+[controller_server-11] [WARN] [1775544038.881474897] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-13] [INFO] [1775544039.009419263] [global_costmap.global_costmap]: Timed out waiting for transform from center_footprint to map to become available, tf error: Invalid frame ID "map" passed to canTransform argument target_frame - frame does not exist
+[battery_manager_node-28] [INFO] [1775544039.038614217] [battery_manager]: State change: IDLE_ON_DOCK -> CHARGING
+[localization_slam_toolbox_node-8] Registering sensor: [Custom Described Lidar]
+[autodock_action_server-27] [INFO] [1775544039.472214444] [autodock_action_server]: auto_dock_init_start
+[planner_server-13] [INFO] [1775544039.507165208] [global_costmap.global_costmap]: start
+[planner_server-13] [INFO] [1775544039.509658566] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_costmap_filter_info" topic for filter info...
+[autodock_action_server-27] [INFO] [1775544039.590511155] [autodock_action_server]: auto_dock_init_complete
+[autodock_action_server-27] [INFO] [1775544039.664791300] [charge_status]: IR Charge State: CHARGING (11)
+[delivery_robot_main_controller-22] [0m[INFO] [1775544039.691518269] [main_controller_node]: Delivery Robot Main Controller Node started.[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544039.700564531] [main_controller_node]: Initial state: STANDBY[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544039.708311179] [main_controller_node]: setting_batteryLowToCharge: 20[0m
+[delivery_robot_main_controller-22] [33m[WARN] [1775544039.770292525] [rcl.logging_rosout]: Publisher already registered for node name: 'main_controller_node'. If this is due to multiple nodes with the same name then all logs for the logger named 'main_controller_node' will go out over the existing publisher. As soon as any node with that name is destructed it will unregister the publisher, preventing any further logs for that name from being published on the rosout topic.[0m
+[delivery_robot_main_controller-22] [33m[WARN] [1775544039.845221310] [main_controller_node]: slam_toolbox_msgs not available; initial pose service calls will be skipped.[0m
+[planner_server-13] [WARN] [1775544040.020219247] [global_costmap.global_costmap]: KeepoutFilter: Filter mask was not received
+[planner_server-13] [INFO] [1775544040.065618551] [planner_server]: Activating plugin GridBased of type SmacPlanner2D
+[planner_server-13] [INFO] [1775544040.071659016] [planner_server]: Creating bond (planner_server) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544040.193279428] [lifecycle_manager_navigation]: Server planner_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544040.193553584] [lifecycle_manager_navigation]: [34m[1mActivating behavior_server[0m[0m
+[behavior_server-14] [INFO] [1775544040.195670416] [behavior_server]: Activating
+[behavior_server-14] [INFO] [1775544040.195818285] [behavior_server]: Activating backup
+[behavior_server-14] [INFO] [1775544040.195910448] [behavior_server]: Activating wait
+[behavior_server-14] [INFO] [1775544040.196067066] [behavior_server]: Creating bond (behavior_server) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544040.313231574] [lifecycle_manager_navigation]: Server behavior_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544040.313528187] [lifecycle_manager_navigation]: [34m[1mActivating velocity_smoother[0m[0m
+[velocity_smoother-17] [INFO] [1775544040.315464484] [velocity_smoother]: Activating
+[velocity_smoother-17] [INFO] [1775544040.315595437] [velocity_smoother]: Creating bond (velocity_smoother) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544040.427552737] [lifecycle_manager_navigation]: Server velocity_smoother connected with bond.
+[lifecycle_manager-20] [INFO] [1775544040.427967178] [lifecycle_manager_navigation]: [34m[1mActivating collision_monitor[0m[0m
+[collision_monitor-18] [INFO] [1775544040.430041720] [collision_monitor]: Activating
+[collision_monitor-18] [INFO] [1775544040.430131841] [collision_monitor]: Creating bond (collision_monitor) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544040.538320667] [lifecycle_manager_navigation]: Server collision_monitor connected with bond.
+[lifecycle_manager-20] [INFO] [1775544040.538409330] [lifecycle_manager_navigation]: [34m[1mActivating collision_detector[0m[0m
+[collision_detector-19] [INFO] [1775544040.539201465] [collision_detector]: Activating
+[collision_detector-19] [INFO] [1775544040.539333585] [collision_detector]: Creating bond (collision_detector) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544040.663530476] [lifecycle_manager_navigation]: Server collision_detector connected with bond.
+[lifecycle_manager-20] [INFO] [1775544040.663702261] [lifecycle_manager_navigation]: [34m[1mActivating bt_navigator[0m[0m
+[bt_navigator-15] [INFO] [1775544040.665903090] [bt_navigator]: Activating
+[controller_server-11] [WARN] [1775544040.889749733] [local_costmap.local_costmap]: KeepoutFilter: Filter mask was not received
+[bt_navigator-15] [INFO] [1775544040.957358853] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544041.071178953] [lifecycle_manager_navigation]: Server bt_navigator connected with bond.
+[lifecycle_manager-20] [INFO] [1775544041.071269366] [lifecycle_manager_navigation]: [34m[1mActivating waypoint_follower[0m[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544041.073373073] [main_controller_node]: Waiting for Nav2 system...[0m
+[waypoint_follower-16] [INFO] [1775544041.073869179] [waypoint_follower]: Activating
+[waypoint_follower-16] [INFO] [1775544041.074607941] [waypoint_follower]: Creating bond (waypoint_follower) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544041.184753771] [lifecycle_manager_navigation]: Server waypoint_follower connected with bond.
+[lifecycle_manager-20] [INFO] [1775544041.184910973] [lifecycle_manager_navigation]: [34m[1mActivating keepout_filter_mask_server[0m[0m
+[map_server-9] [INFO] [1775544041.187098677] [keepout_filter_mask_server]: Activating
+[map_server-9] [INFO] [1775544041.187341334] [keepout_filter_mask_server]: Creating bond (keepout_filter_mask_server) to lifecycle manager.
+[lifecycle_manager-20] [INFO] [1775544041.303172395] [lifecycle_manager_navigation]: Server keepout_filter_mask_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544041.303397552] [lifecycle_manager_navigation]: [34m[1mActivating keepout_costmap_filter_info_server[0m[0m
+[costmap_filter_info_server-10] [INFO] [1775544041.306232730] [keepout_costmap_filter_info_server]: Activating
+[costmap_filter_info_server-10] [INFO] [1775544041.306388474] [keepout_costmap_filter_info_server]: Creating bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[controller_server-11] [INFO] [1775544041.306585924] [local_costmap.local_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[controller_server-11] [INFO] [1775544041.306755084] [local_costmap.local_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-13] [INFO] [1775544041.307308645] [global_costmap.global_costmap]: KeepoutFilter: Received filter info from /keepout_costmap_filter_info topic.
+[planner_server-13] [INFO] [1775544041.307533803] [global_costmap.global_costmap]: KeepoutFilter: Subscribing to "/keepout_filter_mask" topic for filter mask...
+[planner_server-13] [INFO] [1775544041.335157320] [global_costmap.global_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[controller_server-11] [INFO] [1775544041.335853500] [local_costmap.local_costmap]: KeepoutFilter: Received filter mask from /keepout_filter_mask topic.
+[lifecycle_manager-20] [INFO] [1775544041.425122376] [lifecycle_manager_navigation]: Server keepout_costmap_filter_info_server connected with bond.
+[lifecycle_manager-20] [INFO] [1775544041.425265579] [lifecycle_manager_navigation]: [34m[1mManaged nodes are active[0m[0m
+[lifecycle_manager-20] [INFO] [1775544041.425302619] [lifecycle_manager_navigation]: [34m[1mCreating bond timer...[0m[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544043.108040059] [main_controller_node]: Waiting for localization pose to be received from slam_toolbox/pose[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544043.123085664] [main_controller_node]: Acquired localization pose from TF map->base_link[0m
+[INFO] [bash-29]: process started with pid [34005]
+[delivery_robot_main_controller-22] [0m[INFO] [1775544045.139825202] [main_controller_node]: Nav2 is ready for use![0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544045.218576417] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544045.220551796] [main_controller_node]: Robot is in STANDBY mode.[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544045.247988362] [main_controller_node]: Dock State change: IDLE -> DOCKED[0m
+[delivery_robot_main_controller-22] [33m[WARN] [1775544045.311418942] [main_controller_node]: Robot status id missing; refreshing before battery status.[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544046.277654339] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544047.204455652] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544047.326324262] [main_controller_node]: No pending queue found or unexpected format.[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544048.159913523] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544049.200672305] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544049.263664528] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544049.626968909] [localization_monitor]: No pose update for 10.4s
+[localization_monitor-1] [WARN] [1775544049.693004551] [localization_monitor]: No pose update for 10.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544050.152506947] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544050.626837665] [localization_monitor]: No pose update for 11.4s
+[localization_monitor-1] [WARN] [1775544050.695215004] [localization_monitor]: No pose update for 11.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544051.194830166] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544051.285365408] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544051.628878959] [localization_monitor]: No pose update for 12.4s
+[localization_monitor-1] [WARN] [1775544051.695893103] [localization_monitor]: No pose update for 12.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544052.206386995] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544052.629026245] [localization_monitor]: No pose update for 13.4s
+[localization_monitor-1] [WARN] [1775544052.695212964] [localization_monitor]: No pose update for 13.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544053.220835583] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544053.324109730] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544053.628911042] [localization_monitor]: No pose update for 14.4s
+[localization_monitor-1] [WARN] [1775544053.693658444] [localization_monitor]: No pose update for 14.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544054.197949710] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544054.628979873] [localization_monitor]: No pose update for 15.4s
+[localization_monitor-1] [WARN] [1775544054.695308629] [localization_monitor]: No pose update for 15.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544055.164449638] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544055.300969827] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544055.629087203] [localization_monitor]: No pose update for 16.4s
+[localization_monitor-1] [WARN] [1775544055.695232216] [localization_monitor]: No pose update for 16.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544056.206142591] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544056.629023332] [localization_monitor]: No pose update for 17.4s
+[localization_monitor-1] [WARN] [1775544056.693753818] [localization_monitor]: No pose update for 17.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544057.227617438] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544057.327483015] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544057.628973459] [localization_monitor]: No pose update for 18.4s
+[localization_monitor-1] [WARN] [1775544057.693008932] [localization_monitor]: No pose update for 18.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544058.227459654] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544058.628968794] [localization_monitor]: No pose update for 19.4s
+[localization_monitor-1] [WARN] [1775544058.692995516] [localization_monitor]: No pose update for 19.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544059.192154238] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544059.275867962] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544059.626900086] [localization_monitor]: No pose update for 20.4s
+[localization_monitor-1] [WARN] [1775544059.693000767] [localization_monitor]: No pose update for 20.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544060.218880916] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544060.629256950] [localization_monitor]: No pose update for 21.4s
+[localization_monitor-1] [WARN] [1775544060.692978310] [localization_monitor]: No pose update for 21.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544061.153852651] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544061.231621573] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544061.629186954] [localization_monitor]: No pose update for 22.4s
+[localization_monitor-1] [WARN] [1775544061.694261884] [localization_monitor]: No pose update for 22.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544062.186690085] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544062.629327241] [localization_monitor]: No pose update for 23.4s
+[localization_monitor-1] [WARN] [1775544062.693169346] [localization_monitor]: No pose update for 23.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544063.249597728] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544063.361074963] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544063.626906505] [localization_monitor]: No pose update for 24.4s
+[localization_monitor-1] [WARN] [1775544063.693021477] [localization_monitor]: No pose update for 24.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544064.181381382] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544064.626847592] [localization_monitor]: No pose update for 25.4s
+[localization_monitor-1] [WARN] [1775544064.693013604] [localization_monitor]: No pose update for 25.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544065.181806616] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544065.257414374] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544065.626846426] [localization_monitor]: No pose update for 26.4s
+[localization_monitor-1] [WARN] [1775544065.693668370] [localization_monitor]: No pose update for 26.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544066.149129886] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544066.626865384] [localization_monitor]: No pose update for 27.4s
+[localization_monitor-1] [WARN] [1775544066.693056187] [localization_monitor]: No pose update for 27.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544067.179070602] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544067.257659366] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544067.629444198] [localization_monitor]: No pose update for 28.4s
+[localization_monitor-1] [WARN] [1775544067.692986190] [localization_monitor]: No pose update for 28.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544068.248469027] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544068.626886385] [localization_monitor]: No pose update for 29.4s
+[localization_monitor-1] [WARN] [1775544068.693170517] [localization_monitor]: No pose update for 29.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544069.211645839] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544069.297100743] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544069.626896885] [localization_monitor]: No pose update for 30.4s
+[localization_monitor-1] [WARN] [1775544069.692971901] [localization_monitor]: No pose update for 30.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544070.205270553] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544070.626874429] [localization_monitor]: No pose update for 31.4s
+[localization_monitor-1] [WARN] [1775544070.693105479] [localization_monitor]: No pose update for 31.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544071.210793916] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544071.320893665] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544071.626873846] [localization_monitor]: No pose update for 32.4s
+[localization_monitor-1] [WARN] [1775544071.693055899] [localization_monitor]: No pose update for 32.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544072.184036032] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544072.626892221] [localization_monitor]: No pose update for 33.4s
+[localization_monitor-1] [WARN] [1775544072.692956154] [localization_monitor]: No pose update for 33.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544073.229286592] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544073.315912491] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544073.626867723] [localization_monitor]: No pose update for 34.4s
+[localization_monitor-1] [WARN] [1775544073.693069317] [localization_monitor]: No pose update for 34.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544074.188684430] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544074.626852558] [localization_monitor]: No pose update for 35.4s
+[localization_monitor-1] [WARN] [1775544074.692992029] [localization_monitor]: No pose update for 35.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544075.227614536] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544075.294915960] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544075.626854600] [localization_monitor]: No pose update for 36.4s
+[localization_monitor-1] [WARN] [1775544075.692991738] [localization_monitor]: No pose update for 36.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544076.162150247] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544076.626862475] [localization_monitor]: No pose update for 37.4s
+[localization_monitor-1] [WARN] [1775544076.695450682] [localization_monitor]: No pose update for 37.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544077.218948885] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544077.314207188] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544077.626865684] [localization_monitor]: No pose update for 38.4s
+[localization_monitor-1] [WARN] [1775544077.695293480] [localization_monitor]: No pose update for 38.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544078.221839770] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544078.626872685] [localization_monitor]: No pose update for 39.4s
+[localization_monitor-1] [WARN] [1775544078.695297273] [localization_monitor]: No pose update for 39.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544079.231764789] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544079.328753189] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544079.626871811] [localization_monitor]: No pose update for 40.4s
+[localization_monitor-1] [WARN] [1775544079.695489474] [localization_monitor]: No pose update for 40.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544080.195111052] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544080.626896019] [localization_monitor]: No pose update for 41.4s
+[localization_monitor-1] [WARN] [1775544080.696161156] [localization_monitor]: No pose update for 41.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544081.212349611] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544081.317012328] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544081.626860729] [localization_monitor]: No pose update for 42.4s
+[localization_monitor-1] [WARN] [1775544081.696059953] [localization_monitor]: No pose update for 42.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544082.196056016] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544082.626844397] [localization_monitor]: No pose update for 43.4s
+[localization_monitor-1] [WARN] [1775544082.695229320] [localization_monitor]: No pose update for 43.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544083.151967702] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544083.245601779] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544083.628897941] [localization_monitor]: No pose update for 44.4s
+[localization_monitor-1] [WARN] [1775544083.695224071] [localization_monitor]: No pose update for 44.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544084.191910434] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544084.626852565] [localization_monitor]: No pose update for 45.4s
+[localization_monitor-1] [WARN] [1775544084.693564555] [localization_monitor]: No pose update for 45.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544085.208190031] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544085.298710982] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544085.626877648] [localization_monitor]: No pose update for 46.4s
+[localization_monitor-1] [WARN] [1775544085.693501558] [localization_monitor]: No pose update for 46.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544086.206617428] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544086.626875316] [localization_monitor]: No pose update for 47.4s
+[localization_monitor-1] [WARN] [1775544086.692979788] [localization_monitor]: No pose update for 47.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544087.205325981] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544087.266623688] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544087.626856359] [localization_monitor]: No pose update for 48.4s
+[localization_monitor-1] [WARN] [1775544087.692989705] [localization_monitor]: No pose update for 48.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544088.150587595] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544088.626838569] [localization_monitor]: No pose update for 49.4s
+[localization_monitor-1] [WARN] [1775544088.693035496] [localization_monitor]: No pose update for 49.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544089.153626932] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544089.254300101] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544089.626847611] [localization_monitor]: No pose update for 50.4s
+[localization_monitor-1] [WARN] [1775544089.695320905] [localization_monitor]: No pose update for 50.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544090.205394814] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544090.627005105] [localization_monitor]: No pose update for 51.4s
+[localization_monitor-1] [WARN] [1775544090.695476066] [localization_monitor]: No pose update for 51.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544091.216764983] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544091.318665728] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544091.626856362] [localization_monitor]: No pose update for 52.4s
+[localization_monitor-1] [WARN] [1775544091.693106662] [localization_monitor]: No pose update for 52.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544092.180852050] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544092.626865113] [localization_monitor]: No pose update for 53.4s
+[localization_monitor-1] [WARN] [1775544092.693851841] [localization_monitor]: No pose update for 53.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544093.181987172] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544093.260934963] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544093.626832740] [localization_monitor]: No pose update for 54.4s
+[localization_monitor-1] [WARN] [1775544093.696512027] [localization_monitor]: No pose update for 54.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544094.223941156] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544094.628999153] [localization_monitor]: No pose update for 55.4s
+[localization_monitor-1] [WARN] [1775544094.695906844] [localization_monitor]: No pose update for 55.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544095.155098627] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544095.249087065] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544095.627370261] [localization_monitor]: No pose update for 56.4s
+[localization_monitor-1] [WARN] [1775544095.695084378] [localization_monitor]: No pose update for 56.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544096.212781855] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544096.629162482] [localization_monitor]: No pose update for 57.4s
+[localization_monitor-1] [WARN] [1775544096.693155956] [localization_monitor]: No pose update for 57.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544097.206728557] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544097.290037465] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544097.626960779] [localization_monitor]: No pose update for 58.4s
+[localization_monitor-1] [WARN] [1775544097.696029633] [localization_monitor]: No pose update for 58.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544098.225535637] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544098.626869784] [localization_monitor]: No pose update for 59.4s
+[localization_monitor-1] [WARN] [1775544098.695737687] [localization_monitor]: No pose update for 59.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544099.205249868] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544099.282302485] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544099.630328521] [localization_monitor]: No pose update for 60.4s
+[localization_monitor-1] [WARN] [1775544099.693950718] [localization_monitor]: No pose update for 60.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544100.171214901] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544100.626919658] [localization_monitor]: No pose update for 61.4s
+[localization_monitor-1] [WARN] [1775544100.693017131] [localization_monitor]: No pose update for 61.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544101.160930273] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544101.255868922] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544101.629478056] [localization_monitor]: No pose update for 62.4s
+[localization_monitor-1] [WARN] [1775544101.693010424] [localization_monitor]: No pose update for 62.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544102.152793392] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544102.629046408] [localization_monitor]: No pose update for 63.4s
+[localization_monitor-1] [WARN] [1775544102.693091213] [localization_monitor]: No pose update for 63.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544103.150423988] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544103.279665635] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544103.629283232] [localization_monitor]: No pose update for 64.4s
+[localization_monitor-1] [WARN] [1775544103.693152461] [localization_monitor]: No pose update for 64.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544104.210608449] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544104.630092284] [localization_monitor]: No pose update for 65.4s
+[localization_monitor-1] [WARN] [1775544104.696460121] [localization_monitor]: No pose update for 65.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544105.155142092] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544105.256506191] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544105.629392021] [localization_monitor]: No pose update for 66.4s
+[localization_monitor-1] [WARN] [1775544105.696205507] [localization_monitor]: No pose update for 66.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544106.173535604] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544106.629133616] [localization_monitor]: No pose update for 67.4s
+[localization_monitor-1] [WARN] [1775544106.695518660] [localization_monitor]: No pose update for 67.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544107.216424051] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544107.313461449] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544107.629145574] [localization_monitor]: No pose update for 68.4s
+[localization_monitor-1] [WARN] [1775544107.696143969] [localization_monitor]: No pose update for 68.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544108.152776189] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544108.629115535] [localization_monitor]: No pose update for 69.4s
+[localization_monitor-1] [WARN] [1775544108.693001096] [localization_monitor]: No pose update for 69.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544109.217760124] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544109.284615316] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544109.628924793] [localization_monitor]: No pose update for 70.4s
+[localization_monitor-1] [WARN] [1775544109.696240217] [localization_monitor]: No pose update for 70.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544110.207849981] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544110.629843507] [localization_monitor]: No pose update for 71.4s
+[localization_monitor-1] [WARN] [1775544110.696258592] [localization_monitor]: No pose update for 71.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544111.253594021] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544111.352125859] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544111.628999458] [localization_monitor]: No pose update for 72.4s
+[localization_monitor-1] [WARN] [1775544111.695536455] [localization_monitor]: No pose update for 72.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544112.152170425] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544112.628995084] [localization_monitor]: No pose update for 73.4s
+[localization_monitor-1] [WARN] [1775544112.695238093] [localization_monitor]: No pose update for 73.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544113.199786890] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544113.290942774] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544113.627059663] [localization_monitor]: No pose update for 74.4s
+[localization_monitor-1] [WARN] [1775544113.695218553] [localization_monitor]: No pose update for 74.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544114.230486492] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544114.626846755] [localization_monitor]: No pose update for 75.4s
+[localization_monitor-1] [WARN] [1775544114.693111346] [localization_monitor]: No pose update for 75.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544115.201524863] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544115.282065090] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544115.626855506] [localization_monitor]: No pose update for 76.4s
+[localization_monitor-1] [WARN] [1775544115.693197969] [localization_monitor]: No pose update for 76.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544116.154649787] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544116.626843840] [localization_monitor]: No pose update for 77.4s
+[localization_monitor-1] [WARN] [1775544116.692971937] [localization_monitor]: No pose update for 77.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544117.155968943] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544117.255318581] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544117.628893300] [localization_monitor]: No pose update for 78.4s
+[localization_monitor-1] [WARN] [1775544117.693089475] [localization_monitor]: No pose update for 78.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544118.196155498] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544118.626880882] [localization_monitor]: No pose update for 79.4s
+[localization_monitor-1] [WARN] [1775544118.694416797] [localization_monitor]: No pose update for 79.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544119.156903698] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544119.255088176] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544119.629018130] [localization_monitor]: No pose update for 80.4s
+[localization_monitor-1] [WARN] [1775544119.696529255] [localization_monitor]: No pose update for 80.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544120.147046928] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544120.629142959] [localization_monitor]: No pose update for 81.4s
+[localization_monitor-1] [WARN] [1775544120.693006938] [localization_monitor]: No pose update for 81.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544121.154618292] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544121.243558473] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544121.629362868] [localization_monitor]: No pose update for 82.4s
+[localization_monitor-1] [WARN] [1775544121.693067603] [localization_monitor]: No pose update for 82.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544122.160632218] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544122.629177959] [localization_monitor]: No pose update for 83.4s
+[localization_monitor-1] [WARN] [1775544122.693804033] [localization_monitor]: No pose update for 83.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544123.150673951] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544123.252978638] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544123.629321163] [localization_monitor]: No pose update for 84.4s
+[localization_monitor-1] [WARN] [1775544123.694749579] [localization_monitor]: No pose update for 84.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544124.152462964] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544124.629097756] [localization_monitor]: No pose update for 85.4s
+[localization_monitor-1] [WARN] [1775544124.693104938] [localization_monitor]: No pose update for 85.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544125.167650314] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544125.249360952] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544125.629131005] [localization_monitor]: No pose update for 86.4s
+[localization_monitor-1] [WARN] [1775544125.692981277] [localization_monitor]: No pose update for 86.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544126.151025106] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544126.629825728] [localization_monitor]: No pose update for 87.4s
+[localization_monitor-1] [WARN] [1775544126.695143607] [localization_monitor]: No pose update for 87.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544127.154198021] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544127.263077194] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544127.629382413] [localization_monitor]: No pose update for 88.4s
+[localization_monitor-1] [WARN] [1775544127.692986820] [localization_monitor]: No pose update for 88.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544128.166458322] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544128.629106217] [localization_monitor]: No pose update for 89.4s
+[localization_monitor-1] [WARN] [1775544128.693092691] [localization_monitor]: No pose update for 89.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544129.146781237] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544129.230072645] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544129.629078802] [localization_monitor]: No pose update for 90.4s
+[localization_monitor-1] [WARN] [1775544129.693347890] [localization_monitor]: No pose update for 90.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544130.151101523] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544130.629030097] [localization_monitor]: No pose update for 91.4s
+[localization_monitor-1] [WARN] [1775544130.695362060] [localization_monitor]: No pose update for 91.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544131.160026166] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544131.247466657] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544131.628953684] [localization_monitor]: No pose update for 92.4s
+[localization_monitor-1] [WARN] [1775544131.695189693] [localization_monitor]: No pose update for 92.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544132.154543928] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544132.628935019] [localization_monitor]: No pose update for 93.4s
+[localization_monitor-1] [WARN] [1775544132.695278357] [localization_monitor]: No pose update for 93.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544133.151249394] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544133.272067755] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544133.628941727] [localization_monitor]: No pose update for 94.4s
+[localization_monitor-1] [WARN] [1775544133.696512058] [localization_monitor]: No pose update for 94.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544134.215091792] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544134.628963311] [localization_monitor]: No pose update for 95.4s
+[localization_monitor-1] [WARN] [1775544134.696022662] [localization_monitor]: No pose update for 95.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544135.175267474] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544135.266765761] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544135.628976436] [localization_monitor]: No pose update for 96.4s
+[localization_monitor-1] [WARN] [1775544135.693031157] [localization_monitor]: No pose update for 96.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544136.161769100] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544136.628916356] [localization_monitor]: No pose update for 97.4s
+[localization_monitor-1] [WARN] [1775544136.693107863] [localization_monitor]: No pose update for 97.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544137.153406769] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544137.262840087] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544137.626906854] [localization_monitor]: No pose update for 98.4s
+[localization_monitor-1] [WARN] [1775544137.692981286] [localization_monitor]: No pose update for 98.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544138.245087925] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544138.626863690] [localization_monitor]: No pose update for 99.4s
+[localization_monitor-1] [WARN] [1775544138.695476103] [localization_monitor]: No pose update for 99.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544139.155201615] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544139.251728034] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544139.626903064] [localization_monitor]: No pose update for 100.4s
+[localization_monitor-1] [WARN] [1775544139.695725469] [localization_monitor]: No pose update for 100.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544140.144977360] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544140.626906273] [localization_monitor]: No pose update for 101.4s
+[localization_monitor-1] [WARN] [1775544140.693040786] [localization_monitor]: No pose update for 101.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544141.236444732] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544141.307462424] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544141.626849692] [localization_monitor]: No pose update for 102.4s
+[localization_monitor-1] [WARN] [1775544141.693047203] [localization_monitor]: No pose update for 102.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544142.150324855] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544142.626862526] [localization_monitor]: No pose update for 103.4s
+[localization_monitor-1] [WARN] [1775544142.693191573] [localization_monitor]: No pose update for 103.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544143.153400941] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544143.265596522] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544143.626868360] [localization_monitor]: No pose update for 104.4s
+[localization_monitor-1] [WARN] [1775544143.692973999] [localization_monitor]: No pose update for 104.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544144.148573469] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544144.626895776] [localization_monitor]: No pose update for 105.4s
+[localization_monitor-1] [WARN] [1775544144.692982750] [localization_monitor]: No pose update for 105.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544145.150598430] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544145.223410967] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544145.626859903] [localization_monitor]: No pose update for 106.4s
+[localization_monitor-1] [WARN] [1775544145.693057414] [localization_monitor]: No pose update for 106.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544146.188599906] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544146.626851738] [localization_monitor]: No pose update for 107.4s
+[localization_monitor-1] [WARN] [1775544146.693009292] [localization_monitor]: No pose update for 107.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544147.153117164] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544147.248756368] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544147.628832659] [localization_monitor]: No pose update for 108.4s
+[localization_monitor-1] [WARN] [1775544147.695453069] [localization_monitor]: No pose update for 108.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544148.190671824] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544148.626859614] [localization_monitor]: No pose update for 109.4s
+[localization_monitor-1] [WARN] [1775544148.693099123] [localization_monitor]: No pose update for 109.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544149.157118088] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544149.247391132] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544149.626874781] [localization_monitor]: No pose update for 110.4s
+[localization_monitor-1] [WARN] [1775544149.693735223] [localization_monitor]: No pose update for 110.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544150.231681430] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544150.629024570] [localization_monitor]: No pose update for 111.4s
+[localization_monitor-1] [WARN] [1775544150.693579480] [localization_monitor]: No pose update for 111.4s
+[ekf_node-6] [ERROR] [1775544151.135484874] [ekf_filter_node]: Failed to meet update rate! Took 0.078682383999999994106seconds. Try decreasing the rate, limiting sensor output frequency, or limiting the number of sensors.
+[delivery_robot_main_controller-22] [0m[INFO] [1775544151.156210459] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544151.243279674] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544151.628983156] [localization_monitor]: No pose update for 112.4s
+[localization_monitor-1] [WARN] [1775544151.696424575] [localization_monitor]: No pose update for 112.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544152.218515252] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544152.626940406] [localization_monitor]: No pose update for 113.4s
+[localization_monitor-1] [WARN] [1775544152.698521867] [localization_monitor]: No pose update for 113.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544153.155560362] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544153.282107409] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544153.629242439] [localization_monitor]: No pose update for 114.4s
+[localization_monitor-1] [WARN] [1775544153.693119834] [localization_monitor]: No pose update for 114.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544154.171453517] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544154.629121111] [localization_monitor]: No pose update for 115.4s
+[localization_monitor-1] [WARN] [1775544154.696894434] [localization_monitor]: No pose update for 115.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544155.172016411] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544155.262416617] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544155.628990742] [localization_monitor]: No pose update for 116.4s
+[localization_monitor-1] [WARN] [1775544155.695477575] [localization_monitor]: No pose update for 116.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544156.161161598] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544156.626929909] [localization_monitor]: No pose update for 117.4s
+[localization_monitor-1] [WARN] [1775544156.693060631] [localization_monitor]: No pose update for 117.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544157.161305384] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544157.308809008] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544157.628926871] [localization_monitor]: No pose update for 118.4s
+[localization_monitor-1] [WARN] [1775544157.693309705] [localization_monitor]: No pose update for 118.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544158.149367072] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544158.628984620] [localization_monitor]: No pose update for 119.4s
+[localization_monitor-1] [WARN] [1775544158.696288669] [localization_monitor]: No pose update for 119.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544159.163384302] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544159.253990417] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544159.629185571] [localization_monitor]: No pose update for 120.4s
+[localization_monitor-1] [WARN] [1775544159.693090382] [localization_monitor]: No pose update for 120.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544160.217215935] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544160.629150573] [localization_monitor]: No pose update for 121.4s
+[localization_monitor-1] [WARN] [1775544160.693923641] [localization_monitor]: No pose update for 121.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544161.207560115] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544161.278285277] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544161.629318859] [localization_monitor]: No pose update for 122.4s
+[localization_monitor-1] [WARN] [1775544161.693146964] [localization_monitor]: No pose update for 122.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544162.168579263] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544162.629900128] [localization_monitor]: No pose update for 123.4s
+[localization_monitor-1] [WARN] [1775544162.695098720] [localization_monitor]: No pose update for 123.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544163.162214186] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544163.262184175] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544163.629845298] [localization_monitor]: No pose update for 124.4s
+[localization_monitor-1] [WARN] [1775544163.695253298] [localization_monitor]: No pose update for 124.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544164.179077093] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544164.628962167] [localization_monitor]: No pose update for 125.4s
+[localization_monitor-1] [WARN] [1775544164.693651821] [localization_monitor]: No pose update for 125.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544165.211763741] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544165.315752152] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544165.628987833] [localization_monitor]: No pose update for 126.4s
+[localization_monitor-1] [WARN] [1775544165.693742819] [localization_monitor]: No pose update for 126.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544166.229991302] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544166.629246824] [localization_monitor]: No pose update for 127.4s
+[localization_monitor-1] [WARN] [1775544166.696176097] [localization_monitor]: No pose update for 127.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544167.156141349] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544167.282895180] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544167.629162536] [localization_monitor]: No pose update for 128.4s
+[localization_monitor-1] [WARN] [1775544167.693522329] [localization_monitor]: No pose update for 128.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544168.152033098] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544168.629438151] [localization_monitor]: No pose update for 129.4s
+[localization_monitor-1] [WARN] [1775544168.695278093] [localization_monitor]: No pose update for 129.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544169.159310474] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544169.250275032] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544169.629124039] [localization_monitor]: No pose update for 130.4s
+[localization_monitor-1] [WARN] [1775544169.697237140] [localization_monitor]: No pose update for 130.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544170.170408821] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544170.626944503] [localization_monitor]: No pose update for 131.4s
+[localization_monitor-1] [WARN] [1775544170.693035851] [localization_monitor]: No pose update for 131.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544171.174091549] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544171.282198711] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544171.628609270] [localization_monitor]: No pose update for 132.4s
+[localization_monitor-1] [WARN] [1775544171.695851780] [localization_monitor]: No pose update for 132.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544172.149000181] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544172.626858466] [localization_monitor]: No pose update for 133.4s
+[localization_monitor-1] [WARN] [1775544172.694149683] [localization_monitor]: No pose update for 133.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544173.168298699] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544173.271865669] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544173.626892590] [localization_monitor]: No pose update for 134.4s
+[localization_monitor-1] [WARN] [1775544173.693240595] [localization_monitor]: No pose update for 134.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544174.149897022] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544174.626867217] [localization_monitor]: No pose update for 135.4s
+[localization_monitor-1] [WARN] [1775544174.693000855] [localization_monitor]: No pose update for 135.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544175.169013256] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544175.256639240] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544175.626866343] [localization_monitor]: No pose update for 136.4s
+[localization_monitor-1] [WARN] [1775544175.693630539] [localization_monitor]: No pose update for 136.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544176.164742844] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544176.629118795] [localization_monitor]: No pose update for 137.4s
+[localization_monitor-1] [WARN] [1775544176.693359301] [localization_monitor]: No pose update for 137.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544177.198725315] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544177.280579447] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544177.628909387] [localization_monitor]: No pose update for 138.4s
+[localization_monitor-1] [WARN] [1775544177.693201808] [localization_monitor]: No pose update for 138.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544178.173470912] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544178.626902510] [localization_monitor]: No pose update for 139.4s
+[localization_monitor-1] [WARN] [1775544178.693186059] [localization_monitor]: No pose update for 139.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544179.164232742] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544179.242981624] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544179.626895220] [localization_monitor]: No pose update for 140.4s
+[localization_monitor-1] [WARN] [1775544179.693019233] [localization_monitor]: No pose update for 140.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544180.192072959] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544180.629000386] [localization_monitor]: No pose update for 141.4s
+[localization_monitor-1] [WARN] [1775544180.692997360] [localization_monitor]: No pose update for 141.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544181.154791872] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544181.263613298] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544181.629161964] [localization_monitor]: No pose update for 142.4s
+[localization_monitor-1] [WARN] [1775544181.694117899] [localization_monitor]: No pose update for 142.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544182.148359715] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544182.626925554] [localization_monitor]: No pose update for 143.4s
+[localization_monitor-1] [WARN] [1775544182.692977237] [localization_monitor]: No pose update for 143.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544183.152460968] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544183.271965714] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544183.626864016] [localization_monitor]: No pose update for 144.4s
+[localization_monitor-1] [WARN] [1775544183.692993862] [localization_monitor]: No pose update for 144.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544184.169109217] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544184.626934014] [localization_monitor]: No pose update for 145.4s
+[localization_monitor-1] [WARN] [1775544184.693522050] [localization_monitor]: No pose update for 145.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544185.149534795] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544185.226948189] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544185.626857601] [localization_monitor]: No pose update for 146.4s
+[localization_monitor-1] [WARN] [1775544185.692989489] [localization_monitor]: No pose update for 146.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544186.156250734] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544186.626863726] [localization_monitor]: No pose update for 147.4s
+[localization_monitor-1] [WARN] [1775544186.693401015] [localization_monitor]: No pose update for 147.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544187.152598923] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544187.239289570] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544187.626871602] [localization_monitor]: No pose update for 148.4s
+[localization_monitor-1] [WARN] [1775544187.693011656] [localization_monitor]: No pose update for 148.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544188.161263118] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544188.626879186] [localization_monitor]: No pose update for 149.4s
+[localization_monitor-1] [WARN] [1775544188.692997074] [localization_monitor]: No pose update for 149.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544189.181696466] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544189.309272180] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544189.629063682] [localization_monitor]: No pose update for 150.4s
+[localization_monitor-1] [WARN] [1775544189.693387018] [localization_monitor]: No pose update for 150.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544190.205779000] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544190.626880062] [localization_monitor]: No pose update for 151.4s
+[localization_monitor-1] [WARN] [1775544190.693044616] [localization_monitor]: No pose update for 151.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544191.201605710] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544191.300740982] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544191.626945977] [localization_monitor]: No pose update for 152.4s
+[localization_monitor-1] [WARN] [1775544191.692960037] [localization_monitor]: No pose update for 152.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544192.161524736] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544192.626866064] [localization_monitor]: No pose update for 153.4s
+[localization_monitor-1] [WARN] [1775544192.693688591] [localization_monitor]: No pose update for 153.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544193.160671354] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544193.269365035] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544193.629239553] [localization_monitor]: No pose update for 154.4s
+[localization_monitor-1] [WARN] [1775544193.692971704] [localization_monitor]: No pose update for 154.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544194.164962474] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544194.628955482] [localization_monitor]: No pose update for 155.4s
+[localization_monitor-1] [WARN] [1775544194.693004954] [localization_monitor]: No pose update for 155.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544195.175994616] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544195.264169203] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544195.626948897] [localization_monitor]: No pose update for 156.4s
+[localization_monitor-1] [WARN] [1775544195.695452231] [localization_monitor]: No pose update for 156.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544196.159983634] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544196.626864026] [localization_monitor]: No pose update for 157.4s
+[localization_monitor-1] [WARN] [1775544196.692962957] [localization_monitor]: No pose update for 157.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544197.175370767] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544197.273744237] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544197.626910108] [localization_monitor]: No pose update for 158.4s
+[localization_monitor-1] [WARN] [1775544197.693471021] [localization_monitor]: No pose update for 158.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544198.216901268] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544198.626881527] [localization_monitor]: No pose update for 159.4s
+[localization_monitor-1] [WARN] [1775544198.693221948] [localization_monitor]: No pose update for 159.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544199.179037747] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544199.303341093] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544199.627013647] [localization_monitor]: No pose update for 160.4s
+[localization_monitor-1] [WARN] [1775544199.693551227] [localization_monitor]: No pose update for 160.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544200.160391079] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544200.629847076] [localization_monitor]: No pose update for 161.4s
+[localization_monitor-1] [WARN] [1775544200.697517152] [localization_monitor]: No pose update for 161.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544201.152121787] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544201.233678723] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544201.626934027] [localization_monitor]: No pose update for 162.4s
+[localization_monitor-1] [WARN] [1775544201.700877018] [localization_monitor]: No pose update for 162.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544202.149484935] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544202.626902821] [localization_monitor]: No pose update for 163.4s
+[localization_monitor-1] [WARN] [1775544202.695902260] [localization_monitor]: No pose update for 163.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544203.165689869] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544203.245614995] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544203.629025486] [localization_monitor]: No pose update for 164.4s
+[localization_monitor-1] [WARN] [1775544203.696967385] [localization_monitor]: No pose update for 164.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544204.153330407] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544204.630202315] [localization_monitor]: No pose update for 165.4s
+[localization_monitor-1] [WARN] [1775544204.695211623] [localization_monitor]: No pose update for 165.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544205.200743880] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544205.299133683] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544205.626912739] [localization_monitor]: No pose update for 166.4s
+[localization_monitor-1] [WARN] [1775544205.693013712] [localization_monitor]: No pose update for 166.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544206.162791987] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544206.627693500] [localization_monitor]: No pose update for 167.4s
+[localization_monitor-1] [WARN] [1775544206.693099751] [localization_monitor]: No pose update for 167.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544207.171382102] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544207.256110202] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544207.626884742] [localization_monitor]: No pose update for 168.4s
+[localization_monitor-1] [WARN] [1775544207.695271414] [localization_monitor]: No pose update for 168.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544208.163005480] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544208.626903408] [localization_monitor]: No pose update for 169.4s
+[localization_monitor-1] [WARN] [1775544208.695142504] [localization_monitor]: No pose update for 169.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544209.162714409] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544209.246564045] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544209.629411934] [localization_monitor]: No pose update for 170.4s
+[localization_monitor-1] [WARN] [1775544209.695469450] [localization_monitor]: No pose update for 170.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544210.150872927] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544210.632474020] [localization_monitor]: No pose update for 171.4s
+[localization_monitor-1] [WARN] [1775544210.696291626] [localization_monitor]: No pose update for 171.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544211.154863643] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544211.255299113] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544211.629194069] [localization_monitor]: No pose update for 172.4s
+[localization_monitor-1] [WARN] [1775544211.694076215] [localization_monitor]: No pose update for 172.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544212.159938731] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544212.626946868] [localization_monitor]: No pose update for 173.4s
+[localization_monitor-1] [WARN] [1775544212.693296331] [localization_monitor]: No pose update for 173.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544213.167762085] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544213.278021661] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544213.626887955] [localization_monitor]: No pose update for 174.4s
+[localization_monitor-1] [WARN] [1775544213.695514659] [localization_monitor]: No pose update for 174.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544214.151437866] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544214.626849749] [localization_monitor]: No pose update for 175.4s
+[localization_monitor-1] [WARN] [1775544214.695277545] [localization_monitor]: No pose update for 175.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544215.242350510] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544215.321815405] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544215.626911580] [localization_monitor]: No pose update for 176.4s
+[localization_monitor-1] [WARN] [1775544215.695209006] [localization_monitor]: No pose update for 176.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544216.170855380] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544216.629314235] [localization_monitor]: No pose update for 177.4s
+[localization_monitor-1] [WARN] [1775544216.695478496] [localization_monitor]: No pose update for 177.4s
+[delivery_robot_main_controller-22] [0m[INFO] [1775544217.160293971] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[delivery_robot_main_controller-22] [0m[INFO] [1775544217.293510292] [main_controller_node]: No pending queue found or unexpected format.[0m
+[localization_monitor-21] [WARN] [1775544217.630911338] [localization_monitor]: No pose update for 178.4s
+[bash-29] 4
+[bash-29] Queue empty: current state-> STANDBY : queue_action-> 
+[bash-29] queue action->Idle :  current state-> STANDBY : previous state-> 
+[localization_monitor-1] [WARN] [1775544217.696783945] [localization_monitor]: No pose update for 178.4s
+[INFO] [bash-29]: process has finished cleanly [pid 34005]
+[INFO] [battery_manager_node-28]: sending signal 'SIGINT' to process[battery_manager_node-28]
+[INFO] [autodock_action_server-27]: sending signal 'SIGINT' to process[autodock_action_server-27]
+[INFO] [dock_coordinates-26]: sending signal 'SIGINT' to process[dock_coordinates-26]
+[INFO] [rpc_run_node-25]: sending signal 'SIGINT' to process[rpc_run_node-25]
+[INFO] [call_robot_button-24]: sending signal 'SIGINT' to process[call_robot_button-24]
+[INFO] [robot_sound-23]: sending signal 'SIGINT' to process[robot_sound-23]
+[INFO] [dock_coordinates-26]: process has finished cleanly [pid 33848]
+[INFO] [delivery_robot_main_controller-22]: sending signal 'SIGINT' to process[delivery_robot_main_controller-22]
+[INFO] [localization_monitor-21]: sending signal 'SIGINT' to process[localization_monitor-21]
+[INFO] [lifecycle_manager-20]: sending signal 'SIGINT' to process[lifecycle_manager-20]
+[INFO] [collision_detector-19]: sending signal 'SIGINT' to process[collision_detector-19]
+[INFO] [collision_monitor-18]: sending signal 'SIGINT' to process[collision_monitor-18]
+[INFO] [velocity_smoother-17]: sending signal 'SIGINT' to process[velocity_smoother-17]
+[INFO] [waypoint_follower-16]: sending signal 'SIGINT' to process[waypoint_follower-16]
+[INFO] [bt_navigator-15]: sending signal 'SIGINT' to process[bt_navigator-15]
+[INFO] [behavior_server-14]: sending signal 'SIGINT' to process[behavior_server-14]
+[INFO] [planner_server-13]: sending signal 'SIGINT' to process[planner_server-13]
+[INFO] [smoother_server-12]: sending signal 'SIGINT' to process[smoother_server-12]
+[INFO] [controller_server-11]: sending signal 'SIGINT' to process[controller_server-11]
+[INFO] [costmap_filter_info_server-10]: sending signal 'SIGINT' to process[costmap_filter_info_server-10]
+[INFO] [map_server-9]: sending signal 'SIGINT' to process[map_server-9]
+[INFO] [localization_slam_toolbox_node-8]: sending signal 'SIGINT' to process[localization_slam_toolbox_node-8]
+[INFO] [robot_hardware-7]: sending signal 'SIGINT' to process[robot_hardware-7]
+[INFO] [ekf_node-6]: sending signal 'SIGINT' to process[ekf_node-6]
+[INFO] [scan_to_scan_filter_chain-5]: sending signal 'SIGINT' to process[scan_to_scan_filter_chain-5]
+[INFO] [sllidar_node-4]: sending signal 'SIGINT' to process[sllidar_node-4]
+[INFO] [joint_state_publisher-3]: sending signal 'SIGINT' to process[joint_state_publisher-3]
+[INFO] [robot_state_publisher-2]: sending signal 'SIGINT' to process[robot_state_publisher-2]
+[INFO] [localization_monitor-1]: sending signal 'SIGINT' to process[localization_monitor-1]
+[delivery_robot_main_controller-22] [0m[INFO] [1775544218.174029754] [main_controller_node]: Current state: STANDBY, dock_state DOCKED, charge_state CHARGING[0m
+[localization_monitor-21] [WARN] [1775544218.626923832] [localization_monitor]: No pose update for 179.4s
+[localization_monitor-1] [WARN] [1775544218.693753942] [localization_monitor]: No pose update for 179.4s
+[battery_manager_node-28] Traceback (most recent call last):
+[battery_manager_node-28]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node", line 33, in <module>
+[battery_manager_node-28]     sys.exit(load_entry_point('battery-management==0.0.0', 'console_scripts', 'battery_manager_node')())
+[battery_manager_node-28]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-28]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/python3.12/site-packages/battery_management/battery_manager_node.py", line 311, in main
+[battery_manager_node-28]     rclpy.spin(node)
+[battery_manager_node-28]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[battery_manager_node-28]     executor.spin_once()
+[battery_manager_node-28]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 923, in spin_once
+[battery_manager_node-28]     self._spin_once_impl(timeout_sec)
+[battery_manager_node-28]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 904, in _spin_once_impl
+[battery_manager_node-28]     handler, entity, node = self.wait_for_ready_callbacks(
+[battery_manager_node-28]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-28]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 874, in wait_for_ready_callbacks
+[battery_manager_node-28]     return next(self._cb_iter)
+[battery_manager_node-28]            ^^^^^^^^^^^^^^^^^^^
+[battery_manager_node-28]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 778, in _wait_for_ready_callbacks
+[battery_manager_node-28]     wait_set.wait(timeout_nsec)
+[battery_manager_node-28] KeyboardInterrupt
+[dock_coordinates-26] [INFO] [1775544218.846396234] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[rpc_run_node-25] [0m[INFO] [1775544218.872627098] [rpc_run_node]: RPC run node stopped by user.[0m
+[rpc_run_node-25] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[rpc_run_node-25] 2026-04-07 13:43:38,876 [INFO] RPCServer stopped.
+[robot_sound-23] [0m[INFO] [1775544218.931366991] [robot_sound_node]: 🔚 robot_sound_node stopped by user.[0m
+[robot_sound-23] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[delivery_robot_main_controller-22] [0m[INFO] [1775544218.974234730] [main_controller_node]: Node stopped by user.[0m
+[delivery_robot_main_controller-22] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[localization_monitor-21] Traceback (most recent call last):
+[localization_monitor-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/localization_monitor/lib/localization_monitor/localization_monitor", line 33, in <module>
+[localization_monitor-21]     sys.exit(load_entry_point('localization-monitor', 'console_scripts', 'localization_monitor')())
+[localization_monitor-21]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[localization_monitor-21]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/build/localization_monitor/localization_monitor/localization_monitor.py", line 114, in main
+[localization_monitor-21]     rclpy.spin(node)
+[localization_monitor-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[localization_monitor-21]     executor.spin_once()
+[localization_monitor-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 923, in spin_once
+[localization_monitor-21]     self._spin_once_impl(timeout_sec)
+[localization_monitor-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 904, in _spin_once_impl
+[localization_monitor-21]     handler, entity, node = self.wait_for_ready_callbacks(
+[localization_monitor-21]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[localization_monitor-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 874, in wait_for_ready_callbacks
+[localization_monitor-21]     return next(self._cb_iter)
+[localization_monitor-21]            ^^^^^^^^^^^^^^^^^^^
+[localization_monitor-21]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 778, in _wait_for_ready_callbacks
+[localization_monitor-21]     wait_set.wait(timeout_nsec)
+[localization_monitor-21] KeyboardInterrupt
+[lifecycle_manager-20] [INFO] [1775544219.032896751] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[lifecycle_manager-20] [INFO] [1775544219.033076994] [lifecycle_manager_navigation]: Running Nav2 LifecycleManager rcl preshutdown (lifecycle_manager_navigation)
+[lifecycle_manager-20] [INFO] [1775544219.033352024] [lifecycle_manager_navigation]: [34m[1mTerminating bond timer...[0m[0m
+[collision_detector-19] [INFO] [1775544219.075166305] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[collision_detector-19] [INFO] [1775544219.075380380] [collision_detector]: Running Nav2 LifecycleNode rcl preshutdown (collision_detector)
+[collision_detector-19] [INFO] [1775544219.076239304] [collision_detector]: Deactivating
+[collision_detector-19] [INFO] [1775544219.076372590] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[call_robot_button-24] [0m[INFO] [1775544219.142276987] [call_robot_button_node]: CallRobotButton interrupted by user.[0m
+[call_robot_button-24] Failed to publish log message to rosout: publisher's context is invalid, at ./src/rcl/publisher.c:423
+[collision_monitor-18] [INFO] [1775544219.157000021] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[collision_monitor-18] [INFO] [1775544219.157112892] [collision_monitor]: Running Nav2 LifecycleNode rcl preshutdown (collision_monitor)
+[collision_monitor-18] [INFO] [1775544219.157248803] [collision_monitor]: Deactivating
+[collision_monitor-18] [INFO] [1775544219.157302759] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_detector-19] [INFO] [1775544219.177585320] [collision_detector]: Cleaning up
+[collision_detector-19] [INFO] [1775544219.191359893] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_detector-19] [INFO] [1775544219.210887068] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_detector-19] [INFO] [1775544219.223092245] [collision_monitor]: [scan]: Destroying Scan
+[velocity_smoother-17] [INFO] [1775544219.215959822] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[velocity_smoother-17] [INFO] [1775544219.224095538] [velocity_smoother]: Running Nav2 LifecycleNode rcl preshutdown (velocity_smoother)
+[velocity_smoother-17] [INFO] [1775544219.224235824] [velocity_smoother]: Deactivating
+[velocity_smoother-17] [INFO] [1775544219.224290655] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[waypoint_follower-16] [INFO] [1775544219.218069071] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[waypoint_follower-16] [INFO] [1775544219.218237064] [waypoint_follower]: Running Nav2 LifecycleNode rcl preshutdown (waypoint_follower)
+[waypoint_follower-16] [INFO] [1775544219.218356935] [waypoint_follower]: Deactivating
+[waypoint_follower-16] [INFO] [1775544219.218417599] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[bt_navigator-15] [INFO] [1775544219.242713041] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[bt_navigator-15] [INFO] [1775544219.242816870] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[bt_navigator-15] [INFO] [1775544219.242941406] [bt_navigator]: Deactivating
+[bt_navigator-15] [INFO] [1775544219.243005862] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[collision_monitor-18] [INFO] [1775544219.259286334] [collision_monitor]: Cleaning up
+[collision_monitor-18] [INFO] [1775544219.259473285] [collision_monitor]: [PolygonStop]: Destroying Polygon
+[collision_monitor-18] [INFO] [1775544219.259578572] [collision_monitor]: [PolygonSlow]: Destroying Polygon
+[collision_monitor-18] [INFO] [1775544219.259672777] [collision_monitor]: [FootprintApproach]: Destroying Polygon
+[collision_monitor-18] [INFO] [1775544219.259769023] [collision_monitor]: [scan]: Destroying Scan
+[collision_monitor-18] [INFO] [1775544219.307593729] [collision_monitor]: Destroying bond (collision_monitor) to lifecycle manager.
+[collision_detector-19] [INFO] [1775544219.291448002] [collision_detector]: Destroying bond (collision_detector) to lifecycle manager.
+[behavior_server-14] [INFO] [1775544219.298234521] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[behavior_server-14] [INFO] [1775544219.298348850] [behavior_server]: Running Nav2 LifecycleNode rcl preshutdown (behavior_server)
+[behavior_server-14] [INFO] [1775544219.300786794] [behavior_server]: Deactivating
+[behavior_server-14] [INFO] [1775544219.300897331] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[velocity_smoother-17] [INFO] [1775544219.326362601] [velocity_smoother]: Cleaning up
+[velocity_smoother-17] [INFO] [1775544219.326551593] [velocity_smoother]: Destroying bond (velocity_smoother) to lifecycle manager.
+[waypoint_follower-16] [INFO] [1775544219.326681963] [waypoint_follower]: Cleaning up
+[bt_navigator-15] [INFO] [1775544219.344215968] [bt_navigator]: Cleaning up
+[collision_detector-19] [INFO] [1775544219.376051274] [collision_detector]: Destroying
+[planner_server-13] [INFO] [1775544219.385675013] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[planner_server-13] [INFO] [1775544219.385779425] [planner_server]: Running Nav2 LifecycleNode rcl preshutdown (planner_server)
+[planner_server-13] [INFO] [1775544219.385973959] [planner_server]: Deactivating
+[planner_server-13] [INFO] [1775544219.386096454] [global_costmap.global_costmap]: Deactivating
+[behavior_server-14] [INFO] [1775544219.401465796] [behavior_server]: Cleaning up
+[behavior_server-14] [INFO] [1775544219.430570628] [behavior_server]: Destroying bond (behavior_server) to lifecycle manager.
+[smoother_server-12] [INFO] [1775544219.435799126] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[smoother_server-12] [INFO] [1775544219.436014659] [smoother_server]: Running Nav2 LifecycleNode rcl preshutdown (smoother_server)
+[smoother_server-12] [INFO] [1775544219.436459725] [smoother_server]: Deactivating
+[smoother_server-12] [INFO] [1775544219.436660384] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[velocity_smoother-17] [INFO] [1775544219.451337920] [velocity_smoother]: Destroying
+[controller_server-11] [INFO] [1775544219.456018107] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[controller_server-11] [INFO] [1775544219.456112020] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[controller_server-11] [INFO] [1775544219.456234807] [controller_server]: Deactivating
+[controller_server-11] [INFO] [1775544219.456285554] [MPPIController]: Deactivated MPPI Controller: FollowPath
+[controller_server-11] [INFO] [1775544219.456306554] [local_costmap.local_costmap]: Deactivating
+[controller_server-11] [INFO] [1775544219.487076152] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[costmap_filter_info_server-10] [INFO] [1775544219.500555570] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[costmap_filter_info_server-10] [INFO] [1775544219.500831767] [keepout_costmap_filter_info_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_costmap_filter_info_server)
+[costmap_filter_info_server-10] [INFO] [1775544219.501133630] [keepout_costmap_filter_info_server]: Deactivating
+[costmap_filter_info_server-10] [INFO] [1775544219.501222876] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[planner_server-13] [INFO] [1775544219.507645410] [planner_server]: Deactivating plugin GridBased of type SmacPlanner2D
+[planner_server-13] [INFO] [1775544219.507733782] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[autodock_action_server-27] Traceback (most recent call last):
+[autodock_action_server-27]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1409, in main
+[autodock_action_server-27]     executor.spin()
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 359, in spin
+[autodock_action_server-27]     self._spin_once_impl()
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 988, in _spin_once_impl
+[autodock_action_server-27]     handler, entity, node = self.wait_for_ready_callbacks(
+[autodock_action_server-27]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 874, in wait_for_ready_callbacks
+[autodock_action_server-27]     return next(self._cb_iter)
+[autodock_action_server-27]            ^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 778, in _wait_for_ready_callbacks
+[autodock_action_server-27]     wait_set.wait(timeout_nsec)
+[autodock_action_server-27] KeyboardInterrupt
+[autodock_action_server-27] 
+[autodock_action_server-27] During handling of the above exception, another exception occurred:
+[autodock_action_server-27] 
+[autodock_action_server-27] Traceback (most recent call last):
+[autodock_action_server-27]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server", line 33, in <module>
+[autodock_action_server-27]     sys.exit(load_entry_point('action-autodock==0.0.0', 'console_scripts', 'autodock_action_server')())
+[autodock_action_server-27]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[autodock_action_server-27]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/python3.12/site-packages/action_autodock/autodock_action_server.py", line 1420, in main
+[autodock_action_server-27]     rclpy.shutdown()   
+[autodock_action_server-27]     ^^^^^^^^^^^^^^^^
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[autodock_action_server-27]     _shutdown(context=context)
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[autodock_action_server-27]     context.shutdown()
+[autodock_action_server-27]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[autodock_action_server-27]     self.__context.shutdown()
+[autodock_action_server-27] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[collision_monitor-18] [INFO] [1775544219.551996214] [collision_monitor]: Destroying
+[map_server-9] [INFO] [1775544219.579418489] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-9] [INFO] [1775544219.579553817] [keepout_filter_mask_server]: Running Nav2 LifecycleNode rcl preshutdown (keepout_filter_mask_server)
+[map_server-9] [INFO] [1775544219.579669604] [keepout_filter_mask_server]: Deactivating
+[map_server-9] [INFO] [1775544219.579707227] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[controller_server-11] [INFO] [1775544219.590739076] [controller_server]: Cleaning up
+[controller_server-11] [INFO] [1775544219.591958486] [MPPIController]: Cleaned up MPPI Controller: FollowPath
+[controller_server-11] [INFO] [1775544219.592158269] [local_costmap.local_costmap]: Cleaning up
+[planner_server-13] [INFO] [1775544219.608145336] [planner_server]: Cleaning up
+[localization_slam_toolbox_node-8] [INFO] [1775544219.619977486] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[robot_hardware-7] [INFO] [1775544219.628482145] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[ekf_node-6] [INFO] [1775544219.638222838] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[scan_to_scan_filter_chain-5] [INFO] [1775544219.649606423] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[map_server-9] [INFO] [1775544219.680711716] [keepout_filter_mask_server]: Cleaning up
+[map_server-9] [INFO] [1775544219.680822837] [keepout_filter_mask_server]: Destroying bond (keepout_filter_mask_server) to lifecycle manager.
+[localization_monitor-1] [WARN] [1775544219.693423206] [localization_monitor]: No pose update for 180.4s
+[localization_slam_toolbox_node-8] Unregistering sensor: Custom Described Lidar
+[waypoint_follower-16] [INFO] [1775544219.740628729] [waypoint_follower]: Destroying bond (waypoint_follower) to lifecycle manager.
+[waypoint_follower-16] [INFO] [1775544219.754440341] [waypoint_follower]: Destroying
+[robot_state_publisher-2] [INFO] [1775544219.782797370] [rclcpp]: signal_handler(SIGINT/SIGTERM)
+[localization_monitor-1] Traceback (most recent call last):
+[localization_monitor-1]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/localization_monitor/lib/localization_monitor/localization_monitor", line 33, in <module>
+[localization_monitor-1]     sys.exit(load_entry_point('localization-monitor', 'console_scripts', 'localization_monitor')())
+[localization_monitor-1]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[localization_monitor-1]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/build/localization_monitor/localization_monitor/localization_monitor.py", line 114, in main
+[localization_monitor-1]     rclpy.spin(node)
+[localization_monitor-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 247, in spin
+[localization_monitor-1]     executor.spin_once()
+[localization_monitor-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 923, in spin_once
+[localization_monitor-1]     self._spin_once_impl(timeout_sec)
+[localization_monitor-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 904, in _spin_once_impl
+[localization_monitor-1]     handler, entity, node = self.wait_for_ready_callbacks(
+[localization_monitor-1]                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[localization_monitor-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 874, in wait_for_ready_callbacks
+[localization_monitor-1]     return next(self._cb_iter)
+[localization_monitor-1]            ^^^^^^^^^^^^^^^^^^^
+[localization_monitor-1]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/executors.py", line 778, in _wait_for_ready_callbacks
+[localization_monitor-1]     wait_set.wait(timeout_nsec)
+[localization_monitor-1] KeyboardInterrupt
+[planner_server-13] [INFO] [1775544219.834241223] [global_costmap.global_costmap]: Cleaning up
+[sllidar_node-4] [INFO] [1775544219.919257478] [sllidar_node]: Stop motor
+[delivery_robot_main_controller-22] Traceback (most recent call last):
+[delivery_robot_main_controller-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller", line 33, in <module>
+[delivery_robot_main_controller-22]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'delivery_robot_main_controller')())
+[delivery_robot_main_controller-22]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[delivery_robot_main_controller-22]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/main_controller_node.py", line 1931, in main
+[delivery_robot_main_controller-22]     rclpy.shutdown()
+[delivery_robot_main_controller-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[delivery_robot_main_controller-22]     _shutdown(context=context)
+[delivery_robot_main_controller-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[delivery_robot_main_controller-22]     context.shutdown()
+[delivery_robot_main_controller-22]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[delivery_robot_main_controller-22]     self.__context.shutdown()
+[delivery_robot_main_controller-22] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[planner_server-13] [INFO] [1775544219.952424189] [planner_server]: Cleaning up plugin GridBased of type SmacPlanner2D
+[planner_server-13] [INFO] [1775544219.956767223] [planner_server]: Destroying plugin GridBased of type SmacPlanner2D
+[smoother_server-12] [INFO] [1775544220.067388451] [smoother_server]: Cleaning up
+[costmap_filter_info_server-10] [INFO] [1775544220.067841975] [keepout_costmap_filter_info_server]: Cleaning up
+[costmap_filter_info_server-10] [INFO] [1775544220.067935596] [keepout_costmap_filter_info_server]: Destroying bond (keepout_costmap_filter_info_server) to lifecycle manager.
+[costmap_filter_info_server-10] [INFO] [1775544220.074344130] [keepout_costmap_filter_info_server]: Destroying
+[smoother_server-12] [INFO] [1775544220.134717291] [smoother_server]: Destroying bond (smoother_server) to lifecycle manager.
+[map_server-9] [INFO] [1775544220.185662705] [keepout_filter_mask_server]: Destroying
+[behavior_server-14] [INFO] [1775544220.279362696] [behavior_server]: Destroying
+[planner_server-13] [INFO] [1775544220.296924699] [planner_server]: Destroying bond (planner_server) to lifecycle manager.
+[planner_server-13] [INFO] [1775544220.337117087] [global_costmap.global_costmap]: Destroying
+[smoother_server-12] [INFO] [1775544220.357599432] [smoother_server]: Destroying
+[controller_server-11] [INFO] [1775544220.472402700] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[controller_server-11] [INFO] [1775544220.535596165] [local_costmap.local_costmap]: Destroying
+[planner_server-13] [INFO] [1775544220.537252473] [planner_server]: Destroying
+[INFO] [collision_detector-19]: process has finished cleanly [pid 33593]
+[lifecycle_manager-20] [INFO] [1775544220.710410650] [lifecycle_manager_navigation]: Destroying lifecycle_manager_navigation
+[controller_server-11] [INFO] [1775544220.758294854] [controller_server]: Destroying
+[robot_sound-23] Traceback (most recent call last):
+[robot_sound-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound", line 33, in <module>
+[robot_sound-23]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'robot_sound')())
+[robot_sound-23]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[robot_sound-23]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/robot_sound.py", line 150, in main
+[robot_sound-23]     rclpy.shutdown()
+[robot_sound-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[robot_sound-23]     _shutdown(context=context)
+[robot_sound-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[robot_sound-23]     context.shutdown()
+[robot_sound-23]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[robot_sound-23]     self.__context.shutdown()
+[robot_sound-23] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[call_robot_button-24] Traceback (most recent call last):
+[call_robot_button-24]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button", line 33, in <module>
+[call_robot_button-24]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'call_robot_button')())
+[call_robot_button-24]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[call_robot_button-24]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/call_button.py", line 251, in main
+[call_robot_button-24]     rclpy.shutdown()
+[call_robot_button-24]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[call_robot_button-24]     _shutdown(context=context)
+[call_robot_button-24]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[call_robot_button-24]     context.shutdown()
+[call_robot_button-24]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[call_robot_button-24]     self.__context.shutdown()
+[call_robot_button-24] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[rpc_run_node-25] Traceback (most recent call last):
+[rpc_run_node-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node", line 33, in <module>
+[rpc_run_node-25]     sys.exit(load_entry_point('delivery-robot-main-controller==0.0.1', 'console_scripts', 'rpc_run_node')())
+[rpc_run_node-25]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rpc_run_node-25]   File "/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/python3.12/site-packages/delivery_robot_main_controller/rpc_run_node.py", line 57, in main
+[rpc_run_node-25]     rclpy.shutdown()
+[rpc_run_node-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/__init__.py", line 134, in shutdown
+[rpc_run_node-25]     _shutdown(context=context)
+[rpc_run_node-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/utilities.py", line 82, in shutdown
+[rpc_run_node-25]     context.shutdown()
+[rpc_run_node-25]   File "/opt/ros/jazzy/lib/python3.12/site-packages/rclpy/context.py", line 129, in shutdown
+[rpc_run_node-25]     self.__context.shutdown()
+[rpc_run_node-25] rclpy._rclpy_pybind11.RCLError: failed to shutdown: rcl_shutdown already called on the given context, at ./src/rcl/init.c:333
+[INFO] [robot_hardware-7]: process has finished cleanly [pid 33536]
+[INFO] [collision_monitor-18]: process has finished cleanly [pid 33590]
+[bt_navigator-15] [INFO] [1775544221.118143415] [bt_navigator]: Completed Cleaning up
+[bt_navigator-15] [INFO] [1775544221.119121334] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[ERROR] [localization_monitor-21]: process has died [pid 33599, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/localization_monitor/lib/localization_monitor/localization_monitor --ros-args -r __node:=localization_monitor --params-file /tmp/launch_params_vnt8snl3 -r /tf:=tf -r /tf_static:=tf_static -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [waypoint_follower-16]: process has finished cleanly [pid 33588]
+[INFO] [velocity_smoother-17]: process has finished cleanly [pid 33589]
+[ERROR] [battery_manager_node-28]: process has died [pid 33850, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/lib/battery_management/battery_manager_node --ros-args -r __node:=battery_manager -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/battery_management/share/battery_management/config/battery_manager.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [rpc_run_node-25]: process has died [pid 33847, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/rpc_run_node --ros-args -r __node:=rpc_run_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[bt_navigator-15] [INFO] [1775544221.335777516] [bt_navigator]: Destroying
+[ERROR] [robot_sound-23]: process has died [pid 33845, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/robot_sound --ros-args -r __node:=robot_sound_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[ERROR] [call_robot_button-24]: process has died [pid 33846, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/call_robot_button --ros-args -r __node:=call_robot_button_node -r __ns:=/ -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [map_server-9]: process has finished cleanly [pid 33540]
+[INFO] [costmap_filter_info_server-10]: process has finished cleanly [pid 33543]
+[INFO] [scan_to_scan_filter_chain-5]: process has finished cleanly [pid 33534]
+[INFO] [behavior_server-14]: process has finished cleanly [pid 33586]
+[INFO] [joint_state_publisher-3]: process has finished cleanly [pid 33532]
+[ERROR] [localization_monitor-1]: process has died [pid 33530, exit code -2, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/localization_monitor/lib/localization_monitor/localization_monitor --ros-args -r __node:=localization_monitor --params-file /tmp/launch_params_3ig1iuo6'].
+[INFO] [smoother_server-12]: process has finished cleanly [pid 33551]
+[ERROR] [autodock_action_server-27]: process has died [pid 33849, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/lib/action_autodock/autodock_action_server --ros-args -r __ns:=/ --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/action_autodock/share/action_autodock/config/auto_dock_config.yaml --params-file /tmp/launch_params_c8byuzw1 -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [planner_server-13]: process has finished cleanly [pid 33568]
+[INFO] [lifecycle_manager-20]: process has finished cleanly [pid 33596]
+[INFO] [robot_state_publisher-2]: process has finished cleanly [pid 33531]
+[INFO] [sllidar_node-4]: process has finished cleanly [pid 33533]
+[INFO] [controller_server-11]: process has finished cleanly [pid 33546]
+[INFO] [ekf_node-6]: process has finished cleanly [pid 33535]
+[ERROR] [delivery_robot_main_controller-22]: process has died [pid 33844, exit code 1, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/delivery_robot_main_controller/lib/delivery_robot_main_controller/delivery_robot_main_controller --ros-args -r __node:=main_controller_node -r __ns:=/ --params-file /tmp/launch_params_o9dw3l0s -r /tf:=tf -r /tf_static:=tf_static'].
+[INFO] [localization_slam_toolbox_node-8]: process has finished cleanly [pid 33537]
+[INFO] [bt_navigator-15]: process has finished cleanly [pid 33587]

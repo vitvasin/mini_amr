@@ -1,19 +1,3 @@
-keepout_costmap_filter_info_server:
-  ros__parameters:
-    use_sim_time: false
-    type: 0
-    filter_info_topic: "/keepout_costmap_filter_info"
-    mask_topic: "/keepout_filter_mask"
-    base: 0.0
-    multiplier: 1.0
-keepout_filter_mask_server:
-  ros__parameters:
-    use_sim_time: false
-    frame_id: "map"
-    topic_name: "/keepout_filter_mask"
-    # yaml_filename: "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_keepout.yaml" # need to edit for filter
-    # yaml_filename: "/home/smr/workspaces/mini_amr/amrROS2_ws/maps/NECTEC_4th_Floor_SLAM_keepout.yaml" # For SLAM map with keepout areas
-
 amcl:
   ros__parameters:
     alpha1: 0.2
@@ -264,10 +248,10 @@ controller_server:
       PathAngleCritic:
         enabled: true
         cost_power: 1
-        cost_weight: 1.5
-        offset_from_furthest: 20
+        cost_weight: 2.0
+        offset_from_furthest: 4
         threshold_to_consider: 0.5
-        max_angle_to_furthest: 0.8
+        max_angle_to_furthest: 1.0
         mode: 0
       # VelocityDeadbandCritic:
       #   enabled: true
@@ -282,7 +266,7 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      update_frequency: 10.0
+      update_frequency: 5.0
       publish_frequency: 1.0
       global_frame: odom
       robot_base_frame: center_footprint
@@ -295,11 +279,8 @@ local_costmap:
       #footprint: '[ [0.24, 0.22], [-0.24, 0.22], [-0.24, -0.22], [0.24, -0.22] ]'
       #plugins: ["voxel_layer", "inflation_layer"]
       plugins: ["obstacle_layer","denoise_layer", "inflation_layer"]
-      filters: ["keepout_filter","inflation_layer2"]
-      keepout_filter:
-        plugin: "nav2_costmap_2d::KeepoutFilter"
-        enabled: True
-        filter_info_topic: "/keepout_costmap_filter_info"
+      #plugins:["obstacle_layer","voxel_layer","denoise_layer","inflation_layer"]
+      #plugins: ["obstacle_layer", "inflation_layer","denoise_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -316,14 +297,8 @@ local_costmap:
           obstacle_min_range: 0.0
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 5.0
-        inflation_radius: 1.0
-        inflate_unknown: true
-        inflate_around_unknown: true
-      inflation_layer2:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 5.0
-        inflation_radius: 1.0
+        cost_scaling_factor: 2.0
+        inflation_radius: 0.5
         inflate_unknown: true
         inflate_around_unknown: true
       denoise_layer:
@@ -366,7 +341,7 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      update_frequency: 2.0
+      update_frequency: 1.0
       publish_frequency: 1.0
       global_frame: map
       robot_base_frame: center_footprint
@@ -375,11 +350,7 @@ global_costmap:
       resolution: 0.1
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
-      filters: ["keepout_filter","inflation_layer2"]
-      keepout_filter:
-        plugin: "nav2_costmap_2d::KeepoutFilter"
-        enabled: True
-        filter_info_topic: "/keepout_costmap_filter_info"
+      #plugins: ["static_layer", "obstacle_layer"]
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
         enabled: True
@@ -399,12 +370,8 @@ global_costmap:
         map_subscribe_transient_local: True
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 5.0
-        inflation_radius: 1.0
-      inflation_layer2:
-        plugin: "nav2_costmap_2d::InflationLayer"
-        cost_scaling_factor: 5.0 #3.0
-        inflation_radius: 1.0
+        cost_scaling_factor: 2.0
+        inflation_radius: 0.5
       always_send_full_costmap: True
 
 # The yaml_filename does not need to be specified since it going to be set by defaults in launch.
@@ -422,7 +389,7 @@ map_saver:
 
 planner_server:
   ros__parameters:
-    expected_planner_frequency: 5.0
+    expected_planner_frequency: 10.0
     planner_plugins: ["GridBased"]
     costmap_update_timeout: 1.0
     GridBased:
@@ -504,9 +471,9 @@ velocity_smoother:
     # max_velocity: [0.5, 0.0, 2.0]
     max_velocity: [1.0, 0.0, 1.0]
     # min_velocity: [-0.5, 0.0, -2.0]
-    min_velocity: [-0.35, 0.0, -0.5]
-    max_accel: [1.0, 0.0, 1.6]
-    max_decel: [-2.0, 0.0, -1.6]
+    min_velocity: [-1.0, 0.0, -1.0]
+    max_accel: [2.0, 0.0, 2.2]
+    max_decel: [-2.0, 0.0, -2.2]
     odom_topic: "odom"
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]
@@ -593,7 +560,7 @@ collision_monitor:
       points: "[[0.6, 0.2], [0.6, -0.2], [0.0, -0.2], [0.0, 0.2]]"
       action_type: "slowdown"
       #max_points: 4
-      slowdown_ratio: 0.9
+      slowdown_ratio: 0.8
       visualize: true
       polygon_pub_topic: "/polygon_slowdown"
       enabled: True

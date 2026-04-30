@@ -92,7 +92,7 @@ class TopicCheckerWorker(QThread):
     def run(self):
         # Prepare environment with correct ROS_DOMAIN_ID
         env = os.environ.copy()
-        env["ROS_DOMAIN_ID"] = "31"
+        env["ROS_DOMAIN_ID"] = "41"
         env["CYLCONDEDS_URI"] = os.path.expanduser("~/cyclonedds.xml") # Just in case
 
         # 1. Check HZ

@@ -224,9 +224,9 @@ def generate_launch_description():
         name='localization_monitor',
         output='screen',
         parameters=[{
-            'covariance_position_threshold': 2.0,
-            'covariance_yaw_threshold': 0.3,
-            'lost_counter_threshold': 5
+            'covariance_threshold': 0.4,
+            'check_interval': 1.0,
+            'pose_timeout': 10.0
         }]
     )
 

@@ -1,11 +1,12 @@
 battery_manager:
   ros__parameters:
-    soc_target: 1.0
-    soc_resume: 0.95
+    soc_target: 0.95
+    soc_resume: 0.80
+    soc_full_tolerance: 0.01
     capacity_ah: 20.0
-    full_current_ratio: 0.05
-    full_current_hold_sec: 90
-    cooldown_sec: 10 #600
+    full_current_ratio: 0.01
+    full_current_hold_sec: 300
+    cooldown_sec: 300
     temp_ok_c: 40.0
     temp_high_c: 45.0
     set_charge_retries: 5

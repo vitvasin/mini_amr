@@ -35,6 +35,7 @@ class BatteryManager(Node):
         # ---- Parameters ----
         self.soc_target = self.declare_parameter('soc_target', 0.92).value
         self.soc_resume = self.declare_parameter('soc_resume', 0.84).value
+        self.soc_full_tolerance = self.declare_parameter('soc_full_tolerance', 0.01).value
         self.capacity_ah = self.declare_parameter('capacity_ah', 20.0).value
         self.full_current_ratio = self.declare_parameter('full_current_ratio', 0.05).value
         self.full_current_hold_sec = self.declare_parameter('full_current_hold_sec', 90).value
@@ -73,6 +74,8 @@ class BatteryManager(Node):
     def set_state(self, new_state: ManagerState):
         if self.state != new_state:
             self.get_logger().info(f'State change: {self.state.name} -> {new_state.name}')
+            if new_state == ManagerState.CHARGING:
+                self.low_current_since = None
             self.state = new_state
 
     def code_name(self, code: int) -> str:
@@ -99,8 +102,7 @@ class BatteryManager(Node):
             return
 
         self.current_known = True
-        chg_current = max(0.0, curr)
-        if chg_current <= self.full_current_a:
+        if 0.0 < curr <= self.full_current_a:
             if self.low_current_since is None:
                 self.low_current_since = time.time()
         else:
@@ -145,6 +147,16 @@ class BatteryManager(Node):
         except Exception:
             return default
 
+    def _parse_tolerance(self, value, default: float) -> float:
+        """Parse tolerance value from API. Values > 0.5 are treated as percentage (e.g. 1 → 0.01)."""
+        try:
+            v = float(value)
+            if v > 0.5:
+                v = v / 100.0
+            return max(0.0, min(0.5, v))
+        except Exception:
+            return default
+
     def refresh_soc_limits_from_api(self, initial: bool = False):
         try:
             resp = requests.get(self.params_api_url, timeout=3)
@@ -158,12 +170,17 @@ class BatteryManager(Node):
             cfg = data[0]
             new_target = self._parse_soc_limit(cfg.get('batteryChargingLimitUpper'), self.soc_target)
             new_resume = self._parse_soc_limit(cfg.get('batteryChargingLimitLower'), self.soc_resume)
-            changed = (new_target != self.soc_target) or (new_resume != self.soc_resume)
+            new_tolerance = self._parse_tolerance(cfg.get('batteryChargingTolerance'), self.soc_full_tolerance)
+            changed = (new_target != self.soc_target) or (new_resume != self.soc_resume) or (new_tolerance != self.soc_full_tolerance)
             self.soc_target = new_target
             self.soc_resume = new_resume
+            self.soc_full_tolerance = new_tolerance
             if changed or initial:
                 self.get_logger().info(
-                    f'SOC limits from API: target={self.soc_target:.2f}, resume={self.soc_resume:.2f}'
+                    f'SOC limits from API: target={self.soc_target:.2f} '
+                    f'(effective={self.soc_target - self.soc_full_tolerance:.2f}, '
+                    f'tolerance={self.soc_full_tolerance:.2f}), '
+                    f'resume={self.soc_resume:.2f}'
                 )
         except Exception as e:
             # Keep using configured parameters when API is unreachable
@@ -265,7 +282,7 @@ class BatteryManager(Node):
                 elif self.ir_state == ChargerState.BATT_FULL:
                     # Charger latched full; must STOP before it becomes READY, then START
                     self.get_logger().info('Charger in BATT_FULL; sending STOP to reset to READY')
-                    #self.send_cmd(CMD_STOP_CHG)
+                    self.send_cmd(CMD_STOP_CHG)
                     if self.wait_for_ir_state(ChargerState.READY, self.ready_wait_timeout_sec):
                         self.get_logger().info('Charger READY; starting charge')
                         self.send_cmd(CMD_START_CHG)
@@ -284,13 +301,14 @@ class BatteryManager(Node):
             if self.ir_state != ChargerState.CHARGING:
                 self.set_state(ManagerState.IDLE_ON_DOCK)
                 return
-            cond_soc = (soc is not None) and (soc >= self.soc_target)
-            cond_curr = self.low_current_since is not None and (now - self.low_current_since) >= self.full_current_hold_sec
-            # If current is unknown, allow SOC alone to decide full
-            cond_curr_ok = cond_curr if self.current_known else True
-            if cond_soc:#and cond_curr_ok:
-                self.get_logger().info('Battery full → stop charging')
-                #self.send_cmd(CMD_FULL)  # หรือ CMD_STOP_CHG
+            effective_target = self.soc_target - self.soc_full_tolerance
+            cond_soc = (soc is not None) and (soc >= effective_target)
+            cond_curr = (self.current_known
+                         and self.low_current_since is not None
+                         and (now - self.low_current_since) >= self.full_current_hold_sec)
+            if cond_soc or cond_curr:
+                reason = f'SOC {soc:.2f} >= {effective_target:.2f}' if cond_soc else 'tail current detected'
+                self.get_logger().info(f'Battery full ({reason}) → stop charging')
                 self.send_cmd(CMD_STOP_CHG)
                 self.set_state(ManagerState.COOLDOWN)
                 self.last_stop_time = now

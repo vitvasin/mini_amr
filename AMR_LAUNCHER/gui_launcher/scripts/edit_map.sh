@@ -1,2 +1,2 @@
 #!/bin/bash
-/home/smr/workspaces/ROS-SLAM-Map-Editor/run_editor.sh
+"$(dirname "$0")/../../../../ROS-SLAM-Map-Editor/run_editor.sh"

@@ -33,8 +33,8 @@ class BatteryManager(Node):
         super().__init__('battery_manager')
 
         # ---- Parameters ----
-        self.soc_target = self.declare_parameter('soc_target', 0.92).value
-        self.soc_resume = self.declare_parameter('soc_resume', 0.84).value
+        self.soc_target = self.declare_parameter('soc_target', 1.00).value
+        self.soc_resume = self.declare_parameter('soc_resume', 0.95).value
         self.soc_full_tolerance = self.declare_parameter('soc_full_tolerance', 0.01).value
         self.capacity_ah = self.declare_parameter('capacity_ah', 20.0).value
         self.full_current_ratio = self.declare_parameter('full_current_ratio', 0.05).value
@@ -56,6 +56,7 @@ class BatteryManager(Node):
         self.ir_state = ChargerState.IDLE  # 0=Idle,10=Ready,11=Charging,99=Error,12=BATT_FULL
         self.current_known = False
         self.request_stop_charge = False
+        self.interrupted_charging = False  # True when charger lost power while actively charging
 
         # ---- IO ----
         self.sub_batt = self.create_subscription(BatteryState, 'battery', self.on_batt, 10)
@@ -76,6 +77,10 @@ class BatteryManager(Node):
             self.get_logger().info(f'State change: {self.state.name} -> {new_state.name}')
             if new_state == ManagerState.CHARGING:
                 self.low_current_since = None
+                self.interrupted_charging = False
+            elif new_state == ManagerState.UNKNOWN and self.state == ManagerState.CHARGING:
+                self.interrupted_charging = True
+                self.get_logger().warn('Charger lost power during charging; will resume when power returns')
             self.state = new_state
 
     def code_name(self, code: int) -> str:
@@ -266,7 +271,15 @@ class BatteryManager(Node):
             return
 
         if self.state == ManagerState.IDLE_ON_DOCK:
-            soc_ok_to_start = (soc is None) or (soc <= self.soc_resume)
+            # After power-loss interruption, resume if SOC hasn't reached target yet;
+            # otherwise use the normal lower resume threshold.
+            if self.interrupted_charging:
+                effective_target = self.soc_target - self.soc_full_tolerance
+                soc_ok_to_start = (soc is None) or (soc < effective_target)
+            else:
+                soc_ok_to_start = (soc is None) or (soc <= self.soc_resume)
+            if not soc_ok_to_start:
+                self.interrupted_charging = False
             if soc_ok_to_start and temp < self.temp_ok_c and (now - self.last_stop_time) >= self.cooldown_sec:
                 # Use IR charger state enum
                 if self.ir_state == ChargerState.CHARGING:
@@ -276,7 +289,8 @@ class BatteryManager(Node):
                     # ready to charge -> command start
                     #self.send_cmd(CMD_STOP_CHG)
                     if self.wait_for_ir_state(ChargerState.READY, self.ready_wait_timeout_sec):
-                        self.get_logger().info('Charger READY; starting charge')
+                        resume_note = ' (resumed after power loss)' if self.interrupted_charging else ''
+                        self.get_logger().info(f'Charger READY; starting charge{resume_note}')
                         self.send_cmd(CMD_START_CHG)
                         self.set_state(ManagerState.CHARGING)
                 elif self.ir_state == ChargerState.BATT_FULL:

@@ -81,6 +81,113 @@ class PasswordDialog(QDialog):
     def get_password(self):
         return self.password_input.text()
 
+_ROS_SOURCE = (
+    "source /opt/ros/jazzy/setup.bash && "
+    "source /home/smr/workspaces/mini_amr/install/setup.bash"
+)
+
+def _ros_cmd(ros2_args: list) -> list:
+    """Wrap a ros2 command so it runs inside a bash shell with ROS sourced."""
+    inner = " ".join(ros2_args)
+    return ["bash", "-c", f"{_ROS_SOURCE} && {inner}"]
+
+
+# Module-level set keeps worker QThread Python wrappers alive while threads run.
+# Without this, when the dialog is GC'd, its worker references die, the QThread
+# Python wrapper is GC'd, and the still-running C++ thread crashes the process.
+_active_workers = set()
+
+
+class ChargeStateWorker(QThread):
+    result_ready = Signal(int)  # emits raw data value, -1 on error
+
+    def __init__(self):
+        super().__init__()
+        self._proc = None
+        self._cancelled = False
+        _active_workers.add(self)
+        self.finished.connect(lambda: _active_workers.discard(self))
+
+    def cancel(self):
+        self._cancelled = True
+        if self._proc is not None:
+            try:
+                self._proc.kill()
+            except Exception:
+                pass
+
+    def run(self):
+        env = os.environ.copy()
+        env["ROS_DOMAIN_ID"] = "41"
+        try:
+            cmd = _ros_cmd(["ros2", "topic", "echo", "--once", "--no-arr", "--flow-style", "/ir_charge_state"])
+            self._proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
+            if self._cancelled:
+                self._proc.kill()
+                self._proc.communicate()
+                return
+            try:
+                stdout, _ = self._proc.communicate(timeout=3)
+            except subprocess.TimeoutExpired:
+                self._proc.kill()
+                self._proc.communicate()
+                return
+            if not self._cancelled and self._proc.returncode == 0:
+                for line in stdout.splitlines():
+                    if "data:" in line:
+                        value = int(line.split("data:")[1].strip().split()[0])
+                        if not self._cancelled:
+                            self.result_ready.emit(value)
+                        return
+        except Exception:
+            pass
+        if not self._cancelled:
+            self.result_ready.emit(-1)
+
+
+class HWNodeWorker(QThread):
+    result_ready = Signal(bool)  # True = /robot_hardware in node list
+
+    def __init__(self):
+        super().__init__()
+        self._proc = None
+        self._cancelled = False
+        _active_workers.add(self)
+        self.finished.connect(lambda: _active_workers.discard(self))
+
+    def cancel(self):
+        self._cancelled = True
+        if self._proc is not None:
+            try:
+                self._proc.kill()
+            except Exception:
+                pass
+
+    def run(self):
+        env = os.environ.copy()
+        env["ROS_DOMAIN_ID"] = "41"
+        try:
+            self._proc = subprocess.Popen(
+                _ros_cmd(["ros2", "node", "list"]),
+                stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env
+            )
+            if self._cancelled:
+                self._proc.kill()
+                self._proc.communicate()
+                return
+            try:
+                stdout, _ = self._proc.communicate(timeout=3)
+            except subprocess.TimeoutExpired:
+                self._proc.kill()
+                self._proc.communicate()
+                return
+            if not self._cancelled:
+                self.result_ready.emit("/robot_hardware" in stdout)
+        except Exception:
+            if not self._cancelled:
+                self.result_ready.emit(False)
+
+
 class TopicCheckerWorker(QThread):
     result_ready = Signal(str, str, str) # topic, hz, data
 
@@ -100,8 +207,8 @@ class TopicCheckerWorker(QThread):
         try:
             # -w 2 window, count 1 is usually not enough for reliable calculation but we want speed
             # Let's try ros2 topic hz -w 1 --window 2 /topic to be faster
-            cmd = ["ros2", "topic", "hz", "--window", "2", self.topic]
-            
+            cmd = _ros_cmd(["ros2", "topic", "hz", "--window", "2", self.topic])
+
             # We run for a short duration
             proc = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, env=env)
             try:
@@ -131,7 +238,7 @@ class TopicCheckerWorker(QThread):
         if hz_status != "0.00" and self.check_data:
             try:
                 # ros2 topic echo --once --no-arr --flow-style /topic
-                cmd = ["ros2", "topic", "echo", "--once", "--no-arr", "--flow-style", self.topic]
+                cmd = _ros_cmd(["ros2", "topic", "echo", "--once", "--no-arr", "--flow-style", self.topic])
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=2, env=env)
                 if result.returncode == 0:
                     data = result.stdout.strip()
@@ -272,19 +379,32 @@ class DevMenuDialog(QDialog):
         self.setModal(True)
         self.setStyleSheet("background-color: #FFFFFF; border: 2px solid #555555; border-radius: 10px;")
         self.setMinimumSize(400, 350)
-        
+
         # Styles
         self.setStyleSheet("""
             QDialog {
                 background-color: #F9F8F8;
             }
             QPushButton {
-                min-height: 80px;
-                font-size: 24px;
+                min-height: 70px;
+                font-size: 22px;
                 font-weight: bold;
                 border-radius: 10px;
                 border: 2px solid #555;
-                margin: 5px;
+                margin: 3px;
+            }
+            QPushButton:hover {
+                filter: brightness(110%);
+                border-width: 3px;
+            }
+            QPushButton:pressed {
+                padding-top: 4px;
+                padding-left: 4px;
+                border-width: 1px;
+            }
+            QPushButton:disabled {
+                color: #999;
+                border-color: #ccc;
             }
         """)
 
@@ -321,6 +441,62 @@ class DevMenuDialog(QDialog):
         check_btn.clicked.connect(self.open_bringup_check)
         layout.addWidget(check_btn)
 
+        # HW Interface Toggle Button
+        self._hw_proc = None
+        self._hw_external = False  # cached from last HWNodeWorker poll
+        self._hw_node_worker = None
+        self.hw_btn = QPushButton("Start HW Interface")
+        self.hw_btn.setStyleSheet("background-color: #E0E0E0; color: #333; border: 2px solid #555;")
+        self.hw_btn.clicked.connect(self.toggle_hw_interface)
+        layout.addWidget(self.hw_btn)
+
+        self.hw_state_label = QLabel("HW Interface: Unknown")
+        self.hw_state_label.setAlignment(Qt.AlignCenter)
+        self.hw_state_label.setStyleSheet("font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px; background-color: #e0e0e0; color: #333; border: 1px solid #aaa;")
+        layout.addWidget(self.hw_state_label)
+
+        # Charge Buttons — row: [Charge Once] [Auto Charge]
+        self._auto_charging = False
+        self._auto_charge_retry_timer = QTimer(self)
+        self._auto_charge_retry_timer.setInterval(2000)
+        self._auto_charge_retry_timer.timeout.connect(self._auto_charge_retry)
+
+        charge_row = QHBoxLayout()
+        charge_row.setSpacing(8)
+
+        self.charge_once_btn = QPushButton("Charge Once")
+        self.charge_once_btn.setStyleSheet("background-color: #fff3cd; color: #856404; border: 2px solid #856404;")
+        self.charge_once_btn.clicked.connect(self.charge_once)
+        charge_row.addWidget(self.charge_once_btn)
+
+        self.charge_auto_btn = QPushButton("Auto Charge")
+        self.charge_auto_btn.setStyleSheet("background-color: #ffe0b2; color: #7d3a00; border: 2px solid #7d3a00;")
+        self.charge_auto_btn.clicked.connect(self.toggle_auto_charge)
+        charge_row.addWidget(self.charge_auto_btn)
+
+        layout.addLayout(charge_row)
+
+        self.stop_charge_btn = QPushButton("Stop Charging")
+        self.stop_charge_btn.setStyleSheet("background-color: #f8d7da; color: #721c24; border: 2px solid #721c24;")
+        self.stop_charge_btn.clicked.connect(self.stop_charging)
+        layout.addWidget(self.stop_charge_btn)
+
+        # IR Charge State Indicator
+        self.charge_state_label = QLabel("IR Charge State: --")
+        self.charge_state_label.setAlignment(Qt.AlignCenter)
+        self.charge_state_label.setStyleSheet("font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px; background-color: #e0e0e0; color: #333; border: 1px solid #aaa;")
+        layout.addWidget(self.charge_state_label)
+
+        self._charge_state_worker = None
+        self._charge_poll_timer = QTimer(self)
+        self._charge_poll_timer.setInterval(1500)
+        self._charge_poll_timer.timeout.connect(self._poll_charge_state)
+        self._charge_poll_timer.timeout.connect(self._poll_hw_node)
+        self._charge_poll_timer.timeout.connect(self._sync_hw_btn_proc_only)
+        self._charge_poll_timer.start()
+        self._poll_charge_state()
+        self._poll_hw_node()
+
         layout.addStretch()
 
         close_btn = QPushButton("Close")
@@ -338,6 +514,196 @@ class DevMenuDialog(QDialog):
 
     def open_bringup_check(self):
         dialog.exec()
+
+    def toggle_hw_interface(self):
+        env = os.environ.copy()
+        env["ROS_DOMAIN_ID"] = "41"
+        proc_running = self._hw_proc is not None and self._hw_proc.poll() is None
+        if proc_running:
+            self.hw_btn.setEnabled(False)
+            self.hw_btn.setText("Stopping...")
+            self._hw_proc.terminate()
+            try:
+                self._hw_proc.wait(timeout=3)
+            except Exception:
+                self._hw_proc.kill()
+            self._hw_proc = None
+            self._hw_external = False
+            self._update_hw_ui()
+            self.hw_btn.setEnabled(True)
+        elif self._hw_external:
+            QMessageBox.information(self, "HW Interface", "Hardware interface running externally (part of bringup). Stop bringup to kill it.")
+        else:
+            self.hw_btn.setEnabled(False)
+            self.hw_btn.setText("Starting...")
+            try:
+                self._hw_proc = subprocess.Popen(
+                    _ros_cmd(["ros2", "run", "robot_hardware_interface", "robot_hardware"]),
+                    env=env
+                )
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to start hardware interface:\n{e}")
+                self.hw_btn.setEnabled(True)
+                self._update_hw_ui()
+                return
+            self._update_hw_ui()
+            self.hw_btn.setEnabled(True)
+
+    def _poll_hw_node(self):
+        if self._hw_node_worker and self._hw_node_worker.isRunning():
+            return
+        if self._hw_proc is not None and self._hw_proc.poll() is None:
+            return  # we own it, no need to poll
+        self._hw_node_worker = HWNodeWorker()
+        self._hw_node_worker.result_ready.connect(self._on_hw_node_result)
+        self._hw_node_worker.start()
+
+    def _on_hw_node_result(self, running: bool):
+        self._hw_external = running
+        self._update_hw_ui()
+
+    def _sync_hw_btn_proc_only(self):
+        if self._hw_proc is not None:
+            self._update_hw_ui()
+
+    def _update_hw_ui(self):
+        proc_running = self._hw_proc is not None and self._hw_proc.poll() is None
+        if proc_running:
+            self.hw_btn.setText("Stop HW Interface")
+            self.hw_btn.setStyleSheet("background-color: #d4edda; color: #155724; border: 2px solid #155724;")
+            self.hw_state_label.setText("HW Interface: Running")
+            self.hw_state_label.setStyleSheet("font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px; background-color: #d4edda; color: #155724; border: 1px solid #155724;")
+        elif self._hw_external:
+            self.hw_btn.setText("HW Interface (External)")
+            self.hw_btn.setStyleSheet("background-color: #cce5ff; color: #004085; border: 2px solid #004085;")
+            self.hw_state_label.setText("HW Interface: Running (External)")
+            self.hw_state_label.setStyleSheet("font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px; background-color: #cce5ff; color: #004085; border: 1px solid #004085;")
+        else:
+            self.hw_btn.setText("Start HW Interface")
+            self.hw_btn.setStyleSheet("background-color: #E0E0E0; color: #333; border: 2px solid #555;")
+            self.hw_state_label.setText("HW Interface: Stopped")
+            self.hw_state_label.setStyleSheet("font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;")
+
+    def _poll_charge_state(self):
+        if self._charge_state_worker and self._charge_state_worker.isRunning():
+            return
+        self._charge_state_worker = ChargeStateWorker()
+        self._charge_state_worker.result_ready.connect(self._on_charge_state)
+        self._charge_state_worker.start()
+
+    def _on_charge_state(self, value):
+        STATE_MAP = {
+            0:  ("Not at Dock",      "#f8d7da", "#721c24", "#f5c6cb"),
+            10: ("Ready to Charge",  "#fff3cd", "#856404", "#ffeeba"),
+            11: ("Charging",         "#d4edda", "#155724", "#c3e6cb"),
+        }
+        if value in STATE_MAP:
+            text, bg, fg, border = STATE_MAP[value]
+            label = f"IR Charge State: {text} ({value})"
+        else:
+            label = f"IR Charge State: Unknown ({value})" if value >= 0 else "IR Charge State: No Signal"
+            bg, fg, border = "#e0e0e0", "#333", "#aaa"
+        self.charge_state_label.setText(label)
+        self.charge_state_label.setStyleSheet(
+            f"font-size: 16px; font-weight: bold; padding: 6px; border-radius: 6px;"
+            f"background-color: {bg}; color: {fg}; border: 1px solid {border};"
+        )
+        if value == 11 and self._auto_charging:
+            self._stop_auto_charge()
+
+    def closeEvent(self, event):
+        try:
+            self._charge_poll_timer.stop()
+            self._auto_charge_retry_timer.stop()
+        except Exception:
+            pass
+        for worker in (self._charge_state_worker, self._hw_node_worker):
+            if worker is not None:
+                try:
+                    worker.result_ready.disconnect()
+                except (RuntimeError, TypeError):
+                    pass
+                try:
+                    worker.cancel()
+                except Exception:
+                    pass
+                # No wait() — workers are kept alive by _active_workers set
+                # and will self-clean via finished signal. _cancelled flag
+                # prevents emit on dead slots.
+        if self._hw_proc is not None and self._hw_proc.poll() is None:
+            try:
+                self._hw_proc.terminate()
+            except Exception:
+                pass
+        super().closeEvent(event)
+
+    def _send_charge_command(self, data_value: int):
+        env = os.environ.copy()
+        env["ROS_DOMAIN_ID"] = "41"
+        cmd = _ros_cmd([
+            "ros2", "topic", "pub", "-1",
+            "/set_charge_state",
+            "std_msgs/msg/Int16",
+            f"'{{data: {data_value}}}'"
+        ])
+        try:
+            subprocess.Popen(cmd, env=env)
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to send charge command:\n{e}")
+
+    def _ensure_hw_then(self, callback):
+        """Start HW interface if not running, then call callback (with 2s delay if started)."""
+        hw_alive = (self._hw_proc is not None and self._hw_proc.poll() is None) or self._hw_external
+        if not hw_alive:
+            self.charge_state_label.setText("IR Charge State: Starting HW node...")
+            env = os.environ.copy()
+            env["ROS_DOMAIN_ID"] = "41"
+            try:
+                self._hw_proc = subprocess.Popen(
+                    _ros_cmd(["ros2", "run", "robot_hardware_interface", "robot_hardware"]),
+                    env=env
+                )
+            except Exception as e:
+                QMessageBox.critical(self, "Error", f"Failed to start hardware node:\n{e}")
+                return
+            self._update_hw_ui()
+            QTimer.singleShot(2000, callback)
+        else:
+            callback()
+
+    def charge_once(self):
+        self.charge_once_btn.setEnabled(False)
+        def do_send():
+            self._send_charge_command(20)
+            self.charge_once_btn.setEnabled(True)
+        self._ensure_hw_then(do_send)
+
+    def toggle_auto_charge(self):
+        if self._auto_charging:
+            self._stop_auto_charge()
+        else:
+            self._auto_charging = True
+            self.charge_auto_btn.setText("Stop Auto")
+            self.charge_auto_btn.setStyleSheet("background-color: #f8d7da; color: #721c24; border: 2px solid #721c24;")
+            self.charge_once_btn.setEnabled(False)
+            def do_start():
+                self._send_charge_command(20)
+                self._auto_charge_retry_timer.start()
+            self._ensure_hw_then(do_start)
+
+    def _auto_charge_retry(self):
+        self._send_charge_command(20)
+
+    def _stop_auto_charge(self):
+        self._auto_charging = False
+        self._auto_charge_retry_timer.stop()
+        self.charge_auto_btn.setText("Auto Charge")
+        self.charge_auto_btn.setStyleSheet("background-color: #ffe0b2; color: #7d3a00; border: 2px solid #7d3a00;")
+        self.charge_once_btn.setEnabled(True)
+
+    def stop_charging(self):
+        self._stop_auto_charge()
+        self._send_charge_command(22)
 
 class NavigationConfirmDialog(QDialog):
     def __init__(self, parent=None):

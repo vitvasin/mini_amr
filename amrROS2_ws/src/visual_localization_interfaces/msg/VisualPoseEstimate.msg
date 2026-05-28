@@ -1,0 +1,4 @@
+std_msgs/Header header
+std_msgs/Bool pnp_success
+builtin_interfaces/Duration computation_delay
+geometry_msgs/PoseWithCovariance pose

@@ -1,0 +1,66 @@
+nohup: ignoring input
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-05-22-14-56-17-917683-one-119716
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [visual_localizer_node-1]: process started with pid [119722]
+[INFO] [recovery_node-2]: process started with pid [119723]
+[recovery_node-2] [0m[INFO] [1779436579.419179692] [visual_recovery_node]: Visual Recovery Node has been initialized.[0m
+[visual_localizer_node-1] Feature extractor: Using device cpu
+[visual_localizer_node-1] Feature extractor: Using device cpu
+[visual_localizer_node-1] Loaded SuperPoint model
+[visual_localizer_node-1] Loaded SuperGlue model ("outdoor" weights)
+[visual_localizer_node-1] [0m[INFO] [1779436598.667249720] [visual_localization_node]: Visual Localizer ready. Listening on [/visual_localization/image_request] for on-demand pose requests.[0m
+[recovery_node-2] [0m[INFO] [1779437008.642873453] [visual_recovery_node]: === Starting Recovery Sequence ===[0m
+[recovery_node-2] [0m[INFO] [1779437008.643439555] [visual_recovery_node]: Halting robot movement...[0m
+[recovery_node-2] [0m[INFO] [1779437008.644541718] [visual_recovery_node]: Canceling Nav2 goals...[0m
+[recovery_node-2] [33m[WARN] [1779437008.645205525] [visual_recovery_node]: Nav2 goal cancellation bypassed or failed: Expected type ClientGoalHandle but received <class 'NoneType'>[0m
+[recovery_node-2] [0m[INFO] [1779437008.645713004] [visual_recovery_node]: Subscribing to /image_raw to capture an image...[0m
+[recovery_node-2] [31m[ERROR] [1779437013.761681273] [visual_recovery_node]: Failed to capture image from webcam within timeout. Aborting.[0m
+[recovery_node-2] [0m[INFO] [1779437735.577808141] [visual_recovery_node]: === Starting Recovery Sequence ===[0m
+[recovery_node-2] [0m[INFO] [1779437735.579698939] [visual_recovery_node]: Halting robot movement...[0m
+[recovery_node-2] [0m[INFO] [1779437735.582900434] [visual_recovery_node]: Canceling Nav2 goals...[0m
+[recovery_node-2] [33m[WARN] [1779437735.585437248] [visual_recovery_node]: Nav2 goal cancellation bypassed or failed: Expected type ClientGoalHandle but received <class 'NoneType'>[0m
+[recovery_node-2] [0m[INFO] [1779437735.587529288] [visual_recovery_node]: Subscribing to /image_raw to capture an image...[0m
+[recovery_node-2] [0m[INFO] [1779437735.665918526] [visual_recovery_node]: Captured one frame from the webcam.[0m
+[recovery_node-2] [0m[INFO] [1779437735.694694651] [visual_recovery_node]: Sending image to visual localization pipeline...[0m
+[visual_localizer_node-1] [0m[INFO] [1779437735.705759160] [visual_localization_node]: Received image request. Starting 6DoF pose estimation...[0m
+[recovery_node-2] [0m[INFO] [1779437735.706581627] [visual_recovery_node]: Waiting up to 20.0 seconds for the 6DoF pose...[0m
+[visual_localizer_node-1] [0m[INFO] [1779437745.542140282] [visual_localization_node]: Inference completed in 9.84s.[0m
+[visual_localizer_node-1] [0m[INFO] [1779437745.543224947] [visual_localization_node]: Pose estimated: x=0.197, y=-0.035, z=0.006[0m
+[recovery_node-2] [0m[INFO] [1779437745.545469522] [visual_recovery_node]: Received 6DoF pose from visual localization pipeline.[0m
+[recovery_node-2] [0m[INFO] [1779437745.590673106] [visual_recovery_node]: Injecting 6DoF pose into AMCL/Slam-toolbox via /initialpose...[0m
+[recovery_node-2] [0m[INFO] [1779437745.594252585] [visual_recovery_node]: Recovery sequence completed successfully.[0m
+[recovery_node-2] [0m[INFO] [1779440075.380794506] [visual_recovery_node]: === Starting Recovery Sequence ===[0m
+[recovery_node-2] [0m[INFO] [1779440075.381304321] [visual_recovery_node]: Halting robot movement...[0m
+[recovery_node-2] [0m[INFO] [1779440075.382537734] [visual_recovery_node]: Canceling Nav2 goals...[0m
+[recovery_node-2] [33m[WARN] [1779440075.383196293] [visual_recovery_node]: Nav2 goal cancellation bypassed or failed: Expected type ClientGoalHandle but received <class 'NoneType'>[0m
+[recovery_node-2] [0m[INFO] [1779440075.383898308] [visual_recovery_node]: Subscribing to /image_raw to capture an image...[0m
+[recovery_node-2] [0m[INFO] [1779440075.451122369] [visual_recovery_node]: Captured one frame from the webcam.[0m
+[recovery_node-2] [0m[INFO] [1779440075.492471885] [visual_recovery_node]: Sending image to visual localization pipeline...[0m
+[recovery_node-2] [0m[INFO] [1779440075.496903596] [visual_recovery_node]: Waiting up to 20.0 seconds for the 6DoF pose...[0m
+[visual_localizer_node-1] [0m[INFO] [1779440075.498578284] [visual_localization_node]: Received image request. Starting 6DoF pose estimation...[0m
+[visual_localizer_node-1] No 3D points found for image 00011.png
+[visual_localizer_node-1] No 3D points found for image 00007.png
+[visual_localizer_node-1] No 3D points found for image 00009.png
+[visual_localizer_node-1] [0m[INFO] [1779440086.674894595] [visual_localization_node]: Inference completed in 11.17s.[0m
+[visual_localizer_node-1] [0m[INFO] [1779440086.675959431] [visual_localization_node]: Pose estimated: x=0.299, y=-0.061, z=0.002[0m
+[recovery_node-2] [0m[INFO] [1779440086.676871147] [visual_recovery_node]: Received 6DoF pose from visual localization pipeline.[0m
+[recovery_node-2] [0m[INFO] [1779440086.766143228] [visual_recovery_node]: Injecting 6DoF pose into AMCL/Slam-toolbox via /initialpose...[0m
+[recovery_node-2] [0m[INFO] [1779440086.767201064] [visual_recovery_node]: Recovery sequence completed successfully.[0m
+[recovery_node-2] [0m[INFO] [1779441128.281273245] [visual_recovery_node]: === Starting Recovery Sequence ===[0m
+[recovery_node-2] [0m[INFO] [1779441128.282130420] [visual_recovery_node]: Halting robot movement...[0m
+[recovery_node-2] [0m[INFO] [1779441128.284205257] [visual_recovery_node]: Nav2 Action server not ready. Relying on cmd_vel stop.[0m
+[recovery_node-2] [0m[INFO] [1779441128.284813067] [visual_recovery_node]: Subscribing to /image_raw to capture an image...[0m
+[recovery_node-2] [0m[INFO] [1779441128.341362720] [visual_recovery_node]: Captured one frame from the webcam.[0m
+[recovery_node-2] [0m[INFO] [1779441128.394997569] [visual_recovery_node]: Sending image to visual localization pipeline...[0m
+[recovery_node-2] [0m[INFO] [1779441128.402979595] [visual_recovery_node]: Waiting up to 20.0 seconds for the 6DoF pose...[0m
+[visual_localizer_node-1] [0m[INFO] [1779441128.404326168] [visual_localization_node]: Received image request. Starting 6DoF pose estimation...[0m
+[visual_localizer_node-1] No 3D points found for image 00007.png
+[visual_localizer_node-1] [0m[INFO] [1779441142.805339091] [visual_localization_node]: Inference completed in 14.40s.[0m
+[visual_localizer_node-1] [0m[INFO] [1779441142.808006280] [visual_localization_node]: Pose estimated: x=0.229, y=-0.041, z=0.002[0m
+[visual_localizer_node-1] [0m[INFO] [1779441142.809718589] [visual_localization_node]: Received image request. Starting 6DoF pose estimation...[0m
+[recovery_node-2] [0m[INFO] [1779441142.811362943] [visual_recovery_node]: Received 6DoF pose from visual localization pipeline.[0m
+[recovery_node-2] [0m[INFO] [1779441142.847201852] [visual_recovery_node]: Injecting 6DoF pose into AMCL/Slam-toolbox via /initialpose...[0m
+[recovery_node-2] [0m[INFO] [1779441142.849724089] [visual_recovery_node]: Recovery sequence completed successfully.[0m
+[visual_localizer_node-1] No 3D points found for image 00007.png
+[visual_localizer_node-1] [0m[INFO] [1779441156.654958773] [visual_localization_node]: Inference completed in 13.84s.[0m
+[visual_localizer_node-1] [0m[INFO] [1779441156.656299804] [visual_localization_node]: Pose estimated: x=0.229, y=-0.041, z=0.002[0m

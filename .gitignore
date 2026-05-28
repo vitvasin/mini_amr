@@ -1,0 +1,37 @@
+amrROS2_ws/error.txt
+amrROS2_ws/temp
+amrROS2_ws/temp2
+amrROS2_ws/install
+amrROS2_ws/log
+amrROS2_ws/build
+amrROS2_ws/src/sllidar_ros2
+
+traffic_editor
+amrROS2_UI/env
+amrROS2_UI/logs
+amrROS2_UI/ICEAMR/.vscode
+amrROS2_UI/ICEAMR/backupui
+amrROS2_UI/ICEAMR/Icons
+amrROS2_UI/ICEAMR/icons_white
+amrROS2_UI/ICEAMR/logs
+
+amrROS2_ws/maps/*.posegraph
+amrROS2_ws/maps/*.data
+AMR_LAUNCHER/.venv
+amrROS2_ws/ros2_bag_recorder/robot_recordings
+# Ignore generated resource and cache files
+amrROS2_UI/ICEAMR/resources_rc.py
+amrROS2_UI/ICEAMR/__pycache__/
+*.pyc
+*.vscode
+amrROS2_ws/ROS_LOG
+*.claude
+
+# Ignore large build/source folders
+colmap_src/
+pycolmap/
+*.zip
+
+# Ignore generated test map database outputs (exceeds GitHub 100MB limit)
+amrROS2_ws/src/visual_robot_localization/test/image_dataset/outputs/
+amrROS2_ws/src/visual_robot_localization/test/example_dir/outputs/

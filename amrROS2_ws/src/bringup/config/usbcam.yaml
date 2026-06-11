@@ -3,11 +3,11 @@
       video_device: "/dev/video0"
       framerate: 30.0
       io_method: "mmap"
-      frame_id: "camera"
+      frame_id: "rgbd_frame"
         #pixel_format: "yuyv"  # see usb_cam/supported_formats for list of supported formats
         #av_device_format: "YUYV"
       image_width: 640
-      image_height: 360 
+      image_height: 360
       camera_name: "test_camera"
       camera_info_url: "package://usb_cam/config/camera_info.yaml"
       brightness: -1

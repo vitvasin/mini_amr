@@ -1,0 +1,36 @@
+# Camera calibration for 640x360 (center-cropped from 640x480 calibration)
+#
+# Original calibration: 640x480 (from /opt/ros/jazzy/share/usb_cam/config/camera_info.yaml)
+# Streaming resolution:  640x360 (configured in bringup.yaml)
+#
+# Correction applied: center-crop shift
+#   cx stays the same (no horizontal crop: 640 == 640)
+#   cy_360 = cy_480 - (480 - 360) / 2 = 243.738352 - 60 = 183.738352
+#   fx, fy stay the same (focal length is resolution-independent for crop)
+#   distortion coefficients stay the same (they are scale-invariant)
+image_width: 640
+image_height: 360
+camera_name: test_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [438.783367, 0.000000, 305.593336,
+         0.000000, 437.302876, 183.738352,
+         0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.361976, 0.110510, 0.001014, 0.000505, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0,
+         0.0, 1.0, 0.0,
+         0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [438.783367, 0.000000, 305.593336, 0.000000,
+         0.000000, 437.302876, 183.738352, 0.000000,
+         0.000000, 0.000000, 1.000000, 0.000000]

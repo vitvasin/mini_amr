@@ -20,5 +20,8 @@ if [ -f ~/workspaces/mini_amr/traffic_editor/install/setup.bash ]; then
     source ~/workspaces/mini_amr/traffic_editor/install/setup.bash
 fi
 
+# Ensure MongoDB and Backend Server are running
+/home/smr/workspaces/mini_amr/Shortcut/ensure_services.sh
+
 # Run the launch file
 ros2 launch nectec_amr_launch amcl_sequential_launch.py

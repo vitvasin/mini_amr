@@ -1,8 +1,8 @@
 import os
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription, TimerAction, ExecuteProcess, RegisterEventHandler, EmitEvent
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction, ExecuteProcess, RegisterEventHandler, EmitEvent
 from launch.launch_description_sources import PythonLaunchDescriptionSource
-from launch.substitutions import PathJoinSubstitution
+from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch.event_handlers import OnProcessExit
 from launch.events import Shutdown
 from launch_ros.substitutions import FindPackageShare
@@ -48,6 +48,27 @@ def generate_launch_description():
         }.items()
     )
 
+    # Declare launch arguments for switching relocalization methods
+    enable_ai = LaunchConfiguration('enable_ai')
+    enable_marker = LaunchConfiguration('enable_marker')
+    recovery_method = LaunchConfiguration('recovery_method')
+
+    declare_enable_ai = DeclareLaunchArgument(
+        name='enable_ai',
+        default_value='false',
+        description='Whether to launch the heavy 3D AI localization node'
+    )
+    declare_enable_marker = DeclareLaunchArgument(
+        name='enable_marker',
+        default_value='true',
+        description='Whether to launch the ArUco fiducial marker localization node'
+    )
+    declare_recovery_method = DeclareLaunchArgument(
+        name='recovery_method',
+        default_value='marker',
+        description='Relocalization recovery method to use: marker, ai, or hybrid'
+    )
+
     # 0.5. Visual Relocalization / Recovery System
     relocalization_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource([
@@ -58,6 +79,9 @@ def generate_launch_description():
             ])
         ]),
         launch_arguments={
+            'enable_ai': enable_ai,
+            'enable_marker': enable_marker,
+            'recovery_method': recovery_method,
             'image_gallery_path': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/visual_robot_localization/test/image_dataset/',
             'gallery_global_descriptor_path': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/visual_robot_localization/test/image_dataset/outputs/netvlad+superpoint_aachen+superglue/global-feats-netvlad.h5',
             'gallery_local_descriptor_path': '/home/smr/workspaces/mini_amr/amrROS2_ws/src/visual_robot_localization/test/image_dataset/outputs/netvlad+superpoint_aachen+superglue/feats-superpoint-n4096-r1024.h5',
@@ -80,7 +104,7 @@ def generate_launch_description():
     )
 
     delayed_delivery_launch = TimerAction(
-        period=5.0,
+        period=65.0,  # Updated: nav2 now starts at 45s; give 20s after that to fully activate
         actions=[delivery_launch]
     )
 
@@ -95,7 +119,7 @@ def generate_launch_description():
     )
 
     delayed_ui_launch = TimerAction(
-        period=13.0,
+        period=75.0,  # Updated: 10s after delivery controller for full initialization
         actions=[ui_action]
     )
 
@@ -108,6 +132,9 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
+        declare_enable_ai,
+        declare_enable_marker,
+        declare_recovery_method,
         localization_monitor_node,
         navigation_launch,
         relocalization_launch,

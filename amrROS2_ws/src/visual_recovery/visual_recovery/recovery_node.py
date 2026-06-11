@@ -2,13 +2,12 @@
 
 import rclpy
 from rclpy.node import Node
-from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup
 from rclpy.executors import MultiThreadedExecutor
 from rclpy.qos import qos_profile_sensor_data
 import time
 
 from std_srvs.srv import Trigger
-from std_msgs.msg import Bool
 from sensor_msgs.msg import Image
 from geometry_msgs.msg import Twist, PoseWithCovarianceStamped
 from nav2_msgs.action import NavigateToPose
@@ -26,13 +25,22 @@ class RecoveryNode(Node):
         self.declare_parameter('response_pose_topic', '/visual_localization/pose_response')
         self.declare_parameter('initialpose_topic', '/initialpose')
         self.declare_parameter('timeout_seconds', 60.0)
+        
+        # New Parameters for switching and Fiducial Marker localization
+        self.declare_parameter('recovery_method', 'marker')  # Options: 'marker', 'ai', 'hybrid'
+        self.declare_parameter('request_marker_image_topic', '/marker_localization/image_request')
+        self.declare_parameter('response_marker_pose_topic', '/marker_localization/pose_response')
 
         cmd_vel_topic = self.get_parameter('cmd_vel_topic').get_parameter_value().string_value
         self.camera_topic = self.get_parameter('camera_topic').get_parameter_value().string_value
         request_image_topic = self.get_parameter('request_image_topic').get_parameter_value().string_value
-        response_pose_topic = self.get_parameter('response_pose_topic').get_parameter_value().string_value
+        self.response_pose_topic = self.get_parameter('response_pose_topic').get_parameter_value().string_value
         initialpose_topic = self.get_parameter('initialpose_topic').get_parameter_value().string_value
         self.timeout_seconds = self.get_parameter('timeout_seconds').get_parameter_value().double_value
+        
+        self.recovery_method = self.get_parameter('recovery_method').get_parameter_value().string_value
+        request_marker_image_topic = self.get_parameter('request_marker_image_topic').get_parameter_value().string_value
+        self.response_marker_pose_topic = self.get_parameter('response_marker_pose_topic').get_parameter_value().string_value
 
         # Callback Groups
         self.service_cb_group = MutuallyExclusiveCallbackGroup()
@@ -41,6 +49,7 @@ class RecoveryNode(Node):
         # Publishers
         self.cmd_vel_pub = self.create_publisher(Twist, cmd_vel_topic, 10)
         self.image_req_pub = self.create_publisher(Image, request_image_topic, 10)
+        self.marker_image_req_pub = self.create_publisher(Image, request_marker_image_topic, 10)
         self.initialpose_pub = self.create_publisher(PoseWithCovarianceStamped, initialpose_topic, 10)
 
         # Action Client to cancel Nav2 goals
@@ -58,7 +67,6 @@ class RecoveryNode(Node):
         self.captured_image = None
         self.received_pose = None
         self.recovery_in_progress = False
-        self.last_recovery_time = 0.0
 
         # Trigger Service
         self.trigger_srv = self.create_service(
@@ -68,16 +76,7 @@ class RecoveryNode(Node):
             callback_group=self.service_cb_group
         )
 
-        # Automatic recovery trigger subscription is disabled per user request (manual recovery only)
-        # self.status_sub = self.create_subscription(
-        #     Bool,
-        #     '/localization_status',
-        #     self.localization_status_callback,
-        #     10,
-        #     callback_group=self.sub_cb_group
-        # )
-
-        self.get_logger().info('Visual Recovery Node has been initialized. Auto-recovery is disabled (Manual recovery only).')
+        self.get_logger().info(f'Visual Recovery Node initialized with method: [{self.recovery_method}]. Manual recovery only.')
 
     def halt_movement(self):
         self.get_logger().info('Halting robot movement...')
@@ -96,13 +95,11 @@ class RecoveryNode(Node):
         if self.nav_action_client.server_is_ready():
             self.get_logger().info('Canceling Nav2 goals...')
             try:
-                # Asynchronously cancel goals; we don't wait for the result here to keep it non-blocking
                 self.nav_action_client._cancel_goal_async(None)
             except Exception as e:
                 self.get_logger().warn(f'Nav2 goal cancellation bypassed or failed: {e}')
         else:
             self.get_logger().info('Nav2 Action server not ready. Relying on cmd_vel stop.')
-
 
     def camera_callback(self, msg: Image):
         if self.captured_image is None:
@@ -110,25 +107,49 @@ class RecoveryNode(Node):
             self.captured_image = msg
 
     def pose_callback(self, msg: PoseWithCovarianceStamped):
-        if self.received_pose is None:
-            self.get_logger().info('Received 6DoF pose from visual localization pipeline.')
-            self.received_pose = msg
+        # We check if it is a valid pose (non-empty)
+        p = msg.pose.pose.position
+        o = msg.pose.pose.orientation
+        if p.x == 0.0 and p.y == 0.0 and p.z == 0.0 and o.x == 0.0 and o.y == 0.0 and o.z == 0.0 and o.w == 0.0:
+            self.get_logger().warn('Received empty/unsuccessful pose response.')
+            return
 
-    # def localization_status_callback(self, msg: Bool):
-    #     if not msg.data:
-    #         current_time = time.time()
-    #         # Safety cooldown of 30 seconds between auto-recovery attempts
-    #         if not self.recovery_in_progress and (current_time - self.last_recovery_time > 30.0):
-    #             self.last_recovery_time = current_time
-    #             self.get_logger().warn('Localization lost detected via /localization_status. Triggering auto-recovery sequence...')
-    #             import threading
-    #             threading.Thread(target=self.run_recovery_sequence, daemon=True).start()
+        if self.received_pose is None:
+            self.get_logger().info('Received a valid pose from the localization pipeline.')
+            self.received_pose = msg
 
     def trigger_callback(self, request, response):
         success, message = self.run_recovery_sequence()
         response.success = success
         response.message = message
         return response
+
+    def request_and_wait_pose(self, request_pub, response_topic, timeout_val):
+        """Helper to request a pose from a localizer node and block/wait with a timeout."""
+        self.received_pose = None
+        
+        self.pose_sub = self.create_subscription(
+            PoseWithCovarianceStamped,
+            response_topic,
+            self.pose_callback,
+            10,
+            callback_group=self.sub_cb_group
+        )
+
+        self.get_logger().info(f'Publishing captured image request to [{request_pub.topic}]...')
+        request_pub.publish(self.captured_image)
+
+        self.get_logger().info(f'Waiting up to {timeout_val} seconds for the pose response on [{response_topic}]...')
+        time_waited = 0.0
+        while self.received_pose is None and time_waited < timeout_val:
+            time.sleep(0.1)
+            time_waited += 0.1
+
+        # Clean up subscription
+        self.destroy_subscription(self.pose_sub)
+        self.pose_sub = None
+
+        return self.received_pose
 
     def run_recovery_sequence(self):
         if self.recovery_in_progress:
@@ -140,12 +161,16 @@ class RecoveryNode(Node):
         self.captured_image = None
         self.received_pose = None
 
-        self.get_logger().info('=== Starting Recovery Sequence ===')
+        # Fetch latest recovery method from parameters dynamically
+        self.recovery_method = self.get_parameter('recovery_method').get_parameter_value().string_value
+        method = self.recovery_method.lower()
 
-        # 2. Halt Movement
+        self.get_logger().info(f'=== Starting Recovery Sequence ({method.upper()} Method) ===')
+
+        # 1. Halt Movement
         self.halt_movement()
 
-        # 3. Capture Image
+        # 2. Capture Image from camera
         self.get_logger().info(f'Subscribing to {self.camera_topic} to capture an image...')
         self.camera_sub = self.create_subscription(
             Image,
@@ -172,48 +197,36 @@ class RecoveryNode(Node):
             self.recovery_in_progress = False
             return False, msg
 
-        # 4. Asynchronous Pose Request
-        self.get_logger().info('Sending image to visual localization pipeline...')
-        self.pose_sub = self.create_subscription(
-            PoseWithCovarianceStamped,
-            self.get_parameter('response_pose_topic').get_parameter_value().string_value,
-            self.pose_callback,
-            10,
-            callback_group=self.sub_cb_group
-        )
-
-        self.image_req_pub.publish(self.captured_image)
-
-        self.get_logger().info(f'Waiting up to {self.timeout_seconds} seconds for the 6DoF pose...')
-        time_waited = 0.0
-        while self.received_pose is None and time_waited < self.timeout_seconds:
-            time.sleep(0.1)
-            time_waited += 0.1
-
-        # Unsubscribe from pose
-        self.destroy_subscription(self.pose_sub)
-        self.pose_sub = None
-
-        if self.received_pose is None:
-            msg = 'Visual localization pipeline failed to return a pose within timeout. Aborting.'
-            self.get_logger().warn(msg)
+        # 3. Trigger requested localization node
+        pose_result = None
+        if method == 'marker':
+            pose_result = self.request_and_wait_pose(self.marker_image_req_pub, self.response_marker_pose_topic, 10.0)
+        
+        elif method == 'ai':
+            pose_result = self.request_and_wait_pose(self.image_req_pub, self.response_pose_topic, self.timeout_seconds)
+        
+        elif method == 'hybrid':
+            self.get_logger().info('Attempting fast Fiducial Marker localization first...')
+            pose_result = self.request_and_wait_pose(self.marker_image_req_pub, self.response_marker_pose_topic, 5.0)
+            if pose_result is None:
+                self.get_logger().warn('Marker localization failed or returned no pose. Falling back to heavy 3D AI localization...')
+                pose_result = self.request_and_wait_pose(self.image_req_pub, self.response_pose_topic, self.timeout_seconds)
+        
+        else:
+            msg = f'Unknown recovery method: {self.recovery_method}. Aborting.'
+            self.get_logger().error(msg)
             self.recovery_in_progress = False
             return False, msg
 
-        # 5. Pose Injection
-        # Simple validation: Check if position and orientation are all perfectly 0 (likely garbage/uninitialized data)
-        p = self.received_pose.pose.pose.position
-        o = self.received_pose.pose.pose.orientation
-        if p.x == 0.0 and p.y == 0.0 and p.z == 0.0 and o.x == 0.0 and o.y == 0.0 and o.z == 0.0 and o.w == 0.0:
-            msg = 'Received empty/garbage pose data. Aborting recovery sequence.'
-            self.get_logger().warn(msg)
+        if pose_result is None:
+            msg = 'All relocalization pipelines failed to return a valid pose. Aborting.'
+            self.get_logger().error(msg)
             self.recovery_in_progress = False
             return False, msg
 
+        # 4. Pose Injection
         self.get_logger().info('Injecting 6DoF pose into AMCL/Slam-toolbox via /initialpose...')
-        # Ensure header frame is consistent, or rely on what visual pipeline sent
-        # Here we just forward it.
-        self.initialpose_pub.publish(self.received_pose)
+        self.initialpose_pub.publish(pose_result)
 
         # Give the system a brief moment to process the pose update
         time.sleep(0.5)
@@ -239,8 +252,6 @@ def main(args=None):
     rclpy.init(args=args)
     node = RecoveryNode()
     
-    # We use a MultiThreadedExecutor so the async service callback 
-    # doesn't block the executor from running subscriber callbacks.
     executor = MultiThreadedExecutor(num_threads=4)
     executor.add_node(node)
     

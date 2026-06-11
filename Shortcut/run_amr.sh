@@ -7,11 +7,11 @@ gnome-terminal --title="MongoDB" \
 
 # Terminal 2: Backend Server
 gnome-terminal --title="Backend Server" \
-  -- bash -lc "cd ~/workspace/backend && echo '>>> npm run server'; npm run server; exec bash" &
+  -- bash -lc "cd ~/workspaces/backend && echo '>>> npm run server'; npm run server; exec bash" &
 
 # Terminal 3: Navigation AMCL
 gnome-terminal --title="Navigation AMCL" \
-  -- bash -lc "cd ~/workspaces/mini_amr/Shotcut && echo '>>> ./navigation_amcl.sh'; ./navigation_amcl.sh; exec bash" &
+  -- bash -lc "cd ~/workspaces/mini_amr/Shortcut && echo '>>> ./navigation_amcl.sh'; ./navigation_amcl.sh; exec bash" &
 
 # Terminal 4: AutoDock
 gnome-terminal --title="AutoDock" \

@@ -1,32 +1,79 @@
 """
 relocalization_system.launch.py
 --------------------------------
-Starts the full visual relocalization system in one command:
-  1. visual_localizer_node  — AI pipeline (loads models, waits for image requests)
-  2. visual_recovery_node   — Orchestrator (halts robot, captures image, injects pose)
+Starts the full relocalization system with configurable switches:
+  1. visual_localizer_node   — AI pipeline (disabled by default)
+  2. marker_localizer_node   — Fiducial Marker pipeline (enabled by default)
+  3. recovery_node           — Orchestrator (calls the selected method)
 
 USAGE:
   ros2 launch visual_recovery relocalization_system.launch.py \
-      gallery_global_descriptor_path:=/path/to/global-feats-netvlad.h5 \
-      gallery_local_descriptor_path:=/path/to/feats-superpoint.h5 \
-      image_gallery_path:=/path/to/gallery/ \
-      gallery_sfm_path:=/path/to/sfm_output/
+      enable_ai:=false \
+      enable_marker:=true \
+      recovery_method:=marker
 
 TRIGGER (in a separate terminal, after launch):
   ros2 service call /visual_recovery_node/trigger_recovery std_srvs/srv/Trigger
 """
 
+import os
+from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
+from launch.conditions import IfCondition
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 
 
 def generate_launch_description():
     return LaunchDescription([
 
         # ─────────────────────────────────────────────────────────────────────
-        # Gallery / Map paths (YOU MUST SET THESE after running do_SfM.sh)
+        # Relocalization Config Switches
+        # ─────────────────────────────────────────────────────────────────────
+        DeclareLaunchArgument(
+            name='enable_ai',
+            default_value='false',
+            description='Whether to launch the heavy 3D AI localization node'
+        ),
+        DeclareLaunchArgument(
+            name='enable_marker',
+            default_value='true',
+            description='Whether to launch the ArUco fiducial marker localization node'
+        ),
+        DeclareLaunchArgument(
+            name='recovery_method',
+            default_value='marker',
+            description='Relocalization recovery method to use: marker, ai, or hybrid'
+        ),
+
+        # ─────────────────────────────────────────────────────────────────────
+        # Fiducial Marker settings
+        # ─────────────────────────────────────────────────────────────────────
+        DeclareLaunchArgument(
+            name='marker_size',
+            default_value='0.15',
+            description='Size of ArUco markers in meters'
+        ),
+        DeclareLaunchArgument(
+            name='marker_dictionary_name',
+            default_value='DICT_4X4_50',
+            description='ArUco dictionary name to detect'
+        ),
+        DeclareLaunchArgument(
+            name='markers_config',
+            default_value='{"1": {"x": 0.0, "y": 0.0, "z": 1.0, "roll": 0.0, "pitch": 0.0, "yaw": 0.0}, "2": {"x": 2.0, "y": 1.0, "z": 1.0, "roll": 0.0, "pitch": 0.0, "yaw": 1.5708}}',
+            description='JSON string containing marker ID and 6DoF poses on the map'
+        ),
+        DeclareLaunchArgument(
+            name='markers_yaml',
+            default_value=os.path.join(get_package_share_directory('marker_localization'), 'config', 'markers_auto.yaml'),
+            description='Path to the markers configuration YAML file'
+        ),
+
+        # ─────────────────────────────────────────────────────────────────────
+        # Gallery / Map paths (for the AI localizer)
         # ─────────────────────────────────────────────────────────────────────
         DeclareLaunchArgument(
             name='gallery_global_descriptor_path',
@@ -61,9 +108,9 @@ def generate_launch_description():
         # ─────────────────────────────────────────────────────────────────────
         # Sensor offset (set True + base_frame/sensor_frame if camera is offset)
         # ─────────────────────────────────────────────────────────────────────
-        DeclareLaunchArgument('compensate_sensor_offset', default_value='False'),
+        DeclareLaunchArgument('compensate_sensor_offset', default_value='True'),
         DeclareLaunchArgument('base_frame',               default_value='base_link'),
-        DeclareLaunchArgument('sensor_frame',             default_value='camera'),
+        DeclareLaunchArgument('sensor_frame',             default_value='rgbd_frame'),
 
         # ─────────────────────────────────────────────────────────────────────
         # ROS topics
@@ -74,7 +121,7 @@ def generate_launch_description():
         DeclareLaunchArgument('timeout_seconds',        default_value='60.0'),
 
         # ─────────────────────────────────────────────────────────────────────
-        # Node 1: AI localization pipeline
+        # Node 1: AI localization pipeline (Only launched if enable_ai is true)
         # ─────────────────────────────────────────────────────────────────────
         Node(
             package='visual_robot_localization',
@@ -82,8 +129,8 @@ def generate_launch_description():
             name='visual_localization_node',
             output='screen',
             emulate_tty=True,
+            condition=IfCondition(LaunchConfiguration('enable_ai')),
             parameters=[{
-                # On-demand mode: listen to image_request from recovery_node
                 'camera_topic':                   '/visual_localization/image_request',
                 'pose_publish_topic':             '/visual_localization/pose_response',
                 'global_extractor_name':          LaunchConfiguration('global_extractor_name'),
@@ -104,7 +151,32 @@ def generate_launch_description():
         ),
 
         # ─────────────────────────────────────────────────────────────────────
-        # Node 2: Recovery orchestrator bridge
+        # Node 2: Fiducial Marker pipeline (Only launched if enable_marker is true)
+        # ─────────────────────────────────────────────────────────────────────
+        Node(
+            package='marker_localization',
+            executable='marker_localizer_node',
+            name='marker_localization_node',
+            output='screen',
+            emulate_tty=True,
+            condition=IfCondition(LaunchConfiguration('enable_marker')),
+            parameters=[{
+                'camera_topic':                   '/marker_localization/image_request',
+                'pose_publish_topic':             '/marker_localization/pose_response',
+                'camera_info_topic':              '/camera_info',
+                'marker_size':                    LaunchConfiguration('marker_size'),
+                'marker_dictionary_name':         LaunchConfiguration('marker_dictionary_name'),
+                'compensate_sensor_offset':       LaunchConfiguration('compensate_sensor_offset'),
+                'base_frame':                     LaunchConfiguration('base_frame'),
+                'sensor_frame':                   LaunchConfiguration('sensor_frame'),
+                'markers_config':                 ParameterValue(LaunchConfiguration('markers_config'), value_type=str),
+            },
+            LaunchConfiguration('markers_yaml')
+            ]
+        ),
+
+        # ─────────────────────────────────────────────────────────────────────
+        # Node 3: Recovery orchestrator bridge
         # ─────────────────────────────────────────────────────────────────────
         Node(
             package='visual_recovery',
@@ -115,10 +187,13 @@ def generate_launch_description():
             parameters=[{
                 'camera_topic':         LaunchConfiguration('camera_topic'),
                 'cmd_vel_topic':        LaunchConfiguration('cmd_vel_topic'),
-                'request_image_topic':  '/visual_localization/image_request',
-                'response_pose_topic':  '/visual_localization/pose_response',
                 'initialpose_topic':    LaunchConfiguration('initialpose_topic'),
                 'timeout_seconds':      LaunchConfiguration('timeout_seconds'),
+                'recovery_method':      LaunchConfiguration('recovery_method'),
+                'request_image_topic':  '/visual_localization/image_request',
+                'response_pose_topic':  '/visual_localization/pose_response',
+                'request_marker_image_topic': '/marker_localization/image_request',
+                'response_marker_pose_topic': '/marker_localization/pose_response',
             }]
         ),
     ])

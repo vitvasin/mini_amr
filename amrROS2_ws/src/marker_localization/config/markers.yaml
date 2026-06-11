@@ -1,0 +1,7 @@
+/marker_localization_node:
+  ros__parameters:
+    marker_size: 0.15
+    marker_dictionary_name: "DICT_4X4_50"
+    compensate_sensor_offset: false
+    # List your tag IDs and their mapped poses below as a JSON string
+    markers_config: '{"1": {"x": 0.0, "y": 0.0, "z": 1.0, "roll": 0.0, "pitch": 0.0, "yaw": 0.0}, "2": {"x": 2.0, "y": 1.0, "z": 1.0, "roll": 0.0, "pitch": 0.0, "yaw": 1.5708}}'

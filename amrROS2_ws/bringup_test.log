@@ -1,0 +1,24 @@
+[INFO] [launch]: All log files can be found below /home/smr/.ros/log/2026-06-10-11-05-07-227633-sandbox-18
+[INFO] [launch]: Default logging verbosity is set to INFO
+[INFO] [usb_cam_node_exe-1]: process started with pid [22]
+[INFO] [robot_state_publisher-2]: process started with pid [23]
+[INFO] [joint_state_publisher-3]: process started with pid [24]
+[INFO] [sllidar_node-4]: process started with pid [25]
+[INFO] [scan_to_scan_filter_chain-5]: process started with pid [26]
+[INFO] [ekf_node-6]: process started with pid [27]
+[INFO] [robot_hardware-7]: process started with pid [28]
+[sllidar_node-4] [INFO] [1781064307.739629357] [sllidar_node]: SLLidar running on ROS2 package SLLidar.ROS2 SDK Version:1.0.1, SLLIDAR SDK Version:2.1.0
+[robot_hardware-7] Open the serial port error: Bad file descriptor
+[robot_hardware-7] Created receive data thread
+[robot_hardware-7] Received Data Error: Serial port not open.
+[robot_state_publisher-2] [INFO] [1781064307.820212519] [robot_state_publisher]: Robot initialized
+[usb_cam_node_exe-1] [INFO] [1781064308.022280274] [usb_camera]: camera_name value: test_camera
+[usb_cam_node_exe-1] [WARN] [1781064308.022412685] [usb_camera]: framerate: 15.000000
+[usb_cam_node_exe-1] [INFO] [1781064308.027865179] [usb_camera]: camera calibration URL: package://usb_cam/config/camera_info.yaml
+[usb_cam_node_exe-1] terminate called after throwing an instance of 'std::filesystem::__cxx11::filesystem_error'
+[usb_cam_node_exe-1]   what():  filesystem error: directory iterator cannot open directory: No such file or directory [/sys/class/video4linux/]
+[ERROR] [usb_cam_node_exe-1]: process has died [pid 22, exit code -6, cmd '/opt/ros/jazzy/lib/usb_cam/usb_cam_node_exe --ros-args -r __node:=usb_camera --params-file /home/smr/workspaces/mini_amr/amrROS2_ws/install/bringup/share/bringup/config/bringup.yaml -r /tf:=tf -r /tf_static:=tf_static'].
+[joint_state_publisher-3] [INFO] [1781064308.420331565] [joint_state_publisher]: Waiting for robot_description to be published on the robot_description topic...
+[scan_to_scan_filter_chain-5] [WARN] [1781064308.816277688] [scan_to_scan_filter_chain]: diagnostic_updater: No HW_ID was set. This is probably a bug. Please report it. For devices that do not have a HW_ID, set this value to 'none'. This warning only occurs once all diagnostics are OK. It is okay to wait until the device is open before calling setHardwareID.
+[sllidar_node-4] [ERROR] [1781064310.245260652] [sllidar_node]: Error, operation time out. SL_RESULT_OPERATION_TIMEOUT! 
+[ERROR] [sllidar_node-4]: process has died [pid 25, exit code 255, cmd '/home/smr/workspaces/mini_amr/amrROS2_ws/install/sllidar_ros2/lib/sllidar_ros2/sllidar_node --ros-args -r __node:=sllidar_node --params-file /tmp/launch_params__1sgf1ql -r /tf:=tf -r /tf_static:=tf_static'].

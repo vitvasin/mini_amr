@@ -37,9 +37,9 @@ import tf2_ros
 from tf2_ros import LookupException, ConnectivityException, ExtrapolationException
 
 try:
-    from slam_toolbox_msgs.srv import SetPose
+    from slam_toolbox.srv import SetPose  # ROS 2 Jazzy: services are in slam_toolbox package
 except ImportError:
-    SetPose = None
+    SetPose = None  # SetPose not available in this slam_toolbox version; initial pose via /initialpose topic only
 
 
 class NavigationResult(Enum):

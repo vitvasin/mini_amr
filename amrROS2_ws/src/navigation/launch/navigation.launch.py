@@ -33,7 +33,7 @@ def generate_launch_description():
     map = LaunchConfiguration("map")
     bringup = LaunchConfiguration("bringup")
 
-    workspace_path = os.environ.get('ROS_WS')
+    workspace_path = os.environ.get('ROS_WS', '/home/smr/workspaces/mini_amr/amrROS2_ws')
     config_path = os.path.join(workspace_path, "maps", "config.json")
 
     with open(config_path, "r") as f:
@@ -230,16 +230,31 @@ def generate_launch_description():
         }]
     )
 
+    delayed_slam_toolbox = TimerAction(
+        period=10.0,
+        actions=[slam_toolbox]
+    )
+
+    delayed_slam_toolbox_localization = TimerAction(
+        period=10.0,
+        actions=[slam_toolbox_localization]
+    )
+
+    delayed_navigation = TimerAction(
+        period=45.0,  # Increased from 25s: give slam_toolbox 35s after activation to match scans
+        actions=[navigation]
+    )
+
     launch_elements = GroupAction(
      actions=[
         PushRosNamespace(condition=IfCondition(use_namespace), namespace=namespace),
         SetRemap('/tf','tf'),
         SetRemap('/tf_static','tf_static'),
-        amcl,
         bringup,
-        slam_toolbox,
-        slam_toolbox_localization,
-        navigation,
+        amcl,
+        delayed_slam_toolbox,
+        delayed_slam_toolbox_localization,
+        delayed_navigation,
         rviz_cmd,
         localization_monitor_node,
       ]

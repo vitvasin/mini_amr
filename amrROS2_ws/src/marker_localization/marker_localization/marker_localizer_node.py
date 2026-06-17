@@ -23,9 +23,9 @@ class MarkerLocalizer(Node):
         self.declare_parameter('camera_info_topic', '/camera_info')
         self.declare_parameter('marker_size', 0.15)  # size in meters
         self.declare_parameter('marker_dictionary_name', 'DICT_4X4_50')
-        self.declare_parameter('compensate_sensor_offset', False)
+        self.declare_parameter('compensate_sensor_offset', True)
         self.declare_parameter('base_frame', 'base_link')
-        self.declare_parameter('sensor_frame', 'camera')
+        self.declare_parameter('sensor_frame', 'rgbd_frame')
 
         # Markers configuration as a JSON string
         # Maps marker ID (as string) to its 3D pose in the 'map' frame
@@ -110,16 +110,20 @@ class MarkerLocalizer(Node):
         # Sensor offset compensator setup
         if self.compensate_sensor_offset:
             self.get_logger().info(f"Setting up sensor offset compensator for {base_frame} -> {sensor_frame}...")
-            self.sensor_offset_compensator = SensorOffsetCompensator(base_frame, sensor_frame, align_camera_frame=False)
+            self.sensor_offset_compensator = SensorOffsetCompensator(
+                base_frame_name=self.get_parameter('base_frame').value,
+                sensor_frame_name=self.get_parameter('sensor_frame').value,
+                align_camera_frame=False  # CRITICAL: qvec_final is already aligned to ROS!
+            )
         else:
             self.sensor_offset_compensator = None
 
         # Standard ROS-OpenCV coordinate alignment quaternion
         # Rotates OpenCV camera frame (Z-forward, X-right, Y-down) to standard ROS frame (X-forward, Y-left, Z-up)
-        self.camera_frame_alignment_qvec = np.array([0.5, 0.5, -0.5, 0.5])
+        self.camera_frame_alignment_qvec = np.array([0.5, -0.5, 0.5, -0.5])
 
         # Covariance representing high confidence in marker localization (low uncertainty)
-        loc_var = 0.02
+        loc_var = 0.05
         or_var = 0.02
         self.covariance = [
             loc_var, 0.0,     0.0,     0.0,    0.0,    0.0,
@@ -198,7 +202,7 @@ class MarkerLocalizer(Node):
                 self.get_logger().warn("No ArUco markers detected in the image. Relocalization failed.")
                 empty_pose = PoseWithCovarianceStamped()
                 empty_pose.header.frame_id = 'map'
-                empty_pose.header.stamp = self.get_clock().now().to_msg()
+                empty_pose.header.stamp = msg.header.stamp
                 self.pose_pub.publish(empty_pose)
                 return
 
@@ -238,10 +242,10 @@ class MarkerLocalizer(Node):
                     )
                     continue
 
-                # Run solvePnP (Iterative solver is robust to calibration noise)
+                # Use IPPE_SQUARE solver to prevent 180-degree rotation ambiguity
                 success, rvec, tvec = cv2.solvePnP(
                     obj_points, corners[i][0], K, D,
-                    flags=cv2.SOLVEPNP_ITERATIVE
+                    flags=cv2.SOLVEPNP_IPPE_SQUARE
                 )
                 if not success:
                     continue
@@ -276,7 +280,11 @@ class MarkerLocalizer(Node):
                     best_marker_id = marker_id
                     
                     R_m2c, _ = cv2.Rodrigues(rvec)
-                    R_c2m = R_m2c.T
+                    
+                    # Calculate camera position in marker frame
+                    # P_cam = R_m2c * P_m + tvec
+                    # Origin of camera (P_cam = 0) in marker frame:
+                    # 0 = R_m2c * P_m + tvec => P_m = -R_m2c.T * tvec
                     t_c2m = -np.dot(R_m2c.T, tvec)
 
                     m_data = self.markers[marker_id]
@@ -288,7 +296,9 @@ class MarkerLocalizer(Node):
                     R_m2w = t3d.euler.euler2mat(roll, pitch, yaw)
 
                     t_c2w = np.dot(R_m2w, t_c2m) + t_m2w
-                    R_c2w = np.dot(R_m2w, R_c2m)
+                    
+                    # R_c2w = R_m2w * R_c2m = R_m2w * R_m2c.T
+                    R_c2w = np.dot(R_m2w, R_m2c.T)
 
                     q_c2w = t3d.quaternions.mat2quat(R_c2w)
 
@@ -305,7 +315,7 @@ class MarkerLocalizer(Node):
                 self.get_logger().warn("None of the detected markers were registered in the database. Relocalization failed.")
                 empty_pose = PoseWithCovarianceStamped()
                 empty_pose.header.frame_id = 'map'
-                empty_pose.header.stamp = self.get_clock().now().to_msg()
+                empty_pose.header.stamp = msg.header.stamp
                 self.pose_pub.publish(empty_pose)
                 return
 
@@ -317,12 +327,16 @@ class MarkerLocalizer(Node):
                 tvec_final, qvec_final = self.sensor_offset_compensator.remove_offset_from_array(tvec_final, qvec_final)
                 self.get_logger().info("Compensated for camera physical offset relative to base_link.")
 
+            # Flatten to 2D for AMCL (Z=0, Roll=0, Pitch=0)
+            yaw_final = t3d.euler.quat2euler(qvec_final)[2]
+            qvec_flat = t3d.quaternions.mat2quat(t3d.euler.euler2mat(0.0, 0.0, yaw_final))
+
             # Publish the pose message
             pose_msg = PoseWithCovarianceStamped()
-            pose_msg.header.frame_id = 'map'
-            pose_msg.header.stamp = self.get_clock().now().to_msg()
-            pose_msg.pose.pose.position = Point(x=float(tvec_final[0]), y=float(tvec_final[1]), z=float(tvec_final[2]))
-            pose_msg.pose.pose.orientation = Quaternion(w=float(qvec_final[0]), x=float(qvec_final[1]), y=float(qvec_final[2]), z=float(qvec_final[3]))
+            pose_msg.header.frame_id = f'map|{best_marker_id}'
+            pose_msg.header.stamp = msg.header.stamp
+            pose_msg.pose.pose.position = Point(x=float(tvec_final[0]), y=float(tvec_final[1]), z=0.0)
+            pose_msg.pose.pose.orientation = Quaternion(w=float(qvec_flat[0]), x=float(qvec_flat[1]), y=float(qvec_flat[2]), z=float(qvec_flat[3]))
             pose_msg.pose.covariance = self.covariance
 
             self.pose_pub.publish(pose_msg)
@@ -333,7 +347,7 @@ class MarkerLocalizer(Node):
             self.get_logger().error(f"Error during marker localization: {e}")
             empty_pose = PoseWithCovarianceStamped()
             empty_pose.header.frame_id = 'map'
-            empty_pose.header.stamp = self.get_clock().now().to_msg()
+            empty_pose.header.stamp = msg.header.stamp
             self.pose_pub.publish(empty_pose)
 
 def main(args=None):

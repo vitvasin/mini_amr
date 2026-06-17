@@ -1,0 +1,21 @@
+# Camera calibration parameters (dynamically calibrated via asymmetric circle grid)
+camera_name: test_camera
+image_width: 1280
+image_height: 720
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [1488.1711707223346, 0.0, 630.9491760979931, 0.0, 1497.8573728212136, 351.1259144618801, 0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [0.11955119163467737, 2.101200094744668, -0.003107281884068265, -0.006862828481647468, -25.205964338539534]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [1488.1711707223346, 0.0, 630.9491760979931, 0.0, 0.0, 1497.8573728212136, 351.1259144618801, 0.0, 0.0, 0.0, 1.0, 0.0]

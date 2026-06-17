@@ -9,7 +9,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             name='cmd_vel_topic',
             default_value='/cmd_vel',
-            description='Topic to publish zero velocity (halt command)'
+            description='Topic to publish velocity commands (bypassing nav2 if necessary)'
         ),
         DeclareLaunchArgument(
             name='camera_topic',

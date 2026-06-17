@@ -61,7 +61,9 @@ class SensorOffsetCompensator:
                                                     time=rclpy.duration.Duration(seconds=0))
                 except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
                     pass
-                wait += 1/tf_subscription_freq
+                import time
+                time.sleep(1.0 / tf_subscription_freq)
+                wait += 1.0 / tf_subscription_freq
 
 
         rate_node.destroy_node()

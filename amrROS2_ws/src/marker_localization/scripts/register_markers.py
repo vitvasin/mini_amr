@@ -85,7 +85,7 @@ class MarkerRegisterNode(Node):
 
         # Standard ROS-OpenCV coordinate alignment quaternion
         # Rotates OpenCV camera frame (Z-forward, X-right, Y-down) to standard ROS frame (X-forward, Y-left, Z-up)
-        self.camera_frame_alignment_qvec = np.array([0.5, 0.5, -0.5, 0.5])
+        self.camera_frame_alignment_qvec = np.array([0.5, -0.5, 0.5, -0.5])
 
         # Subscribers
         self.info_sub = self.create_subscription(CameraInfo, camera_info_topic, self.info_callback, 10)
@@ -139,26 +139,17 @@ class MarkerRegisterNode(Node):
                 return
 
             if self.tracking_frame is None:
-                # Determine tracking frame: prefer 'map', fallback to 'odom'
+                # We must STRICTLY use the map frame. No fallback to odom, because odom drifts.
                 try:
                     self.tf_buffer.lookup_transform('map', self.sensor_frame, rclpy.time.Time())
                     self.tracking_frame = 'map'
-                    self.get_logger().info("Using 'map' frame for marker registration.")
+                    self.get_logger().info("Successfully acquired 'map' frame for marker registration.")
                 except Exception:
-                    try:
-                        self.tf_buffer.lookup_transform('odom', self.sensor_frame, rclpy.time.Time())
-                        self.tracking_frame = 'odom'
-                        self.get_logger().warn(
-                            "Map frame not available. Using 'odom' frame for marker registration.\n"
-                            "  Marker poses will be saved relative to odom origin.\n"
-                            "  For map-frame-accurate poses, run the script when the robot is localized."
-                        )
-                    except Exception:
-                        self.get_logger().warn(
-                            f"Waiting for map or odom frame to be published... target sensor: {self.sensor_frame}",
-                            throttle_duration_sec=3.0
-                        )
-                        return
+                    self.get_logger().warn(
+                        "Waiting for 'map' frame to be published... Please localize the robot (e.g. using 2D Pose Estimate) BEFORE running this script!",
+                        throttle_duration_sec=3.0
+                    )
+                    return
 
             # Lookup transform from world (map/odom) -> sensor_frame (camera)
             try:
@@ -217,7 +208,7 @@ class MarkerRegisterNode(Node):
 
                 success, rvec, tvec = cv2.solvePnP(
                     obj_points, corners[i][0], self.K, self.D,
-                    flags=cv2.SOLVEPNP_ITERATIVE
+                    flags=cv2.SOLVEPNP_IPPE_SQUARE
                 )
                 if not success:
                     continue
@@ -334,24 +325,41 @@ class MarkerRegisterNode(Node):
                 "yaw": round(float(avg_yaw), 4)
             }
 
-        # Format into ROS 2 YAML parameter structure
-        yaml_data = {
-            "/marker_localization_node": {
-                "ros__parameters": {
-                    "marker_size": self.marker_size,
-                    "marker_dictionary_name": self.dict_name,
-                    "markers_config": json.dumps(averaged_config)
-                }
-            }
-        }
-
         try:
             import yaml
+            import os
+            
+            # Load existing config if it exists so we can append/update
+            existing_config = {}
+            if os.path.exists(self.output_yaml_path):
+                with open(self.output_yaml_path, 'r') as f:
+                    try:
+                        existing_yaml = yaml.safe_load(f)
+                        existing_json = existing_yaml["/marker_localization_node"]["ros__parameters"]["markers_config"]
+                        existing_config = json.loads(existing_json)
+                        self.get_logger().info(f"Loaded {len(existing_config)} existing markers from previous file to merge.")
+                    except Exception:
+                        self.get_logger().warn("Could not parse existing markers_config. Creating a fresh file.")
+            
+            # Merge existing with new ones
+            existing_config.update(averaged_config)
+
+            # Format into ROS 2 YAML parameter structure
+            yaml_data = {
+                "/marker_localization_node": {
+                    "ros__parameters": {
+                        "marker_size": self.marker_size,
+                        "marker_dictionary_name": self.dict_name,
+                        "markers_config": json.dumps(existing_config)
+                    }
+                }
+            }
+
             os.makedirs(os.path.dirname(self.output_yaml_path), exist_ok=True)
             with open(self.output_yaml_path, 'w') as f:
                 yaml.dump(yaml_data, f, default_flow_style=False)
             self.get_logger().info(
-                f"Successfully saved {len(averaged_config)} averaged markers to {self.output_yaml_path}"
+                f"Successfully saved/merged {len(existing_config)} total markers (Added/Updated {len(averaged_config)}) to {self.output_yaml_path}"
             )
         except Exception as e:
             self.get_logger().error(f"Failed to save YAML file: {e}")

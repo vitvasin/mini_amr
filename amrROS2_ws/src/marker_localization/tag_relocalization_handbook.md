@@ -1,6 +1,6 @@
 # 📖 Ultimate Autonomous AMR Relocalization & Navigation Handbook
 
-This handbook serves as the single, authoritative reference for the autonomous navigation, ArUco marker-based relocalization, and AI visual recovery pipelines on the AMR platform. It details everything from generating physical tags to mapping, launching, triggering, and troubleshooting.
+This handbook serves as the single, authoritative reference for the autonomous navigation, AprilTag marker-based relocalization, and AI visual recovery pipelines on the AMR platform. It details everything from generating physical tags to mapping, launching, triggering, and troubleshooting.
 
 ---
 
@@ -12,7 +12,7 @@ The AMR platform utilizes a hybrid, switchable relocalization framework. If the 
 graph TD
     A[Robot Transitioned to LOST State] --> B{Recovery Method Selected}
     
-    B -->|Method 1: ArUco Markers| C[Marker Localizer Node]
+    B -->|Method 1: AprilTag Markers| C[Marker Localizer Node]
     B -->|Method 2: AI Visual SfM| D[COLMAP Place Recognition]
     
     C -->|Detects tag in camera| E[Compute 6-DoF Camera Pose]
@@ -26,7 +26,7 @@ graph TD
 ### Key Components
 
 *   **Fiducial Marker Pipeline (`marker_localization` package)**:
-    *   `generate_markers.py`: Generates mathematically perfect printable ArUco tags using the `DICT_4X4_50` dictionary.
+    *   `generate_markers.py`: Generates mathematically perfect printable AprilTags using the `DICT_APRILTAG_36h11` dictionary.
     *   `register_markers.py`: Captures real-time camera frames and queries the TF tree to average and record marker coordinates in the `map` coordinate frame.
     *   `marker_localizer_node.py`: Captures live video, detects tags, solves 6-DoF camera poses, and publishes estimated robot coordinates.
     *   `publish_marker_debug.py`: Publishes live visual diagnostic frames overlaying detection boxes and 3D coordinate axes.
@@ -64,17 +64,17 @@ To prevent the navigation planners and costmaps from starting before the localiz
 
 ## 3. Step-by-Step Operations Guide
 
-### Step 1: Generating Printable ArUco Markers
+### Step 1: Generating Printable AprilTag Markers
 
-To deploy marker-based relocalization, you must generate and print physical ArUco tags.
+To deploy marker-based relocalization, you must generate and print physical AprilTags.
 
 #### 1. Run the Generator Script
 Open a terminal and run the generation script. By default, the images are saved in the package's `markers` folder:
 ```bash
-python3 /home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/scripts/generate_markers.py --ids 1 2 37 --dict DICT_4X4_50 --size 400
+python3 /home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/scripts/generate_markers.py --ids 1 2 37 --dict DICT_APRILTAG_36h11 --size 400
 ```
 *   `--ids`: Space-separated list of marker IDs to generate (e.g., `1 2 37`).
-*   `--dict`: OpenCV ArUco dictionary (default: `DICT_4X4_50`).
+*   `--dict`: The dictionary to use. **MUST be `DICT_APRILTAG_36h11`** for the highest reliability on this platform.
 *   `--size`: Resolution of the output PNG file in pixels (default: `400`).
 *   `--output_dir`: Output path (default: `/home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/markers`).
 
@@ -98,9 +98,13 @@ Start navigation and verify the robot is fully localized on the map:
 Wait ~30 seconds for the staggered boot sequence to complete, and verify using RViz or the UI that the robot's coordinates on the map are correct.
 
 #### 2. Run the Mapping Script
-Position the robot so that the physical ArUco marker is clearly in the center of the camera's view. The **recommended distance is 0.5m–2.5m**. Run the registration script:
+Position the robot so that the physical AprilTag marker is clearly in the center of the camera's view. The **recommended distance is 0.5m–2.5m**. Run the registration script (note the `--size` is the width of the black square in meters):
+
+> [!NOTE]
+> **Single-Point Registration:** You only need to configure the marker from **ONE point**. The relocalization pipeline uses a full 6-DoF (Degrees of Freedom) rigid body mathematical transformation. It will automatically calculate the robot's correct dynamic location and orientation regardless of the angle or distance the camera views it from later.
+
 ```bash
-python3 /home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/scripts/register_markers.py --size 0.15 --dict DICT_4X4_50 --min-obs 20
+python3 /home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/scripts/register_markers.py --size 0.15 --dict DICT_APRILTAG_36h11 --min-obs 20
 ```
 
 **Good detection log (accept these):**
@@ -124,14 +128,18 @@ python3 /home/smr/workspaces/mini_amr/amrROS2_ws/src/marker_localization/scripts
 *   Rebuild the workspace so the updated file is installed:
     ```bash
     cd /home/smr/workspaces/mini_amr/amrROS2_ws
-    colcon build --packages-select marker_localization navigation
+    colcon build --packages-select marker_localization
+    source install/setup.bash
     ```
+
+> [!TIP]
+> **Growing Your Map:** When you run `register_markers.py`, it safely **merges/appends** new markers into the existing `markers_auto.yaml`! It does NOT overwrite or delete your old ones. You can map Room A, press `Ctrl+C`, drive to Room B, map again, and it will save both. If you ever want to reset completely, just delete the `markers_auto.yaml` file manually.
 
 ---
 
 ### Step 3: Default Autostart Behavior
 
-By default, the system is configured to launch the ArUco marker relocalization nodes automatically during bringup. When you start the robot (using the UI "Navigate" button or the `run_slam_launch.sh` script), the marker localization system is **already running** in the background and waiting for your trigger.
+By default, the system is configured to launch the AprilTag marker relocalization nodes automatically during bringup. When you start the robot (using the UI "Navigate" button or the `run_slam_launch.sh` script), the marker localization system is **already running** in the background and waiting for your trigger.
 
 No additional launch options are required.
 
@@ -194,5 +202,6 @@ You will see the camera stream with:
 | **False positive detections (markers detected in empty room)** | Random textures/patterns matching the marker structure temporarily. | **Fixed (2026-06-11)**: Reverted to OpenCV default parameters for robust real-world detection, but implemented strict post-PnP validation (reprojection error ≤ 4.0px, distance 0.1m–5.0m, area ≥ 100px²) and a high multi-frame observation filter (`--min-obs 20`) to permanently filter out background noise. |
 | **No markers detected / Incorrect ID** | Lack of a white quiet zone, low camera resolution, or screen glare. | **Fixed (2026-06-11)**: Re-added 50px white quiet-zone padding in the detector code (shifting corners back to align with camera matrix K) to ensure 100% accurate identification. Add a 2–3 cm white border around printed markers to further assist. |
 | **Markers registered with wrong coordinates** | Mapping script was run when the robot's own localization was drifting. | Ensure the robot is accurately localized on the map (e.g. by manual alignment in RViz) before running the mapping script. |
+| **Robot relocates to the exact registration point from any angle** | Stale code. The Python files were modified but the workspace was not rebuilt, causing ROS 2 to run the old, buggy matrix math. | Rebuild the workspace with `colcon build --packages-select marker_localization` and source `install/setup.bash` to ensure the new `t_c2m` matrix inversions are executed. |
 | **Updated configs not taking effect** | The workspace was not built after updating `markers_auto.yaml`. | Run `colcon build --packages-select marker_localization` to copy the new coordinates to the install space. |
 

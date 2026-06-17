@@ -104,7 +104,7 @@ def generate_launch_description():
     )
 
     delayed_delivery_launch = TimerAction(
-        period=65.0,  # Updated: nav2 now starts at 45s; give 20s after that to fully activate
+        period=5.0,  # Reverted back from 65.0s
         actions=[delivery_launch]
     )
 
@@ -119,7 +119,7 @@ def generate_launch_description():
     )
 
     delayed_ui_launch = TimerAction(
-        period=75.0,  # Updated: 10s after delivery controller for full initialization
+        period=13.0,  # Reverted back from 75.0s
         actions=[ui_action]
     )
 
